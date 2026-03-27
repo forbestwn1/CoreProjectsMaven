@@ -1,0 +1,25 @@
+<entity name="data.js.converter"
+		table="nosliw.CONVERTERJS"
+		primaryKeys="id" 
+		class="com.nosliw.data.core.imp.runtime.js.resource.HAPResourceDataJSConverterImp" 
+		description="">
+
+	<property name="id" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="value" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(2000) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="dataTypeName" dataType="object" subDataType="com.nosliw.core.data.HAPDataTypeId" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(500) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+</entity>

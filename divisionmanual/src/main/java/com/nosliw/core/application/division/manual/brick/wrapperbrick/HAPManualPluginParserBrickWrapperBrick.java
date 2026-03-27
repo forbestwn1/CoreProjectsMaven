@@ -1,0 +1,42 @@
+package com.nosliw.core.application.division.manual.brick.wrapperbrick;
+
+import org.json.JSONObject;
+
+import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.HAPUtilityBrickId;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.wrapperbrick.HAPBrickWrapperBrick;
+import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
+
+public class HAPManualPluginParserBrickWrapperBrick extends HAPManualDefinitionPluginParserBrickImpSimple{
+
+	public HAPManualPluginParserBrickWrapperBrick(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan) {
+		super(HAPEnumBrickType.WRAPPERBRICK_100, HAPManualDefinitionBrickWrapperBrick.class, manualDivisionEntityMan, brickMan);
+	}
+
+	@Override
+	protected void parseSimpleDefinitionContentJson(HAPManualDefinitionBrick brickManual, Object jsonValue, HAPManualDefinitionContextParse parseContext) {
+		HAPManualDefinitionBrickWrapperBrick wrapperBrick = (HAPManualDefinitionBrickWrapperBrick)brickManual;
+		
+		JSONObject jsonObj = null;
+		if(jsonValue instanceof JSONObject) {
+			jsonObj = (JSONObject)jsonValue;
+		}
+		else {
+			jsonObj = new JSONObject(jsonValue);
+		}
+		
+		HAPIdBrickType brickTypeId = null;
+		Object brickTypeObj = jsonObj.opt(HAPManualDefinitionBrickWrapperBrick.BRICKTYPE);
+		if(brickTypeObj!=null) {
+			brickTypeId = HAPUtilityBrickId.parseBrickTypeId(brickTypeObj);
+		}
+		
+		this.parseBrickAttributeJson(wrapperBrick, jsonObj, HAPBrickWrapperBrick.BRICK, brickTypeId, null, parseContext);
+		
+	}
+}

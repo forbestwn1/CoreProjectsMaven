@@ -1,0 +1,11 @@
+package com.nosliw.application;
+
+@SpringBootApplication
+public class HAPApplication {
+
+	public static void main(String[] args) {
+        SpringApplication.run(HAPApplication.class, args);
+    }
+	
+	
+}

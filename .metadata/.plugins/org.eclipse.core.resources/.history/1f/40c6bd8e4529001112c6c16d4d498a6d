@@ -1,0 +1,5 @@
+package com.nosliw.application.api;
+
+public class HAPGateway {
+
+}

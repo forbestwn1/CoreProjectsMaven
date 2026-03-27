@@ -1,0 +1,210 @@
+
+options {
+	/*create static method */
+	STATIC = false ;
+	/* the location for parser classes */
+	OUTPUT_DIRECTORY = "c:/Temp/JCCTree/criteria";
+}
+
+PARSER_BEGIN(HAPCriteriaParserGenerated)
+/* define the package name for parser classes */
+package com.nosliw.data.imp.criteria.parser.generated;
+
+public class HAPCriteriaParserGenerated {
+
+  public static void main(String args[]) throws ParseException, TokenMgrError {
+		HAPCriteriaParserGenerated parser = new HAPCriteriaParserGenerated( System.in ) ;
+		SimpleNode root = parser.Criteria(0);
+		root.dump("");
+  }  
+}
+PARSER_END(HAPCriteriaParserGenerated)
+
+
+TOKEN : { < START_EXPRESSION : "@||" > }
+TOKEN : { < END_EXPRESSION : "||@" > }
+TOKEN : { < START_IDS : "#||" > }
+TOKEN : { < END_IDS : "||#" > }
+TOKEN : { < START_OR : "^||" > }
+TOKEN : { < END_OR : "||^" > }
+
+TOKEN : { < START_SUBCRITERIA_OPEN : "%||" > }
+TOKEN : { < END_SUBCRITERIA_OPEN : "||%" > }
+
+TOKEN : { < START_SUBCRITERIA_CLOSE : "%%||" > }
+TOKEN : { < END_SUBCRITERIA_CLOSE : "||%%" > }
+
+TOKEN : { < START_REFERENCE : "~||" > }
+TOKEN : { < END_REFERENCE : "||~" > }
+
+TOKEN : { < START_RANGE : "`||" > }
+TOKEN : { < END_RANGE : "||`" > }
+
+
+TOKEN : { < START_AND : "-||" > }
+TOKEN : { < END_AND : "||-" > }
+
+
+TOKEN : { < COMMAR : "," > }
+TOKEN : { < ASSIGNMENT : ":" > }
+TOKEN : { < RANGE : "-" > }
+TOKEN : { < ANY : "*" > }
+/*TOKEN : { < NAME1 : (["0"-"9","a"-"z","A"-"Z", ".", "_", ";", "\t", "\n", "\r"])+ > }*/
+TOKEN : { < NAME : (["0"-"9","a"-"z","A"-"Z", "(", ")", "<", ">", "&", "!", "?", "{", "}", "[", "]", "_", "#", "'", ";", "."])+ > }
+
+<DEFAULT, IN_REGEX>
+TOKEN:
+{
+	< STRING_LITERAL:
+		"\"" (<DOUBLE_STRING_CHARACTERS>)? "\""  | "'" (<SINGLE_STRING_CHARACTERS>)? "'"
+	>	 : IN_REGEX
+|
+	< #DOUBLE_STRING_CHARACTERS: (<DOUBLE_STRING_CHARACTER>)* >
+|
+	< #SINGLE_STRING_CHARACTERS: (<SINGLE_STRING_CHARACTER>)* >
+|
+	< #DOUBLE_STRING_CHARACTER:
+		(~["\"","\\","\n","\r","\u2028","\u2029"])* 
+	>
+|
+	< #SINGLE_STRING_CHARACTER:
+		(~["'","\\","\n","\r","\u2028","\u2029"]) 
+	> 
+|
+	< #CHARACTER_ESCAPE_SEQUENCE:
+		<SINGLE_ESCAPE_CHARACTER> | <NON_ESCAPE_CHARACTER>
+	>
+|
+	< #SINGLE_ESCAPE_CHARACTER: ["'" , "\"" , "\\" , "b" , "f" , "n" , "r" , "t" , "v"] >
+|
+	< #NON_ESCAPE_CHARACTER: 
+		~["\n","\r","\u2028","\u2029"]
+	| 
+		~["'" , "\"" , "\\" , "b" , "f" , "n" , "r" , "t" , "v", "x", "u"]
+	| 
+		~["0"-"9"]
+	>
+}
+
+
+void anyCriteria() #ANYCRITERIA:
+{
+}
+{
+	<ANY>
+	{}
+}
+
+Token referenceCriteria() #REFERENCECRITERIA:
+{
+	Token t ;
+}
+{
+	<START_REFERENCE> t=<NAME> <END_REFERENCE>
+	{jjtThis.value = t.image; return t;}
+}
+
+Token expressionCriteria() #EXPRESSIONCRITERIA:
+{
+	Token t ;
+}
+{
+	<START_EXPRESSION> t=<NAME><END_EXPRESSION>
+	{jjtThis.value = t.image; return t;}
+}
+
+SimpleNode idCriteria() #IDCRITERIA:
+{
+	Token t ;
+}
+{
+	t = <NAME>(subCriteriaGroup())*
+	{jjtThis.value = t.image; return jjtThis;}
+}
+
+void idsCriteria() #IDSCRITERIA:
+{
+}
+{
+	<START_IDS> idCriteria()(<COMMAR>idCriteria())* <END_IDS>
+	{}
+}
+
+void rangeCriteria() #RANGECRITERIA:
+{
+	Token from = null;
+	Token to = null;
+}
+{
+	(<START_RANGE>(from=<NAME>)*<RANGE>(to=<NAME>)*(subCriteriaGroup())*<END_RANGE>)
+	{jjtThis.value = new String[]{from==null?null:from.image, to==null?null:to.image};                    }
+}
+
+SimpleNode subCriteria(int index) #SUBCRITERIA:
+{
+	Token t ;
+}
+{
+	t=<NAME><ASSIGNMENT>Criteria(index)	
+	{jjtThis.value = t.image; return jjtThis;}
+}
+
+SimpleNode subCriteriaGroup() #SUBCRITERIAGROUP:
+{
+	int i = 0;
+}
+{
+	(
+		(<START_SUBCRITERIA_OPEN> [(subCriteria(i){i++;})(<COMMAR>subCriteria(i){i++;})*]  <END_SUBCRITERIA_OPEN>{jjtThis.value=true;})
+		|
+		(<START_SUBCRITERIA_CLOSE> [(subCriteria(i){i++;})(<COMMAR>subCriteria(i){i++;})*]  <END_SUBCRITERIA_CLOSE>{jjtThis.value=false;})
+	)
+	{return jjtThis;}	
+}
+
+SimpleNode orCriteria() #ORCRITERIA:
+{
+	int i = 0;
+}
+{
+	<START_OR>
+	(Criteria(i){i++;})(<COMMAR>Criteria(i){i++;})*
+	<END_OR>
+	{return jjtThis;}
+}
+
+SimpleNode andCriteria() #ANDCRITERIA:
+{
+	int i = 0;
+}
+{
+	<START_AND>
+	(Criteria(i){i++;})(<COMMAR>Criteria(i){i++;})*
+	<END_AND>
+	{return jjtThis;}
+}
+
+
+SimpleNode Criteria(int index) #CRITERIA:
+{
+}
+{
+	(
+		idCriteria()
+		|
+		idsCriteria()
+		|
+		rangeCriteria()
+		|
+		referenceCriteria()
+		|
+		expressionCriteria()
+		|
+		orCriteria ()
+		|
+		andCriteria ()
+		|
+		anyCriteria ()
+	)
+	{jjtThis.value=index+"";   return jjtThis;}
+}

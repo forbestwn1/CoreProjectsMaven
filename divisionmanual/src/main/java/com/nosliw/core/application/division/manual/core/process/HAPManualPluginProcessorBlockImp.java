@@ -1,0 +1,108 @@
+package com.nosliw.core.application.division.manual.core.process;
+
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.brick.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
+import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
+import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
+import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
+import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
+import com.nosliw.core.application.division.manual.brick.interactive.interfacee.expression.HAPManualDefinitionBlockInteractiveInterfaceExpression;
+import com.nosliw.core.application.division.manual.brick.interactive.interfacee.task.HAPManualDefinitionBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
+import com.nosliw.core.application.division.manual.core.HAPManualBrick;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
+import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.resource.HAPUtilityResourceId;
+
+public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginProcessorBlock{
+
+	public HAPManualPluginProcessorBlockImp(HAPIdBrickType brickType, Class<? extends HAPManualBrick> brickClass) {
+		super(brickType, brickClass);
+	}
+
+	//process definition before value context
+	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void postProcessInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+
+	//build other value port
+	public void processOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
+		
+		if(blockPair.getLeft() instanceof HAPWithBlockInteractiveTask) {
+			HAPEntityOrReference taskInterfaceBrickOrRef = ((HAPWithBlockInteractiveTask)blockPair.getLeft()).getTaskInterface();
+			HAPInteractiveTask taskInterface = null;
+			if(taskInterfaceBrickOrRef!=null) {
+				taskInterface = getInteractiveTask(taskInterfaceBrickOrRef, processContext.getBrickManager(), processContext);
+			}
+			HAPManualUtilityTask.buildValuePortGroupForInteractiveTask(blockPair.getRight(), taskInterface, processContext.getCurrentBundle().getValueStructureDomain());
+		}
+
+		if(blockPair.getLeft() instanceof HAPWithBlockInteractiveExpression) {
+			HAPEntityOrReference expressionInterfaceBrickOrRef = ((HAPWithBlockInteractiveExpression)blockPair.getLeft()).getExpressionInterface();
+			HAPInteractiveExpression expressionInterface = null;
+			if(expressionInterfaceBrickOrRef!=null) {
+				expressionInterface = getInteractiveExpression(expressionInterfaceBrickOrRef, processContext.getBrickManager(), processContext);
+			}
+			HAPManualUtilityTask.buildValuePortGroupForInteractiveExpression(blockPair.getRight(), expressionInterface, processContext.getCurrentBundle().getValueStructureDomain());
+		}
+    }
+	
+	private HAPInteractiveTask getInteractiveTask(HAPEntityOrReference brickOrRef, HAPManagerApplicationBrick brickManager, HAPManualContextProcessBrick processContext) {
+		HAPInteractiveTask out = null;
+		String type = brickOrRef.getEntityOrReferenceType();
+		if(type.equals(HAPConstantShared.BRICK)) {
+			HAPManualDefinitionBlockInteractiveInterfaceTask taskInterfaceBrick = (HAPManualDefinitionBlockInteractiveInterfaceTask)brickOrRef;
+			out = taskInterfaceBrick.getValue();
+		}
+		else if(type.equals(HAPConstantShared.RESOURCEID)) {
+			HAPBlockInteractiveInterfaceTask taskInterfaceBlock = (HAPBlockInteractiveInterfaceTask)HAPUtilityBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
+			out = taskInterfaceBlock.getValue();
+		}
+		return out;
+	}
+	
+	private HAPInteractiveExpression getInteractiveExpression(HAPEntityOrReference brickOrRef, HAPManagerApplicationBrick brickManager, HAPManualContextProcessBrick processContext) {
+		HAPInteractiveExpression out = null;
+		String type = brickOrRef.getEntityOrReferenceType();
+		if(type.equals(HAPConstantShared.BRICK)) {
+			HAPManualDefinitionBlockInteractiveInterfaceExpression expressionInterfaceBrick = (HAPManualDefinitionBlockInteractiveInterfaceExpression)brickOrRef;
+			out = expressionInterfaceBrick.getValue();
+		}
+		else if(type.equals(HAPConstantShared.RESOURCEID)) {
+			HAPBlockInteractiveInterfaceExpression expressionInterfaceBlock = (HAPBlockInteractiveInterfaceExpression)HAPUtilityBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
+			out = expressionInterfaceBlock.getValue();
+		}
+		return out;
+	}
+	
+	public void postProcessOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	
+	//value context extension, variable resolve
+	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void postProcessVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	
+	//matcher
+	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void postProcessValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+
+	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void postNormalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	
+	//
+	public void processBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void postProcessBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+
+
+	protected Pair<HAPManualDefinitionBrick, HAPManualBrick> getBrickPair(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext){
+		return HAPManualDefinitionUtilityBrick.getBrickPair(pathFromRoot, processContext.getCurrentBundle());
+	}
+}

@@ -1,0 +1,111 @@
+package com.nosliw.core.application;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPUtilityNamingConversion;
+
+@HAPEntityWithAttribute
+public class HAPPackageBrickInBundle extends HAPSerializableImp{
+
+	@HAPAttribute
+	public static final String BRICKID = "brickId";
+
+	@HAPAttribute
+	public static final String ADAPATERS = "adapters";
+
+	@HAPAttribute
+	public static final String ISADAPTEREXPLICIT = "isAdapterExplicit";
+
+	private HAPIdBrickInBundle m_brickId;
+	
+    private List<String> m_adapterNames;
+    
+    //whether to find adapter during runtime
+    private boolean m_isAdapterExplicit;
+    
+    public HAPPackageBrickInBundle() {
+    	this.m_adapterNames = new ArrayList<String>();
+    	this.m_isAdapterExplicit = false; 
+    }
+    
+    public HAPIdBrickInBundle getBrickId() {   return this.m_brickId;    }
+	
+    public List<String> getAdapters(){    return this.m_adapterNames;     }
+    public void addAdapter(String adapter) {
+    	this.m_adapterNames.add(adapter);
+    	this.m_isAdapterExplicit = true; 
+    }
+    
+    public boolean isAdapterExplicit() {    return this.m_isAdapterExplicit;      }
+    public void setIsAdapterExplicit(boolean isAdapterExplicit) {    this.m_isAdapterExplicit = isAdapterExplicit;     }
+    
+	@Override
+	protected boolean buildObjectByLiterate(String literateValue){	
+		String[] parts = HAPUtilityNamingConversion.parseParts(literateValue);
+		int len = parts.length;
+		if(len>0) {
+			this.m_brickId = new HAPIdBrickInBundle();
+			this.m_brickId.buildObject(parts[0], HAPSerializationFormat.LITERATE);
+		}
+		if(len>1) {
+			for(String adapter : HAPUtilityNamingConversion.parseElements(parts[1])) {
+				this.m_adapterNames.add(adapter);
+			}
+		}
+		if(len>2) {
+			this.m_isAdapterExplicit = Boolean.valueOf(parts[2]);
+		}
+		
+		return true;  
+	}
+    
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		super.buildObjectByJson(json);
+		
+		JSONObject jsonObj = (JSONObject)json;
+		
+		JSONObject brickIdJsonObj = jsonObj.optJSONObject(BRICKID);
+		if(brickIdJsonObj!=null) {
+			Object isAdapterExplicitObj = jsonObj.opt(ISADAPTEREXPLICIT);
+			if(isAdapterExplicitObj!=null) {
+				this.m_isAdapterExplicit = ((Boolean)isAdapterExplicitObj).booleanValue();
+			}
+			
+			JSONArray adapterJsonArray = jsonObj.optJSONArray(ADAPATERS);
+			if(adapterJsonArray!=null&&adapterJsonArray.length()>0) {
+				for(int i=0; i<adapterJsonArray.length(); i++) {
+					this.addAdapter(adapterJsonArray.getString(i));
+				}
+			}
+		}
+		else {
+			brickIdJsonObj = jsonObj;
+		}
+		
+		this.m_brickId = new HAPIdBrickInBundle();
+		this.m_brickId.buildObject(brickIdJsonObj, HAPSerializationFormat.JSON);
+		
+		return true;
+	}
+	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(BRICKID, this.m_brickId.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(ADAPATERS, HAPManagerSerialize.getInstance().toStringValue(this.m_adapterNames, HAPSerializationFormat.JSON));
+		jsonMap.put(ISADAPTEREXPLICIT, this.m_isAdapterExplicit+"");
+		typeJsonMap.put(ISADAPTEREXPLICIT, Boolean.class);
+	}
+	
+}
