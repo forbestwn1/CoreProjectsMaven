@@ -1,6 +1,0 @@
-package com.nosliw.application.api;
-
-@RestController
-public class HAPGateway {
-
-}

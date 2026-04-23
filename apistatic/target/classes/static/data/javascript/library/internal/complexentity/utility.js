@@ -1,0 +1,390 @@
+//get/create package
+var packageObj = library;    
+
+(function(packageObj){
+	//get used node
+	var node_CONSTANT;
+	var node_COMMONCONSTANT;
+	var node_COMMONATRIBUTECONSTANT;
+	var node_createServiceRequestInfoSequence;
+	var node_createServiceRequestInfoSimple;
+	var node_basicUtility;
+	var node_getObjectType;
+	var node_getObjectId;
+	var node_ResourceId;
+	var node_resourceUtility;
+	var node_createConfigure;
+	var node_getEntityTreeNodeInterface;
+	var node_namingConvensionUtility;
+	var loc_createCoreEntityPackage;
+	var node_createReferenceCoreEntity;
+	var node_pathUtility
+    var node_createAdapterInfo;
+
+//*******************************************   Start Node Definition  ************************************** 	
+
+var node_complexEntityUtility = function(){
+
+	var loc_traverseNode = function(coreEntity, processorInfo){
+		var treeNodeInterface = node_getEntityTreeNodeInterface(coreEntity);
+		if(treeNodeInterface!=undefined){
+			var childrenNames = treeNodeInterface.getChildrenName();
+			_.each(childrenNames, function(childName, i){
+				var processOut = processorInfo.processLeaf(coreEntity, childName);
+				
+				if(processOut!=false){
+    				var childNode = treeNodeInterface.getChild(childName);
+	    			var childValue = childNode.getChildValue();
+		    		var childEntityCore = loc_out.getCoreBrick(childValue);
+		    		if(childEntityCore!=undefined && node_getObjectType(childEntityCore)!=node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+				    	loc_traverseNode(childEntityCore, processorInfo);
+					}
+				}
+			});
+		}
+	};
+
+    var loc_getChildCoreEntity = function(entityCore, childName, isRoot){
+		var childCoreEntityInfo = loc_getChildCoreEntityInfo(entityCore, childName, isRoot);
+		if(childCoreEntityInfo.remainPath!=undefined){
+			throw new Error("Invalid path!");
+		}
+		else{
+			return childCoreEntityInfo.coreEntity;
+		}
+	};
+
+    var loc_getChildCoreEntityInfo = function(entityCore, childName, isRoot){
+		var out = {
+			error : false			
+		};
+
+        if(isRoot==undefined)    isRoot = false;
+ 
+        var entityCoreType = node_getObjectType(entityCore);
+        
+		if(isRoot==false && (entityCoreType==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE || entityCoreType==node_CONSTANT.TYPEDOBJECT_TYPE_DYNAMIC)){
+			//for bundle or dynamic node, error
+			out.error = true;
+			throw new Error("Invalid path!");
+   		}
+   		else{
+    		var treeNodeInterface = node_getEntityTreeNodeInterface(entityCore);
+		
+	    	if(childName.startsWith(node_COMMONCONSTANT.PREFIX_BRICKATTRIBUTE_INTERPRET)){
+		         //for attribute need interpret
+		         out.remainPath = childName;
+   		    }
+        	else{
+	        	//normal attribute
+		    	var childTreeNode = treeNodeInterface.getChild(childName)
+		    	if(childTreeNode==undefined){
+        			throw new Error("Invalid path!");
+				}
+			    var childEntityCore = childTreeNode.getChildValue().getCoreEntity();
+			    out.coreEntity = childEntityCore;
+    	    }
+		}
+		
+        return out;		
+	};
+   
+	var loc_getCoreEntityReferenceByPath = function(baseEntityCore, path){
+			var hostEntityCore = baseEntityCore;
+			var remainPath;
+			if(relativePath!=undefined && relativePath!=""){
+				var segs = node_pathUtility.parsePathSegments(relativePath); 
+				_.each(segs, function(seg, i){
+					if(remainPath!=undefined){
+					     remainPath.push(childName);
+					}
+					else{
+						var childInfo = loc_getChildCoreEntityInfo(hostEntityCore, childName, i==0);
+						if(childInfo.remainPath!=undefined){
+    					     //for attribute need interpret
+	    				     remainPath = [];
+		    			     remainPath.push(childName);
+						}
+						else{
+        					hostEntityCore = childInfo.coreEntity;
+						}
+					}
+				});		
+			}
+			
+			return node_createReferenceCoreEntity(hostEntityCore, node_pathUtility.combinePathSegs(remainPath));
+	};
+
+	var loc_getCoreEntityReferenceByRelativePath = function(baseEntityCore, relativePath){
+			var hostEntityCore = baseEntityCore;
+			var remainPath;
+			var isRoot = 0;
+			if(relativePath!=undefined && relativePath!=""){
+				var segs = node_pathUtility.parsePathSegments(relativePath); 
+				_.each(segs, function(seg, i){
+					var treeNodeInterface = node_getEntityTreeNodeInterface(hostEntityCore);
+					if(seg.startsWith(node_COMMONCONSTANT.NAME_PARENT)) {
+						hostEntityCore = treeNodeInterface.getParentCore();
+						if(node_getObjectType(hostEntityCore)==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+							//for bundle node
+							hostEntityCore = node_getEntityTreeNodeInterface(hostEntityCore).getParentCore();
+						}
+					}
+					else{
+						//for child
+						var childName = seg;
+
+						if(childName.startsWith(node_COMMONCONSTANT.SYMBOL_KEYWORD)){
+							childName = childName.substring(node_COMMONCONSTANT.SYMBOL_KEYWORD.length);
+						}
+						
+						if(remainPath!=undefined){
+						     remainPath.push(childName);
+						}
+						else{
+							var childInfo = loc_getChildCoreEntityInfo(hostEntityCore, childName, isRoot==0);
+							if(childInfo.remainPath!=undefined){
+	    					     //for attribute need interpret
+		    				     remainPath = [];
+			    			     remainPath.push(childName);
+							}
+							else{
+	        					hostEntityCore = childInfo.coreEntity;
+							}
+						}
+						isRoot++;
+					}
+				});		
+			}
+			
+			return node_createReferenceCoreEntity(hostEntityCore, node_pathUtility.combinePathSegs(remainPath));
+	};
+
+	var loc_out = {
+		
+		isAttributeNeedInterpretion : function(name){
+			if(name.startWith(node_COMMONCONSTANT.PREFIX_BRICKATTRIBUTE_INTERPRET)){
+				return name.subString(node_COMMONCONSTANT.PREFIX_BRICKATTRIBUTE_INTERPRET.length());
+			}
+			else return undefined;
+		},
+
+		getParmValue : function(brickDef, parmName){
+          	var parms = brickDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.WITHPARMS_PARM);
+			return parms[parmName];
+		},
+		
+		//find all resourc id attibute, do preinit, build adapter
+		getBuildAttributeWithResourceId : function(entityCore, handlers, request){
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+			loc_traverseNode(entityCore, {
+				processRoot: function(entityCore){},
+				
+				processLeaf: function(coreEntity, childName){
+					var childEntityCore = node_getEntityTreeNodeInterface(coreEntity).getChild(childName).getChildValue().getCoreEntity();
+					var coreDataType = node_getObjectType(childEntityCore);
+					if(coreDataType==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+						out.addRequest(node_getComponentInterface(childEntityCore).getPreInitRequest({
+							success1 : function(request){
+								return nosliw.runtime.getComplexEntityService().getCreateAdaptersRequest(childEntityCore.getDmbededAttrDef(), {
+									success : function(request, adapters){
+										node_getEntityTreeNodeInterface(childEntityCore).setAdapters(adapters);
+									}
+								});
+							}
+						}));
+					}
+				}
+			});
+			
+			return out;
+		},
+
+		getCoreEntityReferenceByPath : function(baseEntityCore, path){
+			return loc_getCoreEntityReferenceByPath(baseEntityCore, path);
+		},
+		
+		getCoreEntityReferenceByRelativePath : function(baseEntityCore, relativePath){
+			return loc_getCoreEntityReferenceByRelativePath(baseEntityCore, relativePath);
+		},
+		
+		getBrickPackageByRelativePath : function(baseEntityCore, brickInBundlePackageDef){
+			var brickIdInBundle = brickInBundlePackageDef[node_COMMONATRIBUTECONSTANT.PACKAGEBRICKINBUNDLE_BRICKID];
+			var coreEntityRef = loc_getCoreEntityReferenceByRelativePath(baseEntityCore, brickIdInBundle[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_RELATIVEPATH]);
+			var adapterInfo = node_createAdapterInfo(brickInBundlePackageDef[node_COMMONATRIBUTECONSTANT.PACKAGEBRICKINBUNDLE_ADAPATERS], brickInBundlePackageDef[node_COMMONATRIBUTECONSTANT.ISADAPTEREXPLICIT]);
+			
+			var out = node_createCoreEntityPackage(coreEntityRef, adapterInfo);
+			
+			var coreDataType = node_getObjectType(coreEntityRef.getBaseCoreEntity());
+			if(coreDataType==node_CONSTANT.TYPEDOBJECT_TYPE_DYNAMIC){
+				out.setBaseCoreEntityPackage(coreEntityRef.getBaseCoreEntity().getDynamicInput().getCoreEntityPackage());
+			}
+			return out;
+		},
+
+
+		getDescendantCore : function(entity, path){
+			var out = entity;
+			var out = node_getObjectType(out)==node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTRUNTIME?out.getCorenEntity():out;
+			
+			var pathSegs = node_pathUtility.parsePathSegments(path);;
+			_.each(pathSegs, function(pathSeg, i){
+				out = loc_getChildCoreEntity(out, pathSeg, i==0);
+			});
+			return out;
+		},
+		
+		getInitBrickRequest : function(brickCore, view, envInterface){
+			return node_getComponentInterface(brickCore).getPreInitRequest({
+				success : function(request){
+					//try pass envInterface to main entity
+					if(envInterface!=undefined){
+						var embededInterface = node_getEmbededEntityInterface(brickCore);
+						_.each(envInterface, function(interfacee, name){
+							embededInterface.setEnvironmentInterface(name, interfacee);
+						});
+					}
+
+					//update backup state object
+//					var backupStateObj = runtimeContext==undefined?undefined:runtimeContext.backupState;
+//					if(backupStateObj!=undefined)  node_getComponentInterface(brickCore).updateBackupStateObject(backupStateObj);
+
+					//update lifecycle entity
+//					var lifecycleEntity = runtimeContext==undefined?undefined:runtimeContext.lifecycleEntity;
+//					if(lifecycleEntity==undefined)  lifecycleEntity = node_createLifeCycleRuntimeContext("application");
+//					node_getComponentInterface(application).updateLifecycleEntityObject(lifecycleEntity);
+
+					//update view
+					if(view){
+						node_getComponentInterface(brickCore).updateView(view);
+					}
+
+					return node_getComponentInterface(brickCore).getPostInitRequest({
+						success : function(request){
+							return brickCore;
+						}
+					});
+				}
+			});
+			
+		},
+		
+		traverseNode : function(entity, processorInfo){
+			var entityCore = node_getObjectType(entity)==node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTRUNTIME?entity.getCorenEntity():entity;
+			processorInfo.processRoot(entityCore);
+			loc_traverseNode(entityCore, processorInfo);
+		},
+		
+		getBrickNode : function(node){
+			if(node_getObjectType(node.getChildValue().getCoreEntity())==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+				return node.getChildValue().getCoreEntity().getMainEntityNode();
+			}
+			else return node;					
+		},
+		
+		getCoreEntity : function(obj){
+			var out = obj;
+			var dataType = node_getObjectType(out);
+			if(dataType==node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTRUNTIME){
+				out = obj.getCoreEntity();
+			}
+			return out;
+		},
+		
+		getCoreBrick : function(obj){
+			var out = loc_out.getCoreEntity(obj);
+			
+			var coreDataType = node_getObjectType(out);
+			if(coreDataType==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+				out = out.getMainEntityCore();
+			}
+			else if(coreDataType==node_CONSTANT.TYPEDOBJECT_TYPE_DYNAMIC){
+				var coreEntityRef = out.getDynamicInput().getCoreEntityPackage().getCoreEntityReference();
+				if(coreEntityRef.getRemainingPath()==undefined){
+					out = coreEntityRef.getBaseCoreEntity();
+				}
+			}
+			return out;
+		},
+		
+		getComplexCoreEntity : function(parm){
+			var dataType = node_getObjectType(parm);
+			if(dataType==node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTRUNTIME){
+				return this.getComplexCoreEntity(parm.getCoreEntity());
+			}
+			else if(dataType==node_CONSTANT.TYPEDOBJECT_TYPE_APPLICATION){
+				return this.getComplexCoreEntity(parm.getPackageRuntime());
+			}
+			else if(dataType==node_CONSTANT.TYPEDOBJECT_TYPE_PACKAGE){
+				return this.getComplexCoreEntity(parm.getMainBundleRuntime());
+			}
+			else if(dataType==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+				return this.getComplexCoreEntity(parm.getMainEntityRuntime());
+			}
+			else{
+				return parm;
+			}
+		},
+	
+	    getAdapters : function(entityCore){
+    		var adapters = node_getEntityTreeNodeInterface(entityCore).getAdapters();
+            return adapters;			
+		},
+	
+		getAdapterExecuteRequest : function(entityCore, adapterName, handlers, request){
+			return loc_out.getAdapters(entityCore)[adapterName].getExecuteRequest(entityCore, handlers, request);
+		},
+			
+		XXXXXgetAttributeAdapterExecuteRequest : function(parentCoreEntity, attrName, adapterName, extraInfo, handlers, request){
+			var attrNode = node_getEntityTreeNodeInterface(parentCoreEntity).getChild(attrName);
+			var adapter = attrNode.getAdapters()[adapterName!=undefined?adapterName:node_COMMONCONSTANT.NAME_DEFAULT];
+			if(adapter!=undefined)	return this.getAdapterExecuteRequest(parentCoreEntity, attrNode.getChildValue(), adapter, extraInfo, handlers, request);
+		},
+		
+		XXXXXgetAdapterExecuteRequest : function(parentCoreEntity, childRuntime, adapter, extraInfo, handlers, request){
+			var childInput;
+			var childCore = childRuntime.getCoreEntity==undefined?undefined:childRuntime.getCoreEntity();
+			if(childCore==undefined)   childInput = childRuntime;
+			else{
+				var childCoreType = node_getObjectType(childCore);
+				if(childCoreType==node_CONSTANT.TYPEDOBJECT_TYPE_BUNDLE){
+					childInput = childCore.getMainEntity();
+				}
+				else{
+					childInput = childRuntime;
+				}
+			}
+			
+			return adapter.getExecuteRequest(parentCoreEntity, childInput, extraInfo, handlers, request);
+		},
+		
+	};
+
+	return loc_out;
+}();
+
+//*******************************************   End Node Definition  ************************************** 	
+//populate dependency node data
+nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
+nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
+nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectId", function(){node_getObjectId = this.getData();});
+nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){	node_ResourceId = this.getData();	});
+nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
+nosliw.registerSetNodeDataEvent("complexentity.getEntityTreeNodeInterface", function(){node_getEntityTreeNodeInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("complexentity.entity.createCoreEntityPackage", function(){node_createCoreEntityPackage = this.getData();});
+nosliw.registerSetNodeDataEvent("complexentity.entity.createReferenceCoreEntity", function(){node_createReferenceCoreEntity = this.getData();});
+nosliw.registerSetNodeDataEvent("common.path.pathUtility", function(){node_pathUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("complexentity.entity.createAdapterInfo", function(){node_createAdapterInfo = this.getData();});
+
+
+//Register Node by Name
+packageObj.createChildNode("complexEntityUtility", node_complexEntityUtility); 
+
+})(packageObj);

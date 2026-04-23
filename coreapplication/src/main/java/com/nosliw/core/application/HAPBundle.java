@@ -37,6 +37,9 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 	public final static String DYNAMIC = "dynamic"; 
 
 	@HAPAttribute
+	public final static String ALIASMAPPING = "aliasMapping"; 
+
+	@HAPAttribute
 	public final static String EXTRADATA = "extraData"; 
 
 	private HAPWrapperBrickRoot m_mainBrickWrapper;
@@ -49,25 +52,31 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 	
 	//need dynamic input during runtime
 	private HAPDynamicDefinitionContainer m_dynamicInfo;
+
+	private Map<String, HAPPath> m_aliasMapping;
 	
 	private Object m_extraData;
 
-	private List<HAPInfoExportResource> m_exportResourceInfos;
+	private List<HAPInfoExportBrick> m_exportResourceInfos;
 	
 	public HAPBundle() {
 		this.m_valueStructureDomain = new HAPDomainValueStructure();
-		this.m_exportResourceInfos = new ArrayList<HAPInfoExportResource>();
+		this.m_exportResourceInfos = new ArrayList<HAPInfoExportBrick>();
 		this.m_branchBricks = new LinkedHashMap<String, HAPWrapperBrickRoot>();
+		this.m_aliasMapping = new LinkedHashMap<String, HAPPath>();
 	
 		this.m_dynamicInfo = new HAPDynamicDefinitionContainer(); 
 		
-		HAPInfoExportResource defaultExport = new HAPInfoExportResource(new HAPPath());
+		HAPInfoExportBrick defaultExport = new HAPInfoExportBrick(new HAPPath());
 		defaultExport.setName(HAPConstantShared.NAME_DEFAULT);
 		this.addExportResourceInfo(defaultExport);
 	}
 	
-	public void addExportResourceInfo(HAPInfoExportResource exportResourceInfo) {		this.m_exportResourceInfos.add(exportResourceInfo);	}
-	public List<HAPInfoExportResource> getExportResourceInfos(){    return this.m_exportResourceInfos;    }
+	public void addExportResourceInfo(HAPInfoExportBrick exportResourceInfo) {		
+		exportResourceInfo.setPathFromRoot(HAPUtilityBundle.normalizePathWithBranch(exportResourceInfo.getPathFromRoot().getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN));
+		this.m_exportResourceInfos.add(exportResourceInfo);	
+	}
+	public List<HAPInfoExportBrick> getExportResourceInfos(){    return this.m_exportResourceInfos;    }
 	
 	public HAPDomainValueStructure getValueStructureDomain() {	return this.m_valueStructureDomain;	}
 	
@@ -95,12 +104,16 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 	public void setBranchBrickWrapper(String branch, HAPWrapperBrickRoot brickWrapper) {     this.m_branchBricks.put(branch, brickWrapper);        }
 	private HAPWrapperBrickRoot getBranchBrickWrapper(String branch) {     return this.m_branchBricks.get(branch);         }
 	public Map<String, HAPWrapperBrickRoot> getBranchBrickWrappers() {     return this.m_branchBricks;         }
+	public Set<String> getBranchNames(){   return this.m_branchBricks.keySet();    }
 	
 	public HAPDynamicDefinitionContainer getDynamicInfo() {     return this.m_dynamicInfo;        }
 	
 	public Object getExtraData() {   return this.m_extraData;    }
 	public void setExtraData(Object data) {   this.m_extraData = data;    }
 
+	public Map<String, HAPPath> getAliasMappings(){    return this.m_aliasMapping;     }
+	public void addAliasMapping(String alias, HAPPath path) {    this.m_aliasMapping.put(alias, path);       }
+	public HAPPath getBrickPathByAlias(String alias) {    return this.m_aliasMapping.get(alias);      }
 	
 	public Set<HAPResourceIdSimple> getResourceDependency(){
 		Set<HAPResourceIdSimple> out = new HashSet<HAPResourceIdSimple>();
@@ -117,6 +130,7 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JSON));
+		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JSON));
 		
 		Map<String, String> branchJsonMap = new LinkedHashMap<String, String>();
 		for(String branch : this.m_branchBricks.keySet()) {
@@ -132,6 +146,7 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JAVASCRIPT));
+		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JAVASCRIPT));
 
 		Map<String, String> branchJsonMap = new LinkedHashMap<String, String>();
 		for(String branch : this.m_branchBricks.keySet()) {

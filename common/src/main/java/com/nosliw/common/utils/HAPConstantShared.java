@@ -37,6 +37,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String SYMBOL_ALIAS = "@";
 		public static final String SYMBOL_KEYWORD = "#";
 		public static final String SYMBOL_GROUP = "@";
 		public static final String SYMBOL_ENTITYNAME_COMMON = "..";
@@ -723,6 +724,7 @@ public class HAPConstantShared {
 
 
 		public static final String ENTITYINFO_INFONAME_DISABLE = "disable";
+		public static final String ENTITYINFO_INFONAME_ALIAS = "nosliw_alias";
 
 
 
@@ -979,7 +981,7 @@ public class HAPConstantShared {
 
 
 
-		public static final String NAME_PARENT = "pppppparentttttt";
+		public static final String NAME_PARENT = "#parent#";
 		public static final String NAME_CHILD = "chilllllllld";
 
 
@@ -1053,8 +1055,8 @@ public class HAPConstantShared {
 
 
 
-		public static final String DYNAMICTASK_REF_TYPE_SINGLE = "single";
-		public static final String DYNAMICTASK_REF_TYPE_MULTIPLE = "multiple";
+		public static final String DYNAMICINPUT_TYPE_BRICKREF_SINGLE = "single";
+		public static final String DYNAMICINPUT_TYPE_BRICKREF_MULTIPLE = "multiple";
 
 
 
@@ -1068,10 +1070,6 @@ public class HAPConstantShared {
 
 		public static final String BRICKFACADE_TYPE_SIMPLE = "simple";
 		public static final String BRICKFACADE_TYPE_COMPLEX = "complex";
-
-
-
-		public static final String NAME_ROOTBRICK_MAIN = "main";
 
 
 
@@ -1094,7 +1092,11 @@ public class HAPConstantShared {
 
 
 
-		public static final String BUNDLEBRANCH_NAME_RULETASKS = "ruleTasks";
+		public static final String NAME_ROOTBRICK_MAIN = "#main";
+
+
+
+		public static final String BUNDLEBRANCH_NAME_RULETASKS = "#ruleTasks";
 
 
 }

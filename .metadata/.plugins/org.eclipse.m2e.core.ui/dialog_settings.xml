@@ -2,6 +2,14 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Mywork\CoreProjectsMaven\api\src\main\java\com\nosliw\application\api\HAPGateway.java"/>
+			<item value="C:\Mywork\CoreProjectsMaven\divisionmanual\src\main\java\com\nosliw\core\application\division\manual\brick\ui\uicontent\HAPManualPluginParserBlockComplexUIContent.java"/>
+			<item value="C:\Mywork\CoreProjectsMaven\divisionmanual"/>
+			<item value="C:\Mywork\CoreProjectsMaven\coreruntime"/>
+			<item value="C:\Mywork\CoreProjectsMaven\root\pom.xml"/>
+			<item value="C:\Mywork\CoreProjectsMaven\coreapplication\src\main\java\com\nosliw\core\application\HAPAdapter.java"/>
+			<item value="C:\Mywork\CoreProjectsMaven\common\pom.xml"/>
+			<item value="C:\Mywork\CoreProjectsMaven\coreinfrastructure\pom.xml"/>
 			<item value="C:\Mywork\CoreProjectsMaven"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -45,20 +53,24 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="com.nolsiw"/>
 			<item value="com.nosliw"/>
+			<item value="com.no"/>
 		</list>
 		<list key="name">
-			<item value="CoreResource"/>
-			<item value="Core"/>
-			<item value="Root"/>
-			<item value="CoreInfrastructure"/>
-			<item value="Common"/>
+			<item value="DivisionStory"/>
+			<item value="Api"/>
+			<item value="CoreOtherEntity"/>
+			<item value="DivistionManual"/>
+			<item value="CoreRuntim"/>
 		</list>
 		<list key="artifactId">
-			<item value="coreresource"/>
-			<item value="common"/>
-			<item value="core"/>
-			<item value="coreinfrastructure"/>
+			<item value="divisionstory"/>
+			<item value="root"/>
+			<item value="api"/>
+			<item value="coreotherentity"/>
+			<item value="divisionmanual"/>
+			<item value="coreruntime"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

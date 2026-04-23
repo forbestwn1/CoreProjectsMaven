@@ -57,7 +57,7 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 	}
 	
 	public static HAPManualDefinitionAttributeInBrick parseAttribute(String attrName, JSONObject jsonObj, HAPIdBrickType entityTypeIfNotProvided, HAPIdBrickType adapterTypeId, HAPManualDefinitionContextParse parseContext) {
-		HAPEntityInfo info = HAPUtilityEntityInfo.buildEntityInfoFromJson(jsonObj, HAPManualDefinitionAttributeInBrick.INFO);
+		HAPEntityInfo info = HAPUtilityEntityInfo.buildEntityInfoFromJson(jsonObj);
 		
 		if(HAPUtilityEntityInfo.isEnabled(info)) {
 			HAPManualDefinitionAttributeInBrick out = new HAPManualDefinitionAttributeInBrick();
@@ -77,22 +77,6 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 			if(adaptersObj!=null) {
 				List<HAPManualDefinitionAdapter> adapters = parseAdapters(adaptersObj, adapterTypeId, parseContext);
 				adapters.forEach(adapter->out.addAdapter(adapter));
-				
-				if(adaptersObj instanceof JSONArray) {
-					JSONArray adaptersArray = (JSONArray)adaptersObj;
-					for(int i=0; i<adaptersArray.length(); i++) {
-						HAPManualDefinitionAdapter adapterInfo = parseAdapter(adaptersArray.getJSONObject(i), adapterTypeId, parseContext);
-						if(adapterInfo!=null) {
-							out.addAdapter(adapterInfo);
-						}
-					}
-				}
-				else if(adaptersObj instanceof JSONObject) {
-					HAPManualDefinitionAdapter adapterInfo = parseAdapter((JSONObject)adaptersObj, adapterTypeId, parseContext);
-					if(adapterInfo!=null) {
-						out.addAdapter(adapterInfo);
-					}
-				}
 			}
 			
 			//parse relation
