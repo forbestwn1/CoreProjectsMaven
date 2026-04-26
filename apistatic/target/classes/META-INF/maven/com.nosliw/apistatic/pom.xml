@@ -8,4 +8,11 @@
   <artifactId>apistatic</artifactId>
   <name>apistatic</name>
   <description>apistatic</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

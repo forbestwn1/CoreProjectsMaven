@@ -7,4 +7,18 @@
   </parent>
   <artifactId>coreresource</artifactId>
   <name>CoreResource</name>
+
+  <dependencies>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>coreinfrastructure</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+
 </project>

@@ -11,6 +11,13 @@
   <artifactId>coreinfrastructure</artifactId>
   <name>CoreInfrastructure</name>
 
+  <dependencies>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 
 
 </project>
