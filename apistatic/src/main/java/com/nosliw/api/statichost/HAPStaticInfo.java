@@ -32,6 +32,15 @@ public class HAPStaticInfo extends HAPSerializableImp{
 
 	private String m_version;
 
+	public HAPStaticInfo() {}
+	
+	public HAPStaticInfo(String type, String domain, String name, String version) {
+		this.m_type = type;
+		this.m_domain = domain;
+		this.m_name = name;
+		this.m_version = version;
+	}
+	
 	public String getType() {		return this.m_type;	}
 	
 	public String getDomain() {		return this.m_domain;	}

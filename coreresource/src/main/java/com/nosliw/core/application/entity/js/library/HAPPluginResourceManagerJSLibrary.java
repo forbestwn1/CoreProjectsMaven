@@ -1,12 +1,18 @@
 package com.nosliw.core.application.entity.js.library;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
+
+import com.nosliw.api.statichost.HAPStaticInfo;
+import com.nosliw.api.statichost.HAPStaticRequest;
+import com.nosliw.api.statichost.HAPStaticResponse;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
@@ -27,17 +33,28 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 	public HAPResourceDataOrWrapper getResourceData(HAPResourceIdSimple simpleResourceId, HAPRuntimeInfo runtimeInfo) {
 		HAPResourceIdJSLibrary resourceLibraryId = new HAPResourceIdJSLibrary(simpleResourceId);
 		HAPJSLibraryId libraryId =  resourceLibraryId.getLibraryId();
-
-		List<File> files = this.getLibraryFileName(libraryId);
-		if(files==null || files.size()==0) {
-			return null;
-		}
 		
-		List<URI> uris = new ArrayList<URI>();
-		for(File file : files){
-			uris.add(file.toURI());
-		}
-		return new HAPResourceDataJSLibrary(uris);
+		HAPStaticRequest staticRequest = new HAPStaticRequest();
+		staticRequest.addStaticInfo(new HAPStaticInfo(HAPStaticInfo.STATIC_TYPE_LIBRARY, "data.javascript.library.internal", libraryId.getName(), libraryId.getVersion()));
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String responsStr = restTemplate.postForObject("http://localhost:8081/nosliw/static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
+		HAPStaticResponse staticResponse = new HAPStaticResponse();
+		staticResponse.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
+		return new HAPResourceDataJSLibrary(staticResponse.getURIs());
+		
+		
+		
+//		List<File> files = this.getLibraryFileName(libraryId);
+//		if(files==null || files.size()==0) {
+//			return null;
+//		}
+//		
+//		List<URI> uris = new ArrayList<URI>();
+//		for(File file : files){
+//			uris.add(file.toURI());
+//		}
+//		return new HAPResourceDataJSLibrary(uris);
 	}
 
 	

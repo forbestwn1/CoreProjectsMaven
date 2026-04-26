@@ -1,9 +1,14 @@
 package com.nosliw.api.statichost;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -29,6 +34,24 @@ public class HAPStaticResponse extends HAPSerializableImp{
 	
 	public List<URI> getURIs(){
 		return this.m_staticURI;
+	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		
+		JSONArray uriArray = jsonObj.getJSONArray(URI);
+        for(int i=0; i<uriArray.length(); i++) {
+        	try {
+				this.m_staticURI.add(new URI(uriArray.getString(i)));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+        }
+		
+		return true;  
 	}
 	
 	@Override

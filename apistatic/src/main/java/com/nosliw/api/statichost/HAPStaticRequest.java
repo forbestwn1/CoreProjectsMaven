@@ -23,9 +23,8 @@ public class HAPStaticRequest extends HAPSerializableImp{
 		this.m_staticInfo = new ArrayList<HAPStaticInfo>();
 	}
 	
-	public List<HAPStaticInfo> getStaticInfos(){
-		return this.m_staticInfo;
-	}
+	public List<HAPStaticInfo> getStaticInfos(){	return this.m_staticInfo;	}
+	public void addStaticInfo(HAPStaticInfo staticInfo) {    this.m_staticInfo.add(staticInfo);      }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
