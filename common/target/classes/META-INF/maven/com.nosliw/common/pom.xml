@@ -7,6 +7,7 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
   </parent>
   
   <dependencies>

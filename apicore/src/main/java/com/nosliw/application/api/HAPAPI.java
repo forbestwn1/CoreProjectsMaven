@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ import com.nosliw.core.system.HAPSystemFolderUtility;
 import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/nosliw")
 public class HAPAPI {
 
@@ -55,6 +57,7 @@ public class HAPAPI {
 	
 	private final static Logger LOGGER = Logger.getLogger(HAPAPI.class.getName());
 
+	@CrossOrigin
 	@PostMapping("/gateway")
     public HAPServiceData gateway(@RequestBody HAPRequestInfo requestInfo) {
 		HAPServiceData out = null;

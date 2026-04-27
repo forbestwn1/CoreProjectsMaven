@@ -38,7 +38,7 @@ var node_createGatewayService = function(){
 	nosliw.registerSetNodeDataEvent("runtime", function(){
 		//register remote task configure
 		var configure = node_createConfigures({
-			url : loc_configureName,
+			url : "localhost:8080/nosliw/gateway",     //loc_configureName,
 //			contentType: "application/json; charset=utf-8"
 		});
 		

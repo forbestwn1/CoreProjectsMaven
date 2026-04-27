@@ -4,11 +4,29 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
   </parent>
   <artifactId>coreruntime</artifactId>
 
 <!-- Source: https://mvnrepository.com/artifact/org.mozilla/rhino -->
   <dependencies>
+
+   <dependency>
+   	<groupId>com.nosliw</groupId>
+   	<artifactId>common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+   </dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>coreinfrastructure</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>coreresource</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+
     <dependency>
        <groupId>org.mozilla</groupId>
        <artifactId>rhino</artifactId>

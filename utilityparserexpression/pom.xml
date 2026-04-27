@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.nosliw</groupId>
+    <artifactId>root</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
+  </parent>
+  <artifactId>utilityparserexpression</artifactId>
+  <name>utilityparserexpression</name>
+  <description>utilityparserexpression</description>
+
+  <dependencies>
+
+   <dependency>
+   	<groupId>com.nosliw</groupId>
+   	<artifactId>coreapplication</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+   </dependency>
+
+  </dependencies>
+
+</project>

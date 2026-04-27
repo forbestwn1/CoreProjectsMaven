@@ -4,6 +4,7 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
   </parent>
   <artifactId>coreapplication</artifactId>
   <dependencies>
@@ -30,6 +31,11 @@
   	<dependency>
   		<groupId>com.nosliw</groupId>
   		<artifactId>coreresource</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>utilityparserexpression</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
