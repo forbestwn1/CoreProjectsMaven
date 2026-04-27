@@ -1,0 +1,55 @@
+<entity name="data.operationvar" 
+		class="com.nosliw.data.core.imp.HAPOperationVarInfoImp" 
+		table="nosliw.OPERATIONPARM" 
+		primaryKeys="id" 
+		description="">
+
+	<property name="id" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="type" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20)"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="isBase" dataType="boolean" description="" default="false">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20)"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="dataTypeId" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(100)"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="operationId" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20)"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="name" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20)"/>
+		</dbColumnInfos>
+	</property>
+	
+	<property name="description" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20)"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="criteria" dataType="object" subDataType="com.nosliw.core.data.criteria.HAPDataTypeCriteriaWrapperLiterate" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(1000)"/>
+		</dbColumnInfos>
+	</property>
+
+</entity>

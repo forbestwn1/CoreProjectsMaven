@@ -15,12 +15,12 @@ public interface HAPPluginProcessorEntityWithVariable<T extends HAPWithVariable>
 	String getEntityType();
 	
 	//resolve variable
-	void resolveVariable(T withVariableEntity, HAPContainerVariableInfo varInfoContainer, HAPConfigureResolveElementReference resolveConfigure, HAPRuntimeInfo runtimeInfo);
+	void resolveVariable(T withVariableEntity, HAPContainerVariableInfo varInfoContainer, HAPConfigureResolveElementReference resolveConfigure, HAPManagerWithVariablePlugin withVarPlugMan, HAPRuntimeInfo runtimeInfo);
 	
 	//discovery
-	Pair<HAPContainerVariableInfo, Map<String, HAPMatchers>>  discoverVariableCriteria(T withVariableEntity, Map<String, HAPDataTypeCriteria> expections, HAPContainerVariableInfo varInfoContainer);
+	Pair<HAPContainerVariableInfo, Map<String, HAPMatchers>>  discoverVariableCriteria(T withVariableEntity, Map<String, HAPDataTypeCriteria> expections, HAPContainerVariableInfo varInfoContainer, HAPManagerWithVariablePlugin withVarPlugMan);
 
 	//all variables keys in this entity
-	Set<String> getVariableKeys(T withVariableEntity);
+	Set<String> getVariableKeys(T withVariableEntity, HAPManagerWithVariablePlugin withVarPlugMan);
 	
 }

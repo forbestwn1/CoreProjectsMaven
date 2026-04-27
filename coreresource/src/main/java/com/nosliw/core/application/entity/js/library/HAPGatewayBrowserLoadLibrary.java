@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -27,10 +26,11 @@ public class HAPGatewayBrowserLoadLibrary extends HAPGatewayImp{
 	
 	private HAPGatewayManager m_gatewayManager;
 	
-	public HAPGatewayBrowserLoadLibrary(){
+	public HAPGatewayBrowserLoadLibrary(HAPGatewayManager gatewayManager){
+		this.m_gatewayManager = gatewayManager;
 	}
 	
-	@Autowired
+//	@Autowired
 	public void setGatewayManager(HAPGatewayManager gatewayManager) {
 		this.m_gatewayManager = gatewayManager;
 	}

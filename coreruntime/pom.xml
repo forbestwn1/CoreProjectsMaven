@@ -6,4 +6,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>coreruntime</artifactId>
+
+<!-- Source: https://mvnrepository.com/artifact/org.mozilla/rhino -->
+  <dependencies>
+    <dependency>
+       <groupId>org.mozilla</groupId>
+       <artifactId>rhino</artifactId>
+       <version>1.7.9</version>
+    </dependency>
+  </dependencies>
 </project>

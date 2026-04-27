@@ -15,6 +15,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.common.withvariable.HAPPluginProcessorEntityWithVariable;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
@@ -50,7 +51,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 	}
 
 	@Override
-	public Set<String> getVariableKeys(HAPBasicExpressionData dataExpression){
+	public Set<String> getVariableKeys(HAPBasicExpressionData dataExpression, HAPManagerWithVariablePlugin withVarPlugMan){
 		Set<String> out = new HashSet<String>();
 
 		HAPBasicUtilityOperand.traverseAllOperand(dataExpression.getOperandWrapper(), new HAPBasicHandlerOperand() {
@@ -72,7 +73,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 	
 	@Override
 	public void resolveVariable(HAPBasicExpressionData dataExpression, HAPContainerVariableInfo varInfoContainer,
-			HAPConfigureResolveElementReference resolveConfigure, HAPRuntimeInfo runtimeInfo) {
+			HAPConfigureResolveElementReference resolveConfigure, HAPManagerWithVariablePlugin withVarPlugMan, HAPRuntimeInfo runtimeInfo) {
 		
 		HAPBasicUtilityProcessorDataExpression.resolveVariable(dataExpression, varInfoContainer, resolveConfigure);
 		
@@ -84,7 +85,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 	@Override
 	public Pair<HAPContainerVariableInfo, Map<String, HAPMatchers>> discoverVariableCriteria(
 			HAPBasicExpressionData dataExpression, Map<String, HAPDataTypeCriteria> expections,
-			HAPContainerVariableInfo varInfoContainer) {
+			HAPContainerVariableInfo varInfoContainer, HAPManagerWithVariablePlugin withVarPlugMan) {
 		List<HAPBasicOperand> operands = new ArrayList<HAPBasicOperand>();
 		operands.add(dataExpression.getOperandWrapper().getOperand());
 		
