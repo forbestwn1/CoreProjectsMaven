@@ -1,5 +1,6 @@
 package com.nosliw.application.api;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -8,7 +9,6 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +34,6 @@ import com.nosliw.core.system.HAPSystemFolderUtility;
 import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/nosliw")
 public class HAPAPI {
 
@@ -57,9 +56,10 @@ public class HAPAPI {
 	
 	private final static Logger LOGGER = Logger.getLogger(HAPAPI.class.getName());
 
-	@CrossOrigin
 	@PostMapping("/gateway")
-    public HAPServiceData gateway(@RequestBody HAPRequestInfo requestInfo) {
+    public String gateway(@RequestBody String requestInfoStr) {
+		HAPRequestInfo requestInfo = new HAPRequestInfo(URLDecoder.decode(requestInfoStr));
+		
 		HAPServiceData out = null;
 		if(HAPConstantShared.SERVICECOMMAND_GROUPREQUEST.equals(requestInfo.getCommand())){
 			JSONArray jsonGroupReqs = new JSONArray(requestInfo.getParms());
@@ -73,7 +73,7 @@ public class HAPAPI {
 			}
 			out = HAPServiceData.createSuccessData(requestsResult);
 		}
-	    return out;
+		return out.toStringValue(HAPSerializationFormat.JSON);
 	}
 	
 	@GetMapping("/loadlib")
