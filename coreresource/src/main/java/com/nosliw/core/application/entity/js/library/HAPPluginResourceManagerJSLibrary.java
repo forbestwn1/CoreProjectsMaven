@@ -9,9 +9,10 @@ import java.util.Set;
 import org.json.JSONObject;
 import org.springframework.web.client.RestTemplate;
 
-import com.nosliw.api.statichost.HAPStaticInfo;
-import com.nosliw.api.statichost.HAPStaticRequest;
-import com.nosliw.api.statichost.HAPStaticResponse;
+import com.nosliw.common.exception.HAPServiceData;
+import com.nosliw.common.resource.HAPStaticInfo;
+import com.nosliw.common.resource.HAPStaticRequest;
+import com.nosliw.common.resource.HAPStaticResponse;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
@@ -35,12 +36,27 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 		HAPJSLibraryId libraryId =  resourceLibraryId.getLibraryId();
 		
 		HAPStaticRequest staticRequest = new HAPStaticRequest();
-		staticRequest.addStaticInfo(new HAPStaticInfo(HAPStaticInfo.STATIC_TYPE_LIBRARY, "data.javascript.library.internal", libraryId.getName(), libraryId.getVersion()));
+		
+		String name = libraryId.getName();
+		String domain = "data.javascript.library.internal";
+		if(name.startsWith("nosliw.")) {
+			name = name.substring("nosliw.".length());
+			
+		}
+		else if(name.startsWith("external.")) {
+			name = name.substring("external.".length());
+			domain = "data.javascript.library.external";
+		}
+		
+		staticRequest.addStaticInfo(new HAPStaticInfo(HAPStaticInfo.STATIC_TYPE_LIBRARY, domain, name, libraryId.getVersion()));
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String responsStr = restTemplate.postForObject("http://localhost:8081/nosliw/static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
+		HAPServiceData serviceData = new HAPServiceData();
+		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
+		
 		HAPStaticResponse staticResponse = new HAPStaticResponse();
-		staticResponse.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
+		staticResponse.buildObject(serviceData.getData(), HAPSerializationFormat.JSON);
 		return new HAPResourceDataJSLibrary(staticResponse.getURIs());
 		
 		

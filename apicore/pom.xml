@@ -23,10 +23,24 @@
    </dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
+  		<artifactId>coreotherentity</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <scope>runtime</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
   		<artifactId>utilityparserexpression</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <scope>runtime</scope>
   	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>librarydatasource</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <scope>runtime</scope>
+  	</dependency>
+  	
+  	
   	<dependency>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-devtools</artifactId>

@@ -45,7 +45,7 @@ public class HAPImporterDataSourceDefinition {
 			protected boolean isValid(Class cls) {
 				Class[] interfaces = cls.getInterfaces();
 				for(Class inf : interfaces){
-					if(inf.equals(HAPProviderService.class)){
+					if(inf.getName().equals(HAPProviderService.class.getName())){
 						return true;
 					}
 				}

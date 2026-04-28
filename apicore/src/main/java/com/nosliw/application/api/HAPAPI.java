@@ -1,5 +1,6 @@
 package com.nosliw.application.api;
 
+import java.net.URI;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class HAPAPI {
 			}
 			out = HAPServiceData.createSuccessData(requestsResult);
 		}
-		return out.toStringValue(HAPSerializationFormat.JSON);
+		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}
 	
 	@GetMapping("/loadlib")
@@ -208,7 +209,14 @@ public class HAPAPI {
 			if(output!=null) {
 				for(HAPJSScriptInfo scriptInfo : output.getScripts()){
 					String file = scriptInfo.isFile();
-					if(file==null){
+					URI uri = scriptInfo.isURI();
+					if(file!=null){
+						scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(file));
+					}
+					else if(uri!=null) {
+						
+					}
+					else{
 						if(HAPUtilityResource.LOADRESOURCEBYFILE_MODE_ALWAYS.equals(HAPSystemUtility.getLoadResourceByFileMode())){
 							String name = "gatewayCommand_"+gatewayId+"_"+command+""+index++;
 							String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
@@ -220,9 +228,6 @@ public class HAPAPI {
 							String escaptedScript = StringEscapeUtils.escapeEcmaScript(scriptInfo.getScript());
 							scriptInfo.setScript(escaptedScript);
 						}
-					}
-					else{
-						scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(file));
 					}
 				}
 			}

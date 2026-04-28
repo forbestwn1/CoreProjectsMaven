@@ -1,6 +1,5 @@
 package com.nosliw.core.resource.imp.js;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.util.ArrayList;
@@ -107,10 +106,15 @@ public class HAPUtilityRuntimeJsScriptResource {
 		
 		HAPResourceDataJSLibrary resourceLibrary = (HAPResourceDataJSLibrary)resource.getResourceData();
 		List<URI> uris = resourceLibrary.getURIs();
+//		for(URI uri : uris){
+//			File file = new File(uri);
+//			String fileFullName = file.getAbsolutePath().replaceAll("\\\\", "/");
+//			HAPJSScriptInfo scriptInfo = HAPJSScriptInfo.buildByFile(fileFullName, "Library__" + resource.getId().getCoreIdLiterate() + "__" + file.getName());
+//			scriptInfo.setType(resource.getId().getResourceTypeId().getResourceType());
+//			out.add(scriptInfo);
+//		}
 		for(URI uri : uris){
-			File file = new File(uri);
-			String fileFullName = file.getAbsolutePath().replaceAll("\\\\", "/");
-			HAPJSScriptInfo scriptInfo = HAPJSScriptInfo.buildByFile(fileFullName, "Library__" + resource.getId().getCoreIdLiterate() + "__" + file.getName());
+			HAPJSScriptInfo scriptInfo = HAPJSScriptInfo.buildByURI(uri, "Library__" + resource.getId().getCoreIdLiterate() + "__" + uri.getPath());
 			scriptInfo.setType(resource.getId().getResourceTypeId().getResourceType());
 			out.add(scriptInfo);
 		}

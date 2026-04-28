@@ -1,11 +1,13 @@
 package com.nosliw.common.script;
 
+import java.net.URI;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityIO;
 
 /**
  * Store information related with script  
@@ -20,6 +22,9 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	public static String FILE = "file";
 
 	@HAPAttribute
+	public static String URI = "uri";
+
+	@HAPAttribute
 	public static String SCRIPT = "script";
 
 	//name for the script, it is very useful when work with rhino, so that you can locate your code quickly during debuging
@@ -27,6 +32,8 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	
 	//full file name if the script is in file
 	private String m_file;
+	
+	private URI m_uri;
 	
 	//script
 	private StringBuffer m_script;
@@ -37,6 +44,9 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	public String isFile(){	return this.m_file;	}
 	public void setFile(String file){	this.m_file = file;	}
 	
+	public URI isURI(){	return this.m_uri;	}
+	public void setURI(URI uri){	this.m_uri = uri;	}
+	
 	public String getType() {   return this.m_type;   }
 	public void setType(String type) {   this.m_type = type;    }
 	
@@ -46,12 +56,16 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 		if(this.m_file!=null){
 			this.m_script = new StringBuffer().append(HAPUtilityFile.readFile(m_file));
 		}
+		else if(this.m_uri!=null) {
+			this.m_script = new StringBuffer().append(HAPUtilityIO.readURIContent(m_uri));
+		}
 		return this.m_script.toString();
 	}
 	
 	public void setScript(String script){ 
-		if(script==null)  this.m_script = null;
-		else {
+		if(script==null) {
+			this.m_script = null;
+		} else {
 			this.m_script = new StringBuffer();
 			this.m_script.append(script);
 		}
@@ -59,6 +73,13 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	
 	public void appendScript(String script){		this.m_script.append(script);	}
 	
+	public static HAPJSScriptInfo buildByURI(URI uri, String name){
+		HAPJSScriptInfo out = new HAPJSScriptInfo();
+		out.m_uri = uri;
+		out.m_name = name;
+		return out;
+	}
+
 	public static HAPJSScriptInfo buildByFile(String fileName, String name){
 		HAPJSScriptInfo out = new HAPJSScriptInfo();
 		out.m_file = fileName;
@@ -77,7 +98,9 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(NAME, this.m_name);
 		
-		if(this.m_script!=null)		jsonMap.put(SCRIPT, this.m_script.toString());
+		if(this.m_script!=null) {
+			jsonMap.put(SCRIPT, this.m_script.toString());
+		}
 		jsonMap.put(FILE, this.m_file);
 	}
 }

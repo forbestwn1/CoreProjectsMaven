@@ -1,25 +1,16 @@
 package com.nosliw.core.application.entity.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
-import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
@@ -31,7 +22,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 //service manager, it is used for runtime purpose
 @HAPEntityWithAttribute
 @Component
-public class HAPManagerService implements HAPPluginDivision{
+public class HAPManagerService{
 
 	//all service definition
 	private Map<String, HAPInfoService> m_servicesInfo;
@@ -56,32 +47,6 @@ public class HAPManagerService implements HAPPluginDivision{
 		this.m_serviceFactorys = new LinkedHashMap<String, HAPFactoryService>();
 	}
 	
-	@Override
-	public String getDivisionName() {   return HAPConstantShared.BRICK_DIVISION_SERVICE;   }
-	
-	@Override
-	public Set<HAPIdBrickType> getBrickTypes() {  
-		Set<HAPIdBrickType> out = new HashSet<HAPIdBrickType>();
-		out.add(HAPEnumBrickType.SERVICEINTERFACE_100);
-		out.add(HAPEnumBrickType.SERVICEPROFILE_100);
-		return out;
-	}
-
-	@Override
-	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		HAPIdBrickType brickTypeId = brickId.getBrickTypeId();
-		if(brickTypeId.equals(HAPEnumBrickType.SERVICEPROFILE_100)) {
-			HAPBundle bundle = new HAPBundle();
-			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(this.getServiceInfo(brickId.getId()).getServiceProfileInfo()));
-			return bundle;
-		} 
-		else if(brickTypeId.equals(HAPEnumBrickType.SERVICEINTERFACE_100)) {
-			HAPBundle bundle = new HAPBundle();
-			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(this.getServiceInterfaceManager().getServiceInterface(new HAPIdServcieInterface(brickId.getId()), this.m_dataRuleManager)));
-			return bundle;
-		}
-		return null;
-	}
 
 	public HAPManagerServiceInterface getServiceInterfaceManager() { 	return this.m_serviceInterfaceMan;	}
 	
