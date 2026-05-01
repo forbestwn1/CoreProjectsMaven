@@ -1,4 +1,4 @@
-package com.nosliw.common.resource;
+package com.nosliw.common.staticc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +19,14 @@ public class HAPStaticRequest extends HAPSerializableImp{
 	@HAPAttribute
 	public static final String STATICINFO = "staticInfo";
 	
-	private List<HAPStaticInfo> m_staticInfo;
+	private List<HAPStaticRequestInfo> m_staticInfo;
 	
 	public HAPStaticRequest() {
-		this.m_staticInfo = new ArrayList<HAPStaticInfo>();
+		this.m_staticInfo = new ArrayList<HAPStaticRequestInfo>();
 	}
 	
-	public List<HAPStaticInfo> getStaticInfos(){	return this.m_staticInfo;	}
-	public void addStaticInfo(HAPStaticInfo staticInfo) {    this.m_staticInfo.add(staticInfo);      }
+	public List<HAPStaticRequestInfo> getStaticInfos(){	return this.m_staticInfo;	}
+	public void addStaticInfo(HAPStaticRequestInfo staticInfo) {    this.m_staticInfo.add(staticInfo);      }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
@@ -34,7 +34,7 @@ public class HAPStaticRequest extends HAPSerializableImp{
 		
 		JSONArray statiInfoArray = jsonObj.getJSONArray(STATICINFO);
         for(int i=0; i<statiInfoArray.length(); i++) {
-        	HAPStaticInfo info = new HAPStaticInfo();
+        	HAPStaticRequestInfo info = new HAPStaticRequestInfo();
         	info.buildObject(statiInfoArray.get(i), HAPSerializationFormat.JSON);
         	this.m_staticInfo.add(info);
         }

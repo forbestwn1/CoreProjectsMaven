@@ -17,7 +17,7 @@ nosliw.utility = function(){
 					var url = result[count];
 					
 					var scriptEle = document.createElement('script');
-					scriptEle.setAttribute('src', url);
+					scriptEle.setAttribute('src', url.uri);
 					scriptEle.setAttribute('defer', "defer");
 					scriptEle.setAttribute('type', 'text/javascript');
 
@@ -49,7 +49,7 @@ nosliw.utility = function(){
 			loc_requestLoadFileResources(
 				staticInfos,
 				function(serviceData){
-					return serviceData.data.uri;
+					return serviceData.data.item;
 			    }, 
 				callBackFunction);
 		},

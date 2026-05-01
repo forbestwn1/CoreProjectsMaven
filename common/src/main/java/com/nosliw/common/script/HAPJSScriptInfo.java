@@ -22,7 +22,7 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	public static String FILE = "file";
 
 	@HAPAttribute
-	public static String URI = "uri";
+	public static String URL = "url";
 
 	@HAPAttribute
 	public static String SCRIPT = "script";
@@ -44,8 +44,8 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	public String isFile(){	return this.m_file;	}
 	public void setFile(String file){	this.m_file = file;	}
 	
-	public URI isURI(){	return this.m_uri;	}
-	public void setURI(URI uri){	this.m_uri = uri;	}
+	public URI isURL(){	return this.m_uri;	}
+	public void setURL(URI uri){	this.m_uri = uri;	}
 	
 	public String getType() {   return this.m_type;   }
 	public void setType(String type) {   this.m_type = type;    }
@@ -102,5 +102,8 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 			jsonMap.put(SCRIPT, this.m_script.toString());
 		}
 		jsonMap.put(FILE, this.m_file);
+		if(this.m_uri!=null) {
+			jsonMap.put(URL, this.m_uri.toString());
+		}
 	}
 }

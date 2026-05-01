@@ -7,10 +7,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.staticc.HAPStaticResponse;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
@@ -19,15 +21,15 @@ import com.nosliw.core.resource.HAPConfigureResource;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.resource.infrastructure.HAPGatewayResource;
-import com.nosliw.core.system.HAPSystemFolderUtility;
+import com.nosliw.core.service.HAPServiceStaticResource;
 
 public class HAPUtilityRuntimeJsScriptResource {
 
-	public static List<HAPJSScriptInfo> buildScriptForResource(HAPResourceInfo resourceInfo, HAPResource resource){
+	public static List<HAPJSScriptInfo> buildScriptForResource(HAPResourceInfo resourceInfo, HAPResource resource, HAPServiceStaticResource staticResourceService){
 		List<HAPJSScriptInfo> out = new ArrayList<HAPJSScriptInfo>();
 		//build library script info first
 		if(resource.getId().getResourceTypeId().getResourceType().equals(HAPConstantShared.RUNTIME_RESOURCE_TYPE_JSLIBRARY)){
-			out.addAll(buildScriptInfoForLibrary(resourceInfo, resource));
+			out.addAll(buildScriptInfoForLibrary(resourceInfo, resource, staticResourceService));
 		}
 		
 		if(HAPGatewayResource.ADDTORESOURCEMANAGER.equals(resourceInfo.getInfo().getValue(HAPGatewayResource.ADDTORESOURCEMANAGER))) {
@@ -35,7 +37,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 		}
 		
 		//build script for resource with data
-		out.add(buildScriptInfoForResourceWithScript(resourceInfo, resource));
+		out.add(buildScriptInfoForResourceWithScript(resourceInfo, resource, staticResourceService));
 		
 //		if(resource.getResourceData() instanceof HAPResourceDataJSValue){
 //			out.add(buildScriptInfoForResourceWithScript(resourceInfo, resource, ((HAPResourceDataJSValue)resource.getResourceData()).getValue()));
@@ -43,7 +45,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 		return out;
 	}
 	
-	private static HAPJSScriptInfo buildScriptInfoForResourceWithScript(HAPResourceInfo resourceInfo, HAPResource resource){
+	private static HAPJSScriptInfo buildScriptInfoForResourceWithScript(HAPResourceInfo resourceInfo, HAPResource resource, HAPServiceStaticResource staticResourceService){
 		HAPJSScriptInfo out = null;
 		String script = buildImportResourceScriptForResource(resourceInfo, resource);
 		
@@ -56,9 +58,17 @@ public class HAPUtilityRuntimeJsScriptResource {
 			//load as file, create temp file first
 			String name = resource.getId().toStringValue(HAPSerializationFormat.LITERATE);
 			name = name.replace(";", "_");
-			String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
-			resourceFile = HAPUtilityFile.writeFile(resourceFile, script);
-			out = HAPJSScriptInfo.buildByFile(resourceFile, name);
+			name = name.replace("*", "_");
+			name = name.replace("|", "_");
+			
+			
+			HAPServiceData serviceData = staticResourceService.upload(script, "resource", name);
+			HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
+			out = HAPJSScriptInfo.buildByURI(staticResponse.getItems().get(0).getURI(), name);
+			
+//			String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
+//			resourceFile = HAPUtilityFile.writeFile(resourceFile, script);
+//			out = HAPJSScriptInfo.buildByFile(resourceFile, name);
 			
 			break;
 		case HAPConfigureResource.RESOURCE_LOADPATTERN_VALUE:
@@ -101,7 +111,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 		return script.toString();
 	}
 	
-	private static List<HAPJSScriptInfo> buildScriptInfoForLibrary(HAPResourceInfo resourceInfo, HAPResource resource){
+	private static List<HAPJSScriptInfo> buildScriptInfoForLibrary(HAPResourceInfo resourceInfo, HAPResource resource, HAPServiceStaticResource staticResourceService){
 		List<HAPJSScriptInfo> out = new ArrayList<HAPJSScriptInfo>();
 		
 		HAPResourceDataJSLibrary resourceLibrary = (HAPResourceDataJSLibrary)resource.getResourceData();
@@ -118,7 +128,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 			scriptInfo.setType(resource.getId().getResourceTypeId().getResourceType());
 			out.add(scriptInfo);
 		}
-		out.add(buildScriptInfoForResourceWithScript(resourceInfo, resource));
+		out.add(buildScriptInfoForResourceWithScript(resourceInfo, resource, staticResourceService));
 		return out;
 	}
 }

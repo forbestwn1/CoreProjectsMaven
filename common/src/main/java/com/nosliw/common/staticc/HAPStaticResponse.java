@@ -1,13 +1,10 @@
-package com.nosliw.common.resource;
+package com.nosliw.common.staticc;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
@@ -20,43 +17,37 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 public class HAPStaticResponse extends HAPSerializableImp{
 
 	@HAPAttribute
-	public static final String URI = "uri";
+	public static final String ITEM = "item";
 
-	private List<URI> m_staticURI;
+	private List<HAPStaticResponseInfo> m_items;
 	
 	public HAPStaticResponse() {
-		this.m_staticURI = new ArrayList<URI>();
+		this.m_items = new ArrayList<HAPStaticResponseInfo>();
 	}
 	
-	public void addURI(URI uri) {
-		this.m_staticURI.add(uri);
+	public void addItem(HAPStaticResponseInfo item) {
+		this.m_items.add(item);
 	}
 	
-	public List<URI> getURIs(){
-		return this.m_staticURI;
+	public List<HAPStaticResponseInfo> getItems(){
+		return this.m_items;
 	}
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-		
-		JSONArray uriArray = jsonObj.getJSONArray(URI);
+		JSONArray uriArray = jsonObj.getJSONArray(ITEM);
         for(int i=0; i<uriArray.length(); i++) {
-        	try {
-				this.m_staticURI.add(new URI(uriArray.getString(i)));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
+    		HAPStaticResponseInfo item = new HAPStaticResponseInfo();
+    		item.buildObject(uriArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			this.m_items.add(item);
         }
-		
 		return true;  
 	}
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		jsonMap.put(URI, HAPUtilityJson.buildJson(m_staticURI, HAPSerializationFormat.JSON));
+		jsonMap.put(ITEM, HAPUtilityJson.buildJson(m_items, HAPSerializationFormat.JSON));
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.nosliw.common.resource;
+package com.nosliw.common.staticc;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 
 @HAPEntityWithAttribute
-public class HAPStaticInfo extends HAPSerializableImp{
+public class HAPStaticRequestInfo extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static final String TYPE = "type";
@@ -34,9 +34,9 @@ public class HAPStaticInfo extends HAPSerializableImp{
 
 	private String m_version;
 
-	public HAPStaticInfo() {}
+	public HAPStaticRequestInfo() {}
 	
-	public HAPStaticInfo(String type, String domain, String name, String version) {
+	public HAPStaticRequestInfo(String type, String domain, String name, String version) {
 		this.m_type = type;
 		this.m_domain = domain;
 		this.m_name = name;
@@ -44,12 +44,16 @@ public class HAPStaticInfo extends HAPSerializableImp{
 	}
 	
 	public String getType() {		return this.m_type;	}
+	public void setType(String type) {   this.m_type = type;    }
 	
 	public String getDomain() {		return this.m_domain;	}
+	public void setDomain(String domain) {    this.m_domain = domain;     }
 	
 	public String getName() {		return this.m_name;	}
+	public void setName(String name) {   this.m_name = name;        }
 	
 	public String getVersion() {    return this.m_version;     }
+	public void setVersion(String version) {      this.m_version = version;      }
 
 	@Override
 	protected boolean buildObjectByJson(Object json){

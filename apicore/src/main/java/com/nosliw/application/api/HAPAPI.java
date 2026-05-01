@@ -21,9 +21,9 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.staticc.HAPStaticResponse;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.entity.js.library.HAPGatewayBrowserLoadLibrary;
 import com.nosliw.core.application.entity.js.library.HAPUtilityJSLibrary;
@@ -31,7 +31,7 @@ import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPUtilityResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.system.HAPSystemFolderUtility;
+import com.nosliw.core.service.HAPServiceStaticResource;
 import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
@@ -53,6 +53,9 @@ public class HAPAPI {
 	@Autowired
 	HAPGatewayManager m_gateManager;
 
+	@Autowired
+	HAPServiceStaticResource m_staticResourceService;
+	
 	public static int index = 0;
 	
 	private final static Logger LOGGER = Logger.getLogger(HAPAPI.class.getName());
@@ -209,7 +212,7 @@ public class HAPAPI {
 			if(output!=null) {
 				for(HAPJSScriptInfo scriptInfo : output.getScripts()){
 					String file = scriptInfo.isFile();
-					URI uri = scriptInfo.isURI();
+					URI uri = scriptInfo.isURL();
 					if(file!=null){
 						scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(file));
 					}
@@ -219,9 +222,17 @@ public class HAPAPI {
 					else{
 						if(HAPUtilityResource.LOADRESOURCEBYFILE_MODE_ALWAYS.equals(HAPSystemUtility.getLoadResourceByFileMode())){
 							String name = "gatewayCommand_"+gatewayId+"_"+command+""+index++;
-							String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
-							resourceFile = HAPUtilityFile.writeFile(resourceFile, scriptInfo.getScript());
-							scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(resourceFile));
+							
+							HAPServiceData serviceData = m_staticResourceService.upload(scriptInfo.getScript(), "resource", name);
+							HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
+							scriptInfo.setURL(staticResponse.getItems().get(0).getURI());
+							
+							
+//							String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
+//							resourceFile = HAPUtilityFile.writeFile(resourceFile, scriptInfo.getScript());
+//							scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(resourceFile));
+							
+							
 							scriptInfo.setScript(null);
 						}
 						else {

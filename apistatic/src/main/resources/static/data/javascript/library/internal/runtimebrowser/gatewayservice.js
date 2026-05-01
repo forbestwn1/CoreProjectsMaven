@@ -48,8 +48,11 @@ var node_createGatewayService = function(){
 	//load file to html page to execute it
 	var loc_getLoadFileRequest = function(fileName, handlers, requester_parent){
 		var url = nosliw.utility.buildNosliwUrl(fileName);
-		
-		
+		return loc_getLoadURLRequest(url, handlers, requester_parent);
+	};
+	
+	//load content from url to html page to execute it
+	var loc_getLoadURLRequest = function(url, handlers, requester_parent){
 		var out = node_createServiceRequestInfoCommon(new node_ServiceInfo("LoadResourceFile", {"url":url}), handlers, requester_parent);		
 		out.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(function(requestInfo){
 			var script = document.createElement('script');
@@ -98,8 +101,10 @@ var node_createGatewayService = function(){
 			    			//process script info output 
 				    		_.each(gatewayOutputScripts, function(scriptInfo, i, list){
 					    		var file = scriptInfo[node_COMMONATRIBUTECONSTANT.JSSCRIPTINFO_FILE];
+								var url = scriptInfo[node_COMMONATRIBUTECONSTANT.JSSCRIPTINFO_URL];
 						    	var script = scriptInfo[node_COMMONATRIBUTECONSTANT.JSSCRIPTINFO_SCRIPT];
 							    if(file!=undefined)		requests.push(loc_getLoadFileRequest(file));
+								if(url!=undefined)		requests.push(loc_getLoadURLRequest(url));
     							if(script!=undefined)		requests.push(loc_getLoadScriptRequest(script));
 	    					});
 						
