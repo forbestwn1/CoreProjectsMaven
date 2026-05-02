@@ -13,7 +13,7 @@
 <!-- Source: https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>common</artifactId>
+  		<artifactId>coreinfrastructure</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
     <dependency>

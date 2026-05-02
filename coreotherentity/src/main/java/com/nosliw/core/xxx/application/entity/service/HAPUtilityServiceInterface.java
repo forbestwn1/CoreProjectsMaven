@@ -12,7 +12,7 @@ import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceData;
 import com.nosliw.core.resource.HAPResourceDependency;
-import com.nosliw.core.resource.imp.js.HAPResourceDataFactory;
+import com.nosliw.core.resource.infrastructure.HAPResourceDataFactory;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.xxx.application1.brick.service.interfacee.HAPBrickServiceInterface1;
 

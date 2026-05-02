@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.staticc.HAPStaticRequest;
-import com.nosliw.common.staticc.HAPStaticRequestInfo;
-import com.nosliw.common.staticc.HAPStaticResponse;
-import com.nosliw.common.staticc.HAPStaticResponseInfo;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.service.staticresource.HAPStaticRequest;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.service.staticresource.HAPStaticResponse;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 
 
 @RestController

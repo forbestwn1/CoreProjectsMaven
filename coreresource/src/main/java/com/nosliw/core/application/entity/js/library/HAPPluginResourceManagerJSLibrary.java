@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.nosliw.common.exception.HAPServiceData;
-import com.nosliw.common.staticc.HAPStaticRequest;
-import com.nosliw.common.staticc.HAPStaticRequestInfo;
-import com.nosliw.common.staticc.HAPStaticResponse;
-import com.nosliw.common.staticc.HAPStaticResponseInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
@@ -20,7 +16,11 @@ import com.nosliw.core.resource.HAPResourceDataOrWrapper;
 import com.nosliw.core.resource.HAPResourceHelper;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.service.HAPServiceStaticResource;
+import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
+import com.nosliw.core.service.staticresource.HAPStaticRequest;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.service.staticresource.HAPStaticResponse;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 import com.nosliw.core.system.HAPSystemFolderUtility;
 
 public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManager{
