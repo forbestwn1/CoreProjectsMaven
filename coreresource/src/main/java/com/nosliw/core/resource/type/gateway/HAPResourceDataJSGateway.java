@@ -7,7 +7,7 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.resource.imp.js.HAPResourceDataJSValueImp;
+import com.nosliw.core.resource.HAPResourceDataJSValueImp;
 
 public class HAPResourceDataJSGateway extends HAPResourceDataJSValueImp{
 

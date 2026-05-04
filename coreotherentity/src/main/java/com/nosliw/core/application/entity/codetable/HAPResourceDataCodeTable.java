@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.resource.HAPResourceDataJSValueImp;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;
 import com.nosliw.core.resource.HAPResourceDependency;
-import com.nosliw.core.resource.imp.js.HAPResourceDataJSValueImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPResourceDataCodeTable  extends HAPResourceDataJSValueImp{

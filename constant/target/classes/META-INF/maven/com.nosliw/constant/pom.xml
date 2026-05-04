@@ -15,5 +15,10 @@
   		<artifactId>coreapplication</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<dependency>
+  		<groupId>com.nosliw</groupId>
+  		<artifactId>divisionmanual</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

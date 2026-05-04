@@ -1,7 +1,6 @@
-package com.nosliw.core.resource.imp.js;
+package com.nosliw.core.resource;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
-import com.nosliw.core.resource.HAPResourceDataJSValue;
 
 public abstract class HAPResourceDataJSValueImp extends HAPSerializableImp implements HAPResourceDataJSValue{
 

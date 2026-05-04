@@ -4,21 +4,23 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../root</relativePath>
-</parent>
-  <artifactId>constant</artifactId>
-  <name>constant</name>
-  <description>constant</description>
+  </parent>
+  <artifactId>coreruntime</artifactId>
+  <name>coreruntime</name>
+  <description>coreruntime</description>
+
   <dependencies>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>coreapplication</artifactId>
+  		<artifactId>coreinfrastructure</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>divisionmanual</artifactId>
+  		<artifactId>coreresource</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
+
+
 </project>
