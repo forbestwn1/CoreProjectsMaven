@@ -5,6 +5,7 @@ import java.util.List;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup;
 import com.nosliw.core.resource.HAPResourceDependency;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
 import com.nosliw.core.runtime.js.rhino.HAPRuntimeTaskRhino;
 
@@ -14,9 +15,9 @@ public class HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup extends HAP
 
 	private HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup m_scriptExpressionGroupInfo;
 	
-	public HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup scriptExpressionGroupInfo) {
+	public HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(HAPInfoRuntimeTask scriptExpressionGroupInfo) {
 		super(TASK);
-		this.m_scriptExpressionGroupInfo = scriptExpressionGroupInfo;
+		this.m_scriptExpressionGroupInfo = (HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup)scriptExpressionGroupInfo;
 	}
 
 	@Override

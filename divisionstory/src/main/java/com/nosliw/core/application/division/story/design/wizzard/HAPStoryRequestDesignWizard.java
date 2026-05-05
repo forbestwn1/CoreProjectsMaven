@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
-public class HAPStoryRequestDesignWizard {
+import com.nosliw.core.application.division.story.design.HAPStoryRequestDesign;
 
-	private String m_stepName;
-	
+public class HAPStoryRequestDesignWizard extends HAPStoryRequestDesign{
+
 	//answer for question
 	
 	

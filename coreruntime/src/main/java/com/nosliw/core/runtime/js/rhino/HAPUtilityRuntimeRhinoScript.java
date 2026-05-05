@@ -12,16 +12,16 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.data.HAPOperationParm;
-import com.nosliw.core.data.HAPRuntimeTaskExecuteConverter;
-import com.nosliw.core.data.HAPRuntimeTaskExecuteDataOperation;
+import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskExecuteConverterRhino;
+import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskExecuteDataOperationRhino;
 import com.nosliw.core.runtime.js.rhino.task.HAPUtilityRuntimeJSScript;
 
 public class HAPUtilityRuntimeRhinoScript {
 
-	public static HAPJSScriptInfo buildRequestScriptForExecuteDataConvertTask(HAPRuntimeTaskExecuteConverter executeConverterTask, HAPExecutorRuntimeImpRhino runtime){
+	public static HAPJSScriptInfo buildRequestScriptForExecuteDataConvertTask(HAPRuntimeTaskExecuteConverterRhino executeConverterTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
-		templateParms.put("data", HAPUtilityJson.formatJson(executeConverterTask.getData().toStringValue(HAPSerializationFormat.JSON)));
-		templateParms.put("matchers", HAPUtilityJson.formatJson(executeConverterTask.getMatchers().toStringValue(HAPSerializationFormat.JSON)));
+		templateParms.put("data", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getData().toStringValue(HAPSerializationFormat.JSON)));
+		templateParms.put("matchers", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getMatchers().toStringValue(HAPSerializationFormat.JSON)));
 
 		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
 		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
@@ -38,11 +38,11 @@ public class HAPUtilityRuntimeRhinoScript {
 		return out;
 	}
 	
-	public static HAPJSScriptInfo buildRequestScriptForExecuteDataOperationTask(HAPRuntimeTaskExecuteDataOperation executeDataOperationTask, HAPExecutorRuntimeImpRhino runtime){
+	public static HAPJSScriptInfo buildRequestScriptForExecuteDataOperationTask(HAPRuntimeTaskExecuteDataOperationRhino executeDataOperationTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
-		templateParms.put("dataTypeId", executeDataOperationTask.getDataTypeId().toStringValue(HAPSerializationFormat.LITERATE));
-		templateParms.put("operation", executeDataOperationTask.getOperation());
-		templateParms.put("parmsArray", HAPUtilityJson.formatJson(HAPUtilityJson.buildJson(executeDataOperationTask.getParms()==null?new ArrayList<HAPOperationParm>() : executeDataOperationTask.getParms(), HAPSerializationFormat.JSON)));
+		templateParms.put("dataTypeId", executeDataOperationTask.getTaskInfo().getDataTypeId().toStringValue(HAPSerializationFormat.LITERATE));
+		templateParms.put("operation", executeDataOperationTask.getTaskInfo().getOperation());
+		templateParms.put("parmsArray", HAPUtilityJson.formatJson(HAPUtilityJson.buildJson(executeDataOperationTask.getTaskInfo().getParms()==null?new ArrayList<HAPOperationParm>() : executeDataOperationTask.getTaskInfo().getParms(), HAPSerializationFormat.JSON)));
 
 		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
 		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);

@@ -1,7 +1,9 @@
 package com.nosliw.core.application.division.story;
 
-//static information
+import com.nosliw.common.info.HAPEntityInfoImp;
 
+//static information
+//no transaction
 public class HAPStoryStory extends HAPEntityInfoImp{
 
 }

@@ -83,9 +83,9 @@ public class HAPManualUtilityScriptExpressionConstant {
 		
 		Map<String, Map<String, Object>> out = new LinkedHashMap<String, Map<String, Object>>();
 		if(!taskInfo.isEmpty()) {
-			HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup task = new HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(taskInfo);
+//			HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup task = new HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(taskInfo);
 
-			HAPServiceData serviceData = runtimeMan.getRuntimeExecutor(HAPRuntimeManager.RUNTIME_JS_RHION).executeTaskSync(task);
+			HAPServiceData serviceData = runtimeMan.getRuntimeExecutor(HAPRuntimeManager.RUNTIME_JS_RHION).executeTaskSync(taskInfo);
 			JSONObject serviceDataJson = (JSONObject)serviceData.getData();
 			
 			for(Object key : serviceDataJson.keySet()) {

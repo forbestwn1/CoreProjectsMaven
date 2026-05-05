@@ -12,9 +12,10 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScript;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 
 @HAPEntityWithAttribute
-public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSerializableImp{
+public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSerializableImp implements HAPInfoRuntimeTask{
 
 	@HAPAttribute
 	public static String CONTAINER = "container";
@@ -30,6 +31,9 @@ public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSeri
 	public HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup() {
 		this.m_scriptExpressionInfoContainer = new HAPContainer<HAPItemWrapper>(); 
 	}
+	
+	@Override
+	public String getTaskType() {   return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSION;   }
 	
 	public String addScriptExpressionInfo(String name, HAPExpressionScript exprssionScript, Map<String, Object> constants) {
 		HAPItemWrapper item = new HAPItemWrapper();
@@ -76,4 +80,5 @@ public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSeri
 			jsonMap.put(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup.CONSTANT, HAPManagerSerialize.getInstance().toStringValue(m_constants, HAPSerializationFormat.JAVASCRIPT));
 		}
 	}
+
 }

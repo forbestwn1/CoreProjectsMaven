@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 
 @HAPEntityWithAttribute
-public abstract class HAPRuntimeTaskExecuteDataOperation extends HAPRuntimeTaskImp{
+public class HAPInfoRuntimeTaskExecuteDataOperation implements HAPInfoRuntimeTask{
 
 	final public static String TASK = "ExecuteDataOperation"; 
 	
@@ -23,7 +24,7 @@ public abstract class HAPRuntimeTaskExecuteDataOperation extends HAPRuntimeTaskI
 	
 	private List<HAPOperationParm> m_parms;
 	
-	public HAPRuntimeTaskExecuteDataOperation(HAPDataTypeId dataTypeId, String operation, List<HAPOperationParm> parms){
+	public HAPInfoRuntimeTaskExecuteDataOperation(HAPDataTypeId dataTypeId, String operation, List<HAPOperationParm> parms){
 		this.m_dataTypeId = dataTypeId;
 		this.m_operation = operation;
 		this.m_parms = parms;
@@ -35,9 +36,7 @@ public abstract class HAPRuntimeTaskExecuteDataOperation extends HAPRuntimeTaskI
 	
 	public List<HAPOperationParm> getParms(){  return this.m_parms;  }
 	
-	public HAPData getDataOperationResult(){ return (HAPData)this.getResult(); }
-
 	@Override
-	public String getTaskType(){  return TASK; }
+	public String getTaskType(){  return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTEDATAOPERATION; }
 
 }

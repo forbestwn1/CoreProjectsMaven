@@ -34,6 +34,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntimeWithScript;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 
@@ -52,11 +53,18 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 	//store all the task, for instance, execute expression, load resources
 	private Map<String, HAPTaskRuntime> m_tasks;
 
+	private Map<String, HAPFactoryTaskRuntime> m_taskFactory;
+	
 	private HAPGatewayManager m_gatewayManager;
 	
-	public HAPExecutorRuntimeImpRhino(HAPGatewayManager gatewayManager){
+	public HAPExecutorRuntimeImpRhino(List<HAPFactoryTaskRuntime> taskFactory, HAPGatewayManager gatewayManager){
 		this.m_gatewayManager = gatewayManager;
 		this.m_tasks = new LinkedHashMap<String, HAPTaskRuntime>();
+		
+		this.m_taskFactory = new LinkedHashMap<String, HAPFactoryTaskRuntime>();
+		for(HAPFactoryTaskRuntime factory : taskFactory) {
+			this.m_taskFactory.put(factory.getRuntimeType(), factory);
+		}
 	}
 	
 	private synchronized String generateTaskId() {
@@ -125,6 +133,21 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 //		return null;
 //	}
 
+	
+	//async request
+	@Override
+	public void executeTask(HAPInfoRuntimeTask task) {
+		this.executeTask(this.m_taskFactory.get(task.getTaskType()).createRuntimeTask(task));
+	}
+
+	//sync request
+	@Override
+	public HAPServiceData executeTaskSync(HAPInfoRuntimeTask task) {
+		return this.executeTaskSync(this.m_taskFactory.get(task.getTaskType()).createRuntimeTask(task));
+	}
+	
+	
+	
 	@Override
 	public void executeTask(HAPTaskRuntime task){
 		//prepare expression id

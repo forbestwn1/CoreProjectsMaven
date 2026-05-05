@@ -1,24 +1,30 @@
-package com.nosliw.core.runtime.js.rhino;
+package com.nosliw.core.runtime.js.rhino.task;
 
 import java.util.List;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.core.data.HAPData;
-import com.nosliw.core.data.HAPRuntimeTaskExecuteConverter;
-import com.nosliw.core.data.matcher.HAPMatchers;
+import com.nosliw.core.data.HAPInfoRuntimeTaskExecuteDataOperation;
+import com.nosliw.core.data.HAPRuntimeTaskImp;
 import com.nosliw.core.resource.HAPResourceInfo;
+import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
-import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
-import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskLoadResourcesRhino;
+import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
+import com.nosliw.core.runtime.js.rhino.HAPUtilityRuntimeRhinoScript;
 
-public class HAPRuntimeTaskExecuteConverterRhino extends HAPRuntimeTaskExecuteConverter{
+public class HAPRuntimeTaskExecuteDataOperationRhino extends HAPRuntimeTaskImp{
 
-	public HAPRuntimeTaskExecuteConverterRhino(HAPData data, HAPMatchers matchers) {
-		super(data, matchers);
+	private HAPInfoRuntimeTaskExecuteDataOperation m_taskInfo;
+	
+	public HAPRuntimeTaskExecuteDataOperationRhino(HAPInfoRuntimeTask taskInfo) {
+		this.m_taskInfo = (HAPInfoRuntimeTaskExecuteDataOperation)taskInfo;
 	}
 
+	public HAPInfoRuntimeTaskExecuteDataOperation getTaskInfo() {   return this.m_taskInfo;    }
+	
 	@Override
 	public Class getResultDataType() {	return HAPData.class;	}
 	
@@ -29,7 +35,7 @@ public class HAPRuntimeTaskExecuteConverterRhino extends HAPRuntimeTaskExecuteCo
 			
 			//prepare resources for data operation in the runtime (resource and dependency)
 			//execute expression after load required resources
-			List<HAPResourceInfo> resourcesId =	HAPUtilityExpressionResource.discoverResourceRequirement(this.getMatchers(),rhinoRuntime.getRuntimeEnvironment().getResourceManager(), runtime.getRuntimeInfo());
+			List<HAPResourceInfo> resourcesId =	HAPUtilityExpressionResource.discoverResourceRequirement(this.m_taskInfo.getDataTypeId(), this.m_taskInfo,rhinoRuntime.getRuntimeEnvironment().getResourceManager(), runtime.getRuntimeInfo());
 			
 			HAPTaskRuntime loadResourcesTask = new HAPRuntimeTaskLoadResourcesRhino(resourcesId);
 			loadResourcesTask.registerListener(new HAPRunTaskEventListenerInner(this, rhinoRuntime));
@@ -43,10 +49,10 @@ public class HAPRuntimeTaskExecuteConverterRhino extends HAPRuntimeTaskExecuteCo
 	}
 	
 	class HAPRunTaskEventListenerInner implements HAPRunTaskEventListener{
-		private HAPRuntimeTaskExecuteConverterRhino m_parent;
+		private HAPRuntimeTaskExecuteDataOperationRhino m_parent;
 		private HAPExecutorRuntimeImpRhino m_runtime;
 		
-		public HAPRunTaskEventListenerInner(HAPRuntimeTaskExecuteConverterRhino parent, HAPExecutorRuntimeImpRhino runtime){
+		public HAPRunTaskEventListenerInner(HAPRuntimeTaskExecuteDataOperationRhino parent, HAPExecutorRuntimeImpRhino runtime){
 			this.m_parent = parent;
 			this.m_runtime = runtime;
 		}
@@ -57,7 +63,7 @@ public class HAPRuntimeTaskExecuteConverterRhino extends HAPRuntimeTaskExecuteCo
 			if(resourceTaskResult.isSuccess()){
 				//after resource loaded, execute expression
 				try{
-					HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeRhinoScript.buildRequestScriptForExecuteDataConvertTask(this.m_parent, this.m_runtime);
+					HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeRhinoScript.buildRequestScriptForExecuteDataOperationTask(this.m_parent, this.m_runtime);
 					this.m_runtime.loadTaskScript(scriptInfo, m_parent.getTaskId());
 				}
 				catch(Exception e){

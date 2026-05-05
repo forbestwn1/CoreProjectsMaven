@@ -1,14 +1,32 @@
 package com.nosliw.core.application.division.story;
 
-public class HAPStoryManagerStory {
+import java.util.Set;
 
-	
-	public HAPStoryDesignStory newStoryDesign(String builderId) {
+import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.HAPPluginDivision;
+import com.nosliw.core.runtime.HAPRuntimeInfo;
 
+public class HAPStoryManagerStory implements HAPPluginDivision{
+
+	@Override
+	public String getDivisionName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<HAPIdBrickType> getBrickTypes() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
-	
-	public HAPServiceData designStory(String designId, HAPStoryRequestDesign designRequest) {
-	
-	}	
 }

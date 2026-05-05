@@ -10,6 +10,12 @@ public interface HAPExecutorRuntime {
 	HAPRuntimeInfo getRuntimeInfo();
 	
 	//async request
+	void executeTask(HAPInfoRuntimeTask task);
+
+	//sync request
+	HAPServiceData executeTaskSync(HAPInfoRuntimeTask task);
+
+	//async request
 	void executeTask(HAPTaskRuntime task);
 
 	//sync request

@@ -1,11 +1,10 @@
 package com.nosliw.core.data;
 
 import com.nosliw.common.constant.HAPAttribute;
-import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.data.matcher.HAPMatchers;
+import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 
-@HAPEntityWithAttribute
-public abstract class HAPRuntimeTaskExecuteConverter extends HAPRuntimeTaskImp{
+public class HAPInfoRuntimeTaskExecuteConverter implements HAPInfoRuntimeTask{
 
 	final public static String TASK = "ExecuteConverter"; 
 	
@@ -18,17 +17,15 @@ public abstract class HAPRuntimeTaskExecuteConverter extends HAPRuntimeTaskImp{
 	
 	private HAPMatchers m_matchers;
 	
-	public HAPRuntimeTaskExecuteConverter(HAPData data, HAPMatchers matchers){
+	public HAPInfoRuntimeTaskExecuteConverter(HAPData data, HAPMatchers matchers){
 		this.m_data = data;
 		this.m_matchers = matchers;
 	}
 	
 	public HAPData getData() {  return this.m_data;  }
 	public HAPMatchers getMatchers() {  return this.m_matchers;   }
-	
-	public HAPData getConverterResult(){ return (HAPData)this.getResult(); }
 
 	@Override
-	public String getTaskType(){  return TASK; }
-
+	public String getTaskType() {   return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTECONVERTER;   }
+	
 }

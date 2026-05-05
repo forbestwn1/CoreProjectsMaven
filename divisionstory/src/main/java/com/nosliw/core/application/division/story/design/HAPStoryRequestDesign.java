@@ -1,6 +1,12 @@
 package com.nosliw.core.application.division.story.design;
 
-public interface HAPStoryRequestDesign {
+import com.nosliw.common.info.HAPEntityInfoImp;
+
+public class HAPStoryRequestDesign extends HAPEntityInfoImp{
 
 	
+	
+	
+	
+
 }
