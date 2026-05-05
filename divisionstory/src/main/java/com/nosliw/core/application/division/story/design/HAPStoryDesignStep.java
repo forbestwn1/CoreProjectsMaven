@@ -6,14 +6,14 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 
 public class HAPStoryDesignStep {
 
-	private HAPStoryInfoStep m_stepInfo;
+	private HAPStoryDesignInfoStep m_stepInfo;
 	
 	private List<HAPStoryChangeItem> m_requestChanges;
 	
 	//store all changes
 	private List<HAPStoryChangeItem> m_allChanages;
 	
-	public HAPStoryDesignStep(HAPStoryInfoStep stepInfo) {
+	public HAPStoryDesignStep(HAPStoryDesignInfoStep stepInfo) {
 		this.m_stepInfo = stepInfo;
 	}
 	

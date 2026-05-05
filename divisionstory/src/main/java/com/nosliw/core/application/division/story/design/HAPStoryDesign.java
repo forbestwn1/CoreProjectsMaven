@@ -11,7 +11,7 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryManagerC
 //dynamic, 
 //    store all the information about how story was build
 //    support transaction
-public class HAPStoryDesignStory extends HAPEntityInfoImp{
+public class HAPStoryDesign extends HAPEntityInfoImp{
 
 	private HAPStoryManagerChange m_changeMan;
 
@@ -21,7 +21,7 @@ public class HAPStoryDesignStory extends HAPEntityInfoImp{
 	
 	private List<HAPStoryDesignStep> m_changeHistory;
 	
-	public HAPStoryDesignStory(String id, String builderId) {
+	public HAPStoryDesign(String id, String builderId) {
 		this.setId(id);
 		this.m_builderId = builderId;
 	}
@@ -31,12 +31,12 @@ public class HAPStoryDesignStory extends HAPEntityInfoImp{
 	public HAPStoryStory getStory() {    return this.m_story;     }
 	
 	
-	public void newStep(HAPStoryInfoStep stepInfo) {
+	public void newStep(HAPStoryDesignInfoStep stepInfo) {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(stepInfo);
 		this.m_changeHistory.add(step);
 	}
 
-	public void applyChanges(HAPStoryRequestChange changeRequest) {
+	public void applyChanges(HAPStoryDesignRequestChange changeRequest) {
 		List<HAPStoryChangeItem> changes = new ArrayList<HAPStoryChangeItem>();
 		if(changeRequest.isExtend()) {
 			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChanges(), changes);
@@ -60,11 +60,11 @@ public class HAPStoryDesignStory extends HAPEntityInfoImp{
 	}
 	
 	
-	private HAPStoryDesignStep getCurrentStep() {}
+	public HAPStoryDesignStep getCurrentStep() {}
 	
 	private HAPStoryDesignStep getStepById(String stepId) {}
 	
-	private String getStepId(HAPStoryInfoStep stepInfo) {}
+	private String getStepId(HAPStoryDesignInfoStep stepInfo) {}
 	
 	private String getNextStep(String stepId) {}
 	

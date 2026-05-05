@@ -2,20 +2,19 @@ package com.nosliw.core.application.division.story.design.wizzard;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.core.application.division.story.HAPStoryStory;
-import com.nosliw.core.application.division.story.design.HAPStoryBuilderDesign;
-import com.nosliw.core.application.division.story.design.HAPStoryDesignStory;
-import com.nosliw.core.application.division.story.design.HAPStoryRequestDesign;
+import com.nosliw.core.application.division.story.design.HAPStoryBuilder;
+import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
+import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 
-public class HAPStoryBuilderDesignWizard implements HAPStoryBuilderDesign{
+public class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 
 	@Override
 	public String getBuilderId() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void initDesign(HAPStoryDesignStory design) {
+	public void initDesign(HAPStoryDesign design) {
 		HAPStoryStory story = design.getStory();
 		
 		
@@ -23,11 +22,20 @@ public class HAPStoryBuilderDesignWizard implements HAPStoryBuilderDesign{
 	}
 
 	@Override
-	public HAPServiceData buildStory(HAPStoryDesignStory storyDesign, HAPStoryRequestDesign changeRequest) {
-		HAPStoryRequestDesignWizard wiardRequest = (HAPStoryRequestDesignWizard)changeRequest;
+	public HAPServiceData buildStory(HAPStoryDesign storyDesign, HAPStoryBuilderRequest changeRequest) {
+		HAPStoryWizardRequest wizardRequest = (HAPStoryWizardRequest)changeRequest;
+		
+        switch(wizardRequest.getCommand()) {
+        case HAPStoryWizardRequest.COMMAND_PREVIOUS:
+        	storyDesign
+        	
+        	break;
+        
+        case HAPStoryWizardRequest.COMMAND_NEXT:
+        	break;
+        }
 		
 		
-		// TODO Auto-generated method stub
 		return null;
 	}
 

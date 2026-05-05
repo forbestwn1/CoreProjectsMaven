@@ -46,7 +46,7 @@ var node_RemoteServiceTask = function(syncName, service, handlers, requestInfo, 
 	//unique id
 	this.id = nosliw.runtime.getIdService().generateId();
 	//normal task
-	this[node_COMMONATRIBUTECONSTANT.SERVICESERVLET_REQUEST_TYPE] = node_COMMONCONSTANT.REMOTESERVICE_TASKTYPE_NORMAL;
+	this[node_COMMONATRIBUTECONSTANT.APIGATEWAY_REQUEST_TYPE] = node_COMMONCONSTANT.REMOTESERVICE_TASKTYPE_NORMAL;
 	//sync task name, different sync name have different configuration
 	this.syncName = syncName;
 	//parent requestInfo
@@ -80,7 +80,7 @@ var node_RemoteServiceGroupTask = function(syncName, handlers, requestInfo, sett
 	//unique id
 	this.id = nosliw.runtime.getIdService().generateId();
 	//task type : group
-	this[node_COMMONATRIBUTECONSTANT.SERVICESERVLET_REQUEST_TYPE] = node_COMMONCONSTANT.REMOTESERVICE_TASKTYPE_GROUP;
+	this[node_COMMONATRIBUTECONSTANT.APIGATEWAY_REQUEST_TYPE] = node_COMMONCONSTANT.REMOTESERVICE_TASKTYPE_GROUP;
 	//sync task name, different sync name have different configuration
 	this.syncName = syncName;
 	//parent requestInfo

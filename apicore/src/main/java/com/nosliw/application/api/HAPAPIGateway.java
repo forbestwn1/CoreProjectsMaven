@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -36,7 +37,8 @@ import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
 @RequestMapping("/nosliw")
-public class HAPAPI {
+@HAPEntityWithAttribute
+public class HAPAPIGateway {
 
 	@HAPAttribute
 	public static final String REQUEST_TYPE = "type";
@@ -58,7 +60,7 @@ public class HAPAPI {
 	
 	public static int index = 0;
 	
-	private final static Logger LOGGER = Logger.getLogger(HAPAPI.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(HAPAPIGateway.class.getName());
 
 	@PostMapping("/gateway")
     public String gateway(@RequestBody String requestInfoStr) {

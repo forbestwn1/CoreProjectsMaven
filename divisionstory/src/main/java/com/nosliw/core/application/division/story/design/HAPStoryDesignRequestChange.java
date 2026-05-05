@@ -5,13 +5,13 @@ import java.util.List;
 
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 
-public class HAPStoryRequestChange {
+public class HAPStoryDesignRequestChange {
 
 	private List<HAPStoryChangeItem> m_changes;
 	
 	private Boolean m_extend;
 	
-	public HAPStoryRequestChange(Boolean extend) {
+	public HAPStoryDesignRequestChange(Boolean extend) {
 		this.m_changes = new ArrayList<HAPStoryChangeItem>();
 		this.m_extend = extend;
 		if(this.m_extend==null) {

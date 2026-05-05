@@ -49,7 +49,7 @@ var node_createDataService = function(){
 			gatewayParm[node_COMMONATRIBUTECONSTANT.GATEWAYSERVICE_COMMAND_REQUEST_PARMS] = parms;
 			
 			out.addRequest(nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(
-					node_COMMONATRIBUTECONSTANT.RUNTIME_GATEWAY_SERVICE, 
+					node_COMMONCONSTANT.GATEWAY_SERVICE, 
 					node_COMMONATRIBUTECONSTANT.GATEWAYSERVICE_COMMAND_REQUEST, 
 					gatewayParm,
 					{

@@ -4,16 +4,16 @@ import com.nosliw.common.exception.HAPServiceData;
 
 //stateless
 //   update design according to change request
-public interface HAPStoryBuilderDesign {
+public interface HAPStoryBuilder {
 
 	String getBuilderId();
 	
-	void initDesign(HAPStoryDesignStory design);
+	void initDesign(HAPStoryDesign design);
 	
 	//design story according to change
 	//   storyDesign: current design
 	//   change : change
 	//out: design after change
-	HAPServiceData buildStory(HAPStoryDesignStory storyDesign, HAPStoryRequestDesign changeRequest);
+	HAPServiceData buildStory(HAPStoryDesign storyDesign, HAPStoryBuilderRequest changeRequest);
 	
 }
