@@ -6,9 +6,12 @@ public class HAPStoryWizardRequestNext extends HAPStoryBuilderRequest{
 
     private String m_currentStep;
     
-    private String m_nextStep;
-	
+    private HAPStoryDesignMetadataStepWizard m_wizzardData;
+    
 	public String getCurrentStep() {
 		return this.m_currentStep;
 	}
+	
+	
+	
 }

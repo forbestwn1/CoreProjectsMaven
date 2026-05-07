@@ -31,8 +31,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public HAPStoryStory getStory() {    return this.m_story;     }
 	
 	
-	public void newStep(HAPStoryDesignInfoStep stepInfo) {
-		HAPStoryDesignStep step = new HAPStoryDesignStep(stepInfo);
+	public void newStep(HAPStoryDesignMetadataStep metaData) {
+		HAPStoryDesignStep step = new HAPStoryDesignStep(metaData);
 		this.m_changeHistory.add(step);
 	}
 
@@ -50,15 +50,28 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		step.addChanges(changeRequest.getChanges(), changes);
 	}
 	
+	public void removeStep() {
+		this.rollBackStep();
+		this.m_changeHistory.remove(this.m_changeHistory.size()-1);
+	}
+	
 	public void rollBackStep() {
 		HAPStoryDesignStep step = this.getCurrentStep();
 		this.m_changeMan.revertChange(m_story, step.getChanges());
+		step.getMetaData().clear();
 	}
 	
 	public void commitStep() {
 		
 	}
 	
+	public List<HAPStoryDesignMetadataStep> getStepInfos(){
+		List<HAPStoryDesignMetadataStep> out = new ArrayList<HAPStoryDesignMetadataStep>();
+		for(HAPStoryDesignStep step : this.m_changeHistory) {
+			out.add(step.getMetaData());
+		}
+		return out;      
+	}
 	
 	public HAPStoryDesignStep getCurrentStep() {}
 	

@@ -10,7 +10,7 @@ public class HAPStoryWizardRequest extends HAPStoryBuilderRequest{
 	private String m_command;
 	
 	//answer
-	private Object m_metadata;
+	private Object m_requestData;
 	
 
 	public String getCommand() {
@@ -18,7 +18,7 @@ public class HAPStoryWizardRequest extends HAPStoryBuilderRequest{
 	}
 
 	public Object getRequestData() {
-		return this.m_metadata;
+		return this.m_requestData;
 	}
 	
 }

@@ -6,18 +6,25 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 
 public class HAPStoryDesignStep {
 
-	private HAPStoryDesignInfoStep m_stepInfo;
+	private HAPStoryDesignMetadataStep m_metaData;
 	
 	private List<HAPStoryChangeItem> m_requestChanges;
 	
 	//store all changes
 	private List<HAPStoryChangeItem> m_allChanages;
 	
-	public HAPStoryDesignStep(HAPStoryDesignInfoStep stepInfo) {
-		this.m_stepInfo = stepInfo;
+	public HAPStoryDesignStep(HAPStoryDesignMetadataStep metaData) {
+		this.m_metaData = metaData;
 	}
-	
 
+	public void clear() {
+		this.m_allChanages.clear();
+		this.m_requestChanges.clear();
+		this.m_metaData.clear();
+	}
+
+	public HAPStoryDesignMetadataStep getMetaData() {     return this.m_metaData;      }
+	
 	public void addChanges(List<HAPStoryChangeItem> requestChanges, List<HAPStoryChangeItem> changes) {
 		
 	}
