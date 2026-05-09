@@ -1,9 +1,12 @@
 package com.nosliw.core.application.division.story.design;
 
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.exception.HAPServiceData;
 
 //stateless
 //   update design according to change request
+@Component
 public interface HAPStoryBuilder {
 
 	String getBuilderId();

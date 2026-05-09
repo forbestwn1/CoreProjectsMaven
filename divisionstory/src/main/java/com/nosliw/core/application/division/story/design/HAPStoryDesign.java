@@ -2,8 +2,16 @@ package com.nosliw.core.application.division.story.design;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.division.story.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
@@ -11,8 +19,18 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryManagerC
 //dynamic, 
 //    store all the information about how story was build
 //    support transaction
+@HAPEntityWithAttribute
 public class HAPStoryDesign extends HAPEntityInfoImp{
 
+	@HAPAttribute
+	public static final String BUILDERID = "builderId";
+	
+	@HAPAttribute
+	public static final String STORY = "story";
+	
+	@HAPAttribute
+	public static final String STEP = "step";
+	
 	private HAPStoryManagerChange m_changeMan;
 
 	private String m_builderId;
@@ -21,7 +39,13 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	
 	private List<HAPStoryDesignStep> m_changeHistory;
 	
+	public HAPStoryDesign() {
+		this.m_story = new HAPStoryStory();
+		this.m_changeHistory = new ArrayList<HAPStoryDesignStep>();
+	}
+	
 	public HAPStoryDesign(String id, String builderId) {
+		this();
 		this.setId(id);
 		this.m_builderId = builderId;
 	}
@@ -73,18 +97,33 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		return out;      
 	}
 	
-	public HAPStoryDesignStep getCurrentStep() {}
+	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.m_changeHistory.size()-1);    }
 	
-	private HAPStoryDesignStep getStepById(String stepId) {}
+	@Override
+	protected boolean buildObjectByJson(Object json){  
+		JSONObject jsonObj = (JSONObject)json;
+		this.m_builderId = jsonObj.getString(BUILDERID);
+		
+		this.m_story.buildObject(jsonObj.getJSONObject(STORY), HAPSerializationFormat.JSON);
+		
+		JSONArray stepJsonArray = jsonObj.optJSONArray(STEP);
+		if(stepJsonArray!=null) {
+			for(int i=0; i<stepJsonArray.length(); i++) {
+				HAPStoryDesignStep step = new HAPStoryDesignStep();
+				step.buildObject(stepJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+				this.m_changeHistory.add(step);
+			}
+		}
+		
+		return true;
+	}
 	
-	private String getStepId(HAPStoryDesignInfoStep stepInfo) {}
-	
-	private String getNextStep(String stepId) {}
-	
-	private String getPreviousStep(String stepId) {}
-
-	private String getFirstStep() {}
-	
-	private String getLastStep() {}
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(BUILDERID, this.m_builderId);
+		jsonMap.put(STORY, this.m_story.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(STEP, HAPUtilityJson.buildJson(this.m_changeHistory, HAPSerializationFormat.JSON));
+	}
 	
 }

@@ -9,14 +9,19 @@ import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
 
-public class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
+public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 
-	HAPStoryWizzardDefinition m_wizzardDef;
+	private HAPStoryWizzardDefinition m_wizzardDef;
+	
+	private String m_builderId;
+	
+	public HAPStoryBuilderDesignWizard(String builderId, HAPStoryWizzardDefinition wizzardDef) {
+		this.m_builderId = builderId;
+		this.m_wizzardDef = wizzardDef;
+	}
 	
 	@Override
-	public String getBuilderId() {
-		return null;
-	}
+	public String getBuilderId() {    return this.m_builderId;   }
 
 	@Override
 	public void initDesign(HAPStoryDesign design) {

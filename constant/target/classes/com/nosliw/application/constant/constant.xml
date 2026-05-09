@@ -876,6 +876,9 @@
 			<definition name="STORYDESIGN_CHANGE_INFO_STAGE" value="stage"/>
 
 			<definition type="space"/>
+			<definition name="STORY_BUILDER_DATASOURCEDRIVE" value="dataSourceDrive"/>
+
+			<definition type="space"/>
 			<definition name="STORY_EVENT_CHANGE" value="change"/>
 
 			<definition type="space"/>

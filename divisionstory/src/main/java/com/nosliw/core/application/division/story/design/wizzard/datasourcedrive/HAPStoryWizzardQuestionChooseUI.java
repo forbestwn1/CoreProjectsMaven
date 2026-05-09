@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.story.design.wizzard.magic;
+package com.nosliw.core.application.division.story.design.wizzard.datasourcedrive;
 
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestion;
 

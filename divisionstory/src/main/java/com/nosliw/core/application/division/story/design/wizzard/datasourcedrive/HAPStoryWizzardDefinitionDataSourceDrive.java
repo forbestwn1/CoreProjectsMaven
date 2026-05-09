@@ -1,20 +1,33 @@
-package com.nosliw.core.application.division.story.design.wizzard.magic;
+package com.nosliw.core.application.division.story.design.wizzard.datasourcedrive;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizardRequestNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 
-public class HAPStoryWizzardDefinitionMagic extends HAPStoryWizzardDefinition{
+public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDefinition{
 
 	public static final String STEP_SELECTDATASOURCE = "selectDataSource"; 
 	public static final String STEP_CUSTOMIZEUI = "customizeUI"; 
 	
 	
-	private Map<String, HAPStoryWizzardStepDefinition> m_steps;
+	private List<HAPStoryWizzardStepDefinition> m_steps;
+	
+	public HAPStoryWizzardDefinitionDataSourceDrive() {
+		this.m_steps = new ArrayList<HAPStoryWizzardStepDefinition>();
+		
+		HAPStoryWizzardStepDefinition step1 = new HAPStoryWizzardStepDefinition();
+		step1.setId(STEP_SELECTDATASOURCE);
+		
+		HAPStoryWizzardStepDefinition step2 = new HAPStoryWizzardStepDefinition();
+		step2.setId(STEP_SELECTDATASOURCE);
+
+		this.m_steps.add(step1);
+		this.m_steps.add(step2);
+	}
 	
 	@Override
 	public void initDesign(HAPStoryDesign design) {
@@ -38,8 +51,7 @@ public class HAPStoryWizzardDefinitionMagic extends HAPStoryWizzardDefinition{
 
 	@Override
 	public List<HAPStoryWizzardStepDefinition> getStepsDefinition() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.m_steps;
 	}
 
 
