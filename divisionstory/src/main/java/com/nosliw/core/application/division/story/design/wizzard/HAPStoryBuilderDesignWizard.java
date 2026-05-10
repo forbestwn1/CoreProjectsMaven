@@ -24,8 +24,9 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 	public String getBuilderId() {    return this.m_builderId;   }
 
 	@Override
-	public void initDesign(HAPStoryDesign design) {
+	public HAPServiceData initDesign(HAPStoryDesign design) {
 		this.m_wizzardDef.initDesign(design);	
+    	return this.createResult(design);
 	}
 
 	//return all steps

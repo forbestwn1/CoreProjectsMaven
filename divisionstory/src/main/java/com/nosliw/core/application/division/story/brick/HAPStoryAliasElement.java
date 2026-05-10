@@ -62,7 +62,7 @@ public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStory
 	}
 
 	@Override
-	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+	public void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(NAME, this.m_name);
 		jsonMap.put(TEMPORARY, this.m_isTemp+"");

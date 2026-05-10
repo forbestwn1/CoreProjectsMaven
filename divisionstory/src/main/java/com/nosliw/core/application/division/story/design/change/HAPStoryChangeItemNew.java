@@ -28,9 +28,14 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 	public HAPStoryChangeItemNew() {
 		super(MYCHANGETYPE);
 	}
+	
+	public HAPStoryChangeItemNew(HAPStoryAliasElement alias) {
+		this();
+		this.m_alias = alias;
+	}
 
 	public HAPStoryChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
-		this();
+		this(alias);
 		this.m_alias = alias;
 		this.m_storyElement = storyElement;
 	}

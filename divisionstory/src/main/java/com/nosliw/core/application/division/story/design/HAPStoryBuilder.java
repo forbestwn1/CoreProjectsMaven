@@ -11,7 +11,7 @@ public interface HAPStoryBuilder {
 
 	String getBuilderId();
 	
-	void initDesign(HAPStoryDesign design);
+	HAPServiceData initDesign(HAPStoryDesign design);
 	
 	//design story according to change
 	//   storyDesign: current design

@@ -44,34 +44,39 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		this.m_changeHistory = new ArrayList<HAPStoryDesignStep>();
 	}
 	
-	public HAPStoryDesign(String id, String builderId) {
+	public HAPStoryDesign(String id, String builderId, HAPStoryManagerChange changeMan) {
 		this();
 		this.setId(id);
+		this.m_changeMan = changeMan;
 		this.m_builderId = builderId;
 	}
 	
 	public String getBuilderId() {  return this.m_builderId;     }
 	
 	public HAPStoryStory getStory() {    return this.m_story;     }
-	
+
+	public void newInitStep() {
+		HAPStoryDesignStep step = new HAPStoryDesignStep(new HAPStoryDesignMetadataStepInit());
+		this.m_changeHistory.add(step);
+	}
 	
 	public void newStep(HAPStoryDesignMetadataStep metaData) {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(metaData);
 		this.m_changeHistory.add(step);
 	}
 
-	public void applyChanges(HAPStoryDesignRequestChange changeRequest) {
+	public void applyChanges(HAPStoryDesignRequestChangeGroup changeRequest) {
 		List<HAPStoryChangeItem> changes = new ArrayList<HAPStoryChangeItem>();
 		if(changeRequest.isExtend()) {
-			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChanges(), changes);
+			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChangeItems(), changes);
 		}
 		else {
-			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChanges());
-			changes.addAll(changeRequest.getChanges());
+			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChangeItems());
+			changes.addAll(changeRequest.getChangeItems());
 		}
 
 		HAPStoryDesignStep step = this.getCurrentStep();
-		step.addChanges(changeRequest.getChanges(), changes);
+		step.addChanges(changeRequest.getChangeItems(), changes);
 	}
 	
 	public void removeStep() {
