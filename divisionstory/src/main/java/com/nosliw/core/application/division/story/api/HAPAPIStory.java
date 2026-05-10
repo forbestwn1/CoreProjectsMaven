@@ -10,7 +10,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.division.story.design.HAPStoryDesign;
+import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 
 @RestController
@@ -23,8 +23,8 @@ public class HAPAPIStory {
 	
 	@PostMapping("/new")
     public String newStory(@RequestParam String builderId) {
-		HAPStoryDesign design = m_designManager.newStoryDesign(builderId, null);
-		HAPServiceData out = HAPServiceData.createSuccessData(design.getId());
+		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(builderId, null);
+		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 }

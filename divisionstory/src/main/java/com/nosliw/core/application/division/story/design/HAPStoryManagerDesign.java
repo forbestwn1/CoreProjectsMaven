@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
@@ -39,21 +38,21 @@ public class HAPStoryManagerDesign {
 		}
 	}
 	
-	public HAPStoryDesign newStoryDesign(String builderId, String designId) {
+	public HAPStoryBuilderResponseNew newStoryDesign(String builderId, String designId) {
 		HAPStoryBuilder storyBuilder = this.getBuilder(builderId);
-		HAPStoryDesign out = new HAPStoryDesign(designId!=null?designId:this.generateId(), builderId, this.m_changeMan);
-		storyBuilder.initDesign(out);
-		this.saveStoryDesign(out);
+		HAPStoryDesign design = new HAPStoryDesign(designId!=null?designId:this.generateId(), builderId, this.m_changeMan);
+		HAPStoryBuilderResponseNew out = storyBuilder.initDesign(design);
+		this.saveStoryDesign(design);
 		return out;
 	}
 	
-	public HAPServiceData designStory(String designId, HAPStoryBuilderRequest designRequest) {
+	public HAPStoryBuilderResponseBuild designStory(String designId, HAPStoryBuilderRequest designRequest) {
 		HAPStoryDesign design = this.getDesign(designId);
 		HAPStoryBuilder builder = this.getBuilder(design.getBuilderId());
-		HAPServiceData out = builder.buildStory(design, designRequest);
-		if(out.isSuccess()) {
-			this.saveStoryDesign(design);
-		}
+		HAPStoryBuilderResponseBuild out = builder.buildStory(design, designRequest);
+//		if(out.isSuccess()) {
+//			this.saveStoryDesign(design);
+//		}
 		return out;
 	}	
 

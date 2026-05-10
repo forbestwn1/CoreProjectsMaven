@@ -1,11 +1,9 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilder;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
+import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
+import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
 
@@ -24,17 +22,17 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 	public String getBuilderId() {    return this.m_builderId;   }
 
 	@Override
-	public HAPServiceData initDesign(HAPStoryDesign design) {
+	public HAPStoryBuilderResponseNew initDesign(HAPStoryDesign design) {
 		this.m_wizzardDef.initDesign(design);	
-    	return this.createResult(design);
+    	return this.createResultNew(design);
 	}
 
 	//return all steps
 	@Override
-	public HAPServiceData buildStory(HAPStoryDesign storyDesign, HAPStoryBuilderRequest changeRequest) {
+	public HAPStoryBuilderResponseBuild buildStory(HAPStoryDesign storyDesign, HAPStoryBuilderRequest changeRequest) {
 		HAPStoryWizardRequest wizardRequest = (HAPStoryWizardRequest)changeRequest;
 
-		HAPServiceData out = null;
+		HAPStoryBuilderResponseBuild out = null;
 		
         switch(wizardRequest.getCommand()) {
         case HAPStoryWizardRequest.COMMAND_PREVIOUS:
@@ -47,7 +45,7 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         	//for previous step, roll back changes in step, remove answer
         	storyDesign.rollBackStep();
         	
-        	out = this.createResult(storyDesign);
+        	out = this.createResultBuild(storyDesign);
         	
         	break;
         
@@ -56,7 +54,7 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         	//if no previous, create a new step with question
         	this.m_wizzardDef.processNext(storyDesign, (HAPStoryWizardRequestNext)wizardRequest.getRequestData());
         	
-        	out = this.createResult(storyDesign);
+        	out = this.createResultBuild(storyDesign);
         	
         	break;
 
@@ -65,16 +63,32 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 		return out;
 	}
 	
-	private HAPServiceData createResult(HAPStoryDesign storyDesign) {
-		List<HAPStoryDesignMetadataStep> stepsInfo = new ArrayList<HAPStoryDesignMetadataStep>();
+	private HAPStoryBuilderResponseBuild createResultBuild(HAPStoryDesign storyDesign) {
+		HAPStoryBuilderResponseBuild out = new HAPStoryBuilderResponseBuild();
 		
-		stepsInfo.addAll(storyDesign.getStepInfos());
-		
-		for(int i=stepsInfo.size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
-			stepsInfo.add(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
+		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
+			out.addStepInfo(stepInfo);
+		}
+
+		for(int i=storyDesign.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
+			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
 		}
 		
-		return HAPServiceData.createSuccessData(stepsInfo);
+		return out;
+	}
+	
+	private HAPStoryBuilderResponseNew createResultNew(HAPStoryDesign storyDesign) {
+		HAPStoryBuilderResponseNew out = new HAPStoryBuilderResponseNew(storyDesign.getId());
+		
+		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
+			out.addStepInfo(stepInfo);
+		}
+
+		for(int i=storyDesign.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
+			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
+		}
+		
+		return out;
 	}
 	
 }

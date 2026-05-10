@@ -96,8 +96,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	
 	public List<HAPStoryDesignMetadataStep> getStepInfos(){
 		List<HAPStoryDesignMetadataStep> out = new ArrayList<HAPStoryDesignMetadataStep>();
-		for(HAPStoryDesignStep step : this.m_changeHistory) {
-			out.add(step.getMetaData());
+		for(int i=1; i<this.m_changeHistory.size(); i++) {
+			out.add(m_changeHistory.get(i).getMetaData());
+			
 		}
 		return out;      
 	}

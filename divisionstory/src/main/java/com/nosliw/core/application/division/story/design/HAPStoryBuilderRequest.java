@@ -1,10 +1,5 @@
 package com.nosliw.core.application.division.story.design;
 
-public class HAPStoryBuilderRequest{
-
-	
-	
-	
-	
+public class HAPStoryBuilderRequest {
 
 }
