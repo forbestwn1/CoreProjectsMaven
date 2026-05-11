@@ -4,7 +4,5 @@ public interface HAPProviderDataRule {
 
 	String getDataRuleType();
 	
-	HAPPluginParserDataRule getParser();
-
 	HAPPluginTransformerDataRule getTransformer();
 }
