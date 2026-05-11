@@ -34,7 +34,7 @@ class HAPStoryWizzardRequestDataNext_HAPEntityParsable implements HAPParserEntit
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		JSONObject jsonObj = (JSONObject)obj;
 		HAPStoryWizzardRequestDataNext out = new HAPStoryWizzardRequestDataNext();
-		out.setStepData((HAPStoryDesignMetadataStepWizard)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPStoryWizzardRequestDataNext.STEP), getEntityType()));
+		out.setStepData((HAPStoryDesignMetadataStepWizard)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPStoryWizzardRequestDataNext.STEP), HAPStoryDesignMetadataStepWizard.PARSABLEENTITYTYPE));
 		return out;
 	}
 

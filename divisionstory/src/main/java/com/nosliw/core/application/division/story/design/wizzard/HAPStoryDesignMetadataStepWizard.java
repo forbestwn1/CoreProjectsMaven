@@ -36,10 +36,12 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	//questionair for this step
 	private List<HAPStoryWizzardQuestionair> m_questionairs;
 	
-	public HAPStoryDesignMetadataStepWizard() {}
+	public HAPStoryDesignMetadataStepWizard() {
+		this.m_questionairs = new ArrayList<HAPStoryWizzardQuestionair>();
+	}
 	
 	public HAPStoryDesignMetadataStepWizard(HAPStoryWizzardStepDefinition stepDefinition) {
-		this.m_questionairs = new ArrayList<HAPStoryWizzardQuestionair>();
+		this();
 	    this.m_stepDefinition = stepDefinition;
 	}
 	

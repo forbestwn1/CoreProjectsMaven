@@ -58,7 +58,7 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         
         case COMMAND_NEXT:
         	
-        	HAPStoryWizzardRequestDataNext nextRequestData = (HAPStoryWizzardRequestDataNext)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)changeRequest.getRequestData(), HAPStoryWizzardRequestDataNext.ENTITYTYPE);
+        	HAPStoryWizzardRequestDataNext nextRequestData = (HAPStoryWizzardRequestDataNext)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)changeRequest.getRequestData(), HAPStoryWizzardRequestDataNext.PARSABLEENTITYTYPE);
         	
         	//if no previous, create a new step with question
         	this.m_wizzardDef.processNext(storyDesign, nextRequestData);
