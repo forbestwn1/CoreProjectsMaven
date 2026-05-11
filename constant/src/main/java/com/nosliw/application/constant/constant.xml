@@ -869,7 +869,8 @@
 			
 			<definition type="space"/>
 			<definition name="STORYDESIGN_QUESTIONTYPE_GROUP" value="group"/>
-			<definition name="STORYDESIGN_QUESTIONTYPE_ITEM" value="item"/>
+			<definition name="STORYDESIGN_QUESTIONTYPE_ITEM_STATIC" value="static"/>
+			<definition name="STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC" value="dynamic"/>
 
 			<definition type="space"/>
 			<definition name="STORYDESIGN_INFO_STAGES" value="stages"/>

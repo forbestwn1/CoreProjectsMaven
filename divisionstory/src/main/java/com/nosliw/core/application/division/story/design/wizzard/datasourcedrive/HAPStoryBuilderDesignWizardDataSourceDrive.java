@@ -4,12 +4,13 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryBuilderDesignWizard;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPStoryBuilderDesignWizardDataSourceDrive extends HAPStoryBuilderDesignWizard{
 
-	public HAPStoryBuilderDesignWizardDataSourceDrive() {
-		super(HAPConstantShared.STORY_BUILDER_DATASOURCEDRIVE, new HAPStoryWizzardDefinitionDataSourceDrive());
+	public HAPStoryBuilderDesignWizardDataSourceDrive(HAPServiceParseEntity m_entityParseService) {
+		super(HAPConstantShared.STORY_BUILDER_DATASOURCEDRIVE, new HAPStoryWizzardDefinitionDataSourceDrive(), m_entityParseService);
 	}
 
 }

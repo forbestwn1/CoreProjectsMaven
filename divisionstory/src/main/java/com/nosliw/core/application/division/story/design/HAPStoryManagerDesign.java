@@ -46,7 +46,8 @@ public class HAPStoryManagerDesign {
 		return out;
 	}
 	
-	public HAPStoryBuilderResponseBuild designStory(String designId, HAPStoryBuilderRequest designRequest) {
+	public HAPStoryBuilderResponseBuild designStory(HAPStoryBuilderRequest designRequest) {
+		String designId = designRequest.getDesignId();
 		HAPStoryDesign design = this.getDesign(designId);
 		HAPStoryBuilder builder = this.getBuilder(design.getBuilderId());
 		HAPStoryBuilderResponseBuild out = builder.buildStory(design, designRequest);

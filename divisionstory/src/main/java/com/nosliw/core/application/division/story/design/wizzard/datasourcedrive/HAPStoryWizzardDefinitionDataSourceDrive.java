@@ -9,7 +9,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignRequestChangeGroup;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemNew;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryDesignMetadataStepWizard;
-import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizardRequestNext;
+import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
@@ -31,7 +31,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		step1.setId(STEP_SELECTDATASOURCE);
 		
 		HAPStoryWizzardStepDefinition step2 = new HAPStoryWizzardStepDefinition();
-		step2.setId(STEP_SELECTDATASOURCE);
+		step2.setId(STEP_CUSTOMIZEUI);
 
 		this.m_stepDefinitions.add(step1);
 		this.m_stepDefinitions.add(step2);
@@ -48,7 +48,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 		//service step
 		HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_SELECTDATASOURCE));
-		stepMetaData.addQuestionair(new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionChooseService()));
+		stepMetaData.addQuestionair(new HAPStoryWizzardQuestionairItemDynamic());
 		design.newStep(stepMetaData);
 		design.commitStep();
 		
@@ -57,7 +57,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	//error: attach error to answer
 	//next : next step name, question
 	@Override
-	public void processNext(HAPStoryDesign storyDesign, HAPStoryWizardRequestNext request) {
+	public void processNext(HAPStoryDesign storyDesign, HAPStoryWizzardRequestDataNext request) {
 		
 		//validation lifecycle first
 		

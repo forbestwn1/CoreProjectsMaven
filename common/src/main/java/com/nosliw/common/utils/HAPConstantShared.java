@@ -800,7 +800,8 @@ public class HAPConstantShared {
 
 
 		public static final String STORYDESIGN_QUESTIONTYPE_GROUP = "group";
-		public static final String STORYDESIGN_QUESTIONTYPE_ITEM = "item";
+		public static final String STORYDESIGN_QUESTIONTYPE_ITEM_STATIC = "static";
+		public static final String STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC = "dynamic";
 
 
 

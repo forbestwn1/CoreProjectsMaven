@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HAPServiceIdGenerator {
 
-	private static long m_index = System.currentTimeMillis();
+	private static long m_index = 0;//System.currentTimeMillis();
 	
 	public String generateIdStr() {
 		m_index++;

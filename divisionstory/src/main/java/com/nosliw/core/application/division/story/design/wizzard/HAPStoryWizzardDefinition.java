@@ -12,6 +12,6 @@ public abstract class HAPStoryWizzardDefinition {
 	
 	//error: attach error to answer
 	//next : next step name, question
-	abstract public void processNext(HAPStoryDesign storyDesign, HAPStoryWizardRequestNext request);
+	abstract public void processNext(HAPStoryDesign storyDesign, HAPStoryWizzardRequestDataNext request);
 	
 }

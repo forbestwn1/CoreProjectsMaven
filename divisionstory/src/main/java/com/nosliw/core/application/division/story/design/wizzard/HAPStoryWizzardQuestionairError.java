@@ -1,6 +1,8 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
-public class HAPStoryWizzardQuestionairError {
+import com.nosliw.common.serialization.HAPSerializableImp;
+
+public class HAPStoryWizzardQuestionairError extends HAPSerializableImp{
 
 	
 	

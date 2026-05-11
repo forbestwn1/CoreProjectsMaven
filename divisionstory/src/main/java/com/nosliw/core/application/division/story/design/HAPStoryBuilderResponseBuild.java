@@ -22,9 +22,8 @@ public class HAPStoryBuilderResponseBuild extends HAPSerializableImp{
 		this.m_stepsInfo = new ArrayList<HAPStoryDesignMetadataStep>();
 	}
 	
-	public void addStepInfo(HAPStoryDesignMetadataStep stepInfo) {
-		this.m_stepsInfo.add(stepInfo);
-	}
+	public void addStepInfo(HAPStoryDesignMetadataStep stepInfo) {	this.m_stepsInfo.add(stepInfo); 	}
+	public List<HAPStoryDesignMetadataStep> getStepInfos(){     return this.m_stepsInfo;       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
