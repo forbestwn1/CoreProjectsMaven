@@ -20,24 +20,24 @@ public class HAPStoryWizzardQuestionChooseService extends HAPSerializableImp imp
 	public static final String PARSABLEENTITYTYPE = "story.wizzard.question.choolsservice";
 	
 	@HAPAttribute
-	public static final String SERVICENAME = "serviceName";
+	public static final String DATASOURCE = "serviceName";
 
-	private String m_serviceName;
+	private String m_dataSource;
 	
 	public HAPStoryWizzardQuestionChooseService() {
 		
 	}
 	
-	public HAPStoryWizzardQuestionChooseService(String serviceName) {
-		this.m_serviceName = serviceName;
+	public HAPStoryWizzardQuestionChooseService(String dataSource) {
+		this.m_dataSource = dataSource;
 	}
 	
-	public String getServiceName() {     return this.m_serviceName;      }
+	public String getServiceName() {     return this.m_dataSource;      }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-		this.m_serviceName = (String)jsonObj.opt(SERVICENAME);
+		this.m_dataSource = (String)jsonObj.opt(DATASOURCE);
 		
 		return true;  
 	}
@@ -45,8 +45,7 @@ public class HAPStoryWizzardQuestionChooseService extends HAPSerializableImp imp
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(HAPEntityParsable.ENTITYTYPE, HAPStoryWizzardQuestionChooseService.PARSABLEENTITYTYPE);
-		jsonMap.put(SERVICENAME, this.m_serviceName);
+		jsonMap.put(DATASOURCE, this.m_dataSource);
 	}
 	
 }

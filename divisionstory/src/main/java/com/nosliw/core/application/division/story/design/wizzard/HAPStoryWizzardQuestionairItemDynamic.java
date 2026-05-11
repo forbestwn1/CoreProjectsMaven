@@ -99,7 +99,7 @@ class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPParserE
         }
         
         out.setDefaultValue(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE));
-        out.setDefaultValue(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE));
+        out.setChangedValue(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE));
 		
 		return out;
 	}

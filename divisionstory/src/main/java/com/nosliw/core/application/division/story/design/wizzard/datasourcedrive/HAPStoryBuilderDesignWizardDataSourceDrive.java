@@ -9,8 +9,8 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 @Component
 public class HAPStoryBuilderDesignWizardDataSourceDrive extends HAPStoryBuilderDesignWizard{
 
-	public HAPStoryBuilderDesignWizardDataSourceDrive(HAPServiceParseEntity m_entityParseService) {
-		super(HAPConstantShared.STORY_BUILDER_DATASOURCEDRIVE, new HAPStoryWizzardDefinitionDataSourceDrive(), m_entityParseService);
+	public HAPStoryBuilderDesignWizardDataSourceDrive(HAPServiceParseEntity entityParseService) {
+		super(HAPConstantShared.STORY_BUILDER_DATASOURCEDRIVE, new HAPStoryWizzardDefinitionDataSourceDrive(entityParseService), entityParseService);
 	}
 
 }

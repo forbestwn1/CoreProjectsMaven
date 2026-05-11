@@ -48,8 +48,10 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	public void addQuestionair(HAPStoryWizzardQuestionair questionair) {
 		this.m_questionairs.add(questionair);
 	}
+	public List<HAPStoryWizzardQuestionair> getQuestionairs(){     return this.m_questionairs;      }
 	
 	public void setStepDefinition(HAPStoryWizzardStepDefinition stepDefinition) {    this.m_stepDefinition = stepDefinition;       }
+	public HAPStoryWizzardStepDefinition getStepDefinition() {     return this.m_stepDefinition;      }
 	
 	@Override
 	public void clear() {
