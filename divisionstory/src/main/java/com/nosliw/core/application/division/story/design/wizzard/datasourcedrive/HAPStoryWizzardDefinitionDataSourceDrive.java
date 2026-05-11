@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
+import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.brick.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.brick.element.HAPStoryElementModule;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
@@ -12,9 +14,13 @@ import com.nosliw.core.application.division.story.design.HAPStoryDesignRequestCh
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemNew;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryDesignMetadataStepWizard;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardDefinition;
+import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairGroup;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
+import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemStatic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
+import com.nosliw.core.application.entity.service.HAPManagerService;
+import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDefinition{
@@ -28,8 +34,11 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService) {
+	private HAPManagerService m_serviceMan;
+	
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPManagerService serviceMan) {
 		this.m_entityParseService = entityParseService;
+		this.m_serviceMan = serviceMan;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
 		
@@ -75,6 +84,31 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		HAPStoryWizzardQuestionChooseService choosServiceQuestion = (HAPStoryWizzardQuestionChooseService)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)changeValue, HAPStoryWizzardQuestionChooseService.PARSABLEENTITYTYPE);
 		
 		//apply answer
+		HAPInteractiveTask taskInterface = this.m_serviceMan.getServiceProfile(choosServiceQuestion.getServiceName(), null).getInterface();
+		
+		HAPStoryWizzardQuestionairGroup serviceInterfaceGroupQ = new HAPStoryWizzardQuestionairGroup();
+		
+		HAPStoryWizzardQuestionairGroup serviceRequestGroupQ = new HAPStoryWizzardQuestionairGroup();
+		for(HAPDefinitionParm parDef : taskInterface.getRequestParms()) {
+			HAPStoryWizzardQuestionairGroup parmGroupQ = new HAPStoryWizzardQuestionairGroup();
+			HAPDataTypeCriteria dataTypeCriteria = parDef.getDataDefinition().getRuleCriteria();
+			
+			HAPStoryWizzardQuestionairItemStatic parmInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic();
+			
+			HAPStoryWizzardQuestionairGroup parmDynamicGroupQ = new HAPStoryWizzardQuestionairGroup();
+			HAPStoryWizzardQuestionairItemDynamic parmIsConstantQ = new HAPStoryWizzardQuestionairItemDynamic();
+
+			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic();
+
+			HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = new HAPStoryWizzardQuestionairItemDynamic();
+			
+			
+			//child criteria
+//			HAPDataTypeCriteriaId 
+		}
+		
+		
+		HAPStoryWizzardQuestionairGroup serviceResponseGroupQ = new HAPStoryWizzardQuestionairGroup();
 		
 		
 	}
