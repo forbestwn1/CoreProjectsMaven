@@ -11,7 +11,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.HAPPackageBrickInBundle;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPUtilityParserElement;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInfoTrigguerTask extends HAPEntityInfoImp{
@@ -50,13 +50,13 @@ public class HAPInfoTrigguerTask extends HAPEntityInfoImp{
 	public void setExternalValuePortGroupName(String name) {    this.m_externalValuePortGroupName = name;       }
 	
 	
-	public static HAPInfoTrigguerTask parseInfoTrigguerTask(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPInfoTrigguerTask parseInfoTrigguerTask(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInfoTrigguerTask out = new HAPInfoTrigguerTask();
 		
 		out.buildEntityInfoByJson(jsonObj);
 		
 		out.setTrigguerType((String)jsonObj.opt(TRIGGUERTYPE));
-		out.setEventDataDefinition(HAPUtilityParserElement.parseStructureElement(jsonObj.optJSONObject(DATADEFINITION), dataRuleMan));
+		out.setEventDataDefinition(HAPUtilityParserElement.parseStructureElement(jsonObj.optJSONObject(DATADEFINITION), entityParseService));
 		
 		HAPPackageBrickInBundle handlerId = new HAPPackageBrickInBundle();
 		handlerId.buildObject(jsonObj.opt(HANDLERID), HAPSerializationFormat.JSON);

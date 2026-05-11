@@ -10,29 +10,29 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserBlockTaskWrapperDataExpression extends HAPManualDefinitionPluginParserBrickImpSimple{
 
 	private HAPParserDataExpression m_dataExpressionParser;
 	
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
 	public HAPManualPluginParserBlockTaskWrapperDataExpression(
 			HAPManualManagerBrick manualDivisionEntityMan, 
 			HAPManagerApplicationBrick brickMan, 
 			HAPParserDataExpression dataExpressionParser,
-			HAPManagerDataRule dataRuleMan) {
+			HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.TASKWRAPPERDATAEXPRESSION, HAPManualDefinitionBlockTaskWrapperDataExpression.class, manualDivisionEntityMan, brickMan);
 		this.m_dataExpressionParser = dataExpressionParser;
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_dataExpressionParser = dataExpressionParser;
 	}
 	
 	@Override
 	protected void parseSimpleDefinitionContentJson(HAPManualDefinitionBrick brickDefinition, Object jsonValue, HAPManualDefinitionContextParse parseContext) {
 		HAPManualDefinitionBlockTaskWrapperDataExpression brick = (HAPManualDefinitionBlockTaskWrapperDataExpression)brickDefinition;
 
-		HAPDefinitionDataExpressionStandAlone value = HAPDefinitionDataExpressionStandAlone.parse((JSONObject)jsonValue, m_dataRuleMan); 
+		HAPDefinitionDataExpressionStandAlone value = HAPDefinitionDataExpressionStandAlone.parse((JSONObject)jsonValue, this.m_entityParseService); 
 		value.setExpression(this.m_dataExpressionParser.parseExpression(value.getExpressionStr()));
 		
 		brick.setDataExpression(value);

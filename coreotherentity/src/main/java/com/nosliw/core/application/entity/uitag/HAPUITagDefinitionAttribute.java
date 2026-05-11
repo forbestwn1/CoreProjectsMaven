@@ -10,7 +10,7 @@ import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public abstract class HAPUITagDefinitionAttribute extends HAPEntityInfoImp{
@@ -35,7 +35,7 @@ public abstract class HAPUITagDefinitionAttribute extends HAPEntityInfoImp{
 	
 	public Object getDefaultValue() {    return this.m_defaultValue;     }
 	
-	public static HAPUITagDefinitionAttribute parseUITagDefinitionAttribute(JSONObject jsonObj, HAPManagerDataRule dataRuleManager) {
+	public static HAPUITagDefinitionAttribute parseUITagDefinitionAttribute(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		String type = (String)jsonObj.opt(TYPE);
 		if(type==null) {
 			type = HAPConstantShared.UITAGDEFINITION_ATTRIBUTETYPE_SIMPLE;
@@ -53,7 +53,7 @@ public abstract class HAPUITagDefinitionAttribute extends HAPEntityInfoImp{
 			varAttrDef.buildEntityInfoByJson(jsonObj);
 			Object dfObj = jsonObj.opt(HAPUITagDefinitionAttributeVariable.DATADEFINITION);
 			if(dfObj!=null) {
-				varAttrDef.setDataDefinition(HAPParserDataDefinition.parseDataDefinitionWritable(dfObj, dataRuleManager));
+				varAttrDef.setDataDefinition(HAPParserDataDefinition.parseDataDefinitionWritable(dfObj, entityParseService));
 			}
 			String scope = (String)jsonObj.opt(HAPUITagDefinitionAttributeVariable.SCOPE);
 			if(scope==null) {

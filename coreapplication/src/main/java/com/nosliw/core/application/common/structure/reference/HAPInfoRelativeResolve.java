@@ -12,7 +12,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPUtilityParserElement;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInfoRelativeResolve extends HAPSerializableImp{
@@ -59,12 +59,12 @@ public class HAPInfoRelativeResolve extends HAPSerializableImp{
 	public HAPElementStructure getSolidElement() {    return this.m_solidElement;    }
 	public void setSolidElement(HAPElementStructure element) {     this.m_solidElement = element;        }
 	
-	public static HAPInfoRelativeResolve parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPInfoRelativeResolve parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInfoRelativeResolve out = new HAPInfoRelativeResolve();
 		out.setResolvedStructureId((String)jsonObj.opt(STRUCTUREID));
 		out.setResolvedElementPath(HAPComplexPath.newInstance(jsonObj.opt(PATH)));
 		out.settUnresolvedElementPath(new HAPPath(jsonObj.optString(REMAINPATH)));
-		out.setSolidElement(HAPUtilityParserElement.parseStructureElement(jsonObj.optJSONObject(SOLIDELEMENT), dataRuleMan));
+		out.setSolidElement(HAPUtilityParserElement.parseStructureElement(jsonObj.optJSONObject(SOLIDELEMENT), entityParseService));
 		return out;
 	}
 	

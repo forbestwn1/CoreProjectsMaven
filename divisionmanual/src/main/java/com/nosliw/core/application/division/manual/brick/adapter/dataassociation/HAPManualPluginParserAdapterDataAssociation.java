@@ -11,15 +11,15 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserAdapterDataAssociation  extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserAdapterDataAssociation(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserAdapterDataAssociation(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.DATAASSOCIATION_100, HAPManualDefinitionAdapterDataAssociation.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 	
 	@Override
@@ -31,13 +31,13 @@ public class HAPManualPluginParserAdapterDataAssociation  extends HAPManualDefin
 			daObj = jsonValue;
 		}
 		if(daObj instanceof JSONObject) {
-			HAPDefinitionDataAssociation da = HAPDefinitionParserDataAssociation.buildDefinitionByJson((JSONObject)daObj, this.m_dataRuleMan);
+			HAPDefinitionDataAssociation da = HAPDefinitionParserDataAssociation.buildDefinitionByJson((JSONObject)daObj, this.m_entityParseService);
 			entity.addDataAssciation(da);
 		}
 		else if(daObj instanceof JSONArray) {
 			JSONArray daArray = (JSONArray)daObj;
 			for(int i=0; i<daArray.length(); i++) {
-				HAPDefinitionDataAssociation da = HAPDefinitionParserDataAssociation.buildDefinitionByJson(daArray.getJSONObject(i), this.m_dataRuleMan);
+				HAPDefinitionDataAssociation da = HAPDefinitionParserDataAssociation.buildDefinitionByJson(daArray.getJSONObject(i), this.m_entityParseService);
 				entity.addDataAssciation(da);
 			}
 		}

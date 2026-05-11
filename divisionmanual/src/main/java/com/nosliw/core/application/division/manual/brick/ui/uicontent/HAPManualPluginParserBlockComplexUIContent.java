@@ -33,16 +33,16 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImp;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPWithAttachment;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinitionPluginParserBrickImp{
 
-    private HAPManagerDataRule m_dataRuleMan;
+    private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserBlockComplexUIContent(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserBlockComplexUIContent(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.UICONTENT_100, HAPManualDefinitionBlockComplexUIContent.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 
 	@Override
@@ -52,10 +52,10 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		Element element = (Element)obj;
 		
 		//parse value context
-		parseValueContext(element, uiContent, parseContext, this.m_dataRuleMan);
+		parseValueContext(element, uiContent, parseContext, this.m_entityParseService);
 
 		//parse tasks
-		parseTasks(element, uiContent, parseContext, this.m_dataRuleMan);
+		parseTasks(element, uiContent, parseContext, this.m_entityParseService);
 		
 		parseDescendantTags(element, uiContent, parseContext);
 		
@@ -229,10 +229,10 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		}
 	}
 	
-	private void parseValueContext(Element ele, HAPManualDefinitionBlockComplexUIContent brickManualDef, HAPManualDefinitionContextParse parseContext, HAPManagerDataRule dataRuleMan) {
+	private void parseValueContext(Element ele, HAPManualDefinitionBlockComplexUIContent brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
 		List<Element> valueContextEles = HAPUtilityUIResourceParser.getChildElementsByTag(ele, HAPWithValueContext.VALUECONTEXT);
 		for(Element valueContextEle : valueContextEles){
-			HAPManualParserValueContext.parseValueContextContentJson(brickManualDef.getValueContextBrick(), new JSONArray(Parser.unescapeEntities(valueContextEle.html(), false)), parseContext, dataRuleMan);
+			HAPManualParserValueContext.parseValueContextContentJson(brickManualDef.getValueContextBrick(), new JSONArray(Parser.unescapeEntities(valueContextEle.html(), false)), parseContext, entityParseService);
 			break;
 		}
 		for(Element valueContextEle : valueContextEles) {
@@ -240,7 +240,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		}
 	}
 	
-	private void parseTasks(Element ele, HAPManualDefinitionBlockComplexUIContent brickManualDef, HAPManualDefinitionContextParse parseContext, HAPManagerDataRule dataRuleMan) {
+	private void parseTasks(Element ele, HAPManualDefinitionBlockComplexUIContent brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
 		HAPManualDefinitionBrickContainer taskContainer = (HAPManualDefinitionBrickContainer)parseContext.getManualBrickManager().newBrickDefinition(HAPEnumBrickType.CONTAINER_100);
 		brickManualDef.setAttributeValueWithBrick(HAPManualDefinitionWithBrickTasks.TASK, taskContainer);
 		

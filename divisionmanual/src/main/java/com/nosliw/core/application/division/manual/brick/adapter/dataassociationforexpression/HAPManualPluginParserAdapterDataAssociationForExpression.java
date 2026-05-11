@@ -10,22 +10,22 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserAdapterDataAssociationForExpression  extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserAdapterDataAssociationForExpression(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserAdapterDataAssociationForExpression(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.DATAASSOCIATIONFOREXPRESSION_100, HAPManualDefinitionAdapterDataAssociationForExpression.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 	
 	@Override
 	protected void parseSimpleDefinitionContentJson(HAPManualDefinitionBrick brickManual, Object jsonValue, HAPManualDefinitionContextParse parseContext) {
 		HAPManualDefinitionAdapterDataAssociationForExpression entity = (HAPManualDefinitionAdapterDataAssociationForExpression)brickManual;
 		JSONObject daJsonObj =  ((JSONObject)jsonValue).optJSONObject(HAPManualDefinitionAdapterDataAssociationForExpression.DEFINITION);
-		HAPDefinitionDataAssociationForExpression dataAssociationForExpression = HAPDefinitionParserDataAssociationForExpression.parse(daJsonObj, this.m_dataRuleMan);
+		HAPDefinitionDataAssociationForExpression dataAssociationForExpression = HAPDefinitionParserDataAssociationForExpression.parse(daJsonObj, this.m_entityParseService);
 		entity.setDataAssciation(dataAssociationForExpression);
 	}
 }

@@ -10,10 +10,13 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 @HAPEntityWithAttribute
-public abstract class HAPDataRule extends HAPSerializableImp{
+public abstract class HAPDataRule extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static String ENTITYPARSEDOMAIN = "core.datarule";
+	
 	@HAPAttribute
 	public static String RULETYPE = "ruleType";
 

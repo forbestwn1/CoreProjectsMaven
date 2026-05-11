@@ -12,17 +12,17 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserBlockTestComplexScript extends HAPManualDefinitionPluginParserBrickImpComplex{
 
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserBlockTestComplexScript(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserBlockTestComplexScript(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.TEST_COMPLEX_SCRIPT_100, HAPManualDefinitionBlockTestComplexScript.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class HAPManualPluginParserBlockTestComplexScript extends HAPManualDefini
 		JSONArray eventArray = jsonObj.optJSONArray(HAPBlockTestComplexScript.TASKTRIGGUER);
 		if(eventArray!=null) {
 			for(int i=0; i<eventArray.length(); i++) {
-				HAPTestTaskTrigguer eventTest = HAPTestTaskTrigguer.parsTestTaskTrigguer(eventArray.getJSONObject(i), m_dataRuleMan);
+				HAPTestTaskTrigguer eventTest = HAPTestTaskTrigguer.parsTestTaskTrigguer(eventArray.getJSONObject(i), this.m_entityParseService);
 				scriptEntity.getTaskTrigguers().add(eventTest);
 			}
 		}

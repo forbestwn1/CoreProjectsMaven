@@ -6,11 +6,11 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionParserDataAssociation {
 
-	public static HAPDefinitionDataAssociation buildDefinitionByJson(JSONObject asJson, HAPManagerDataRule dataRuleMan){
+	public static HAPDefinitionDataAssociation buildDefinitionByJson(JSONObject asJson, HAPServiceParseEntity entityParseService){
 		if(asJson==null) {
 			return null;
 		}
@@ -27,7 +27,7 @@ public class HAPDefinitionParserDataAssociation {
 		switch(type) {
 		case HAPConstantShared.DATAASSOCIATION_TYPE_MAPPING:
 		{
-			HAPDefinitionDataAssociationMapping out = HAPDefinitionParserMapping.parse(asJson, dataRuleMan); 
+			HAPDefinitionDataAssociationMapping out = HAPDefinitionParserMapping.parse(asJson, entityParseService); 
 			return out;
 		}
 		case HAPConstantShared.DATAASSOCIATION_TYPE_MIRROR:

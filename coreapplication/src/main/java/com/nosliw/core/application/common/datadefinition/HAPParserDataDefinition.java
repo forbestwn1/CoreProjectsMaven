@@ -5,16 +5,17 @@ import org.json.JSONObject;
 
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPParserDataDefinition {
 
-	public static HAPDataDefinitionWritableWithInit parseDataDefinitionWritableWithInit(Object obj, HAPManagerDataRule dataRuleManager) {
+	public static HAPDataDefinitionWritableWithInit parseDataDefinitionWritableWithInit(Object obj, HAPServiceParseEntity entityParseService) {
 		HAPDataDefinitionWritableWithInit out = new HAPDataDefinitionWritableWithInit();
 		
-		parseToDataDefinitionWritable(obj, out, dataRuleManager);
+		parseToDataDefinitionWritable(obj, out, entityParseService);
 
 		if(obj instanceof String) {
 		}
@@ -29,13 +30,13 @@ public class HAPParserDataDefinition {
 		return out;
 	}
 	
-	public static HAPDataDefinitionWritable parseDataDefinitionWritable(Object obj, HAPManagerDataRule dataRuleManager) {
+	public static HAPDataDefinitionWritable parseDataDefinitionWritable(Object obj, HAPServiceParseEntity entityParseService) {
 		HAPDataDefinitionWritable out = new HAPDataDefinitionWritable();
-		parseToDataDefinitionWritable(obj, out, dataRuleManager);
+		parseToDataDefinitionWritable(obj, out, entityParseService);
 		return out;
 	}
 
-	private static void parseToDataDefinitionWritable(Object obj, HAPDataDefinitionWritable dataDefWritable, HAPManagerDataRule dataRuleManager) {
+	private static void parseToDataDefinitionWritable(Object obj, HAPDataDefinitionWritable dataDefWritable, HAPServiceParseEntity entityParseService) {
 		parseToDataDefinition(obj, dataDefWritable);
 
 		if(obj instanceof String) {
@@ -61,7 +62,7 @@ public class HAPParserDataDefinition {
 						if(dataRuleJson==null) {
 							dataRuleJson = dataRuleDefJson;
 						}
-						HAPDataRule dataRule = dataRuleManager.parseDataRule(dataRuleJson);
+						HAPDataRule dataRule = HAPUtilityDataRule.parseDataRule(dataRuleJson, entityParseService); 
 						dataRuleDef.setDataRule(dataRule);
 						
 						dataDefWritable.addRule(dataRuleDef);

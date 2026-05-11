@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.task.HAPInfoTrigguerTask;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPTestTaskTrigguer extends HAPSerializableImp{
@@ -33,9 +33,9 @@ public class HAPTestTaskTrigguer extends HAPSerializableImp{
 	public Object getTestData() {    return this.m_testData;     }
 	public void setTaskData(Object testData) {   this.m_testData = testData;      }
 	
-	public static HAPTestTaskTrigguer parsTestTaskTrigguer(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPTestTaskTrigguer parsTestTaskTrigguer(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPTestTaskTrigguer out = new HAPTestTaskTrigguer();
-		out.setTaskTrigguerInfo(HAPInfoTrigguerTask.parseInfoTrigguerTask(jsonObj.optJSONObject(TRIGGUERINFO), dataRuleMan));
+		out.setTaskTrigguerInfo(HAPInfoTrigguerTask.parseInfoTrigguerTask(jsonObj.optJSONObject(TRIGGUERINFO), entityParseService));
 		out.setTaskData(jsonObj.opt(TESTDATA));
 		return out;
 	}

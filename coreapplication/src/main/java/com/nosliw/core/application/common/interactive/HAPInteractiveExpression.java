@@ -12,7 +12,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInteractiveExpression extends HAPSerializableImp implements HAPInteractive{
@@ -35,12 +35,12 @@ public class HAPInteractiveExpression extends HAPSerializableImp implements HAPI
 
 	public HAPDefinitionResult getResult() {   return this.m_result;  }
 	
-	public static HAPInteractiveExpression parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPInteractiveExpression parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInteractiveExpression out = new HAPInteractiveExpression();
 		
 		JSONArray parmsArray = jsonObj.optJSONArray(REQUEST);
 		if(parmsArray!=null) {
-			out.setRequest(HAPInteractiveRequest.parse(parmsArray, dataRuleMan));
+			out.setRequest(HAPInteractiveRequest.parse(parmsArray, entityParseService));
 		}
 		
 		JSONObject resutltsObj = jsonObj.optJSONObject(RESULT);

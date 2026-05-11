@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.xxx.application.common.interactive1.HAPRequestParmInInteractive;
 
 public class HAPDefinitionParm extends HAPEntityInfoImp{
@@ -24,13 +24,13 @@ public class HAPDefinitionParm extends HAPEntityInfoImp{
 	public HAPDataDefinitionWritableWithInit getDataDefinition() {		return this.m_dataDefinition;	}
 	public void setDataDefinition(HAPDataDefinitionWritableWithInit dataDef) {    this.m_dataDefinition = dataDef;       }
 	
-	public static HAPDefinitionParm buildParmFromObject(JSONObject jsonValue, HAPManagerDataRule dataRuleMan) {
+	public static HAPDefinitionParm buildParmFromObject(JSONObject jsonValue, HAPServiceParseEntity entityParseService) {
 		HAPDefinitionParm out = new HAPDefinitionParm();
 		out.buildEntityInfoByJson(jsonValue);
 		
 		Object dataDefObj = jsonValue.opt(DATADEFINITION);
 		if(dataDefObj!=null) {
-			out.setDataDefinition(HAPParserDataDefinition.parseDataDefinitionWritableWithInit(dataDefObj, dataRuleMan));
+			out.setDataDefinition(HAPParserDataDefinition.parseDataDefinitionWritableWithInit(dataDefObj, entityParseService));
 		}
 		return out;
 	}

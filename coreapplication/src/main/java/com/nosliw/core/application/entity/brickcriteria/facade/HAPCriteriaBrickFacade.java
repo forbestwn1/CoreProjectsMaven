@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.entity.brickcriteria.HAPCriteriaBrick;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPCriteriaBrickFacade extends HAPCriteriaBrick{
 
@@ -22,7 +22,7 @@ public class HAPCriteriaBrickFacade extends HAPCriteriaBrick{
 	public String getFacade() {	return this.m_facade;	}
 	public void setFacade(String facade) {   this.m_facade = facade;    }
 	
-	public static HAPCriteriaBrickFacade parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPCriteriaBrickFacade parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPCriteriaBrickFacade out = new HAPCriteriaBrickFacade();
 		out.setFacade(jsonObj.getString(FACADE));
 		return out;

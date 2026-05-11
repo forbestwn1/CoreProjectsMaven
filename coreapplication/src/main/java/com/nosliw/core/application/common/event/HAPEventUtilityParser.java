@@ -5,11 +5,11 @@ import org.json.JSONObject;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.common.structure.HAPStructureImp;
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPEventUtilityParser {
 
-	public static HAPEventDefinition parseEventDefinition(Object obj, HAPManagerDataRule dataRuleManager) {
+	public static HAPEventDefinition parseEventDefinition(Object obj, HAPServiceParseEntity entityParseService) {
 		HAPEventDefinition out = new HAPEventDefinition();
 		
 		if(obj instanceof JSONObject) {
@@ -18,7 +18,7 @@ public class HAPEventUtilityParser {
 			Object dfObj = jsonObj.opt(HAPEventDefinition.DATADEFINITION);
 			if(dfObj!=null) {
 				HAPStructure eventDataDef = new HAPStructureImp();
-				HAPUtilityParserStructure.parseStuctureJson(dfObj, eventDataDef, dataRuleManager);
+				HAPUtilityParserStructure.parseStuctureJson(dfObj, eventDataDef, entityParseService);
 				out.setDataDefinition(eventDataDef);
 			}
 		}

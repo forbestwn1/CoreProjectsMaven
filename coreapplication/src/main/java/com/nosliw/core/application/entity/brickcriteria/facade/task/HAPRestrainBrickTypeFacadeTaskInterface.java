@@ -9,7 +9,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.entity.brickcriteria.HAPRestrainBrick;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPRestrainBrickTypeFacadeTaskInterface extends HAPRestrainBrick{
 
@@ -24,9 +24,9 @@ public class HAPRestrainBrickTypeFacadeTaskInterface extends HAPRestrainBrick{
 	public HAPInteractiveTask getTaskInteractiveInterface() {	return this.m_interactiveTaskInterface;	}
 	public void setTaskInteractiveInterface(HAPInteractiveTask taskInterface) {	this.m_interactiveTaskInterface = taskInterface;	}
 
-	public static HAPRestrainBrickTypeFacadeTaskInterface parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPRestrainBrickTypeFacadeTaskInterface parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPRestrainBrickTypeFacadeTaskInterface out = new HAPRestrainBrickTypeFacadeTaskInterface();
-		out.setTaskInteractiveInterface(HAPInteractiveTask.parse(jsonObj.getJSONObject(INTERFACE), dataRuleMan));
+		out.setTaskInteractiveInterface(HAPInteractiveTask.parse(jsonObj.getJSONObject(INTERFACE), entityParseService));
 		return out;
 	}
 	

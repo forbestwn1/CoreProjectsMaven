@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.entity.brickcriteria.facade.HAPCriteriaBrickFacade;
 import com.nosliw.core.application.entity.brickcriteria.facade.task.HAPRestrainBrickTypeFacadeTaskInterface;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPManagerBrickCriteria {
 
 	@Autowired
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
 	public HAPCriteriaBrick parseCriteria(Object obj) {
 		HAPCriteriaBrick out = null;
@@ -23,7 +23,7 @@ public class HAPManagerBrickCriteria {
 			JSONObject jsonObj = (JSONObject)obj;
 			String criteriaType = (String)jsonObj.opt(HAPCriteriaBrick.CRITERIATYPE);
 			if(criteriaType.equals(HAPConstantShared.BRICKTYPECRITERIA_TYPE_FACADE)) {
-				out = HAPCriteriaBrickFacade.parse(jsonObj, this.m_dataRuleMan);
+				out = HAPCriteriaBrickFacade.parse(jsonObj, this.m_entityParseService);
 			}
 
 			//parse restrain
@@ -31,12 +31,12 @@ public class HAPManagerBrickCriteria {
 				Object restrainObj = jsonObj.opt(HAPCriteriaBrick.RESTRAIN);
 				if(restrainObj!=null) {
 					if(restrainObj instanceof JSONObject) {
-						out.getRestains().add(parseBrickTypeFacadeRestrain((JSONObject)restrainObj, m_dataRuleMan));
+						out.getRestains().add(parseBrickTypeFacadeRestrain((JSONObject)restrainObj, this.m_entityParseService));
 					}
 					else if(restrainObj instanceof JSONArray) {
 						JSONArray restrainArray = (JSONArray)restrainObj;
 						for(int i=0; i<restrainArray.length(); i++) {
-							out.addRestrain(parseBrickTypeFacadeRestrain(restrainArray.getJSONObject(i), m_dataRuleMan));
+							out.addRestrain(parseBrickTypeFacadeRestrain(restrainArray.getJSONObject(i), this.m_entityParseService));
 						}
 					}
 				}
@@ -46,14 +46,14 @@ public class HAPManagerBrickCriteria {
 		return out;
 	}
 	
-	public static HAPRestrainBrick parseBrickTypeFacadeRestrain(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPRestrainBrick parseBrickTypeFacadeRestrain(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPRestrainBrick out = null;
 		
 		String type = jsonObj.getString(HAPRestrainBrick.TYPE);
 		
 		switch(type) {
 		case HAPConstantShared.BRICKTYPECRITERIA_RESTRAIN_TASKINTERFACE:
-			out = HAPRestrainBrickTypeFacadeTaskInterface.parse(jsonObj, dataRuleMan);
+			out = HAPRestrainBrickTypeFacadeTaskInterface.parse(jsonObj, entityParseService);
 			break;
 		}
 		return out;

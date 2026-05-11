@@ -9,7 +9,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionDataExpressionStandAlone extends HAPSerializableImp{
 
@@ -36,9 +36,9 @@ public class HAPDefinitionDataExpressionStandAlone extends HAPSerializableImp{
 	public HAPDefinitionDataExpression getExpression() {	return this.m_expression;	}
 	public void setExpression(HAPDefinitionDataExpression expression) {   this.m_expression = expression;     }
 
-	public static HAPDefinitionDataExpressionStandAlone parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPDefinitionDataExpressionStandAlone parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPDefinitionDataExpressionStandAlone out = new HAPDefinitionDataExpressionStandAlone();
-		out.setExpressionInteractive(HAPInteractiveExpression.parse(jsonObj, dataRuleMan));
+		out.setExpressionInteractive(HAPInteractiveExpression.parse(jsonObj, entityParseService));
 		out.setExpressionStr(jsonObj.getString(HAPDataExpressionStandAlone.EXPRESSION));
 		return out;
 	}

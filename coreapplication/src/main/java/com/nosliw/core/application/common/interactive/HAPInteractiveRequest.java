@@ -14,7 +14,7 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInteractiveRequest extends HAPSerializableImp{
@@ -40,12 +40,12 @@ public class HAPInteractiveRequest extends HAPSerializableImp{
 	public List<HAPDefinitionParm> getRequestParms() {   return this.m_requestParms;  }
 	public void addRequestParm(HAPDefinitionParm parm) {   this.m_requestParms.add(parm);    }
 	
-	public static HAPInteractiveRequest parse(JSONArray parmsArray, HAPManagerDataRule dataRuleMan) {
+	public static HAPInteractiveRequest parse(JSONArray parmsArray, HAPServiceParseEntity entityParseService) {
 		HAPInteractiveRequest out = new HAPInteractiveRequest();
 		for(int i=0; i<parmsArray.length(); i++) {
 			JSONObject parmJson = parmsArray.getJSONObject(i);
 			if(HAPUtilityEntityInfo.isEnabled(parmJson)){
-				HAPDefinitionParm parm = HAPDefinitionParm.buildParmFromObject(parmJson, dataRuleMan);
+				HAPDefinitionParm parm = HAPDefinitionParm.buildParmFromObject(parmJson, entityParseService);
 				out.addRequestParm(parm);
 			}
 		}

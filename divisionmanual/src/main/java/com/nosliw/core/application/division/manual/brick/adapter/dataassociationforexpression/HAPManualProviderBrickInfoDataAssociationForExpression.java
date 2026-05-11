@@ -10,17 +10,17 @@ import com.nosliw.core.application.division.manual.core.HAPManualProviderBrickIn
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPManualProviderBrickInfoDataAssociationForExpression extends HAPManualProviderBrickInfoImp{
 
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
 	public HAPManualProviderBrickInfoDataAssociationForExpression(HAPManualManagerBrick manualBrickMan,
-			HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+			HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(manualBrickMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class HAPManualProviderBrickInfoDataAssociationForExpression extends HAPM
 
 	@Override
 	protected HAPManualDefinitionPluginParserBrick newBrickParser() {  
-		return new HAPManualPluginParserAdapterDataAssociationForExpression(this.getManualBrickManager(), this.getBrickManager(), this.m_dataRuleMan);
+		return new HAPManualPluginParserAdapterDataAssociationForExpression(this.getManualBrickManager(), this.getBrickManager(), this.m_entityParseService);
 	}
 
 	@Override

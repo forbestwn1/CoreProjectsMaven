@@ -22,18 +22,18 @@ import com.nosliw.core.application.common.structure.HAPValueStructure;
 import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinition;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUITagUtilityDefinitionParser {
 
-	static public HAPUITagDefinition parseUITagDefinition(File file, String tagName, String tagVersion, HAPManagerDataRule dataRuleManager) {
+	static public HAPUITagDefinition parseUITagDefinition(File file, String tagName, String tagVersion, HAPServiceParseEntity entityParseService) {
 		JSONObject jsonObj = new JSONObject(HAPUtilityFile.readFile(file));
-		return parseUITagDefinition(jsonObj, tagName, tagVersion, dataRuleManager);
+		return parseUITagDefinition(jsonObj, tagName, tagVersion, entityParseService);
 	}
 	
-	static public HAPUITagDefinition parseUITagDefinition(JSONObject jsonObj, String tagName, String tagVersion, HAPManagerDataRule dataRuleManager) {
+	static public HAPUITagDefinition parseUITagDefinition(JSONObject jsonObj, String tagName, String tagVersion, HAPServiceParseEntity entityParseService) {
 
 		HAPUITagDefinition out = null;
 
@@ -48,19 +48,19 @@ public class HAPUITagUtilityDefinitionParser {
 		
 		//parse value context
 		HAPValueContextDefinition valueContext = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContext, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXT), dataRuleManager);
+		parseValueContext(valueContext, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXT), entityParseService);
 		out.setValueContext(valueContext);
 
 		//parse value context embeded
 		HAPValueContextDefinition valueContextEmbeded = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContextEmbeded, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), dataRuleManager);
+		parseValueContext(valueContextEmbeded, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), entityParseService);
 		out.setValueContextEmbeded(valueContextEmbeded);
 
 		//attribute
 		JSONArray attrArray = jsonObj.optJSONArray(HAPUITagDefinition.ATTRIBUTE);
 		if(attrArray!=null) {
 			for(int i=0; i<attrArray.length(); i++) {
-				HAPUITagDefinitionAttribute attr = HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(attrArray.getJSONObject(i), dataRuleManager);
+				HAPUITagDefinitionAttribute attr = HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(attrArray.getJSONObject(i), entityParseService);
 				attr.buildObject(attrArray.getJSONObject(i), HAPSerializationFormat.JSON);
 				out.addAttributeDefinition(attr);
 			}
@@ -70,7 +70,7 @@ public class HAPUITagUtilityDefinitionParser {
 		JSONArray eventArray = jsonObj.optJSONArray(HAPWithEvents.EVENT);
 		if(eventArray!=null) {
 			for(int i=0; i<eventArray.length(); i++) {
-				HAPEventDefinition eventDef = HAPEventUtilityParser.parseEventDefinition(eventArray.getJSONObject(i), dataRuleManager);
+				HAPEventDefinition eventDef = HAPEventUtilityParser.parseEventDefinition(eventArray.getJSONObject(i), entityParseService);
 				out.addEvent(eventDef);
 			}
 		}
@@ -206,7 +206,7 @@ public class HAPUITagUtilityDefinitionParser {
 		return out;
 	}
 	
-	static private void parseValueContext(HAPValueContextDefinition valueContext, JSONArray valueStructuresArray, HAPManagerDataRule dataRuleMan) {
+	static private void parseValueContext(HAPValueContextDefinition valueContext, JSONArray valueStructuresArray, HAPServiceParseEntity entityParseService) {
 		if(valueStructuresArray!=null) {
 			for(int i=0; i<valueStructuresArray.length(); i++) {
 				JSONObject valueStructureWrapperObj = valueStructuresArray.getJSONObject(i);
@@ -216,7 +216,7 @@ public class HAPUITagUtilityDefinitionParser {
 				HAPUtilityParserStructure.parseValueStructureWrapper(valueStructureWrapper, valueStructureWrapperObj);
 				
 				HAPValueStructure valueStructure = new HAPValueStructureImp();
-				HAPUtilityParserStructure.parseValueStructureJson(valueStructureWrapperObj.getJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTURE), valueStructure, dataRuleMan);
+				HAPUtilityParserStructure.parseValueStructureJson(valueStructureWrapperObj.getJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTURE), valueStructure, entityParseService);
 				valueStructureWrapper.setValueStructure(valueStructure);
 				
 				valueContext.getValueStructures().add(valueStructureWrapper);

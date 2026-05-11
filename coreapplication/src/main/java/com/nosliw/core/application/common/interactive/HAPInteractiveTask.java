@@ -13,7 +13,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPInteractiveTask extends HAPSerializableImp implements HAPInteractive{
 
@@ -46,12 +46,12 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 		return null;
 	}
 	
-	public static HAPInteractiveTask parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPInteractiveTask parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInteractiveTask out = new HAPInteractiveTask();
 		
 		JSONArray parmsArray = jsonObj.optJSONArray(REQUEST);
 		if(parmsArray!=null) {
-			out.setRequest(HAPInteractiveRequest.parse(parmsArray, dataRuleMan));
+			out.setRequest(HAPInteractiveRequest.parse(parmsArray, entityParseService));
 		}
 		
 		Object resutltsObj = jsonObj.opt(RESULT);

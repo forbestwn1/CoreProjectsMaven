@@ -6,12 +6,12 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.common.structure.reference.HAPInfoRelativeResolve;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityParserElement {
 
-	public static HAPElementStructure parseStructureElement(JSONObject eleDefJson, HAPManagerDataRule dataRuleMan) {
+	public static HAPElementStructure parseStructureElement(JSONObject eleDefJson, HAPServiceParseEntity entityParseService) {
 		if(eleDefJson==null) {
 			return null;
 		}
@@ -30,23 +30,23 @@ public class HAPUtilityParserElement {
 		if(defRefObj!=null) {
 			//relative for definition
 			out = new HAPElementStructureLeafRelativeForDefinition();
-			parseRelativeElement((HAPElementStructureLeafRelativeForDefinition)out, defRefObj, eleDefJson, dataRuleMan);
+			parseRelativeElement((HAPElementStructureLeafRelativeForDefinition)out, defRefObj, eleDefJson, entityParseService);
 		}
 		else if(linkRefObj!=null){
 			//relative for value link
 			HAPElementStructureLeafRelativeForValue relativeEle = new HAPElementStructureLeafRelativeForValue();
 			out = relativeEle;
-			parseRelativeElement(relativeEle, linkRefObj, eleDefJson, dataRuleMan);
+			parseRelativeElement(relativeEle, linkRefObj, eleDefJson, entityParseService);
 			
 			JSONObject definitionJsonObj = eleDefJson.optJSONObject(HAPElementStructureLeafRelativeForValue.DEFINITION);
 			if(definitionJsonObj!=null) {
-				relativeEle.setDefinition((HAPElementStructureLeafData)parseStructureElement(definitionJsonObj, dataRuleMan));
+				relativeEle.setDefinition((HAPElementStructureLeafData)parseStructureElement(definitionJsonObj, entityParseService));
 			}
 		}
 		else if(mappingRefObj!=null) {
 			//relative for mapping
 			out = new HAPElementStructureLeafRelativeForMapping();
-			parseRelativeElement((HAPElementStructureLeafRelativeForMapping)out, mappingRefObj, eleDefJson, dataRuleMan);
+			parseRelativeElement((HAPElementStructureLeafRelativeForMapping)out, mappingRefObj, eleDefJson, entityParseService);
 		}
 //		else if(provideObj!=null) {
 //			HAPElementStructureLeafProvide provideElement = new HAPElementStructureLeafProvide();
@@ -65,7 +65,7 @@ public class HAPUtilityParserElement {
 //		}
 		else if(criteriaDef!=null) {
 			//data
-			HAPDataDefinitionWritable dataDef = HAPParserDataDefinition.parseDataDefinitionWritable(criteriaDef, dataRuleMan); 
+			HAPDataDefinitionWritable dataDef = HAPParserDataDefinition.parseDataDefinitionWritable(criteriaDef, entityParseService); 
 			out = new HAPElementStructureLeafData(dataDef);   
 		}
 		else if(valueJsonObj!=null){
@@ -87,7 +87,7 @@ public class HAPUtilityParserElement {
 		return out;
 	}
 
-	private static void parseRelativeElement(HAPElementStructureLeafRelative relativeEle, Object refObj, JSONObject eleDefJson, HAPManagerDataRule dataRuleMan) {
+	private static void parseRelativeElement(HAPElementStructureLeafRelative relativeEle, Object refObj, JSONObject eleDefJson, HAPServiceParseEntity entityParseService) {
 		
 		HAPReferenceElement path = new HAPReferenceElement();
 		path.buildObject(refObj, HAPSerializationFormat.JSON);
@@ -95,7 +95,7 @@ public class HAPUtilityParserElement {
 
 		JSONObject resolvedInfoJsonObj = eleDefJson.optJSONObject(HAPElementStructureLeafRelative.RESOLVEDINFO);
 		if(resolvedInfoJsonObj!=null) {
-			HAPInfoRelativeResolve resolvedInfo = HAPInfoRelativeResolve.parse(resolvedInfoJsonObj, dataRuleMan);
+			HAPInfoRelativeResolve resolvedInfo = HAPInfoRelativeResolve.parse(resolvedInfoJsonObj, entityParseService);
 			relativeEle.setResolvedInfo(resolvedInfo);
 		}
 		

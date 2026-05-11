@@ -13,7 +13,6 @@ import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
@@ -21,9 +20,6 @@ public class HAPDivisionService implements HAPPluginDivision{
 
 	@Autowired
     private HAPManagerService m_serviceMan;
-
-	@Autowired
-	private HAPManagerDataRule m_dataRuleManager;
 
 	@Override
 	public String getDivisionName() {   return HAPConstantShared.BRICK_DIVISION_SERVICE;   }
@@ -46,7 +42,7 @@ public class HAPDivisionService implements HAPPluginDivision{
 		} 
 		else if(brickTypeId.equals(HAPEnumBrickType.SERVICEINTERFACE_100)) {
 			HAPBundle bundle = new HAPBundle();
-			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(m_serviceMan.getServiceInterfaceManager().getServiceInterface(new HAPIdServcieInterface(brickId.getId()), this.m_dataRuleManager)));
+			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(m_serviceMan.getServiceInterfaceManager().getServiceInterface(new HAPIdServcieInterface(brickId.getId()))));
 			return bundle;
 		}
 		return null;

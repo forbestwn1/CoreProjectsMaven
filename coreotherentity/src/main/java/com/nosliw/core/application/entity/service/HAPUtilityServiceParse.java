@@ -6,17 +6,17 @@ import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInt
 import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTaskImp;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityServiceParse {
 
-	public static HAPBlockInteractiveInterfaceTask parseTaskInterfaceInterfaceBlock(JSONObject jsonObj, HAPManagerDataRule dataRuleMan) {
+	public static HAPBlockInteractiveInterfaceTask parseTaskInterfaceInterfaceBlock(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		JSONObject serviceInterfaceJsonObj = jsonObj.optJSONObject(HAPWithBlockInteractiveTask.TASKINTERFACE);
 		if(serviceInterfaceJsonObj==null) {
 			serviceInterfaceJsonObj = jsonObj;
 		}
 		HAPBlockInteractiveInterfaceTaskImp interfaceBlock = new HAPBlockInteractiveInterfaceTaskImp();
-		HAPInteractiveTask taskInterface = HAPInteractiveTask.parse(serviceInterfaceJsonObj, dataRuleMan); 
+		HAPInteractiveTask taskInterface = HAPInteractiveTask.parse(serviceInterfaceJsonObj, entityParseService); 
 		interfaceBlock.setValue(taskInterface);
 		return interfaceBlock;
 	}

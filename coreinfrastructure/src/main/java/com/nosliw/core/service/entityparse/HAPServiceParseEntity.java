@@ -20,7 +20,7 @@ public class HAPServiceParseEntity {
 		this.m_parsers = new LinkedHashMap<String, HAPParserEntity>();
 	}
 	
-	@Autowired
+	@Autowired(required=false)
 	private void setParsers(List<HAPParserEntity> parsers) {
 		for(HAPParserEntity parser : parsers) {
 			this.m_parsers.put(parser.getEntityType(), parser);

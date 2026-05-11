@@ -12,11 +12,11 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPImporterDataSourceDefinition {
 
-	public static List<HAPInfoService> loadDataSourceDefinition(HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public static List<HAPInfoService> loadDataSourceDefinition(HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		List<HAPInfoService> out = new ArrayList<HAPInfoService>();
 
 		/*
@@ -37,7 +37,7 @@ public class HAPImporterDataSourceDefinition {
 		new HAPClassFilter(){
 			@Override
 			protected void process(Class cls, Object data) {
-				List<HAPInfoService> dataSourceDefs = loadDataSourceDefinition(cls, brickMan, dataRuleMan);
+				List<HAPInfoService> dataSourceDefs = loadDataSourceDefinition(cls, brickMan, entityParseService);
 				out.addAll(dataSourceDefs);
 			}
 
@@ -56,7 +56,7 @@ public class HAPImporterDataSourceDefinition {
 		return out;
 	}
 	
-	private static List<HAPInfoService> loadDataSourceDefinition(Class cls, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan){
+	private static List<HAPInfoService> loadDataSourceDefinition(Class cls, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService){
 		List<HAPInfoService> out = new ArrayList<HAPInfoService>();
 		try{
 			InputStream inputStream = cls.getResourceAsStream("service.ds");
@@ -69,7 +69,7 @@ public class HAPImporterDataSourceDefinition {
 						JSONObject profileJsonObj = serviceDefJson.optJSONObject(HAPInfoService.PROFILE);
 						if(HAPUtilityEntityInfo.isEnabled(profileJsonObj)) {
 							//service profile
-							HAPBlockServiceProfileImp serviceProfile = HAPBlockServiceProfileImp.parse(profileJsonObj, dataRuleMan); 
+							HAPBlockServiceProfileImp serviceProfile = HAPBlockServiceProfileImp.parse(profileJsonObj, entityParseService); 
 							
 							//service runtime
 							JSONObject runtimeJsonObj = serviceDefJson.optJSONObject(HAPInfoService.RUNTIME);

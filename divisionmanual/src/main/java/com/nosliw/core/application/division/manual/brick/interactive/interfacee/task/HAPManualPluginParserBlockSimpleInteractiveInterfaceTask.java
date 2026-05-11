@@ -10,15 +10,15 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserBlockSimpleInteractiveInterfaceTask extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserBlockSimpleInteractiveInterfaceTask(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserBlockSimpleInteractiveInterfaceTask(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.INTERACTIVETASKINTERFACE_100, HAPManualDefinitionBlockInteractiveInterfaceTask.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = entityParseService;
 	}
 	
 	@Override
@@ -31,7 +31,7 @@ public class HAPManualPluginParserBlockSimpleInteractiveInterfaceTask extends HA
 			valueJsonObj = jsonObj;
 		}
 		
-		HAPInteractiveTask taskInteractive = HAPInteractiveTask.parse(valueJsonObj, this.m_dataRuleMan);
+		HAPInteractiveTask taskInteractive = HAPInteractiveTask.parse(valueJsonObj, this.m_entityParseService);
 		taskInteractiveDef.setValue(taskInteractive);
 	}
 }

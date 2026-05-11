@@ -10,15 +10,15 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserAdapterDataAssociationForTask  extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	private HAPManagerDataRule m_dataRuleMan;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManualPluginParserAdapterDataAssociationForTask(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerDataRule dataRuleMan) {
+	public HAPManualPluginParserAdapterDataAssociationForTask(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.DATAASSOCIATIONFORTASK_100, HAPManualDefinitionAdapterDataAssociationForTask.class, manualDivisionEntityMan, brickMan);
-		this.m_dataRuleMan = dataRuleMan;
+		this.m_entityParseService = m_entityParseService;
 	}
 	
 	@Override
@@ -26,7 +26,7 @@ public class HAPManualPluginParserAdapterDataAssociationForTask  extends HAPManu
 		HAPManualDefinitionAdapterDataAssociationForTask entity = (HAPManualDefinitionAdapterDataAssociationForTask)brickManual;
 		
 		JSONObject daJsonObj =  ((JSONObject)jsonValue).optJSONObject(HAPManualDefinitionAdapterDataAssociationForTask.DEFINITION);
-		HAPDefinitionDataAssociationForTask dataAssociationForTask = HAPDefinitionParserDataAssociationForTask.parse(daJsonObj, m_dataRuleMan);
+		HAPDefinitionDataAssociationForTask dataAssociationForTask = HAPDefinitionParserDataAssociationForTask.parse(daJsonObj, this.m_entityParseService);
 		entity.setDataAssciation(dataAssociationForTask);
 	}
 }

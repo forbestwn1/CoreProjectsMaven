@@ -3,6 +3,8 @@ package com.nosliw.core.application.entity.datarule;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
@@ -13,9 +15,14 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityDataRule {
 
+	public static HAPDataRule parseDataRule(JSONObject dataRuleJson, HAPServiceParseEntity entityParseService) {
+		return (HAPDataRule)entityParseService.parseEntityJSONImplicitAttribute(dataRuleJson, HAPDataRule.RULETYPE, HAPDataRule.ENTITYPARSEDOMAIN);		
+	}
+	
 	public static void setRuleDefParm(HAPWithParms withParms, HAPDataRule dataRule) {
 		withParms.getParms().setParm(HAPConstantShared.PARM_RULETASK_RULEDEF, dataRule);
 	}

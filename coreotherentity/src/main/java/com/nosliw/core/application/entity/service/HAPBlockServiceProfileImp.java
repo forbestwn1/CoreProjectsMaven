@@ -15,10 +15,10 @@ import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.brick.HAPBrickImpWithEntityInfo;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
-import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 //contains all information related with service definition
 @HAPEntityWithAttribute
@@ -41,7 +41,7 @@ public class HAPBlockServiceProfileImp extends HAPBrickImpWithEntityInfo impleme
 	public HAPDisplayResourceNode getDisplayResource() {    return (HAPDisplayResourceNode)this.getAttributeValueOfValue(DISPLAY);  }
 	public void setDisplayResource(HAPDisplayResourceNode displayResource) {    this.setAttributeValueWithValue(DISPLAY, displayResource);      }
  
-	public static HAPBlockServiceProfileImp parse(JSONObject jsonObj, HAPManagerDataRule dataRuleMan){
+	public static HAPBlockServiceProfileImp parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService){
 		HAPBlockServiceProfileImp out = new HAPBlockServiceProfileImp();
 		out.buildEntityInfoByJson(jsonObj);
 
@@ -58,7 +58,7 @@ public class HAPBlockServiceProfileImp extends HAPBrickImpWithEntityInfo impleme
 			out.setTaskInterface(resourceId);
 		}
 		else {
-			out.setTaskInterface(HAPUtilityServiceParse.parseTaskInterfaceInterfaceBlock(jsonObj, dataRuleMan));
+			out.setTaskInterface(HAPUtilityServiceParse.parseTaskInterfaceInterfaceBlock(jsonObj, entityParseService));
 		}
 		
 		List<String> tags = new ArrayList<String>();
