@@ -42,6 +42,10 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 		this.m_elementType = elementType;
 	}
 	
+	public void addChild(HAPStoryElement ele) {
+		
+	}
+	
 	
 	public HAPStoryIdElement getElementId() {	return this.m_id;	}
 	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }

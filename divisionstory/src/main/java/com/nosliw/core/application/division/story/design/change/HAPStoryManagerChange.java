@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.division.story.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.HAPStoryStory;
-import com.nosliw.core.application.division.story.brick.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.brick.HAPStoryElement;
 
 @Component
@@ -94,6 +94,22 @@ public class HAPStoryManagerChange {
 				changeItem.setRevertChanges(revertChanges);
 			}
 		}
+		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_NEW)) {
+			HAPStoryChangeItemConnectionNew changeConnectionNew = (HAPStoryChangeItemConnectionNew)changeItem;
+			HAPStoryElement sourceEle = story.getElement(changeConnectionNew.getSourceElementId());
+			HAPStoryElement targetEle = story.getElement(changeConnectionNew.getTargetElementId());
+			HAPStoryChangeInfoConnection connectionInfo = changeConnectionNew.getConnectionInfo();
+			if(connectionInfo.getConnectionType().equals(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN)) {
+				sourceEle.addChild(targetEle);
+				if(ifRevertable(saveRevert, changeItem)) {
+					List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
+					HAPStoryChangeItemConnectionDelete deleteChange = new HAPStoryChangeItemConnectionDelete(changeConnectionNew.getSourceElementId(), changeConnectionNew.getTargetElementId(), changeConnectionNew.getConnectionInfo());
+					revertChanges.add(deleteChange);
+					changeItem.setRevertChanges(revertChanges);
+				}
+			}
+		}
+
 		if(extendChanges!=null) {
 			changeItem.setExtended();
 		}

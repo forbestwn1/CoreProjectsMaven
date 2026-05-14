@@ -864,6 +864,8 @@
 			<definition name="STORYDESIGN_CHANGETYPE_DELETE" value="delete"/>
 			<definition name="STORYDESIGN_CHANGETYPE_PATCH" value="patch"/>
 			<definition name="STORYDESIGN_CHANGETYPE_PUT" value="put"/>
+			<definition name="STORYDESIGN_CHANGETYPE_CONNECTION_NEW" value="newConnection"/>
+			<definition name="STORYDESIGN_CHANGETYPE_CONNECTION_DELETE" value="deleteConnection"/>
 			<definition name="STORYDESIGN_CHANGETYPE_ALIAS" value="alias"/>
 			<definition name="STORYDESIGN_CHANGETYPE_STORYINFO" value="storyInfo"/>
 			
@@ -877,6 +879,10 @@
 			<definition name="STORYDESIGN_CHANGE_INFO_STAGE" value="stage"/>
 
 			<definition type="space"/>
+			<definition name="STORY_ELEMENT_REFERENCE_ID" value="id"/>
+			<definition name="STORY_ELEMENT_REFERENCE_ALIAS" value="alias"/>
+
+			<definition type="space"/>
 			<definition name="STORY_BUILDER_DATASOURCEDRIVE" value="dataSourceDrive"/>
 
 			<definition type="space"/>
@@ -884,6 +890,10 @@
 
 			<definition type="space"/>
 			<definition name="STORY_INFO_IDINDEX" value="story_idindex"/>
+
+			<definition type="space"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID" value="dataSourceId"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO" value="dataSourceInfo"/>
 
 			<definition type="space"/>
 			<definition name="BRICK" value="brick"/>

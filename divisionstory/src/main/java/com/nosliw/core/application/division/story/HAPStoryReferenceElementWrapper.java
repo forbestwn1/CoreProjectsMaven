@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.division.story.brick.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
 
 public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implements HAPStoryWithAlias{
@@ -30,6 +29,10 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 			throw new RuntimeException();
 		}
 		return this.m_elementId;
+	}
+	
+	public HAPStoryAliasElement getAlias() {
+		return this.m_alias;
 	}
 	
 	@Override

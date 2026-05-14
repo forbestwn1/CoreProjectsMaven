@@ -1,6 +1,8 @@
 package com.nosliw.core.service.entityparse;
 
-public interface HAPEntityParsable {
+import com.nosliw.common.serialization.HAPSerializable;
+
+public interface HAPEntityParsable extends HAPSerializable{
 
 	public static final String ENTITYTYPE = "____entityType____";
 	

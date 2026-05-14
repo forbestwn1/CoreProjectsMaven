@@ -10,8 +10,9 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.division.story.brick.HAPStoryAliasElement;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.brick.HAPStoryElement;
+import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
 
 //static information
 //no transaction
@@ -47,6 +48,21 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		this.m_elementByAliase = new LinkedHashMap<String, HAPStoryIdElement>();
 		this.m_aliaseByElementId = new LinkedHashMap<HAPStoryIdElement, String>();
 		this.m_temporyAlias = new HashSet<String>();
+	}
+	
+	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
+		HAPStoryElement out = null;
+		
+		String refType = eleRef.getEntityOrReferenceType();
+		if(refType.equals(HAPConstantShared.STORY_ELEMENT_REFERENCE_ID)) {
+			HAPStoryIdElement eleId = (HAPStoryIdElement)eleRef;
+			out = this.m_elements.get(eleId);
+		}
+		else if(refType.equals(HAPConstantShared.STORY_ELEMENT_REFERENCE_ALIAS)) {
+			HAPStoryAliasElement eleAlias = (HAPStoryAliasElement)eleRef;
+			out = this.m_elements.get(this.m_elementByAliase.get(eleAlias.getName()));
+		}
+		return out;
 	}
 	
 	public HAPStoryIdElement getElementId(String alias) {	return this.m_elementByAliase.get(alias);	}

@@ -794,6 +794,8 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_CHANGETYPE_DELETE = "delete";
 		public static final String STORYDESIGN_CHANGETYPE_PATCH = "patch";
 		public static final String STORYDESIGN_CHANGETYPE_PUT = "put";
+		public static final String STORYDESIGN_CHANGETYPE_CONNECTION_NEW = "newConnection";
+		public static final String STORYDESIGN_CHANGETYPE_CONNECTION_DELETE = "deleteConnection";
 		public static final String STORYDESIGN_CHANGETYPE_ALIAS = "alias";
 		public static final String STORYDESIGN_CHANGETYPE_STORYINFO = "storyInfo";
 
@@ -810,6 +812,11 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORY_ELEMENT_REFERENCE_ID = "id";
+		public static final String STORY_ELEMENT_REFERENCE_ALIAS = "alias";
+
+
+
 		public static final String STORY_BUILDER_DATASOURCEDRIVE = "dataSourceDrive";
 
 
@@ -819,6 +826,11 @@ public class HAPConstantShared {
 
 
 		public static final String STORY_INFO_IDINDEX = "story_idindex";
+
+
+
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID = "dataSourceId";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO = "dataSourceInfo";
 
 
 

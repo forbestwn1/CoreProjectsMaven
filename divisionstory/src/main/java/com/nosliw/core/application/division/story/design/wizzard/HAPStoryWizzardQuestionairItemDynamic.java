@@ -27,15 +27,15 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 	@HAPAttribute
 	public static final String ERROR = "error";
 
-	private Object m_defaultValue;
+	private HAPStoryWizzardValueInQuestionair m_defaultValue;
 	
-	private Object m_changedValue;
+	private HAPStoryWizzardValueInQuestionair m_changedValue;
 	
-	private HAPStoryWizzardQuestionairError m_error;
+	private HAPStoryWizzardErrorInQuestionair m_error;
 
 	private boolean m_isDirty;
 
-	public HAPStoryWizzardQuestionairItemDynamic(Object defaultValue) {
+	public HAPStoryWizzardQuestionairItemDynamic(HAPStoryWizzardValueInQuestionair defaultValue) {
     	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC);
 		this.m_defaultValue = defaultValue;
 		this.m_isDirty = false;
@@ -45,14 +45,14 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 		this(null);
 	}
 	
-	public Object getDefaultValue() {     return this.m_defaultValue;     }
-	public void setDefaultValue(Object value) {    this.m_defaultValue = value;     }
+	public HAPStoryWizzardValueInQuestionair getDefaultValue() {     return this.m_defaultValue;     }
+	public void setDefaultValue(HAPStoryWizzardValueInQuestionair value) {    this.m_defaultValue = value;     }
 	
-	public Object getChangedValue() {     return this.m_changedValue;     }
-	public void setChangedValue(Object value) {     this.m_changedValue = value;       }
+	public HAPStoryWizzardValueInQuestionair getChangedValue() {     return this.m_changedValue;     }
+	public void setChangedValue(HAPStoryWizzardValueInQuestionair value) {     this.m_changedValue = value;       }
 	
-	public HAPStoryWizzardQuestionairError getError() {		return this.m_error;	}
-	public void setError(HAPStoryWizzardQuestionairError error) {    this.m_error = error;      }
+	public HAPStoryWizzardErrorInQuestionair getError() {		return this.m_error;	}
+	public void setError(HAPStoryWizzardErrorInQuestionair error) {    this.m_error = error;      }
 	
 	public boolean isDirty() {     return this.m_isDirty;     }
 	public void setIsDirty(boolean isDirty) {     this.m_isDirty = isDirty;        }
@@ -93,7 +93,7 @@ class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPParserE
         
         JSONObject errorObj = jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.ERROR);
         if(errorObj!=null) {
-        	HAPStoryWizzardQuestionairError error = new HAPStoryWizzardQuestionairError();
+        	HAPStoryWizzardErrorInQuestionair error = new HAPStoryWizzardErrorInQuestionair();
         	error.buildObject(errorObj, HAPSerializationFormat.JSON);
         	out.setError(error);
         }

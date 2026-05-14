@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="main.js"  type="text/babel"></script>
+    <script type="text/babel">
+
+
+      var container = document.querySelector('.js-container');
+
+function Profile1() {
+  return (
+	<h2>Hello world11111!!!!</h2>
+  );
+}
+
+
+      const content = (
+          <div>
+          <h2>abced</h2>
+          <Profile1 />
+
+          </div>
+      );
+
+
+
+      ReactDOM.createRoot(container).render(<Profile />);
+    </script>
+  </body>
+</html>

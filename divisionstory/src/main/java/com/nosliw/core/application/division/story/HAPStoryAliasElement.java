@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.story.brick;
+package com.nosliw.core.application.division.story;
 
 import java.util.Map;
 
@@ -8,6 +8,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
 
 @HAPEntityWithAttribute
 public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStoryReferenceElement{
@@ -37,7 +38,7 @@ public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStory
 	public boolean isTemporary() {   return this.m_isTemp;    }
 
 	@Override
-	public String getEntityOrReferenceType() {  return HAPConstantShared.REFERENCE;  }
+	public String getEntityOrReferenceType() {  return HAPConstantShared.STORY_ELEMENT_REFERENCE_ALIAS;  }
 
 	@Override
 	public HAPStoryReferenceElement cloneElementReference() {

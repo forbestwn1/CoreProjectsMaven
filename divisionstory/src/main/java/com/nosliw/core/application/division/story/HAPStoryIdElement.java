@@ -37,7 +37,7 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	}
 	
 	@Override
-	public String getEntityOrReferenceType() {  return HAPConstantShared.REFERENCE;  }
+	public String getEntityOrReferenceType() {  return HAPConstantShared.STORY_ELEMENT_REFERENCE_ID;  }
 
 	public String getCategary() {    return this.m_categary;     }
 	
