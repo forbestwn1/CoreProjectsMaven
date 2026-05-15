@@ -5,12 +5,17 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionairImp;
 
 @HAPEntityWithAttribute
-public class HAPStoryWizzardQuestionValueDynamicDataSourceReponseParmChooseUI extends HAPStoryWizzardValueInQuestionairImp{
+public class HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic extends HAPStoryWizzardValueInQuestionairImp{
 
-	public HAPStoryWizzardQuestionValueDynamicDataSourceReponseParmChooseUI() {
+	private HAPStoryWizzardUITagInfo m_uiTagInfo;
+	
+	public HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic(HAPStoryWizzardUITagInfo uiTagInfo) {
+		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG);
+		this.m_uiTagInfo = uiTagInfo;
 	}
 	
 	@Override

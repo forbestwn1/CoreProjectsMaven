@@ -894,7 +894,13 @@
 			<definition type="space"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID" value="dataSourceId"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO" value="dataSourceInfo"/>
-
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMINFO" value="dataSourceRequestParmInfo"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMISCONSTANT" value="dataSourceRequestParmIsConstant"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE" value="dataSourceRequestParmConstantValue"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG" value="dataSourceRequestParmUITag"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO" value="dataSourceResponseParmInfo"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG" value="dataSourceResponseParmUITag"/>
+I
 			<definition type="space"/>
 			<definition name="BRICK" value="brick"/>
 			<definition name="REFERENCE" value="reference"/>

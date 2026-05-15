@@ -15,18 +15,18 @@ import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPStoryWizzardQuestionValueDynamicDataSourceChoose extends HAPStoryWizzardValueInQuestionairImp{
+public class HAPStoryWizzardQuestionValueDataSourceChooseDynamic extends HAPStoryWizzardValueInQuestionairImp{
 
 	@HAPAttribute
 	public static final String DATASOURCE = "dataSourceName";
 
 	private String m_dataSource;
 	
-	public HAPStoryWizzardQuestionValueDynamicDataSourceChoose() {
+	public HAPStoryWizzardQuestionValueDataSourceChooseDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID);
 	}
 	
-	public HAPStoryWizzardQuestionValueDynamicDataSourceChoose(String dataSource) {
+	public HAPStoryWizzardQuestionValueDataSourceChooseDynamic(String dataSource) {
 		this();
 		this.m_dataSource = dataSource;
 	}
@@ -59,7 +59,7 @@ class HAPStoryWizzardQuestionChooseService_HAPEntityParsable extends HAPStoryWiz
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryWizzardQuestionValueDynamicDataSourceChoose out = new HAPStoryWizzardQuestionValueDynamicDataSourceChoose();
+		HAPStoryWizzardQuestionValueDataSourceChooseDynamic out = new HAPStoryWizzardQuestionValueDataSourceChooseDynamic();
 		out.buildObject(obj, HAPSerializationFormat.JSON);
 		return out;
 	}

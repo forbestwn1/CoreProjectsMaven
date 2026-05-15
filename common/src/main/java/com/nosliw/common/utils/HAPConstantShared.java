@@ -831,6 +831,12 @@ public class HAPConstantShared {
 
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID = "dataSourceId";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO = "dataSourceInfo";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfo";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstant";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE = "dataSourceRequestParmConstantValue";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITag";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfo";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
 
 
 

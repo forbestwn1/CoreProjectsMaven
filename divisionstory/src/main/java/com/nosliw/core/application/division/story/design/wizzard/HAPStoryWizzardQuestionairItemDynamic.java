@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -13,6 +14,7 @@ import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuestionairItem{
 
 	@HAPAttribute
@@ -35,14 +37,14 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 
 	private boolean m_isDirty;
 
-	public HAPStoryWizzardQuestionairItemDynamic(HAPStoryWizzardValueInQuestionair defaultValue) {
+	public HAPStoryWizzardQuestionairItemDynamic() {
     	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC);
-		this.m_defaultValue = defaultValue;
-		this.m_isDirty = false;
 	}
 	
-	public HAPStoryWizzardQuestionairItemDynamic() {
-		this(null);
+	public HAPStoryWizzardQuestionairItemDynamic(HAPStoryWizzardValueInQuestionair defaultValue) {
+		this();
+		this.m_defaultValue = defaultValue;
+		this.m_isDirty = false;
 	}
 	
 	public HAPStoryWizzardValueInQuestionair getDefaultValue() {     return this.m_defaultValue;     }
@@ -98,8 +100,8 @@ class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPParserE
         	out.setError(error);
         }
         
-        out.setDefaultValue(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE));
-        out.setChangedValue(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE));
+        out.setDefaultValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE));
+        out.setChangedValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE));
 		
 		return out;
 	}

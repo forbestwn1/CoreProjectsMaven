@@ -3,9 +3,11 @@ package com.nosliw.core.application.division.story.design.wizzard;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
+@HAPEntityWithAttribute
 public abstract class HAPStoryWizzardQuestionair extends HAPEntityInfoImp implements HAPEntityParsable{
 
 	public static final String PARSE_DOMAIN = "story.design.wizzard.questionair";
