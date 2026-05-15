@@ -11,7 +11,6 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
@@ -27,7 +26,12 @@ public class HAPStoryWizzardQuestionairItemStatic extends HAPStoryWizzardQuestio
 	}
 	
     public HAPStoryWizzardQuestionairItemStatic(HAPStoryWizzardValueInQuestionair value) {
-    	this();
+    	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC);
+    	this.m_value = value;
+	}
+
+    public HAPStoryWizzardQuestionairItemStatic(HAPStoryWizzardValueInQuestionair value, String tag) {
+    	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC, tag);
     	this.m_value = value;
 	}
 
@@ -43,22 +47,22 @@ public class HAPStoryWizzardQuestionairItemStatic extends HAPStoryWizzardQuestio
 }
 
 @Component
-class HAPStoryWizzardQuestionairItemStatic_Parsable extends HAPParserEntityImpWithDomain{
-
-	@Override
-	public String getDomain() {   return HAPStoryWizzardQuestionair.PARSE_DOMAIN;  }
+class HAPStoryWizzardQuestionairItemStatic_Parsable extends HAPStoryWizzardQuestionair_Parsable{
 
 	@Override
 	public String getSubName() {   return HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC;  }
 
+    @Override
+	protected void parseQuestionair(HAPStoryWizzardQuestionair questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+    	super.parseQuestionair(questionair, jsonObj, parseService);
+    	HAPStoryWizzardQuestionairItemStatic out = (HAPStoryWizzardQuestionairItemStatic)questionair;
+        out.setValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemStatic.VALUE));
+    }
+	
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		JSONObject jsonObj = (JSONObject)obj;
-		
 		HAPStoryWizzardQuestionairItemStatic out = new HAPStoryWizzardQuestionairItemStatic();
-		
-        out.setValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemStatic.VALUE));
-		
+		this.parseQuestionair(out, (JSONObject)obj, parseService);
 		return out;
 	}
 

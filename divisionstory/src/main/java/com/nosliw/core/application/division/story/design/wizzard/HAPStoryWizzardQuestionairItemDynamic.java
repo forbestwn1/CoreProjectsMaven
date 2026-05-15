@@ -11,7 +11,6 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
@@ -39,12 +38,23 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 
 	public HAPStoryWizzardQuestionairItemDynamic() {
     	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC);
+		this.m_isDirty = false;
 	}
 	
 	public HAPStoryWizzardQuestionairItemDynamic(HAPStoryWizzardValueInQuestionair defaultValue) {
-		this();
+		super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC);
 		this.m_defaultValue = defaultValue;
 		this.m_isDirty = false;
+	}
+	
+	public HAPStoryWizzardQuestionairItemDynamic(HAPStoryWizzardValueInQuestionair defaultValue, String tag) {
+		super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC, tag);
+		this.m_defaultValue = defaultValue;
+		this.m_isDirty = false;
+	}
+	
+	public HAPStoryWizzardValueInQuestionair getValue() {
+		return this.isDirty()? this.getChangedValue():this.getDefaultValue();
 	}
 	
 	public HAPStoryWizzardValueInQuestionair getDefaultValue() {     return this.m_defaultValue;     }
@@ -74,20 +84,17 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 }
 
 @Component
-class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPParserEntityImpWithDomain{
-
-	@Override
-	public String getDomain() {   return HAPStoryWizzardQuestionair.PARSE_DOMAIN;  }
+class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPStoryWizzardQuestionair_Parsable{
 
 	@Override
 	public String getSubName() {   return HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC;  }
 
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		JSONObject jsonObj = (JSONObject)obj;
-		
-		HAPStoryWizzardQuestionairItemDynamic out = new HAPStoryWizzardQuestionairItemDynamic();
-		
+    @Override
+	protected void parseQuestionair(HAPStoryWizzardQuestionair questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+    	super.parseQuestionair(questionair, jsonObj, parseService);
+
+    	HAPStoryWizzardQuestionairItemDynamic out = (HAPStoryWizzardQuestionairItemDynamic)questionair;
+
         Boolean isDirtyBoolean = (Boolean)jsonObj.get(HAPStoryWizzardQuestionairItemDynamic.ISDIRTY);
         if(isDirtyBoolean!=null) {
         	out.setIsDirty(isDirtyBoolean.booleanValue());
@@ -102,7 +109,12 @@ class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPParserE
         
         out.setDefaultValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE));
         out.setChangedValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE));
-		
+    }
+	
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPStoryWizzardQuestionairItemDynamic out = new HAPStoryWizzardQuestionairItemDynamic();
+		this.parseQuestionair(out, (JSONObject)obj, parseService);
 		return out;
 	}
 

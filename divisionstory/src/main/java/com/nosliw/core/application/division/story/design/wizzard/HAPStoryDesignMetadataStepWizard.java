@@ -1,7 +1,5 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -34,10 +32,9 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	private HAPStoryWizzardStepDefinition m_stepDefinition;
 
 	//questionair for this step
-	private List<HAPStoryWizzardQuestionair> m_questionairs;
+	private HAPStoryWizzardQuestionair m_questionair;
 	
 	public HAPStoryDesignMetadataStepWizard() {
-		this.m_questionairs = new ArrayList<HAPStoryWizzardQuestionair>();
 	}
 	
 	public HAPStoryDesignMetadataStepWizard(HAPStoryWizzardStepDefinition stepDefinition) {
@@ -45,10 +42,8 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	    this.m_stepDefinition = stepDefinition;
 	}
 	
-	public void addQuestionair(HAPStoryWizzardQuestionair questionair) {
-		this.m_questionairs.add(questionair);
-	}
-	public List<HAPStoryWizzardQuestionair> getQuestionairs(){     return this.m_questionairs;      }
+	public void addQuestionair(HAPStoryWizzardQuestionair questionair) {    this.m_questionair = questionair;  } 
+	public HAPStoryWizzardQuestionair getQuestionair(){     return this.m_questionair;      }
 	
 	public void setStepDefinition(HAPStoryWizzardStepDefinition stepDefinition) {    this.m_stepDefinition = stepDefinition;       }
 	public HAPStoryWizzardStepDefinition getStepDefinition() {     return this.m_stepDefinition;      }
@@ -63,7 +58,7 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(STEPDEFINITION, this.m_stepDefinition.toStringValue(HAPSerializationFormat.JSON));
-		jsonMap.put(QUESTIONAIR, HAPManagerSerialize.getInstance().toStringValue(this.m_questionairs, HAPSerializationFormat.JSON));
+		jsonMap.put(QUESTIONAIR, HAPManagerSerialize.getInstance().toStringValue(this.m_questionair, HAPSerializationFormat.JSON));
 	}
 
 }

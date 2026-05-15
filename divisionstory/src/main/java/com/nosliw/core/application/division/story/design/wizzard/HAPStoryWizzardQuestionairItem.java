@@ -6,5 +6,8 @@ public abstract class HAPStoryWizzardQuestionairItem extends HAPStoryWizzardQues
 		super(type);
 	}
 
+	public HAPStoryWizzardQuestionairItem(String type, String tag) {
+		super(type, tag);
+	}
 	
 }

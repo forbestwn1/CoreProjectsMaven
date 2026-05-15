@@ -12,7 +12,6 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryWizzardQuestionairGroup extends HAPStoryWizzardQuestionair{
@@ -22,11 +21,16 @@ public class HAPStoryWizzardQuestionairGroup extends HAPStoryWizzardQuestionair{
 	
 	private List<HAPStoryWizzardQuestionair> m_items;
 	
+    public HAPStoryWizzardQuestionairGroup(String tag) {
+    	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP, tag);
+    }
+    
     public HAPStoryWizzardQuestionairGroup() {
     	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP);
     }
     
 	public void addItem(HAPStoryWizzardQuestionair item) {    this.m_items.add(item);    }
+	public List<HAPStoryWizzardQuestionair> getItems(){     return this.m_items;      }
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -37,20 +41,17 @@ public class HAPStoryWizzardQuestionairGroup extends HAPStoryWizzardQuestionair{
 }
 
 @Component
-class HAPStoryWizzardQuestionairGroup_HAPEntityParsable extends HAPParserEntityImpWithDomain{
-
-	@Override
-	public String getDomain() {   return HAPStoryWizzardQuestionair.PARSE_DOMAIN;  }
+class HAPStoryWizzardQuestionairGroup_HAPEntityParsable extends HAPStoryWizzardQuestionair_Parsable{
 
 	@Override
 	public String getSubName() {   return HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP;  }
 
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		JSONObject jsonObj = (JSONObject)obj;
-		
-		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup();
-		
+    @Override
+	protected void parseQuestionair(HAPStoryWizzardQuestionair questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+    	super.parseQuestionair(questionair, jsonObj, parseService);
+
+		HAPStoryWizzardQuestionairGroup out = (HAPStoryWizzardQuestionairGroup)questionair;
+
 		JSONArray itemArray = jsonObj.optJSONArray(HAPStoryWizzardQuestionairGroup.ITEM);
 		if(itemArray!=null) {
 			for(int i=0; i<itemArray.length(); i++) {
@@ -59,7 +60,12 @@ class HAPStoryWizzardQuestionairGroup_HAPEntityParsable extends HAPParserEntityI
 				out.addItem(item);
 			}
 		}
-		
+    }
+	
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup();
+		this.parseQuestionair(out, (JSONObject)obj, parseService);
 		return out;
 	}
 
