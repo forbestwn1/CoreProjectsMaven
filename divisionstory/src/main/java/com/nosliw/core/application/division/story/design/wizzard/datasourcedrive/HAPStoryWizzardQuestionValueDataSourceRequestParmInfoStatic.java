@@ -19,6 +19,8 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmInfoStatic extends
 		this.m_parmDef = parmDef;
 	}
 	
+	public HAPDefinitionParm getParmDefinition() {     return this.m_parmDef;      }
+	
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;

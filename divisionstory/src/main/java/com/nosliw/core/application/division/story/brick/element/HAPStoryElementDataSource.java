@@ -17,4 +17,10 @@ public class HAPStoryElementDataSource extends HAPStoryElement{
 		this.m_serviceInterface = serviceInterface;
 	}
 
+	@Override
+	public HAPStoryElement cloneStoryElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

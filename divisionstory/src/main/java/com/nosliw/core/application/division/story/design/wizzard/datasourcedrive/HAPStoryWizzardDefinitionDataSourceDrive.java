@@ -13,6 +13,8 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.brick.element.HAPStoryElementDataSource;
 import com.nosliw.core.application.division.story.brick.element.HAPStoryElementModule;
+import com.nosliw.core.application.division.story.brick.element.HAPStoryElementUIPage;
+import com.nosliw.core.application.division.story.brick.element.HAPStoryElementVariable;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignRequestChangeGroup;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -44,6 +46,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private final static HAPStoryAliasElement ALIAS_ELEMENT_MODULE = new HAPStoryAliasElement("module", false);
 	private final static HAPStoryAliasElement ALIAS_ELEMENT_DATASOURCE = new HAPStoryAliasElement("dataSource", false);
+	private final static HAPStoryAliasElement ALIAS_ELEMENT_UIPAGE = new HAPStoryAliasElement("uiPage", false);
 	
 	private List<HAPStoryWizzardStepDefinition> m_stepDefinitions;
 	
@@ -116,21 +119,37 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			design.newStep(stepMetaData);
 		}
 		else if(STEP_CUSTOMIZEUI.equals(stepName)) {
+			HAPStoryDesignRequestChangeGroup changeGroup = new HAPStoryDesignRequestChangeGroup();
+			
+			//add page to module
+			HAPStoryElementUIPage uiPageItem = new HAPStoryElementUIPage();
+			changeGroup.addChangeItem(new HAPStoryChangeItemNew(uiPageItem, ALIAS_ELEMENT_UIPAGE));
+			changeGroup.addChangeItem(new HAPStoryChangeItemConnectionNew(ALIAS_ELEMENT_MODULE, ALIAS_ELEMENT_UIPAGE, new HAPStoryChangeInfoConnectionContainer()));
+
+			
 			HAPStoryWizzardQuestionairGroup questionair = (HAPStoryWizzardQuestionairGroup)stepData.getQuestionair();
 			
 			List<HAPStoryWizzardQuestionair> requestParmGroupQs = HAPStoryWizzardUtilityQuestion.findQuestionairsByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP);
 			for(HAPStoryWizzardQuestionair requestParmGroupQ : requestParmGroupQs) {
 				HAPStoryWizzardQuestionairItemStatic parmInfoStaticQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO);
+				HAPStoryWizzardQuestionValueDataSourceRequestParmInfoStatic parmInfoValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmInfoStatic)parmInfoStaticQ.getValue();
 				
 				HAPStoryWizzardQuestionairItemDynamic parmIsConstantQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT);
 				HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic parmIsConstantQValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic)parmIsConstantQ.getValue();
 				if(parmIsConstantQValue.getIsConstant()) {
 					HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
 					
+					//add constant
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 					
+					//add variable
+					HAPStoryElementVariable variableEle = new HAPStoryElementVariable(parmInfoValue.getParmDefinition().getDataDefinition());
+					changeGroup.addChangeItem(new HAPStoryChangeItemNew(variableEle));
+					
+					
+					//add uitag
 				}
 			}
 			
