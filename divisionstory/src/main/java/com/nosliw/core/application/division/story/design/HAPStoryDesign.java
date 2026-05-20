@@ -65,18 +65,25 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		this.m_changeHistory.add(step);
 	}
 
-	public void applyChanges(HAPStoryDesignRequestChangeGroup changeRequest) {
+	public HAPStoryDesignSessionChange newChangeReqestSession() {     return this.newChangeReqestSession(null);	}
+	
+	public HAPStoryDesignSessionChange newChangeReqestSession(HAPStoryDesignConfigureSessionChange configure) {
+		return new HAPStoryDesignSessionChange(this, configure);
+	}
+	
+	protected List<HAPStoryChangeItem> applyChanges(List<HAPStoryChangeItem> changesRequest, HAPStoryDesignConfigureSessionChange configure){
 		List<HAPStoryChangeItem> changes = new ArrayList<HAPStoryChangeItem>();
-		if(changeRequest.isExtend()) {
-			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChangeItems(), changes);
+		if(configure.isExtend()) {
+			this.m_changeMan.applyChanges(this.m_story, changesRequest, changes);
 		}
 		else {
-			this.m_changeMan.applyChanges(this.m_story, changeRequest.getChangeItems());
-			changes.addAll(changeRequest.getChangeItems());
+			this.m_changeMan.applyChanges(this.m_story, changesRequest);
+			changes.addAll(changesRequest);
 		}
 
 		HAPStoryDesignStep step = this.getCurrentStep();
-		step.addChanges(changeRequest.getChangeItems(), changes);
+		step.addChanges(changesRequest, changes);
+		return changes;
 	}
 	
 	public void removeStep() {

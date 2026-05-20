@@ -9,6 +9,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.brick.HAPStoryElement;
 
 public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
@@ -47,6 +48,8 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 	public HAPStoryAliasElement getAlias() {	return this.m_alias;	}
 
 	public HAPStoryElement getElement() {  return this.m_storyElement;  }
+	
+	public HAPStoryIdElement getElementId() {     return this.m_storyElement.getElementId();      } 
 	
 	public void setElement(HAPStoryElement storyEle) {    this.m_storyElement = storyEle;     }
 	

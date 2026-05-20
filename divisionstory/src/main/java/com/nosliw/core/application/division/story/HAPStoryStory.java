@@ -1,9 +1,7 @@
 package com.nosliw.core.application.division.story;
 
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -31,9 +29,6 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	@HAPAttribute
 	public static final String ALIASBYELEMENTID = "aliasByElementId";
 	
-	@HAPAttribute
-	public static final String TEMPORARYALIAS = "temporaryAlias";
-	
 	private int m_index = 0;
 	
 	private Map<HAPStoryIdElement, HAPStoryElement> m_elements;
@@ -41,13 +36,10 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	private Map<String, HAPStoryIdElement> m_elementByAliase;
 	private Map<HAPStoryIdElement, String> m_aliaseByElementId;
 	
-	private Set<String> m_temporyAlias;
-	
 	public HAPStoryStory() {
 		this.m_elements = new LinkedHashMap<HAPStoryIdElement, HAPStoryElement>();
 		this.m_elementByAliase = new LinkedHashMap<String, HAPStoryIdElement>();
 		this.m_aliaseByElementId = new LinkedHashMap<HAPStoryIdElement, String>();
-		this.m_temporyAlias = new HashSet<String>();
 	}
 	
 	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
@@ -70,8 +62,7 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	public HAPStoryAliasElement getAlias(HAPStoryIdElement eleId) {
 		for(String alias : this.m_elementByAliase.keySet()) {
 			if(eleId.equals(this.m_elementByAliase.get(alias))) {
-				boolean isTemp = this.m_temporyAlias.contains(alias); 
-				return new HAPStoryAliasElement(alias, isTemp);
+				return new HAPStoryAliasElement(alias);
 			}
 		}
 		return null;
@@ -83,16 +74,15 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAliasElement alias) {
 		HAPStoryElement out = element;
-		this.buildElementId(out);
+		if(out.getElementId()==null) {
+			this.buildElementId(out);
+		}
 		this.m_elements.put(out.getElementId(), out);
 		
 		//set alias
 		if(alias!=null) {
 			this.m_elementByAliase.put(alias.getName(), out.getElementId());
 			this.m_aliaseByElementId.put(out.getElementId(), alias.getName());
-			if(alias.isTemporary()) {
-				this.m_temporyAlias.add(alias.getName());
-			}
 		}
 		return out;
 	}
@@ -100,12 +90,11 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	public HAPStoryElement deleteElement(HAPStoryIdElement eleId) {
 		HAPStoryElement out = this.m_elements.remove(eleId);
 		String alias = this.m_aliaseByElementId.remove(eleId);
-		this.m_temporyAlias.remove(alias);
 		this.m_elementByAliase.remove(alias);
 		return out;
 	}
 	
-	private void buildElementId(HAPStoryElement element) {
+	public void buildElementId(HAPStoryElement element) {
 		this.m_index++;
 		element.setElementId(new HAPStoryIdElement(element.getElementType().getKey() + this.m_index));
 	}
@@ -127,8 +116,6 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 			mapElementByAliase.put(alias, this.m_elementByAliase.get(alias).getKey());
 		}
 		jsonMap.put(ELEMENTBYALIAS, HAPUtilityJson.buildMapJson(mapElementByAliase));
-		
-		jsonMap.put(TEMPORARYALIAS, HAPUtilityJson.buildArrayJson(this.m_temporyAlias.toArray(new String[0])));
 	}
 
 }

@@ -19,6 +19,8 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 		this.m_constantData = constantData;
 	}
 	
+	public HAPData getConstantData() {    return this.m_constantData;     }
+	
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;

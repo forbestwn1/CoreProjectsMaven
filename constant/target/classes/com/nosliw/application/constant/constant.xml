@@ -828,15 +828,19 @@
 
 			<definition type="space"/>
 			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
-			<definition name="STORYNODE_TYPE_SCRIPT" value="script"/>
 			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>
+			<definition name="STORYNODE_TYPE_CONSTANT" value="constant"/>
+			<definition name="STORYNODE_TYPE_VARIABLE" value="variable"/>
+			<definition name="STORYNODE_TYPE_COMMAND" value="command"/>
+			<definition name="STORYNODE_TYPE_IOENDPOINT" value="ioEndPoint"/>
+			
+			<definition name="STORYNODE_TYPE_PAGE" value="UI_page"/>
+			
+			<definition name="STORYNODE_TYPE_SCRIPT" value="script"/>
 			<definition name="STORYNODE_TYPE_SERVICEINPUT" value="serviceInput"/>
 			<definition name="STORYNODE_TYPE_SERVICEOUTPUT" value="serviceOutput"/>
 			<definition name="STORYNODE_TYPE_SERVICEINPUTPARM" value="serviceInputParm"/>
 			<definition name="STORYNODE_TYPE_SERVICEOUTPUTITEM" value="serviceOutputItem"/>
-			<definition name="STORYNODE_TYPE_CONSTANT" value="constant"/>
-			<definition name="STORYNODE_TYPE_VARIABLE" value="variable"/>
-			<definition name="STORYNODE_TYPE_PAGE" value="UI_page"/>
 			<definition name="STORYNODE_TYPE_UITAGOTHER" value="UI_tagOther"/>
 			<definition name="STORYNODE_TYPE_UITAGDATA" value="UI_tagData"/>
 			<definition name="STORYNODE_TYPE_HTML" value="UI_html"/>

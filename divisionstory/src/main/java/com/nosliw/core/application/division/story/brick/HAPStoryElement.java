@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.core.application.division.story.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.HAPStoryIdElementType;
@@ -46,6 +47,9 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 		
 	}
 	
+	public HAPStoryIdElement getChild(HAPPath path) {
+		
+	}
 	
 	public HAPStoryIdElement getElementId() {	return this.m_id;	}
 	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }
