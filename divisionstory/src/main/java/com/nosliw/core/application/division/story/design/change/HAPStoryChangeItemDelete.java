@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.story.design.change;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 
 public class HAPStoryChangeItemDelete extends HAPStoryChangeItemModifyElement{
 

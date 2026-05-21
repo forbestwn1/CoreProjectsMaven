@@ -1,0 +1,19 @@
+package com.nosliw.core.application.division.story.definition.element;
+
+import java.util.Map;
+
+import com.nosliw.core.application.division.story.definition.HAPStoryElementRunnable;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+
+public class HAPStoryElementRunnableCommand extends HAPStoryElementRunnable{
+
+	//command element id
+	private HAPStoryIdElement m_command;
+	
+	//data association for rquest
+	HAPStoryIdElement m_requestDataAssociation;
+	
+	//data association for response
+	Map<String, HAPStoryIdElement> m_responseDataAssociation;
+	
+}

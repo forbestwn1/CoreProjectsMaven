@@ -3,10 +3,10 @@ package com.nosliw.core.application.division.story.design;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nosliw.core.application.division.story.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.HAPStoryStory;
-import com.nosliw.core.application.division.story.brick.HAPStoryElement;
-import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnection;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemConnectionNew;

@@ -8,7 +8,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 
 public class HAPStoryChangeItemPatch extends HAPStoryChangeItemModifyElement{
 

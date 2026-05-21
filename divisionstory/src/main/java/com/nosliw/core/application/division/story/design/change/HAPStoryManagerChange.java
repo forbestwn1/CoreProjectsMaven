@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.HAPStoryStory;
-import com.nosliw.core.application.division.story.brick.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 
 @Component
 public class HAPStoryManagerChange {

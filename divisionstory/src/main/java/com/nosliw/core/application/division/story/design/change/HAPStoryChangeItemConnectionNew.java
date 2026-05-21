@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 
 @HAPEntityWithAttribute
 public class HAPStoryChangeItemConnectionNew extends HAPStoryChangeItemConnection{

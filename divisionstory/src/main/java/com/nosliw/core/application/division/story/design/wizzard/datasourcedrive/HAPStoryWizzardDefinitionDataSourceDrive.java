@@ -11,15 +11,18 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
-import com.nosliw.core.application.division.story.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementCommand;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementConstant;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementDataSource;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementIOEndPoint;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementModule;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementUIPage;
-import com.nosliw.core.application.division.story.brick.element.HAPStoryElementVariable;
+import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryTunnelEnd;
+import com.nosliw.core.application.division.story.definition.HAPStoryTunnel;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryConstant;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityDataSource;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIO;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityUIPage;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -85,7 +88,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		//init step
 		design.newInitStep();
 		HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
-		changeSession.addChangeItemNew(new HAPStoryElementModule(), ALIAS_ELEMENT_MODULE);
+		changeSession.addChangeItemNew(new HAPStoryElementEntityModule(), ALIAS_ELEMENT_MODULE);
 		changeSession.commit();
 
 		//service step
@@ -126,7 +129,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
 			
 			//add page to module
-			HAPStoryElementUIPage uiPageItem = new HAPStoryElementUIPage();
+			HAPStoryElementEntityUIPage uiPageItem = new HAPStoryElementEntityUIPage();
 			HAPStoryChangeItemNew newPageChange = changeSession.addChangeItemNew(uiPageItem, ALIAS_ELEMENT_UIPAGE);
 			changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, newPageChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
 			
@@ -144,7 +147,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic constantValueInQ = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic)parmConstantValueQ.getValue();
 					
 					//add constant
-					HAPStoryElementConstant constanteEle = new HAPStoryElementConstant(constantValueInQ.getConstantData());
+					HAPStoryElementAccessoryConstant constanteEle = new HAPStoryElementAccessoryConstant(constantValueInQ.getConstantData());
 					HAPStoryChangeItemNew newConstantChange = changeSession.addChangeItemNew(constanteEle);
 					changeSession.addChangeConnectionNew(newPageChange.getElementId(), newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
 					
@@ -152,14 +155,16 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 					
+					HAPDefinitionParm parmDef = parmInfoValue.getParmDefinition();
 					//add variable
-					HAPStoryElementVariable variableEle = new HAPStoryElementVariable(parmInfoValue.getParmDefinition().getDataDefinition());
+					HAPStoryElementAccessoryVariable variableEle = new HAPStoryElementAccessoryVariable(parmDef.getDataDefinition());
 					HAPStoryChangeItemNew newVariableChange = changeSession.addChangeItemNew(variableEle);
 					changeSession.addChangeConnectionNew(newPageChange.getElementId(), newVariableChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
 					
 					//build connection between variable and datasource
-					
-					
+					HAPStoryTunnelEnd variableEnd = new HAPStoryTunnelEnd(newVariableChange.getElementId());
+					HAPStoryTunnelEnd commandEnd = new HAPStoryTunnelEnd(HAPStoryUtilityStory.getChildren(null, ALIAS_ELEMENT_DATASOURCE, HAPStoryElementAccessoryCommand.buildPathForRequestEndPoint(parmDef.getName())));
+					HAPStoryTunnel dataAssociationConnection = new HAPStoryTunnel(variableEnd, commandEnd);
 					
 					
 					
@@ -185,7 +190,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		
 		//data source item
 		//put data source under module
-		changeSession.addChangeItemNew(new HAPStoryElementDataSource(dataSourceId, dataSourceInterface), ALIAS_ELEMENT_DATASOURCE);
+		changeSession.addChangeItemNew(new HAPStoryElementEntityDataSource(dataSourceId, dataSourceInterface), ALIAS_ELEMENT_DATASOURCE);
 		changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, ALIAS_ELEMENT_DATASOURCE, new HAPStoryChangeInfoConnectionContainer());
 
 		//command in data source
@@ -195,12 +200,12 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		changeSession.commit();
 	}
 	
-	private HAPStoryIdElement buildCommand(HAPStoryDesignSessionChange changeSession, HAPInteractiveTask taskInterface, HAPEntityInfo entityInfo) {
-		HAPStoryChangeItemNew newCommandChange = changeSession.addChangeItemNew(new HAPStoryElementCommand(entityInfo));
+	private HAPStoryIdElement buildCommand(HAPStoryDesignSessionChange changeSession, HAPInteractiveTask taskInterface, HAPEntityInfo commandInfo) {
+		HAPStoryChangeItemNew newCommandChange = changeSession.addChangeItemNew(new HAPStoryElementAccessoryCommand(commandInfo));
 		
 		for(HAPDefinitionParm parmDef : taskInterface.getRequestParms()) {
-			HAPStoryChangeItemNew parmEndpointNew = changeSession.addChangeItemNew(new HAPStoryElementIOEndPoint(parmDef.getDataDefinition(), HAPConstantShared.IO_DIRECTION_IN));
-			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), parmEndpointNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementCommand.buildPathForRequestEndPoint(parmDef.getName())));
+			HAPStoryChangeItemNew parmEndpointNew = changeSession.addChangeItemNew(new HAPStoryElementEndPointIO(parmDef.getDataDefinition(), HAPConstantShared.IO_DIRECTION_IN));
+			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), parmEndpointNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.buildPathForRequestEndPoint(parmDef.getName())));
 		}
 		
 		

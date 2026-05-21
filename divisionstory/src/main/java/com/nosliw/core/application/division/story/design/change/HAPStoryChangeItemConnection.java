@@ -8,9 +8,9 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.division.story.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.HAPStoryReferenceElementWrapper;
-import com.nosliw.core.application.division.story.brick.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElementWrapper;
 
 @HAPEntityWithAttribute
 public abstract class HAPStoryChangeItemConnection extends HAPStoryChangeItem{
