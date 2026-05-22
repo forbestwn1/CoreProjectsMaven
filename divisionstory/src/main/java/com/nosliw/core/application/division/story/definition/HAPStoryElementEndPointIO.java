@@ -1,9 +1,8 @@
-package com.nosliw.core.application.division.story.definition.element;
+package com.nosliw.core.application.division.story.definition;
 
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 
-public class HAPStoryElementEndPointIO extends HAPStoryElement{
+public class HAPStoryElementEndPointIO extends HAPStoryElementImp{
 
 	//
 	private HAPDataDefinition m_dataDefinition;

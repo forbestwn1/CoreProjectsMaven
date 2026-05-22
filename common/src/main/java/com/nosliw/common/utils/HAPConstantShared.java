@@ -752,16 +752,20 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYNODE_TYPE_ENDPOINT_DATA = "dataEndPoint";
+		public static final String STORYNODE_TYPE_DATAASSOCIATION = "dataAssociation";
 		public static final String STORYNODE_TYPE_MODULE = "module";
-		public static final String STORYNODE_TYPE_SCRIPT = "script";
 		public static final String STORYNODE_TYPE_SERVICE = "service";
+		public static final String STORYNODE_TYPE_CONSTANT = "constant";
+		public static final String STORYNODE_TYPE_VARIABLE = "variable";
+		public static final String STORYNODE_TYPE_COMMAND = "command";
+		public static final String STORYNODE_TYPE_IOENDPOINT = "ioEndPoint";
+		public static final String STORYNODE_TYPE_PAGE = "UI_page";
+		public static final String STORYNODE_TYPE_SCRIPT = "script";
 		public static final String STORYNODE_TYPE_SERVICEINPUT = "serviceInput";
 		public static final String STORYNODE_TYPE_SERVICEOUTPUT = "serviceOutput";
 		public static final String STORYNODE_TYPE_SERVICEINPUTPARM = "serviceInputParm";
 		public static final String STORYNODE_TYPE_SERVICEOUTPUTITEM = "serviceOutputItem";
-		public static final String STORYNODE_TYPE_CONSTANT = "constant";
-		public static final String STORYNODE_TYPE_VARIABLE = "variable";
-		public static final String STORYNODE_TYPE_PAGE = "UI_page";
 		public static final String STORYNODE_TYPE_UITAGOTHER = "UI_tagOther";
 		public static final String STORYNODE_TYPE_UITAGDATA = "UI_tagData";
 		public static final String STORYNODE_TYPE_HTML = "UI_html";

@@ -1,22 +1,24 @@
 package com.nosliw.core.application.division.story.definition.element;
 
+import com.nosliw.common.info.HAPEntityInfo;
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 
-public class HAPStoryElementAccessoryVariable extends HAPStoryElementEntity{
+public class HAPStoryElementAccessoryVariable extends HAPStoryElementAccessory{
 
-	private HAPDataDefinitionWritableWithInit m_dataDef;
+	private HAPStoryReferenceElement m_endpointElement;
 	
 	public HAPStoryElementAccessoryVariable() {
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_VARIABLE));
 	}
 
-	public HAPStoryElementAccessoryVariable(HAPDataDefinitionWritableWithInit dataDef) {
+	public HAPStoryElementAccessoryVariable(HAPEntityInfo entityInfo) {
 		this();
-		this.m_dataDef = dataDef;
 	}
 
 	protected void cloneToStoryElement(HAPStoryElementAccessoryVariable storyEle) {
@@ -24,10 +26,22 @@ public class HAPStoryElementAccessoryVariable extends HAPStoryElementEntity{
 	}
 
 	@Override
-	public HAPStoryElement cloneStoryElement() {
-		HAPStoryElement out = new HAPStoryElementAccessoryVariable();
+	public HAPStoryElementImp cloneStoryElement() {
+		HAPStoryElementImp out = new HAPStoryElementAccessoryVariable();
 		this.cloneToStoryElement(out);
 		return out;
+	}
+
+	@Override
+	public void addChild(HAPStoryElement ele, HAPPath path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HAPStoryReferenceElement getChild(HAPPath path) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,0 +1,42 @@
+package com.nosliw.core.application.division.story.definition;
+
+import java.util.Map;
+
+import com.nosliw.common.serialization.HAPSerializableImp;
+
+//root class for all element
+public abstract class HAPStoryElementImp extends HAPSerializableImp implements HAPStoryElement{
+
+	private HAPStoryIdElement m_id;
+	
+	private HAPStoryIdElementType m_elementType; 
+	
+	public HAPStoryElementImp(HAPStoryIdElementType elementType) {
+		this.m_elementType = elementType;
+	}
+	
+	@Override
+	public HAPStoryIdElement getElementId() {	return this.m_id;	}
+	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }
+	
+	@Override
+	public HAPStoryIdElementType getElementType() {     return this.m_elementType;       }
+	protected void setElementType(HAPStoryIdElementType elementType) {    this.m_elementType = elementType;     }
+	
+	protected void cloneToStoryElement(HAPStoryElementImp storyEle) {
+		if(this.m_id!=null) {
+			storyEle.setElementId((HAPStoryIdElement)m_id.cloneElementReference());
+		}
+		storyEle.setElementType(this.m_elementType);
+	}
+	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(ELEMENTTYPE, this.m_elementType.getKey());
+		if(this.m_id!=null) {
+			jsonMap.put(ELEMENTID, this.m_id.getKey());
+		}
+	}
+	
+}

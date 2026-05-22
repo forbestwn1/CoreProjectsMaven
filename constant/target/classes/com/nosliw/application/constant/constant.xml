@@ -827,11 +827,17 @@
 			<definition name="STORYELEMENT_CATEGARY_GROUP" value="group"/>
 
 			<definition type="space"/>
+			<definition name="STORYNODE_TYPE_ENDPOINT_DATA" value="dataEndPoint"/>
+
+			<definition name="STORYNODE_TYPE_DATAASSOCIATION" value="dataAssociation"/>
+
 			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
 			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>
 			<definition name="STORYNODE_TYPE_CONSTANT" value="constant"/>
 			<definition name="STORYNODE_TYPE_VARIABLE" value="variable"/>
 			<definition name="STORYNODE_TYPE_COMMAND" value="command"/>
+
+
 			<definition name="STORYNODE_TYPE_IOENDPOINT" value="ioEndPoint"/>
 			
 			<definition name="STORYNODE_TYPE_PAGE" value="UI_page"/>

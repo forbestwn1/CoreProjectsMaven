@@ -4,11 +4,11 @@ import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
-public class HAPStoryElementEntityDataSource extends HAPStoryElement{
+public class HAPStoryElementEntityDataSource extends HAPStoryElementImp{
 
 	private String m_serviceId;
 	
@@ -26,7 +26,7 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElement{
 	}
 
 	@Override
-	public HAPStoryElement cloneStoryElement() {
+	public HAPStoryElementImp cloneStoryElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}

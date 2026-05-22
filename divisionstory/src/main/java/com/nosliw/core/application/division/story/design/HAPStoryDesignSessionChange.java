@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnection;
@@ -48,11 +48,11 @@ public class HAPStoryDesignSessionChange {
 		}
 	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement) {
+	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElementImp storyElement) {
 		return this.addChangeItemNew(storyElement, null);
 	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
+	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElementImp storyElement, HAPStoryAliasElement alias) {
 		if(storyElement.getElementId()==null) {
 			this.getStory().buildElementId(storyElement);
 		}

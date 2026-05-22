@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.story.definition.element;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
@@ -16,8 +16,8 @@ public class HAPStoryElementEntityModule extends HAPStoryElementEntity{
 	}
 
 	@Override
-	public HAPStoryElement cloneStoryElement() {
-		HAPStoryElement out = new HAPStoryElementEntityModule();
+	public HAPStoryElementImp cloneStoryElement() {
+		HAPStoryElementImp out = new HAPStoryElementEntityModule();
 		this.cloneToStoryElement(out);
 		return out;
 	}

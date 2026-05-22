@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.story.definition.element;
 
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
@@ -26,7 +26,7 @@ public class HAPStoryElementAccessoryEvent extends HAPStoryElementAccessory{
 	
 	
 	@Override
-	public HAPStoryElement cloneStoryElement() {
+	public HAPStoryElementImp cloneStoryElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}

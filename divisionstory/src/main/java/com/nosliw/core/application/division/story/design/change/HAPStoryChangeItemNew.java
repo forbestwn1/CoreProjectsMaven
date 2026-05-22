@@ -9,7 +9,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
@@ -24,7 +24,7 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 
 	private HAPStoryAliasElement m_alias;
 	
-	private HAPStoryElement m_storyElement;
+	private HAPStoryElementImp m_storyElement;
 	
 	public HAPStoryChangeItemNew() {
 		super(MYCHANGETYPE);
@@ -35,23 +35,23 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 		this.m_alias = alias;
 	}
 
-	public HAPStoryChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
+	public HAPStoryChangeItemNew(HAPStoryElementImp storyElement, HAPStoryAliasElement alias) {
 		this(alias);
 		this.m_alias = alias;
 		this.m_storyElement = storyElement;
 	}
 	
-	public HAPStoryChangeItemNew(HAPStoryElement storyElement) {
+	public HAPStoryChangeItemNew(HAPStoryElementImp storyElement) {
 		this(storyElement, null);
 	}
 
 	public HAPStoryAliasElement getAlias() {	return this.m_alias;	}
 
-	public HAPStoryElement getElement() {  return this.m_storyElement;  }
+	public HAPStoryElementImp getElement() {  return this.m_storyElement;  }
 	
 	public HAPStoryIdElement getElementId() {     return this.m_storyElement.getElementId();      } 
 	
-	public void setElement(HAPStoryElement storyEle) {    this.m_storyElement = storyEle;     }
+	public void setElement(HAPStoryElementImp storyEle) {    this.m_storyElement = storyEle;     }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){

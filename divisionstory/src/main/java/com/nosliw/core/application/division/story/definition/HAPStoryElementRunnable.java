@@ -1,5 +1,9 @@
 package com.nosliw.core.application.division.story.definition;
 
-public class HAPStoryElementRunnable extends HAPStoryElement{
+public abstract class HAPStoryElementRunnable extends HAPStoryElementImp{
+
+	public HAPStoryElementRunnable(HAPStoryIdElementType elementType) {
+		super(elementType);
+	}
 
 }

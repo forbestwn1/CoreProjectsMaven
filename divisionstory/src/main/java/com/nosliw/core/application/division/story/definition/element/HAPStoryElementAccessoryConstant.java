@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.story.definition.element;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 import com.nosliw.core.data.HAPData;
@@ -24,8 +24,8 @@ public class HAPStoryElementAccessoryConstant extends HAPStoryElementEntity{
 	}
 
 	@Override
-	public HAPStoryElement cloneStoryElement() {
-		HAPStoryElement out = new HAPStoryElementAccessoryConstant();
+	public HAPStoryElementImp cloneStoryElement() {
+		HAPStoryElementImp out = new HAPStoryElementAccessoryConstant();
 		this.cloneToStoryElement(out);
 		return out;
 	}
