@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.story.definition;
 import com.nosliw.common.path.HAPPath;
 
 //a tunnel is a connection between two end point
-public abstract class HAPStoryTunnel{
+public class HAPStoryTunnel{
 
 	//from item
 	private HAPPath m_end1;

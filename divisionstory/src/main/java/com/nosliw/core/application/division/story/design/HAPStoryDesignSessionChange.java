@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
+import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnection;
@@ -37,6 +37,10 @@ public class HAPStoryDesignSessionChange {
 	public void rollback() {
 		
 	}
+
+	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
+		
+	}
 	
 	public List<HAPStoryChangeItem> getChangeItems(){   return this.m_changeItems;    }
 	public void addChangeItem(HAPStoryChangeItem changeItem) {
@@ -48,11 +52,11 @@ public class HAPStoryDesignSessionChange {
 		}
 	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElementImp storyElement) {
+	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement) {
 		return this.addChangeItemNew(storyElement, null);
 	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElementImp storyElement, HAPStoryAliasElement alias) {
+	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
 		if(storyElement.getElementId()==null) {
 			this.getStory().buildElementId(storyElement);
 		}
@@ -67,7 +71,7 @@ public class HAPStoryDesignSessionChange {
 		return out;
 	}
 
-	
+
 	public HAPStoryDesignConfigureSessionChange getConfigure() {    return this.m_configure;       }
 	
 	private HAPStoryStory getStory() {    return this.m_storyDesign.getStory();       }

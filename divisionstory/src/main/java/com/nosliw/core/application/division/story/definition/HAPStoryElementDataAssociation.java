@@ -22,10 +22,12 @@ public class HAPStoryElementDataAssociation extends HAPStoryElementImpWithEntity
 	//mutiple tunnel among data association
 	private List<HAPStoryTunnel> m_tunnels;
 	
-	public HAPStoryElementDataAssociation(HAPStoryReferenceElement entity1, HAPStoryReferenceElement entity2, String direction) {
+	public HAPStoryElementDataAssociation(HAPStoryReferenceElement entity1, HAPPath path1, HAPStoryReferenceElement entity2, HAPPath path2, String direction) {
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_DATAASSOCIATION));
 	}
 
+	public void addTunnel(HAPStoryTunnel tunnel) {      this.m_tunnels.add(tunnel);      }
+	
 	@Override
 	public void addChild(HAPStoryElement ele, HAPPath path) {
 		// TODO Auto-generated method stub
