@@ -1,15 +1,16 @@
 package com.nosliw.core.application.division.story.definition.element;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
 public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
@@ -26,35 +27,63 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	//response end points
 	private Map<String, Map<String, HAPStoryIdElement>> m_responseIOEndPoints;
 	
+	public HAPStoryElementAccessoryCommand() {
+		this(null, null);
+	}
 	
 	public HAPStoryElementAccessoryCommand(HAPInteractiveTask taskInterface, HAPEntityInfo commandInfo) {
-		super();
-		
-		
+		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_COMMAND), commandInfo);
+		this.m_taskInterface = taskInterface;
+		this.m_requestIOEndPoints = new LinkedHashMap<String, HAPStoryIdElement>();
+		this.m_responseIOEndPoints = new LinkedHashMap<String, Map<String, HAPStoryIdElement>>();
 	}
 
-	public static HAPPath buildPathForRequestEndPoint(String parName) {}
-	
-	
-	
 	@Override
-	public HAPStoryElementImp cloneStoryElement() {
-		// TODO Auto-generated method stub
+	public HAPStoryIdElement getChild(HAPPath path) {
+		String[] segs = path.getPathSegments();
+		if(REQUEST.equals(segs[0])){
+			return this.m_requestIOEndPoints.get(segs[1]);
+		}
+		else if(RESPONSE.equals(segs[0])){
+			return this.m_responseIOEndPoints.get(segs[1]).get(segs[2]);
+		}
 		return null;
 	}
-
+	
 	@Override
 	public void addChild(HAPStoryElement ele, HAPPath path) {
-		// TODO Auto-generated method stub
-		
+		String[] segs = path.getPathSegments();
+		if(REQUEST.equals(segs[0])){
+			this.m_requestIOEndPoints.put(segs[1], ele.getElementId());
+		}
+		else if(RESPONSE.equals(segs[0])){
+			Map<String, HAPStoryIdElement> result = this.m_responseIOEndPoints.get(segs[1]);
+			if(result==null) {
+				result = new LinkedHashMap<String, HAPStoryIdElement>();
+				this.m_responseIOEndPoints.put(segs[1], result);
+			}
+			result.put(segs[2], ele.getElementId());
+		}
+		else {
+			throw new RuntimeException();
+		}
+	}
+	
+	public static HAPPath buildPathForRequestEndPoint(String parName) {   return new HAPPath(new String[]{REQUEST, parName});	}
+	public static HAPPath buildPathForResponseEndPoint(String resultName, String parName) {   return new HAPPath(new String[]{REQUEST, resultName, parName});	}
+	
+	protected void cloneToStoryElement(HAPStoryElementAccessoryCommand storyEle) {
+		super.cloneToStoryElement(storyEle);
+		storyEle.m_taskInterface = this.m_taskInterface;
+		storyEle.m_requestIOEndPoints.putAll(this.m_requestIOEndPoints);
+		storyEle.m_responseIOEndPoints.putAll(this.m_responseIOEndPoints);
 	}
 
 	@Override
-	public HAPStoryReferenceElement getChild(HAPPath path) {
-		// TODO Auto-generated method stub
-		return null;
+	public HAPStoryElement cloneStoryElement() {
+		HAPStoryElementAccessoryCommand out = new HAPStoryElementAccessoryCommand();
+	    this.cloneToStoryElement(out);
+		return out;
 	}
-	
-	
-	
+
 }

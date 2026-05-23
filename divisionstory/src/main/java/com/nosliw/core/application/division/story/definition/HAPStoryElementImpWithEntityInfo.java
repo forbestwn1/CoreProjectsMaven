@@ -22,7 +22,7 @@ public abstract class HAPStoryElementImpWithEntityInfo extends HAPEntityInfoImp 
 	public HAPStoryIdElementType getElementType() {     return this.m_elementType;       }
 	protected void setElementType(HAPStoryIdElementType elementType) {    this.m_elementType = elementType;     }
 	
-	protected void cloneToStoryElement(HAPStoryElementImp storyEle) {
+	protected void cloneToStoryElement(HAPStoryElementImpWithEntityInfo storyEle) {
 		if(this.m_id!=null) {
 			storyEle.setElementId((HAPStoryIdElement)m_id.cloneElementReference());
 		}

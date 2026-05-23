@@ -827,7 +827,8 @@
 			<definition name="STORYELEMENT_CATEGARY_GROUP" value="group"/>
 
 			<definition type="space"/>
-			<definition name="STORYNODE_TYPE_ENDPOINT_DATA" value="dataEndPoint"/>
+			<definition name="STORYNODE_TYPE_ENDPOINT_VARIABLE" value="variableEndPoint"/>
+			<definition name="STORYNODE_TYPE_ENDPOINT_CONSTANT" value="constantEndPoint"/>
 
 			<definition name="STORYNODE_TYPE_DATAASSOCIATION" value="dataAssociation"/>
 

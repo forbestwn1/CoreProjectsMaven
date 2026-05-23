@@ -11,7 +11,6 @@ var packageObj = library;
 	
 //interface for ui tag core object
 var node_buildStandaloneUITag = function(dataDefinition, dataUITagId, attributes){
-	var loc_rawEntity = rawEntity;
 	
 	var loc_out = {
 		

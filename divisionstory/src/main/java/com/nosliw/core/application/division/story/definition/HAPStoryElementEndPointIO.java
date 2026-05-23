@@ -4,11 +4,15 @@ public abstract class HAPStoryElementEndPointIO extends HAPStoryElementImp{
 
 	private String m_IOType;
 	
-	public HAPStoryElementEndPointIO(String IOType) {
-		super(null);
-	
+	public HAPStoryElementEndPointIO(HAPStoryIdElementType elementType, String IOType) {
+		super(elementType);
+		this.m_IOType = IOType;
 	}
+	
+	public String getIOType() {     return this.m_IOType;     }
 
-	
-	
+	protected void cloneToStoryElement(HAPStoryElementEndPointIO storyEle) {
+		super.cloneToStoryElement(storyEle);
+		storyEle.m_IOType = this.m_IOType;
+	}
 }

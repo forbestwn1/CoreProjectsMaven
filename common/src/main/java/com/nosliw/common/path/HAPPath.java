@@ -25,6 +25,11 @@ public class HAPPath {
 		}
 	}
 	
+	public HAPPath(String[] segs) {
+		this.m_pathSegs = segs;
+		this.m_path = HAPUtilityNamingConversion.cascadePath(segs);
+	}
+	
 	private void init(String path) {
 		this.m_path = path;
 		this.m_pathSegs = HAPUtilityNamingConversion.parsePaths(this.m_path);

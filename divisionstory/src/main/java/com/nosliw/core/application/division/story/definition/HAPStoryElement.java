@@ -20,7 +20,7 @@ public interface HAPStoryElement extends HAPSerializable{
 	
 	void addChild(HAPStoryElement ele, HAPPath path);
 	
-	HAPStoryReferenceElement getChild(HAPPath path);
+	HAPStoryIdElement getChild(HAPPath path);
 	
 	HAPStoryElement cloneStoryElement();
 	

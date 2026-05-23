@@ -10,7 +10,6 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
@@ -52,7 +51,7 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 	
 	public HAPStoryIdElement getElementId() {     return this.m_storyElement.getElementId();      } 
 	
-	public void setElement(HAPStoryElementImp storyEle) {    this.m_storyElement = storyEle;     }
+	public void setElement(HAPStoryElement storyEle) {    this.m_storyElement = storyEle;     }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){

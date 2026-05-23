@@ -752,7 +752,8 @@ public class HAPConstantShared {
 
 
 
-		public static final String STORYNODE_TYPE_ENDPOINT_DATA = "dataEndPoint";
+		public static final String STORYNODE_TYPE_ENDPOINT_VARIABLE = "variableEndPoint";
+		public static final String STORYNODE_TYPE_ENDPOINT_CONSTANT = "constantEndPoint";
 		public static final String STORYNODE_TYPE_DATAASSOCIATION = "dataAssociation";
 		public static final String STORYNODE_TYPE_MODULE = "module";
 		public static final String STORYNODE_TYPE_SERVICE = "service";
