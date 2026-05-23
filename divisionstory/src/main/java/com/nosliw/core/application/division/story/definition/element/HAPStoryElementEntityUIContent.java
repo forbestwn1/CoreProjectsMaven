@@ -2,20 +2,17 @@ package com.nosliw.core.application.division.story.definition.element;
 
 import java.util.Map;
 
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
-import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
 
 public class HAPStoryElementEntityUIContent extends HAPStoryElementEntity{
 
 	private String m_html;
 	
-	private Map<String, HAPStoryIdElement> m_childrenElementId;
+	private Map<String, HAPStoryUIChild> m_children;
 	
-	public HAPStoryElementEntityUIContent(HAPStoryIdElementType elementType) {
-		super(elementType);
-		// TODO Auto-generated constructor stub
+	public HAPStoryElementEntityUIContent() {
+		super(null);
 	}
 
 	@Override

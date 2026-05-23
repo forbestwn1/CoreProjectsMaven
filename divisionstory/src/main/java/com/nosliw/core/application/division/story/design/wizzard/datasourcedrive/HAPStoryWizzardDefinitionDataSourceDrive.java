@@ -19,6 +19,8 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityUIPage;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementRunnableCommand;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryUIChildMetaAppend;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryUIChildMetaInject;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -130,6 +132,19 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryChangeItemNew newPageChange = changeSession.addChangeItemNew(uiPageItem, ALIAS_ELEMENT_UIPAGE);
 			changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, newPageChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
 			
+			//add root content to page
+			HAPStoryChangeItemNew newRootContentChange = HAPStoryWizzardUtility.newUIContent(changeSession, "main.html");
+			changeSession.addChangeConnectionNew(newPageChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
+
+			//add request content to root
+			HAPStoryChangeItemNew newRequestContentChange = HAPStoryWizzardUtility.newUIContent(changeSession, "request.html");
+			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newRequestContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIChildMetaInject("request")));
+			
+			//add response content to root
+			HAPStoryChangeItemNew newResponseContentChange = HAPStoryWizzardUtility.newUIContent(changeSession, "response.html");
+			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newResponseContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIChildMetaInject("response")));
+			
+			
 			HAPStoryWizzardQuestionairGroup questionair = (HAPStoryWizzardQuestionairGroup)stepData.getQuestionair();
 
 			//data association between page and data source request
@@ -151,17 +166,27 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					
 					//add constant
 					HAPStoryChangeItemNew newConstantChange = HAPStoryChangeUtility.buildNewConstantChange(changeSession, newPageChange.getElementId(), constantValueInQ.getConstantData(), parmDef);
-					sourcePath = "variable";
-					
+					sourcePath = "constant";
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 					
 					//add variable
 					HAPStoryChangeItemNew newVariableChange = HAPStoryChangeUtility.buildNewVariableChange(changeSession, newPageChange.getElementId(), parmDef.getDataDefinition(), parmDef);
-					sourcePath = "constant";
+					sourcePath = "variable";
 					
-					//add uitag
+					//append input content
+					HAPStoryChangeItemNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContent(changeSession, "input.html");
+					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIChildMetaAppend("input")));
+					
+					//inject label
+					HAPStoryChangeItemNew newRequestInputLabelContentChange = HAPStoryWizzardUtility.newUIContent(changeSession, "inputlabel.html");
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIChildMetaAppend("label")));
+					
+					//inject uiTag
+					
+					//inject error tag
+					
 				}
 
 				//build tunnel between variable and datasource request parm
