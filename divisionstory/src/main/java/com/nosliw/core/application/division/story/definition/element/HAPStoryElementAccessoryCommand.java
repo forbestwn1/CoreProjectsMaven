@@ -39,7 +39,8 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	}
 
 	@Override
-	public HAPStoryIdElement getChild(HAPPath path) {
+	public HAPStoryIdElement getChild(String childName) {
+		HAPPath path = this.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(REQUEST.equals(segs[0])){
 			return this.m_requestIOEndPoints.get(segs[1]);
@@ -51,10 +52,12 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	}
 	
 	@Override
-	public void addChild(HAPStoryElement ele, HAPPath path) {
+	public boolean addChild(HAPStoryElement ele, String childName) {
+		HAPPath path = this.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(REQUEST.equals(segs[0])){
 			this.m_requestIOEndPoints.put(segs[1], ele.getElementId());
+			return true;
 		}
 		else if(RESPONSE.equals(segs[0])){
 			Map<String, HAPStoryIdElement> result = this.m_responseIOEndPoints.get(segs[1]);
@@ -63,9 +66,10 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 				this.m_responseIOEndPoints.put(segs[1], result);
 			}
 			result.put(segs[2], ele.getElementId());
+			return true;
 		}
 		else {
-			throw new RuntimeException();
+			return false;
 		}
 	}
 	

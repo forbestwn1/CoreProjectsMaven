@@ -1,6 +1,5 @@
 package com.nosliw.core.application.division.story.definition.element;
 
-import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
@@ -25,12 +24,13 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementEntity{
 	}
 
 	@Override
-	public void addChild(HAPStoryElement ele, HAPPath path) {
+	public boolean addChild(HAPStoryElement ele, String childName) {
 		this.m_commandEleId = ele.getElementId();
+		return true;
 	}
 
 	@Override
-	public HAPStoryIdElement getChild(HAPPath path) {
+	public HAPStoryIdElement getChild(String childName) {
 		return this.m_commandEleId;
 	}
 

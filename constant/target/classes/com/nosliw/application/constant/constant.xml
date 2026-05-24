@@ -832,16 +832,27 @@
 
 			<definition name="STORYNODE_TYPE_DATAASSOCIATION" value="dataAssociation"/>
 
-			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
-			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>
 			<definition name="STORYNODE_TYPE_CONSTANT" value="constant"/>
 			<definition name="STORYNODE_TYPE_VARIABLE" value="variable"/>
 			<definition name="STORYNODE_TYPE_COMMAND" value="command"/>
+			<definition name="STORYNODE_TYPE_EVENT" value="event"/>
+
+			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
+			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>
+			<definition name="STORYNODE_TYPE_UIPAGE" value="UIPage"/>
+			<definition name="STORYNODE_TYPE_UICONTENT" value="UIContent"/>
+			<definition name="STORYNODE_TYPE_UICUSTOMTAG" value="UICustomTag"/>
+
+
+
+
 
 
 			<definition name="STORYNODE_TYPE_IOENDPOINT" value="ioEndPoint"/>
 			
-			<definition name="STORYNODE_TYPE_PAGE" value="UI_page"/>
+
+
+
 			
 			<definition name="STORYNODE_TYPE_SCRIPT" value="script"/>
 			<definition name="STORYNODE_TYPE_SERVICEINPUT" value="serviceInput"/>
