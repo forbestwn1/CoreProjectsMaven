@@ -20,7 +20,9 @@ public interface HAPStoryElement extends HAPSerializable{
 	boolean addChild(HAPStoryElement ele, String childName);
 	
 	HAPStoryIdElement getChild(String childName);
-	
+
 	HAPStoryElement cloneStoryElement();
+
+	HAPStoryContainerChildrenElements getChildren(String name);
 	
 }

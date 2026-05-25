@@ -15,6 +15,8 @@ import com.nosliw.common.utils.HAPConstantShared;
 @HAPEntityWithAttribute
 public class HAPStoryStory extends HAPEntityInfoImp{
 
+	public static final String ALIAS_ROOT = "__root___";
+	
 	@HAPAttribute
 	public static final String IDINDEX = "idIndex";
 	
