@@ -24,6 +24,7 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementRunnableCommand;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIPage;
+import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUITagCustom;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapper;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryUIMetaContentChildAppend;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryUIMetaContentChildInject;
@@ -181,6 +182,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
+					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic)parmUITagChooseQ.getValue();
+					HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
 					
 					//add variable
 					HAPStoryChangeItemNew newVariableChange = HAPStoryChangeUtility.buildNewVariableChange(changeSession, newPageUIWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
@@ -198,6 +201,12 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIMetaContentChildInject("label")));
 					
 					//inject uiTag
+					HAPStoryChangeItemNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUITagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIMetaContentChildInject("uitag")));
+					
+					//inject content wrapper into uitag
+					HAPStoryChangeItemNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapper());
+					changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
 					
 					//inject error tag
 					

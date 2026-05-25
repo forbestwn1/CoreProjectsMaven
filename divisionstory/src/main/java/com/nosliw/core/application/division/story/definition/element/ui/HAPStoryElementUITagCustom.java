@@ -15,6 +15,11 @@ public class HAPStoryElementUITagCustom extends HAPStoryElementEntityComplex{
 	
 	private Map<String, String> m_attributes;
 	
-	
+	public HAPStoryElementUITagCustom(String uiTagId, Map<String, String> attributes) {
+		this.m_uiTagId = uiTagId;
+		this.m_attributes.putAll(attributes);
+		
+		
+	}
 	
 }

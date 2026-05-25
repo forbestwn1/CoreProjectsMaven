@@ -16,6 +16,10 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic ex
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic(HAPStoryWizzardUITagInfo uiTagInfo) {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG);
 	}
+
+	public HAPStoryWizzardUITagInfo getUITagInfo() {
+		return this.m_uiTagInfo;
+	}
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
