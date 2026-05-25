@@ -914,6 +914,7 @@
 			<definition name="STORY_INFO_IDINDEX" value="story_idindex"/>
 
 			<definition type="space"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_ENTITYINFO" value="entityInfo"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID" value="dataSourceId"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO" value="dataSourceInfo"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMINFO" value="dataSourceRequestParmInfo"/>
@@ -923,6 +924,7 @@
 
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO" value="dataSourceResponseParmInfo"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG" value="dataSourceResponseParmUITag"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO" value="dataSourceResponseDataCriteriaInfo"/>
 
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP" value="dataSourceRequestParmGroup"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO" value="dataSourceRequestParmInfo"/>

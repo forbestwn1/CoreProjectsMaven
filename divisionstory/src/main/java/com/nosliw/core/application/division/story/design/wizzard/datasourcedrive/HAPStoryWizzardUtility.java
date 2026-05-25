@@ -5,7 +5,7 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 
 public class HAPStoryWizzardUtility {
 
-	public static HAPStoryChangeItemNew newUIContent(HAPStoryDesignSessionChange changeSession, String fileName) {
+	public static HAPStoryChangeItemNew newUIContentHtml(HAPStoryDesignSessionChange changeSession, String fileName) {
 		
 	}
 	

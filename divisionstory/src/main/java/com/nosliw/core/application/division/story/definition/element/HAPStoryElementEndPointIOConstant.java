@@ -16,7 +16,7 @@ public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO
 	}
 	
 	public HAPStoryElementEndPointIOConstant(HAPData data) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_CONSTANT), HAPConstantShared.DATAFLOW_OUT);
+		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_CONSTANT), HAPConstantShared.IO_DIRECTION_OUT);
 		this.m_data = data;
 	}
 

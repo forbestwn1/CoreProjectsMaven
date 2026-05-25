@@ -1,6 +1,7 @@
 package com.nosliw.core.application.division.story.definition;
 
 import com.nosliw.common.info.HAPEntityInfo;
+import com.nosliw.common.utils.HAPConstantShared;
 
 //access element that attached to entity (command, event, variable, constant)
 public abstract class HAPStoryElementAccessory extends HAPStoryElementImpWithEntityInfo{
@@ -13,6 +14,9 @@ public abstract class HAPStoryElementAccessory extends HAPStoryElementImpWithEnt
 		this(elementType);
 		if(entityInfo!=null) {
 			entityInfo.cloneToEntityInfo(this);
+		}
+		else {
+			this.setName(HAPConstantShared.NAME_DEFAULT);
 		}
 	}
 }

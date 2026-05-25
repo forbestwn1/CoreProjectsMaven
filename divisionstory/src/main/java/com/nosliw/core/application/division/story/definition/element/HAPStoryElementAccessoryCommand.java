@@ -11,6 +11,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
 
 public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
@@ -40,7 +41,7 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
 	@Override
 	public HAPStoryIdElement getChild(String childName) {
-		HAPPath path = this.parseChildNameToPath(childName);
+		HAPPath path = HAPStoryUtilityElement.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(REQUEST.equals(segs[0])){
 			return this.m_requestIOEndPoints.get(segs[1]);
@@ -53,7 +54,7 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	
 	@Override
 	public boolean addChild(HAPStoryElement ele, String childName) {
-		HAPPath path = this.parseChildNameToPath(childName);
+		HAPPath path = HAPStoryUtilityElement.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(REQUEST.equals(segs[0])){
 			this.m_requestIOEndPoints.put(segs[1], ele.getElementId());
@@ -73,8 +74,12 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 		}
 	}
 	
-	public static HAPPath buildPathForRequestEndPoint(String parName) {   return new HAPPath(new String[]{REQUEST, parName});	}
-	public static HAPPath buildPathForResponseEndPoint(String resultName, String parName) {   return new HAPPath(new String[]{REQUEST, resultName, parName});	}
+	public static HAPPath buildPathForRequestEndPoint(String parName) {
+		return new HAPPath(new String[]{HAPStoryUtilityElement.buildChildNameFromPath(new String[]{REQUEST, parName}), HAPStoryElementAccessoryVariable.CHILD_ENDPOINT});	
+	}
+	public static HAPPath buildPathForResponseEndPoint(String resultName, String parName) {
+		return new HAPPath(new String[]{HAPStoryUtilityElement.buildChildNameFromPath(new String[]{REQUEST, resultName, parName}), HAPStoryElementAccessoryVariable.CHILD_ENDPOINT});	
+	}
 	
 	protected void cloneToStoryElement(HAPStoryElementAccessoryCommand storyEle) {
 		super.cloneToStoryElement(storyEle);

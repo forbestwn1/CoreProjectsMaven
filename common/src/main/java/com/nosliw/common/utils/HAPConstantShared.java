@@ -837,6 +837,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_ENTITYINFO = "entityInfo";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID = "dataSourceId";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO = "dataSourceInfo";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfo";
@@ -845,6 +846,7 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfo";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO = "dataSourceResponseDataCriteriaInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroup";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstant";

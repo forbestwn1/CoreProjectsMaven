@@ -9,6 +9,8 @@ import com.nosliw.core.application.division.story.definition.HAPStoryIdElementTy
 
 public class HAPStoryElementAccessoryVariable extends HAPStoryElementAccessory{
 
+	public static final String CHILD_ENDPOINT = "endpoint";
+	
 	private HAPStoryIdElement m_endpointElementId;
 	
 	public HAPStoryElementAccessoryVariable() {

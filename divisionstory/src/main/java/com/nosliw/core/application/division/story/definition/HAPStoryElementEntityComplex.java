@@ -31,7 +31,7 @@ public abstract class HAPStoryElementEntityComplex
 
 	@Override
 	public HAPStoryIdElement getChild(String childName) {
-		HAPPath path = this.parseChildNameToPath(childName);
+		HAPPath path = HAPStoryUtilityElement.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(HAPStoryElementWithCommand.CHILD_COMMAND.equals(segs[0])){
 			return this.m_commands.get(segs[1]);
@@ -50,7 +50,7 @@ public abstract class HAPStoryElementEntityComplex
 	
 	@Override
 	public boolean addChild(HAPStoryElement ele, String childName) {
-		HAPPath path = this.parseChildNameToPath(childName);
+		HAPPath path = HAPStoryUtilityElement.parseChildNameToPath(childName);
 		String[] segs = path.getPathSegments();
 		if(HAPStoryElementWithCommand.CHILD_COMMAND.equals(segs[0])){
 			this.m_commands.put(segs[1], ele.getElementId());

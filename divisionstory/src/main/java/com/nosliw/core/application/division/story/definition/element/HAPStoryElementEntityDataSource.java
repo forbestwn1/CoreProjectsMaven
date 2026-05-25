@@ -1,12 +1,13 @@
 package com.nosliw.core.application.division.story.definition.element;
 
+import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementEntity;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfo;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
-public class HAPStoryElementEntityDataSource extends HAPStoryElementEntity{
+public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntityInfo{
 
 	public static final String CHILD_COMMAND = "command";
 	
@@ -15,11 +16,11 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementEntity{
 	private HAPStoryIdElement m_commandEleId;
 	
 	public HAPStoryElementEntityDataSource() {
-		this(null);
+		this(null, null);
 	}
 	
-	public HAPStoryElementEntityDataSource(String serviceId) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE));
+	public HAPStoryElementEntityDataSource(String serviceId, HAPEntityInfo dataSourceInfo) {
+		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE), dataSourceInfo);
 		this.m_serviceId = serviceId;
 	}
 

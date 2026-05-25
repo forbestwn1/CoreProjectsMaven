@@ -2,6 +2,7 @@ package com.nosliw.core.application.division.story.definition;
 
 import java.util.Map;
 
+import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPEntityInfoImp;
 
 public abstract class HAPStoryElementImpWithEntityInfo extends HAPEntityInfoImp implements HAPStoryElement{
@@ -13,7 +14,14 @@ public abstract class HAPStoryElementImpWithEntityInfo extends HAPEntityInfoImp 
 	public HAPStoryElementImpWithEntityInfo(HAPStoryIdElementType elementType) {
 		this.m_elementType = elementType;
 	}
-	
+
+	public HAPStoryElementImpWithEntityInfo(HAPStoryIdElementType elementType, HAPEntityInfo entityInfo) {
+		this(elementType);
+		if(entityInfo!=null) {
+			entityInfo.cloneToEntityInfo(this);
+		}
+	}
+
 	@Override
 	public HAPStoryIdElement getElementId() {	return this.m_id;	}
 	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }
