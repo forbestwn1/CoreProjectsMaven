@@ -3,9 +3,9 @@ package com.nosliw.core.application.division.story.definition.element.ui;
 import java.util.List;
 
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImp;
+import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 
-public class HAPStoryElementUIContentHtml extends HAPStoryElementImp{
+public class HAPStoryElementUIContentHtml extends HAPStoryElement{
 
 	private String m_html;
 	

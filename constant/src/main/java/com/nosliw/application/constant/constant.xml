@@ -874,6 +874,12 @@
 			<definition name="STORYCONNECTION_TYPE_DATAIO" value="dataIO"/>
 
 			<definition type="space"/>
+			<definition name="STORYELEMENTCHILDREN_TYPE_SINGLE" value="single"/>
+			<definition name="STORYELEMENTCHILDREN_TYPE_MAP" value="map"/>
+			<definition name="STORYELEMENTCHILDREN_TYPE_LIST" value="list"/>
+
+
+			<definition type="space"/>
 			<definition name="SERVICE_CHILD_INPUT" value="serviceInput"/>
 			<definition name="SERVICE_CHILD_RESULT" value="serviceResult"/>
 

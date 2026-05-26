@@ -11,8 +11,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class HAPUtilityBasic {
 
+	public static boolean isNumber(String str) {
+		return StringUtils.isNumeric(str);
+	}
+	
 	public static List toList(Map map){
 		List out = new ArrayList();
 		for(Object item : map.values()) {
@@ -59,26 +65,40 @@ public class HAPUtilityBasic {
 	}
 	
 	public static boolean isEqualMaps(Map m1, Map m2) {
-	   if (m1.size() != m2.size())	      return false;
-	   if (!m1.keySet().equals(m2.keySet()))  return false;
+	   if (m1.size() != m2.size()) {
+		return false;
+	   }
+	   if (!m1.keySet().equals(m2.keySet())) {
+		return false;
+	   }
 	   for (Object key: m1.keySet()){
-		   if(!HAPUtilityBasic.isEquals(m1.get(key), m2.get(key)))  return false;
+		   if(!HAPUtilityBasic.isEquals(m1.get(key), m2.get(key))) {
+			return false;
+		   }
 	   }
 	   return true;
 	}	
 
 	public static boolean isEqualLists(List l1, List l2) {
-	   if (l1.size() != l2.size())	      return false;
+	   if (l1.size() != l2.size()) {
+		return false;
+	   }
 	   for (int i=0; i<l1.size(); i++){
-		   if(!HAPUtilityBasic.isEquals(l1.get(i), l2.get(i)))  return false;
+		   if(!HAPUtilityBasic.isEquals(l1.get(i), l2.get(i))) {
+			return false;
+		   }
 	   }
 	   return true;
 	}	
 
 	public static boolean isEqualSets(Set s1, Set s2) {
-	   if (s1.size() != s2.size())	      return false;
+	   if (s1.size() != s2.size()) {
+		return false;
+	   }
 	   for(Object v1 : s1){
-		   if(!s2.contains(v1))  return false;
+		   if(!s2.contains(v1)) {
+			return false;
+		   }
 	   }
 	   return true;
 	}	
@@ -111,7 +131,9 @@ public class HAPUtilityBasic {
 	}
 
 	public static boolean isEquals(Object obj1, Object obj2){
-		if(obj1==null && obj2==null)  return true;
+		if(obj1==null && obj2==null) {
+			return true;
+		}
 		if(obj1!=null && obj2!=null){
 			return obj1.equals(obj2);
 		}
@@ -119,11 +141,17 @@ public class HAPUtilityBasic {
 	}
 	
 	public static boolean isEqualSet(Set obj1, Set obj2){
-		if(obj1==null && obj2==null)  return true;
+		if(obj1==null && obj2==null) {
+			return true;
+		}
 		if(obj1!=null && obj2!=null){
-			if(obj1.size()!=obj2.size())  return false;
+			if(obj1.size()!=obj2.size()) {
+				return false;
+			}
 			for(Object ele1 : obj1){
-				if(!obj2.contains(ele1))   return false;
+				if(!obj2.contains(ele1)) {
+					return false;
+				}
 			}
 			return true;
 		}
@@ -166,7 +194,9 @@ public class HAPUtilityBasic {
 	}	
 	
 	public static String upperCaseFirstLetter(String name){
-		if(HAPUtilityBasic.isStringEmpty(name))  return name;
+		if(HAPUtilityBasic.isStringEmpty(name)) {
+			return name;
+		}
 		return name.substring(0, 1).toUpperCase() + name.substring(1);
 	}
 	

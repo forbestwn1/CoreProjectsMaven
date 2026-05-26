@@ -788,6 +788,12 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYELEMENTCHILDREN_TYPE_SINGLE = "single";
+		public static final String STORYELEMENTCHILDREN_TYPE_MAP = "map";
+		public static final String STORYELEMENTCHILDREN_TYPE_LIST = "list";
+
+
+
 		public static final String SERVICE_CHILD_INPUT = "serviceInput";
 		public static final String SERVICE_CHILD_RESULT = "serviceResult";
 

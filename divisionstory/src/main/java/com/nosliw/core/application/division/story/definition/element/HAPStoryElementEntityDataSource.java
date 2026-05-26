@@ -1,44 +1,37 @@
 package com.nosliw.core.application.division.story.definition.element;
 
 import com.nosliw.common.info.HAPEntityInfo;
+import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.info.HAPWithEntityInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfo;
-import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
-public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntityInfo{
+public class HAPStoryElementEntityDataSource extends HAPStoryElement implements HAPWithEntityInfo{
 
 	public static final String CHILD_COMMAND = "command";
 	
 	private String m_serviceId;
 	
-	private HAPStoryIdElement m_commandEleId;
+	private HAPEntityInfo m_entityInfo;
 	
 	public HAPStoryElementEntityDataSource() {
 		this(null, null);
 	}
 	
 	public HAPStoryElementEntityDataSource(String serviceId, HAPEntityInfo dataSourceInfo) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE), dataSourceInfo);
+		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE));
+		this.m_entityInfo = new HAPEntityInfoImp();
 		this.m_serviceId = serviceId;
+		dataSourceInfo.cloneToEntityInfo(this.m_entityInfo);
 	}
 
 	@Override
-	public boolean addChild(HAPStoryElement ele, String childName) {
-		this.m_commandEleId = ele.getElementId();
-		return true;
-	}
-
-	@Override
-	public HAPStoryIdElement getChild(String childName) {
-		return this.m_commandEleId;
-	}
+	public HAPEntityInfo getEntityInfo() {  return this.m_entityInfo;  }
 
 	protected void cloneToStoryElement(HAPStoryElementEntityDataSource storyEle) {
 		super.cloneToStoryElement(storyEle);
 		storyEle.m_serviceId = this.m_serviceId;
-		storyEle.m_commandEleId = this.m_commandEleId;
 	}
 
 	

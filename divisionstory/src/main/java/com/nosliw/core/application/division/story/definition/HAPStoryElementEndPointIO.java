@@ -1,6 +1,6 @@
 package com.nosliw.core.application.division.story.definition;
 
-public abstract class HAPStoryElementEndPointIO extends HAPStoryElementImp{
+public abstract class HAPStoryElementEndPointIO extends HAPStoryElement{
 
 	private String m_IOType;
 	

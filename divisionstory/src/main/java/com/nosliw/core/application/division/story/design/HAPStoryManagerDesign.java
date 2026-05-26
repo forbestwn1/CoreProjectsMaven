@@ -38,6 +38,8 @@ public class HAPStoryManagerDesign {
 		}
 	}
 	
+	public HAPStoryDesign getDesign(String designId) {   return this.m_designs.get(designId);      }
+	
 	public HAPStoryBuilderResponseNew newStoryDesign(String builderId, String designId) {
 		HAPStoryBuilder storyBuilder = this.getBuilder(builderId);
 		HAPStoryDesign design = new HAPStoryDesign(designId!=null?designId:this.generateId(), builderId, this.m_changeMan);
@@ -63,8 +65,6 @@ public class HAPStoryManagerDesign {
 		HAPUtilityFile.writeJsonFile(HAPSystemFolderUtility.getStoryDesignFolder(), storyDesign.getId()+".json", storyDesign.toStringValue(HAPSerializationFormat.JSON));
 	}
 
-	private HAPStoryDesign getDesign(String designId) {   return this.m_designs.get(designId);      }
-	
 	private HAPStoryBuilder getBuilder(String builderId) {	return this.m_builders.get(builderId);	}
 	
 	private String generateId() {		return this.m_idGenerator.generateIdStr();	}

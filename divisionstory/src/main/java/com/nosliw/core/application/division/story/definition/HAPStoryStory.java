@@ -31,19 +31,19 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	private int m_index = 0;
 	
-	private Map<HAPStoryIdElement, HAPStoryElementImp> m_elements;
+	private Map<HAPStoryIdElement, HAPStoryElement> m_elements;
 	
 	private Map<String, HAPStoryIdElement> m_elementByAliase;
 	private Map<HAPStoryIdElement, String> m_aliaseByElementId;
 	
 	public HAPStoryStory() {
-		this.m_elements = new LinkedHashMap<HAPStoryIdElement, HAPStoryElementImp>();
+		this.m_elements = new LinkedHashMap<HAPStoryIdElement, HAPStoryElement>();
 		this.m_elementByAliase = new LinkedHashMap<String, HAPStoryIdElement>();
 		this.m_aliaseByElementId = new LinkedHashMap<HAPStoryIdElement, String>();
 	}
 	
-	public HAPStoryElementImp getElement(HAPStoryReferenceElement eleRef) {
-		HAPStoryElementImp out = null;
+	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
+		HAPStoryElement out = null;
 		
 		String refType = eleRef.getEntityOrReferenceType();
 		if(refType.equals(HAPConstantShared.STORY_ELEMENT_REFERENCE_ID)) {
@@ -68,12 +68,12 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		return null;
 	}
 	
-	public HAPStoryElementImp addElement(HAPStoryElementImp element) {
+	public HAPStoryElement addElement(HAPStoryElement element) {
 		return this.addElement(element, null);
 	}
 	
-	public HAPStoryElementImp addElement(HAPStoryElementImp element, HAPStoryAliasElement alias) {
-		HAPStoryElementImp out = element;
+	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAliasElement alias) {
+		HAPStoryElement out = element;
 		if(out.getElementId()==null) {
 			this.buildElementId(out);
 		}
@@ -87,14 +87,14 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		return out;
 	}
 	
-	public HAPStoryElementImp deleteElement(HAPStoryIdElement eleId) {
-		HAPStoryElementImp out = this.m_elements.remove(eleId);
+	public HAPStoryElement deleteElement(HAPStoryIdElement eleId) {
+		HAPStoryElement out = this.m_elements.remove(eleId);
 		String alias = this.m_aliaseByElementId.remove(eleId);
 		this.m_elementByAliase.remove(alias);
 		return out;
 	}
 	
-	public void buildElementId(HAPStoryElementImp element) {
+	public void buildElementId(HAPStoryElement element) {
 		this.m_index++;
 		element.setElementId(new HAPStoryIdElement(element.getElementType().getKey() + this.m_index));
 	}

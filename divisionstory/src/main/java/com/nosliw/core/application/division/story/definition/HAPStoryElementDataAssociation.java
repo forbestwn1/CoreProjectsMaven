@@ -6,7 +6,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 
 //data association between entity
-public class HAPStoryElementDataAssociation extends HAPStoryElementImpWithEntityInfo{
+public class HAPStoryElementDataAssociation extends HAPStoryElementImp{
 
 	public static final String CHILD_ENTITY1 = "entity1";
 	public static final String CHILD_ENTITY2 = "entity2";
