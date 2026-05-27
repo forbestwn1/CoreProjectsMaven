@@ -37,6 +37,6 @@ nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMO
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("buildStandaloneUITag", node_buildStandaloneUITag); 
+packageObj.createChildNode("buildStandaloneUITagRequest", node_buildStandaloneUITagRequest); 
 
 })(packageObj);
