@@ -1,11 +1,12 @@
 package com.nosliw.core.application.division.manual.core.definition;
 
 import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 
 public class HAPManualDefinitionContextParse {
 
-	private String m_basePath;
+	private HAPManualContentProvider m_contentProvider;
 	
 	private String m_brickDivision;
 	
@@ -13,14 +14,14 @@ public class HAPManualDefinitionContextParse {
 	
 	private HAPManagerApplicationBrick m_brickManager;
 	
-	public HAPManualDefinitionContextParse(String basePath, String brickDivision, HAPManualManagerBrick manualBrickMan, HAPManagerApplicationBrick brickMan) {
-		this.m_basePath = basePath;
+	public HAPManualDefinitionContextParse(HAPManualContentProvider contentProvider, String brickDivision, HAPManualManagerBrick manualBrickMan, HAPManagerApplicationBrick brickMan) {
+		this.m_contentProvider = contentProvider;
 		this.m_brickDivision = brickDivision;
 		this.m_manualBrickMan = manualBrickMan;
 		this.m_brickManager = brickMan;
 	}
 	
-	public String getBasePath() {    return this.m_basePath;    }
+	public HAPManualContentProvider getContentProvider() {    return this.m_contentProvider;    }
 	
 	public String getBrickDivision() {   return this.m_brickDivision;   }
 	

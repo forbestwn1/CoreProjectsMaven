@@ -10,12 +10,12 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.HAPValueOfDynamic;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
+import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputContainer;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
@@ -182,9 +182,8 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 	}
 
 	private static HAPManualDefinitionBrick parseLocalValue(HAPIdBrick entityId, HAPManualDefinitionContextParse parseContext) {
-		HAPManualDefinitionInfoBrickLocation entityLocationInfo = HAPManualDefinitionUtilityBrickLocation.getLocalBrickLocationInfo(parseContext.getBasePath(), entityId);
-		String content = HAPUtilityFile.readFile(entityLocationInfo.getFiile());
-		return HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(content, entityId.getBrickTypeId(), entityLocationInfo.getFormat(), parseContext).getBrick();
+		HAPManualInfoContent contentInfo = parseContext.getContentProvider().getLocalBrickContent(entityId);
+		return HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(contentInfo.getContent(), entityId.getBrickTypeId(), contentInfo.getFormat(), parseContext).getBrick();
 	}
 	
 	private static HAPManualDefinitionAdapter parseAdapter(JSONObject adapterObj, HAPIdBrickType adatperTypeId, HAPManualDefinitionContextParse parseContext) {

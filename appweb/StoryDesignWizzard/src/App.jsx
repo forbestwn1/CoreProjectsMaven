@@ -4,13 +4,30 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import ChooseDataSourceStep from './ChooseDataSourceStep'
+import CustomerizeUI from './CustomerizeUI'
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <ChooseDataSourceStep/>
+      <BrowserRouter>
+
+
+        <nav>
+          <NavLink to="/choose-data-source">Choose Data Source</NavLink>
+          <NavLink to="/customerize-ui">Customerize UI</NavLink>
+        </nav>
+
+        <Routes>
+          <Route path="/choose-data-source" element={<ChooseDataSourceStep />} />
+          <Route path="/customerize-ui" element={<CustomerizeUI />} />
+        </Routes>
+
+      </BrowserRouter>
+
+      
 
       <section id="center">
         <div className="hero">

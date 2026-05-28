@@ -107,6 +107,7 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 	public Set<String> getBranchNames(){   return this.m_branchBricks.keySet();    }
 	
 	public HAPDynamicDefinitionContainer getDynamicInfo() {     return this.m_dynamicInfo;        }
+	public void setDynamicInfo(HAPDynamicDefinitionContainer dynamicInfo) {      this.m_dynamicInfo = dynamicInfo;     }
 	
 	public Object getExtraData() {   return this.m_extraData;    }
 	public void setExtraData(Object data) {   this.m_extraData = data;    }

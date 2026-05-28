@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.uitag.standalone;
+package com.nosliw.core.application.division.manual.gateway;
 
 import java.util.Map;
 
