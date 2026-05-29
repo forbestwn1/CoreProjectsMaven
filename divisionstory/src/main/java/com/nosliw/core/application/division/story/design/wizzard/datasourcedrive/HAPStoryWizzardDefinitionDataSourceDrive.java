@@ -177,7 +177,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), constantValueInQ.getConstantData(), parmDef);
 
 					//build tunnel between constant endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithConstant.buildPathForConstantEndPoint(parmDef.getName()), HAPStoryElementAccessoryCommand.getAddRequestParmChildPath(parmDef.getName()));
+					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithConstant.getConstantEndPointPath(parmDef.getName()), HAPStoryElementAccessoryCommand.getRequestParmEndPointPath(parmDef.getName()));
 					requestDataAssocationEle.addTunnel(tunnel);
 				}
 				else {
@@ -189,24 +189,24 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
 
 					//build tunnel between variable endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithVariable.buildPathForVariableEndPoint(parmDef.getName()), HAPStoryElementAccessoryCommand.getAddRequestParmChildPath(parmDef.getName()));
+					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithVariable.getVariableEndPointPath(parmDef.getName()), HAPStoryElementAccessoryCommand.getRequestParmEndPointPath(parmDef.getName()));
 					requestDataAssocationEle.addTunnel(tunnel);
 					
 					//append input content
 					HAPStoryChangeItemNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "input.html");
-					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIMetaContentChildAppend("input")));
+					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("input"), new HAPStoryUIMetaContentChildAppend()));
 					
 					//inject label
 					HAPStoryChangeItemNew newRequestInputLabelContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "inputlabel.html");
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIMetaContentChildInject("label")));
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("label"), new HAPStoryUIMetaContentChildInject()));
 					
 					//inject uiTag
 					HAPStoryChangeItemNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(null, new HAPStoryUIMetaContentChildInject("uitag")));
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("uitag"), new HAPStoryUIMetaContentChildInject()));
 					
 					//inject content wrapper into uitag
 					HAPStoryChangeItemNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
-					changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
+					changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
 					
 					//inject error tag
 					
@@ -228,7 +228,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//build data source execute task
 			HAPStoryChangeItemNew commandRunChangeNew = changeSession.addChangeItemNew(new HAPStoryElementRunnableCommand());
 			//add command to command run
-			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getChild(HAPStoryElementEntityDataSource.CHILD_COMMAND), new HAPStoryChangeInfoConnectionContainer());
+			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getChild(HAPStoryElementEntityDataSource.CHILD_COMMAND).getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementRunnableCommand.CHILD_COMMAND)));
 			//add request data association to command run
 			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), requestDataAssociationChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementAccessoryCommand.CHILD_REQUEST)));
 			

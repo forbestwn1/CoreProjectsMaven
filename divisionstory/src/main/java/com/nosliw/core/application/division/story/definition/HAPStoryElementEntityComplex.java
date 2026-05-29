@@ -6,7 +6,8 @@ public abstract class HAPStoryElementEntityComplex
                         implements HAPStoryElementWithCommand, 
                                    HAPStoryElementWithConstant, 
                                    HAPStoryElementWithVariable, 
-                                   HAPStoryElementWithEvent{
+                                   HAPStoryElementWithEvent,
+                                   HAPStoryElementWithTask{
 
 	
 	public HAPStoryElementEntityComplex(HAPStoryIdElementType elementType) {

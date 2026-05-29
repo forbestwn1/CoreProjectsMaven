@@ -8,4 +8,7 @@ public interface HAPStoryElementWithConstant {
 
 	public static HAPPath getAddConstantChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_CONSTANT));   }
 
+	public static HAPPath getConstantEndPointPath(String contantName) {
+		return new HAPPath(new String[] {CHILD_CONSTANT, contantName, HAPStoryElementWithEndPoint.CHILD_ENDPOINT});
+	}
 }

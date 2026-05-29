@@ -7,6 +7,13 @@ import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryElementRunnableCommand extends HAPStoryElementRunnable{
 
+	public final static String CHILD_COMMAND = "command";
+
+	public final static String CHILD_REQUESTDATAASSOCIATION = "requestDataAssociation";
+	
+	public final static String CHILD_RESPONSEDATAASSOCIATION = "responseDataAssociation";
+
+	
 	//command element id
 	private HAPStoryIdElement m_command;
 	

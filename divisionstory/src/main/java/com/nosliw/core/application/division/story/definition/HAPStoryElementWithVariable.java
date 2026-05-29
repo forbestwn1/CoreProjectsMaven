@@ -8,4 +8,7 @@ public interface HAPStoryElementWithVariable {
 
 	public static HAPPath getAddVariableChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_VARIABLE));   }
 
+	public static HAPPath getVariableEndPointPath(String contantName) {
+		return new HAPPath(new String[] {CHILD_VARIABLE, contantName, HAPStoryElementWithEndPoint.CHILD_ENDPOINT});
+	}
 }
