@@ -4,12 +4,11 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 
-public class HAPStoryElementAccessoryConstant extends HAPStoryElementAccessory{
+public class HAPStoryElementAccessoryConstant extends HAPStoryElementAccessory implements HAPStoryElementWithEndPoint{
 
-	public static final String CHILD_ENDPOINT = "endpoint";
-	
 	public HAPStoryElementAccessoryConstant() {
 		this(null);
 	}

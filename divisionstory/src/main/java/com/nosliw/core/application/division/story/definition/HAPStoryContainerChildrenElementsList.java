@@ -22,5 +22,11 @@ public class HAPStoryContainerChildrenElementsList extends HAPStoryContainerChil
     	return childContainer;
     }
 
+	@Override
+	public HAPStoryContainerChildrenElements cloneContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

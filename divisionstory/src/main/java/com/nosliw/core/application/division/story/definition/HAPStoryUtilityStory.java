@@ -4,10 +4,12 @@ import com.nosliw.common.path.HAPPath;
 
 public class HAPStoryUtilityStory {
 
-	
-	public static HAPStoryIdElement getChildren(HAPStoryStory story, HAPStoryReferenceElement eleRef, HAPPath pathToChildren) {
-		
+	public static HAPPath buildChildPathForElement(HAPPath basePath) {
+		HAPPath out = new HAPPath(basePath);
+		out.appendSegment(HAPStoryElement.SEG_ELEMENT);
+		return out;
 	}
+
 	
 	
 }

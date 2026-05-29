@@ -11,5 +11,7 @@ public abstract class HAPStoryContainerChildrenElements {
 	public String getContainerType() {
 		return this.m_containerType;
 	}
-	
+
+	abstract public HAPStoryContainerChildrenElements cloneContainer();
+		
 }

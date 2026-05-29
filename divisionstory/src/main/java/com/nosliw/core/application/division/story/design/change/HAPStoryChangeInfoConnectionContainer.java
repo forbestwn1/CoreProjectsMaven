@@ -9,17 +9,13 @@ public class HAPStoryChangeInfoConnectionContainer extends HAPStoryChangeInfoCon
 	
 	private Object m_metaData;
 	
-    public HAPStoryChangeInfoConnectionContainer() {
-    	super(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN);
-    }
-	
     public HAPStoryChangeInfoConnectionContainer(HAPPath path) {
-    	this();
-    	this.m_childPath = path;
+    	this(path, null);
     }	
 	
     public HAPStoryChangeInfoConnectionContainer(HAPPath path, Object metaData) {
-    	this();
+    	super(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN);
     	this.m_childPath = path;
+    	this.m_metaData = metaData;
     }	
 }

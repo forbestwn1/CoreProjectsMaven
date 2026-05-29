@@ -4,7 +4,7 @@ public abstract class HAPStoryUIMetaContentChild{
 
     private String m_slotName;
 	
-    public HAPStoryUIMetaContentChild(String placeHolderName) {
+    public HAPStoryUIMetaContentChild(String slotName) {
     	
     }
 	

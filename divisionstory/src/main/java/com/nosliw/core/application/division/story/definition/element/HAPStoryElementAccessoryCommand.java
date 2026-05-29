@@ -4,18 +4,16 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
-import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsMap;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
-import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
 
 public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
-	public final static String REQUEST = "request";
+	public final static String CHILD_REQUEST = "request";
 	
-	public final static String RESPONSE = "request";
-	
+	public final static String CHILD_RESPONSE = "request";
 	
 	private HAPInteractiveTask m_taskInterface;
 	
@@ -26,20 +24,11 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	public HAPStoryElementAccessoryCommand(HAPInteractiveTask taskInterface, HAPEntityInfo commandInfo) {
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_COMMAND), commandInfo);
 		this.m_taskInterface = taskInterface;
-		
-		//request end points
-		this.addChildContainer(REQUEST, new HAPStoryContainerChildrenElementsMap());
-		//response end points
-		this.addChildContainer(RESPONSE, new HAPStoryContainerChildrenElementsMap());
-		
 	}
 
-	public static HAPPath buildPathForRequestEndPoint(String parName) {
-		return new HAPPath(new String[]{HAPStoryUtilityElement.buildChildNameFromPath(new String[]{REQUEST, parName}), HAPStoryElementAccessoryVariable.CHILD_ENDPOINT});	
-	}
-	public static HAPPath buildPathForResponseEndPoint(String resultName, String parName) {
-		return new HAPPath(new String[]{HAPStoryUtilityElement.buildChildNameFromPath(new String[]{REQUEST, resultName, parName}), HAPStoryElementAccessoryVariable.CHILD_ENDPOINT});	
-	}
+	public static HAPPath getAddRequestParmChildPath(String parName) {		return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_REQUEST));  }
+
+	public static HAPPath getAddResponseParmChildPath(String resultName, String parName) {		return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(new String[] {CHILD_RESPONSE, resultName}));	}
 	
 	protected void cloneToStoryElement(HAPStoryElementAccessoryCommand storyEle) {
 		super.cloneToStoryElement(storyEle);

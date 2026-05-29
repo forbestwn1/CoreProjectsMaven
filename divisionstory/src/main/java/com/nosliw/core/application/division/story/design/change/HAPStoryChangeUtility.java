@@ -9,6 +9,9 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEndPointIO;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryConstant;
@@ -20,30 +23,39 @@ import com.nosliw.core.data.HAPData;
 
 public class HAPStoryChangeUtility {
 
-	public static HAPStoryChangeItemNew buildNewConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPData constantData, HAPEntityInfo entityInfo) {
+	public static HAPStoryChangeItemNew buildNewAppendConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPData constantData, HAPEntityInfo entityInfo) {
 		//variable element
 		HAPStoryElementAccessoryConstant constantEle = new HAPStoryElementAccessoryConstant(entityInfo);
 		HAPStoryChangeItemNew newConstantChange = changeSession.addChangeItemNew(constantEle);
-		changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementAccessoryConstant.CHILD_ENDPOINT)));
+		changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithConstant.getAddConstantChildPath()));
 
 		//end point element
 		HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOConstant(constantData);
 		HAPStoryChangeItemNew newEndpointChange = changeSession.addChangeItemNew(endPointEle);
-		changeSession.addChangeConnectionNew(newConstantChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
+		changeSession.addChangeConnectionNew(newConstantChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)));
 
 		return newConstantChange;
 	}
 	
-	public static HAPStoryChangeItemNew buildNewVariableChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataDefinition dataDefinition, HAPEntityInfo variableInfo) {
+	public static HAPStoryChangeItemNew buildNewAppendVariableChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataDefinition dataDefinition, HAPEntityInfo variableInfo) {
+		//new variable element
+		HAPStoryChangeItemNew newVariableChange = buildNewVariableChange(changeSession, dataDefinition, variableInfo, HAPConstantShared.IO_DIRECTION_BOTH);
+		
+		//append to parent
+		changeSession.addChangeConnectionNew(parentRef, newVariableChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithVariable.getAddVariableChildPath()));
+
+		return newVariableChange;
+	}
+
+	public static HAPStoryChangeItemNew buildNewVariableChange(HAPStoryDesignSessionChange changeSession, HAPDataDefinition dataDefinition, HAPEntityInfo variableInfo, String ioDirection) {
 		//variable element
 		HAPStoryElementAccessoryVariable variableEle = new HAPStoryElementAccessoryVariable(variableInfo);
 		HAPStoryChangeItemNew newVariableChange = changeSession.addChangeItemNew(variableEle);
-		changeSession.addChangeConnectionNew(parentRef, newVariableChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementAccessoryVariable.CHILD_ENDPOINT)));
 
 		//end point element
-		HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOVariable(dataDefinition, HAPConstantShared.IO_DIRECTION_BOTH);
+		HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOVariable(dataDefinition, ioDirection);
 		HAPStoryChangeItemNew newEndpointChange = changeSession.addChangeItemNew(endPointEle);
-		changeSession.addChangeConnectionNew(newVariableChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer());
+		changeSession.addChangeConnectionNew(newVariableChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)));
 
 		return newVariableChange;
 	}
@@ -54,21 +66,19 @@ public class HAPStoryChangeUtility {
 		
 		//build request end point in command
 		for(HAPDefinitionParm parmDef : taskInterface.getRequestParms()) {
-			HAPStoryChangeItemNew parmEndpointNew = changeSession.addChangeItemNew(new HAPStoryElementEndPointIOVariable(parmDef.getDataDefinition(), HAPConstantShared.IO_DIRECTION_IN));
-			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), parmEndpointNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.buildPathForRequestEndPoint(parmDef.getName())));
+			HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, parmDef.getDataDefinition(), parmDef, HAPConstantShared.IO_DIRECTION_BOTH);
+			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddRequestParmChildPath(parmDef.getName())));
 		}
 		
 		//build response end point in command
 		for(HAPInteractiveResultTask result : taskInterface.getResult()) {
 			for(HAPDefinitionResult output : result.getOutput()) {
-				HAPStoryChangeItemNew parmEndpointNew = changeSession.addChangeItemNew(new HAPStoryElementEndPointIOVariable(output.getDataDefinition(), HAPConstantShared.IO_DIRECTION_OUT));
-				changeSession.addChangeConnectionNew(newCommandChange.getElementId(), parmEndpointNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.buildPathForResponseEndPoint(result.getName(), output.getName())));
+				HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, output.getDataDefinition(), output, HAPConstantShared.IO_DIRECTION_BOTH);
+				changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddResponseParmChildPath(result.getName(), output.getName())));
 			}
 		}
 		
 		return newCommandChange;
 	}
 	
-
-
 }

@@ -12,5 +12,11 @@ public class HAPStoryContainerChildrenElementsSingle extends HAPStoryContainerCh
 	}
 
 	public HAPStoryChildElement getChildElement() {     return this.m_childElement;      }
+
+	@Override
+	public HAPStoryContainerChildrenElements cloneContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
