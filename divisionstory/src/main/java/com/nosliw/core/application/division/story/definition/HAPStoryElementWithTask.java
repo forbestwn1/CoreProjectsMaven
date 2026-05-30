@@ -4,8 +4,8 @@ import com.nosliw.common.path.HAPPath;
 
 public interface HAPStoryElementWithTask {
 
-	public static final String CHILD_COMMAND = "command";
+	public static final String CHILD_TASK = "task";
 	
-	public static HAPPath getAddCommandChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_COMMAND));   }
-	
+	public static HAPPath getAddTaskChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_TASK));   }
+
 }

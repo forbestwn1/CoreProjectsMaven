@@ -111,7 +111,9 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 				else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
 					if(HAPUtilityBasic.isNumber(seg)){
 						currentContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(Integer.valueOf(seg));
-						
+					}
+					else {
+						currentContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(seg);
 					}
 				}
 				

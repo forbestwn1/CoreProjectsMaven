@@ -1,0 +1,23 @@
+{
+	"info": {
+		"name": "test0",
+		"description": "test expression group entity"
+	},
+	"brick": {
+	
+	    "page" : [
+            ||pages||
+	    ],
+	    
+	    "valueContext" : {
+	    
+	        ||valueContext||
+	    },
+	
+	    "task" : [
+            ||tasks||
+	    ],
+	    
+	    
+	}
+}

@@ -844,6 +844,7 @@
 			<definition name="STORYNODE_TYPE_UICONTENT" value="UIContent"/>
 			<definition name="STORYNODE_TYPE_UICUSTOMTAG" value="UICustomTag"/>
 
+			<definition name="STORYNODE_TYPE_TASK_COMMAND" value="commandTask"/>
 
 
 

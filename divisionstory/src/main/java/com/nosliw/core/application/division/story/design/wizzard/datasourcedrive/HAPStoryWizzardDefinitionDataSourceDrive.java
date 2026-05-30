@@ -19,6 +19,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElementData
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithCommand;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
@@ -215,7 +216,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			}
 			HAPStoryChangeItemNew requestDataAssociationChangeNew = changeSession.addChangeItemNew(requestDataAssocationEle);
 			
-			
 			//response
 			List<HAPStoryWizzardQuestionair> responseParmGroupQs = HAPStoryWizzardUtilityQuestion.findQuestionairsByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP);
 			for(HAPStoryWizzardQuestionair responseParmGroupQ : responseParmGroupQs) {
@@ -231,7 +231,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getChild(HAPStoryElementEntityDataSource.CHILD_COMMAND).getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementRunnableCommand.CHILD_COMMAND)));
 			//add request data association to command run
 			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), requestDataAssociationChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementAccessoryCommand.CHILD_REQUEST)));
+
 			
+			changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, commandRunChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithTask.getAddTaskChildPath()));
 			
 			changeSession.commit();
 		}
