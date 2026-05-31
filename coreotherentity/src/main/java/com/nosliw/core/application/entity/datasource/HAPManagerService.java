@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -98,7 +98,7 @@ public class HAPManagerService{
 	private Map<String, HAPInfoService> getAllServicesInfo(){
 		if(this.m_servicesInfo==null) {
 			this.m_servicesInfo = new LinkedHashMap<String, HAPInfoService>();
-			List<HAPInfoService> defs = HAPImporterDataSourceDefinition.loadDataSourceDefinition(this.m_brickManager, this.m_entityParseService);
+			List<HAPInfoService> defs = HAPImporterDataSourceDefinition.loadDataSourceDefinition(this.m_entityParseService);
 			for(HAPInfoService def : defs) {
 				this.registerServiceInfo(def);
 			}

@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.service.profile.HAPInfoServiceStatic;
-import com.nosliw.core.application.entity.service.HAPInfoServiceRuntime;
+import com.nosliw.core.application.entity.datasource.HAPInfoServiceRuntime;
 import com.nosliw.core.runtimeenv.HAPRuntimeEnvironment;
 import com.nosliw.core.xxx.resource.HAPResourceDefinition;
 import com.nosliw.core.xxx.resource.HAPResourceDefinitionOrId;

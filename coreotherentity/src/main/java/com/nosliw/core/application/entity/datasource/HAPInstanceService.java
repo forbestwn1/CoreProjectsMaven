@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource;
 
 import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
 

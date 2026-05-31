@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.brick.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.entity.datasource.brick.HAPBlockServiceInterfaceImp;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.system.HAPSystemFolderUtility;
 

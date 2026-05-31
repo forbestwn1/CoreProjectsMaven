@@ -48,8 +48,8 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionair;
-import com.nosliw.core.application.entity.service.HAPManagerService;
-import com.nosliw.core.application.entity.service.HAPServiceProfile;
+import com.nosliw.core.application.entity.datasource.HAPManagerService;
+import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;

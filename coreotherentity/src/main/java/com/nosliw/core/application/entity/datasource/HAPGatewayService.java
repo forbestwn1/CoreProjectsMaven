@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource;
 
 import java.util.List;
 import java.util.Map;

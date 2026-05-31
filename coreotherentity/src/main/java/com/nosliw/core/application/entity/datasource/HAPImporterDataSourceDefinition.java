@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import com.nosliw.common.clss.HAPClassFilter;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.datasource.brick.HAPBlockServiceProfileImp;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPImporterDataSourceDefinition {
 
-	public static List<HAPInfoService> loadDataSourceDefinition(HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
+	public static List<HAPInfoService> loadDataSourceDefinition(HAPServiceParseEntity entityParseService) {
 		List<HAPInfoService> out = new ArrayList<HAPInfoService>();
 
 		/*
@@ -37,7 +37,7 @@ public class HAPImporterDataSourceDefinition {
 		new HAPClassFilter(){
 			@Override
 			protected void process(Class cls, Object data) {
-				List<HAPInfoService> dataSourceDefs = loadDataSourceDefinition(cls, brickMan, entityParseService);
+				List<HAPInfoService> dataSourceDefs = loadDataSourceDefinition(cls, entityParseService);
 				out.addAll(dataSourceDefs);
 			}
 
@@ -56,7 +56,7 @@ public class HAPImporterDataSourceDefinition {
 		return out;
 	}
 	
-	private static List<HAPInfoService> loadDataSourceDefinition(Class cls, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService){
+	private static List<HAPInfoService> loadDataSourceDefinition(Class cls, HAPServiceParseEntity entityParseService){
 		List<HAPInfoService> out = new ArrayList<HAPInfoService>();
 		try{
 			InputStream inputStream = cls.getResourceAsStream("service.ds");

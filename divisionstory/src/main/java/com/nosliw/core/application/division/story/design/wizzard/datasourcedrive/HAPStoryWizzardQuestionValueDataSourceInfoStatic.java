@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionairImp;
-import com.nosliw.core.application.entity.service.HAPServiceProfile;
+import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 
 @HAPEntityWithAttribute
 public class HAPStoryWizzardQuestionValueDataSourceInfoStatic extends HAPStoryWizzardValueInQuestionairImp{

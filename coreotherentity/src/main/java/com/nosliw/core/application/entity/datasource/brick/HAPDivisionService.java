@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.service;
+package com.nosliw.core.application.entity.datasource.brick;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,8 @@ import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.entity.datasource.HAPIdServcieInterface;
+import com.nosliw.core.application.entity.datasource.HAPManagerService;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
