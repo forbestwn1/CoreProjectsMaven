@@ -5,7 +5,7 @@ import java.util.Map;
 import com.nosliw.common.utils.HAPConstantShared;
 
 //for attribute
-public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChildrenElements{
+public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChildrenElementsCollection{
 
 	private Map<String, HAPStoryContainerChildrenElements> m_childElement;
 	
@@ -17,7 +17,8 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
 		return this.m_childElement;
 	}
 	
-    public HAPStoryContainerChildrenElements getChildContainer(String childName) {
+    @Override
+	public HAPStoryContainerChildrenElements getChildContainer(String childName) {
     	return this.m_childElement.get(childName);
     }
     
@@ -26,6 +27,11 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
     	return childContainer;
     }
 
+    @Override
+	public HAPStoryContainerChildrenElementsSingle removeChild(String childName) {
+    	return (HAPStoryContainerChildrenElementsSingle)this.m_childElement.remove(childName);
+    }
+    
 	@Override
 	public HAPStoryContainerChildrenElements cloneContainer() {
 		// TODO Auto-generated method stub

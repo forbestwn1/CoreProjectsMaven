@@ -892,10 +892,11 @@
 			<definition type="space"/>
 			<definition name="STORYDESIGN_CHANGETYPE_NEW" value="new"/>
 			<definition name="STORYDESIGN_CHANGETYPE_DELETE" value="delete"/>
-			<definition name="STORYDESIGN_CHANGETYPE_PATCH" value="patch"/>
-			<definition name="STORYDESIGN_CHANGETYPE_PUT" value="put"/>
 			<definition name="STORYDESIGN_CHANGETYPE_CONNECTION_NEW" value="newConnection"/>
 			<definition name="STORYDESIGN_CHANGETYPE_CONNECTION_DELETE" value="deleteConnection"/>
+
+			<definition name="STORYDESIGN_CHANGETYPE_PATCH" value="patch"/>
+			<definition name="STORYDESIGN_CHANGETYPE_PUT" value="put"/>
 			<definition name="STORYDESIGN_CHANGETYPE_ALIAS" value="alias"/>
 			<definition name="STORYDESIGN_CHANGETYPE_STORYINFO" value="storyInfo"/>
 			

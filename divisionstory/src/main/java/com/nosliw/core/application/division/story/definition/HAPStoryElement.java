@@ -2,6 +2,8 @@ package com.nosliw.core.application.division.story.definition;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
@@ -41,10 +43,30 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 	public HAPStoryIdElementType getElementType() {     return this.m_elementType;       }
 	protected void setElementType(HAPStoryIdElementType elementType) {    this.m_elementType = elementType;     }
 	
-	public boolean addChild(HAPStoryChildElement child, String childPath) {
+	public HAPPath addChild(HAPStoryChildElement child, String childPath) {
+		return this.addChild(child, new HAPPath(childPath));
+	}
+
+	public HAPStoryContainerChildrenElementsSingle removeChild(HAPPath childPath) {
+		HAPStoryContainerChildrenElements currentContainer = this.m_children;
+		String[] segs = childPath.getPathSegments();
+		for(int i=0; i<segs.length; i++) {
+            String seg = segs[i];
+            if(i==segs.length-1) {
+            	return ((HAPStoryContainerChildrenElementsCollection)currentContainer).removeChild(seg);
+            }
+            else {
+            	currentContainer = this.getChildContainer(currentContainer, seg);
+            }
+		}
+		return null;
+	}
+	
+	public HAPPath addChild(HAPStoryChildElement child, HAPPath childPath) {
+		HAPPath out = new HAPPath();
 		HAPStoryContainerChildrenElementsSingle singleContainer = new HAPStoryContainerChildrenElementsSingle(child);
 		HAPStoryContainerChildrenElements currentContainer = this.m_children;
-		String[] segs = HAPUtilityNamingConversion.parsePaths(childPath);
+		String[] segs = childPath.getPathSegments();
 		for(int i=0; i<segs.length; i++) {
             String seg = segs[i];
 			String containerType = currentContainer.getContainerType();
@@ -52,33 +74,44 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 			if(i==segs.length-1) {
 				if(seg.equals(SEG_ELEMENT)) {
 					if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
-						((HAPStoryContainerChildrenElementsList)currentContainer).newChildContainer(singleContainer);
-						return true;
+						out.appendSegment(((HAPStoryContainerChildrenElementsList)currentContainer).newChildContainer(singleContainer));
 					}
 				}
 				else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP.equals(containerType)) {
 					((HAPStoryContainerChildrenElementsMap)currentContainer).newChildContainer(seg, singleContainer);
-					return true;
+					out.appendSegment(seg);
 				}
 				throw new RuntimeException();
 			}
+			else {
+				HAPStoryContainerChildrenElements childContainer = null;
+				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP.equals(containerType)) {
+					childContainer = ((HAPStoryContainerChildrenElementsMap)currentContainer).getChildContainer(seg);
+					if(childContainer==null) {
+						childContainer = ((HAPStoryContainerChildrenElementsMap)currentContainer).newChildContainer(seg, newElementsChildrenContainerAccordingToSeg(segs[i+1]));
+					}
+					out.appendSegment(seg);
+				}
+				else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
+					if(HAPUtilityBasic.isNumber(seg)){
+						Pair<String, HAPStoryContainerChildrenElements> childPair = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(Integer.valueOf(seg));
+						childContainer = childPair.getRight();
+						out.appendSegment(childPair.getLeft());
+					}
+					else {
+						childContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(seg);
+						out.appendSegment(seg);
+					}
+					
+					if(childContainer==null) {
+						throw new RuntimeException();
+					}
+				}
+				currentContainer = childContainer;
+			}
 
-			HAPStoryContainerChildrenElements childContainer = null;
-			if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP.equals(containerType)) {
-				childContainer = ((HAPStoryContainerChildrenElementsMap)currentContainer).getChildContainer(seg);
-				if(childContainer==null) {
-					childContainer = ((HAPStoryContainerChildrenElementsMap)currentContainer).newChildContainer(seg, newElementsChildrenContainerAccordingToSeg(segs[i+1]));
-				}
-			}
-			else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
-				childContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(Integer.valueOf(seg));
-				if(childContainer==null) {
-					throw new RuntimeException();
-				}
-			}
-			currentContainer = childContainer;
 		}
-		return true;
+		return out;
 	}
 	
 	private HAPStoryContainerChildrenElements newElementsChildrenContainerAccordingToSeg(String seg) {
@@ -104,25 +137,13 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 		boolean searching = true;
 		for(String seg : segs) {
 			if(searching==true) {
-				String containerType = currentContainer.getContainerType();
-				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP.equals(containerType)) {
-					currentContainer = ((HAPStoryContainerChildrenElementsMap)currentContainer).getChildContainer(seg);
-				}
-				else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
-					if(HAPUtilityBasic.isNumber(seg)){
-						currentContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(Integer.valueOf(seg));
-					}
-					else {
-						currentContainer = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(seg);
-					}
-				}
+				currentContainer = this.getChildContainer(currentContainer, seg);
 				
 				if(currentContainer==null) {
 					throw new RuntimeException();
 				}
 				
-				containerType = currentContainer.getContainerType();
-				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_SINGLE.equals(containerType)) {
+				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_SINGLE.equals(currentContainer.getContainerType())) {
 					childElement = ((HAPStoryContainerChildrenElementsSingle)currentContainer).getChildElement();
 					searching = false;
 				}
@@ -132,6 +153,23 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 			}
 		}
 		return new HAPStoryResultElementChild(childElement, remainingPath);
+	}
+	
+	private HAPStoryContainerChildrenElements getChildContainer(HAPStoryContainerChildrenElements currentContainer, String seg) {
+		HAPStoryContainerChildrenElements out = null;
+		String containerType = currentContainer.getContainerType();
+		if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP.equals(containerType)) {
+			out = ((HAPStoryContainerChildrenElementsMap)currentContainer).getChildContainer(seg);
+		}
+		else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST.equals(containerType)) {
+			if(HAPUtilityBasic.isNumber(seg)){
+				out = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(Integer.valueOf(seg)).getRight();
+			}
+			else {
+				out = ((HAPStoryContainerChildrenElementsList)currentContainer).getChildContainer(seg);
+			}
+		}
+		return out;
 	}
 	
 	public HAPStoryChildElement getChild(String childName) {

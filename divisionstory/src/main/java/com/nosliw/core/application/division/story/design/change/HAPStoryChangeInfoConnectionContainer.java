@@ -12,7 +12,11 @@ public class HAPStoryChangeInfoConnectionContainer extends HAPStoryChangeInfoCon
     public HAPStoryChangeInfoConnectionContainer(HAPPath path) {
     	this(path, null);
     }	
-	
+
+    public HAPPath getChildPath() {    return this.m_childPath;     }
+    
+    public Object getMetaData() {     return this.m_metaData;       }
+    
     public HAPStoryChangeInfoConnectionContainer(HAPPath path, Object metaData) {
     	super(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN);
     	this.m_childPath = path;

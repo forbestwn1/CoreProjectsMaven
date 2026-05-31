@@ -808,10 +808,10 @@ public class HAPConstantShared {
 
 		public static final String STORYDESIGN_CHANGETYPE_NEW = "new";
 		public static final String STORYDESIGN_CHANGETYPE_DELETE = "delete";
-		public static final String STORYDESIGN_CHANGETYPE_PATCH = "patch";
-		public static final String STORYDESIGN_CHANGETYPE_PUT = "put";
 		public static final String STORYDESIGN_CHANGETYPE_CONNECTION_NEW = "newConnection";
 		public static final String STORYDESIGN_CHANGETYPE_CONNECTION_DELETE = "deleteConnection";
+		public static final String STORYDESIGN_CHANGETYPE_PATCH = "patch";
+		public static final String STORYDESIGN_CHANGETYPE_PUT = "put";
 		public static final String STORYDESIGN_CHANGETYPE_ALIAS = "alias";
 		public static final String STORYDESIGN_CHANGETYPE_STORYINFO = "storyInfo";
 

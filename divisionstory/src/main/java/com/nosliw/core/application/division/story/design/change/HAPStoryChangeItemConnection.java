@@ -9,48 +9,46 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElementWrapper;
 
 @HAPEntityWithAttribute
 public abstract class HAPStoryChangeItemConnection extends HAPStoryChangeItem{
 
 	@HAPAttribute
-	public static final String ELEMENTREFSOURCE = "elementRefSource";
+	public static final String ELEMENTIDSOURCE = "elementRefSource";
 
 	@HAPAttribute
-	public static final String ELEMENTREFTARGET = "elementRefTarget";
+	public static final String ELEMENTIDTARGET = "elementRefTarget";
 
 	@HAPAttribute
 	public static final String CONNECTIONTYPE = "connectionType";
 
-	private HAPStoryReferenceElementWrapper m_elementRefSource;
+	private HAPStoryIdElement m_elementIdSource;
 	
-	private HAPStoryReferenceElementWrapper m_elementRefTarget;
+	private HAPStoryIdElement m_elementIdTarget;
 	
 	public HAPStoryChangeItemConnection(String changeType) {
 		super(changeType);
 	}
 	
-	public HAPStoryChangeItemConnection(String changeType, HAPStoryReferenceElement elementRefSource, HAPStoryReferenceElement elementRefTarget) {
+	public HAPStoryChangeItemConnection(String changeType, HAPStoryIdElement elementRefSource, HAPStoryIdElement elementRefTarget) {
 		this(changeType);
-		this.m_elementRefSource = new HAPStoryReferenceElementWrapper(elementRefSource);
-		this.m_elementRefTarget = new HAPStoryReferenceElementWrapper(elementRefTarget);
+		this.m_elementIdSource = elementRefSource;
+		this.m_elementIdTarget = elementRefTarget;
 	}
 	
-	public HAPStoryIdElement getSourceElementId() {  return this.m_elementRefSource.getElementId(); } 
-	public HAPStoryIdElement getTargetElementId() {  return this.m_elementRefTarget.getElementId(); } 
+	public HAPStoryIdElement getSourceElementId() {  return this.m_elementIdSource; } 
+	public HAPStoryIdElement getTargetElementId() {  return this.m_elementIdTarget; } 
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
 		super.buildObjectByJson(jsonObj);
 		
-		this.m_elementRefSource = new HAPStoryReferenceElementWrapper();
-		this.m_elementRefSource.buildObject(jsonObj.getJSONObject(ELEMENTREFSOURCE), HAPSerializationFormat.JSON);
+		this.m_elementIdSource = new HAPStoryIdElement();
+		this.m_elementIdSource.buildObject(jsonObj.getJSONObject(ELEMENTIDSOURCE), HAPSerializationFormat.JSON);
 		
-		this.m_elementRefTarget = new HAPStoryReferenceElementWrapper();
-		this.m_elementRefTarget.buildObject(jsonObj.getJSONObject(ELEMENTREFTARGET), HAPSerializationFormat.JSON);
+		this.m_elementIdTarget = new HAPStoryIdElement();
+		this.m_elementIdTarget.buildObject(jsonObj.getJSONObject(ELEMENTIDTARGET), HAPSerializationFormat.JSON);
 		
 		return true;  
 	}
@@ -58,7 +56,7 @@ public abstract class HAPStoryChangeItemConnection extends HAPStoryChangeItem{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(ELEMENTREFSOURCE, HAPUtilityJson.buildJson(this.m_elementRefSource, HAPSerializationFormat.JSON));
-		jsonMap.put(ELEMENTREFTARGET, HAPUtilityJson.buildJson(this.m_elementRefTarget, HAPSerializationFormat.JSON));
+		jsonMap.put(ELEMENTIDSOURCE, HAPUtilityJson.buildJson(this.m_elementIdSource, HAPSerializationFormat.JSON));
+		jsonMap.put(ELEMENTIDTARGET, HAPUtilityJson.buildJson(this.m_elementIdTarget, HAPSerializationFormat.JSON));
 	}
 }

@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsSingle;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 
 @Component
@@ -64,21 +66,12 @@ public class HAPStoryManagerChange {
 			HAPStoryChangeItemNew changeNew = (HAPStoryChangeItemNew)changeItem;
 			HAPStoryElement element = changeNew.getElement();
 			HAPStoryAliasElement alias = changeNew.getAlias();
-			HAPStoryIdElement oldAliasEleId = null;
-			if(alias!=null) {
-				oldAliasEleId = story.getElementId(alias.getName());
-			}
 			out = story.addElement(element, alias);
 			changeNew.setElement(out.cloneStoryElement());
 			//revert changes info
 			if(ifRevertable(saveRevert, changeItem)) {
-				List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
+				List<HAPStoryChangeItem> revertChanges =new ArrayList<HAPStoryChangeItem>();
 				revertChanges.add(new HAPStoryChangeItemDelete(out.getElementId()));
-				if(alias!=null && !alias.isTemporary()) {
-					if(oldAliasEleId!=null) {
-						revertChanges.add(new HAPStoryChangeItemAlias(alias, oldAliasEleId));
-					}
-				}
 				changeItem.setRevertChanges(revertChanges);
 			}
 		}		
@@ -100,11 +93,28 @@ public class HAPStoryManagerChange {
 			HAPStoryElement targetEle = story.getElement(changeConnectionNew.getTargetElementId());
 			HAPStoryChangeInfoConnection connectionInfo = changeConnectionNew.getConnectionInfo();
 			if(connectionInfo.getConnectionType().equals(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN)) {
-				sourceEle.addChild(targetEle);
+				HAPStoryChangeInfoConnectionContainer containConnectionInfo = (HAPStoryChangeInfoConnectionContainer)connectionInfo;
+				HAPPath childPath = sourceEle.addChild(new HAPStoryChildElement(targetEle.getElementId(), containConnectionInfo.getMetaData()), containConnectionInfo.getChildPath());
 				if(ifRevertable(saveRevert, changeItem)) {
 					List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
-					HAPStoryChangeItemConnectionDelete deleteChange = new HAPStoryChangeItemConnectionDelete(changeConnectionNew.getSourceElementId(), changeConnectionNew.getTargetElementId(), changeConnectionNew.getConnectionInfo());
+					HAPStoryChangeItemConnectionDelete deleteChange = new HAPStoryChangeItemConnectionDelete(changeConnectionNew.getSourceElementId(), changeConnectionNew.getTargetElementId(), new HAPStoryChangeInfoConnectionContainer(childPath));
 					revertChanges.add(deleteChange);
+					changeItem.setRevertChanges(revertChanges);
+				}
+			}
+		}
+		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE)) {
+			HAPStoryChangeItemConnectionDelete changeConnectionDelete = (HAPStoryChangeItemConnectionDelete)changeItem;
+			HAPStoryElement sourceEle = story.getElement(changeConnectionDelete.getSourceElementId());
+			HAPStoryElement targetEle = story.getElement(changeConnectionDelete.getTargetElementId());
+			HAPStoryChangeInfoConnection connectionInfo = changeConnectionDelete.getConnectionInfo();
+			if(connectionInfo.getConnectionType().equals(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN)) {
+				HAPStoryChangeInfoConnectionContainer containConnectionInfo = (HAPStoryChangeInfoConnectionContainer)connectionInfo;
+				HAPStoryContainerChildrenElementsSingle childElementSingle = sourceEle.removeChild(containConnectionInfo.getChildPath());
+				if(ifRevertable(saveRevert, changeItem)) {
+					List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
+					HAPStoryChangeItemConnectionNew newChange = new HAPStoryChangeItemConnectionNew(changeConnectionDelete.getSourceElementId(), changeConnectionDelete.getTargetElementId(), new HAPStoryChangeInfoConnectionContainer(containConnectionInfo.getChildPath(), childElementSingle.getChildElement().getMetaData()));
+					revertChanges.add(newChange);
 					changeItem.setRevertChanges(revertChanges);
 				}
 			}
