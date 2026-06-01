@@ -30,10 +30,10 @@ public abstract class HAPStoryChangeItemConnection extends HAPStoryChangeItem{
 		super(changeType);
 	}
 	
-	public HAPStoryChangeItemConnection(String changeType, HAPStoryIdElement elementRefSource, HAPStoryIdElement elementRefTarget) {
+	public HAPStoryChangeItemConnection(String changeType, HAPStoryIdElement elementIdSource, HAPStoryIdElement elementIdTarget) {
 		this(changeType);
-		this.m_elementIdSource = elementRefSource;
-		this.m_elementIdTarget = elementRefTarget;
+		this.m_elementIdSource = elementIdSource;
+		this.m_elementIdTarget = elementIdTarget;
 	}
 	
 	public HAPStoryIdElement getSourceElementId() {  return this.m_elementIdSource; } 

@@ -29,6 +29,9 @@ public class HAPServiceParseEntity {
 
 	//entity type through attribute
 	public HAPEntityParsable parseEntityJSONImplicitAttribute(JSONObject jsonObj, String attributNameForEntityType, String domain) {
+		if(jsonObj==null) {
+			return null;
+		}
 		String attributeName = attributNameForEntityType!=null?attributNameForEntityType:HAPEntityParsable.ENTITYTYPE;
 		String subType = jsonObj.getString(attributeName);
 		return this.parseEntityJSONExplicit(jsonObj, subType, domain);
@@ -44,11 +47,17 @@ public class HAPServiceParseEntity {
 	}
 
 	public HAPEntityParsable parseEntityJSONExplicit(JSONObject jsonObj, String subType, String domain) {
+		if(jsonObj==null) {
+			return null;
+		}
 		String entityType = HAPUtilityNamingConversion.cascadePath(domain, subType);
 		return this.m_parsers.get(entityType).parseEntityJson(jsonObj, this);
 	}
 
 	public HAPEntityParsable parseEntityJSONImplicitAttribute(JSONObject jsonObj) {
+		if(jsonObj==null) {
+			return null;
+		}
 		return this.parseEntityJSONImplicitAttribute(jsonObj, null, null);
 	}
 	

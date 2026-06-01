@@ -18,7 +18,7 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 public class HAPStoryWizzardQuestionValueDataSourceChooseDynamic extends HAPStoryWizzardValueInQuestionairImp{
 
 	@HAPAttribute
-	public static final String DATASOURCE = "dataSourceName";
+	public static final String DATASOURCEID = "dataSourceId";
 
 	private String m_dataSource;
 	
@@ -39,14 +39,14 @@ public class HAPStoryWizzardQuestionValueDataSourceChooseDynamic extends HAPStor
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-		this.m_dataSource = (String)jsonObj.opt(DATASOURCE);
+		this.m_dataSource = (String)jsonObj.opt(DATASOURCEID);
 		return true;  
 	}
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(DATASOURCE, this.m_dataSource);
+		jsonMap.put(DATASOURCEID, this.m_dataSource);
 	}
 
 }

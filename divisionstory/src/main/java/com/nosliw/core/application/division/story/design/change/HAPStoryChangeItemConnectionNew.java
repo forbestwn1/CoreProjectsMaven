@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 @HAPEntityWithAttribute
 public class HAPStoryChangeItemConnectionNew extends HAPStoryChangeItemConnection{
@@ -17,8 +17,8 @@ public class HAPStoryChangeItemConnectionNew extends HAPStoryChangeItemConnectio
 		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_NEW);
 	}
 	
-	public HAPStoryChangeItemConnectionNew(HAPStoryReferenceElement elementRefSource, HAPStoryReferenceElement elementRefTarget, HAPStoryChangeInfoConnection connectionInfo) {
-		this();
+	public HAPStoryChangeItemConnectionNew(HAPStoryIdElement elementIdSource, HAPStoryIdElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_NEW, elementIdSource, elementIdTarget);
 		this.m_connectionInfo = connectionInfo;
 	}
 	

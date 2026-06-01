@@ -81,7 +81,9 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 					((HAPStoryContainerChildrenElementsMap)currentContainer).newChildContainer(seg, singleContainer);
 					out.appendSegment(seg);
 				}
-				throw new RuntimeException();
+				else {
+					throw new RuntimeException();
+				}
 			}
 			else {
 				HAPStoryContainerChildrenElements childContainer = null;

@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
@@ -11,6 +12,7 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
 	
 	public HAPStoryContainerChildrenElementsMap() {
 		super(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP);
+		this.m_childElement = new LinkedHashMap<String, HAPStoryContainerChildrenElements>();
 	}
 
 	public Map<String, HAPStoryContainerChildrenElements> getChildrenContainer(){

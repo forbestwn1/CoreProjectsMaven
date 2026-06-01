@@ -3,8 +3,10 @@ package com.nosliw.core.application.division.story.design;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnection;
@@ -65,14 +67,28 @@ public class HAPStoryDesignSessionChange {
 		return out;
 	}
 
-	public HAPStoryChangeItemConnectionNew addChangeConnectionNew(HAPStoryReferenceElement elementRefSource, HAPStoryReferenceElement elementRefTarget, HAPStoryChangeInfoConnection connectionInfo) {
-		HAPStoryChangeItemConnectionNew out = new HAPStoryChangeItemConnectionNew(elementRefSource, elementRefTarget, connectionInfo);
+	public HAPStoryChangeItemConnectionNew addChangeConnectionNew(HAPStoryReferenceElement elementIdSource, HAPStoryReferenceElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
+		HAPStoryStory story = this.m_storyDesign.getStory();
+		
+		HAPStoryChangeItemConnectionNew out = new HAPStoryChangeItemConnectionNew(getElementId(elementIdSource, story), getElementId(elementIdTarget, story), connectionInfo);
 		this.m_changeItems.add(out);
 		return out;
 	}
 
 
 	public HAPStoryDesignConfigureSessionChange getConfigure() {    return this.m_configure;       }
+
+	private HAPStoryIdElement getElementId(HAPStoryReferenceElement eleRef, HAPStoryStory story) {
+		HAPStoryIdElement out = null;
+		String refType = eleRef.getEntityOrReferenceType();
+		if(HAPConstantShared.STORY_ELEMENT_REFERENCE_ID.equals(refType)) {
+			out = (HAPStoryIdElement)eleRef;
+		}
+		else if(HAPConstantShared.STORY_ELEMENT_REFERENCE_ALIAS.equals(refType)) {
+			out = story.getElement(eleRef).getElementId();
+		}
+		return out;
+	}
 	
 	private HAPStoryStory getStory() {    return this.m_storyDesign.getStory();       }
 

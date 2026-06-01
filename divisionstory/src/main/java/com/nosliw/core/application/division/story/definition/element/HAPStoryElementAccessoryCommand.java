@@ -14,7 +14,7 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
 	public final static String CHILD_REQUEST = "request";
 	
-	public final static String CHILD_RESPONSE = "request";
+	public final static String CHILD_RESPONSE = "response";
 	
 	private HAPInteractiveTask m_taskInterface;
 	

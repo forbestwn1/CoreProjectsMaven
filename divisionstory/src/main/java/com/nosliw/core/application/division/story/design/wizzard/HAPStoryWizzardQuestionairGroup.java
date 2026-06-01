@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,10 +24,11 @@ public class HAPStoryWizzardQuestionairGroup extends HAPStoryWizzardQuestionair{
 	
     public HAPStoryWizzardQuestionairGroup(String tag) {
     	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP, tag);
+    	this.m_items = new ArrayList<HAPStoryWizzardQuestionair>();
     }
     
     public HAPStoryWizzardQuestionairGroup() {
-    	super(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP);
+    	this(null);
     }
     
 	public void addItem(HAPStoryWizzardQuestionair item) {    this.m_items.add(item);    }

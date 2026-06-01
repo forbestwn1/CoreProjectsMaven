@@ -67,7 +67,7 @@ public class HAPStoryChangeUtility {
 		//build request end point in command
 		for(HAPDefinitionParm parmDef : taskInterface.getRequestParms()) {
 			HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, parmDef.getDataDefinition(), parmDef, HAPConstantShared.IO_DIRECTION_BOTH);
-			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddRequestParmChildPath(parmDef.getName())));
+			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddRequestParmChildPath()));
 		}
 		
 		//build response end point in command

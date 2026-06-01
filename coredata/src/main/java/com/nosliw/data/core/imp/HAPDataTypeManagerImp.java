@@ -2,20 +2,29 @@ package com.nosliw.data.core.imp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.strvalue.valueinfo.HAPDBAccess;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.HAPDataTypeManager;
 import com.nosliw.core.data.HAPDataTypeOperation;
+import com.nosliw.data.core.imp.runtime.js.HAPModuleRuntimeJS;
 
+@Component
 public class HAPDataTypeManagerImp implements HAPDataTypeManager{
 
 	private HAPDataAccessDataType m_dataAccess;
 
-	public HAPDataTypeManagerImp(HAPDataAccessDataType dataAccess){
+	public HAPDataTypeManagerImp(){
 		init();
-		this.m_dataAccess = dataAccess;
+	}
+	
+	@Autowired
+	private void setRuntimeJSModule(HAPModuleRuntimeJS jsRuntimeModule) {
+		this.m_dataAccess = jsRuntimeModule.getDataTypeDataAccess();
 	}
 	
 	public HAPDBAccess getDBAccess(){		return this.m_dataAccess;	}

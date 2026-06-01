@@ -6,10 +6,7 @@ public class HAPStoryUtilityStory {
 
 	public static HAPPath buildChildPathForElement(HAPPath basePath) {
 		HAPPath out = new HAPPath(basePath);
-		out.appendSegment(HAPStoryElement.SEG_ELEMENT);
-		return out;
+		return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
 	}
-
-	
 	
 }

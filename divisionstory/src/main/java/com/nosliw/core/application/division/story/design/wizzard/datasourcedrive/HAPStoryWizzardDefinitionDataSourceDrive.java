@@ -121,8 +121,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 			//validation answer
 			HAPStoryWizzardQuestionairItemDynamic questionair = (HAPStoryWizzardQuestionairItemDynamic)stepData.getQuestionair();
-			Object changeValue = questionair.getChangedValue();
-			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)this.parseQuestionValue((JSONObject)changeValue, HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID);
+			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)questionair.getChangedValue();
 			
 			String dataSourceId = choosServiceQuestion.getDataSourceName();
 			HAPServiceProfile dataSrouceProfile = this.m_serviceMan.getServiceProfile(dataSourceId, null);
@@ -245,12 +244,12 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		
 		//data source item
 		//put data source under module
-		changeSession.addChangeItemNew(new HAPStoryElementEntityDataSource(dataSourceId, dataSrouceProfile), ALIAS_ELEMENT_DATASOURCE);
-		changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, ALIAS_ELEMENT_DATASOURCE, new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithDataSource.getAddDataSourceChildPath()));
+		HAPStoryChangeItemNew dataSourceChangeNew = changeSession.addChangeItemNew(new HAPStoryElementEntityDataSource(dataSourceId, dataSrouceProfile), ALIAS_ELEMENT_DATASOURCE);
+		changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, dataSourceChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithDataSource.getAddDataSourceChildPath()));
 
 		//command in data source
 		HAPStoryIdElement commandInDataSourceEleId = HAPStoryChangeUtility.buildNewCommandChange(changeSession, dataSrouceProfile.getInterface(), null).getElementId();
-		changeSession.addChangeConnectionNew(ALIAS_ELEMENT_DATASOURCE, commandInDataSourceEleId, new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithCommand.getAddCommandChildPath()));
+		changeSession.addChangeConnectionNew(dataSourceChangeNew.getElementId(), commandInDataSourceEleId, new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithCommand.getAddCommandChildPath()));
 		
 		changeSession.commit();
 	}
