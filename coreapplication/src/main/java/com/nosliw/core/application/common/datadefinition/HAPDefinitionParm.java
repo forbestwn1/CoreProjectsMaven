@@ -8,7 +8,6 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
-import com.nosliw.core.xxx.application.common.interactive1.HAPRequestParmInInteractive;
 
 public class HAPDefinitionParm extends HAPEntityInfoImp{
 

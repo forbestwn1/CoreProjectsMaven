@@ -11,7 +11,6 @@ import com.nosliw.common.clss.HAPClassFilter;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.entity.datasource.brick.HAPBlockServiceProfileImp;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPImporterDataSourceDefinition {
@@ -69,7 +68,7 @@ public class HAPImporterDataSourceDefinition {
 						JSONObject profileJsonObj = serviceDefJson.optJSONObject(HAPInfoService.PROFILE);
 						if(HAPUtilityEntityInfo.isEnabled(profileJsonObj)) {
 							//service profile
-							HAPBlockServiceProfileImp serviceProfile = HAPBlockServiceProfileImp.parse(profileJsonObj, entityParseService); 
+							HAPServiceProfile serviceProfile = HAPServiceProfile.parse(profileJsonObj, entityParseService); 
 							
 							//service runtime
 							JSONObject runtimeJsonObj = serviceDefJson.optJSONObject(HAPInfoService.RUNTIME);

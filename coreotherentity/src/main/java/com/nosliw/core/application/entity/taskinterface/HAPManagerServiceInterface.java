@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datasource;
+package com.nosliw.core.application.entity.taskinterface;
 
 import java.io.File;
 
@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.brick.service.interfacee.HAPBlockServiceInterface;
-import com.nosliw.core.application.entity.datasource.brick.HAPBlockServiceInterfaceImp;
+import com.nosliw.core.application.entity.datasource.HAPIdServcieInterface;
+import com.nosliw.core.application.entity.datasource.HAPUtilityServiceParse;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.system.HAPSystemFolderUtility;
 
@@ -22,7 +23,7 @@ public class HAPManagerServiceInterface{
 	}
 	
 	public HAPBlockServiceInterface getServiceInterface(HAPIdServcieInterface id) {
-		HAPBlockServiceInterfaceImp out = new HAPBlockServiceInterfaceImp();
+		HAPResourceDataTaskInterface out = new HAPResourceDataTaskInterface();
 		
 		String fileName = HAPSystemFolderUtility.getServiceInterfaceFolder() + id.getId() + ".json";
 		String content = HAPUtilityFile.readFile(new File(fileName));

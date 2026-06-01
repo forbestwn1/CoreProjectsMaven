@@ -8,19 +8,19 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.brick.service.profile.HAPInfoServiceStatic;
+import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociation;
+import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociationMirror;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.entity.datasource.HAPExecutableService;
 import com.nosliw.core.application.entity.datasource.HAPFactoryService;
 import com.nosliw.core.application.entity.datasource.HAPInfoServiceRuntime;
+import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.data.HAPData;
-import com.nosliw.core.dataassociation.HAPDefinitionDataAssociation;
 import com.nosliw.core.dataassociation.HAPExecutableWrapperTask;
 import com.nosliw.core.dataassociation.HAPParserDataAssociation;
-import com.nosliw.core.dataassociation.mirror.HAPDefinitionDataAssociationMirror;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.xxx.application.common.datadefinition.HAPVariableDataInfo;
 import com.nosliw.core.xxx.application.common.datadefinition.HAPVariableDefinition;
@@ -55,7 +55,7 @@ public class HAPFactoryServiceProcess implements HAPFactoryService{
 	}
 	
 	@Override
-	public HAPExecutableService newService(HAPBlockServiceProfile dataSourceDefinition) {
+	public HAPExecutableService newService(HAPServiceProfile dataSourceDefinition) {
 
 		//basic information
 		HAPInfoServiceRuntime runtimeInfo = dataSourceDefinition.getRuntimeInfo();

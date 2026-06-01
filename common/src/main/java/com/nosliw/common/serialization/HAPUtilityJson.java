@@ -162,8 +162,8 @@ public class HAPUtilityJson {
 
 			return out;
 		} catch (Exception e) {
-			System.out.println(jsonString);
-			e.printStackTrace();
+//			System.out.println(jsonString);
+//			e.printStackTrace();
 			return jsonString;
 		}
 	}

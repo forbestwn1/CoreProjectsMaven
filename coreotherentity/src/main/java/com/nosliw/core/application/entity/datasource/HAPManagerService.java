@@ -9,12 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
+import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
+import com.nosliw.core.application.entity.taskinterface.HAPManagerServiceInterface;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
@@ -34,14 +32,11 @@ public class HAPManagerService{
 	
 	private HAPManagerServiceInterface m_serviceInterfaceMan;
 	
-	private HAPManagerApplicationBrick m_brickManager;
-	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManagerService(HAPManagerServiceInterface serviceInterfaceMan, HAPManagerApplicationBrick brickManager){
+	public HAPManagerService(HAPManagerServiceInterface serviceInterfaceMan){
 		this.m_serviceInterfaceMan = serviceInterfaceMan;
-		this.m_brickManager = brickManager;
 //		this.m_servicesInfo = new LinkedHashMap<String, HAPInfoService>();
 		this.m_serviceInstances = new LinkedHashMap<String, HAPInstanceService>();
 		this.m_serviceFactorys = new LinkedHashMap<String, HAPFactoryService>();
@@ -61,16 +56,15 @@ public class HAPManagerService{
 	}
 	
 	public HAPServiceProfile getServiceProfile(String id, HAPRuntimeInfo runtimeInfo) {
-		return fromBlockToObjServiceProfile(this.getAllServicesInfo().get(id).getServiceProfileInfo(), runtimeInfo);
-		
+		return this.getAllServicesInfo().get(id).getServiceProfileInfo();
 	}
 	
 	public List<HAPServiceProfile> queryDefinition(HAPQueryServiceDefinition query, HAPRuntimeInfo runtimeInfo){
 		List<HAPServiceProfile> out = new ArrayList<HAPServiceProfile>();
 		for(String id : this.getAllServicesInfo().keySet()) {
 			boolean found = true;
-			HAPBlockServiceProfile profileBlock = this.getAllServicesInfo().get(id).getServiceProfileInfo();
-			List<String> tags = profileBlock.getTags();
+			HAPServiceProfile profile = this.getAllServicesInfo().get(id).getServiceProfileInfo();
+			List<String> tags = profile.getTags();
 			for(String keyword : query.getKeywords()) { 
 				if(!tags.contains(keyword)) {
 					found = false;
@@ -78,23 +72,12 @@ public class HAPManagerService{
 			}
 			
 			if(found) {
-				out.add(fromBlockToObjServiceProfile(profileBlock, runtimeInfo));
+				out.add(profile);
 			}
 		}
 		return out;
 	}
 
-	private HAPServiceProfile fromBlockToObjServiceProfile(HAPBlockServiceProfile blockServiceProfile, HAPRuntimeInfo runtimeInfo) {
-		HAPServiceProfile profile = new HAPServiceProfile();
-		blockServiceProfile.cloneToEntityInfo(profile);
-		profile.setTags(blockServiceProfile.getTags());
-		profile.setDisplayResource(blockServiceProfile.getDisplayResource());
-		
-		HAPBlockInteractiveInterfaceTask taskInterfaceBlock = (HAPBlockInteractiveInterfaceTask)HAPUtilityBrick.getBrick(blockServiceProfile.getTaskInterface(), this.m_brickManager, runtimeInfo);
-		profile.setInterface(taskInterfaceBlock.getValue());
-		return profile;
-	}
-	
 	private Map<String, HAPInfoService> getAllServicesInfo(){
 		if(this.m_servicesInfo==null) {
 			this.m_servicesInfo = new LinkedHashMap<String, HAPInfoService>();
@@ -145,8 +128,8 @@ public class HAPManagerService{
 		if(serviceInstance!=null) {
 			Map<String, HAPData> serviceParms = new LinkedHashMap<String, HAPData>();
 			
-			HAPBlockInteractiveInterfaceTask serviceInterface = (HAPBlockInteractiveInterfaceTask)HAPUtilityBrick.getBrick(serviceInstance.getDefinition().getTaskInterface(), this.m_brickManager, null);
-			for(HAPDefinitionParm parm : serviceInterface.getValue().getRequestParms()) {
+			HAPInteractiveTask serviceInterface = serviceInstance.getDefinition().getInterface();
+			for(HAPDefinitionParm parm : serviceInterface.getRequestParms()) {
 				String parmName = parm.getId();
 				HAPData parmData = null;
 				if(parms!=null) {

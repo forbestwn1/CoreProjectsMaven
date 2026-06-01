@@ -19,7 +19,6 @@ import com.nosliw.core.application.entity.datasource.HAPUtilityServiceParse;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 //contains all information related with service definition
 @HAPEntityWithAttribute
@@ -42,38 +41,6 @@ public class HAPBlockServiceProfileImp extends HAPBrickImpWithEntityInfo impleme
 	public HAPDisplayResourceNode getDisplayResource() {    return (HAPDisplayResourceNode)this.getAttributeValueOfValue(DISPLAY);  }
 	public void setDisplayResource(HAPDisplayResourceNode displayResource) {    this.setAttributeValueWithValue(DISPLAY, displayResource);      }
  
-	public static HAPBlockServiceProfileImp parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService){
-		HAPBlockServiceProfileImp out = new HAPBlockServiceProfileImp();
-		out.buildEntityInfoByJson(jsonObj);
-
-		Object displayObj = jsonObj.opt(DISPLAY);
-		if(displayObj!=null) {
-			HAPDisplayResourceNode displayResource = new HAPDisplayResourceNode();
-			displayResource.buildObject(displayObj, HAPSerializationFormat.JSON);
-			out.setDisplayResource(displayResource);
-		}
-		
-		Object resourceObj = jsonObj.opt(HAPWrapperValueOfReferenceResource.RESOURCEID);
-		if(resourceObj!=null) {
-			HAPResourceId resourceId = HAPFactoryResourceId.tryNewInstance(HAPEnumBrickType.INTERACTIVETASKINTERFACE_100.getBrickType(), HAPEnumBrickType.INTERACTIVETASKINTERFACE_100.getVersion(), resourceObj);
-			out.setTaskInterface(resourceId);
-		}
-		else {
-			out.setTaskInterface(HAPUtilityServiceParse.parseTaskInterfaceInterfaceBlock(jsonObj, entityParseService));
-		}
-		
-		List<String> tags = new ArrayList<String>();
-		JSONArray tagArray = jsonObj.optJSONArray(TAG);
-		if(tagArray!=null) {
-			for(int i=0; i<tagArray.length(); i++) {
-				tags.add(tagArray.getString(i));
-			}
-		}
-		out.setTags(tags);
-		
-		return out;  
-	}
-
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
