@@ -493,6 +493,7 @@ public class HAPConstantShared {
 		public static final String RUNTIME_RESOURCE_TYPE_INTERACTIVETASKINTERFACE = "interactivetaskinterface";
 		public static final String RUNTIME_RESOURCE_TYPE_INTERACTIVEEXPRESSIONINTERFACE = "interactiveexpressioninterface";
 		public static final String RUNTIME_RESOURCE_TYPE_SERVICE = "service";
+		public static final String RUNTIME_RESOURCE_TYPE_TASKINTERFACE = "taskinterface";
 		public static final String RUNTIME_RESOURCE_TYPE_SERVICEINTERFACE = "serviceinterface";
 		public static final String RUNTIME_RESOURCE_TYPE_SERVICEPROFILE = "serviceprofile";
 		public static final String RUNTIME_RESOURCE_TYPE_SERVICEPROVIDER = "serviceprovider";
@@ -828,6 +829,11 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYDESIGN_STEP_METADATATYPE_INIT = "init";
+		public static final String STORYDESIGN_STEP_METADATATYPE_WIZZARD = "wizzard";
+
+
+
 		public static final String STORY_ELEMENT_REFERENCE_ID = "id";
 		public static final String STORY_ELEMENT_REFERENCE_ALIAS = "alias";
 
@@ -842,6 +848,11 @@ public class HAPConstantShared {
 
 
 		public static final String STORY_INFO_IDINDEX = "story_idindex";
+
+
+
+		public static final String STORY_CHILD_METADATA_TYPE_UIAPPEND = "uiAppend";
+		public static final String STORY_CHILD_METADATA_TYPE_UIINJECT = "uiInject";
 
 
 

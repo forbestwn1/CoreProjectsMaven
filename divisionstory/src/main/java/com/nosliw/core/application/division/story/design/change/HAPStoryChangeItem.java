@@ -12,10 +12,15 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public abstract class HAPStoryChangeItem extends HAPEntityInfoImp{
+public abstract class HAPStoryChangeItem extends HAPEntityInfoImp implements HAPEntityParsable{
 
+	public static final String PARSABLEENTITYDOMAIN = "story.change.item";
+	
 	@HAPAttribute
 	public static final String CHANGETYPE = "changeType";
 
@@ -42,6 +47,7 @@ public abstract class HAPStoryChangeItem extends HAPEntityInfoImp{
 	private boolean m_extended;
 	
 	public HAPStoryChangeItem(String changeType) {
+		this.m_revertChanges = new ArrayList<HAPStoryChangeItem>();
 		this.m_changeType = changeType;
 		this.m_revertable = true;
 		this.m_extended = false;
@@ -49,6 +55,7 @@ public abstract class HAPStoryChangeItem extends HAPEntityInfoImp{
 
 	public String getChangeType() {    return this.m_changeType;    }
 	
+	public void addRevertChange(HAPStoryChangeItem changeItem) {  this.m_revertChanges.add(changeItem);      }
 	public void setRevertChanges(List<HAPStoryChangeItem> revertChanges) {    this.m_revertChanges = revertChanges;      }
 	public List<HAPStoryChangeItem> getRevertChanges(){     return this.m_revertChanges;       }
 	
@@ -60,30 +67,6 @@ public abstract class HAPStoryChangeItem extends HAPEntityInfoImp{
 	
 	public boolean isExtended() {   return this.m_extended;     }
 	public void setExtended() {    this.m_extended = true;     }
-	
-	@Override
-	protected boolean buildObjectByJson(Object json){
-		JSONObject jsonObj = (JSONObject)json;
-		super.buildObjectByJson(jsonObj);
-		this.m_changeType = jsonObj.getString(CHANGETYPE);
-		Object revertableObj = jsonObj.opt(REVERTABLE);
-		if(revertableObj!=null) {
-			this.m_revertable = (Boolean)revertableObj;
-		} 
-		this.m_extendedFrom = (String)jsonObj.opt(EXTENDFROM);
-		if(jsonObj.opt(EXTENDED)!=null) {
-			this.m_extended = jsonObj.getBoolean(EXTENDED);
-		}
-		
-		JSONArray revertChangesArray = jsonObj.optJSONArray(REVERTCHANGES);
-		if(revertChangesArray!=null) {
-			this.m_revertChanges = new ArrayList<HAPStoryChangeItem>();
-			for(int i=0; i<revertChangesArray.length(); i++) {
-				this.m_revertChanges.add(HAPStoryParserChange.parseChangeItem(revertChangesArray.getJSONObject(i)));
-			}
-		}
-		return true;  
-	}
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -99,3 +82,33 @@ public abstract class HAPStoryChangeItem extends HAPEntityInfoImp{
 		typeJsonMap.put(EXTENDED, Boolean.class);
 	}
 }
+
+abstract class HAPStoryChangeItem__HAPEntityParsable extends HAPParserEntityImpWithDomain{
+
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItem changeItem, HAPServiceParseEntity parseService) {
+		Object revertableObj = jsonObj.opt(HAPStoryChangeItem.REVERTABLE);
+		if(revertableObj!=null) {
+			changeItem.setRevertable((Boolean)revertableObj);
+		} 
+
+		changeItem.setExtendFrom((String)jsonObj.opt(HAPStoryChangeItem.EXTENDFROM));
+
+		if(jsonObj.opt(HAPStoryChangeItem.EXTENDED)!=null) {
+			if(jsonObj.getBoolean(HAPStoryChangeItem.EXTENDED)) {
+				changeItem.setExtended();
+			}
+		}
+
+		JSONArray revertChangesArray = jsonObj.optJSONArray(HAPStoryChangeItem.REVERTCHANGES);
+		if(revertChangesArray!=null) {
+			for(int i=0; i<revertChangesArray.length(); i++) {
+				changeItem.addRevertChange((HAPStoryChangeItem)parseService.parseEntityJSONImplicitAttribute(revertChangesArray.getJSONObject(i), HAPStoryChangeItem.CHANGETYPE, HAPStoryChangeItem.PARSABLEENTITYDOMAIN));
+			}
+		}
+	}
+	
+	@Override
+	public String getDomain() {   return HAPStoryChangeItem.PARSABLEENTITYDOMAIN;   }
+
+}
+

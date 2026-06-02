@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
@@ -50,6 +47,10 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 	}
 
 	public HAPStoryDesignMetadataStep getMetaData() {     return this.m_metaData;      }
+	public void setMetaData(HAPStoryDesignMetadataStep metaData) {    this.m_metaData = metaData;     }
+	
+	public void addRequestChange(HAPStoryChangeItem change) {    this.m_requestChanges.add(change);       }
+	public void addAllChange(HAPStoryChangeItem change) {    this.m_allChanages.add(change);       }
 	
 	public void addChanges(List<HAPStoryChangeItem> requestChanges, List<HAPStoryChangeItem> changes) {
 		this.m_allChanages.addAll(changes);
@@ -58,28 +59,6 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 	
     public List<HAPStoryChangeItem> getChanges() {    return this.m_allChanages;      }
 
-	@Override
-	protected boolean buildObjectByJson(Object json){  
-		JSONObject jsonObj = (JSONObject)json;
-		
-		
-		
-		this.m_builderId = jsonObj.getString(BUILDERID);
-		
-		this.m_story.buildObject(jsonObj.getJSONObject(STORY), HAPSerializationFormat.JSON);
-		
-		JSONArray stepJsonArray = jsonObj.optJSONArray(STEP);
-		if(stepJsonArray!=null) {
-			for(int i=0; i<stepJsonArray.length(); i++) {
-				HAPStoryDesignStep step = new HAPStoryDesignStep();
-				step.buildObject(stepJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
-				this.m_changeHistory.add(step);
-			}
-		}
-		
-		return true;
-	}
-	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);

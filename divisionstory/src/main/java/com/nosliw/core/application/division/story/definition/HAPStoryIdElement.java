@@ -26,8 +26,8 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	
 	public HAPStoryIdElement() {}
 	
-	public HAPStoryIdElement(String id) {
-		this(null, id);
+	public HAPStoryIdElement(String key) {
+		this.parseKey(key);
 	}
 
 	public HAPStoryIdElement(String categary, String id) {
@@ -43,7 +43,7 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	public String getId() {    return this.m_id;    }
 
 	public String getKey() {      
-		return HAPUtilityNamingConversion.cascadeLevel2(new String[]{this.getCategary(), this.getId()});
+		return this.m_categary==null? this.getId() : HAPUtilityNamingConversion.cascadeLevel2(new String[]{this.getCategary(), this.getId()});
 	}
 	
 	public void parseKey(String key) {
@@ -67,6 +67,7 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 
 	@Override
 	protected boolean buildObjectByLiterate(String literateValue){
+		parseKey(literateValue);
 		return true;
 	}
 

@@ -1,6 +1,8 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
@@ -42,6 +44,9 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		this.m_aliaseByElementId = new LinkedHashMap<HAPStoryIdElement, String>();
 	}
 	
+	public int getIndex() {     return this.m_index;     }
+	public void setIndex(int index) {     this.m_index = index;      }
+	
 	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
 		HAPStoryElement out = null;
 		
@@ -69,21 +74,29 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	}
 	
 	public HAPStoryElement addElement(HAPStoryElement element) {
-		return this.addElement(element, null);
-	}
-	
-	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAliasElement alias) {
 		HAPStoryElement out = element;
 		if(out.getElementId()==null) {
 			this.buildElementId(out);
 		}
 		this.m_elements.put(out.getElementId(), out);
-		
+		return out;
+	}
+	
+	public void setElementAlias(HAPStoryIdElement eleId, HAPStoryAliasElement alias) {
 		//set alias
 		if(alias!=null) {
-			this.m_elementByAliase.put(alias.getName(), out.getElementId());
-			this.m_aliaseByElementId.put(out.getElementId(), alias.getName());
+			this.m_elementByAliase.put(alias.getName(), eleId);
+			this.m_aliaseByElementId.put(eleId, alias.getName());
 		}
+	}
+	
+	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAliasElement alias) {
+		//add element
+		HAPStoryElement out = this.addElement(element);
+		
+		//set alias
+		setElementAlias(out.getElementId(), alias);
+		
 		return out;
 	}
 	
@@ -105,11 +118,11 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		jsonMap.put(IDINDEX, this.m_index+"");
 		typeJsonMap.put(IDINDEX, Integer.class);
 		
-		Map<String, String> mapElements = new LinkedHashMap<String, String>();
+		List<String> listElements = new ArrayList<String>();
 		for(HAPStoryIdElement eleId : this.m_elements.keySet()) {
-			mapElements.put(eleId.getKey(), this.m_elements.get(eleId).toStringValue(HAPSerializationFormat.JSON));
+			listElements.add(this.m_elements.get(eleId).toStringValue(HAPSerializationFormat.JSON));
 		}
-		jsonMap.put(ELEMENT, HAPUtilityJson.buildMapJson(mapElements));
+		jsonMap.put(ELEMENT, HAPUtilityJson.buildArrayJson(listElements.toArray(new String[0])));
 		
 		Map<String, String> mapElementByAliase = new LinkedHashMap<String, String>();
 		for(String alias : this.m_elementByAliase.keySet()) {

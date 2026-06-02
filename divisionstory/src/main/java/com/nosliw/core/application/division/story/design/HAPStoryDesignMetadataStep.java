@@ -1,9 +1,31 @@
 package com.nosliw.core.application.division.story.design;
 
-import com.nosliw.common.serialization.HAPSerializable;
+import java.util.Map;
 
-public interface HAPStoryDesignMetadataStep extends HAPSerializable{
+import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
-	void clear();
+public abstract class HAPStoryDesignMetadataStep extends HAPSerializableImp implements HAPEntityParsable{
+
+	public static final String PARSABLEENTITYDOMAIN = "story.wizzard.metadata";
 	
+	public static final String TYPE = "type";
+	
+	private String m_type;
+	
+	public HAPStoryDesignMetadataStep(String type) {
+		this.m_type = type;
+	}
+	
+	public String getType() {
+		return this.m_type;
+	}
+
+	public abstract void clear();
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(TYPE, this.getType());
+	}
 }

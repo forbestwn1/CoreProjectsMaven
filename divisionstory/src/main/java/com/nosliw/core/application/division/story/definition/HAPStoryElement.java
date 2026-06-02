@@ -7,13 +7,17 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 //root class for all element
-public abstract class HAPStoryElement extends HAPSerializableImp{
+public abstract class HAPStoryElement extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String PARSABLEENTITYDOMAIN = "story.item.definition";
+	
 	public static final String SEG_ELEMENT = "__element__";
 	
 	@HAPAttribute
@@ -21,6 +25,8 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 	
 	@HAPAttribute
 	public static final String ELEMENTTYPE = "elementType";
+
+	public static final String CHILDREN = "children";
 	
 	private HAPStoryIdElement m_id;
 	
@@ -29,13 +35,12 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 	private HAPStoryContainerChildrenElementsMap m_children;
 	
 	public HAPStoryElement(HAPStoryIdElementType elementType) {
-		this.m_elementType = elementType;
 		this.m_children = new HAPStoryContainerChildrenElementsMap();
+		this.m_elementType = elementType;
 	}
 	
-	public HAPStoryContainerChildrenElements getChildren() {
-		return this.m_children;
-	}
+	public HAPStoryContainerChildrenElements getChildren() {		return this.m_children;	   }
+	public void setChildren(HAPStoryContainerChildrenElementsMap children) {     this.m_children = children;      }
 	
 	public HAPStoryIdElement getElementId() {	return this.m_id;	}
 	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }
@@ -204,6 +209,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp{
 		if(this.m_id!=null) {
 			jsonMap.put(ELEMENTID, this.m_id.getKey());
 		}
+		jsonMap.put(CHILDREN, this.m_children.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
 }

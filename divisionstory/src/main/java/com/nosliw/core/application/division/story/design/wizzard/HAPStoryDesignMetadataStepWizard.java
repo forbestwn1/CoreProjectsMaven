@@ -9,18 +9,16 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
-import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
+import com.nosliw.core.application.division.story.design.HAPStoryParserEntityMetadataStep;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntity;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp implements HAPStoryDesignMetadataStep, HAPEntityParsable{
+public class HAPStoryDesignMetadataStepWizard extends HAPStoryDesignMetadataStep{
 
-	@HAPAttribute
-	public static final String PARSABLEENTITYTYPE = "story.wizzard.step.metadata";
 	
 	@HAPAttribute
 	public static final String STEPDEFINITION = "stepDefinition";
@@ -35,6 +33,7 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 	private HAPStoryWizzardQuestionair m_questionair;
 	
 	public HAPStoryDesignMetadataStepWizard() {
+		super(HAPConstantShared.STORYDESIGN_STEP_METADATATYPE_WIZZARD);
 	}
 	
 	public HAPStoryDesignMetadataStepWizard(HAPStoryWizzardStepDefinition stepDefinition) {
@@ -64,10 +63,10 @@ public class HAPStoryDesignMetadataStepWizard extends HAPSerializableImp impleme
 }
 
 @Component
-class HAPStoryDesignMetadataStepWizard_HAPEntityParsable implements HAPParserEntity{
+class HAPStoryDesignMetadataStepWizard_HAPEntityParsable extends HAPStoryParserEntityMetadataStep{
 
 	@Override
-	public String getEntityType() {   return HAPStoryDesignMetadataStepWizard.PARSABLEENTITYTYPE;  }
+	public String getSubName() {    return HAPConstantShared.STORYDESIGN_STEP_METADATATYPE_WIZZARD;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

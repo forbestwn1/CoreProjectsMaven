@@ -12,6 +12,10 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPParserDataDefinition {
 
+	public static HAPDataDefinition parseDataDefinition(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
+		
+	}
+	
 	public static HAPDataDefinitionWritableWithInit parseDataDefinitionWritableWithInit(Object obj, HAPServiceParseEntity entityParseService) {
 		HAPDataDefinitionWritableWithInit out = new HAPDataDefinitionWritableWithInit();
 		

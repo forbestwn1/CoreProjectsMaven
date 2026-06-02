@@ -31,16 +31,6 @@ public class HAPRestrainBrickTypeFacadeTaskInterface extends HAPRestrainBrick{
 	}
 	
 	@Override
-	protected boolean buildObjectByJson(Object json){
-		JSONObject jsonObj = (JSONObject)json;
-
-		m_interactiveTaskInterface = new HAPInteractiveTask();
-		m_interactiveTaskInterface.buildObject(jsonObj.getJSONObject(INTERFACE), HAPSerializationFormat.JSON);
-		
-		return true;
-	}
-
-	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(INTERFACE, HAPManagerSerialize.getInstance().toStringValue(m_interactiveTaskInterface, HAPSerializationFormat.JSON));

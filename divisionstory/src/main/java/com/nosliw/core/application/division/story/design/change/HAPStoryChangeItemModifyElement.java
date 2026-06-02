@@ -8,44 +8,42 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElementWrapper;
-import com.nosliw.core.application.division.story.definition.HAPStoryStory;
-import com.nosliw.core.application.division.story.definition.HAPStoryWithAlias;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPStoryChangeItemModifyElement extends HAPStoryChangeItem implements HAPStoryWithAlias{
+abstract public class HAPStoryChangeItemModifyElement extends HAPStoryChangeItem{
 
 	@HAPAttribute
-	public static final String TARGETELEMENTREF = "targetElementRef";
+	public static final String TARGETELEMENTID = "targetElementId";
 
-	private HAPStoryReferenceElementWrapper m_targetElementRef;
+	private HAPStoryIdElement m_targetElementId;
 	
 	public HAPStoryChangeItemModifyElement(String type) {
 		super(type);
 	}
 	
-	public HAPStoryChangeItemModifyElement(String type, HAPStoryReferenceElement targetElementRef) {
+	public HAPStoryChangeItemModifyElement(String type, HAPStoryIdElement targetElementId) {
 		this(type);
-		this.m_targetElementRef = new HAPStoryReferenceElementWrapper(targetElementRef);
+		this.m_targetElementId = targetElementId;
 	}
 	
-	public HAPStoryIdElement getTargetElementId() {  return this.m_targetElementRef.getElementId(); } 
+	public HAPStoryIdElement getTargetElementId() {  return this.m_targetElementId; } 
+	public void setTargetElementId(HAPStoryIdElement elementId) {    this.m_targetElementId = elementId;    }
 
-	@Override
-	public void processAlias(HAPStoryStory story) {	this.m_targetElementRef.processAlias(story);	}
-
-	@Override
-	protected boolean buildObjectByJson(Object json){
-		JSONObject jsonObj = (JSONObject)json;
-		super.buildObjectByJson(jsonObj);
-		this.m_targetElementRef = new HAPStoryReferenceElementWrapper();
-		this.m_targetElementRef.buildObject(jsonObj.getJSONObject(TARGETELEMENTREF), HAPSerializationFormat.JSON);
-		return true;  
-	}
-	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(TARGETELEMENTREF, HAPUtilityJson.buildJson(this.m_targetElementRef, HAPSerializationFormat.JSON));
+		jsonMap.put(TARGETELEMENTID, HAPUtilityJson.buildJson(this.m_targetElementId, HAPSerializationFormat.JSON));
 	}
+}
+
+abstract class HAPStoryChangeItemModifyElement_HAPEntityParsable extends HAPStoryChangeItem__HAPEntityParsable{
+
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItemModifyElement changeItem, HAPServiceParseEntity parseService) {
+		super.parseToEntity(jsonObj, changeItem, parseService);
+		
+		HAPStoryIdElement targetElementId = new HAPStoryIdElement();
+		targetElementId.buildObject(jsonObj.getJSONObject(HAPStoryChangeItemModifyElement.TARGETELEMENTID), HAPSerializationFormat.JSON);
+		changeItem.setTargetElementId(targetElementId);
+	}
+	
 }

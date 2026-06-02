@@ -911,6 +911,11 @@
 			<definition name="STORYDESIGN_CHANGE_INFO_STAGE" value="stage"/>
 
 			<definition type="space"/>
+			<definition name="STORYDESIGN_STEP_METADATATYPE_INIT" value="init"/>
+			<definition name="STORYDESIGN_STEP_METADATATYPE_WIZZARD" value="wizzard"/>
+
+
+			<definition type="space"/>
 			<definition name="STORY_ELEMENT_REFERENCE_ID" value="id"/>
 			<definition name="STORY_ELEMENT_REFERENCE_ALIAS" value="alias"/>
 
@@ -922,6 +927,11 @@
 
 			<definition type="space"/>
 			<definition name="STORY_INFO_IDINDEX" value="story_idindex"/>
+
+			<definition type="space"/>
+			<definition name="STORY_CHILD_METADATA_TYPE_UIAPPEND" value="uiAppend"/>
+			<definition name="STORY_CHILD_METADATA_TYPE_UIINJECT" value="uiInject"/>
+
 
 			<definition type="space"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_ENTITYINFO" value="entityInfo"/>

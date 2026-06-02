@@ -3,10 +3,13 @@ package com.nosliw.core.application.division.story.design.change;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPStoryChangeItemConnectionDelete extends HAPStoryChangeItemConnection{
@@ -22,6 +25,7 @@ public class HAPStoryChangeItemConnectionDelete extends HAPStoryChangeItemConnec
 		this.m_connectionInfo = connectionInfo;
 	}
 	
+	@Override
 	public HAPStoryChangeInfoConnection getConnectionInfo() {    return this.m_connectionInfo;     }
 	
 	@Override
@@ -38,3 +42,23 @@ public class HAPStoryChangeItemConnectionDelete extends HAPStoryChangeItemConnec
 	}
 
 }
+
+@Component
+class HAPStoryChangeItemConnectionDelete_HAPEntityParsable extends HAPStoryChangeItemConnection_HAPEntityParsable{
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE;   }
+	
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItemConnectionDelete changeItem, HAPServiceParseEntity parseService) {
+		super.parseToEntity(jsonObj, changeItem, parseService);
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPStoryChangeItemConnectionDelete out = new HAPStoryChangeItemConnectionDelete();
+		this.parseToEntity((JSONObject)obj, out, parseService);
+		return out;
+	}
+
+}
+

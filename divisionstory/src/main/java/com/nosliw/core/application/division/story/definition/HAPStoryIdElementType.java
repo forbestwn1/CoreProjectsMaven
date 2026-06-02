@@ -19,8 +19,8 @@ public class HAPStoryIdElementType extends HAPSerializableImp{
 	
 	public HAPStoryIdElementType() {}
 	
-	public HAPStoryIdElementType(String elementType) {
-		this.m_elementType = elementType;
+	public HAPStoryIdElementType(String key) {
+		this.parseKey(key);
 	}
 	
 	public String getElementType() {    return this.m_elementType;    }

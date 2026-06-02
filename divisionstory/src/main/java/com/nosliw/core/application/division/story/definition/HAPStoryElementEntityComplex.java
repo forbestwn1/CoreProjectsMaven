@@ -1,5 +1,7 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.Map;
+
 //entity element (module, page, datasource, ....)
 public abstract class HAPStoryElementEntityComplex 
                         extends HAPStoryElement 
@@ -18,4 +20,8 @@ public abstract class HAPStoryElementEntityComplex
 		super.cloneToStoryElement(storyEle);
 	}
 	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+	}
 }

@@ -52,17 +52,21 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	}
 	
 	public String getBuilderId() {  return this.m_builderId;     }
+	public void setBuilderId(String builderId) {     this.m_builderId = builderId;     }
 	
 	public HAPStoryStory getStory() {    return this.m_story;     }
+	public void setStory(HAPStoryStory story) {      this.m_story = story;      }
 
+	public void addStep(HAPStoryDesignStep step) {    this.m_changeHistory.add(step);     }
+	
 	public void newInitStep() {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(new HAPStoryDesignMetadataStepInit());
-		this.m_changeHistory.add(step);
+		this.addStep(step);
 	}
 	
 	public void newStep(HAPStoryDesignMetadataStep metaData) {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(metaData);
-		this.m_changeHistory.add(step);
+		this.addStep(step);
 	}
 
 	public HAPStoryDesignSessionChange newChangeReqestSession() {     return this.newChangeReqestSession(null);	}

@@ -26,6 +26,17 @@ import org.apache.commons.io.FileUtils;
 import com.nosliw.common.serialization.HAPUtilityJson;
 
 public class HAPUtilityFile {
+
+	public static File getOrCreateFolder(File file) {
+		file.mkdirs();
+		return file;
+	}
+	
+	public static File getOrCreateFolder(String path) {
+		File out = new File(path);
+		out.mkdirs();
+		return out;
+	}
 	
 	public static String getFileCoreName(String fileName) {
 		int index = fileName.indexOf(".");
@@ -54,6 +65,10 @@ public class HAPUtilityFile {
 	
 	public static Set<File> getChildrenFolder(File folder){
 		return getChildren(folder).stream().filter(f->f.isDirectory()).collect(Collectors.toSet());
+	}
+	
+	public static List<File> getChildrenSortedByName(File file){
+		return sortFiles(getChildren(file));
 	}
 	
 	public static Set<File> getChildren(String path){

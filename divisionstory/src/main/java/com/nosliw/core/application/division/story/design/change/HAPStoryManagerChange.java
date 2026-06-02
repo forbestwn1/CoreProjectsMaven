@@ -77,7 +77,6 @@ public class HAPStoryManagerChange {
 		}		
 		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_DELETE)) {
 			HAPStoryChangeItemDelete changeDelete = (HAPStoryChangeItemDelete)changeItem;
-			changeDelete.processAlias(story);
 			HAPStoryAliasElement alias = story.getAlias(changeDelete.getTargetElementId());
 			HAPStoryElement element = story.deleteElement(changeDelete.getTargetElementId());
 			//revert changes info
