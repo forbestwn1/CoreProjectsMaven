@@ -842,8 +842,9 @@
 			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
 			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>
 			<definition name="STORYNODE_TYPE_UIPAGE" value="UIPage"/>
-			<definition name="STORYNODE_TYPE_UICONTENT" value="UIContent"/>
-			<definition name="STORYNODE_TYPE_UICUSTOMTAG" value="UICustomTag"/>
+			<definition name="STORYNODE_TYPE_UIWRAPPER" value="UIWrapper"/>
+			<definition name="STORYNODE_TYPE_UICONTENT_HTML" value="UIContentHtml"/>
+			<definition name="STORYNODE_TYPE_UICONTENT_CUSTOMTAG" value="UIContentCustomTag"/>
 
 			<definition name="STORYNODE_TYPE_TASK_COMMAND" value="commandTask"/>
 

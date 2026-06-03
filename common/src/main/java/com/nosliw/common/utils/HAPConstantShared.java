@@ -764,8 +764,9 @@ public class HAPConstantShared {
 		public static final String STORYNODE_TYPE_MODULE = "module";
 		public static final String STORYNODE_TYPE_SERVICE = "service";
 		public static final String STORYNODE_TYPE_UIPAGE = "UIPage";
-		public static final String STORYNODE_TYPE_UICONTENT = "UIContent";
-		public static final String STORYNODE_TYPE_UICUSTOMTAG = "UICustomTag";
+		public static final String STORYNODE_TYPE_UIWRAPPER = "UIWrapper";
+		public static final String STORYNODE_TYPE_UICONTENT_HTML = "UIContentHtml";
+		public static final String STORYNODE_TYPE_UICONTENT_CUSTOMTAG = "UIContentCustomTag";
 		public static final String STORYNODE_TYPE_TASK_COMMAND = "commandTask";
 		public static final String STORYNODE_TYPE_IOENDPOINT = "ioEndPoint";
 		public static final String STORYNODE_TYPE_SCRIPT = "script";

@@ -1,10 +1,16 @@
 package com.nosliw.core.application.division.story.definition.element.ui;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfo;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfoParser;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementUIPage extends HAPStoryElementImpWithEntityInfo{
 
@@ -26,6 +32,25 @@ public class HAPStoryElementUIPage extends HAPStoryElementImpWithEntityInfo{
 	public HAPStoryElement cloneStoryElement() {
 		HAPStoryElementUIPage out = new HAPStoryElementUIPage();
 		this.cloneToStoryElement(out);
+		return out;
+	}
+
+}
+
+@Component
+class HAPStoryElementUIPage__HAPEntityParsable extends HAPStoryElementImpWithEntityInfoParser{
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_UIPAGE;    }
+
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryElementUIPage element, HAPServiceParseEntity parseService) {
+		super.parseToEntity(jsonObj, element, parseService);
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPStoryElementUIPage out = new HAPStoryElementUIPage();
+		this.parseToEntity((JSONObject)obj, out, parseService);
 		return out;
 	}
 
