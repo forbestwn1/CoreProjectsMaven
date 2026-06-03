@@ -709,7 +709,10 @@ var COMMONCONSTANT=
   "EVENT_HANDLERTYPE_SCRIPT": "script",
   "PARM_RULETASK_RULEDEF": "ruleDef",
   "NAME_ROOTBRICK_MAIN": "#main",
-  "BUNDLEBRANCH_NAME_RULETASKS": "#ruleTasks"
+  "BUNDLEBRANCH_NAME_RULETASKS": "#ruleTasks",
+  "DATADEFINITION_TYPE_READONLY": "readonly",
+  "DATADEFINITION_TYPE_WRITABLE": "writable",
+  "DATADEFINITION_TYPE_WRITEABLEWITHINIT": "writablewithinit"
 };
 
 //*******************************************   End Node Definition  ************************************** 	

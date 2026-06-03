@@ -1159,4 +1159,10 @@ public class HAPConstantShared {
 		public static final String BUNDLEBRANCH_NAME_RULETASKS = "#ruleTasks";
 
 
+
+		public static final String DATADEFINITION_TYPE_READONLY = "readonly";
+		public static final String DATADEFINITION_TYPE_WRITABLE = "writable";
+		public static final String DATADEFINITION_TYPE_WRITEABLEWITHINIT = "writablewithinit";
+
+
 }

@@ -3,12 +3,16 @@ package com.nosliw.core.application.common.datadefinition;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable{
 
@@ -17,7 +21,9 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 
 	private HAPData m_initData;
 
-	public HAPDataDefinitionWritableWithInit() {}
+	public HAPDataDefinitionWritableWithInit() {
+		super(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT);
+	}
 	
 	public HAPData getInitData() {    return this.m_initData;     }
 	public void setInitData(HAPData initData) {    this.m_initData = initData;      }
@@ -73,3 +79,27 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 	}
 	
 }
+
+@Component
+class HAPDataDefinitionWritableWithInit__HAPEntityParsable extends HAPDataDefinitionWritable__HAPEntityParsable{
+
+	@Override
+	public String getSubName() {     return HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT;    }
+	
+	protected void parseToEntity(JSONObject jsonObj, HAPDataDefinitionWritableWithInit dataDefinition, HAPServiceParseEntity parseService) {
+		super.parseToEntity(jsonObj, dataDefinition, parseService);
+		Object initDataObj = jsonObj.opt(HAPDataDefinitionWritableWithInit.INITDATA);
+		if(initDataObj!=null) {
+			dataDefinition.setInitData(HAPUtilityData.buildDataWrapperFromObject(initDataObj));
+		}
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPDataDefinitionWritableWithInit out = new HAPDataDefinitionWritableWithInit();
+		this.parseToEntity((JSONObject)obj, out, parseService);
+		return out;
+	}
+
+}
+

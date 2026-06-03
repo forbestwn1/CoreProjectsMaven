@@ -8,12 +8,13 @@ import org.json.JSONObject;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
+import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryDesignUtilityParse {
 
-	public static HAPStoryDesign parseStoryDesign(File file, HAPServiceParseEntity entityParseService) {
-		HAPStoryDesign out = new HAPStoryDesign();
+	public static HAPStoryDesign parseStoryDesign(File file, HAPServiceParseEntity entityParseService, HAPStoryManagerChange changeMan) {
+		HAPStoryDesign out = new HAPStoryDesign(changeMan);
 		
 		String content = HAPUtilityFile.readFile(file);
 		

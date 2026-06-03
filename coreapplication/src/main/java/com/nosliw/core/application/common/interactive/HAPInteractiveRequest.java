@@ -40,7 +40,15 @@ public class HAPInteractiveRequest extends HAPSerializableImp{
 	public List<HAPDefinitionParm> getRequestParms() {   return this.m_requestParms;  }
 	public void addRequestParm(HAPDefinitionParm parm) {   this.m_requestParms.add(parm);    }
 	
-	public static HAPInteractiveRequest parse(JSONArray parmsArray, HAPServiceParseEntity entityParseService) {
+	public static HAPInteractiveRequest parse(Object obj, HAPServiceParseEntity entityParseService) {
+		JSONArray parmsArray = null;
+		if(obj instanceof JSONArray) {
+			parmsArray = (JSONArray)obj;
+		}
+		else if(obj instanceof JSONObject) {
+			parmsArray = ((JSONObject)obj).getJSONArray(PARM);
+		}
+		
 		HAPInteractiveRequest out = new HAPInteractiveRequest();
 		for(int i=0; i<parmsArray.length(); i++) {
 			JSONObject parmJson = parmsArray.getJSONObject(i);

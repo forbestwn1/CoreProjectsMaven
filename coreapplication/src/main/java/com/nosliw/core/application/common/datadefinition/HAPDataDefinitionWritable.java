@@ -4,15 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
+import com.nosliw.core.application.entity.datarule.HAPDataRule;
+import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.data.matcher.HAPMatchersCombo;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDataDefinitionWritable extends HAPDataDefinition{
 
@@ -33,12 +43,18 @@ public class HAPDataDefinitionWritable extends HAPDataDefinition{
 
 	private HAPDataTypeCriteria m_ruleCriteria;
 
+	HAPDataDefinitionWritable(String type) { 
+		super(type);
+		this.m_rules = new ArrayList<HAPDefinitionDataRule>();
+	}
+
 	public HAPDataDefinitionWritable() { 
+		super(HAPConstantShared.DATADEFINITION_TYPE_WRITABLE);
 		this.m_rules = new ArrayList<HAPDefinitionDataRule>();
 	}
 	
 	public HAPDataDefinitionWritable(HAPDataTypeCriteria criteria) {
-		super(criteria);
+		super(HAPConstantShared.DATADEFINITION_TYPE_WRITABLE, criteria);
 		this.m_rules = new ArrayList<HAPDefinitionDataRule>();
 	}
 	
@@ -109,3 +125,62 @@ public class HAPDataDefinitionWritable extends HAPDataDefinition{
 	@Override
 	public String toString(){		return this.toStringValue(HAPSerializationFormat.JSON);	}
 }
+
+@Component
+class HAPDataDefinitionWritable__HAPEntityParsable extends HAPDataDefinition__HAPEntityParsable{
+
+	@Override
+	public String getSubName() {     return HAPConstantShared.DATADEFINITION_TYPE_WRITABLE;    }
+	
+	protected void parseToEntity(JSONObject jsonObj, HAPDataDefinitionWritable dataDefinition, HAPServiceParseEntity parseService) {
+		super.parseToEntity(jsonObj, dataDefinition, parseService);
+		
+		JSONArray ruleJsonArray = jsonObj.optJSONArray(HAPDataDefinitionWritable.RULE);
+		if(ruleJsonArray!=null) {
+			for(int i=0; i<ruleJsonArray.length(); i++) {
+				JSONObject dataRuleDefJson = ruleJsonArray.getJSONObject(i);
+				if(HAPUtilityEntityInfo.isEnabled(dataRuleDefJson)) {
+					HAPDefinitionDataRule dataRuleDef = new HAPDefinitionDataRule();
+					
+					dataRuleDef.buildEntityInfoByJson(dataRuleDefJson);
+					
+					String rulePath = (String)dataRuleDefJson.opt(HAPDefinitionDataRule.PATH);
+					if(rulePath!=null) {
+						dataRuleDef.setPath(rulePath);
+					}
+					
+					JSONObject dataRuleJson = dataRuleDefJson.optJSONObject(HAPDefinitionDataRule.DATARULE);
+					if(dataRuleJson==null) {
+						dataRuleJson = dataRuleDefJson;
+					}
+					HAPDataRule dataRule = HAPUtilityDataRule.parseDataRule(dataRuleJson, parseService); 
+					dataRuleDef.setDataRule(dataRule);
+					
+					dataDefinition.addRule(dataRuleDef);
+				}
+			}
+		}
+		
+//		JSONObject ruleMatchersObj = jsonValue.optJSONObject(RULEMATCHERS);
+//		if(ruleMatchersObj!=null) {
+//			this.m_ruleMatchers = new HAPMatchersCombo();
+//			this.m_ruleMatchers.buildObject(ruleMatchersObj, HAPSerializationFormat.JSON);
+//		}
+//
+//		String ruleCriteriaStr = (String)jsonValue.opt(RULECRITERIA);
+//		if(ruleCriteriaStr!=null) {
+//			this.m_ruleCriteria = HAPParserCriteriaImp.getInstance().parseCriteria(ruleCriteriaStr);
+//		}
+		
+		
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPDataDefinitionWritable out = new HAPDataDefinitionWritable();
+		this.parseToEntity((JSONObject)obj, out, parseService);
+		return out;
+	}
+
+}
+

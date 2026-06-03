@@ -49,7 +49,9 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	public void parseKey(String key) {
 		String[] segs = HAPUtilityNamingConversion.parseLevel2(key);
 		this.m_categary = segs[0];
-		this.m_id = segs[1];
+		if(segs.length>=2) {
+			this.m_id = segs[1];
+		}
 	}
 	
 	@Override

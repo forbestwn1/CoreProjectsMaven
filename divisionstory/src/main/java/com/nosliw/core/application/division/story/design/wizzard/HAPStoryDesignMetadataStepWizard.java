@@ -2,7 +2,6 @@ package com.nosliw.core.application.division.story.design.wizzard;
 
 import java.util.Map;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +40,7 @@ public class HAPStoryDesignMetadataStepWizard extends HAPStoryDesignMetadataStep
 	    this.m_stepDefinition = stepDefinition;
 	}
 	
-	public void addQuestionair(HAPStoryWizzardQuestionair questionair) {    this.m_questionair = questionair;  } 
+	public void setQuestionair(HAPStoryWizzardQuestionair questionair) {    this.m_questionair = questionair;  } 
 	public HAPStoryWizzardQuestionair getQuestionair(){     return this.m_questionair;      }
 	
 	public void setStepDefinition(HAPStoryWizzardStepDefinition stepDefinition) {    this.m_stepDefinition = stepDefinition;       }
@@ -79,11 +78,9 @@ class HAPStoryDesignMetadataStepWizard_HAPEntityParsable extends HAPStoryParserE
 		stepDef.buildObject(stepDefJsonObj, HAPSerializationFormat.JSON);
 		out.setStepDefinition(stepDef);
 		
-        JSONArray questionairArray = jsonObj.getJSONArray(HAPStoryDesignMetadataStepWizard.QUESTIONAIR);
-        for(int i=0; i<questionairArray.length(); i++) {
-        	JSONObject questionairJson = questionairArray.getJSONObject(i);
-        	HAPStoryWizzardQuestionair questionair = (HAPStoryWizzardQuestionair)parseService.parseEntityJSONImplicitAttribute(questionairJson, HAPStoryWizzardQuestionair.TYPE, HAPStoryWizzardQuestionair.PARSE_DOMAIN);
-        	out.addQuestionair(questionair);
+        JSONObject questionairJsonObj = jsonObj.getJSONObject(HAPStoryDesignMetadataStepWizard.QUESTIONAIR);
+        if(questionairJsonObj!=null) {
+        	out.setQuestionair(HAPStoryWizzardQuestionair.parseWizzardQuestionair(questionairJsonObj, parseService));
         }
 		
 		return out;

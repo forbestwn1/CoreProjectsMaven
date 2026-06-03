@@ -1198,6 +1198,12 @@ I
 			<definition type="space"/>
 			<definition name="BUNDLEBRANCH_NAME_RULETASKS" value="#ruleTasks"/>
 
+			<definition type="space"/>
+			<definition name="DATADEFINITION_TYPE_READONLY" value="readonly"/>
+			<definition name="DATADEFINITION_TYPE_WRITABLE" value="writable"/>
+			<definition name="DATADEFINITION_TYPE_WRITEABLEWITHINIT" value="writablewithinit"/>
+
+
 		</definitions>
 	</constants>
 </root>

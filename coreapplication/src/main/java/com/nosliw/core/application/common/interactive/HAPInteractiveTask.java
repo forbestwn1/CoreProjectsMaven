@@ -60,8 +60,7 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 				JSONObject resultObject = (JSONObject)resutltsObj;
 				for(Object key : resultObject.keySet()) {
 					String name = (String)key;
-					HAPInteractiveResultTask resultEle = new HAPInteractiveResultTask();
-					resultEle.buildObject(resultObject.get(name), HAPSerializationFormat.JSON);
+					HAPInteractiveResultTask resultEle = HAPInteractiveResultTask.parse(resultObject.getJSONObject(name), entityParseService);
 					resultEle.setName(name);
 					out.addResult(resultEle);
 				}
@@ -69,8 +68,7 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 			else if(resutltsObj instanceof JSONArray) {
 				JSONArray resultArray = (JSONArray)resutltsObj;
 				for(int i=0; i<resultArray.length(); i++) {
-					HAPInteractiveResultTask resultEle = new HAPInteractiveResultTask();
-					resultEle.buildObject(resultArray.getJSONObject(i), HAPSerializationFormat.JSON);
+					HAPInteractiveResultTask resultEle = HAPInteractiveResultTask.parse(resultArray.getJSONObject(i), entityParseService);
 					out.addResult(resultEle);
 				}
 			}

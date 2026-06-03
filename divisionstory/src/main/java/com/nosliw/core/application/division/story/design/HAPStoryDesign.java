@@ -39,15 +39,15 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	
 	private List<HAPStoryDesignStep> m_changeHistory;
 	
-	public HAPStoryDesign() {
+	public HAPStoryDesign(HAPStoryManagerChange changeMan) {
 		this.m_story = new HAPStoryStory();
 		this.m_changeHistory = new ArrayList<HAPStoryDesignStep>();
+		this.m_changeMan = changeMan;
 	}
 	
 	public HAPStoryDesign(String id, String builderId, HAPStoryManagerChange changeMan) {
-		this();
+		this(changeMan);
 		this.setId(id);
-		this.m_changeMan = changeMan;
 		this.m_builderId = builderId;
 	}
 	

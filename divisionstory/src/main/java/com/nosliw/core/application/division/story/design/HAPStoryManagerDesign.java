@@ -77,7 +77,7 @@ public class HAPStoryManagerDesign {
 		File dir = this.getDesignFolder(designId);
 		if(dir.exists()) {
 			List<File> children = HAPUtilityFile.getChildrenSortedByName(dir);
-			out = HAPStoryDesignUtilityParse.parseStoryDesign(children.get(children.size()-1), this.m_entityParseService);
+			out = HAPStoryDesignUtilityParse.parseStoryDesign(children.get(children.size()-1), this.m_entityParseService, this.m_changeMan);
 		}
 		else {
 			throw new RuntimeException();

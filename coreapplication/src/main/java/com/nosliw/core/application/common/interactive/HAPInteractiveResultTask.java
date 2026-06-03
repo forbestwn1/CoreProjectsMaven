@@ -13,6 +13,7 @@ import com.nosliw.common.info.HAPEntityInfoWritableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
@@ -42,23 +43,35 @@ public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
 		}
 	}
 	
+	public static HAPInteractiveResultTask parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
+		HAPInteractiveResultTask out = new HAPInteractiveResultTask();
+		out.buildEntityInfoByJson(jsonObj);
+		JSONArray outputArray = jsonObj.getJSONArray(OUTPUT);
+		for(int i=0; i<outputArray.length(); i++) {
+			HAPDefinitionResult output = HAPDefinitionResult.buildResultFromObject(outputArray.getJSONObject(i), entityParseService);
+			out.addOutput(output);
+		}
+		return out;
+	}
+
 	@Override
 	protected boolean buildObjectByJson(Object json){
-		try{
-			JSONObject objJson = (JSONObject)json;
-			super.buildObjectByJson(objJson);
-			
-			JSONArray outputArray = objJson.getJSONArray(OUTPUT);
-			for(int i=0; i<outputArray.length(); i++) {
-				HAPDefinitionResult output = new HAPDefinitionResult();
-				output.buildObject(outputArray.get(i), HAPSerializationFormat.JSON);
-				this.addOutput(output);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		return true;  
+		throw new RuntimeException();
+//		try{
+//			JSONObject objJson = (JSONObject)json;
+//			super.buildObjectByJson(objJson);
+//			
+//			JSONArray outputArray = objJson.getJSONArray(OUTPUT);
+//			for(int i=0; i<outputArray.length(); i++) {
+//				HAPDefinitionResult output = new HAPDefinitionResult();
+//				output.buildObject(outputArray.get(i), HAPSerializationFormat.JSON);
+//				this.addOutput(output);
+//			}
+//		}
+//		catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		return true;  
 	}
 
 	@Override

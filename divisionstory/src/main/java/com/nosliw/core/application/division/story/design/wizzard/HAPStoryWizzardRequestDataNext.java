@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntity;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
@@ -33,7 +34,10 @@ class HAPStoryWizzardRequestDataNext_HAPEntityParsable implements HAPParserEntit
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		JSONObject jsonObj = (JSONObject)obj;
 		HAPStoryWizzardRequestDataNext out = new HAPStoryWizzardRequestDataNext();
-		out.setStepData((HAPStoryDesignMetadataStepWizard)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPStoryWizzardRequestDataNext.STEP), HAPStoryDesignMetadataStepWizard.PARSABLEENTITYTYPE));
+		
+		out.setStepData((HAPStoryDesignMetadataStepWizard)HAPStoryDesignMetadataStep.parseDesignMetadata(jsonObj.getJSONObject(HAPStoryWizzardRequestDataNext.STEP), parseService));
+		
+//		out.setStepData((HAPStoryDesignMetadataStepWizard)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPStoryWizzardRequestDataNext.STEP), HAPStoryDesignMetadataStepWizard.PARSABLEENTITYTYPE));
 		return out;
 	}
 

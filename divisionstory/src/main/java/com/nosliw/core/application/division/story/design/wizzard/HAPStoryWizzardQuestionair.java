@@ -42,6 +42,10 @@ public abstract class HAPStoryWizzardQuestionair extends HAPEntityInfoImp implem
 	public boolean isTag(String tag) {    return HAPUtilityBasic.isEquals(m_tag, tag);      }
 	public void setTag(String tag) {    this.m_tag = tag;       }
 
+	public static HAPStoryWizzardQuestionair parseWizzardQuestionair(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		return (HAPStoryWizzardQuestionair)parseService.parseEntityJSONImplicitAttribute(jsonObj, TYPE, PARSE_DOMAIN);
+	}
+	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);

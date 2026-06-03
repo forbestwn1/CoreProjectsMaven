@@ -13,22 +13,36 @@ import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public abstract class HAPDataDefinition extends HAPSerializableImp{
+public abstract class HAPDataDefinition extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String PARSABLEENTITYDOMAIN = "core.data.definition";
+	
+	public static final String TYPE = "type";
+	
 	@HAPAttribute
 	public static String CRITERIA = "criteria";
 
+	private String m_type;
+	
 	//data type
 	private HAPDataTypeCriteria m_criteria;
 	
-	public HAPDataDefinition() {}
+	public HAPDataDefinition(String type) {
+		this.m_type = type;
+	}
 
-	public HAPDataDefinition(HAPDataTypeCriteria criteria) {
+	public HAPDataDefinition(String type, HAPDataTypeCriteria criteria) {
+		this(type);
 		this.m_criteria = criteria;
 	}
 
+	public String getType() {     return this.m_type;      }
+	
 	public HAPDataTypeCriteria getCriteria() {   return this.m_criteria; }
 	public void setCriteria(HAPDataTypeCriteria criteria) {    this.m_criteria = criteria;     }
 	
@@ -49,6 +63,7 @@ public abstract class HAPDataDefinition extends HAPSerializableImp{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(TYPE, this.m_type);
 		if(this.getCriteria()!=null) {
 			jsonMap.put(CRITERIA, HAPManagerSerialize.getInstance().toStringValue(this.getCriteria(), HAPSerializationFormat.LITERATE));
 		}
@@ -73,3 +88,18 @@ public abstract class HAPDataDefinition extends HAPSerializableImp{
 	@Override
 	public String toString(){		return this.toStringValue(HAPSerializationFormat.JSON);	}
 }
+
+
+abstract class HAPDataDefinition__HAPEntityParsable extends HAPParserEntityImpWithDomain{
+
+	@Override
+	public String getDomain() {   return HAPDataDefinition.PARSABLEENTITYDOMAIN;   }
+
+	protected void parseToEntity(JSONObject jsonObj, HAPDataDefinition dataDefinition, HAPServiceParseEntity parseService) {
+		dataDefinition.setCriteria(HAPParserCriteriaImp.getInstance().parseCriteria((String)jsonObj.opt(HAPDataDefinition.CRITERIA)));
+	}
+	
+}
+
+
+

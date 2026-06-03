@@ -31,7 +31,7 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentTagCustom;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIUtility;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapperContent;
-import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryUIMetaContentChildAppend;
+import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIAppend;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
@@ -105,7 +105,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 		//service step
 		HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_SELECTDATASOURCE));
-		stepMetaData.addQuestionair(new HAPStoryWizzardQuestionairItemDynamic());
+		stepMetaData.setQuestionair(new HAPStoryWizzardQuestionairItemDynamic());
 		design.newStep(stepMetaData);
 	}
 	
@@ -132,7 +132,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 	        //prepare next step + questionair
 			HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_CUSTOMIZEUI));
-			stepMetaData.addQuestionair(this.prepareChooseUIQuestionair(dataSrouceProfile));
+			stepMetaData.setQuestionair(this.prepareChooseUIQuestionair(dataSrouceProfile));
 			design.newStep(stepMetaData);
 		}
 		else if(STEP_CUSTOMIZEUI.equals(stepName)) {
@@ -194,7 +194,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					
 					//append input content
 					HAPStoryChangeItemNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "input.html");
-					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("input"), new HAPStoryUIMetaContentChildAppend()));
+					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("input"), new HAPStoryMetaDataChildElementUIAppend()));
 					
 					//inject label
 					HAPStoryChangeItemNew newRequestInputLabelContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "inputlabel.html");
