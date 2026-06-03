@@ -13,7 +13,7 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
@@ -22,13 +22,13 @@ public class HAPInteractiveRequest extends HAPSerializableImp{
 	@HAPAttribute
 	public static String PARM = "parm";
 	
-	private List<HAPDefinitionParm> m_requestParms;
+	private List<HAPDefinitionParmRequest> m_requestParms;
 
 	public HAPInteractiveRequest() {
-		this.m_requestParms = new ArrayList<HAPDefinitionParm>();
+		this.m_requestParms = new ArrayList<HAPDefinitionParmRequest>();
 	}
 	
-	public HAPInteractiveRequest(List<HAPDefinitionParm> requestParms) {
+	public HAPInteractiveRequest(List<HAPDefinitionParmRequest> requestParms) {
 		this();
 		this.m_requestParms = requestParms;
 		this.initValuePort();
@@ -37,8 +37,8 @@ public class HAPInteractiveRequest extends HAPSerializableImp{
 	private void initValuePort() {
 	}
 	
-	public List<HAPDefinitionParm> getRequestParms() {   return this.m_requestParms;  }
-	public void addRequestParm(HAPDefinitionParm parm) {   this.m_requestParms.add(parm);    }
+	public List<HAPDefinitionParmRequest> getRequestParms() {   return this.m_requestParms;  }
+	public void addRequestParm(HAPDefinitionParmRequest parm) {   this.m_requestParms.add(parm);    }
 	
 	public static HAPInteractiveRequest parse(Object obj, HAPServiceParseEntity entityParseService) {
 		JSONArray parmsArray = null;
@@ -53,7 +53,7 @@ public class HAPInteractiveRequest extends HAPSerializableImp{
 		for(int i=0; i<parmsArray.length(); i++) {
 			JSONObject parmJson = parmsArray.getJSONObject(i);
 			if(HAPUtilityEntityInfo.isEnabled(parmJson)){
-				HAPDefinitionParm parm = HAPDefinitionParm.buildParmFromObject(parmJson, entityParseService);
+				HAPDefinitionParmRequest parm = HAPDefinitionParmRequest.buildParmFromObject(parmJson, entityParseService);
 				out.addRequestParm(parm);
 			}
 		}

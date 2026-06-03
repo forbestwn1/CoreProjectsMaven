@@ -8,8 +8,8 @@ import org.json.JSONObject;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -42,7 +42,7 @@ public class HAPUtilityDataRule {
 //	}
 	
 	public static HAPInteractiveTask buildTaskInterface(HAPDataTypeCriteria dataCriteria) {
-		HAPDefinitionParm parm = new HAPDefinitionParm();
+		HAPDefinitionParmRequest parm = new HAPDefinitionParmRequest();
 		parm.getDataDefinition().setCriteria(dataCriteria);
 		parm.setName(HAPConstantShared.NAME_ROOT_DATA);
 		
@@ -60,7 +60,7 @@ public class HAPUtilityDataRule {
 			HAPInteractiveResultTask interactiveResult = new HAPInteractiveResultTask();
 			interactiveResult.setName(HAPConstantShared.TASK_RESULT_FAIL);
 			
-			HAPDefinitionResult output = new HAPDefinitionResult();
+			HAPDefinitionParmResponse output = new HAPDefinitionParmResponse();
 			output.setName(HAPConstantShared.NAME_ROOT_ERROR);
 		    output.setDataDefinition(new HAPDataDefinitionReadonly());
 		    output.getDataDefinition().setCriteria(new HAPDataTypeCriteriaId(new HAPDataTypeId("string", "1.0.0"), null));

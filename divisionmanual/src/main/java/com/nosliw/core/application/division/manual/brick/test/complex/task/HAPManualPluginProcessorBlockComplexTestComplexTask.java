@@ -8,8 +8,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
@@ -77,7 +77,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexTask extends HAPManu
 			buildRquestParmsVars(varRefs, taskInteractive.getRequestParms(), HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVETASK);
 			
 			for(HAPInteractiveResultTask taskResult : taskInteractive.getResult()) {
-				for(HAPDefinitionResult output : taskResult.getOutput()) {
+				for(HAPDefinitionParmResponse output : taskResult.getOutput()) {
 					String varName = output.getName();
 					HAPReferenceElement varDef = new HAPReferenceElement(varName);
 					varDef.setIODirection(HAPConstantShared.IO_DIRECTION_IN);
@@ -107,8 +107,8 @@ public class HAPManualPluginProcessorBlockComplexTestComplexTask extends HAPManu
 		}
 	}
 
-	private void buildRquestParmsVars(Map<String, HAPReferenceElement> varRefs, List<HAPDefinitionParm> requestParms, String valuePortGroup) {
-		for(HAPDefinitionParm requestParm : requestParms) {
+	private void buildRquestParmsVars(Map<String, HAPReferenceElement> varRefs, List<HAPDefinitionParmRequest> requestParms, String valuePortGroup) {
+		for(HAPDefinitionParmRequest requestParm : requestParms) {
 			String varName = requestParm.getName();
 			HAPReferenceElement varDef = new HAPReferenceElement(varName);
 			varDef.setIODirection(HAPConstantShared.IO_DIRECTION_OUT);

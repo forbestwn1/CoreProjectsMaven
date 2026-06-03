@@ -12,7 +12,7 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPInteractiveTask extends HAPSerializableImp implements HAPInteractive{
@@ -21,7 +21,7 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 
 	private List<HAPInteractiveResultTask> m_results;
 
-	public HAPInteractiveTask(List<HAPDefinitionParm> requestParms, List<HAPInteractiveResultTask> results) {
+	public HAPInteractiveTask(List<HAPDefinitionParmRequest> requestParms, List<HAPInteractiveResultTask> results) {
 		this.m_request = new HAPInteractiveRequest(requestParms);
 		this.m_results = results;
 	}
@@ -32,7 +32,7 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 	}
 	
 	public void setRequest(HAPInteractiveRequest request) {    this.m_request = request;      }
-	public List<HAPDefinitionParm> getRequestParms() {   return this.m_request.getRequestParms();  }
+	public List<HAPDefinitionParmRequest> getRequestParms() {   return this.m_request.getRequestParms();  }
 
 	public List<HAPInteractiveResultTask> getResult() {   return this.m_results;  }
 	public void addResult(HAPInteractiveResultTask result) {    this.m_results.add(result);    }

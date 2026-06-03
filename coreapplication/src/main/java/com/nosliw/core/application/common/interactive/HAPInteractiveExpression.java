@@ -10,30 +10,30 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPInteractiveExpression extends HAPSerializableImp implements HAPInteractive{
 	
 	private HAPInteractiveRequest m_request;
-	private HAPDefinitionResult m_result;
+	private HAPDefinitionParmResponse m_result;
 
 	public HAPInteractiveExpression() {
 		this.m_request = new HAPInteractiveRequest();
-		this.m_result = new HAPDefinitionResult();
+		this.m_result = new HAPDefinitionParmResponse();
 	}
 	
-	public HAPInteractiveExpression(List<HAPDefinitionParm> requestParms, HAPDefinitionResult result) {
+	public HAPInteractiveExpression(List<HAPDefinitionParmRequest> requestParms, HAPDefinitionParmResponse result) {
 		this.m_request = new HAPInteractiveRequest(requestParms);
 		this.m_result = result;
 	}
 
 	public void setRequest(HAPInteractiveRequest request) {    this.m_request = request;      }
-	public List<HAPDefinitionParm> getRequestParms() {   return this.m_request.getRequestParms();  }
+	public List<HAPDefinitionParmRequest> getRequestParms() {   return this.m_request.getRequestParms();  }
 
-	public HAPDefinitionResult getResult() {   return this.m_result;  }
+	public HAPDefinitionParmResponse getResult() {   return this.m_result;  }
 	
 	public static HAPInteractiveExpression parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInteractiveExpression out = new HAPInteractiveExpression();

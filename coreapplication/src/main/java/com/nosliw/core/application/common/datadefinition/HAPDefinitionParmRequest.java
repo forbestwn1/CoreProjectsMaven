@@ -9,22 +9,22 @@ import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPDefinitionParm extends HAPEntityInfoImp{
+public class HAPDefinitionParmRequest extends HAPEntityInfoImp{
 
 	@HAPAttribute
 	public static String DATADEFINITION = "dataDefinition";
 	
 	private HAPDataDefinitionWritableWithInit m_dataDefinition;
 	
-	public HAPDefinitionParm() {
+	public HAPDefinitionParmRequest() {
 		this.m_dataDefinition = new HAPDataDefinitionWritableWithInit();
 	}
 	
 	public HAPDataDefinitionWritableWithInit getDataDefinition() {		return this.m_dataDefinition;	}
 	public void setDataDefinition(HAPDataDefinitionWritableWithInit dataDef) {    this.m_dataDefinition = dataDef;       }
 	
-	public static HAPDefinitionParm buildParmFromObject(JSONObject jsonValue, HAPServiceParseEntity entityParseService) {
-		HAPDefinitionParm out = new HAPDefinitionParm();
+	public static HAPDefinitionParmRequest buildParmFromObject(JSONObject jsonValue, HAPServiceParseEntity entityParseService) {
+		HAPDefinitionParmRequest out = new HAPDefinitionParmRequest();
 		out.buildEntityInfoByJson(jsonValue);
 		
 		Object dataDefObj = jsonValue.opt(DATADEFINITION);
@@ -50,8 +50,8 @@ public class HAPDefinitionParm extends HAPEntityInfoImp{
 		return out;
 	}
 	
-	public HAPDefinitionParm cloneParmDefinition() {
-		HAPDefinitionParm out = new HAPDefinitionParm();
+	public HAPDefinitionParmRequest cloneParmDefinition() {
+		HAPDefinitionParmRequest out = new HAPDefinitionParmRequest();
 		this.cloneToEntityInfo(out);
 		out.m_dataDefinition = this.m_dataDefinition.cloneDataDefinitionWritableWithInit();
 		return out;

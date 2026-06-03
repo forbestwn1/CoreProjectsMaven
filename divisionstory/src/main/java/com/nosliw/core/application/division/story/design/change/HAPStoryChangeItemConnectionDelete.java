@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -20,8 +20,8 @@ public class HAPStoryChangeItemConnectionDelete extends HAPStoryChangeItemConnec
 		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE);
 	}
 	
-	public HAPStoryChangeItemConnectionDelete(HAPStoryReferenceElement elementRefSource, HAPStoryReferenceElement elementRefTarget, HAPStoryChangeInfoConnection connectionInfo) {
-		this();
+	public HAPStoryChangeItemConnectionDelete(HAPStoryIdElement elementIdSource, HAPStoryIdElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE, elementIdSource, elementIdTarget, connectionInfo);
 		this.m_connectionInfo = connectionInfo;
 	}
 	

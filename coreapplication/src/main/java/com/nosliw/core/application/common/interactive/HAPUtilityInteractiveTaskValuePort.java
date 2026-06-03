@@ -11,8 +11,8 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafValue;
@@ -157,10 +157,10 @@ public class HAPUtilityInteractiveTaskValuePort {
 	}
 	
 	
-	private static void buildInteractiveRequestValuePort(Pair<HAPValuePort, HAPValuePort> valuePortPair, List<HAPDefinitionParm> requestParms, HAPDomainValueStructure valueStructureDomain) {
+	private static void buildInteractiveRequestValuePort(Pair<HAPValuePort, HAPValuePort> valuePortPair, List<HAPDefinitionParmRequest> requestParms, HAPDomainValueStructure valueStructureDomain) {
 		Set<HAPRootInStructure> requestRoots = new HashSet<HAPRootInStructure>();
 		Map<String, HAPData> initData = new LinkedHashMap<String, HAPData>(); 
-		for(HAPDefinitionParm parm : requestParms) {
+		for(HAPDefinitionParmRequest parm : requestParms) {
 			HAPRootInStructure root = null;
 			if(parm.getDataDefinition().getCriteria()!=null) {
 				root = new HAPRootInStructure(new HAPElementStructureLeafData(parm.getDataDefinition().getCriteria()), parm);
@@ -187,7 +187,7 @@ public class HAPUtilityInteractiveTaskValuePort {
 
 	private static void buildTaskInteractiveResultValuePort(Pair<HAPValuePort, HAPValuePort> valuePortPair, HAPInteractiveResultTask interactiveResult, HAPDomainValueStructure valueStructureDomain) {
 		Set<HAPRootInStructure> outputRoots = new HashSet<HAPRootInStructure>();
-		for(HAPDefinitionResult element : interactiveResult.getOutput()) {
+		for(HAPDefinitionParmResponse element : interactiveResult.getOutput()) {
 			HAPRootInStructure root = null;
 			if(element.getDataDefinition().getCriteria()!=null) {
 				root = new HAPRootInStructure(new HAPElementStructureLeafData(element.getDataDefinition().getCriteria()), element);
@@ -212,7 +212,7 @@ public class HAPUtilityInteractiveTaskValuePort {
 		return HAPUtilityNamingConversion.cascadeComponents(HAPConstantShared.VALUEPORT_NAME_INTERACT_RESULT, resultName, HAPConstantShared.SEPERATOR_PREFIX);
 	}
 
-	private static void buildExpressionInteractiveResultValuePort(Pair<HAPValuePort, HAPValuePort> valuePortPair, HAPDefinitionResult interactiveResult, HAPDomainValueStructure valueStructureDomain) {
+	private static void buildExpressionInteractiveResultValuePort(Pair<HAPValuePort, HAPValuePort> valuePortPair, HAPDefinitionParmResponse interactiveResult, HAPDomainValueStructure valueStructureDomain) {
 		//result value structure
 		Set<HAPRootInStructure> resultRoots = new HashSet<HAPRootInStructure>();
 		HAPRootInStructure resultRoot = new HAPRootInStructure(new HAPElementStructureLeafData(interactiveResult.getDataDefinition().getCriteria()), null);

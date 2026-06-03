@@ -58,6 +58,7 @@ class HAPStoryContainerChildrenElementsSingle__HAPEntityParsable extends HAPStor
    	    if(metadataJsonObj!=null) {
    	    	childEle.setMetaData(HAPStoryMetaDataChildElement.parseMetaData(childJsonObj, parseService));
    	    }
+   	    container.setChildElement(childEle);
 	}
 
 	@Override

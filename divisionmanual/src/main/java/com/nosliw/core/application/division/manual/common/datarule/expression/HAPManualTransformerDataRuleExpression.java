@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.division.manual.brick.expression.dataexpression.standalone.HAPManualDefinitionBlockDataExpressionStandAlone;
@@ -33,11 +33,11 @@ public class HAPManualTransformerDataRuleExpression implements HAPManualTransfor
 		HAPDataRuleExpression expressionDataRule = (HAPDataRuleExpression)dataRule;
 		dataExpressionStandAlone.setExpression(expressionDataRule.getExpressionDefinition());		
 
-		HAPDefinitionParm parm = new HAPDefinitionParm();
+		HAPDefinitionParmRequest parm = new HAPDefinitionParmRequest();
 		parm.getDataDefinition().setCriteria(expressionDataRule.getDataCriteria());
 		parm.setName("data");
 		
-		HAPDefinitionResult result = new HAPDefinitionResult();
+		HAPDefinitionParmResponse result = new HAPDefinitionParmResponse();
 		result.setDataDefinition(new HAPDataDefinitionReadonly());
 		result.getDataDefinition().setCriteria(new HAPDataTypeCriteriaId(new HAPDataTypeId("boolean", "1.0.0"), null));
 

@@ -52,11 +52,9 @@ class HAPStoryWizzardQuestionairItemStatic_Parsable extends HAPStoryWizzardQuest
 	@Override
 	public String getSubName() {   return HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC;  }
 
-    @Override
-	protected void parseQuestionair(HAPStoryWizzardQuestionair questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+	protected void parseQuestionair(HAPStoryWizzardQuestionairItemStatic questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
     	super.parseQuestionair(questionair, jsonObj, parseService);
-    	HAPStoryWizzardQuestionairItemStatic out = (HAPStoryWizzardQuestionairItemStatic)questionair;
-        out.setValue((HAPStoryWizzardValueInQuestionair)jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemStatic.VALUE));
+    	questionair.setValue(HAPStoryWizzardValueInQuestionair.parseEntity(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemStatic.VALUE), parseService));
     }
 	
 	@Override

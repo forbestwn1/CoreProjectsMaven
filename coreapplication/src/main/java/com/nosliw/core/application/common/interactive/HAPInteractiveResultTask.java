@@ -12,7 +12,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoWritableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
@@ -21,14 +21,14 @@ public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
 	@HAPAttribute
 	public static String OUTPUT = "output";
 	
-	private List<HAPDefinitionResult> m_output;
+	private List<HAPDefinitionParmResponse> m_output;
 	
 	public HAPInteractiveResultTask(){
-		this.m_output = new ArrayList<HAPDefinitionResult>();
+		this.m_output = new ArrayList<HAPDefinitionParmResponse>();
 	}
 
-	public void addOutput(HAPDefinitionResult output) {   this.m_output.add(output);   }
-	public List<HAPDefinitionResult> getOutput(){   return this.m_output;  }
+	public void addOutput(HAPDefinitionParmResponse output) {   this.m_output.add(output);   }
+	public List<HAPDefinitionParmResponse> getOutput(){   return this.m_output;  }
 	
 	public HAPInteractiveResultTask cloneInteractiveResult() {
 		HAPInteractiveResultTask out = new HAPInteractiveResultTask();
@@ -38,7 +38,7 @@ public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
 	
 	protected void cloneToInteractiveResult(HAPInteractiveResultTask result) {
 		this.cloneToEntityInfo(result);
-		for(HAPDefinitionResult output : this.m_output) {
+		for(HAPDefinitionParmResponse output : this.m_output) {
 			result.addOutput(output.cloneInteractiveOutput());
 		}
 	}
@@ -48,7 +48,7 @@ public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
 		out.buildEntityInfoByJson(jsonObj);
 		JSONArray outputArray = jsonObj.getJSONArray(OUTPUT);
 		for(int i=0; i<outputArray.length(); i++) {
-			HAPDefinitionResult output = HAPDefinitionResult.buildResultFromObject(outputArray.getJSONObject(i), entityParseService);
+			HAPDefinitionParmResponse output = HAPDefinitionParmResponse.parse(outputArray.getJSONObject(i), entityParseService);
 			out.addOutput(output);
 		}
 		return out;

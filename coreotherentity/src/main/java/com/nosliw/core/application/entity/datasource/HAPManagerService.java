@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.application.entity.taskinterface.HAPManagerServiceInterface;
@@ -129,7 +129,7 @@ public class HAPManagerService{
 			Map<String, HAPData> serviceParms = new LinkedHashMap<String, HAPData>();
 			
 			HAPInteractiveTask serviceInterface = serviceInstance.getDefinition().getInterface();
-			for(HAPDefinitionParm parm : serviceInterface.getRequestParms()) {
+			for(HAPDefinitionParmRequest parm : serviceInterface.getRequestParms()) {
 				String parmName = parm.getId();
 				HAPData parmData = null;
 				if(parms!=null) {

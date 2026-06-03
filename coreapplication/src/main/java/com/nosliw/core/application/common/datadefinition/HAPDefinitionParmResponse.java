@@ -9,7 +9,7 @@ import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPDefinitionResult extends HAPEntityInfoImp{
+public class HAPDefinitionParmResponse extends HAPEntityInfoImp{
 
 	@HAPAttribute
 	public static String DATADEFINITION = "dataDefinition";
@@ -25,8 +25,8 @@ public class HAPDefinitionResult extends HAPEntityInfoImp{
 		jsonMap.put(DATADEFINITION, this.m_dataDefinition.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
-	public static HAPDefinitionResult buildResultFromObject(JSONObject jsonValue, HAPServiceParseEntity entityParseService) {
-		HAPDefinitionResult out = new HAPDefinitionResult();
+	public static HAPDefinitionParmResponse parse(JSONObject jsonValue, HAPServiceParseEntity entityParseService) {
+		HAPDefinitionParmResponse out = new HAPDefinitionParmResponse();
 		out.buildEntityInfoByJson(jsonValue);
 		out.setDataDefinition(HAPParserDataDefinition.parseDataDefinitionReadonly(jsonValue.opt(DATADEFINITION), entityParseService));
 		return out;

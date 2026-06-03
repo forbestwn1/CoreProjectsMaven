@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.json.JSONObject;
 
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementDataAssociation;
@@ -47,7 +46,6 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
-import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionair;
 import com.nosliw.core.application.entity.datasource.HAPManagerService;
 import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.data.HAPDataType;
@@ -164,7 +162,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			for(HAPStoryWizzardQuestionair requestParmGroupQ : requestParmGroupQs) {
 				HAPStoryWizzardQuestionairItemStatic parmInfoStaticQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO);
 				HAPStoryWizzardQuestionValueDataSourceRequestParmInfoStatic parmInfoValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmInfoStatic)parmInfoStaticQ.getValue();
-				HAPDefinitionParm parmDef = parmInfoValue.getParmDefinition();
+				HAPDefinitionParmRequest parmDef = parmInfoValue.getParmDefinition();
 				
 				HAPStoryWizzardQuestionairItemDynamic parmIsConstantQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT);
 				HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic parmIsConstantQValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic)parmIsConstantQ.getValue();
@@ -267,7 +265,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		
 		//group for requests
 		HAPStoryWizzardQuestionairGroup serviceRequestGroupQ = new HAPStoryWizzardQuestionairGroup();
-		for(HAPDefinitionParm parmDef : dataSourceInterface.getRequestParms()) {
+		for(HAPDefinitionParmRequest parmDef : dataSourceInterface.getRequestParms()) {
 			HAPDataTypeCriteria dataTypeCriteria = parmDef.getDataDefinition().getCriteria();
 			
 			//group for parm
@@ -299,7 +297,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		//group for response
 		HAPStoryWizzardQuestionairGroup serviceResponseGroupQ = new HAPStoryWizzardQuestionairGroup();
 		
-		for(HAPDefinitionResult resultParm : dataSourceInterface.getResult(HAPConstantShared.SERVICE_RESULT_SUCCESS).getOutput()) {
+		for(HAPDefinitionParmResponse resultParm : dataSourceInterface.getResult(HAPConstantShared.SERVICE_RESULT_SUCCESS).getOutput()) {
 			HAPDataTypeCriteria dataTypeCriteria = resultParm.getDataDefinition().getCriteria();
 		
 			//group for parm
@@ -395,8 +393,4 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		return null;
 	}
 
-	private Object parseQuestionValue(JSONObject jsonObj, String valueType) {
-		return this.m_entityParseService.parseEntityJSONExplicit(jsonObj, HAPStoryWizzardValueInQuestionair.PARSER_DOMAIN, valueType);
-	}
-	
 }

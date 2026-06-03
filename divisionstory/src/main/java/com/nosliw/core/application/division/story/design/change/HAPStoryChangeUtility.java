@@ -4,8 +4,8 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionParm;
-import com.nosliw.core.application.common.datadefinition.HAPDefinitionResult;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEndPointIO;
@@ -65,14 +65,14 @@ public class HAPStoryChangeUtility {
 		HAPStoryChangeItemNew newCommandChange = changeSession.addChangeItemNew(new HAPStoryElementAccessoryCommand(taskInterface, commandInfo));
 		
 		//build request end point in command
-		for(HAPDefinitionParm parmDef : taskInterface.getRequestParms()) {
+		for(HAPDefinitionParmRequest parmDef : taskInterface.getRequestParms()) {
 			HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, parmDef.getDataDefinition(), parmDef, HAPConstantShared.IO_DIRECTION_BOTH);
 			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddRequestParmChildPath()));
 		}
 		
 		//build response end point in command
 		for(HAPInteractiveResultTask result : taskInterface.getResult()) {
-			for(HAPDefinitionResult output : result.getOutput()) {
+			for(HAPDefinitionParmResponse output : result.getOutput()) {
 				HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, output.getDataDefinition(), output, HAPConstantShared.IO_DIRECTION_BOTH);
 				changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddResponseParmChildPath(result.getName(), output.getName())));
 			}

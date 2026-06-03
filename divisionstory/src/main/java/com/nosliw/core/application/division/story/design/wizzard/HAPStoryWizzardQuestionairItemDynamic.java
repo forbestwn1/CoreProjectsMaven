@@ -107,8 +107,8 @@ class HAPStoryWizzardQuestionairItemDynamic_HAPEntityParsable extends HAPStoryWi
         	out.setError(error);
         }
         
-        out.setDefaultValue((HAPStoryWizzardValueInQuestionair)parseService.parseEntityJSONImplicitAttribute(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE), HAPStoryWizzardValueInQuestionair.VALUETYPE, HAPStoryWizzardValueInQuestionair.PARSER_DOMAIN));
-        out.setChangedValue((HAPStoryWizzardValueInQuestionair)parseService.parseEntityJSONImplicitAttribute(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE), HAPStoryWizzardValueInQuestionair.VALUETYPE, HAPStoryWizzardValueInQuestionair.PARSER_DOMAIN));
+        out.setDefaultValue(HAPStoryWizzardValueInQuestionair.parseEntity(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.DEFAULTVALUE), parseService));
+        out.setChangedValue(HAPStoryWizzardValueInQuestionair.parseEntity(jsonObj.optJSONObject(HAPStoryWizzardQuestionairItemDynamic.CHANGEDVALUE), parseService));
     }
 	
 	@Override

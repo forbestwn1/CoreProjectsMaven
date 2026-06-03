@@ -15,10 +15,10 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 public abstract class HAPStoryChangeItemConnection extends HAPStoryChangeItem{
 
 	@HAPAttribute
-	public static final String ELEMENTIDSOURCE = "elementRefSource";
+	public static final String ELEMENTIDSOURCE = "elementIdSource";
 
 	@HAPAttribute
-	public static final String ELEMENTIDTARGET = "elementRefTarget";
+	public static final String ELEMENTIDTARGET = "elementIdTarget";
 
 	@HAPAttribute
 	public static final String CONNECTIONINFO = "connectionInfo";
