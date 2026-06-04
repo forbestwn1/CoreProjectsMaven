@@ -34,6 +34,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignStep;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemNew;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeUtility;
@@ -48,6 +49,9 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
 import com.nosliw.core.application.entity.datasource.HAPManagerService;
 import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
+import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
+import com.nosliw.core.application.entity.uitag.HAPUITagInfo;
+import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -75,11 +79,14 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPDataTypeManager m_dataTypeMan;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPManagerService serviceMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	private HAPManagerUITag m_uiTagMan;
+	
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPManagerService serviceMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan) {
 		this.m_entityParseService = entityParseService;
 		this.m_serviceMan = serviceMan;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
+		this.m_uiTagMan = uiTagMan;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
 		
@@ -107,6 +114,11 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		design.newStep(stepMetaData);
 	}
 	
+	private void setAnsweredQuestionairToStep(HAPStoryDesignStep step, HAPStoryWizzardQuestionair answeredQuestionair) {
+		HAPStoryDesignMetadataStepWizard stepMetaData = (HAPStoryDesignMetadataStepWizard)step.getMetaData();
+		stepMetaData.setQuestionair(answeredQuestionair);
+	}
+	
 	//error: attach error to answer
 	//next : next step name, question
 	@Override
@@ -120,13 +132,18 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//validation answer
 			HAPStoryWizzardQuestionairItemDynamic questionair = (HAPStoryWizzardQuestionairItemDynamic)stepData.getQuestionair();
 			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)questionair.getChangedValue();
+
+			//set answer
+			this.setAnsweredQuestionairToStep(design.getCurrentStep(), questionair);
 			
 			String dataSourceId = choosServiceQuestion.getDataSourceName();
 			HAPServiceProfile dataSrouceProfile = this.m_serviceMan.getServiceProfile(dataSourceId, null);
 			HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 
 			//apply answer for data source selection
-			this.applyDataSourceSelection(design, dataSourceId, dataSrouceProfile);
+			HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
+			this.applyDataSourceSelection(changeSession, dataSourceId, dataSrouceProfile);
+			changeSession.commit();
 			
 	        //prepare next step + questionair
 			HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_CUSTOMIZEUI));
@@ -237,9 +254,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		
 	}
 	
-	private void applyDataSourceSelection(HAPStoryDesign design, String dataSourceId, HAPServiceProfile dataSrouceProfile) {
-		HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
-		
+	private void applyDataSourceSelection(HAPStoryDesignSessionChange changeSession, String dataSourceId, HAPServiceProfile dataSrouceProfile) {
 		//data source item
 		//put data source under module
 		HAPStoryChangeItemNew dataSourceChangeNew = changeSession.addChangeItemNew(new HAPStoryElementEntityDataSource(dataSourceId, dataSrouceProfile), ALIAS_ELEMENT_DATASOURCE);
@@ -248,8 +263,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		//command in data source
 		HAPStoryIdElement commandInDataSourceEleId = HAPStoryChangeUtility.buildNewCommandChange(changeSession, dataSrouceProfile.getInterface(), null).getElementId();
 		changeSession.addChangeConnectionNew(dataSourceChangeNew.getElementId(), commandInDataSourceEleId, new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithCommand.getAddCommandChildPath()));
-		
-		changeSession.commit();
 	}
 	
 	
@@ -288,8 +301,14 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag
-			HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic(null), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
+			
+			HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataTypeCriteria));
+			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName());
+			
+			HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic(wizzardUITagInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 			parmDynamicGroupQ.addItem(parmUITagChooseQ);
+			
+			serviceRequestGroupQ.addItem(parmGroupQ);
 			
 		}
 		out.addItem(serviceRequestGroupQ);
@@ -309,6 +328,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			HAPStoryWizzardQuestionairGroup parmDataCriteriaGroupQ = this.prepareSelectUIForDataTypeCriteria(dataTypeCriteria);
 			parmGroupQ.addItem(parmDataCriteriaGroupQ);
+			
+			serviceResponseGroupQ.addItem(parmDataCriteriaGroupQ);
 		}
 		
 		out.addItem(serviceResponseGroupQ);

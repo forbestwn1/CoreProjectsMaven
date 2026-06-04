@@ -41,7 +41,7 @@ public class HAPStoryDesignSessionChange {
 	}
 
 	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
-		
+		return this.getStory().getElement(eleRef);
 	}
 	
 	public List<HAPStoryChangeItem> getChangeItems(){   return this.m_changeItems;    }
@@ -68,17 +68,15 @@ public class HAPStoryDesignSessionChange {
 	}
 
 	public HAPStoryChangeItemConnectionNew addChangeConnectionNew(HAPStoryReferenceElement elementIdSource, HAPStoryReferenceElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
-		HAPStoryStory story = this.m_storyDesign.getStory();
-		
-		HAPStoryChangeItemConnectionNew out = new HAPStoryChangeItemConnectionNew(getElementId(elementIdSource, story), getElementId(elementIdTarget, story), connectionInfo);
+		HAPStoryChangeItemConnectionNew out = new HAPStoryChangeItemConnectionNew(getElementId(elementIdSource), getElementId(elementIdTarget), connectionInfo);
 		this.m_changeItems.add(out);
 		return out;
 	}
 
-
 	public HAPStoryDesignConfigureSessionChange getConfigure() {    return this.m_configure;       }
 
-	private HAPStoryIdElement getElementId(HAPStoryReferenceElement eleRef, HAPStoryStory story) {
+	private HAPStoryIdElement getElementId(HAPStoryReferenceElement eleRef) {
+		HAPStoryStory story = this.getStory();
 		HAPStoryIdElement out = null;
 		String refType = eleRef.getEntityOrReferenceType();
 		if(HAPConstantShared.STORY_ELEMENT_REFERENCE_ID.equals(refType)) {

@@ -51,6 +51,10 @@ public class HAPManagerUITag{
 		return result;
 	}
 	
+	public void clearCache() {
+		this.m_dataTagDefs = null;
+		this.m_otherTagDefs = null;
+	}
 	
 	private String getUITagFolder(String tagId, String version) {
 		return HAPSystemFolderUtility.getTagDefinitionFolder() + version + "/" + tagId +"/";
@@ -85,7 +89,7 @@ public class HAPManagerUITag{
 		HAPDataTypeCriteria queryDataTypeCriteria = query.getDataTypeCriterai();
 		for(String name : this.m_dataTagDefs.keySet()) {
 			HAPUITagDefinitionData uiTagDef = this.m_dataTagDefs.get(name);
-			HAPDataTypeCriteria tagDataTypeCriteria = uiTagDef.getDataTypeCriteria();
+			HAPDataTypeCriteria tagDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
 			HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria);
 			if(matchers!=null) {
 				double score = matchers.getScore();
@@ -123,6 +127,12 @@ public class HAPManagerUITag{
 		String fileName = HAPSystemFolderUtility.getTagDefinitionFolder() + tagId + "/definition.json";
 		File file = new File(fileName);
 		return HAPUtilityFile.readFile(file);
+	}
+	
+	private HAPDataTypeCriteria getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
+		String attrName = uiTagDef.getAttributeForData();
+		HAPUITagDefinitionAttributeVariable attrDef = (HAPUITagDefinitionAttributeVariable)uiTagDef.getAttributeDefition(attrName);
+		return attrDef.getDataDefinition().getCriteria();
 	}
 	
 	class HAPUITagCandidate{

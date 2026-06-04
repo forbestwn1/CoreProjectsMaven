@@ -4,12 +4,13 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntity;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPStoryWizzardRequestDataNext implements HAPEntityParsable{
+public class HAPStoryWizzardRequestDataNext extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
 	public static final String PARSABLEENTITYTYPE = "story.wizzard.requestdata.next";

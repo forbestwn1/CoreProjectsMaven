@@ -16,6 +16,13 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 public class HAPGatewayUITag extends HAPGatewayImp{
 
 	@HAPAttribute
+	final public static String COMMAND_GETTAG = "getTag";
+	@HAPAttribute
+	final public static String COMMAND_GETTAG_NAME = "name";
+	@HAPAttribute
+	final public static String COMMAND_GETTAG_VERSION = "version";
+
+	@HAPAttribute
 	final public static String COMMAND_GETDEFAULTTAG = "getDefaultTag";
 	@HAPAttribute
 	final public static String COMMAND_GETDEFAULTTAG_CRITERIA = "criteria";
@@ -24,6 +31,9 @@ public class HAPGatewayUITag extends HAPGatewayImp{
 	final public static String COMMAND_QUERYTAG = "queryTag";
 	@HAPAttribute
 	final public static String COMMAND_QUERYTAG_CRITERIA = "criteria";
+
+	@HAPAttribute
+	final public static String COMMAND_CLEARCHACHE = "clearCache";
 
 	private HAPManagerUITag m_uiTagMan;
 	
@@ -39,6 +49,17 @@ public class HAPGatewayUITag extends HAPGatewayImp{
 		HAPServiceData out = null;
 		try{
 			switch(command){
+			case COMMAND_GETTAG:
+			{
+				String name = parms.getString(COMMAND_GETTAG_NAME);
+				String version = (String)parms.opt(COMMAND_GETTAG_VERSION);
+				if(version==null) {
+					version = "1.0.0";
+				}
+				HAPUITagDefinition tagDef = this.m_uiTagMan.getUITagDefinition(name, version);
+				out = this.createSuccessWithObject(tagDef);
+				break;
+			}
 			case COMMAND_GETDEFAULTTAG:
 			{
 				HAPUITageQueryData query = new HAPUITageQueryData(HAPUtilityCriteria.parseCriteria(parms.getString(COMMAND_GETDEFAULTTAG_CRITERIA)));
@@ -53,6 +74,9 @@ public class HAPGatewayUITag extends HAPGatewayImp{
 				out = this.createSuccessWithObject(result);
 				break;
 			}
+			case COMMAND_CLEARCHACHE:
+				this.m_uiTagMan.clearCache();
+				break;
 			}
 		}
 		catch(Exception e){

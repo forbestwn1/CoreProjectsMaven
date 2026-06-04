@@ -76,7 +76,8 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvent
 	public void setValueContextEmbeded(HAPValueContextDefinition valueContext) {    this.m_valueContextEmbeded = valueContext;       }
 
 	public void addAttributeDefinition(HAPUITagDefinitionAttribute attribute) {   this.m_attributes.put(attribute.getName(), attribute);    }
-	public Map<String, HAPUITagDefinitionAttribute> getAttributeDefinition() {   return this.m_attributes;    }
+	public Map<String, HAPUITagDefinitionAttribute> getAttributeDefinitions() {   return this.m_attributes;    }
+	public HAPUITagDefinitionAttribute getAttributeDefition(String attrName) {     return this.m_attributes.get(attrName);      }
 	
 	@Override
 	public Set<String> getEventNames() {  return this.m_events.keySet();  }

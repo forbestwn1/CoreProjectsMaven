@@ -26,7 +26,7 @@ public class HAPManualUtilityUITag {
 	public static Map<String, HAPDefinitionConstant> buildConstantDefinitions(HAPUITagDefinition uiTagDef, Map<String, String> attrValues){
 		Map<String, HAPDefinitionConstant> out = new LinkedHashMap<String, HAPDefinitionConstant>();
 
-		Map<String, HAPUITagDefinitionAttribute> tagAttrDefs = uiTagDef.getAttributeDefinition();
+		Map<String, HAPUITagDefinitionAttribute> tagAttrDefs = uiTagDef.getAttributeDefinitions();
 		for(String attrName : tagAttrDefs.keySet()) {
 			String constantName = buildAttributeConstantName(attrName);
 			HAPDefinitionConstant constantDef = new HAPDefinitionConstant(constantName, tagAttrDefs.get(attrName).getDefaultValue());

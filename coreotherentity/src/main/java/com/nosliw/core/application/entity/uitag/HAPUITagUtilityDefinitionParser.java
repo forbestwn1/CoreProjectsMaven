@@ -1,7 +1,6 @@
 package com.nosliw.core.application.entity.uitag;
 
 import java.io.File;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,8 +12,6 @@ import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventUtilityParser;
 import com.nosliw.core.application.common.event.HAPWithEvents;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
-import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelativeForValue;
-import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinitionImp;
@@ -41,6 +38,11 @@ public class HAPUITagUtilityDefinitionParser {
 		String uiTagType = jsonObj.optString(HAPUITagDefinition.TYPE);
 		if(HAPConstantShared.UITAG_TYPE_DATA.equals(uiTagType)) {
 			out = new HAPUITagDefinitionData();
+			String attributeForData = (String)jsonObj.opt(HAPUITagDefinitionData.ATTRIBUTEFORDATA);
+			if(attributeForData==null) {
+				//default attribute name
+			}
+			((HAPUITagDefinitionData)out).setAttributeForData(attributeForData);
 		}
 		else {
 			out = new HAPUITagDefinition();
@@ -79,21 +81,6 @@ public class HAPUITagUtilityDefinitionParser {
 		
 		
 		
-		
-		//parse data type criteria
-		if(HAPConstantShared.UITAG_TYPE_DATA.equals(uiTagType)) {
-			for(HAPWrapperValueStructureDefinition wrapper : valueContext.getValueStructures()) {
-				HAPValueStructure vs = wrapper.getValueStructure();
-				Map<String, HAPRootInStructure> roots = vs.getRoots();
-				for(String rootName : roots.keySet()) {
-					if(HAPConstantShared.NAME_ROOT_TAGDATA.equals(rootName)) {
-						HAPElementStructureLeafRelativeForValue eleStructure = (HAPElementStructureLeafRelativeForValue)roots.get(rootName).getDefinition();
-						((HAPUITagDefinitionData)out).setDataTypeCriteria((eleStructure.getDefinition()).getDataDefinition().getCriteria());
-						break;
-					}
-				}
-			}
-		}
 		
 		//base
 		String baseName = (String)jsonObj.opt(HAPUITagDefinition.BASE);

@@ -111,6 +111,9 @@ public class HAPStoryManagerDesign {
 	
 	private HAPStoryBuilder getBuilder(String builderId) {	return this.m_builders.get(builderId);	}
 	
-	private String generateId() {		return this.m_idGenerator.generateIdStr();	}
+	private String generateId() {		
+		return System.currentTimeMillis()+"";
+//		return this.m_idGenerator.generateIdStr();	
+	}
 	
 }

@@ -57,7 +57,7 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualDef
 		uiCustomerTag.setUITagDefinition(uiTagDef);
 
 		//attribute definition
-		Map<String, HAPUITagDefinitionAttribute> attrDefs = uiTagDef.getAttributeDefinition();
+		Map<String, HAPUITagDefinitionAttribute> attrDefs = uiTagDef.getAttributeDefinitions();
 		for(String attrName : attrDefs.keySet()) {
 			uiCustomerTag.addTagAttributeDefinition(attrDefs.get(attrName));
 		}
@@ -90,7 +90,7 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualDef
 					}
 				}
 			}
-			else if(uiTagDef.getAttributeDefinition().get(eleAttr.getKey())!=null) {
+			else if(uiTagDef.getAttributeDefinitions().get(eleAttr.getKey())!=null) {
 				uiCustomerTag.addTagAttribute(eleAttrName, eleAttrValue);
 			}
 		}
