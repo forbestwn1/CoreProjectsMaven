@@ -17,6 +17,8 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntityInfo implements HAPStoryElementWithCommand{
 
+	public static final String COMMAND_EXECUTE = "execute";
+	
 	public static final String SERVICEID = "serviceId";
 	
 	private String m_serviceId;

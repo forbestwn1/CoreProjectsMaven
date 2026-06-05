@@ -12,8 +12,6 @@ import com.nosliw.core.application.division.story.definition.HAPStoryReferenceEl
 
 public class HAPStoryChangeItemPatch extends HAPStoryChangeItemModifyElement{
 
-	public static final String MYCHANGETYPE = HAPConstantShared.STORYDESIGN_CHANGETYPE_PATCH;
-	
 	@HAPAttribute
 	public static final String PATH = "path";
 
@@ -30,11 +28,11 @@ public class HAPStoryChangeItemPatch extends HAPStoryChangeItemModifyElement{
 	public void setValue(Object value) {   this.m_value = value;    }
 	
 	public HAPStoryChangeItemPatch() {
-		super(MYCHANGETYPE);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_PATCH);
 	}
 	
 	public HAPStoryChangeItemPatch(HAPStoryReferenceElement targetReference, String path, Object value) {
-		super(MYCHANGETYPE, targetReference);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_PATCH, targetReference);
 		this.m_path = path;
 		this.m_value = value;
 	}

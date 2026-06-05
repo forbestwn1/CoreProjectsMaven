@@ -13,8 +13,6 @@ import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
 
-	public static final String MYCHANGETYPE = HAPConstantShared.STORYDESIGN_CHANGETYPE_ALIAS;
-
 	@HAPAttribute
 	public static final String ALIAS = "alias";
 
@@ -26,7 +24,7 @@ public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
 	private HAPStoryIdElement m_eleId;
 	
 	public HAPStoryChangeItemAlias() {
-		super(MYCHANGETYPE);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_ALIAS);
 	}
 	
 	public HAPStoryChangeItemAlias(HAPStoryAliasElement alias, HAPStoryIdElement eleId) {

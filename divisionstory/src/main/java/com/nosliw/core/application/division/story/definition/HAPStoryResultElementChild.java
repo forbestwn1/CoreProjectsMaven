@@ -10,7 +10,8 @@ public class HAPStoryResultElementChild {
 	
 	
 	public HAPStoryResultElementChild(HAPStoryChildElement childElement, HAPPath remainingPath) {
-		
+		this.m_childElement = childElement;
+		this.m_remainingPath = remainingPath;
 	}
 	
     public HAPPath getRemainingPath() {      return this.m_remainingPath;        }

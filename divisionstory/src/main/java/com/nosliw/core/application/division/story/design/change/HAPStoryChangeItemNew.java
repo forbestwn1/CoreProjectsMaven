@@ -18,8 +18,6 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 
-	public static final String MYCHANGETYPE = HAPConstantShared.STORYDESIGN_CHANGETYPE_NEW;
-
 	@HAPAttribute
 	public static final String ALIAS = "alias";
 
@@ -31,16 +29,11 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 	private HAPStoryElement m_storyElement;
 	
 	public HAPStoryChangeItemNew() {
-		super(MYCHANGETYPE);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_NEW);
 	}
 	
-	public HAPStoryChangeItemNew(HAPStoryAliasElement alias) {
-		this();
-		this.m_alias = alias;
-	}
-
 	public HAPStoryChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
-		this(alias);
+		this();
 		this.m_alias = alias;
 		this.m_storyElement = storyElement;
 	}

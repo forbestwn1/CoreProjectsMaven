@@ -22,8 +22,12 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDy
 
 	private boolean m_isConstant = false;
 	
-	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic(boolean isConstant) {
+	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMISCONSTANT);
+	}
+	
+	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic(boolean isConstant) {
+		this();
 		this.m_isConstant = isConstant;
 	}
 	
@@ -57,7 +61,7 @@ class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic_H
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryWizzardQuestionValueDataSourceChooseDynamic out = new HAPStoryWizzardQuestionValueDataSourceChooseDynamic();
+		HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic out = new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic();
 		out.buildObject(obj, HAPSerializationFormat.JSON);
 		return out;
 	}

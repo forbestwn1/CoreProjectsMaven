@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -24,49 +25,58 @@ public class HAPStoryContainerChildrenElementsList extends HAPStoryContainerChil
 	
 	private int m_index;
 	
-	private List<Pair<String, HAPStoryContainerChildrenElements>> m_childrenElement;
+	private List<HAPStoryContainerChildrenElementsList_Element> m_childrenElement;
 	
 	public HAPStoryContainerChildrenElementsList() {
 		super(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_LIST);
 		this.m_index = 0;
-		this.m_childrenElement = new ArrayList<Pair<String, HAPStoryContainerChildrenElements>>();
+		this.m_childrenElement = new ArrayList<HAPStoryContainerChildrenElementsList_Element>();
 	}
 
 	public void setIndex(int index) {   this.m_index = index;      }
 	
-    public Pair<String, HAPStoryContainerChildrenElements> getChildContainer(int childIndex) {    	return this.m_childrenElement.get(childIndex);    }
-    void addChildContainerPair(Pair<String, HAPStoryContainerChildrenElements> containerPair) {  this.m_childrenElement.add(containerPair);     }
+    public Pair<String, HAPStoryContainerChildrenElements> getChildContainer(int childIndex) {  
+    	HAPStoryContainerChildrenElementsList_Element child = this.m_childrenElement.get(childIndex);
+    	return Pair.of(child.id, child.child);
+    }
+    void addChildContainerPair(String id, HAPStoryContainerChildrenElements element, String alias) {  this.m_childrenElement.add(new HAPStoryContainerChildrenElementsList_Element(id, element, alias));     }
     
     @Override
 	public HAPStoryContainerChildrenElements getChildContainer(String id) {
-    	for(Pair<String, HAPStoryContainerChildrenElements> pair : this.m_childrenElement) {
-    		if(id.equals(pair.getLeft())) {
-    			return pair.getRight();
-    		}
-    	}
-    	return null;
+		int index = this.getChild(id);
+        return this.m_childrenElement.get(index).child;
     }
     
     public String newChildContainer(HAPStoryContainerChildrenElements childContainer) {
+    	return this.newChildContainer(childContainer);
+    }
+
+    public String newChildContainer(HAPStoryContainerChildrenElements childContainer, String alias) {
     	String id = this.generateId();
-    	this.m_childrenElement.add(Pair.of(id, childContainer));
+    	this.m_childrenElement.add(new HAPStoryContainerChildrenElementsList_Element(id, childContainer, alias));
     	return id;
     }
 
 	@Override
 	public HAPStoryContainerChildrenElementsSingle removeChild(String childName) {
-		int i = 0;
-		for(; i<this.m_childrenElement.size(); i++) {
-			Pair<String, HAPStoryContainerChildrenElements> child = this.m_childrenElement.get(i);
-			if(child.getLeft().equals(childName)) {
-				break;
-			}
-		}
-		
-		return (HAPStoryContainerChildrenElementsSingle)this.m_childrenElement.remove(i).getRight();
+		int index = this.getChild(childName);
+		return (HAPStoryContainerChildrenElementsSingle)this.m_childrenElement.remove(index).child;
 	}
 
-
+	private int getChild(String idOrAlias) {
+		int i = 0;
+		for(; i<this.m_childrenElement.size(); i++) {
+			HAPStoryContainerChildrenElementsList_Element child = this.m_childrenElement.get(i);
+			if(HAPUtilityBasic.isEquals(child.id, idOrAlias)) {
+				return i;
+			}
+			if(HAPUtilityBasic.isEquals(child.alias, idOrAlias)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
     private String generateId() {
     	this.m_index++;
     	return "id" + this.m_index;
@@ -85,15 +95,34 @@ public class HAPStoryContainerChildrenElementsList extends HAPStoryContainerChil
 		typeJsonMap.put(INDEX, Integer.class);
 		
 		List<String> chilrendArrayStr = new ArrayList<String>();
-		for(Pair<String, HAPStoryContainerChildrenElements> child : this.m_childrenElement) {
+		for(HAPStoryContainerChildrenElementsList_Element child : this.m_childrenElement) {
 			List<String> childArrayStr = new ArrayList<String>();
-			childArrayStr.add(child.getLeft());
-			childArrayStr.add(child.getRight().toStringValue(HAPSerializationFormat.JSON));
+			childArrayStr.add(child.id);
+			childArrayStr.add(child.child.toStringValue(HAPSerializationFormat.JSON));
+			if(child.alias!=null) {
+				childArrayStr.add(child.alias);
+			}
 			chilrendArrayStr.add(HAPUtilityJson.buildArrayJson(childArrayStr.toArray(new String[0])));
 		}
 		jsonMap.put(CHILDREN, HAPUtilityJson.buildArrayJson(chilrendArrayStr.toArray(new String[0])));
 	}
 
+}
+
+class HAPStoryContainerChildrenElementsList_Element{
+
+	public HAPStoryContainerChildrenElementsList_Element(String id, HAPStoryContainerChildrenElements child, String alias) {
+		this.id = id;
+		this.child = child;
+		this.alias = alias;
+	}
+	
+	public String id;
+
+	public String alias;
+	
+	public HAPStoryContainerChildrenElements child;
+	
 }
 
 @Component
@@ -111,7 +140,12 @@ class HAPStoryContainerChildrenElementsList__HAPEntityParsable extends HAPStoryC
 			 JSONArray childJsonArray = childrenJsonArray.getJSONArray(i);
 			 String childId = childJsonArray.getString(0);
 			 HAPStoryContainerChildrenElements childContainer = HAPStoryContainerChildrenElements.parseChildrenContainer(childJsonArray.getJSONObject(1), parseService);
-			 container.addChildContainerPair(Pair.of(childId, childContainer));
+			 String alias = null;
+			 if(childJsonArray.length()>=3) {
+				alias = childJsonArray.getString(2);
+			 }
+			 
+			 container.addChildContainerPair(childId, childContainer, alias);
 		 }
 	}
 

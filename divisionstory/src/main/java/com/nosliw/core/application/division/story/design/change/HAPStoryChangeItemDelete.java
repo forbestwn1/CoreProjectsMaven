@@ -12,14 +12,12 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryChangeItemDelete extends HAPStoryChangeItemModifyElement{
 
-	public static final String MYCHANGETYPE = HAPConstantShared.STORYDESIGN_CHANGETYPE_DELETE;
-
 	public HAPStoryChangeItemDelete() {
-		super(MYCHANGETYPE);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_DELETE);
 	}
 	
 	public HAPStoryChangeItemDelete(HAPStoryIdElement targetElementId) {
-		super(MYCHANGETYPE, targetElementId);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_DELETE, targetElementId);
 	}
 	
 	@Override

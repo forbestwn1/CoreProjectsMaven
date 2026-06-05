@@ -67,7 +67,7 @@ public class HAPStoryManagerChange {
 			HAPStoryElement element = changeNew.getElement();
 			HAPStoryAliasElement alias = changeNew.getAlias();
 			out = story.addElement(element, alias);
-			changeNew.setElement(out.cloneStoryElement());
+			changeNew.setElement(out);
 			//revert changes info
 			if(ifRevertable(saveRevert, changeItem)) {
 				List<HAPStoryChangeItem> revertChanges =new ArrayList<HAPStoryChangeItem>();

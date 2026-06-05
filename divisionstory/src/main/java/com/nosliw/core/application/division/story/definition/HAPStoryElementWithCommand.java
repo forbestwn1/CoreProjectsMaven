@@ -8,5 +8,6 @@ public interface HAPStoryElementWithCommand {
 	
 	public static HAPPath getAddCommandChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_COMMAND));   }
 	
+	public static HAPPath getAddCommandChildPath(String alias) {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_COMMAND), alias);   }
 	
 }

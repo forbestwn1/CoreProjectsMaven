@@ -867,14 +867,14 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfo";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO = "dataSourceResponseDataCriteriaInfo";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroup";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfo";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstant";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE = "dataSourceRequestParmConstantValue";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITag";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP = "dataSourceResponseParmGroup";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfo";
-		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroupTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfoTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstantTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE = "dataSourceRequestParmConstantValueTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITagTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP = "dataSourceResponseParmGroupTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfoTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITagTag";
 
 
 
