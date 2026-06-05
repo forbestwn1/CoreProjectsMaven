@@ -1,21 +1,21 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.List;
+
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
 public class HAPStoryUtilityStory {
 
-	public static HAPPath buildChildPathForElement(HAPPath basePath) {
-		HAPPath out = new HAPPath(basePath);
-		return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
+	public static List<HAPStoryContainerChildrenElementsWrapper> getChildren(HAPStoryStory story, HAPStoryIdElement elementId, HAPPath childPath){
+		HAPStoryElement parentelement = story.getElement(elementId);
+		
+	}
+
+	public static HAPStoryContainerChildrenElements getDescendants(HAPStoryStory story, HAPStoryElement element, HAPPath childPath) {
+		HAPStoryResultElementChild result = element.tryGetChild(childPath.toString());
+		
+		
+		
 	}
 	
-	public static HAPPath buildChildPathForElement(HAPPath basePath, String alias) {
-		HAPPath out = new HAPPath(basePath);
-		if(alias==null) {
-			return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
-		} else {
-			return out.appendSegment(HAPUtilityNamingConversion.cascadeDetail(HAPStoryElement.SEG_ELEMENT, alias));
-		}
-	}
 }

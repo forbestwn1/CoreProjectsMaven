@@ -13,7 +13,7 @@ abstract public class HAPStoryElementParser  extends HAPParserEntityImpWithDomai
 			element.setElementId(new HAPStoryIdElement(eleIdKey));
 		}
 		
-		element.setChildren((HAPStoryContainerChildrenElementsMap)HAPStoryContainerChildrenElements.parseChildrenContainer(jsonObj.getJSONObject(HAPStoryElement.CHILDREN), parseService));
+		element.setChildren((HAPStoryContainerChildrenElementsAttributes)HAPStoryContainerChildrenElements.parseChildrenContainer(jsonObj.getJSONObject(HAPStoryElement.CHILDREN), parseService));
 	}
 	
 	@Override

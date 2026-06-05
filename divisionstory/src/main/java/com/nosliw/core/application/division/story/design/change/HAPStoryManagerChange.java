@@ -9,7 +9,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsSingle;
+import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsWrapper;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 
@@ -109,7 +109,7 @@ public class HAPStoryManagerChange {
 			HAPStoryChangeInfoConnection connectionInfo = changeConnectionDelete.getConnectionInfo();
 			if(connectionInfo.getConnectionType().equals(HAPConstantShared.STORYCONNECTION_TYPE_CONTAIN)) {
 				HAPStoryChangeInfoConnectionContainer containConnectionInfo = (HAPStoryChangeInfoConnectionContainer)connectionInfo;
-				HAPStoryContainerChildrenElementsSingle childElementSingle = sourceEle.removeChild(containConnectionInfo.getChildPath());
+				HAPStoryContainerChildrenElementsWrapper childElementSingle = sourceEle.removeChild(containConnectionInfo.getChildPath());
 				if(ifRevertable(saveRevert, changeItem)) {
 					List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
 					HAPStoryChangeItemConnectionNew newChange = new HAPStoryChangeItemConnectionNew(changeConnectionDelete.getSourceElementId(), changeConnectionDelete.getTargetElementId(), new HAPStoryChangeInfoConnectionContainer(containConnectionInfo.getChildPath(), childElementSingle.getChildElement().getMetaData()));

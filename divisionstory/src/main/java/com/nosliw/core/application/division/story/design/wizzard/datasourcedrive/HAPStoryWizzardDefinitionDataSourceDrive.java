@@ -28,6 +28,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIAppend;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStepEnd;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignStep;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -245,6 +246,11 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.addChangeConnectionNew(ALIAS_ELEMENT_MODULE, commandRunChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithTask.getAddTaskChildPath()));
 			
 			changeSession.commit();
+			
+			//end step
+			HAPStoryDesignMetadataStepEnd stepMetaData = new HAPStoryDesignMetadataStepEnd();
+			design.newStep(stepMetaData);
+			
 		}
 		
 	}

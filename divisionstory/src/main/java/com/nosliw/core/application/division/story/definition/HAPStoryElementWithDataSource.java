@@ -6,7 +6,7 @@ public class HAPStoryElementWithDataSource {
 
 	public static final String CHILD_DATASOURCE = "dataSource";
 	
-	public static HAPPath getAddDataSourceChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_DATASOURCE));   }
+	public static HAPPath getAddDataSourceChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_DATASOURCE));   }
 	
 	
 }

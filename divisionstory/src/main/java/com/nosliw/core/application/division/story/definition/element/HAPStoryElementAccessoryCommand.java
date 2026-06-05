@@ -15,7 +15,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElementAcce
 import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfoParser;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
-import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -40,12 +40,12 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
     public void setTaskInterface(HAPInteractiveTask taskInterface) {    this.m_taskInterface = taskInterface;        }
 	
-	public static HAPPath getAddRequestParmChildPath() {		return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_REQUEST));  }
+	public static HAPPath getAddRequestParmChildPath() {		return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_REQUEST));  }
 	public static HAPPath getRequestParmEndPointPath(String parmName) {
 		return new HAPPath(new String[] {CHILD_REQUEST, parmName, HAPStoryElementWithEndPoint.CHILD_ENDPOINT});
 	}
 
-	public static HAPPath getAddResponseParmChildPath(String resultName, String parName) {		return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(new String[] {CHILD_RESPONSE, resultName}));	}
+	public static HAPPath getAddResponseParmChildPath(String resultName, String parName) {		return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(new String[] {CHILD_RESPONSE, resultName}));	}
 	
 	protected void cloneToStoryElement(HAPStoryElementAccessoryCommand storyEle) {
 		super.cloneToStoryElement(storyEle);

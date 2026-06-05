@@ -1,33 +1,21 @@
 package com.nosliw.core.application.division.story.definition;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
 public class HAPStoryUtilityElement {
 
-	
-	public static HAPPath parseChildNameToPath(String childName) {
-		if(HAPUtilityBasic.isStringEmpty(childName)) {
-			return null;
-		}
-		return new HAPPath(HAPUtilityNamingConversion.parseNameSegments(childName));
+	public static HAPPath buildChildPathForElement(HAPPath basePath) {
+		HAPPath out = new HAPPath(basePath);
+		return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
 	}
 	
-	public static String buildChildNameFromPath(String[] segs) {
-		if(segs==null||segs.length==0) {
-			return null;
+	public static HAPPath buildChildPathForElement(HAPPath basePath, String alias) {
+		HAPPath out = new HAPPath(basePath);
+		if(alias==null) {
+			return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
+		} else {
+			return out.appendSegment(HAPUtilityNamingConversion.cascadeDetail(HAPStoryElement.SEG_ELEMENT, alias));
 		}
-		
-		String out = null;
-		for(int i=0; i<segs.length; i++) {
-			if(i==0) {
-				out = segs[0];
-			} else {
-				out = HAPUtilityNamingConversion.cascadeNameSegment(out, segs[i]);
-			}
-		}
-		return out;
 	}
-	
 }

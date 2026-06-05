@@ -13,15 +13,15 @@ import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 //for attribute
-public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChildrenElementsCollection{
+public class HAPStoryContainerChildrenElementsAttributes extends HAPStoryContainerChildrenElementsMultiple{
 
 	public static final String CHILDREN = "children";
 	
 	
 	private Map<String, HAPStoryContainerChildrenElements> m_childElement;
 	
-	public HAPStoryContainerChildrenElementsMap() {
-		super(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP);
+	public HAPStoryContainerChildrenElementsAttributes() {
+		super(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_ATTRIBUTES);
 		this.m_childElement = new LinkedHashMap<String, HAPStoryContainerChildrenElements>();
 	}
 
@@ -34,6 +34,12 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
     	return this.m_childElement.get(childName);
     }
     
+    public HAPStoryContainerChildrenElements newChildContainer(String childName, HAPStoryChildElement child) {
+    	HAPStoryContainerChildrenElementsWrapper wrapper = new HAPStoryContainerChildrenElementsWrapper(child);
+    	return this.newChildContainer(childName, wrapper);
+    }
+    
+    
     public HAPStoryContainerChildrenElements newChildContainer(String childName, HAPStoryContainerChildrenElements childContainer) {
     	this.addChildContainer(childName, childContainer);
     	return childContainer;
@@ -44,8 +50,8 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
     }
 
     @Override
-	public HAPStoryContainerChildrenElementsSingle removeChild(String childName) {
-    	return (HAPStoryContainerChildrenElementsSingle)this.m_childElement.remove(childName);
+	public HAPStoryContainerChildrenElementsWrapper removeChild(String childName) {
+    	return (HAPStoryContainerChildrenElementsWrapper)this.m_childElement.remove(childName);
     }
     
 	@Override
@@ -70,11 +76,11 @@ public class HAPStoryContainerChildrenElementsMap extends HAPStoryContainerChild
 class HAPStoryContainerChildrenElementsMap__HAPEntityParsable extends HAPStoryContainerChildrenElements__HAPEntityParsable{
 
 	@Override
-	public String getSubName() {   return HAPConstantShared.STORYELEMENTCHILDREN_TYPE_MAP;   }
+	public String getSubName() {   return HAPConstantShared.STORYELEMENTCHILDREN_TYPE_ATTRIBUTES;   }
 	
-	protected void parseToEntity(JSONObject jsonObj, HAPStoryContainerChildrenElementsMap container, HAPServiceParseEntity parseService) {
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryContainerChildrenElementsAttributes container, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, container, parseService);
-   	    JSONObject childrenJsonMap = jsonObj.getJSONObject(HAPStoryContainerChildrenElementsMap.CHILDREN);
+   	    JSONObject childrenJsonMap = jsonObj.getJSONObject(HAPStoryContainerChildrenElementsAttributes.CHILDREN);
 		
 		for(Object key : childrenJsonMap.keySet()) {
 			String name = (String)key;
@@ -85,7 +91,7 @@ class HAPStoryContainerChildrenElementsMap__HAPEntityParsable extends HAPStoryCo
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryContainerChildrenElementsMap out = new HAPStoryContainerChildrenElementsMap();
+		HAPStoryContainerChildrenElementsAttributes out = new HAPStoryContainerChildrenElementsAttributes();
 		this.parseToEntity((JSONObject)obj, out, parseService);
 		return out;
 	}

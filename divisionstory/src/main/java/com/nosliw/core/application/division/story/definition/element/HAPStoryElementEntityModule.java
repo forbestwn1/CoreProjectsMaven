@@ -9,7 +9,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntityComplex;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementParser;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
-import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -21,7 +21,7 @@ public class HAPStoryElementEntityModule extends HAPStoryElementEntityComplex{
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_MODULE));
 	}
 
-	public static HAPPath getAddPageChildPath() {	   return HAPStoryUtilityStory.buildChildPathForElement(new HAPPath(CHILD_PAGE));   }
+	public static HAPPath getAddPageChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_PAGE));   }
 
 	
 	

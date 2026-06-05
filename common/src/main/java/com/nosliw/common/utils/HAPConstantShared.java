@@ -792,9 +792,9 @@ public class HAPConstantShared {
 
 
 
-		public static final String STORYELEMENTCHILDREN_TYPE_SINGLE = "single";
-		public static final String STORYELEMENTCHILDREN_TYPE_MAP = "map";
-		public static final String STORYELEMENTCHILDREN_TYPE_LIST = "list";
+		public static final String STORYELEMENTCHILDREN_TYPE_WRAPPER = "wrapper";
+		public static final String STORYELEMENTCHILDREN_TYPE_ATTRIBUTES = "attributes";
+		public static final String STORYELEMENTCHILDREN_TYPE_COLLECTION = "collection";
 
 
 
@@ -832,6 +832,7 @@ public class HAPConstantShared {
 
 		public static final String STORYDESIGN_STEP_METADATATYPE_INIT = "init";
 		public static final String STORYDESIGN_STEP_METADATATYPE_WIZZARD = "wizzard";
+		public static final String STORYDESIGN_STEP_METADATATYPE_END = "end";
 
 
 
