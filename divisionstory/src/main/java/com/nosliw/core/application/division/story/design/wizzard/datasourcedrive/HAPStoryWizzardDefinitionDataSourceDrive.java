@@ -238,7 +238,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//build data source execute task
 			HAPStoryChangeItemNew commandRunChangeNew = changeSession.addChangeItemNew(new HAPStoryElementRunnableCommand());
 			//add command to command run
-			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getChild(new HAPPath(new String[] {HAPStoryElementEntityDataSource.CHILD_COMMAND, HAPStoryElementEntityDataSource.COMMAND_EXECUTE}).toString()).getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementRunnableCommand.CHILD_COMMAND)));
+			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getChildElement(new HAPPath(new String[] {HAPStoryElementEntityDataSource.CHILD_COMMAND, HAPStoryElementEntityDataSource.COMMAND_EXECUTE}).toString()).getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementRunnableCommand.CHILD_COMMAND)));
 			//add request data association to command run
 //			changeSession.addChangeConnectionNew(commandRunChangeNew.getElementId(), requestDataAssociationChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementAccessoryCommand.CHILD_REQUEST)));
 

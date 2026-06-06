@@ -12,7 +12,7 @@ public class HAPStoryUtilityStory {
 	}
 
 	public static HAPStoryContainerChildrenElements getDescendants(HAPStoryStory story, HAPStoryElement element, HAPPath childPath) {
-		HAPStoryResultElementChild result = element.tryGetChild(childPath.toString());
+		HAPStoryResultContainerChild result = element.tryGetChild(childPath.toString());
 		
 		
 		

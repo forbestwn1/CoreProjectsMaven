@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
@@ -8,7 +9,6 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 //root class for all element
@@ -37,14 +37,14 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 		this.m_elementType = elementType;
 	}
 	
-	public HAPStoryContainerChildrenElements getChildren() {		return this.m_children;	   }
-	public void setChildren(HAPStoryContainerChildrenElementsAttributes children) {     this.m_children = children;      }
-	
 	public HAPStoryIdElement getElementId() {	return this.m_id;	}
 	public void setElementId(HAPStoryIdElement elementId) {    this.m_id = elementId;       }
 	
 	public HAPStoryIdElementType getElementType() {     return this.m_elementType;       }
 	protected void setElementType(HAPStoryIdElementType elementType) {    this.m_elementType = elementType;     }
+	
+	public HAPStoryContainerChildrenElements getChildren() {		return this.m_children;	   }
+	public void setChildren(HAPStoryContainerChildrenElementsAttributes children) {     this.m_children = children;      }
 	
 	public HAPPath addChild(HAPStoryChildElement child, String childPath) {
 		return this.addChild(child, new HAPPath(childPath));
@@ -52,17 +52,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 
 	public HAPStoryContainerChildrenElementsWrapper removeChild(HAPPath childPath) {
 		HAPStoryContainerChildrenElements currentContainer = this.m_children;
-		String[] segs = childPath.getPathSegments();
-		for(int i=0; i<segs.length; i++) {
-            String seg = segs[i];
-            if(i==segs.length-1) {
-            	return ((HAPStoryContainerChildrenElementsMultiple)currentContainer).removeChild(seg);
-            }
-            else {
-            	currentContainer = this.getChildContainer(currentContainer, seg);
-            }
-		}
-		return null;
+		return HAPStoryUtilityContainer.removeChild(currentContainer, childPath);		
 	}
 	
 	public HAPPath addChild(HAPStoryChildElement child, HAPPath childPath) {
@@ -98,7 +88,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 					HAPStoryContainerChildrenElementsAttributes mapContainer = (HAPStoryContainerChildrenElementsAttributes)currentContainer;
 					childContainer = mapContainer.getChildContainer(seg);
 					if(childContainer==null) {
-						childContainer = mapContainer.newChildContainer(seg, newElementsChildrenContainerAccordingToSeg(segs[i+1]));
+						childContainer = mapContainer.newChildContainer(seg, HAPStoryUtilityContainer.newElementsChildrenContainerAccordingToSeg(segs[i+1]));
 					}
 					out.appendSegment(seg);
 				}
@@ -124,73 +114,24 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 		return out;
 	}
 	
-	private HAPStoryContainerChildrenElements newElementsChildrenContainerAccordingToSeg(String seg) {
-		HAPStoryContainerChildrenElements out = null;
-		
-		if(HAPUtilityBasic.isStringEmpty(seg)) {
-		}
-		else if(seg.startsWith(SEG_ELEMENT) || HAPUtilityBasic.isNumber(seg)) {
-			out = new HAPStoryContainerChildrenElementsCollection();
-		}
-		else {
-			out = new HAPStoryContainerChildrenElementsAttributes();
-		}
-		return out;
-	}
-	
-	public HAPStoryResultElementChild tryGetChild(String childPath) {
-		HAPPath remainingPath = new HAPPath();
-		HAPStoryChildElement childElement = null;
-		
-		HAPStoryContainerChildrenElements currentContainer = this.m_children;
-		String[] segs = HAPUtilityNamingConversion.parsePaths(childPath);
-		boolean searching = true;
-		for(String seg : segs) {
-			if(searching==true) {
-				currentContainer = this.getChildContainer(currentContainer, seg);
-				
-				if(currentContainer==null) {
-					throw new RuntimeException();
-				}
-				
-				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_WRAPPER.equals(currentContainer.getContainerType())) {
-					childElement = ((HAPStoryContainerChildrenElementsWrapper)currentContainer).getChildElement();
-					searching = false;
-				}
-			}
-			else {
-				remainingPath.appendSegment(seg);
-			}
-		}
-		return new HAPStoryResultElementChild(childElement, remainingPath);
-	}
-	
-	private HAPStoryContainerChildrenElements getChildContainer(HAPStoryContainerChildrenElements currentContainer, String seg) {
-		HAPStoryContainerChildrenElements out = null;
-		String containerType = currentContainer.getContainerType();
-		if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_ATTRIBUTES.equals(containerType)) {
-			out = ((HAPStoryContainerChildrenElementsAttributes)currentContainer).getChildContainer(seg);
-		}
-		else if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_COLLECTION.equals(containerType)) {
-			if(HAPUtilityBasic.isNumber(seg)){
-				out = ((HAPStoryContainerChildrenElementsCollection)currentContainer).getChildContainer(Integer.valueOf(seg));
-			}
-			else {
-				out = ((HAPStoryContainerChildrenElementsCollection)currentContainer).getChildContainer(seg);
-			}
-		}
-		return out;
-	}
-	
-	public HAPStoryChildElement getChild(String childName) {
-		HAPStoryResultElementChild result = tryGetChild(childName);
+	public HAPStoryChildElement getChildElement(String childPath) {
+		HAPStoryResultContainerChild result = HAPStoryUtilityContainer.tryGetChildElement(this.m_children, childPath);
 		if(!result.getRemainingPath().isEmpty()) {
 			throw new RuntimeException();
 		} else {
-			return result.getChildElement();
+			return ((HAPStoryContainerChildrenElementsWrapper)result.getChildContainer()).getChildElement();
 		}
 	}
-	
+
+	public List<HAPStoryContainerChildrenElementsWrapper> getChildCollection(String childPath) {
+		HAPStoryResultContainerChild result = HAPStoryUtilityContainer.tryGetChildCollection(this.m_children, childPath);
+		if(!result.getRemainingPath().isEmpty()) {
+			throw new RuntimeException();
+		} else {
+			return ((HAPStoryContainerChildrenElementsCollection)result.getChildContainer()).getChildren();
+		}
+	}
+
 	protected void cloneToStoryElement(HAPStoryElement storyEle) {
 		if(this.m_id!=null) {
 			storyEle.setElementId((HAPStoryIdElement)m_id.cloneElementReference());

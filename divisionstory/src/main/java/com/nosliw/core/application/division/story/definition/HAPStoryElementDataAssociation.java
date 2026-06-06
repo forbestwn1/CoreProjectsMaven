@@ -54,7 +54,7 @@ public class HAPStoryElementDataAssociation extends HAPStoryElement{
 	}
 
 	@Override
-	public HAPStoryIdElement getChild(String childName) {
+	public HAPStoryIdElement getChildElement(String childName) {
 		if(CHILD_ENTITY1.equals(childName)) {
 			return this.m_entity1;
 		}
