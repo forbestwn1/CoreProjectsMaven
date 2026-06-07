@@ -28,6 +28,7 @@ public class HAPStoryElementEndPointIOVariable extends HAPStoryElementEndPointIO
 	}
 	
 	public void setDataDefinition(HAPDataDefinition dataDefinition) {      this.m_dataDefinition = dataDefinition;          }
+	public HAPDataDefinition getDataDefinition() {    return this.m_dataDefinition;      }
 	
 	public HAPStoryElementEndPointIOVariable(HAPDataDefinition dataDefinition, String IOType) {
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_VARIABLE), IOType);

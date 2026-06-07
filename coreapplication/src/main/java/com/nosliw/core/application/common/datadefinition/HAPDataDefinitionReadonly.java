@@ -9,6 +9,11 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDataDefinitionReadonly extends HAPDataDefinition{
 
+	public HAPDataDefinitionReadonly(HAPDataDefinition dataDefinition) {
+		this();
+		dataDefinition.cloneToDataDefinition(this);
+	}
+	
 	public HAPDataDefinitionReadonly() {
 		super(HAPConstantShared.DATADEFINITION_TYPE_READONLY);
 	}

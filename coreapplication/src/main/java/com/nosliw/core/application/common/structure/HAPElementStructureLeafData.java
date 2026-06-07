@@ -27,7 +27,7 @@ public class HAPElementStructureLeafData extends HAPElementStructureLeafVariable
 	private String m_status = HAPConstantShared.EXPRESSION_VARIABLE_STATUS_OPEN;
 	
 	public HAPElementStructureLeafData() {}
-	
+
 	public HAPElementStructureLeafData(HAPDataTypeCriteria dataTypeCriteria){
 		this.m_dataDefinition = new HAPDataDefinitionWritable(dataTypeCriteria);
 		if(dataTypeCriteria==null) {

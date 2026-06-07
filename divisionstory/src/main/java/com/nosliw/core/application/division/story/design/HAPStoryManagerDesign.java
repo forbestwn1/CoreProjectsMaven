@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
+import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityExporterContentProviderText;
+import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
@@ -72,6 +75,13 @@ public class HAPStoryManagerDesign {
 		return out;
 	}
 
+	public void convertDesignToManual(String designId) {
+		HAPStoryDesign design = this.getDesign(designId);
+		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
+		
+		HAPManualUtilityExporterContentProviderText.export(contentProvider, getDesignFolder(designId).getAbsolutePath()+"/manual");
+	}
+	
 	private HAPStoryDesign loadDesign(String designId) {
 		HAPStoryDesign out = null;
 		File dir = this.getDesignFolder(designId);

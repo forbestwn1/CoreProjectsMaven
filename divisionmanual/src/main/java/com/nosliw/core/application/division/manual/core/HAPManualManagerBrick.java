@@ -8,30 +8,23 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPPluginDivision;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperBrickRoot;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
+import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualProcessBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessAlias;
+import com.nosliw.core.application.division.manual.core.process.HAPManualProcessBundle;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
-import com.nosliw.core.application.entity.datarule.HAPProcessorRuleInBundle;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -99,60 +92,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	@Override
 	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		return buildBundle(new HAPManualContentProviderFile(brickId, this.m_brickCriteriaMan), runtimeInfo);
+		return HAPManualProcessBundle.buildBundle(new HAPManualContentProviderFile(brickId, this.m_brickCriteriaMan), runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser);
 	}
-	
-	public HAPBundle buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
-		HAPBundle bundle = new HAPBundle();
-		bundle.setDynamicInfo(contentProvider.getDynamicDefinition());
-
-		Map<String, HAPManualDefinitionWrapperBrickRoot> definitions = new LinkedHashMap();
-		
-		//branches
-		Map<String, HAPManualInfoContent> branchsContent = contentProvider.getBranchContents();
-		for(String branchName : branchsContent.keySet()) {
-			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(branchsContent.get(branchName), contentProvider, new HAPManualContextProcessBrick(bundle, branchName, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo));
-			definitions.put(rootBrick.getName(), rootBrick.getDefinition());
-		}
-	
-		//main 
-		{
-			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(contentProvider.getMainContent(), contentProvider, new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo));
-			definitions.put(rootBrick.getName(), rootBrick.getDefinition());
-		}
-
-		//process alias
-		Map<String, HAPPath> aliasMapping = new LinkedHashMap<String, HAPPath>();
-		HAPManualUtilityProcessAlias.processBrickAlias(new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo));
-		for(String branchName : bundle.getBranchNames()) {
-			HAPManualUtilityProcessAlias.processBrickAlias(new HAPManualContextProcessBrick(bundle, branchName, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo));
-		}
-		
-		//process root bricks
-		{
-			HAPManualContextProcessBrick cp = new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo);
-			HAPManualProcessBrick.processRootBrick(cp);
-			for(String branchName : bundle.getBranchNames()) {
-				cp = new HAPManualContextProcessBrick(bundle, branchName, this, this.m_brickManager, this.m_dataTypeHelper, this.m_resourceMan, runtimeInfo);
-				HAPManualProcessBrick.processRootBrick(cp);
-			}
-		}
-		
-		//process data rule
-		HAPProcessorRuleInBundle.process(bundle, m_dataRuleManager, this.m_brickManager, runtimeInfo);
-		
-		bundle.setExtraData(definitions);
-		return bundle;
-	}
-	
-	private HAPWrapperBrickRoot createRootBrick(HAPManualInfoContent contentInfo, HAPManualContentProvider contentProvider, HAPManualContextProcessBrick processContext) {
-		HAPManualDefinitionContextParse parseContext = new HAPManualDefinitionContextParse(contentProvider, HAPConstantShared.BRICK_DIVISION_MANUAL, this, this.m_brickManager);
-		//get definition
-		HAPManualDefinitionWrapperBrickRoot brickDefWrapper = HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(contentInfo.getContent(), contentInfo.getBrickTypeId(), contentInfo.getFormat(), parseContext);
-		HAPWrapperBrickRoot out = HAPManualProcessBrick.processRootBrickInit(brickDefWrapper, this.m_runtimeMan, this.m_dataExpressionParser, processContext);
-		return out;
-	}
-	
 	
 	@Autowired
 	private void setBickInfoProviders(List<HAPManualProviderBrickInfo> brickInfoProviders) {

@@ -1,8 +1,9 @@
-package com.nosliw.core.application.division.manual.core;
+package com.nosliw.core.application.division.manual.core.process;
 
 import java.util.Map;
 
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public interface HAPManualContentProvider {

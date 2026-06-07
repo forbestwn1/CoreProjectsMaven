@@ -19,9 +19,9 @@ import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPResourceDataBrick;
 import com.nosliw.core.application.HAPUtilityBrickResource;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
-import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -67,7 +67,7 @@ public class HAPManualGatewayUITagStandalone extends HAPGatewayImp{
 		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPManualGatewayUITagStandalone.class, "uitag.html");
 		String text = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);
 		
-		HAPManualContentProviderText contentProvider = new HAPManualContentProviderText(new HAPManualInfoContent(HAPSerializationFormat.HTML, text, null));
+		HAPManualContentProviderText contentProvider = new HAPManualContentProviderText(new HAPManualInfoContent(text, HAPSerializationFormat.HTML, null));
 		
 		return this.m_manualBrickMan.buildBundle(contentProvider, runtimeInfo);
 	}

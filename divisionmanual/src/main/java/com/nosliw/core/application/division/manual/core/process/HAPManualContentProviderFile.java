@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core;
+package com.nosliw.core.application.division.manual.core.process;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -10,6 +10,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
@@ -70,7 +71,7 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	private HAPManualInfoContent buildContentInfo(HAPManualDefinitionInfoBrickLocation locationInfo) {
 		HAPSerializationFormat format = locationInfo.getFormat();
 		String content = HAPUtilityFile.readFile(locationInfo.getFiile());
-		return new HAPManualInfoContent(format, content, locationInfo.getBrickTypeId());
+		return new HAPManualInfoContent(content, format, locationInfo.getBrickTypeId());
 	}
 	
 	@Override
@@ -92,7 +93,7 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	public HAPManualInfoContent getLocalBrickContent(HAPIdBrick brickId) {
 		HAPManualDefinitionInfoBrickLocation entityLocationInfo = HAPManualDefinitionUtilityBrickLocation.getLocalBrickLocationInfo(this.m_entityLocationInfo.getBasePath().getPath(), brickId);
 		String content = HAPUtilityFile.readFile(entityLocationInfo.getFiile());
-		return new HAPManualInfoContent(entityLocationInfo.getFormat(), content, entityLocationInfo.getBrickTypeId());
+		return new HAPManualInfoContent(content, entityLocationInfo.getFormat(), entityLocationInfo.getBrickTypeId());
 	}
 	
 }

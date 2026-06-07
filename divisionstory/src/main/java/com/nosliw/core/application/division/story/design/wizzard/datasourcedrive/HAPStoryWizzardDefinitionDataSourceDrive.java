@@ -28,7 +28,6 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIAppend;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
-import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStepEnd;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignStep;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -152,7 +151,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
 			
 			//add page to module
-			Pair<HAPStoryChangeItemNew, HAPStoryChangeItemNew> pagePair = HAPStoryElementUIUtility.newUIPage(changeSession, ALIAS_ELEMENT_MODULE, new HAPEntityInfoImp());
+			Pair<HAPStoryChangeItemNew, HAPStoryChangeItemNew> pagePair = HAPStoryElementUIUtility.newUIPage(changeSession, ALIAS_ELEMENT_MODULE, null);
 			HAPStoryChangeItemNew newPageContentWrapperChange = pagePair.getRight();
 			
 			//add root content to content wrapper
@@ -248,8 +247,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.commit();
 			
 			//end step
-			HAPStoryDesignMetadataStepEnd stepMetaData = new HAPStoryDesignMetadataStepEnd();
-			design.newStep(stepMetaData);
+//			HAPStoryDesignMetadataStepEnd stepMetaData = new HAPStoryDesignMetadataStepEnd();
+//			design.newStep(stepMetaData);
 			
 		}
 		

@@ -25,6 +25,11 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 		super(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT);
 	}
 	
+	public HAPDataDefinitionWritableWithInit(HAPDataDefinition dataDefinition) {
+		this();
+		dataDefinition.cloneToDataDefinition(this);
+	}
+	
 	public HAPData getInitData() {    return this.m_initData;     }
 	public void setInitData(HAPData initData) {    this.m_initData = initData;      }
 
@@ -65,8 +70,8 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 		return true;
 	}
 	
-	protected void cloneToDataDefinitionWritableWithInit(HAPDataDefinitionWritableWithInit out) {
-		this.cloneToDataDefinitionWritable(out);
+	protected void cloneToDataDefinition(HAPDataDefinitionWritableWithInit out) {
+		super.cloneToDataDefinition(out);
 		if(this.m_initData!=null) {
 			out.m_initData = this.m_initData.cloneData();
 		}
@@ -74,7 +79,7 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 	
 	public HAPDataDefinitionWritableWithInit cloneDataDefinitionWritableWithInit() {
 		HAPDataDefinitionWritableWithInit out = new HAPDataDefinitionWritableWithInit();
-		this.cloneToDataDefinitionWritableWithInit(out);
+		this.cloneToDataDefinition(out);
 		return out;
 	}
 	

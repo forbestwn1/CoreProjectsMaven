@@ -22,7 +22,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @RestController
-@RequestMapping("/nosliw/story")
+@RequestMapping("/nosliw/design")
 @HAPEntityWithAttribute
 public class HAPAPIStory {
 
@@ -33,24 +33,31 @@ public class HAPAPIStory {
 	private HAPServiceParseEntity m_entityParseService;
 	
 	@PostMapping("/new")
-    public String newStory(@RequestParam String builderId) {
+    public String newDesign(@RequestParam String builderId) {
 		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(builderId, null);
 		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
 	@PostMapping("/build")
-    public String buildStory(@RequestBody String requestBody) {
+    public String buildDesign(@RequestBody String requestBody) {
 		HAPStoryBuilderRequest request = (HAPStoryBuilderRequest)this.m_entityParseService.parseEntityJSONExplicit(new JSONObject(requestBody), HAPStoryBuilderRequest.PARSABLEENTITYTYPE);
 		HAPStoryBuilderResponseBuild buildResponse = m_designManager.designStory(request);
 		HAPServiceData out = HAPServiceData.createSuccessData(buildResponse);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@GetMapping("/design/{id}")
-    public String getStory(@PathVariable String id) {
+	@GetMapping("/{id}")
+    public String getDesign(@PathVariable String id) {
 		HAPStoryDesign design = m_designManager.getDesign(id);
 		HAPServiceData out = HAPServiceData.createSuccessData(design);
+	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}	
+
+	@PostMapping("/convert/{id}")
+    public String convertDesign(@PathVariable String id) {
+		m_designManager.convertDesignToManual(id);
+		HAPServiceData out = HAPServiceData.createSuccessData();
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 }

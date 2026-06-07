@@ -4,6 +4,7 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
@@ -37,7 +38,7 @@ public class HAPStoryChangeUtility {
 		return newConstantChange;
 	}
 	
-	public static HAPStoryChangeItemNew buildNewAppendVariableChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataDefinition dataDefinition, HAPEntityInfo variableInfo) {
+	public static HAPStoryChangeItemNew buildNewAppendVariableChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataDefinitionWritable dataDefinition, HAPEntityInfo variableInfo) {
 		//new variable element
 		HAPStoryChangeItemNew newVariableChange = buildNewVariableChange(changeSession, dataDefinition, variableInfo, HAPConstantShared.IO_DIRECTION_BOTH);
 		
@@ -66,14 +67,14 @@ public class HAPStoryChangeUtility {
 		
 		//build request end point in command
 		for(HAPDefinitionParmRequest parmDef : taskInterface.getRequestParms()) {
-			HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, parmDef.getDataDefinition(), parmDef, HAPConstantShared.IO_DIRECTION_BOTH);
+			HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, parmDef.getDataDefinition(), parmDef, HAPConstantShared.IO_DIRECTION_IN);
 			changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddRequestParmChildPath()));
 		}
 		
 		//build response end point in command
 		for(HAPInteractiveResultTask result : taskInterface.getResult()) {
 			for(HAPDefinitionParmResponse output : result.getOutput()) {
-				HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, output.getDataDefinition(), output, HAPConstantShared.IO_DIRECTION_BOTH);
+				HAPStoryChangeItemNew newParmChange = buildNewVariableChange(changeSession, output.getDataDefinition(), output, HAPConstantShared.IO_DIRECTION_OUT);
 				changeSession.addChangeConnectionNew(newCommandChange.getElementId(), newParmChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementAccessoryCommand.getAddResponseParmChildPath(result.getName(), output.getName())));
 			}
 		}

@@ -46,7 +46,6 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 	public HAPDataTypeCriteria getCriteria() {   return this.m_criteria; }
 	public void setCriteria(HAPDataTypeCriteria criteria) {    this.m_criteria = criteria;     }
 	
-
 	@Override
 	public boolean equals(Object obj){
 		boolean out = false;
@@ -100,6 +99,3 @@ abstract class HAPDataDefinition__HAPEntityParsable extends HAPParserEntityImpWi
 	}
 	
 }
-
-
-

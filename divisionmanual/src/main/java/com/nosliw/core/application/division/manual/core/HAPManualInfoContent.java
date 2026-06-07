@@ -11,8 +11,16 @@ public class HAPManualInfoContent {
 	
 	//brick type id if not provided
 	private HAPIdBrickType m_brickTypeId;
+
+	public HAPManualInfoContent(String content, HAPIdBrickType brickTypeId) {
+		this(content, null, brickTypeId);
+	}
+
+	public HAPManualInfoContent(String content, HAPSerializationFormat format) {
+		this(content, format, null);
+	}
 	
-	public HAPManualInfoContent(HAPSerializationFormat format, String content, HAPIdBrickType brickTypeId) {
+	public HAPManualInfoContent(String content, HAPSerializationFormat format, HAPIdBrickType brickTypeId) {
 		this.m_format = format;
 		if(this.m_format==null) {
 			this.m_format = HAPSerializationFormat.JSON;

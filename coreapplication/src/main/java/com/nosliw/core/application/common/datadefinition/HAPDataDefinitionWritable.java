@@ -43,6 +43,11 @@ public class HAPDataDefinitionWritable extends HAPDataDefinition{
 
 	private HAPDataTypeCriteria m_ruleCriteria;
 
+	public HAPDataDefinitionWritable(HAPDataDefinition dataDefinition) {
+		this();
+		dataDefinition.cloneToDataDefinition(this);
+	}
+	
 	HAPDataDefinitionWritable(String type) { 
 		super(type);
 		this.m_rules = new ArrayList<HAPDefinitionDataRule>();
@@ -105,8 +110,8 @@ public class HAPDataDefinitionWritable extends HAPDataDefinition{
 		}
 	}
 	
-	protected void cloneToDataDefinitionWritable(HAPDataDefinitionWritable out) {
-		this.cloneToDataDefinition(out);
+	protected void cloneToDataDefinition(HAPDataDefinitionWritable out) {
+		super.cloneToDataDefinition(out);
 		out.m_rules.addAll(this.m_rules);
 		if(this.m_ruleMatchers!=null) {
 			out.m_ruleMatchers = this.m_ruleMatchers.cloneMatchers();
@@ -118,7 +123,7 @@ public class HAPDataDefinitionWritable extends HAPDataDefinition{
 	
 	public HAPDataDefinitionWritable cloneDataDefinitionWritable() {
 		HAPDataDefinitionWritable out = new HAPDataDefinitionWritable();
-		this.cloneToDataDefinitionWritable(out);
+		this.cloneToDataDefinition(out);
 		return out;
 	}
 	
