@@ -78,8 +78,15 @@ public class HAPStoryConverterToManual {
 			templateParms.put("html", convertUIContent(contentChild.getElementId(), story));
 		}
 		
-		String valueContextJsonStr = convertWithVariable(contentWrapperElement, story);
-		templateParms.put("valueContext", valueContextJsonStr);
+		InputStream valueContextTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "valuecontextinui.temp");
+		Map<String, String> valueContexTemplateParms = new LinkedHashMap<String, String>();
+
+		String valueContextJsonStr = convertWithVariable(contentWrapperElement, story, false);
+		if(valueContextJsonStr!=null) {
+			valueContexTemplateParms.put("valueContext", valueContextJsonStr);
+			templateParms.put("valueContext", HAPStringTemplateUtil.getStringValue(valueContextTemplateStream, valueContexTemplateParms));
+		}
+		
 		return HAPStringTemplateUtil.getStringValue(templateStream, templateParms);
 	}
 	
@@ -147,12 +154,17 @@ public class HAPStoryConverterToManual {
 	}
 	
 	
-	private static String convertWithVariable(HAPStoryElementWithVariable withVariableElement, HAPStoryStory story) {
+	private static String convertWithVariable(HAPStoryElementWithVariable withVariableElement, HAPStoryStory story, boolean returnSthWithEmpty) {
 		HAPValueContextDefinitionImp valueContext = new HAPValueContextDefinitionImp();
 		
 		HAPValueStructureImp valueStructure = new HAPValueStructureImp();
 		
 		List<HAPStoryContainerChildrenElementsWrapper> variablesChildren =((HAPStoryElement)withVariableElement).getChildCollection(HAPStoryElementWithVariable.CHILD_VARIABLE);
+		
+		if(!returnSthWithEmpty&&variablesChildren.size()==0) {
+			return null;
+		}
+		
 		for(HAPStoryContainerChildrenElementsWrapper variableChild : variablesChildren) {
 			HAPStoryElementAccessoryVariable variableElement = (HAPStoryElementAccessoryVariable)story.getElement(variableChild.getChildElement().getElementId());
 			String variableName = variableElement.getEntityInfo().getName();
