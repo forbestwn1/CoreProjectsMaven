@@ -6,15 +6,19 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementParser;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementUIContentHtml extends HAPStoryElement{
 
+	public static final String CHILD_CHILDREN = "children";
+	
 	public static final String HTML = "html";
 	
 	private String m_html;
@@ -27,6 +31,11 @@ public class HAPStoryElementUIContentHtml extends HAPStoryElement{
 		this();
 		this.m_html = html;
 	}
+	
+	public static HAPPath getAddChildChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_CHILDREN));   }
+
+	
+	public String getHtml() {    return this.m_html;       }
 	void setHtml(String html) {     this.m_html = html;     }
 
 	@Override

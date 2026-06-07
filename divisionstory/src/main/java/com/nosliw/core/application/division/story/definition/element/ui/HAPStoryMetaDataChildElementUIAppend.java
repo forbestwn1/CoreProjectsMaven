@@ -9,7 +9,12 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryMetaDataChildElementUIAppend extends HAPStoryMetaDataChildElementUI{
 
-    public HAPStoryMetaDataChildElementUIAppend() {
+    public HAPStoryMetaDataChildElementUIAppend(String slotName) {
+    	this();
+    	this.setSlotName(slotName);
+    }
+	
+    HAPStoryMetaDataChildElementUIAppend() {
     	super(HAPConstantShared.STORY_CHILD_METADATA_TYPE_UIAPPEND);
     }
 	

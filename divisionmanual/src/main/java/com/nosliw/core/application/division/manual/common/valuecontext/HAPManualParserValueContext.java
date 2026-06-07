@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
+import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickWrapperValueStructure;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
@@ -25,8 +26,15 @@ public class HAPManualParserValueContext {
 			}
 		}
 		else if(jsonValue instanceof JSONObject) {
-			HAPManualDefinitionBrickWrapperValueStructure valueStructureWrapper = parseValueStructureWrapper((JSONObject)jsonValue, parseContext);
-			valueContext.addValueStructure(valueStructureWrapper);
+			JSONObject jsonObj = (JSONObject)jsonValue;
+			JSONArray itemArray = jsonObj.optJSONArray(HAPValueContextDefinition.ITEM);
+			if(itemArray!=null) {
+				parseValueContextContentJson(valueContext, itemArray, parseContext, entityParseService);
+			}
+			else {
+				HAPManualDefinitionBrickWrapperValueStructure valueStructureWrapper = parseValueStructureWrapper(jsonObj, parseContext);
+				valueContext.addValueStructure(valueStructureWrapper);
+			}
 		}
 	}
 

@@ -22,6 +22,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityDataSource;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementRunnableCommand;
+import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentHtml;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentTagCustom;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIUtility;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapperContent;
@@ -155,16 +156,16 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryChangeItemNew newPageContentWrapperChange = pagePair.getRight();
 			
 			//add root content to content wrapper
-			HAPStoryChangeItemNew newRootContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "main.html");
+			HAPStoryChangeItemNew newRootContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "main.html");
 			changeSession.addChangeConnectionNew(newPageContentWrapperChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIWrapperContent.CHILD_CONTENT)));
 
 			//add request content and inject it to "request" slot
-			HAPStoryChangeItemNew newRequestContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "request.html");
-			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newRequestContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("request"), new HAPStoryMetaDataChildElementUIInject()));
+			HAPStoryChangeItemNew newRequestContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "request.html");
+			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newRequestContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("request")));
 			
 			//add response content and inject it to "response" slot
-			HAPStoryChangeItemNew newResponseContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "response.html");
-			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newResponseContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("response"), new HAPStoryMetaDataChildElementUIInject()));
+			HAPStoryChangeItemNew newResponseContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "response.html");
+			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newResponseContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("response")));
 
 			//data association between page and data source request
 //			HAPStoryElementDataAssociation requestDataAssocationEle = new HAPStoryElementDataAssociation(newPageContentWrapperChange.getElementId(), null, changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getElementId(), new HAPPath(HAPStoryElementEntityDataSource.CHILD_COMMAND), HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM);
@@ -203,16 +204,20 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 //					requestDataAssocationEle.addTunnel(tunnel);
 					
 					//append input content
-					HAPStoryChangeItemNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "input.html");
-					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("input"), new HAPStoryMetaDataChildElementUIAppend()));
+					HAPStoryChangeItemNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "input.html");
+					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("input")));
 					
 					//inject label
-					HAPStoryChangeItemNew newRequestInputLabelContentChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, "inputlabel.html");
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("label"), new HAPStoryMetaDataChildElementUIInject()));
+					HAPStoryChangeItemNew newRequestInputLabelContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "inputlabel.html");
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
+
+					//inject title
+					HAPStoryChangeItemNew newRequestInputLabelTitleChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, parmDef.getName());
+					changeSession.addChangeConnectionNew(newRequestInputLabelContentChange.getElementId(), newRequestInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
 					
 					//inject uiTag
 					HAPStoryChangeItemNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath("uitag"), new HAPStoryMetaDataChildElementUIInject()));
+					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
 					
 					//inject content wrapper into uitag
 					HAPStoryChangeItemNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());

@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.definition;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 	public HAPStoryIdElementType getElementType() {     return this.m_elementType;       }
 	protected void setElementType(HAPStoryIdElementType elementType) {    this.m_elementType = elementType;     }
 	
-	public HAPStoryContainerChildrenElements getChildren() {		return this.m_children;	   }
+	public HAPStoryContainerChildrenElementsAttributes getChildren() {		return this.m_children;	   }
 	public void setChildren(HAPStoryContainerChildrenElementsAttributes children) {     this.m_children = children;      }
 	
 	public HAPPath addChild(HAPStoryChildElement child, String childPath) {
@@ -119,7 +120,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 		if(!result.getRemainingPath().isEmpty()) {
 			throw new RuntimeException();
 		} else {
-			return ((HAPStoryContainerChildrenElementsWrapper)result.getChildContainer()).getChildElement();
+			return result.getChildContainer()==null?null:((HAPStoryContainerChildrenElementsWrapper)result.getChildContainer()).getChildElement();
 		}
 	}
 
@@ -128,7 +129,7 @@ public abstract class HAPStoryElement extends HAPSerializableImp implements HAPE
 		if(!result.getRemainingPath().isEmpty()) {
 			throw new RuntimeException();
 		} else {
-			return ((HAPStoryContainerChildrenElementsCollection)result.getChildContainer()).getChildren();
+			return result.getChildContainer()==null? new ArrayList<HAPStoryContainerChildrenElementsWrapper>() : ((HAPStoryContainerChildrenElementsCollection)result.getChildContainer()).getChildren();
 		}
 	}
 

@@ -13,12 +13,17 @@ public class HAPStoryUtilityContainer {
 		
 		String[] segs = HAPUtilityNamingConversion.parsePaths(childPath);
 		boolean searching = true;
-		for(String seg : segs) {
+		for(int i=0; i<segs.length; i++) {
+			String seg = segs[i];
 			if(searching==true) {
 				currentContainer = HAPStoryUtilityContainer.getChildContainer(currentContainer, seg);
 				
 				if(currentContainer==null) {
-					throw new RuntimeException();
+					if(i==segs.length-1) {
+						return new HAPStoryResultContainerChild(null, remainingPath);
+					} else {
+						throw new RuntimeException();
+					}
 				}
 				
 				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_WRAPPER.equals(currentContainer.getContainerType())) {
@@ -48,7 +53,11 @@ public class HAPStoryUtilityContainer {
 				currentContainer = HAPStoryUtilityContainer.getChildContainer(currentContainer, seg);
 				
 				if(currentContainer==null) {
-					throw new RuntimeException();
+					if(i==segs.length-1) {
+						return new HAPStoryResultContainerChild(null, remainingPath);
+					} else {
+						throw new RuntimeException();
+					}
 				}
 				
 				if(HAPConstantShared.STORYELEMENTCHILDREN_TYPE_WRAPPER.equals(currentContainer.getContainerType())) {

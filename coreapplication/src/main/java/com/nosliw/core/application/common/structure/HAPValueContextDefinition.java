@@ -6,7 +6,7 @@ import com.nosliw.common.serialization.HAPSerializable;
 
 public interface HAPValueContextDefinition extends HAPSerializable{
 
-	public static final String VALUESTRUCTURE = "valueStructure";
+	public static final String ITEM = "item";
 	
 	List<HAPWrapperValueStructureDefinition> getValueStructures();
 	

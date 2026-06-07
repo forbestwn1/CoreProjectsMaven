@@ -24,7 +24,7 @@ public class HAPValueContextDefinitionImp extends HAPSerializableImp implements 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(VALUESTRUCTURE, HAPManagerSerialize.getInstance().toStringValue(this.m_valueStructures, HAPSerializationFormat.JSON));
+		jsonMap.put(ITEM, HAPManagerSerialize.getInstance().toStringValue(this.m_valueStructures, HAPSerializationFormat.JSON));
 	}
 	
 }

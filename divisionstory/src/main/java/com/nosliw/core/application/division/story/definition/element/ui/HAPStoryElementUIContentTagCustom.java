@@ -37,7 +37,10 @@ public class HAPStoryElementUIContentTagCustom extends HAPStoryElement{
 		this.m_attributes.putAll(attributes);
 	}
 
+	public String getTagId() {   return this.m_uiTagId;   }
 	void setUITagId(String uiTagId) {      this.m_uiTagId = uiTagId;      }
+	
+	public Map<String, String> getAttributes(){    return this.m_attributes;      }
 	void addAttribute(String name, String value) {     this.m_attributes.put(name, value);        }
 	
 	@Override
