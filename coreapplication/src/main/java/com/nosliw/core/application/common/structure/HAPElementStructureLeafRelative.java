@@ -45,7 +45,7 @@ public abstract class HAPElementStructureLeafRelative extends HAPElementStructur
 	public void setSolidNodeReference(HAPInfoPathToSolidRoot solidNodeRef) {    this.m_solidNodeRef = solidNodeRef;    }
 
 	@Override
-	public HAPElementStructure getChild(String childName) {  return this.getSolidStructureElement().getChild(childName);  } 
+	public HAPElementStructure getChild(String childName) {  return this.getSolidStructureElement().getChild(childName);  }
 
 
 	@Override

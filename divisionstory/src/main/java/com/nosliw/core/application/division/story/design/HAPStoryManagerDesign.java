@@ -75,11 +75,11 @@ public class HAPStoryManagerDesign {
 		return out;
 	}
 
-	public void convertDesignToManual(String designId) {
+	public HAPManualContentProviderText convertDesignToManual(String designId) {
 		HAPStoryDesign design = this.getDesign(designId);
 		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
-		
 		HAPManualUtilityExporterContentProviderText.export(contentProvider, getDesignFolder(designId).getAbsolutePath()+"/manual");
+		return contentProvider;
 	}
 	
 	private HAPStoryDesign loadDesign(String designId) {

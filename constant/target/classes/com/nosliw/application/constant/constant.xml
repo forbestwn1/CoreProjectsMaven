@@ -1125,6 +1125,7 @@ I
 
 			<definition type="space"/>
 			<definition name="BRICK_DIVISION_MANUAL" value="manual"/>
+			<definition name="BRICK_DIVISION_STORY" value="story"/>
 			<definition name="BRICK_DIVISION_SERVICE" value="service"/>
 			<definition name="BRICK_DIVISION_SCRIPT" value="script"/>
 

@@ -1,9 +1,11 @@
 package com.nosliw.core.application.division.story.converter.manual;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -26,6 +28,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
@@ -35,6 +38,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIPage;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapperContent;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUI;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 
 public class HAPStoryConverterToManual {
 
@@ -46,15 +50,30 @@ public class HAPStoryConverterToManual {
 		
 		InputStream moduleTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "module.temp");
 		Map<String, String> moduleTemplateParms = new LinkedHashMap<String, String>();
-		out.setMainContent(new HAPManualInfoContent(HAPStringTemplateUtil.getStringValue(moduleTemplateStream, moduleTemplateParms), HAPEnumBrickType.MODULE_100));
 		
-		//get page elemtns
+		//get page elements
+		List<String> pageElementList = new ArrayList<String>();
 		List<HAPStoryContainerChildrenElementsWrapper> pagesChildren = moduleElement.getChildCollection(HAPStoryElementEntityModule.CHILD_PAGE);
 		for(HAPStoryContainerChildrenElementsWrapper pageChild : pagesChildren) {
 			HAPStoryElementUIPage pageElement = (HAPStoryElementUIPage)story.getElement(pageChild.getChildElement().getElementId());
 			HAPIdBrick pageBrickId = new HAPIdBrick( HAPEnumBrickType.UIPAGE_100, null, pageElement.getEntityInfo().getName());
 			out.addLocalBrickContent(pageBrickId, new HAPManualInfoContent(convertPage(pageElement, story) , HAPSerializationFormat.HTML));
+			
+			pageElementList.add(HAPStoryUtilityConverter.convertToBrickWrapper(pageElement.getEntityInfo(), pageBrickId));
 		}
+		moduleTemplateParms.put("pages", pageElementList.toString());
+		
+		//get tasks
+		Set<HAPStoryRunnable> runnables = story.getRunnables();
+		for(HAPStoryRunnable runnable : runnables) {
+			String runnableType = runnable.getRunnableType();
+			if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND)) {
+				HAPStoryRunnableCommand commandRunnable = (HAPStoryRunnableCommand)runnable;
+				
+			}
+		}
+		
+		out.setMainContent(new HAPManualInfoContent(HAPStringTemplateUtil.getStringValue(moduleTemplateStream, moduleTemplateParms), HAPEnumBrickType.MODULE_100));
 		
 		return out;
 	}

@@ -48,6 +48,9 @@ public class HAPIdBrick extends HAPSerializableImp{
 	}
 	
 	@Override
+	protected String buildLiterate(){  return this.getKey(); }
+	
+	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(DIVISION, this.m_division);
 		jsonMap.put(BRICKTYPEID, this.m_brickTypeId.toStringValue(HAPSerializationFormat.JSON));

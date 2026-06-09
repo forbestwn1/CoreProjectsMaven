@@ -1,9 +1,11 @@
 package com.nosliw.core.application.division.story.definition;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -59,6 +61,8 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	public int getIndex() {     return this.m_index;     }
 	public void setIndex(int index) {     this.m_index = index;      }
+
+	public Set<HAPStoryRunnable> getRunnables(){    return new HashSet<>(this.m_runnables.values());      }
 	
 	public HAPStoryRunnable getRunnable(String runnableId) {
 		return this.m_runnables.get(runnableId);

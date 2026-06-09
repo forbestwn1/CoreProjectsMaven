@@ -17,6 +17,7 @@ import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
+import com.nosliw.core.application.division.manual.core.process.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
@@ -92,7 +93,11 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	@Override
 	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		return HAPManualProcessBundle.buildBundle(new HAPManualContentProviderFile(brickId, this.m_brickCriteriaMan), runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser);
+		return this.buildBundle(new HAPManualContentProviderFile(brickId, this.m_brickCriteriaMan), runtimeInfo);
+	}
+	
+	public HAPBundle buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
+		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser);
 	}
 	
 	@Autowired

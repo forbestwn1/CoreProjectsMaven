@@ -5,9 +5,9 @@
 	},
 	"brick": {
 	
-	    "page" : [
+	    "page" : 
             ||pages||
-	    ],
+	    ,
 	    
 	    "valueContext" : {
 	    

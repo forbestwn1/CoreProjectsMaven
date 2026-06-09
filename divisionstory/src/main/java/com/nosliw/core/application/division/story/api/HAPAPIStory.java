@@ -14,11 +14,16 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.division.story.HAPStoryManagerStory;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
+import com.nosliw.core.runtime.HAPRuntimeManager;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @RestController
@@ -26,6 +31,9 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPAPIStory {
 
+	@Autowired
+	private HAPStoryManagerStory m_storyManager;
+	
 	@Autowired
 	private HAPStoryManagerDesign m_designManager;
 	
@@ -60,4 +68,12 @@ public class HAPAPIStory {
 		HAPServiceData out = HAPServiceData.createSuccessData();
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
+
+	@PostMapping("/bundle/{id}")
+    public String buildBundle(@PathVariable String id) {
+		HAPBundle bundle = this.m_storyManager.getBundle(new HAPIdBrick(HAPEnumBrickType.MODULE_100, null, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
+		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
+	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}	
+
 }
