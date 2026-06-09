@@ -19,7 +19,7 @@ import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
-import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsWrapper;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
@@ -42,7 +42,7 @@ public class HAPStoryConverterToManual {
 		HAPManualContentProviderText out = new HAPManualContentProviderText();
 		
 		//get module element (root)
-		HAPStoryElementEntityModule moduleElement = (HAPStoryElementEntityModule)story.getElement(new HAPStoryAliasElement(HAPStoryStory.ALIAS_ROOT));
+		HAPStoryElementEntityModule moduleElement = (HAPStoryElementEntityModule)story.getElement(new HAPStoryAlias(HAPStoryStory.ALIAS_ROOT));
 		
 		InputStream moduleTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "module.temp");
 		Map<String, String> moduleTemplateParms = new LinkedHashMap<String, String>();

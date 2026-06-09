@@ -9,14 +9,14 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
+public class HAPStoryChangeItemElementNew extends HAPStoryChangeItem{
 
 	@HAPAttribute
 	public static final String ALIAS = "alias";
@@ -24,26 +24,26 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 	@HAPAttribute
 	public static final String ELEMENT = "element";
 
-	private HAPStoryAliasElement m_alias;
+	private HAPStoryAlias m_alias;
 	
 	private HAPStoryElement m_storyElement;
 	
-	public HAPStoryChangeItemNew() {
-		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_NEW);
+	public HAPStoryChangeItemElementNew() {
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_ELEMENT_NEW);
 	}
 	
-	public HAPStoryChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
+	public HAPStoryChangeItemElementNew(HAPStoryElement storyElement, HAPStoryAlias alias) {
 		this();
 		this.m_alias = alias;
 		this.m_storyElement = storyElement;
 	}
 	
-	public HAPStoryChangeItemNew(HAPStoryElement storyElement) {
+	public HAPStoryChangeItemElementNew(HAPStoryElement storyElement) {
 		this(storyElement, null);
 	}
 
-	public HAPStoryAliasElement getAlias() {	return this.m_alias;	}
-	public void setAlias(HAPStoryAliasElement alias) {    this.m_alias = alias;     }
+	public HAPStoryAlias getAlias() {	return this.m_alias;	}
+	public void setAlias(HAPStoryAlias alias) {    this.m_alias = alias;     }
 
 	public HAPStoryElement getElement() {  return this.m_storyElement;  }
 	
@@ -63,26 +63,26 @@ public class HAPStoryChangeItemNew extends HAPStoryChangeItem{
 class HAPStoryChangeItemNew_HAPEntityParsable extends HAPStoryChangeItem__HAPEntityParsable{
 
 	@Override
-	public String getSubName() {    return HAPConstantShared.STORYDESIGN_CHANGETYPE_NEW;   }
+	public String getSubName() {    return HAPConstantShared.STORYDESIGN_CHANGETYPE_ELEMENT_NEW;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryChangeItemNew out = new HAPStoryChangeItemNew();
+		HAPStoryChangeItemElementNew out = new HAPStoryChangeItemElementNew();
 		this.parseToEntity((JSONObject)obj, out, parseService);
 		return out;
 	}
 
-	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItemNew changeItem, HAPServiceParseEntity parseService) {
+	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItemElementNew changeItem, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, changeItem, parseService);
 		
-		JSONObject aliasObj = jsonObj.optJSONObject(HAPStoryChangeItemNew.ALIAS);
+		JSONObject aliasObj = jsonObj.optJSONObject(HAPStoryChangeItemElementNew.ALIAS);
 		if(aliasObj!=null) {
-			HAPStoryAliasElement alias = new HAPStoryAliasElement();
+			HAPStoryAlias alias = new HAPStoryAlias();
 			alias.buildObject(aliasObj, HAPSerializationFormat.JSON);
 			changeItem.setAlias(alias);
 		}
 		
-		JSONObject eleObj = jsonObj.optJSONObject(HAPStoryChangeItemNew.ELEMENT);
+		JSONObject eleObj = jsonObj.optJSONObject(HAPStoryChangeItemElementNew.ELEMENT);
 		if(eleObj!=null) {
 			changeItem.setElement(HAPStoryUtilityStoryParse.parseElement(eleObj, parseService));
 		}

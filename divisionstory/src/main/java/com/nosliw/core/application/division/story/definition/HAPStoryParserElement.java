@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-abstract public class HAPStoryElementParser  extends HAPParserEntityImpWithDomain{
+abstract public class HAPStoryParserElement  extends HAPParserEntityImpWithDomain{
 
 	protected void parseToEntity(JSONObject jsonObj, HAPStoryElement element, HAPServiceParseEntity parseService) {
 		String eleIdKey = (String)jsonObj.opt(HAPStoryElement.ELEMENTID);

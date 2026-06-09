@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEntityComplex;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementParser;
+import com.nosliw.core.application.division.story.definition.HAPStoryParserElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
@@ -28,7 +28,7 @@ public class HAPStoryElementUIWrapperContent extends HAPStoryElementEntityComple
 }
 
 @Component
-class HAPStoryElementUIWrapperContent__HAPEntityParsable extends HAPStoryElementParser{
+class HAPStoryElementUIWrapperContent__HAPEntityParsable extends HAPStoryParserElement{
 
 	@Override
 	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_UIWRAPPER;    }

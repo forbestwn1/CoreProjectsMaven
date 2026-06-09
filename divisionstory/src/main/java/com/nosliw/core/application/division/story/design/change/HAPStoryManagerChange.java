@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsWrapper;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 
 @Component
@@ -39,16 +40,15 @@ public class HAPStoryManagerChange {
 	
 	//apply change and triggued extend changes to story
 	//allChanges : story all changes
-	public HAPStoryElement applyChange(HAPStoryStory story, HAPStoryChangeItem change, List<HAPStoryChangeItem> allChanges) {
+	public void applyChange(HAPStoryStory story, HAPStoryChangeItem change, List<HAPStoryChangeItem> allChanges) {
 		allChanges.add(change);
 		
 		List<HAPStoryChangeItem> extendChanges = new ArrayList<HAPStoryChangeItem>();
-		HAPStoryElement element = applySingleChange(story, change, extendChanges, true);
+		applySingleChange(story, change, extendChanges, true);
 		
 		for(HAPStoryChangeItem extendChange : extendChanges) {
 			applyChange(story, extendChange, allChanges);
 		}
-		return element;
 	}	
 	
 	
@@ -59,30 +59,29 @@ public class HAPStoryManagerChange {
 	//     extendedChanges :  sometimes, one change may trigue more extend changes
 	//     saveRevert : whether save revert information when apply change.
 	//return story element related with change
-	private HAPStoryElement applySingleChange(HAPStoryStory story, HAPStoryChangeItem changeItem, List<HAPStoryChangeItem> extendChanges, boolean saveRevert) {
-		HAPStoryElement out = null;
+	private void applySingleChange(HAPStoryStory story, HAPStoryChangeItem changeItem, List<HAPStoryChangeItem> extendChanges, boolean saveRevert) {
 		String changeType = changeItem.getChangeType();
-		if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_NEW)) {
-			HAPStoryChangeItemNew changeNew = (HAPStoryChangeItemNew)changeItem;
+		if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_ELEMENT_NEW)) {
+			HAPStoryChangeItemElementNew changeNew = (HAPStoryChangeItemElementNew)changeItem;
 			HAPStoryElement element = changeNew.getElement();
-			HAPStoryAliasElement alias = changeNew.getAlias();
-			out = story.addElement(element, alias);
-			changeNew.setElement(out);
+			HAPStoryAlias alias = changeNew.getAlias();
+			element = story.addElement(element, alias);
+			changeNew.setElement(element);
 			//revert changes info
 			if(ifRevertable(saveRevert, changeItem)) {
 				List<HAPStoryChangeItem> revertChanges =new ArrayList<HAPStoryChangeItem>();
-				revertChanges.add(new HAPStoryChangeItemDelete(out.getElementId()));
+				revertChanges.add(new HAPStoryChangeItemElementDelete(element.getElementId()));
 				changeItem.setRevertChanges(revertChanges);
 			}
 		}		
-		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_DELETE)) {
-			HAPStoryChangeItemDelete changeDelete = (HAPStoryChangeItemDelete)changeItem;
-			HAPStoryAliasElement alias = story.getAlias(changeDelete.getTargetElementId());
+		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_ELEMENT_DELETE)) {
+			HAPStoryChangeItemElementDelete changeDelete = (HAPStoryChangeItemElementDelete)changeItem;
+			HAPStoryAlias alias = story.getElementAlias(changeDelete.getTargetElementId());
 			HAPStoryElement element = story.deleteElement(changeDelete.getTargetElementId());
 			//revert changes info
 			if(ifRevertable(saveRevert, changeItem)) {
 				List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
-				revertChanges.add(new HAPStoryChangeItemNew(element, alias));
+				revertChanges.add(new HAPStoryChangeItemElementNew(element, alias));
 				changeItem.setRevertChanges(revertChanges);
 			}
 		}
@@ -118,11 +117,35 @@ public class HAPStoryManagerChange {
 				}
 			}
 		}
-
+		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_RUNNABLE_NEW)) {
+			HAPStoryChangeItemRunnableNew changeNew = (HAPStoryChangeItemRunnableNew)changeItem;
+			HAPStoryRunnable runnable = changeNew.getRunnable();
+			HAPStoryAlias alias = changeNew.getAlias();
+			runnable = story.addRunnable(runnable, alias);
+			changeNew.setRunnable(runnable);
+			//revert changes info
+			if(ifRevertable(saveRevert, changeItem)) {
+				List<HAPStoryChangeItem> revertChanges =new ArrayList<HAPStoryChangeItem>();
+				revertChanges.add(new HAPStoryChangeItemRunnableDelete(runnable.getId()));
+				changeItem.setRevertChanges(revertChanges);
+			}
+		}
+		else if(changeType.equals(HAPConstantShared.STORYDESIGN_CHANGETYPE_RUNNABLE_DELETE)) {
+			HAPStoryChangeItemRunnableDelete changeDelete = (HAPStoryChangeItemRunnableDelete)changeItem;
+			HAPStoryAlias alias = story.getRunnableAlias(changeDelete.getRunnableId());
+			String runnableId = changeDelete.getRunnableId();
+			HAPStoryRunnable runnable = story.deleteRunnable(runnableId);
+			//revert changes info
+			if(ifRevertable(saveRevert, changeItem)) {
+				List<HAPStoryChangeItem> revertChanges = new ArrayList<HAPStoryChangeItem>();
+				revertChanges.add(new HAPStoryChangeItemRunnableNew(runnable, alias));
+				changeItem.setRevertChanges(revertChanges);
+			}
+		}
+		
 		if(extendChanges!=null) {
 			changeItem.setExtended();
 		}
-		return out;
 	}
 	
 	private boolean ifRevertable(boolean saveRevert, HAPStoryChangeItem changeItem) {

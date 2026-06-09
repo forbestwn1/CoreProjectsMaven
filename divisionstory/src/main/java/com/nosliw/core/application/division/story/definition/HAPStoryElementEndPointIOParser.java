@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-abstract public class HAPStoryElementEndPointIOParser extends HAPStoryElementParser{
+abstract public class HAPStoryElementEndPointIOParser extends HAPStoryParserElement{
 
 	protected void parseToEntity(JSONObject jsonObj, HAPStoryElementEndPointIO element, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, element, parseService);

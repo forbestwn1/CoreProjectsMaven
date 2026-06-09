@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnection;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemConnectionNew;
-import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemNew;
+import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemElementNew;
+import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemRunnableNew;
 
 public class HAPStoryDesignSessionChange {
 
@@ -54,19 +56,29 @@ public class HAPStoryDesignSessionChange {
 		}
 	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement) {
-		return this.addChangeItemNew(storyElement, null);
-	}
+	public HAPStoryChangeItemElementNew addChangeItemNew(HAPStoryElement storyElement) {		return this.addChangeItemNew(storyElement, null);	}
 	
-	public HAPStoryChangeItemNew addChangeItemNew(HAPStoryElement storyElement, HAPStoryAliasElement alias) {
+	public HAPStoryChangeItemElementNew addChangeItemNew(HAPStoryElement storyElement, HAPStoryAlias alias) {
 		if(storyElement.getElementId()==null) {
 			this.getStory().buildElementId(storyElement);
 		}
-		HAPStoryChangeItemNew out = new HAPStoryChangeItemNew(storyElement, alias);
+		HAPStoryChangeItemElementNew out = new HAPStoryChangeItemElementNew(storyElement, alias);
 		this.m_changeItems.add(out);
 		return out;
 	}
 
+	public HAPStoryChangeItemRunnableNew addChangeItemNew(HAPStoryRunnable storyRunnable) {		return this.addChangeItemNew(storyRunnable, null);	}
+	
+	public HAPStoryChangeItemRunnableNew addChangeItemNew(HAPStoryRunnable storyRunnable, HAPStoryAlias alias) {
+		if(storyRunnable.getId()==null) {
+			this.getStory().buildRunnableId(storyRunnable);
+		}
+		HAPStoryChangeItemRunnableNew out = new HAPStoryChangeItemRunnableNew(storyRunnable, alias);
+		this.m_changeItems.add(out);
+		return out;
+	}
+
+	
 	public HAPStoryChangeItemConnectionNew addChangeConnectionNew(HAPStoryReferenceElement elementIdSource, HAPStoryReferenceElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
 		HAPStoryChangeItemConnectionNew out = new HAPStoryChangeItemConnectionNew(getElementId(elementIdSource), getElementId(elementIdTarget), connectionInfo);
 		this.m_changeItems.add(out);

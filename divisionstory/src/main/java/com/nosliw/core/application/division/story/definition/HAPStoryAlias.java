@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.utils.HAPConstantShared;
 
 @HAPEntityWithAttribute
-public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStoryReferenceElement{
+public class HAPStoryAlias extends HAPSerializableImp implements HAPStoryReferenceElement{
 	
 	@HAPAttribute
 	public static final String NAME = "name";
@@ -22,13 +22,13 @@ public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStory
 
 	private boolean m_isTemp;
 	
-	public HAPStoryAliasElement() {}
+	public HAPStoryAlias() {}
 
-	public HAPStoryAliasElement(String alias) {
+	public HAPStoryAlias(String alias) {
 		this(alias, true);
 	}
 
-	public HAPStoryAliasElement(String alias, boolean isTemp) {
+	public HAPStoryAlias(String alias, boolean isTemp) {
 		this.m_name = alias;
 		this.m_isTemp = isTemp;
 	}
@@ -41,7 +41,7 @@ public class HAPStoryAliasElement extends HAPSerializableImp implements HAPStory
 
 	@Override
 	public HAPStoryReferenceElement cloneElementReference() {
-		HAPStoryAliasElement out = new HAPStoryAliasElement();
+		HAPStoryAlias out = new HAPStoryAlias();
 		out.m_isTemp = this.m_isTemp;
 		out.m_name = this.m_name;
 		return out;

@@ -8,7 +8,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryAliasElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
@@ -19,7 +19,7 @@ public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
 	@HAPAttribute
 	public static final String ELEMENTID = "elementId";
 	
-	private HAPStoryAliasElement m_alias;
+	private HAPStoryAlias m_alias;
 	
 	private HAPStoryIdElement m_eleId;
 	
@@ -27,13 +27,13 @@ public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
 		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_ALIAS);
 	}
 	
-	public HAPStoryChangeItemAlias(HAPStoryAliasElement alias, HAPStoryIdElement eleId) {
+	public HAPStoryChangeItemAlias(HAPStoryAlias alias, HAPStoryIdElement eleId) {
 		this();
 		this.m_alias = alias;
 		this.m_eleId = eleId;
 	}
 	
-	public HAPStoryAliasElement getAlias() {   return this.m_alias;    }
+	public HAPStoryAlias getAlias() {   return this.m_alias;    }
 	public HAPStoryIdElement getElementId() {   return this.m_eleId;   }
 
 	@Override
@@ -43,7 +43,7 @@ public class HAPStoryChangeItemAlias extends HAPStoryChangeItem{
 		
 		JSONObject aliasObj = jsonObj.getJSONObject(ALIAS);
 		if(aliasObj!=null) {
-			this.m_alias = new HAPStoryAliasElement();
+			this.m_alias = new HAPStoryAlias();
 			this.m_alias.buildObject(aliasObj, HAPSerializationFormat.JSON);
 		}
 		

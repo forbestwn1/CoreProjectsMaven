@@ -15,7 +15,7 @@ import com.nosliw.core.service.entityparse.HAPEntityParsable;
 //root class for all element
 public abstract class HAPStoryElement extends HAPSerializableImp implements HAPEntityParsable{
 
-	public static final String PARSABLEENTITYDOMAIN = "story.item.definition";
+	public static final String PARSABLEENTITYDOMAIN = "story.definition.element";
 	
 	public static final String SEG_ELEMENT = "__element__";
 	

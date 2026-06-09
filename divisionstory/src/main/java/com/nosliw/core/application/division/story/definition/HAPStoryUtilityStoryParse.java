@@ -24,7 +24,7 @@ public class HAPStoryUtilityStoryParse {
 			String alias = (String)key;
 			HAPStoryIdElement eleId = new HAPStoryIdElement();
 			eleId.parseKey(aliasJsonMap.getString(alias));
-			out.setElementAlias(eleId, new HAPStoryAliasElement(alias));
+			out.setElementAlias(eleId, new HAPStoryAlias(alias));
 		}
 		
 		return out;
@@ -32,6 +32,10 @@ public class HAPStoryUtilityStoryParse {
 
 	public static HAPStoryElement parseElement(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		return (HAPStoryElement)entityParseService.parseEntityJSONImplicitAttribute(jsonObj, HAPStoryElement.ELEMENTTYPE, HAPStoryElement.PARSABLEENTITYDOMAIN);
+	}
+	
+	public static HAPStoryRunnable parseRunnable(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
+		return (HAPStoryRunnable)entityParseService.parseEntityJSONImplicitAttribute(jsonObj, HAPStoryRunnable.RUNNABLETYPE, HAPStoryRunnable.PARSABLEENTITYDOMAIN);
 	}
 	
 }

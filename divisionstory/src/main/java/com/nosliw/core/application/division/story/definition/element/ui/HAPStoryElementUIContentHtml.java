@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementParser;
+import com.nosliw.core.application.division.story.definition.HAPStoryParserElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityElement;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
@@ -53,7 +53,7 @@ public class HAPStoryElementUIContentHtml extends HAPStoryElement{
 }
 
 @Component
-class HAPStoryElementUIContentHtml__HAPEntityParsable extends HAPStoryElementParser{
+class HAPStoryElementUIContentHtml__HAPEntityParsable extends HAPStoryParserElement{
 
 	@Override
 	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_UICONTENT_HTML;    }

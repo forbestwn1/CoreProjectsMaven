@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.info.HAPEntityInfo;
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfo;
@@ -31,6 +32,10 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntit
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE), dataSourceInfo);
 	}
 
+	public static HAPPath buildPathToCommandExecute() {
+		return HAPStoryElementWithCommand.getAddCommandChildPath(HAPStoryElementEntityDataSource.COMMAND_EXECUTE);
+	}
+	
 	void setServiceId(String serviceId) {     this.m_serviceId = serviceId;      }
 	
 	protected void cloneToStoryElement(HAPStoryElementEntityDataSource storyEle) {

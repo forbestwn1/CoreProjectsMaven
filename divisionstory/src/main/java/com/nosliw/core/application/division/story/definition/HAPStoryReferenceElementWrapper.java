@@ -11,15 +11,15 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 
 	private HAPStoryIdElement m_elementId;
 	
-	private HAPStoryAliasElement m_alias;
+	private HAPStoryAlias m_alias;
 
 	public HAPStoryReferenceElementWrapper() {}
 	
 	public HAPStoryReferenceElementWrapper(HAPStoryReferenceElement elementRef) {
 		if(elementRef instanceof HAPStoryIdElement) {
 			this.m_elementId = (HAPStoryIdElement)elementRef;
-		} else if(elementRef instanceof HAPStoryAliasElement) {
-			this.m_alias = (HAPStoryAliasElement)elementRef;
+		} else if(elementRef instanceof HAPStoryAlias) {
+			this.m_alias = (HAPStoryAlias)elementRef;
 		}
 	}
 
@@ -30,7 +30,7 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 		return this.m_elementId;
 	}
 	
-	public HAPStoryAliasElement getAlias() {
+	public HAPStoryAlias getAlias() {
 		return this.m_alias;
 	}
 	
@@ -44,7 +44,7 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 	public HAPStoryReferenceElementWrapper cloneElementReferenceWrapper() {
 		HAPStoryReferenceElementWrapper out = new HAPStoryReferenceElementWrapper();
 		if(this.m_alias!=null) {
-			out.m_alias = (HAPStoryAliasElement)this.m_alias.cloneElementReference();
+			out.m_alias = (HAPStoryAlias)this.m_alias.cloneElementReference();
 		}
 		if(this.m_elementId!=null) {
 			out.m_elementId = (HAPStoryIdElement)this.m_elementId.cloneElementReference();
@@ -62,7 +62,7 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 			this.m_elementId = eleId;
 		}
 		
-		HAPStoryAliasElement alias = new HAPStoryAliasElement();
+		HAPStoryAlias alias = new HAPStoryAlias();
 		alias.buildObject(jsonObj, HAPSerializationFormat.JSON);
 		if(alias.getName()!=null) {
 			this.m_alias = alias;

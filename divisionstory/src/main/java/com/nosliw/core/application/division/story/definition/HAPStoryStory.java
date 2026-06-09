@@ -33,19 +33,77 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	private int m_index = 0;
 	
+	//all elements
 	private Map<HAPStoryIdElement, HAPStoryElement> m_elements;
 	
+	//alias
 	private Map<String, HAPStoryIdElement> m_elementByAliase;
 	private Map<HAPStoryIdElement, String> m_aliaseByElementId;
+	
+	
+	//all runnable(task)
+	private Map<String, HAPStoryRunnable> m_runnables;
+	
+	//alias for runnable
+	private Map<String, String> m_runnableByAliase;
+	private Map<String, String> m_aliaseByRunnableId;
 	
 	public HAPStoryStory() {
 		this.m_elements = new LinkedHashMap<HAPStoryIdElement, HAPStoryElement>();
 		this.m_elementByAliase = new LinkedHashMap<String, HAPStoryIdElement>();
 		this.m_aliaseByElementId = new LinkedHashMap<HAPStoryIdElement, String>();
+		
+		this.m_runnables = new LinkedHashMap<String, HAPStoryRunnable>();
+		this.m_runnableByAliase = new LinkedHashMap<String, String>();		this.m_aliaseByRunnableId = new LinkedHashMap<String, String>();
 	}
 	
 	public int getIndex() {     return this.m_index;     }
 	public void setIndex(int index) {     this.m_index = index;      }
+	
+	public HAPStoryRunnable getRunnable(String runnableId) {
+		return this.m_runnables.get(runnableId);
+	}
+
+	public HAPStoryAlias getRunnableAlias(String runnableId) {
+		for(String alias : this.m_runnableByAliase.keySet()) {
+			if(runnableId.equals(this.m_runnableByAliase.get(alias))) {
+				return new HAPStoryAlias(alias);
+			}
+		}
+		return null;
+	}
+	
+
+	public HAPStoryRunnable addRunnable(HAPStoryRunnable runnable, HAPStoryAlias alias) {
+		HAPStoryRunnable out = this.addRunnable(runnable);
+		this.setRunnableAlias(out.getId(), alias);
+		return out;
+	}
+	
+	public HAPStoryRunnable addRunnable(HAPStoryRunnable runnable) {		
+		HAPStoryRunnable out = runnable;
+		if(out.getId()==null) {
+			this.buildRunnableId(out);
+		}
+		this.m_runnables.put(out.getId(), out);
+		return out;
+	}
+	
+	public void setRunnableAlias(String runnableId, HAPStoryAlias alias) {
+		//set alias
+		if(alias!=null) {
+			this.m_runnableByAliase.put(alias.getName(), runnableId);
+			this.m_aliaseByRunnableId.put(runnableId, alias.getName());
+		}
+	}
+
+	public HAPStoryRunnable deleteRunnable(String runnableId) {
+		HAPStoryRunnable out = this.m_runnables.remove(runnableId);
+		String alias = this.m_aliaseByRunnableId.remove(runnableId);
+		this.m_runnableByAliase.remove(alias);
+		return out;
+	}
+
 	
 	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
 		HAPStoryElement out = null;
@@ -56,7 +114,7 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 			out = this.m_elements.get(eleId);
 		}
 		else if(refType.equals(HAPConstantShared.STORY_ELEMENT_REFERENCE_ALIAS)) {
-			HAPStoryAliasElement eleAlias = (HAPStoryAliasElement)eleRef;
+			HAPStoryAlias eleAlias = (HAPStoryAlias)eleRef;
 			out = this.m_elements.get(this.m_elementByAliase.get(eleAlias.getName()));
 		}
 		return out;
@@ -64,10 +122,10 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	public HAPStoryIdElement getElementId(String alias) {	return this.m_elementByAliase.get(alias);	}
 	
-	public HAPStoryAliasElement getAlias(HAPStoryIdElement eleId) {
+	public HAPStoryAlias getElementAlias(HAPStoryIdElement eleId) {
 		for(String alias : this.m_elementByAliase.keySet()) {
 			if(eleId.equals(this.m_elementByAliase.get(alias))) {
-				return new HAPStoryAliasElement(alias);
+				return new HAPStoryAlias(alias);
 			}
 		}
 		return null;
@@ -82,7 +140,7 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		return out;
 	}
 	
-	public void setElementAlias(HAPStoryIdElement eleId, HAPStoryAliasElement alias) {
+	public void setElementAlias(HAPStoryIdElement eleId, HAPStoryAlias alias) {
 		//set alias
 		if(alias!=null) {
 			this.m_elementByAliase.put(alias.getName(), eleId);
@@ -90,7 +148,7 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 		}
 	}
 	
-	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAliasElement alias) {
+	public HAPStoryElement addElement(HAPStoryElement element, HAPStoryAlias alias) {
 		//add element
 		HAPStoryElement out = this.addElement(element);
 		
@@ -110,6 +168,11 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	public void buildElementId(HAPStoryElement element) {
 		this.m_index++;
 		element.setElementId(new HAPStoryIdElement(element.getElementType().getKey() + this.m_index));
+	}
+
+	public void buildRunnableId(HAPStoryRunnable runnable) {
+		this.m_index++;
+		runnable.setId(runnable.getRunnableType()+this.m_index);
 	}
 
 	@Override
