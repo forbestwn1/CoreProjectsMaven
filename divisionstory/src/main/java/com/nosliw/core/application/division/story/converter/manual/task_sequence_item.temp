@@ -1,6 +1,6 @@
 	    					        {
                         		    	"status": "disabled1",
          	    					    "brickId" : {
-		    	    	    			    "idPath" : "@||taskAlias||"
+		    	    	    			    "alias" : "||taskAlias||"
     			            			}
 		    			    	    }
