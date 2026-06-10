@@ -20,6 +20,8 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
+	public static final HAPStoryIdElementType TYPE = new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_COMMAND); 
+	
 	public final static String TASKINTERFACE = "taskInterface";
 	
 	public final static String CHILD_REQUEST = "request";
@@ -33,7 +35,7 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 	}
 	
 	public HAPStoryElementAccessoryCommand(HAPInteractiveTask taskInterface, HAPEntityInfo commandInfo) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_COMMAND), commandInfo);
+		super(TYPE, commandInfo);
 		this.m_taskInterface = taskInterface;
 	}
 

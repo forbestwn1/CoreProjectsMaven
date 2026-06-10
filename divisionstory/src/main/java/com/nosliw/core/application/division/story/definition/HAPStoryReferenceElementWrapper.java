@@ -58,7 +58,7 @@ public class HAPStoryReferenceElementWrapper extends HAPSerializableImp implemen
 
 		HAPStoryIdElement eleId = new HAPStoryIdElement();
 		eleId.buildObject(jsonObj, HAPSerializationFormat.JSON);
-		if(eleId.getCategary()!=null) {
+		if(eleId.getTypeId()!=null) {
 			this.m_elementId = eleId;
 		}
 		

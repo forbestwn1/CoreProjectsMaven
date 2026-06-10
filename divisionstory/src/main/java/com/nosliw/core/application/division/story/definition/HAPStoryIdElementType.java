@@ -25,22 +25,26 @@ public class HAPStoryIdElementType extends HAPSerializableImp{
 	
 	public String getElementType() {    return this.m_elementType;    }
 	
-	@Override
-	public boolean equals(Object obj) {
-		boolean out = false;
-		if(obj instanceof HAPStoryIdElementType) {
-			HAPStoryIdElementType elementTypeId = (HAPStoryIdElementType)obj;
-			return elementTypeId.getElementType().equals(this.getElementType());
-		}
-		return out;
-	}
-	
 	public String getKey() {     return this.m_elementType;      }
 	private void parseKey(String key) {    this.m_elementType = key;     }
 	
 	@Override
+	public String toString() {     return this.getKey();        }
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof HAPStoryIdElementType) {
+			return obj.toString().equals(this.toString());
+		}
+		return false;
+	}
+	
+	@Override
 	public int hashCode() {		return this.getKey().hashCode();	}
 	
+	@Override
+	protected String buildLiterate(){  return this.getKey(); }
+
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(ELEMENTTYPE, this.m_elementType);

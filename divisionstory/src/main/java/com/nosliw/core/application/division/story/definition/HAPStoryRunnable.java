@@ -21,6 +21,7 @@ public abstract class HAPStoryRunnable extends HAPEntityInfoImp implements HAPEn
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(RUNNABLETYPE, this.getRunnableType());
 	}
 

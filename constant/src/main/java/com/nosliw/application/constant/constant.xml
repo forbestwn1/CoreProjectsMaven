@@ -847,6 +847,9 @@
 			<definition name="STORYNODE_TYPE_UICONTENT_CUSTOMTAG" value="UIContentCustomTag"/>
 
 			<definition name="STORYNODE_TYPE_TASK_COMMAND" value="commandTask"/>
+			<definition name="STORYNODE_TYPE_TASK_PRESENTPAGE" value="presentPage"/>
+			<definition name="STORYNODE_TYPE_TASK_NAVIGATEPAGE" value="navigatePage"/>
+			<definition name="STORYNODE_TYPE_TASK_SEQUENCE" value="sequence"/>
 
 
 

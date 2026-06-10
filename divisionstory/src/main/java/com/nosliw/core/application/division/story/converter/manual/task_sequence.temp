@@ -1,0 +1,19 @@
+	        {
+	    		"name" : "nosliw_init",
+		    	"status": "disabled1",
+			    "description" : "",
+		        "brick" : {
+        			"resourceId":"taskTaskScript|1.0.0|sequence",  
+        			"dynamicInput" : { 
+	        			"element" :
+		        		[ 
+			        		{
+								"name" : "tasks",
+				        		"type" : "multiple",
+    						    "brickPackages" : 
+        		        		     ||subTasks|| 
+	    			    	}
+    	    			]
+	    	    	}
+		        }
+	        }

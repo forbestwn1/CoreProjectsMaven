@@ -17,6 +17,8 @@ import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntityInfo implements HAPStoryElementWithCommand{
+	
+	public static final HAPStoryIdElementType TYPEID = new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE);
 
 	public static final String COMMAND_EXECUTE = "execute";
 	
@@ -29,7 +31,7 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntit
 	}
 	
 	public HAPStoryElementEntityDataSource(String serviceId, HAPEntityInfo dataSourceInfo) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_SERVICE), dataSourceInfo);
+		super(TYPEID, dataSourceInfo);
 	}
 
 	public static HAPPath buildPathToCommandExecute() {

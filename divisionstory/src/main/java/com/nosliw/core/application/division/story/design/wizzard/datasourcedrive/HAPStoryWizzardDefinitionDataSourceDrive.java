@@ -33,6 +33,8 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignStep;
@@ -160,6 +162,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//add page to module
 			Pair<HAPStoryChangeItemElementNew, HAPStoryChangeItemElementNew> pagePair = HAPStoryElementUIUtility.newUIPage(changeSession, ALIAS_ELEMENT_MODULE, null);
 			HAPStoryChangeItemElementNew newPageContentWrapperChange = pagePair.getRight();
+			HAPStoryChangeItemElementNew newPageChange = pagePair.getLeft();
+			HAPStoryIdElement pageElementId = newPageChange.getElementId();
 			
 			//add root content to content wrapper
 			HAPStoryChangeItemElementNew newRootContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "main.html");
@@ -177,7 +181,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			//data association between page and data source request
 			HAPStoryDataAssociation requestDataAssociation = new HAPStoryDataAssociation(
-					new HAPStoryPath(pagePair.getLeft().getElementId(), HAPStoryElementUIPage.buildPathToVariableCollection()),
+					new HAPStoryPath(pageElementId, HAPStoryElementUIPage.buildPathToVariableCollection()),
 					new HAPStoryPath(dataSourceElementId, HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST)),
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
@@ -250,13 +254,25 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(responseParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMUITAG);
 				
 			}
+
+			//present page task
+			HAPStoryRunnableUIPagePresent presentPageRunnable = new HAPStoryRunnableUIPagePresent();
+			presentPageRunnable.setPage(pageElementId.getId());
+			HAPStoryChangeItemRunnableNew presentPageRunableChangeNew = changeSession.addChangeItemNew(presentPageRunnable);
+			
+			//module init task
+			HAPStoryRunnableSequence moculeInitRunnable = new HAPStoryRunnableSequence();
+			moculeInitRunnable.addRunnable(presentPageRunableChangeNew.getRunnable().getId());
+			HAPStoryChangeItemRunnableNew moduleInitRunableChangeNew = changeSession.addChangeItemNew(moculeInitRunnable);
+
+			
 			
 			//build data source execute task
 			HAPStoryRunnableCommand commandRunnable = new HAPStoryRunnableCommand();
 			commandRunnable.setPathToCommand(new HAPStoryPath(dataSourceElementId, HAPStoryElementEntityDataSource.buildPathToCommandExecute()));
 			commandRunnable.setRequestDataAssociation(requestDataAssociation);
 			
-			HAPStoryChangeItemRunnableNew commandRunChangeNew = changeSession.addChangeItemNew(commandRunnable);
+//			HAPStoryChangeItemRunnableNew commandRunChangeNew = changeSession.addChangeItemNew(commandRunnable);
 
 			
 			changeSession.commit();

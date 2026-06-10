@@ -33,6 +33,15 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	@HAPAttribute
 	public static final String ALIASBYELEMENTID = "aliasByElementId";
 	
+	@HAPAttribute
+	public static final String RUNNABLE = "runnable";
+	
+	@HAPAttribute
+	public static final String RUNNABLEBYALIAS = "runnableByAlias";
+	
+	@HAPAttribute
+	public static final String ALIASBYRUNNABLEID = "aliasByRunnableId";
+	
 	private int m_index = 0;
 	
 	//all elements
@@ -171,7 +180,7 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 	
 	public void buildElementId(HAPStoryElement element) {
 		this.m_index++;
-		element.setElementId(new HAPStoryIdElement(element.getElementType().getKey() + this.m_index));
+		element.setElementId(new HAPStoryIdElement(this.m_index+"", new HAPStoryIdElementType(element.getElementType().getKey())));
 	}
 
 	public void buildRunnableId(HAPStoryRunnable runnable) {
@@ -196,6 +205,19 @@ public class HAPStoryStory extends HAPEntityInfoImp{
 			mapElementByAliase.put(alias, this.m_elementByAliase.get(alias).getKey());
 		}
 		jsonMap.put(ELEMENTBYALIAS, HAPUtilityJson.buildMapJson(mapElementByAliase));
+		
+		
+		List<String> listRunnables = new ArrayList<String>();
+		for(String runnableId : this.m_runnables.keySet()) {
+			listRunnables.add(this.m_runnables.get(runnableId).toStringValue(HAPSerializationFormat.JSON));
+		}
+		jsonMap.put(RUNNABLE, HAPUtilityJson.buildArrayJson(listRunnables.toArray(new String[0])));
+		
+		Map<String, String> mapRunnableByAliase = new LinkedHashMap<String, String>();
+		for(String alias : this.m_runnableByAliase.keySet()) {
+			mapRunnableByAliase.put(alias, this.m_runnableByAliase.get(alias));
+		}
+		jsonMap.put(RUNNABLEBYALIAS, HAPUtilityJson.buildMapJson(mapRunnableByAliase));
 	}
 
 }

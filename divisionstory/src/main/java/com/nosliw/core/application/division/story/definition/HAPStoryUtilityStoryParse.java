@@ -19,12 +19,24 @@ public class HAPStoryUtilityStoryParse {
 			out.addElement(element);
 		}
 		
-		JSONObject aliasJsonMap = jsonObj.getJSONObject(HAPStoryStory.ELEMENTBYALIAS);
-		for(Object key : aliasJsonMap.keySet()) {
+		JSONObject aliasEleJsonMap = jsonObj.getJSONObject(HAPStoryStory.ELEMENTBYALIAS);
+		for(Object key : aliasEleJsonMap.keySet()) {
 			String alias = (String)key;
 			HAPStoryIdElement eleId = new HAPStoryIdElement();
-			eleId.parseKey(aliasJsonMap.getString(alias));
+			eleId.parseKey(aliasEleJsonMap.getString(alias));
 			out.setElementAlias(eleId, new HAPStoryAlias(alias));
+		}
+
+		JSONArray runnableJsonArray = jsonObj.getJSONArray(HAPStoryStory.RUNNABLE);
+		for(int i=0; i<runnableJsonArray.length(); i++) {
+			HAPStoryRunnable runnable = parseRunnable(runnableJsonArray.getJSONObject(i), entityParseService);
+			out.addRunnable(runnable);
+		}
+
+		JSONObject aliasRunnableJsonMap = jsonObj.getJSONObject(HAPStoryStory.RUNNABLEBYALIAS);
+		for(Object key : aliasRunnableJsonMap.keySet()) {
+			String alias = (String)key;
+			out.setRunnableAlias(jsonObj.getString(alias), new HAPStoryAlias(alias));
 		}
 		
 		return out;

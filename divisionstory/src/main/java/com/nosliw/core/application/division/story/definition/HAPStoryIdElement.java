@@ -15,12 +15,12 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryReferenceElement{
 
 	@HAPAttribute
-	public static final String CATEGARY = "categary";
+	public static final String TYPE = "type";
 
 	@HAPAttribute
 	public static final String ID = "id";
 
-	private String m_categary;
+	private HAPStoryIdElementType m_typeId;
 	
 	private String m_id;
 	
@@ -30,34 +30,34 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 		this.parseKey(key);
 	}
 
-	public HAPStoryIdElement(String categary, String id) {
-		this.m_categary = categary;
+	public HAPStoryIdElement(String id, HAPStoryIdElementType typeId) {
+		this.m_typeId = typeId;
 		this.m_id = id;
 	}
 	
 	@Override
 	public String getEntityOrReferenceType() {  return HAPConstantShared.STORY_ELEMENT_REFERENCE_ID;  }
 
-	public String getCategary() {    return this.m_categary;     }
+	public HAPStoryIdElementType getTypeId() {    return this.m_typeId;     }
 	
 	public String getId() {    return this.m_id;    }
 
 	public String getKey() {      
-		return this.m_categary==null? this.getId() : HAPUtilityNamingConversion.cascadeLevel2(new String[]{this.getCategary(), this.getId()});
+		return this.m_typeId==null? this.getId() : HAPUtilityNamingConversion.cascadeLevel2(new String[]{this.getId(), this.getTypeId().getKey()});
 	}
 	
 	public void parseKey(String key) {
 		String[] segs = HAPUtilityNamingConversion.parseLevel2(key);
-		this.m_categary = segs[0];
+		this.m_id = segs[0];
 		if(segs.length>=2) {
-			this.m_id = segs[1];
+			this.m_typeId = new HAPStoryIdElementType(segs[1]);
 		}
 	}
 	
 	@Override
 	public HAPStoryReferenceElement cloneElementReference() {
 		HAPStoryIdElement out = new HAPStoryIdElement();
-		out.m_categary = this.m_categary;
+		out.m_typeId = this.m_typeId;
 		out.m_id = this.m_id;
 		return out;
 	}
@@ -76,13 +76,13 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-		Object categaryObj = jsonObj.opt(CATEGARY);
-		if(categaryObj!=null) {
-			this.m_categary = (String)categaryObj;
-		}
 		Object idObj = jsonObj.opt(ID);
 		if(idObj!=null) {
 			this.m_id = (String)idObj;
+		}
+		Object typeObj = jsonObj.opt(TYPE);
+		if(typeObj!=null) {
+			this.m_typeId = new HAPStoryIdElementType((String)typeObj);
 		}
 		return true;  
 	}
@@ -90,7 +90,7 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(CATEGARY, this.m_categary);
+		jsonMap.put(TYPE, this.m_typeId.toString());
 		jsonMap.put(ID, this.m_id);
 	}
 	
@@ -104,7 +104,7 @@ public class HAPStoryIdElement  extends HAPSerializableImp implements HAPStoryRe
 		boolean out = false;
 		if(obj instanceof HAPStoryIdElement) {
 			HAPStoryIdElement eleId = (HAPStoryIdElement)obj;
-			if(HAPUtilityBasic.isEquals(this.m_categary, eleId.m_categary)) {
+			if(HAPUtilityBasic.isEquals(this.m_typeId, eleId.m_typeId)) {
 				if(HAPUtilityBasic.isEquals(this.m_id, eleId.m_id)) {
 					out = true;
 				}

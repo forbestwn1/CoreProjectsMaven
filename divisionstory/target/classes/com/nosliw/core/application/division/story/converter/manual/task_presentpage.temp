@@ -1,0 +1,17 @@
+	        {
+	    		"name" : "||taskName||",
+			    "description" : "Present page",
+        		"brickType" : {
+		    	    "brickType" : "taskTaskScript",
+			        "version" : "1.0.0"
+		        },
+		        "brick" : {
+					"info" : {
+						"nosliw_alias" : "||alias||"
+					},
+    				"scriptResourceId": "task_page_present",
+    				"parm": {
+    				    "page" : "||pageId||"
+    				}
+		        }
+	        }

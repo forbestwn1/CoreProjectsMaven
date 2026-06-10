@@ -24,6 +24,9 @@ public class HAPStoryPath extends HAPSerializableImp{
 		this.m_baseStoryElementId = baseStoryElementId;
 		this.m_path = path;
 	}
+
+	public HAPStoryIdElement getBaseStoryElementId() {      return this.m_baseStoryElementId;       }
+	public HAPPath getPath() {     return this.m_path;       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
