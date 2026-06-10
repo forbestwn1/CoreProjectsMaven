@@ -6,7 +6,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../root</relativePath>
   </parent>
-  <groupId>com.nolsiw</groupId>
   <artifactId>divisionstory</artifactId>
   <name>DivisionStory</name>
 
