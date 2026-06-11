@@ -208,7 +208,7 @@ public class HAPUtilityInteractiveTaskValuePort {
 		}
 	}
 
-	private static String buildResultValuePortName(String resultName) {
+	public static String buildResultValuePortName(String resultName) {
 		return HAPUtilityNamingConversion.cascadeComponents(HAPConstantShared.VALUEPORT_NAME_INTERACT_RESULT, resultName, HAPConstantShared.SEPERATOR_PREFIX);
 	}
 

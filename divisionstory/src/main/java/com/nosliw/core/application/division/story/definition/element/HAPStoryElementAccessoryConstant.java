@@ -15,12 +15,14 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementAccessoryConstant extends HAPStoryElementAccessory implements HAPStoryElementWithEndPoint{
 
+	public static final HAPStoryIdElementType TYPE = new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_CONSTANT);
+	
 	public HAPStoryElementAccessoryConstant() {
 		this(null);
 	}
 	
 	public HAPStoryElementAccessoryConstant(HAPEntityInfo entityInfo) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_CONSTANT), entityInfo);
+		super(TYPE, entityInfo);
 	}
 
 	protected void cloneToStoryElement(HAPStoryElementAccessoryConstant storyEle) {
@@ -39,7 +41,7 @@ public class HAPStoryElementAccessoryConstant extends HAPStoryElementAccessory i
 class HAPStoryElementAccessoryConstant__HAPEntityParsable extends HAPStoryElementImpWithEntityInfoParser{
 
 	@Override
-	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_CONSTANT;    }
+	public String getSubName() {    return HAPStoryElementAccessoryConstant.TYPE.getElementType();    }
 
 	protected void parseToEntity(JSONObject jsonObj, HAPStoryElementAccessoryConstant element, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, element, parseService);

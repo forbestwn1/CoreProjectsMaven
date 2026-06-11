@@ -14,9 +14,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
-import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryPath;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
@@ -32,6 +30,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationComplex;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
@@ -180,12 +179,18 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryIdElement dataSourceElementId = changeSession.getElement(ALIAS_ELEMENT_DATASOURCE).getElementId();
 			
 			//data association between page and data source request
-			HAPStoryDataAssociation requestDataAssociation = new HAPStoryDataAssociation(
-					new HAPStoryPath(pageElementId, HAPStoryElementUIPage.buildPathToVariableCollection()),
-					new HAPStoryPath(dataSourceElementId, HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST)),
+			HAPStoryDataAssociation requestDataAssociationForVariable = new HAPStoryDataAssociation(
+					new HAPStoryPath(pageElementId, null), HAPStoryElementUIPage.buildPathToVariableCollection(),
+					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
-			
+
+			HAPStoryDataAssociation requestDataAssociationForConstant = new HAPStoryDataAssociation(
+					new HAPStoryPath(pageElementId, null), HAPStoryElementUIPage.buildPathToConstantCollection(),
+					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
+					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+					);
+
 			//request
 			List<HAPStoryWizzardQuestionair> requestParmGroupQs = HAPStoryWizzardUtilityQuestion.findQuestionairsByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP);
 			for(HAPStoryWizzardQuestionair requestParmGroupQ : requestParmGroupQs) {
@@ -204,8 +209,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemElementNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), constantValueInQ.getConstantData(), parmDef);
 
 					//build tunnel between constant endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithConstant.getConstantEndPointPath(parmDef.getName()), HAPStoryElementAccessoryCommand.getRequestParmEndPointPath(parmDef.getName()));
-					requestDataAssociation.addTunnel(tunnel);
+					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
+					requestDataAssociationForConstant.addTunnel(tunnel);
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
@@ -216,8 +221,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
 
 					//build tunnel between variable endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(HAPStoryElementWithVariable.getVariableEndPointPath(parmDef.getName()), HAPStoryElementAccessoryCommand.getRequestParmEndPointPath(parmDef.getName()));
-					requestDataAssociation.addTunnel(tunnel);
+					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
+					requestDataAssociationForVariable.addTunnel(tunnel);
 					
 					//append input content
 					HAPStoryChangeItemElementNew newRequestInputContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "input.html");
@@ -270,7 +275,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//build data source execute task
 			HAPStoryRunnableCommand commandRunnable = new HAPStoryRunnableCommand();
 			commandRunnable.setPathToCommand(new HAPStoryPath(dataSourceElementId, HAPStoryElementEntityDataSource.buildPathToCommandExecute()));
-			commandRunnable.setRequestDataAssociation(requestDataAssociation);
+			HAPStoryDataAssociationComplex daComplex = new HAPStoryDataAssociationComplex();
+			daComplex.addDataAssociation(requestDataAssociationForConstant);
+			daComplex.addDataAssociation(requestDataAssociationForVariable);
+			commandRunnable.setRequestDataAssociation(daComplex);
 			
 //			HAPStoryChangeItemRunnableNew commandRunChangeNew = changeSession.addChangeItemNew(commandRunnable);
 

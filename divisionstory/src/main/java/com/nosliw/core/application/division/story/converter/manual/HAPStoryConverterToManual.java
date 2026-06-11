@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
@@ -15,6 +19,7 @@ import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
+import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinitionImp;
@@ -24,6 +29,7 @@ import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsCollection;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsWrapper;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
@@ -35,7 +41,9 @@ import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityDataSource;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentHtml;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentTagCustom;
@@ -44,6 +52,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUI;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationComplex;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
@@ -81,35 +90,22 @@ public class HAPStoryConverterToManual {
 			if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND)) {
 				HAPStoryRunnableCommand commandRunnable = (HAPStoryRunnableCommand)runnable;
 		
-				HAPStoryDataAssociation requestDataAssociation = commandRunnable.getRequestDataAssociation();
+				HAPStoryDataAssociationComplex requestDataAssociation = commandRunnable.getRequestDataAssociation();
+				String requestDAContent = converDataAssociation(requestDataAssociation, story);
 				
+				HAPStoryDataAssociationComplex responseDataAssociation = commandRunnable.getResponseDataAssociations().get(HAPConstantShared.TASK_RESULT_SUCCESS);
+				String responseDAContent = converDataAssociation(responseDataAssociation, story);
 				
-				HAPStoryPath daElementPath1 = requestDataAssociation.getBasePath1();
-				HAPStoryIdElement daElementId1 = HAPStoryUtilityStory.getDescendant(story, daElementPath1).getChildElement().getElementId();
-
-				HAPIdBrickInBundle brickIdInBundle1 = new HAPIdBrickInBundle();
-				brickIdInBundle1.setAlias(daElementId1.getKey());
-
-				HAPIdValuePort valuePortId;
-				
-				if(daElementId1.getTypeId().equals(HAPStoryElementAccessoryCommand.TYPE)) {
-					valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVEEXPRESSION, HAPConstantShared.VALUEPORT_NAME_INTERACT_RESULT);
+				HAPStoryElement commandWrapperEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommand(), story);
+				if(commandWrapperEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {
+					HAPStoryElementEntityDataSource dataSourceElement = (HAPStoryElementEntityDataSource)commandWrapperEle;
+					tasksList.add(new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_datasource.temp"))
+							.setParm("taskId", runnable.getId())
+			    			.setParm("requestDataAssociation", requestDAContent)
+			    			.setParm("responseDataAssociation", responseDAContent)
+			    			.setParm("dataSourceId", dataSourceElement.getServiceId())
+				    		.getContent());
 				}
-				else {
-					valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_VALUECONTEXT, HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT);
-				}
-				
-				HAPIdValuePortInBundle valuePortIdInBundle1 = new HAPIdValuePortInBundle(brickIdInBundle1, HAPConstantShared.VALUEPORTGROUP_SIDE_EXTERNAL, valuePortId);
-
-				
-				
-				HAPIdValuePortInBundle valuePortIdInBundle2 = null;
-				
-				List<HAPStoryTunnel> tunnels = requestDataAssociation.getTunnels();
-				for(HAPStoryTunnel tunnel : tunnels) {
-					
-				}
-				
 			}
 			else if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_PRESENTPAGE)) {
 				HAPStoryRunnableUIPagePresent presentPageRunnable = (HAPStoryRunnableUIPagePresent)runnable;
@@ -148,7 +144,88 @@ public class HAPStoryConverterToManual {
 		return out;
 	}
 	
+	private static String converDataAssociation(HAPStoryDataAssociationComplex dataAssociationComplex, HAPStoryStory story) {
+		List<String> tunnelsContent = new ArrayList<String>();
+
+		for(HAPStoryDataAssociation dataAssociation : dataAssociationComplex.getDataAssociations()) {
+			Pair<HAPStoryPath, HAPIdValuePortInBundle> pSource = buildTunnelBase(dataAssociation.getSourceBasePath(), dataAssociation.getSourceSubPath(), story);
+			Pair<HAPStoryPath, HAPIdValuePortInBundle> pTarget = buildTunnelBase(dataAssociation.getTargetBasePath(), dataAssociation.getTargetSubPath(), story);
+			
+			for(HAPStoryTunnel tunnel : dataAssociation.getTunnels()) {
+				tunnelsContent.add(convertTunnel(tunnel, pSource.getLeft(), pSource.getRight(), pTarget.getLeft(), pTarget.getRight(), story));
+			}
+		}
+		
+		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "dataassociation.temp")).
+    			setParm("tunnels", tunnelsContent.toString()).
+	    		getContent();			
+	}
+
+	private static Pair<HAPStoryPath, HAPIdValuePortInBundle> buildTunnelBase(HAPStoryPath basePath, HAPPath subPath, HAPStoryStory story) {
+		HAPIdValuePortInBundle valuePortIdInBundle = null;
+		
+		HAPIdValuePort valuePortId = null;
+		HAPStoryElement entityElement =  HAPStoryUtilityStory.getDescendantElement(basePath, story);
+		if(entityElement.getElementType().equals(HAPStoryElementEntityDataSource.TYPEID)) {
+			String[] subPathSegs = subPath.getPathSegments();
+			String commandPath = subPathSegs[0];
+			String requestOrResponse = subPathSegs[1];
+			if(requestOrResponse.equals(HAPStoryElementAccessoryCommand.CHILD_REQUEST)) {
+				valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVETASK, HAPConstantShared.VALUEPORT_NAME_INTERACT_REQUEST);
+			}
+			else if(requestOrResponse.equals(HAPStoryElementAccessoryCommand.CHILD_RESPONSE)) {
+				String responseResult = subPathSegs[2];
+				valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVETASK, HAPUtilityInteractiveTaskValuePort.buildResultValuePortName(responseResult));
+			}
+		}
+		else {
+			valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_VALUECONTEXT, HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT);
+		}
+		
+		HAPIdBrickInBundle brickIdInBundle = new HAPIdBrickInBundle();
+		brickIdInBundle.setAlias(entityElement.getElementId().getKey());
+		
+		valuePortIdInBundle = new HAPIdValuePortInBundle(brickIdInBundle, HAPConstantShared.VALUEPORTGROUP_SIDE_EXTERNAL, valuePortId);
+		
+		return Pair.of(new HAPStoryPath(basePath.getBaseStoryElementId(), basePath.getPath().appendPath(subPath)), valuePortIdInBundle);
+	}
 	
+	private static String convertTunnel(HAPStoryTunnel tunnel, HAPStoryPath sourceBasePath, HAPIdValuePortInBundle sourceValuePort, HAPStoryPath targetBasePath, HAPIdValuePortInBundle targetValuePort, HAPStoryStory story) {
+		HAPStoryContainerChildrenElementsCollection endPointWrapperCollectionSource = HAPStoryUtilityStory.getDescendantCollection(sourceBasePath, story);
+		HAPStoryContainerChildrenElementsCollection endPointWrapperCollectionTarget = HAPStoryUtilityStory.getDescendantCollection(targetBasePath, story);
+		
+		HAPStoryIdElement endPointWrapperEleIdSource = ((HAPStoryContainerChildrenElementsWrapper)endPointWrapperCollectionSource.getChildContainer(tunnel.getSource())).getChildElement().getElementId();
+		HAPStoryIdElement endPointWrapperEleIdTarget = ((HAPStoryContainerChildrenElementsWrapper)endPointWrapperCollectionTarget.getChildContainer(tunnel.getTarget())).getChildElement().getElementId();
+		
+		String source = null;
+		
+		HAPStoryElement sourceEndpointEle = HAPStoryUtilityStory.getDescendantElement(new HAPStoryPath(endPointWrapperEleIdSource, new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)), story);
+		if(sourceEndpointEle.getElementType().equals(HAPStoryElementEndPointIOConstant.TYPE)) {
+			HAPStoryElementEndPointIOConstant constantEndPointElement = (HAPStoryElementEndPointIOConstant)sourceEndpointEle;
+			source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_constant.temp")).
+	    			setParm("constantData", constantEndPointElement.getData().toStringValue(HAPSerializationFormat.JSON)).
+		    		getContent();			
+		}
+		else if(sourceEndpointEle.getElementType().equals(HAPStoryElementEndPointIOVariable.TYPE)) {
+			HAPStoryElementEndPointIOVariable variableEndPointElement = (HAPStoryElementEndPointIOVariable)sourceEndpointEle;
+			source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_variable.temp"))
+					.setParm("variableName", tunnel.getSource())
+					.setParm("valuePortIdInBundle", sourceValuePort.toStringValue(HAPSerializationFormat.JSON))
+					.getContent();			
+		}
+		
+		HAPStoryElement targetEndpointEle = HAPStoryUtilityStory.getDescendantElement(new HAPStoryPath(endPointWrapperEleIdTarget, new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)), story);
+		HAPStoryElementEndPointIOVariable targetEndPointElement = (HAPStoryElementEndPointIOVariable)targetEndpointEle;
+		String target = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_target.temp"))
+				.setParm("variableName", tunnel.getTarget())
+				.setParm("valuePortIdInBundle", targetValuePort.toStringValue(HAPSerializationFormat.JSON))
+				.getContent();			
+
+		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel.temp")).
+				setParm("source", source).
+				setParm("target", target).
+				getContent();
+	}
 	
 	
 	

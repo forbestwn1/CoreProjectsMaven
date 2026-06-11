@@ -9,6 +9,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfo;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementImpWithEntityInfoParser;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
@@ -28,6 +29,10 @@ public class HAPStoryElementUIPage extends HAPStoryElementImpWithEntityInfo{
 
 	public static HAPPath buildPathToVariableCollection() {
 		return new HAPPath(HAPStoryElementUIPage.CHILD_CONTENTWRAPPER).appendSegment(HAPStoryElementWithVariable.CHILD_VARIABLE);
+	}
+	
+	public static HAPPath buildPathToConstantCollection() {
+		return new HAPPath(HAPStoryElementUIPage.CHILD_CONTENTWRAPPER).appendSegment(HAPStoryElementWithConstant.CHILD_CONSTANT);
 	}
 	
 	protected void cloneToStoryElement(HAPStoryElementUIPage storyEle) {

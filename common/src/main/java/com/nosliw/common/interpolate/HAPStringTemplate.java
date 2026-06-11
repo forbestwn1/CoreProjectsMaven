@@ -2,14 +2,16 @@ package com.nosliw.common.interpolate;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
 
 public class HAPStringTemplate {
 
 	private String m_template;
+	
+	private Map<String, String> m_parms = new LinkedHashMap<String, String>();
 	
 	public HAPStringTemplate(String template){
 		this.m_template = template;
@@ -22,17 +24,14 @@ public class HAPStringTemplate {
 	public HAPStringTemplate(File file){
 		this.m_template = HAPUtilityFile.readFile(file);
 	}
+
+	public HAPStringTemplate setParm(String name, String value) {
+		this.m_parms.put(name, value);
+		return this;
+	}
 	
-	public String getContent(Map<String, String> parms){
-		String out = m_template;
-		if(HAPUtilityBasic.isStringNotEmpty(m_template)){
-			for(String key : parms.keySet()){
-				String fill = parms.get(key);
-				if(fill==null)  fill = "";
-				out = out.replace("||"+key+"||", fill);
-			}
-		}
-		return out;
+	public String getContent() {
+		return HAPStringTemplateUtil.getStringValue(m_template, m_parms);
 	}
 	
 }

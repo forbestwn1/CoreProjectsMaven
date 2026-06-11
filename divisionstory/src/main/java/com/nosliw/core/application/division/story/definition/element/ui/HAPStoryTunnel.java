@@ -4,44 +4,43 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
 
 //a tunnel is a connection between two end point
 public class HAPStoryTunnel extends HAPSerializableImp{
 
-	public final static String END1 = "end1";
+	public final static String SOURCE = "source";
 	
-	public final static String END2 = "end2";
-	
-	//path to end point
-	private HAPPath m_end1;
+	public final static String TARGET = "target";
 	
 	//path to end point
-	private HAPPath m_end2;
+	private String m_source;
+	
+	//path to end point
+	private String m_target;
 
 	public HAPStoryTunnel() {}
 	
-	public HAPStoryTunnel(HAPPath end1, HAPPath end2) {
-		this.m_end1 = end1;
-		this.m_end2 = end2;
+	public HAPStoryTunnel(String source, String target) {
+		this.m_source = source;
+		this.m_target = target;
 	}
 	
-	public HAPPath getEnd1() {    return this.m_end1;      }
-	public HAPPath getEnd2() {    return this.m_end2;      }
+	public String getSource() {    return this.m_source;      }
+	public String getTarget() {    return this.m_target;      }
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(END1, this.m_end1.toString());
-		jsonMap.put(END2, this.m_end2.toString());
+		jsonMap.put(SOURCE, this.m_source);
+		jsonMap.put(TARGET, this.m_target);
 	}
 
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-        this.m_end1 = new HAPPath(jsonObj.getString(END1));	
-        this.m_end2 = new HAPPath(jsonObj.getString(END2));	
+        this.m_source = jsonObj.getString(SOURCE);	
+        this.m_target = jsonObj.getString(TARGET);	
 		return true;
 	}	
 }

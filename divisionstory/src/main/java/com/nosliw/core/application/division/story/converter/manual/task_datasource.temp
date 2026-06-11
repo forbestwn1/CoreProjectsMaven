@@ -1,0 +1,33 @@
+			{
+				"name" : "||taskId||",
+			    "description" : "data source execute",
+				"brickType" : {
+				    "brickType" : "serviceprovider",
+			        "version" : "1.0.0"
+			    },
+			    "brick" : {
+					"brick" : {
+    					"serviceKey" : {
+	    					"id" : "||dataSourceId||"
+		    			}
+					},
+    				"adapter" : [
+ 	    				{
+		    				"name" : "||adapterId||",
+				    		"brickTypeId" : {
+					    		"brickType": "dataAssociationForTask",
+    							"version": "1.0.0"
+	    					},
+		    				"brick" : {
+			    				"definition" : {
+				    				"in" : ||requestDataAssociation||,
+			    					"out" : {
+				    					"success" : ||responseDataAssociation||
+				    				}
+			    				}
+		    				}
+	    				}
+    				]
+			    }
+			},
+	

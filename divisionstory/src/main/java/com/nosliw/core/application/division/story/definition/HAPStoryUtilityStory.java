@@ -6,7 +6,11 @@ import com.nosliw.common.path.HAPPath;
 
 public class HAPStoryUtilityStory {
 
-    public static HAPStoryContainerChildrenElementsWrapper getDescendant(HAPStoryStory story, HAPStoryPath storyPath) {
+    public static HAPStoryElement getDescendantElement(HAPStoryPath storyPath, HAPStoryStory story) {
+    	
+    }
+	
+	public static HAPStoryContainerChildrenElementsWrapper getDescendant(HAPStoryPath storyPath, HAPStoryStory story) {
     	
     	HAPStoryContainerChildrenElementsAttributes elementAttrContainer = story.getElement(storyPath.getBaseStoryElementId()).getChildren();
     	
@@ -15,7 +19,12 @@ public class HAPStoryUtilityStory {
     	
     	
     }
-	
+
+    public static HAPStoryContainerChildrenElementsCollection getDescendantCollection(HAPStoryPath storyPath, HAPStoryStory story) {
+    	
+    }
+
+    
 	public static List<HAPStoryContainerChildrenElementsWrapper> getChildren(HAPStoryStory story, HAPStoryIdElement elementId, HAPPath childPath){
 		HAPStoryElement parentelement = story.getElement(elementId);
 		

@@ -34,22 +34,23 @@ public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 	
 	public HAPStoryPath m_pathToCommand;
 	
-	private HAPStoryDataAssociation m_requestDataAssociation;
+	private HAPStoryDataAssociationComplex m_requestDataAssociation;
 	
-	private Map<String, HAPStoryDataAssociation> m_responseDataAssociation;
+	private Map<String, HAPStoryDataAssociationComplex> m_responseDataAssociation;
 	
 	public HAPStoryRunnableCommand() {
 		super(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND);
-		this.m_responseDataAssociation = new LinkedHashMap<String, HAPStoryDataAssociation>();
+		this.m_responseDataAssociation = new LinkedHashMap<String, HAPStoryDataAssociationComplex>();
 	}
 
 	public void setPathToCommand(HAPStoryPath path) {    this.m_pathToCommand = path;   }
 	public HAPStoryPath getPathToCommand() {    return this.m_pathToCommand;     }
 	
-	public void setRequestDataAssociation(HAPStoryDataAssociation requestDataAssociation) {     this.m_requestDataAssociation = requestDataAssociation;      }
-	public HAPStoryDataAssociation getRequestDataAssociation() {     return this.m_requestDataAssociation;     }
+	public HAPStoryDataAssociationComplex getRequestDataAssociation() {     return this.m_requestDataAssociation;     }
+	public void setRequestDataAssociation(HAPStoryDataAssociationComplex requestDataAssociation) {     this.m_requestDataAssociation = requestDataAssociation;      }
 	
-	public void addResponseDataAssociation(String name, HAPStoryDataAssociation responseDataAssociation) {    this.m_responseDataAssociation.put(name, responseDataAssociation);       }
+    public Map<String, HAPStoryDataAssociationComplex> getResponseDataAssociations(){     return this.m_responseDataAssociation;         }
+	public void addResponseDataAssociation(String name, HAPStoryDataAssociationComplex responseDataAssociation) {    this.m_responseDataAssociation.put(name, responseDataAssociation);       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -76,8 +77,9 @@ class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRu
 
 		JSONObject requestDAJson = jsonObj.getJSONObject(HAPStoryRunnableCommand.REQUESTDATAASSOCIATION);
 		if(requestDAJson!=null) {
-			HAPStoryDataAssociation requestDataAssociation = new HAPStoryDataAssociation(); 
+			HAPStoryDataAssociationComplex requestDataAssociation = new HAPStoryDataAssociationComplex(); 
 			requestDataAssociation.buildObject(requestDAJson, HAPSerializationFormat.JSON);
+			runnable.setRequestDataAssociation(requestDataAssociation);
 		}
 
 		JSONObject responseDAJsonMap = jsonObj.getJSONObject(HAPStoryRunnableCommand.RESPONSEDATAASSOCIATION);
@@ -85,7 +87,7 @@ class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRu
 			for(Object key : responseDAJsonMap.keySet()) {
 				String resultName = (String)key;
 				JSONObject responseDA = jsonObj.getJSONObject(resultName);
-				HAPStoryDataAssociation responseDataAssociation = new HAPStoryDataAssociation(); 
+				HAPStoryDataAssociationComplex responseDataAssociation = new HAPStoryDataAssociationComplex(); 
 				responseDataAssociation.buildObject(responseDA, HAPSerializationFormat.JSON);
 				runnable.addResponseDataAssociation(resultName, responseDataAssociation);
 			}

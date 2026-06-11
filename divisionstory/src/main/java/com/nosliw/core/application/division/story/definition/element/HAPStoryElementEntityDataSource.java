@@ -37,7 +37,8 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntit
 	public static HAPPath buildPathToCommandExecute() {
 		return HAPStoryElementWithCommand.getAddCommandChildPath(HAPStoryElementEntityDataSource.COMMAND_EXECUTE);
 	}
-	
+
+	public String getServiceId() {     return this.m_serviceId;      }
 	void setServiceId(String serviceId) {     this.m_serviceId = serviceId;      }
 	
 	protected void cloneToStoryElement(HAPStoryElementEntityDataSource storyEle) {

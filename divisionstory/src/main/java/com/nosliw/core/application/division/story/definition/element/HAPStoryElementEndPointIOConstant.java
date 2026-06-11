@@ -18,6 +18,8 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO{
 
+	public static final HAPStoryIdElementType TYPE = new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_CONSTANT);
+	
 	public static final String DATA = "data";
 	
 	//constant value
@@ -28,7 +30,7 @@ public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO
 	}
 	
 	public HAPStoryElementEndPointIOConstant(HAPData data) {
-		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_CONSTANT), HAPConstantShared.IO_DIRECTION_OUT);
+		super(TYPE, HAPConstantShared.IO_DIRECTION_OUT);
 		this.m_data = data;
 	}
 
@@ -60,7 +62,7 @@ public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO
 class HAPStoryElementEndPointIOConstant__HAPEntityParsable extends HAPStoryElementEndPointIOParser{
 
 	@Override
-	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_ENDPOINT_CONSTANT;    }
+	public String getSubName() {    return HAPStoryElementEndPointIOConstant.TYPE.getElementType();    }
 
 	protected void parseToEntity(JSONObject jsonObj, HAPStoryElementEndPointIOConstant element, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, element, parseService);
