@@ -50,12 +50,12 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIPage;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapperContent;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUI;
-import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationComplex;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.valueport.HAPIdValuePort;
 import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
 
@@ -94,7 +94,10 @@ public class HAPStoryConverterToManual {
 				String requestDAContent = converDataAssociation(requestDataAssociation, story);
 				
 				HAPStoryDataAssociationComplex responseDataAssociation = commandRunnable.getResponseDataAssociations().get(HAPConstantShared.TASK_RESULT_SUCCESS);
-				String responseDAContent = converDataAssociation(responseDataAssociation, story);
+				String responseDAContent = null;
+				if(responseDataAssociation!=null) {
+					converDataAssociation(responseDataAssociation, story);
+				}
 				
 				HAPStoryElement commandWrapperEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommand(), story);
 				if(commandWrapperEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {

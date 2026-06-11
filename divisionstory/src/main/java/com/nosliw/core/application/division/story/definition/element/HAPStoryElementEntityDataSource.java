@@ -34,8 +34,12 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntit
 		super(TYPEID, dataSourceInfo);
 	}
 
-	public static HAPPath buildPathToCommandExecute() {
+	public static HAPPath getAddCommandPath() {
 		return HAPStoryElementWithCommand.getAddCommandChildPath(HAPStoryElementEntityDataSource.COMMAND_EXECUTE);
+	}
+
+	public static HAPPath buildPathToCommandExecute() {
+		return new HAPPath(HAPStoryElementWithCommand.CHILD_COMMAND).appendSegment(HAPStoryElementEntityDataSource.COMMAND_EXECUTE);
 	}
 
 	public String getServiceId() {     return this.m_serviceId;      }

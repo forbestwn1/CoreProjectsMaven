@@ -6,7 +6,7 @@ public interface HAPStoryElementWithConstant {
 
 	public static final String CHILD_CONSTANT = "constant";
 
-	public static HAPPath getAddConstantChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_CONSTANT));   }
+	public static HAPPath getAddConstantChildPath() {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_CONSTANT));   }
 
 	public static HAPPath getConstantEndPointPath(String contantName) {		return new HAPPath(new String[] {CHILD_CONSTANT, contantName});	}
 }

@@ -32,7 +32,7 @@ public class HAPStoryElementUIContentHtml extends HAPStoryElement{
 		this.m_html = html;
 	}
 	
-	public static HAPPath getAddChildChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_CHILDREN));   }
+	public static HAPPath getAddChildChildPath() {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_CHILDREN));   }
 
 	
 	public String getHtml() {    return this.m_html;       }

@@ -41,10 +41,10 @@ public class HAPStoryElementAccessoryCommand extends HAPStoryElementAccessory{
 
     public void setTaskInterface(HAPInteractiveTask taskInterface) {    this.m_taskInterface = taskInterface;        }
 	
-	public static HAPPath getAddRequestParmChildPath() {		return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_REQUEST));  }
+	public static HAPPath getAddRequestParmChildPath() {		return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_REQUEST));  }
 	public static HAPPath getRequestParmEndPointPath(String parmName) {		return new HAPPath(new String[] {CHILD_REQUEST, parmName});	}
 
-	public static HAPPath getAddResponseParmChildPath(String resultName, String parName) {		return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(new String[] {CHILD_RESPONSE, resultName}));	}
+	public static HAPPath getAddResponseParmChildPath(String resultName, String parName) {		return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(new String[] {CHILD_RESPONSE, resultName}));	}
 	
 	protected void cloneToStoryElement(HAPStoryElementAccessoryCommand storyEle) {
 		super.cloneToStoryElement(storyEle);

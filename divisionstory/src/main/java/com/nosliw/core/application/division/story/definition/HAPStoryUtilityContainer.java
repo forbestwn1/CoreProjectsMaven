@@ -8,6 +8,10 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 public class HAPStoryUtilityContainer {
 
 	public static HAPStoryResultContainerChild tryGetChildElement(HAPStoryContainerChildrenElements currentContainer, String childPath) {
+        if(HAPUtilityBasic.isStringEmpty(childPath)) {
+			return new HAPStoryResultContainerChild(currentContainer, null);
+		}
+		
 		HAPPath remainingPath = new HAPPath();
 		HAPStoryContainerChildrenElementsWrapper childEleWrapper = null;
 		
@@ -43,6 +47,10 @@ public class HAPStoryUtilityContainer {
 	}
 
 	public static HAPStoryResultContainerChild tryGetChildCollection(HAPStoryContainerChildrenElements currentContainer, String childPath) {
+        if(HAPUtilityBasic.isStringEmpty(childPath)) {
+			return new HAPStoryResultContainerChild(currentContainer, null);
+		}
+
 		HAPPath remainingPath = new HAPPath();
 		
 		String[] segs = HAPUtilityNamingConversion.parsePaths(childPath);

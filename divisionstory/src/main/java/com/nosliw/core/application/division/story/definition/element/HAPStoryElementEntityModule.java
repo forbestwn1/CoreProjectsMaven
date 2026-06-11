@@ -21,7 +21,7 @@ public class HAPStoryElementEntityModule extends HAPStoryElementEntityComplex{
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_MODULE));
 	}
 
-	public static HAPPath getAddPageChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_PAGE));   }
+	public static HAPPath getAddPageChildPath() {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_PAGE));   }
 
 	
 	

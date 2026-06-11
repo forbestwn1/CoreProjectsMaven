@@ -6,6 +6,6 @@ public interface HAPStoryElementWithTask {
 
 	public static final String CHILD_TASK = "task";
 	
-	public static HAPPath getAddTaskChildPath() {	   return HAPStoryUtilityElement.buildChildPathForElement(new HAPPath(CHILD_TASK));   }
+	public static HAPPath getAddTaskChildPath() {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_TASK));   }
 
 }

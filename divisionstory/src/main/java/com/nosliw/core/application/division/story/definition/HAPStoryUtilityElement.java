@@ -5,12 +5,12 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
 public class HAPStoryUtilityElement {
 
-	public static HAPPath buildChildPathForElement(HAPPath basePath) {
+	public static HAPPath getAddElementChildPath(HAPPath basePath) {
 		HAPPath out = new HAPPath(basePath);
 		return out.appendSegment(HAPStoryElement.SEG_ELEMENT);
 	}
 	
-	public static HAPPath buildChildPathForElement(HAPPath basePath, String alias) {
+	public static HAPPath getAddElementChildPath(HAPPath basePath, String alias) {
 		HAPPath out = new HAPPath(basePath);
 		if(alias==null) {
 			return out.appendSegment(HAPStoryElement.SEG_ELEMENT);

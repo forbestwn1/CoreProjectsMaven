@@ -2,6 +2,8 @@ package com.nosliw.core.application.division.story.definition;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -37,4 +39,18 @@ public class HAPStoryPath extends HAPSerializableImp{
 		}
 	}
 
+	@Override
+	protected boolean buildObjectByJson(Object json){  
+		JSONObject jsonObj = (JSONObject)json;
+		
+		this.m_baseStoryElementId = new HAPStoryIdElement();
+		this.m_baseStoryElementId.buildObjectByJson(jsonObj.getJSONObject(BASESTORYELEMENTID));
+		
+		String path = (String)jsonObj.opt(PATH);
+		this.m_path = new HAPPath(path);
+		
+		return true;  
+	}
+	
+	
 }
