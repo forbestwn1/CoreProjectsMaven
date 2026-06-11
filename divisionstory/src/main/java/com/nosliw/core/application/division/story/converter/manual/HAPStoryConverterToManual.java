@@ -78,7 +78,7 @@ public class HAPStoryConverterToManual {
 			HAPIdBrick pageBrickId = new HAPIdBrick( HAPEnumBrickType.UIPAGE_100, HAPConstantShared.BRICK_DIVISION_MANUAL, pageElement.getEntityInfo().getName());
 			out.addLocalBrickContent(pageBrickId, new HAPManualInfoContent(convertPage(pageElement, story) , HAPSerializationFormat.HTML));
 			
-			pageElementList.add(HAPStoryUtilityConverter.convertToBrickWrapper(pageElement.getEntityInfo(), pageBrickId));
+			pageElementList.add(HAPStoryUtilityConverter.convertToBrickWrapper(pageElement.getElementId(), pageElement.getEntityInfo(), pageBrickId));
 		}
 		moduleTemplateParms.put("pages", pageElementList.toString());
 		
