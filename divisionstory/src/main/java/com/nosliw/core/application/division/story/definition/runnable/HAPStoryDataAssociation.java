@@ -86,7 +86,7 @@ public class HAPStoryDataAssociation extends HAPSerializableImp{
 		this.m_sourceSubPath = new HAPPath((String)jsonObj.opt(HAPStoryDataAssociation.SOURCESUBPATH));
 		
 		this.m_targetBasePath = new HAPStoryPath();
-		this.m_targetBasePath.buildObject(jsonObj.getJSONObject(SOURCEBASEPATH), HAPSerializationFormat.JSON);
+		this.m_targetBasePath.buildObject(jsonObj.getJSONObject(TARGEBASEPATH), HAPSerializationFormat.JSON);
 
 		this.m_targetSubPath = new HAPPath((String)jsonObj.opt(HAPStoryDataAssociation.TARGETSUBPATH));
 		

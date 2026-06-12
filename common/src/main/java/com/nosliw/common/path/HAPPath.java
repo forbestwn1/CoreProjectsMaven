@@ -48,11 +48,13 @@ public class HAPPath {
 	public int getLength() {  return this.m_pathSegs.length;  }
 	
 	public HAPPath appendSegment(String segment) {
-		return new HAPPath(HAPUtilityNamingConversion.cascadePath(this.m_path, segment));
+		this.init(HAPUtilityNamingConversion.cascadePath(this.m_path, segment));
+		return this;
 	}
 	
 	public HAPPath appendPath(HAPPath path) {
-		return new HAPPath(HAPUtilityNamingConversion.cascadePath(this.m_path, path.m_path));
+		this.init(HAPUtilityNamingConversion.cascadePath(this.m_path, path.m_path));
+		return this;
 	}
 	
 	public HAPPath getRemainingPath(int startIndex) {

@@ -6,7 +6,7 @@ public interface HAPStoryElementWithVariable {
 
 	public static final String CHILD_VARIABLE = "variable";
 
-	public static HAPPath getAddVariableChildPath() {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_VARIABLE));   }
+	public static HAPPath getAddVariableChildPath(String variableName) {	   return HAPStoryUtilityElement.getAddElementChildPath(new HAPPath(CHILD_VARIABLE), variableName);   }
 
 	public static HAPPath getVariableEndPointPath(String contantName) {
 		return new HAPPath(new String[] {CHILD_VARIABLE, contantName, HAPStoryElementWithEndPoint.CHILD_ENDPOINT});

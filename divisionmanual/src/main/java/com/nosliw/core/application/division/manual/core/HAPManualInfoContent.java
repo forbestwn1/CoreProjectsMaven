@@ -33,6 +33,8 @@ public class HAPManualInfoContent {
 	
 	public String getContent() {      return this.m_content;        }
 	
+	public void setContent(String content) {      this.m_content = content;       }
+	
 	public HAPIdBrickType getBrickTypeId() {    return this.m_brickTypeId;     }
 	
 }

@@ -37,6 +37,7 @@ public class HAPStoryDataAssociationComplex extends HAPSerializableImp{
 		for(int i=0; i<itemJsonArray.length(); i++) {
 			HAPStoryDataAssociation dataAssociation = new HAPStoryDataAssociation();
 			dataAssociation.buildObject(itemJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			this.addDataAssociation(dataAssociation);
 		}
 		return true;  
 	}

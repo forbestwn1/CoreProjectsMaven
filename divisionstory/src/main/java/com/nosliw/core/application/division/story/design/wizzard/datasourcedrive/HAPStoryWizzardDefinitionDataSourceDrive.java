@@ -15,6 +15,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRespon
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryPath;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
@@ -23,7 +24,6 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentHtml;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentTagCustom;
-import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIPage;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIUtility;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIWrapperContent;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIAppend;
@@ -161,8 +161,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//add page to module
 			Pair<HAPStoryChangeItemElementNew, HAPStoryChangeItemElementNew> pagePair = HAPStoryElementUIUtility.newUIPage(changeSession, ALIAS_ELEMENT_MODULE, null);
 			HAPStoryChangeItemElementNew newPageContentWrapperChange = pagePair.getRight();
-			HAPStoryChangeItemElementNew newPageChange = pagePair.getLeft();
-			HAPStoryIdElement pageElementId = newPageChange.getElementId();
+			HAPStoryIdElement pageElementId = pagePair.getLeft().getElementId();
+			HAPStoryIdElement uiWrapperElementId = pagePair.getRight().getElementId();
+			
 			
 			//add root content to content wrapper
 			HAPStoryChangeItemElementNew newRootContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "main.html");
@@ -180,13 +181,13 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			//data association between page and data source request
 			HAPStoryDataAssociation requestDataAssociationForVariable = new HAPStoryDataAssociation(
-					new HAPStoryPath(pageElementId, null), HAPStoryElementUIPage.buildPathToVariableCollection(),
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithVariable.CHILD_VARIABLE),
 					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
 
 			HAPStoryDataAssociation requestDataAssociationForConstant = new HAPStoryDataAssociation(
-					new HAPStoryPath(pageElementId, null), HAPStoryElementUIPage.buildPathToConstantCollection(),
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithVariable.CHILD_VARIABLE),
 					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);

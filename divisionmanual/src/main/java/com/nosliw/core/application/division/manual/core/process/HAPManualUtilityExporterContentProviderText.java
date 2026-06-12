@@ -3,6 +3,7 @@ package com.nosliw.core.application.division.manual.core.process;
 import java.util.Map;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
@@ -11,6 +12,8 @@ import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 public class HAPManualUtilityExporterContentProviderText {
 
 	public static void export(HAPManualContentProviderText cotentProvider, String exportFolder) {
+		
+		formatContentProviderText(cotentProvider);
 		
 		HAPUtilityFile.deleteFolder(exportFolder);
 		
@@ -30,5 +33,23 @@ public class HAPManualUtilityExporterContentProviderText {
 		
 	}
 	
+	private static void formatContentProviderText(HAPManualContentProviderText contentProvider) {
+		formatContent(contentProvider.getMainContent());
+		
+		for(HAPManualInfoContent contentInfo : contentProvider.getLocalBrickContents().values()) {
+			formatContent(contentInfo);
+		}
+		
+		for(HAPManualInfoContent contentInfo : contentProvider.getBranchContents().values()) {
+			formatContent(contentInfo);
+		}
+		
+	}
+	
+	private static void formatContent(HAPManualInfoContent contentInfo) {
+		if(contentInfo.getFormat()==HAPSerializationFormat.JSON) {
+			contentInfo.setContent(HAPUtilityJson.formatJson(contentInfo.getContent()));
+		}
+	}
 	
 }
