@@ -340,9 +340,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag
-			
 			HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataTypeCriteria));
-			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName());
+			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
+			wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), parmDef.getName());
 			
 			HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic(wizzardUITagInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 			parmDynamicGroupQ.addItem(parmUITagChooseQ);

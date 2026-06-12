@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -89,12 +90,12 @@ public class HAPManagerUITag{
 		HAPDataTypeCriteria queryDataTypeCriteria = query.getDataTypeCriterai();
 		for(String name : this.m_dataTagDefs.keySet()) {
 			HAPUITagDefinitionData uiTagDef = this.m_dataTagDefs.get(name);
-			HAPDataTypeCriteria tagDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
-			HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria);
+			Pair<String, HAPDataTypeCriteria> tagDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
+			HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria.getRight());
 			if(matchers!=null) {
 				double score = matchers.getScore();
 				if(score>0) {
-					candidates.add(new HAPUITagCandidate(uiTagDef, score, matchers));
+					candidates.add(new HAPUITagCandidate(uiTagDef, tagDataTypeCriteria.getLeft(), score, matchers));
 				}
 			}
 		}
@@ -115,6 +116,7 @@ public class HAPManagerUITag{
 		HAPUITagQueryResultSet out = new HAPUITagQueryResultSet();
 		for(HAPUITagCandidate candidate : candiateArray) {
 			HAPUITagInfo result = new HAPUITagInfo(candidate.getUITagDef());
+			result.setAttributeForData(candidate.getDataAttributeName());
 			result.addMatchers("internal_data", candidate.getMatchers());
 			HAPUITagQueryResult resultInfo = new HAPUITagQueryResult(result, candidate.getScore());
 			out.addItem(resultInfo);
@@ -129,26 +131,31 @@ public class HAPManagerUITag{
 		return HAPUtilityFile.readFile(file);
 	}
 	
-	private HAPDataTypeCriteria getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
+	private Pair<String, HAPDataTypeCriteria> getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
 		String attrName = uiTagDef.getAttributeForData();
 		HAPUITagDefinitionAttributeVariable attrDef = (HAPUITagDefinitionAttributeVariable)uiTagDef.getAttributeDefition(attrName);
-		return attrDef.getDataDefinition().getCriteria();
+		return Pair.of(attrName, attrDef.getDataDefinition().getCriteria());
 	}
 	
 	class HAPUITagCandidate{
+		
 		private HAPUITagDefinition m_uiTagDef;
+		
+		private String m_dataAttrName;
 		
 		private double m_score;
 		
 		private HAPMatchers m_matchers;
 		
-		public HAPUITagCandidate(HAPUITagDefinition uiTagDef, double score, HAPMatchers matchers) {
+		public HAPUITagCandidate(HAPUITagDefinition uiTagDef, String dataAttrName, double score, HAPMatchers matchers) {
 			this.m_uiTagDef = uiTagDef;
+			this.m_dataAttrName = dataAttrName;
 			this.m_score = score;
 			this.m_matchers = matchers;
 		}
 		
 		public HAPUITagDefinition getUITagDef() {		return this.m_uiTagDef;		}
+		public String getDataAttributeName() {     return this.m_dataAttrName;       }
 		public double getScore() {   return this.m_score;    }
 		public HAPMatchers getMatchers() {    return this.m_matchers;    }
 	}

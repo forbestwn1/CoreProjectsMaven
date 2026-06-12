@@ -6,10 +6,10 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.data.matcher.HAPMatchersCombo;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 
 @HAPEntityWithAttribute
 public class HAPUITagInfo extends HAPEntityInfoImp{
@@ -18,12 +18,17 @@ public class HAPUITagInfo extends HAPEntityInfoImp{
 	public static final String ATTRIBUTES = "attributes";
 
 	@HAPAttribute
+	public static final String ATTRIBUTEFORDATA = "attributeForData";
+	
+	@HAPAttribute
 	public static final String MATCHERS = "matchers";
 	
 	private Map<String, String> m_attributes;
 
 	private Map<String, HAPMatchersCombo> m_matchers;
 
+	private String m_attributeForData;
+	
 	public HAPUITagInfo() {
 		this.m_attributes = new LinkedHashMap<String, String>();
 		this.m_matchers = new LinkedHashMap<String, HAPMatchersCombo>();
@@ -36,6 +41,9 @@ public class HAPUITagInfo extends HAPEntityInfoImp{
 	
 	public Map<String, String> getAttributes(){   return this.m_attributes;    }
 
+	public void setAttributeForData(String attrName) {       this.m_attributeForData = attrName;        }
+	public String getAttributeForData() {     return this.m_attributeForData;      }
+	
 	public void addMatchers(String name, HAPMatchers matchers) { 
 		this.m_matchers.put(name, new HAPMatchersCombo(matchers));    
 	}
@@ -47,6 +55,7 @@ public class HAPUITagInfo extends HAPEntityInfoImp{
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(ATTRIBUTES, HAPUtilityJson.buildJson(this.m_attributes, HAPSerializationFormat.JSON));
 		jsonMap.put(MATCHERS, HAPUtilityJson.buildJson(this.m_matchers, HAPSerializationFormat.JSON));
+		jsonMap.put(ATTRIBUTEFORDATA, this.m_attributeForData);
 	}
 	
 //	@Override

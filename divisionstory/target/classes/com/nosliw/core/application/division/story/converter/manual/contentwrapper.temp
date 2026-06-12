@@ -1,6 +1,14 @@
 
 ||html||
 
+            <metainfo>
+            {
+	            "info" : {
+   		            "nosliw_alias" : "||alias||"
+	            }
+	        }
+            </metainfo> 
+
     <task>
         [
             ||task||

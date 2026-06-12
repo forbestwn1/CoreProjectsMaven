@@ -22,14 +22,20 @@ public class HAPStoryWizzardUITagInfo extends HAPSerializableImp{
 		this.m_attributes = new LinkedHashMap<String, String>();
 	}
 	
-	public HAPStoryWizzardUITagInfo(String tagName) {
+	public HAPStoryWizzardUITagInfo(String tagName, Map<String, String> attributes) {
 		this();
 		this.m_tagName = tagName;
+		if(attributes!=null) {
+			for(String name : attributes.keySet()) {
+				this.setAttribute(name, attributes.get(name));
+			}
+		}
 	}
 	
 	public String getTagName() {    return this.m_tagName;	}
 	
 	public Map<String, String> getAttributes(){    return this.m_attributes;  	}
+	public void setAttribute(String name, String value) {     this.m_attributes.put(name, value);      }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

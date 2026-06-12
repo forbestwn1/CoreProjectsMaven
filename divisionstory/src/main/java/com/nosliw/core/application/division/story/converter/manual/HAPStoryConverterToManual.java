@@ -233,13 +233,11 @@ public class HAPStoryConverterToManual {
 	
 	
 	private static String convertPage(HAPStoryElementUIPage pageElement, HAPStoryStory story) {
-		InputStream pageTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "page.temp");
-		Map<String, String> pageTemplateParms = new LinkedHashMap<String, String>();
-
 		HAPStoryElementUIWrapperContent pageContentWrapperElement = (HAPStoryElementUIWrapperContent)story.getElement(pageElement.getChildElement(HAPStoryElementUIPage.CHILD_CONTENTWRAPPER).getElementId());
-		pageTemplateParms.put("html", convertUIContentWrapper(pageContentWrapperElement, story));
 		
-		return HAPStringTemplateUtil.getStringValue(pageTemplateStream, pageTemplateParms);
+		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "page.temp"))
+				.setParm("html", convertUIContentWrapper(pageContentWrapperElement, story))
+	    		.getContent();
 	}
 	
 	private static String convertUIContentWrapper(HAPStoryElementUIWrapperContent contentWrapperElement, HAPStoryStory story) {
@@ -259,7 +257,9 @@ public class HAPStoryConverterToManual {
 			valueContexTemplateParms.put("valueContext", valueContextJsonStr);
 			templateParms.put("valueContext", HAPStringTemplateUtil.getStringValue(valueContextTemplateStream, valueContexTemplateParms));
 		}
-		
+
+		templateParms.put("alias", contentWrapperElement.getElementId().getId());
+
 		return HAPStringTemplateUtil.getStringValue(templateStream, templateParms);
 	}
 	
