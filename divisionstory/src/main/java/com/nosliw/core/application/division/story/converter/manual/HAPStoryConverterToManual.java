@@ -52,6 +52,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUI;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationComplex;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationForTask;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
@@ -89,15 +90,18 @@ public class HAPStoryConverterToManual {
 			String runnableType = runnable.getRunnableType();
 			if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND)) {
 				HAPStoryRunnableCommand commandRunnable = (HAPStoryRunnableCommand)runnable;
+				HAPStoryDataAssociationForTask dataAssociationForTask = commandRunnable.getDataAssociation();
 		
-				HAPStoryDataAssociationComplex requestDataAssociation = commandRunnable.getRequestDataAssociation();
+				HAPStoryDataAssociationComplex requestDataAssociation = dataAssociationForTask.getRequestDataAssociation();
 				String requestDAContent = converDataAssociation(requestDataAssociation, story);
-				
-				HAPStoryDataAssociationComplex responseDataAssociation = commandRunnable.getResponseDataAssociations().get(HAPConstantShared.TASK_RESULT_SUCCESS);
-				String responseDAContent = null;
-				if(responseDataAssociation!=null) {
-					converDataAssociation(responseDataAssociation, story);
+
+				Map<String, String> responseDAContent = new LinkedHashMap<String, String>();
+				Map<String, HAPStoryDataAssociationComplex> responseDAComplexs = dataAssociationForTask.getResponseDataAssociations();
+				for(String resultName : responseDAComplexs.keySet()) {
+					HAPStoryDataAssociationComplex responseDataAssociation = responseDAComplexs.get(resultName);
+					responseDAContent.put(resultName, converDataAssociation(responseDataAssociation, story));
 				}
+				
 				
 				HAPStoryElement commandWrapperEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommand(), story);
 				if(commandWrapperEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {
@@ -105,7 +109,7 @@ public class HAPStoryConverterToManual {
 					tasksList.add(new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_datasource.temp"))
 							.setParm("taskId", runnable.getId())
 			    			.setParm("requestDataAssociation", requestDAContent)
-			    			.setParm("responseDataAssociation", responseDAContent)
+			    			.setParm("responseDataAssociation", responseDAContent.toString())
 			    			.setParm("dataSourceId", dataSourceElement.getServiceId())
 				    		.getContent());
 				}

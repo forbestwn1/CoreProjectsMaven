@@ -30,6 +30,7 @@ import com.nosliw.core.application.division.story.definition.element.ui.HAPStory
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryMetaDataChildElementUIInject;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationComplex;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationForTask;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
@@ -276,10 +277,15 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//build data source execute task
 			HAPStoryRunnableCommand commandRunnable = new HAPStoryRunnableCommand();
 			commandRunnable.setPathToCommand(new HAPStoryPath(dataSourceElementId, null));
-			HAPStoryDataAssociationComplex daComplex = new HAPStoryDataAssociationComplex();
-			daComplex.addDataAssociation(requestDataAssociationForConstant);
-			daComplex.addDataAssociation(requestDataAssociationForVariable);
-			commandRunnable.setRequestDataAssociation(daComplex);
+
+			HAPStoryDataAssociationForTask dataAssociationForTask = new HAPStoryDataAssociationForTask();
+			
+			HAPStoryDataAssociationComplex requestDAComplex = new HAPStoryDataAssociationComplex();
+			requestDAComplex.addDataAssociation(requestDataAssociationForConstant);
+			requestDAComplex.addDataAssociation(requestDataAssociationForVariable);
+			dataAssociationForTask.setRequestDataAssociation(requestDAComplex);
+			
+			commandRunnable.setDataAssociation(dataAssociationForTask);
 			
 			HAPStoryChangeItemRunnableNew commandRunChangeNew = changeSession.addChangeItemNew(commandRunnable);
 

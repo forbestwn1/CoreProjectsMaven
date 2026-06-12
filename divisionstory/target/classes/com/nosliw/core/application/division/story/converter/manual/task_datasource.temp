@@ -21,9 +21,7 @@
 		    				"brick" : {
 			    				"definition" : {
 				    				"in" : ||requestDataAssociation||,
-			    					"out" : {
-				    					"success" : ||responseDataAssociation||
-				    				}
+			    					"out" : ||responseDataAssociation||, 
 			    				}
 		    				}
 	    				}

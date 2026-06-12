@@ -1,12 +1,10 @@
 package com.nosliw.core.application.division.story.definition.runnable;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnable;
@@ -17,47 +15,31 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 
-	//command element id
-	public final static String CHILD_COMMAND = "command";
-
-	//data association for request
-	public final static String CHILD_REQUESTDATAASSOCIATION = "requestDataAssociation";
-	
-	//data association for response
-	public final static String CHILD_RESPONSEDATAASSOCIATION = "responseDataAssociation";
-
 	public final static String PATHTOCOMMAND = "pathToCommand";
 	
-	public final static String REQUESTDATAASSOCIATION = "requestDataAssociation";
+	public final static String DATAASSOCIATION = "dataAssociation";
 	
-	public final static String RESPONSEDATAASSOCIATION = "responseDataAssociation";
+	private HAPStoryPath m_pathToCommand;
 	
-	public HAPStoryPath m_pathToCommand;
-	
-	private HAPStoryDataAssociationComplex m_requestDataAssociation;
-	
-	private Map<String, HAPStoryDataAssociationComplex> m_responseDataAssociation;
+	private HAPStoryDataAssociationForTask m_dataAssociation;
 	
 	public HAPStoryRunnableCommand() {
 		super(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND);
-		this.m_responseDataAssociation = new LinkedHashMap<String, HAPStoryDataAssociationComplex>();
 	}
 
 	public void setPathToCommand(HAPStoryPath path) {    this.m_pathToCommand = path;   }
 	public HAPStoryPath getPathToCommand() {    return this.m_pathToCommand;     }
 	
-	public HAPStoryDataAssociationComplex getRequestDataAssociation() {     return this.m_requestDataAssociation;     }
-	public void setRequestDataAssociation(HAPStoryDataAssociationComplex requestDataAssociation) {     this.m_requestDataAssociation = requestDataAssociation;      }
-	
-    public Map<String, HAPStoryDataAssociationComplex> getResponseDataAssociations(){     return this.m_responseDataAssociation;         }
-	public void addResponseDataAssociation(String name, HAPStoryDataAssociationComplex responseDataAssociation) {    this.m_responseDataAssociation.put(name, responseDataAssociation);       }
+	public HAPStoryDataAssociationForTask getDataAssociation() {      return this.m_dataAssociation;        }
+	public void setDataAssociation(HAPStoryDataAssociationForTask dataAssociation) {      this.m_dataAssociation = dataAssociation;         }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(PATHTOCOMMAND, this.m_pathToCommand.toStringValue(HAPSerializationFormat.JSON));
-		jsonMap.put(REQUESTDATAASSOCIATION, this.m_requestDataAssociation.toStringValue(HAPSerializationFormat.JSON));
-		jsonMap.put(RESPONSEDATAASSOCIATION, HAPManagerSerialize.getInstance().toStringValue(m_responseDataAssociation, HAPSerializationFormat.JSON));
+		if(this.m_dataAssociation!=null) {
+			jsonMap.put(DATAASSOCIATION, this.m_dataAssociation.toStringValue(HAPSerializationFormat.JSON));
+		}
 	}
 	
 }
@@ -74,24 +56,14 @@ class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRu
 		HAPStoryPath path = new HAPStoryPath();
 		path.buildObject(jsonObj.getJSONObject(HAPStoryRunnableCommand.PATHTOCOMMAND), HAPSerializationFormat.JSON);
 		runnable.setPathToCommand(path);
-
-		JSONObject requestDAJson = jsonObj.getJSONObject(HAPStoryRunnableCommand.REQUESTDATAASSOCIATION);
-		if(requestDAJson!=null) {
-			HAPStoryDataAssociationComplex requestDataAssociation = new HAPStoryDataAssociationComplex(); 
-			requestDataAssociation.buildObject(requestDAJson, HAPSerializationFormat.JSON);
-			runnable.setRequestDataAssociation(requestDataAssociation);
+		
+		JSONObject daJsonObj = jsonObj.optJSONObject(HAPStoryRunnableCommand.DATAASSOCIATION);
+		if(daJsonObj!=null) {
+			HAPStoryDataAssociationForTask da = new HAPStoryDataAssociationForTask();
+			da.buildObject(daJsonObj, HAPSerializationFormat.JSON);
+			runnable.setDataAssociation(da);
 		}
 
-		JSONObject responseDAJsonMap = jsonObj.getJSONObject(HAPStoryRunnableCommand.RESPONSEDATAASSOCIATION);
-		if(responseDAJsonMap!=null) {
-			for(Object key : responseDAJsonMap.keySet()) {
-				String resultName = (String)key;
-				JSONObject responseDA = jsonObj.getJSONObject(resultName);
-				HAPStoryDataAssociationComplex responseDataAssociation = new HAPStoryDataAssociationComplex(); 
-				responseDataAssociation.buildObject(responseDA, HAPSerializationFormat.JSON);
-				runnable.addResponseDataAssociation(resultName, responseDataAssociation);
-			}
-		}
 	}
 
 	@Override
