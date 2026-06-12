@@ -32,6 +32,7 @@ public class HAPStoryElementEntityDataSource extends HAPStoryElementImpWithEntit
 	
 	public HAPStoryElementEntityDataSource(String serviceId, HAPEntityInfo dataSourceInfo) {
 		super(TYPEID, dataSourceInfo);
+		this.m_serviceId = serviceId;
 	}
 
 	public static HAPPath getAddCommandPath() {

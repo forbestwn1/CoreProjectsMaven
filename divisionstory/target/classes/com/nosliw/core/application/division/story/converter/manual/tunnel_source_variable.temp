@@ -1,4 +1,6 @@
+{
 	    												"mapping" : {
     														"elementPath": "||variableName||",
 		    												"valuePortId" : ||valuePortIdInBundle||
 									    				}
+}

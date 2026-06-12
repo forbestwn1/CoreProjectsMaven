@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.manual.core;
 
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPAttributeInBrick;
@@ -67,7 +68,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 		
 		HAPManualAttributeInBrick manualAttr = (HAPManualAttributeInBrick)attribute; 
 		
-		HAPInfoTreeNode treeNodeInfo = new HAPInfoTreeNode(this.getTreeNodeInfo().getPathFromRoot().appendSegment(manualAttr.getName()), this);
+		HAPInfoTreeNode treeNodeInfo = new HAPInfoTreeNode(new HAPPath(this.getTreeNodeInfo().getPathFromRoot()).appendSegment(manualAttr.getName()), this);
 		manualAttr.setTreeNodeInfo(treeNodeInfo);
 	}
 	

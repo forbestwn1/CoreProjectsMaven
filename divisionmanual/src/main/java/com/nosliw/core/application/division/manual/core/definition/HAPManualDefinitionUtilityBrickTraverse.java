@@ -47,7 +47,7 @@ public class HAPManualDefinitionUtilityBrickTraverse {
 				//if related value is not brick, then stop processing children attribute
 				List<HAPManualDefinitionAttributeInBrick> attrs = leafBrick.getAllAttributes();
 				for(HAPManualDefinitionAttributeInBrick attr : attrs) {
-					HAPPath attrPath = path.appendSegment(attr.getName());
+					HAPPath attrPath = new HAPPath(path).appendSegment(attr.getName());
 					traverseBrickTreeLeaves(rootBrick, attrPath, processor, data);
 				}
 			}

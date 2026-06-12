@@ -42,7 +42,7 @@ public class HAPUtilityBrickTraverse {
 				//only process child for brick
 				List<HAPAttributeInBrick> attrsExe = leafBrick.getAttributes();
 				for(HAPAttributeInBrick attrExe : attrsExe) {
-					HAPPath attrPath = path.appendSegment(attrExe.getName());
+					HAPPath attrPath = new HAPPath(path).appendSegment(attrExe.getName());
 					traversePreTree(bundle, attrPath, processor, brickMan, data, validPath);
 				}
 			}
@@ -58,7 +58,7 @@ public class HAPUtilityBrickTraverse {
 				//only process child for brick
 				List<HAPAttributeInBrick> attrsExe = leafBrick.getAttributes();
 				for(HAPAttributeInBrick attrExe : attrsExe) {
-					HAPPath attrPath = path.appendSegment(attrExe.getName());
+					HAPPath attrPath = new HAPPath(path).appendSegment(attrExe.getName());
 					traversePostTree(bundle, attrPath, processor, brickMan, data, validPath);
 				}
 			}
