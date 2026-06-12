@@ -38,6 +38,13 @@
 
    <dependency>
    	<groupId>com.nosliw</groupId>
+   	<artifactId>coreruntime</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+   </dependency>
+
+
+   <dependency>
+   	<groupId>com.nosliw</groupId>
    	<artifactId>librarydatasource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
    </dependency>

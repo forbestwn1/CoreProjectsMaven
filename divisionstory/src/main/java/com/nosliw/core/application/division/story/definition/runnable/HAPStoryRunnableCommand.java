@@ -5,6 +5,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnable;
@@ -15,11 +16,15 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 
-	public final static String PATHTOCOMMAND = "pathToCommand";
-	
+	public final static String PATHTOCOMMANDHOST = "pathToCommandHost";
+
+	public final static String SUBPATHTOVALUEPORT = "subPathToValuePort";
+
 	public final static String DATAASSOCIATION = "dataAssociation";
 	
-	private HAPStoryPath m_pathToCommand;
+	private HAPStoryPath m_pathToCommandHost;
+
+	private HAPPath m_subPathToValuePort;
 	
 	private HAPStoryDataAssociationForTask m_dataAssociation;
 	
@@ -27,8 +32,11 @@ public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 		super(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND);
 	}
 
-	public void setPathToCommand(HAPStoryPath path) {    this.m_pathToCommand = path;   }
-	public HAPStoryPath getPathToCommand() {    return this.m_pathToCommand;     }
+	public void setPathToCommandHost(HAPStoryPath path) {    this.m_pathToCommandHost = path;   }
+	public HAPStoryPath getPathToCommandHost() {    return this.m_pathToCommandHost;     }
+	
+	public void setSubpathToValuePort(HAPPath path) {      this.m_subPathToValuePort = path;         }
+	public HAPPath getSubpathToValuePort() {      return this.m_subPathToValuePort;       }
 	
 	public HAPStoryDataAssociationForTask getDataAssociation() {      return this.m_dataAssociation;        }
 	public void setDataAssociation(HAPStoryDataAssociationForTask dataAssociation) {      this.m_dataAssociation = dataAssociation;         }
@@ -36,7 +44,10 @@ public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(PATHTOCOMMAND, this.m_pathToCommand.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(PATHTOCOMMANDHOST, this.m_pathToCommandHost.toStringValue(HAPSerializationFormat.JSON));
+		if(this.m_subPathToValuePort!=null) {
+			jsonMap.put(SUBPATHTOVALUEPORT, this.m_subPathToValuePort.toString());
+		}
 		if(this.m_dataAssociation!=null) {
 			jsonMap.put(DATAASSOCIATION, this.m_dataAssociation.toStringValue(HAPSerializationFormat.JSON));
 		}
@@ -54,8 +65,10 @@ class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRu
 		super.parseToEntity(jsonObj, runnable, parseService);
 		
 		HAPStoryPath path = new HAPStoryPath();
-		path.buildObject(jsonObj.getJSONObject(HAPStoryRunnableCommand.PATHTOCOMMAND), HAPSerializationFormat.JSON);
-		runnable.setPathToCommand(path);
+		path.buildObject(jsonObj.getJSONObject(HAPStoryRunnableCommand.PATHTOCOMMANDHOST), HAPSerializationFormat.JSON);
+		runnable.setPathToCommandHost(path);
+		
+		runnable.setSubpathToValuePort(new HAPPath((String)jsonObj.opt(HAPStoryRunnableCommand.SUBPATHTOVALUEPORT)));
 		
 		JSONObject daJsonObj = jsonObj.optJSONObject(HAPStoryRunnableCommand.DATAASSOCIATION);
 		if(daJsonObj!=null) {

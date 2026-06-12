@@ -276,7 +276,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			//build data source execute task
 			HAPStoryRunnableCommand commandRunnable = new HAPStoryRunnableCommand();
-			commandRunnable.setPathToCommand(new HAPStoryPath(dataSourceElementId, null));
+			commandRunnable.setPathToCommandHost(new HAPStoryPath(dataSourceElementId, null));
+			commandRunnable.setSubpathToValuePort(null);
 
 			HAPStoryDataAssociationForTask dataAssociationForTask = new HAPStoryDataAssociationForTask();
 			

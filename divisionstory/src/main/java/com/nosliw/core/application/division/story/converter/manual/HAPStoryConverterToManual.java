@@ -91,21 +91,22 @@ public class HAPStoryConverterToManual {
 			if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND)) {
 				HAPStoryRunnableCommand commandRunnable = (HAPStoryRunnableCommand)runnable;
 				HAPStoryDataAssociationForTask dataAssociationForTask = commandRunnable.getDataAssociation();
-		
+
+				HAPStoryElement commandHostEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommandHost(), story);
+				HAPStoryElement commandValePortEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommandHost().getBaseStoryElementId(), new HAPPath(commandRunnable.getPathToCommandHost().getPath()).appendPath(commandRunnable.getSubpathToValuePort()), story);
+
 				HAPStoryDataAssociationComplex requestDataAssociation = dataAssociationForTask.getRequestDataAssociation();
-				String requestDAContent = converDataAssociation(requestDataAssociation, story);
+				String requestDAContent = converDataAssociation(requestDataAssociation, commandValePortEle.getElementId(), story);
 
 				Map<String, String> responseDAContent = new LinkedHashMap<String, String>();
 				Map<String, HAPStoryDataAssociationComplex> responseDAComplexs = dataAssociationForTask.getResponseDataAssociations();
 				for(String resultName : responseDAComplexs.keySet()) {
 					HAPStoryDataAssociationComplex responseDataAssociation = responseDAComplexs.get(resultName);
-					responseDAContent.put(resultName, converDataAssociation(responseDataAssociation, story));
+					responseDAContent.put(resultName, converDataAssociation(responseDataAssociation, commandValePortEle.getElementId(), story));
 				}
 				
-				
-				HAPStoryElement commandWrapperEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommand(), story);
-				if(commandWrapperEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {
-					HAPStoryElementEntityDataSource dataSourceElement = (HAPStoryElementEntityDataSource)commandWrapperEle;
+				if(commandHostEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {
+					HAPStoryElementEntityDataSource dataSourceElement = (HAPStoryElementEntityDataSource)commandHostEle;
 					tasksList.add(new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_datasource.temp"))
 							.setParm("taskId", runnable.getId())
 			    			.setParm("requestDataAssociation", requestDAContent)
@@ -151,12 +152,12 @@ public class HAPStoryConverterToManual {
 		return out;
 	}
 	
-	private static String converDataAssociation(HAPStoryDataAssociationComplex dataAssociationComplex, HAPStoryStory story) {
+	private static String converDataAssociation(HAPStoryDataAssociationComplex dataAssociationComplex, HAPStoryIdElement defaultElementId, HAPStoryStory story) {
 		List<String> tunnelsContent = new ArrayList<String>();
 
 		for(HAPStoryDataAssociation dataAssociation : dataAssociationComplex.getDataAssociations()) {
-			Pair<HAPStoryPath, HAPIdValuePortInBundle> pSource = buildTunnelBase(dataAssociation.getSourceBasePath(), dataAssociation.getSourceSubPath(), story);
-			Pair<HAPStoryPath, HAPIdValuePortInBundle> pTarget = buildTunnelBase(dataAssociation.getTargetBasePath(), dataAssociation.getTargetSubPath(), story);
+			Pair<HAPStoryPath, HAPIdValuePortInBundle> pSource = buildTunnelBase(dataAssociation.getSourceBasePath(), dataAssociation.getSourceSubPath(), defaultElementId, story);
+			Pair<HAPStoryPath, HAPIdValuePortInBundle> pTarget = buildTunnelBase(dataAssociation.getTargetBasePath(), dataAssociation.getTargetSubPath(), defaultElementId, story);
 			
 			for(HAPStoryTunnel tunnel : dataAssociation.getTunnels()) {
 				tunnelsContent.add(convertTunnel(tunnel, pSource.getLeft(), pSource.getRight(), pTarget.getLeft(), pTarget.getRight(), story));
@@ -168,7 +169,7 @@ public class HAPStoryConverterToManual {
 	    		getContent();			
 	}
 
-	private static Pair<HAPStoryPath, HAPIdValuePortInBundle> buildTunnelBase(HAPStoryPath basePath, HAPPath subPath, HAPStoryStory story) {
+	private static Pair<HAPStoryPath, HAPIdValuePortInBundle> buildTunnelBase(HAPStoryPath basePath, HAPPath subPath, HAPStoryIdElement defaultElementId, HAPStoryStory story) {
 		HAPIdValuePortInBundle valuePortIdInBundle = null;
 		
 		HAPIdValuePort valuePortId = null;
@@ -189,8 +190,12 @@ public class HAPStoryConverterToManual {
 			valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_VALUECONTEXT, HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT);
 		}
 		
-		HAPIdBrickInBundle brickIdInBundle = new HAPIdBrickInBundle();
-		brickIdInBundle.setAlias(entityElement.getElementId().getKey());
+		HAPIdBrickInBundle brickIdInBundle = null;
+		if(!defaultElementId.equals(entityElement.getElementId())) {
+			//default brick id do not need to show
+			brickIdInBundle = new HAPIdBrickInBundle();
+			brickIdInBundle.setAlias(entityElement.getElementId().getId());
+		}
 		
 		valuePortIdInBundle = new HAPIdValuePortInBundle(brickIdInBundle, HAPConstantShared.VALUEPORTGROUP_SIDE_EXTERNAL, valuePortId);
 		
