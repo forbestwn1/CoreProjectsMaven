@@ -950,6 +950,7 @@
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG" value="dataSourceRequestParmUITag"/>
 
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO" value="dataSourceResponseParmInfo"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMISSHOW" value="dataSourceResponseParmIsShow"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG" value="dataSourceResponseParmUITag"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO" value="dataSourceResponseDataCriteriaInfo"/>
 
@@ -961,6 +962,7 @@
 
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP" value="dataSourceResponseParmGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO" value="dataSourceResponseParmInfoTag"/>
+			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMISSHOW" value="dataSourceResponseParmIsShowTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMUITAG" value="dataSourceResponseParmUITagTag"/>
 I
 			<definition type="space"/>

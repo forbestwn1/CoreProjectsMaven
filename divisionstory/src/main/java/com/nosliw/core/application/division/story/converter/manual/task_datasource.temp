@@ -6,6 +6,9 @@
 			        "version" : "1.0.0"
 			    },
 			    "brick" : {
+                    "info": {
+                        "nosliw_alias": "||alias||"
+                    },
 					"brick" : {
     					"serviceKey" : {
 	    					"id" : "||dataSourceId||"

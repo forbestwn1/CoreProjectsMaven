@@ -51,7 +51,7 @@ public class HAPStoryDataAssociationForTask extends HAPSerializableImp{
 		if(responseDAJsonMap!=null) {
 			for(Object key : responseDAJsonMap.keySet()) {
 				String resultName = (String)key;
-				JSONObject responseDA = jsonObj.getJSONObject(resultName);
+				JSONObject responseDA = responseDAJsonMap.getJSONObject(resultName);
 				HAPStoryDataAssociationComplex responseDataAssociation = new HAPStoryDataAssociationComplex(); 
 				responseDataAssociation.buildObject(responseDA, HAPSerializationFormat.JSON);
 				this.addResponseDataAssociation(resultName, responseDataAssociation);

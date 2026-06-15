@@ -871,6 +871,7 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE = "dataSourceRequestParmConstantValue";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfo";
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMISSHOW = "dataSourceResponseParmIsShow";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO = "dataSourceResponseDataCriteriaInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroupTag";
@@ -880,6 +881,7 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITagTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP = "dataSourceResponseParmGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfoTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMISSHOW = "dataSourceResponseParmIsShowTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITagTag";
 
 

@@ -31,6 +31,7 @@ public class HAPStoryWizzardQuestionValueDataSourceResponseParmInfoStatic extend
 	}
 
 	void setRespsoneParmDefinition(HAPDefinitionParmResponse responseParmDef) {     this.m_responseParmDef = responseParmDef;  	}
+	public HAPDefinitionParmResponse getResponseParmDef() {     return this.m_responseParmDef;       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

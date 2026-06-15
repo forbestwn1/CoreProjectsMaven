@@ -136,6 +136,10 @@ var loc_createUITagComponentCore = function(complexEntityDef, tagDefScriptFun, v
 			return loc_envInterface[node_CONSTANT.INTERFACE_WITHVALUEPORT].createVariableByName(variableName);
 		},
 		
+		getVariableDefinition : function(varibleName){
+			
+		},
+		
 		//---------------------------------operation request
 		getBatchDataOperationRequest : function(operations, handlers, request){
      		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);

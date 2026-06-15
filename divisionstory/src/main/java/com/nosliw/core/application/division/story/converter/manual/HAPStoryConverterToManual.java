@@ -13,6 +13,7 @@ import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
@@ -109,8 +110,9 @@ public class HAPStoryConverterToManual {
 					HAPStoryElementEntityDataSource dataSourceElement = (HAPStoryElementEntityDataSource)commandHostEle;
 					tasksList.add(new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_datasource.temp"))
 							.setParm("taskId", runnable.getId())
+							.setParm("alias", runnable.getId())
 			    			.setParm("requestDataAssociation", requestDAContent)
-			    			.setParm("responseDataAssociation", responseDAContent.toString())
+			    			.setParm("responseDataAssociation", HAPUtilityJson.buildMapJson(responseDAContent))
 			    			.setParm("dataSourceId", dataSourceElement.getServiceId())
 				    		.getContent());
 				}
@@ -177,12 +179,12 @@ public class HAPStoryConverterToManual {
 		if(entityElement.getElementType().equals(HAPStoryElementEntityDataSource.TYPEID)) {
 			String[] subPathSegs = subPath.getPathSegments();
 			String commandPath = subPathSegs[0];
-			String requestOrResponse = subPathSegs[1];
+			String requestOrResponse = subPathSegs[2];
 			if(requestOrResponse.equals(HAPStoryElementAccessoryCommand.CHILD_REQUEST)) {
 				valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVETASK, HAPConstantShared.VALUEPORT_NAME_INTERACT_REQUEST);
 			}
 			else if(requestOrResponse.equals(HAPStoryElementAccessoryCommand.CHILD_RESPONSE)) {
-				String responseResult = subPathSegs[2];
+				String responseResult = subPathSegs[3];
 				valuePortId = new HAPIdValuePort(HAPConstantShared.VALUEPORTGROUP_TYPE_INTERACTIVETASK, HAPUtilityInteractiveTaskValuePort.buildResultValuePortName(responseResult));
 			}
 		}
@@ -244,13 +246,13 @@ public class HAPStoryConverterToManual {
 	private static String convertPage(HAPStoryElementUIPage pageElement, HAPStoryStory story) {
 		HAPStoryElementUIWrapperContent pageContentWrapperElement = (HAPStoryElementUIWrapperContent)story.getElement(pageElement.getChildElement(HAPStoryElementUIPage.CHILD_CONTENTWRAPPER).getElementId());
 		
-		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "page.temp"))
+		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_page.temp"))
 				.setParm("html", convertUIContentWrapper(pageContentWrapperElement, story))
 	    		.getContent();
 	}
 	
 	private static String convertUIContentWrapper(HAPStoryElementUIWrapperContent contentWrapperElement, HAPStoryStory story) {
-		InputStream templateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "contentwrapper.temp");
+		InputStream templateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_contentwrapper.temp");
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		
 		HAPStoryChildElement contentChild = contentWrapperElement.getChildElement(HAPStoryElementUIWrapperContent.CHILD_CONTENT);
@@ -258,7 +260,7 @@ public class HAPStoryConverterToManual {
 			templateParms.put("html", convertUIContent(contentChild.getElementId(), story));
 		}
 		
-		InputStream valueContextTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "valuecontextinui.temp");
+		InputStream valueContextTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_valuecontextinui.temp");
 		Map<String, String> valueContexTemplateParms = new LinkedHashMap<String, String>();
 
 		String valueContextJsonStr = convertWithVariable(contentWrapperElement, story, false);
@@ -286,7 +288,7 @@ public class HAPStoryConverterToManual {
 	}
 
 	private static String convertCustomTagContent(HAPStoryElementUIContentTagCustom uiTagElement, HAPStoryStory story) {
-		InputStream templateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "customtag.temp");
+		InputStream templateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_customtag.temp");
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 
 		templateParms.put("tagname", uiTagElement.getTagId());

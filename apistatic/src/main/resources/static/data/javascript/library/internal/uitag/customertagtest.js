@@ -108,7 +108,7 @@ var node_createUICustomerTagTest = function(envObj){
 		out.addRequest(loc_envObj.getDataOperationRequestGet(loc_inputVariableInfos[attrName].variable, "", {
 			success : function(requestInfo, data){
 				var inputVarInfo = loc_inputVariableInfos[attrName];
-				inputVarInfo.valueView.val(node_basicUtility.stringify(data.value));
+				inputVarInfo.valueView.val(data==undefined?"null" : node_basicUtility.stringify(data.value));
             	inputVarInfo.ruleView.val(node_basicUtility.stringify(inputVarInfo.ruleInfo));
 				
 			}
