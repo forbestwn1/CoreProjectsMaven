@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
-import createComponentQuestionItemService from './Service'
+import { useState, useEffect, useReducer} from 'react'
+import {createComponentQuestionItemService, nextStepDesignService} from './Service'
+import { storyReducer, STORY_ACTIONS, initialState, updateDesign } from './reducers/storyReducer';
 
 export default function ChooseDataSourceStep() {
+    const [state, dispatch] = useReducer(storyReducer, initialState);
     const [dataSources, setDataSources] = useState([]);
     const [selectedDataSource, setSelectedDataSource] = useState(null);
 
@@ -11,6 +13,24 @@ export default function ChooseDataSourceStep() {
             setDataSources(services);
         });
     }, []);
+
+    var onNext = function(){
+        
+        var requestData = {
+            ...state.stepInfo[state.currentStep].questionair,
+            isDirty : true,
+            changedValue : {
+                valueType : "dataSourceId",
+                "dataSourceId" : selectedDataSource
+            }
+        };
+
+        nextStepDesignService(state.designId, requestData).next((response) => {
+            // Handle response
+            updateDesign(response.data.data.stepInfo);
+
+        });
+    };
 
     return (
         <>
@@ -25,6 +45,9 @@ export default function ChooseDataSourceStep() {
                 ))}
             </select>
 
+            <button onClick={onNext}>
+                Next
+            </button>
 
         </>
     );

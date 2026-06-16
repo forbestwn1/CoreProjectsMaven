@@ -1,7 +1,26 @@
+
+import axios from "axios";
+
+export const nextStepDesignService = function(designId, step){
+    const payload = {
+        designId: designId,
+		command : "next",
+		requestData: {
+			"step" : step
+		}
+	};
+	const url = "http://localhost:8083/nosliw/design/build";
+	return axios.post(url, payload, {});
+};
+
+export const newDesignService = function(payload = {}, config = {}){
+	const url = "http://localhost:8083/nosliw/design/new?builderId=dataSourceDrive";
+	return axios.post(url, payload, config);
+};
 /**
  * 
  */
-const createComponentQuestionItemService = function(){
+export const createComponentQuestionItemService = function(){
 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -50,4 +69,3 @@ const createComponentQuestionItemService = function(){
 	};
 };	
 
-export default createComponentQuestionItemService;
