@@ -115,7 +115,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 		//service step
 		HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_SELECTDATASOURCE));
-		stepMetaData.setQuestionair(new HAPStoryWizzardQuestionairItemDynamic());
+		stepMetaData.setQuestionair(new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceChooseDynamic()));
 		design.newStep(stepMetaData);
 	}
 	

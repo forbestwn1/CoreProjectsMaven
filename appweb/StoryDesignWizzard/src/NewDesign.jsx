@@ -1,14 +1,18 @@
-import { useReducer, useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { newDesignService } from './Service'
-import { storyReducer, STORY_ACTIONS, initialState, newDesign } from './reducers/storyReducer';
+import { DesignContext, DesignDispatchContext } from './DesignContext'
+import { newDesign } from './reducers/designReducer';
 
 export default function NewDesign() {
-  const [state, dispatch] = useReducer(storyReducer, initialState);
+
+  const dispatch = useContext(DesignDispatchContext);
+  const designState = useContext(DesignContext);
 
   useEffect(() => {
+	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
     newDesignService().then((response) => {
       console.log("newDesignService response: ", response);
-      dispatch(newDesign(response.data.data.designId, response.data.data.stepInfo));
+      dispatch(newDesign(response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_DESIGNID], response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_STEPINFO]));
     }).catch((error) => {
       console.error("newDesignService error: ", error);
     });

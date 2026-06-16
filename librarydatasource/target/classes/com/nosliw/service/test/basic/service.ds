@@ -2,7 +2,7 @@
 	"profile": {
 		"id": "TestServiceBasic",
 		"status":"disabled1",
-		"name": "TestBasicService",
+		"name": "TestServiceBasic",
 		"description" : "test service implemented by process",
 		"tag" : ["demo", "test", "public"],
 		"taskInterface" : {

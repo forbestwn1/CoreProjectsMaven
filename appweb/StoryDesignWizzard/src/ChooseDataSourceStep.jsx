@@ -1,39 +1,32 @@
-import { useState, useEffect, useReducer} from 'react'
+import { useState, useEffect, useContext} from 'react'
 import {createComponentQuestionItemService, nextStepDesignService} from './Service'
-import { storyReducer, STORY_ACTIONS, initialState, updateDesign } from './reducers/storyReducer';
+import { designReducer, initialState, updateDesign } from './reducers/designReducer';
+import { DesignContext, DesignDispatchContext } from './DesignContext'
+import QuestionairDynamicChooseDataSource from './QuestionairDynamicChooseDataSource';
+import {Questionair} from './Questionair';
 
 export default function ChooseDataSourceStep() {
-    const [state, dispatch] = useReducer(storyReducer, initialState);
     const [dataSources, setDataSources] = useState([]);
     const [selectedDataSource, setSelectedDataSource] = useState(null);
 
-    useEffect(() => {
-        const service = createComponentQuestionItemService();
-        service.getLoadServicesRequest((services) => {
-            setDataSources(services);
-        });
-    }, []);
+    const dispatch = useContext(DesignDispatchContext);
+    const designState = useContext(DesignContext);
 
     var onNext = function(){
-        
-        var requestData = {
-            ...state.stepInfo[state.currentStep].questionair,
-            isDirty : true,
-            changedValue : {
-                valueType : "dataSourceId",
-                "dataSourceId" : selectedDataSource
-            }
-        };
-
-        nextStepDesignService(state.designId, requestData).next((response) => {
+        nextStepDesignService(designState.designId, designState.stepInfo[designState.currentStep]).then((response) => {
             // Handle response
-            updateDesign(response.data.data.stepInfo);
-
+            dispatch(updateDesign(response.data.data.stepInfo));
         });
     };
 
     return (
         <>
+           <Questionair questionair={designState.stepInfo[designState.currentStep].questionair} onChange={setSelectedDataSource}></Questionair>
+
+Hello ChooseDataSourceStep!!!!
+
+           <QuestionairDynamicChooseDataSource questionair={designState.stepInfo[designState.currentStep].questionair} onChange={setSelectedDataSource} />
+
             Choosed : {selectedDataSource}
 
             <label for="cars">Choose a DataSource:</label>

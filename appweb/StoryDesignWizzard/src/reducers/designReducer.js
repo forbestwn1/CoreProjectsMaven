@@ -8,7 +8,7 @@ export const initialState = {
 };
 
 // Action types
-export const STORY_ACTIONS = {
+export const DESIGN_ACTIONS = {
   NEW_DESIGN: 'NEW_DESIGN',
   UPDATE_DESIGN : 'UPDATE_DESIGN',
   SET_LOADING: 'SET_LOADING',
@@ -17,34 +17,34 @@ export const STORY_ACTIONS = {
 };
 
 // Reducer function
-export const storyReducer = (state = initialState, action) => {
+export const designReducer = (state = initialState, action) => {
   switch (action.type) {
-    case STORY_ACTIONS.NEW_DESIGN:
+    case DESIGN_ACTIONS.NEW_DESIGN:
       return {
         ...state,
         designId: action.payload.designId,
         stepInfo: action.payload.stepInfo,
       };
 
-    case STORY_ACTIONS.UPDATE_DESIGN:
+    case DESIGN_ACTIONS.UPDATE_DESIGN:
       return {
         ...state,
-        stepInfo: action.payload.stepInfo,
+        stepInfo: action.payload,
       };
 
-    case STORY_ACTIONS.SET_LOADING:
+    case DESIGN_ACTIONS.SET_LOADING:
       return {
         ...state,
         loading: action.payload,
       };
 
-    case STORY_ACTIONS.SET_ERROR:
+    case DESIGN_ACTIONS.SET_ERROR:
       return {
         ...state,
         error: action.payload,
       };
 
-    case STORY_ACTIONS.RESET_STATE:
+    case DESIGN_ACTIONS.RESET_STATE:
       return initialState;
 
     default:
@@ -54,7 +54,7 @@ export const storyReducer = (state = initialState, action) => {
 
 // Action creators
 export const newDesign = (designId, stepInfo) => ({
-  type: STORY_ACTIONS.NEW_DESIGN,
+  type: DESIGN_ACTIONS.NEW_DESIGN,
   payload: {
     designId,
     stepInfo,
@@ -62,25 +62,25 @@ export const newDesign = (designId, stepInfo) => ({
 });
 
 export const updateDesign = (stepInfo) => ({
-  type: STORY_ACTIONS.UPDATE_DESIGN,
+  type: DESIGN_ACTIONS.UPDATE_DESIGN,
   payload: stepInfo ,
 });
 
 export const setLoading = (loading) => ({
-  type: STORY_ACTIONS.SET_LOADING,
+  type: DESIGN_ACTIONS.SET_LOADING,
   payload: loading,
 });
 
 export const setError = (error) => ({
-  type: STORY_ACTIONS.SET_ERROR,
+  type: DESIGN_ACTIONS.SET_ERROR,
   payload: error,
 });
 
 export const setSelectedStep = (step) => ({
-  type: STORY_ACTIONS.SET_SELECTED_STEP,
+  type: DESIGN_ACTIONS.SET_SELECTED_STEP,
   payload: step,
 });
 
 export const resetState = () => ({
-  type: STORY_ACTIONS.RESET_STATE,
+  type: DESIGN_ACTIONS.RESET_STATE,
 });
