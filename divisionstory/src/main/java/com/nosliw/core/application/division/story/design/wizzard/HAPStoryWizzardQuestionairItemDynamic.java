@@ -17,9 +17,6 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuestionairItem{
 
 	@HAPAttribute
-	public static final String VALUETYPE = "valueType";
-
-	@HAPAttribute
 	public static final String DEFAULTVALUE = "defaultValue";
 
 	@HAPAttribute
@@ -56,6 +53,7 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 		this.m_isDirty = false;
 	}
 	
+	@Override
 	public String getValueType() {    return this.m_defaultValue.getValueType();      } 
 	
 	
@@ -76,8 +74,6 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		
-		jsonMap.put(VALUETYPE, this.getValueType());
 		
 		jsonMap.put(DEFAULTVALUE, HAPManagerSerialize.getInstance().toStringValue(this.m_defaultValue, HAPSerializationFormat.JSON));
 		jsonMap.put(CHANGEDVALUE, HAPManagerSerialize.getInstance().toStringValue(this.m_changedValue, HAPSerializationFormat.JSON));

@@ -11,6 +11,7 @@ export const initialState = {
 export const DESIGN_ACTIONS = {
   NEW_DESIGN: 'NEW_DESIGN',
   UPDATE_DESIGN : 'UPDATE_DESIGN',
+  NEXT_STEP: 'NEXT_STEP',
   SET_LOADING: 'SET_LOADING',
   SET_ERROR: 'SET_ERROR',
   RESET_STATE: 'RESET_STATE',
@@ -31,6 +32,14 @@ export const designReducer = (state = initialState, action) => {
         ...state,
         stepInfo: action.payload,
       };
+    
+    case DESIGN_ACTIONS.NEXT_STEP:
+      return {
+        ...state,
+        currentStep: state.currentStep + 1,
+      };
+
+
 
     case DESIGN_ACTIONS.SET_LOADING:
       return {

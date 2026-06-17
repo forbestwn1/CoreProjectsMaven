@@ -3,9 +3,11 @@ package com.nosliw.core.application.division.story.design.wizzard;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public interface HAPStoryWizzardValueInQuestionair extends HAPEntityParsable{
 
 	public static final String PARSER_DOMAIN = "design.wizzard.question.value";

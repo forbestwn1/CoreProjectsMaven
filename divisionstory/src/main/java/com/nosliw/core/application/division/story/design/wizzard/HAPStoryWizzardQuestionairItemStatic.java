@@ -35,6 +35,9 @@ public class HAPStoryWizzardQuestionairItemStatic extends HAPStoryWizzardQuestio
     	this.m_value = value;
 	}
 
+	@Override
+	public String getValueType() {   return this.getValue().getValueType();  }	// TODO Auto-generated method stub
+    
     public HAPStoryWizzardValueInQuestionair getValue() {   	return this.m_value;    }
     public void setValue(HAPStoryWizzardValueInQuestionair value) {     this.m_value = value;     }
     
@@ -43,7 +46,7 @@ public class HAPStoryWizzardQuestionairItemStatic extends HAPStoryWizzardQuestio
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(VALUE, HAPManagerSerialize.getInstance().toStringValue(this.m_value, HAPSerializationFormat.JSON));
 	}
-    
+
 }
 
 @Component

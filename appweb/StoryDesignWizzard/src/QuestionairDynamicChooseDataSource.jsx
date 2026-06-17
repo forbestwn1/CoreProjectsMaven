@@ -4,13 +4,15 @@ import { DataSourceContext } from './DesignContext'
 export default function QuestionairDynamicChooseDataSource({questionair, onChange}){ 
     const dataSources = useContext(DataSourceContext);
 
+   	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+
     var setSelectedDataSource = function(dataSourceId){
         questionair.isDirty = true;
-        questionair.changedValue = {
-            valueType : "dataSourceId",
-            "dataSourceId" : dataSourceId
-         };
-         onChange(dataSourceId);
+        questionair.changedValue = {};
+        questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID;
+        questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCECHOOSEDYNAMIC_DATASOURCEID] = dataSourceId;
+        onChange(dataSourceId);
     };
 
     return (
