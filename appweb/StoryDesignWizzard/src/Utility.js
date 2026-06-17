@@ -33,9 +33,20 @@ export var questionairUtility = function () {
 
 
     var loc_out = {
-        
+
         getChildQuestionairByValueType :function(questionair, valueType){
             return loc_getChildQuestionairByValueType(questionair, valueType);
+        },
+
+        getValueFromQuestionairDynamic : function(questionair){
+            var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	        var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+            if(questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_ISDIRTY]==true){
+                return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_CHANGEDVALUE];
+            }
+            else{
+                return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_DEFAULTVALUE];
+            }
         }
 
 

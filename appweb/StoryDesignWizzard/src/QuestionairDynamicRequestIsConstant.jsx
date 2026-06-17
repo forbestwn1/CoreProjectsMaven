@@ -18,8 +18,10 @@ export default function QuestionairDynamicRequestIsConstant({questionair, onChan
 
     return (
         <>
+        <div>
             <label>Choose is Constant:</label>
             <input type="checkbox" switch onChange={(e) => setSelectedDataSource(e.target.checked)}></input>
+        </div>
         </>
     );
 
