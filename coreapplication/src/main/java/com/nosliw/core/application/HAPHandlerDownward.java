@@ -7,9 +7,9 @@ import com.nosliw.common.utils.HAPConstantShared;
 
 public abstract class HAPHandlerDownward {
 
-	public abstract boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data);
+	public abstract boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data);
 
-	public abstract void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data);
+	public abstract void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data);
 
 //	public abstract boolean processBrickNode(HAPWrapperBrickRoot rootBrickWrapper, HAPPath path, Object data);
 
@@ -19,7 +19,7 @@ public abstract class HAPHandlerDownward {
 		return path.getLength()<=1;
 	}
 
-	protected Pair<HAPBrick, String> getParentAttributeInfo(HAPBundle bundle, HAPPath path) {
+	protected Pair<HAPBrick, String> getParentAttributeInfo(HAPBundleForBrick bundle, HAPPath path) {
 		HAPPath childPath = new HAPPath();
 		String[] pathSegs = path.getPathSegments();
 		for(int i=0; i<pathSegs.length-1; i++) {

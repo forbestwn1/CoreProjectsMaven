@@ -4,7 +4,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPWrapperValue;
@@ -34,7 +34,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	
 	private HAPManualManagerBrick m_manualBrickMan;
 
-	private HAPBundle m_bundle; 
+	private HAPBundleForBrick m_bundle; 
 
 	public HAPManualBrick() {
 		this.m_valueContext = new HAPManualValueContext(); 
@@ -46,7 +46,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 		this.m_varInfoContainer = new HAPContainerVariableInfo(this, this.m_bundle.getValueStructureDomain()); 
 	}
 
-	public void setBundle(HAPBundle bundle) {    this.m_bundle = bundle;      }
+	public void setBundle(HAPBundleForBrick bundle) {    this.m_bundle = bundle;      }
 	
 	public HAPManualValueContext getManualValueContext() {    return this.m_valueContext;    }
 	

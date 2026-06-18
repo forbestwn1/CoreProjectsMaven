@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
@@ -71,7 +71,7 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 	
 	@Override
 	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
-		HAPBundle bundle = processContext.getCurrentBundle();
+		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockComplexUIContent executableBlock = (HAPManualBlockComplexUIContent)blockPair.getRight();
 

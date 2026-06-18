@@ -4,8 +4,6 @@ import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPResourceDataBrick;
-import com.nosliw.core.application.HAPUtilityBrickResource;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.dataexpression.HAPOperand;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
@@ -19,6 +17,8 @@ import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
+import com.nosliw.core.application.resource.HAPResourceDataBrick;
+import com.nosliw.core.application.resource.HAPUtilityBrickResource;
 import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.resource.HAPFactoryResourceId;

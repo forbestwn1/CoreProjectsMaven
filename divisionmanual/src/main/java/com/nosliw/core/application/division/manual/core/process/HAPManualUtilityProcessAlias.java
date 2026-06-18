@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.process;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBundle;
@@ -15,7 +15,7 @@ public class HAPManualUtilityProcessAlias {
 		HAPManualUtilityBrickTraverse.traverseTree(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				if(path.isEmpty()) {
 					return true;
 				}
@@ -37,7 +37,7 @@ public class HAPManualUtilityProcessAlias {
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 			}
 
 		}, null);

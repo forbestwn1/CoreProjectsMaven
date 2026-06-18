@@ -1,21 +1,17 @@
 package com.nosliw.core.application;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.resource.HAPResourceDataImp;
-import com.nosliw.core.resource.HAPResourceDataOrWrapper;
-import com.nosliw.core.resource.HAPResourceDependency;
-import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPResourceDataBrick extends HAPResourceDataImp {
+public class HAPBundleForExecute extends HAPSerializableImp{
 
 	@HAPAttribute
 	public final static String BRICK = "brick"; 
@@ -31,6 +27,7 @@ public class HAPResourceDataBrick extends HAPResourceDataImp {
 
 	@HAPAttribute
 	public final static String EXPORTBRICKINFO = "exportBrickInfo"; 
+	
 
 	private HAPBrick m_brick;
 	
@@ -43,7 +40,7 @@ public class HAPResourceDataBrick extends HAPResourceDataImp {
 	
 	private HAPInfoExportBrick m_exportBrickInfo;
 	
-	public HAPResourceDataBrick(HAPBrick brick, Map<String, HAPBrick> supportBricks, HAPInfoExportBrick exportBrickInfo, Map<String, HAPPath> aliasMapping, HAPDomainValueStructure valueStructureDomain) {
+	public HAPBundleForExecute(HAPBrick brick, Map<String, HAPBrick> supportBricks, HAPInfoExportBrick exportBrickInfo, Map<String, HAPPath> aliasMapping, HAPDomainValueStructure valueStructureDomain) {
 		this.m_supportBricks = new LinkedHashMap<String, HAPBrick>();
 		this.m_supportBricks.putAll(supportBricks);
 		this.m_brick = brick;
@@ -56,11 +53,6 @@ public class HAPResourceDataBrick extends HAPResourceDataImp {
 	
 	public HAPDomainValueStructure getValueStructureDomain() {   return this.m_valueStructureDomain;    }
 	
-	@Override
-	public HAPResourceDataOrWrapper getDescendant(HAPPath path) {
-		throw new RuntimeException();
-	}
-
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
@@ -93,11 +85,5 @@ public class HAPResourceDataBrick extends HAPResourceDataImp {
 		jsonMap.put(SUPPORTBRICKS, HAPUtilityJson.buildMapJson(supportBrickMap));
 		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(EXPORTBRICKINFO, this.m_exportBrickInfo.toStringValue(HAPSerializationFormat.JSON));
-	}
-
-	@Override
-	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {
-		this.m_brick.buildResourceDependency(dependency, runtimeInfo);
-	}
-
+	}	
 }

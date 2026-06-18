@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.process;
 import java.util.Set;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickTraverse;
@@ -21,7 +21,7 @@ public class HAPManualUtilityProcessorPost {
 		HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPManualBrickImp brick = (HAPManualBrickImp)HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				brick.getManualValueContext().cleanValueStucture(vsIds);
 				brick.getOtherExternalValuePortContainer().cleanValueStucture(vsIds);
@@ -30,7 +30,7 @@ public class HAPManualUtilityProcessorPost {
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 			}
 
 		}, processContext.getBrickManager(), null);

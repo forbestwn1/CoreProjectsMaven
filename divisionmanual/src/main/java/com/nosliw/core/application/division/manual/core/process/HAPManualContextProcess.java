@@ -1,6 +1,6 @@
 package com.nosliw.core.application.division.manual.core.process;
 
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -9,7 +9,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPManualContextProcess {
 
-	private HAPBundle m_bundle;
+	private HAPBundleForBrick m_bundle;
 	
 	private String m_rootBrickName;
 	
@@ -24,7 +24,7 @@ public class HAPManualContextProcess {
 	private HAPRuntimeInfo m_runtimeInfo;
 	
 	public HAPManualContextProcess(
-			HAPBundle bundle, 
+			HAPBundleForBrick bundle, 
 			String rootBrickName, 
 			HAPManualManagerBrick manualBrickMan, 
 			HAPManagerApplicationBrick brickMan, 
@@ -40,7 +40,7 @@ public class HAPManualContextProcess {
 		this.m_runtimeInfo = runtimeInfo;
 	}
 	
-	public HAPBundle getCurrentBundle(){   return this.m_bundle;  }
+	public HAPBundleForBrick getCurrentBundle(){   return this.m_bundle;  }
 	
 	public String getRootBrickName() {    return this.m_rootBrickName;       }
 

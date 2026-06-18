@@ -8,7 +8,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstant;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
@@ -93,17 +93,17 @@ public class HAPUtilityResovleElement {
 		return buildElementInfo(refResolve);
 	}
 	
-	public static HAPInfoElementResolve resolveElementReferenceInBundle(HAPReferenceElement reference, HAPConfigureResolveElementReference resolveConfigure, HAPBundle bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
+	public static HAPInfoElementResolve resolveElementReferenceInBundle(HAPReferenceElement reference, HAPConfigureResolveElementReference resolveConfigure, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
 		HAPResultReferenceResolve refResolve = analyzeElementReferenceInBundle(reference, resolveConfigure, bundle, resourceMan, runtimeInfo);
 		return buildElementInfo(refResolve);
 	}
 
-	public static HAPIdRootElement resolveRootReferenceInBundle(HAPReferenceRootElement rootEleCriteria, HAPConfigureResolveElementReference resolveConfigure, HAPBundle bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
+	public static HAPIdRootElement resolveRootReferenceInBundle(HAPReferenceRootElement rootEleCriteria, HAPConfigureResolveElementReference resolveConfigure, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
 		HAPResultReferenceResolve resolve = analyzeElementReferenceInBundle(new HAPReferenceElement(rootEleCriteria), resolveConfigure, bundle, resourceMan, runtimeInfo);
 		return new HAPIdRootElement(rootEleCriteria.getValuePortId(), resolve.structureId, rootEleCriteria.getRootName());
 	}
 
-	public static HAPResultReferenceResolve analyzeElementReferenceInBundle(HAPReferenceElement reference, HAPConfigureResolveElementReference resolveConfigure, HAPBundle bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPResultReferenceResolve analyzeElementReferenceInBundle(HAPReferenceElement reference, HAPConfigureResolveElementReference resolveConfigure, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPInfoValuePort valuePortInfo = HAPUtilityBrickValuePort.getValuePortInBundle(reference.getValuePortId(), bundle, resourceMan, runtimeInfo);
 		HAPResultReferenceResolve resolve = HAPUtilityResovleElement.analyzeElementReferenceValuePort(reference, valuePortInfo.getValuePort(), resolveConfigure, valuePortInfo.getValueStructureDomain());
 		if(resolve!=null) {

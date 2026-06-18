@@ -5,7 +5,7 @@ import java.util.List;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPUtilityBrick;
@@ -56,7 +56,7 @@ public class HAPManualUtilityProcessorInit {
 	}
 
 	private static void buildExecutableTree(HAPManualDefinitionBrick brickDef, HAPManualBrick brick, HAPManualContextProcessBrick processContext) {
-		HAPBundle bundle = processContext.getCurrentBundle();
+		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		
 		HAPIdBrickType entityTypeId = brickDef.getBrickTypeId();
 
@@ -136,14 +136,14 @@ public class HAPManualUtilityProcessorInit {
 		HAPManualUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).processInit(path, processContext);
 				return true;
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).postProcessInit(path, processContext);
 			}
@@ -151,7 +151,7 @@ public class HAPManualUtilityProcessorInit {
 		}, null);
 	}
 	
-	private static HAPManualBrick newBrickInstance(HAPIdBrickType brickTypeId, HAPBundle bundle, HAPManualManagerBrick manualBrickMan) {
+	private static HAPManualBrick newBrickInstance(HAPIdBrickType brickTypeId, HAPBundleForBrick bundle, HAPManualManagerBrick manualBrickMan) {
 		return manualBrickMan.newBrick(brickTypeId, bundle);
 	}
 

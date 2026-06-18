@@ -7,7 +7,7 @@ import com.nosliw.common.path.HAPPath;
 public abstract class HAPHandlerDownwardImpAttribute extends HAPHandlerDownward{
 
 	@Override
-	public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		if(this.isRoot(path)) {
 			this.processRootEntity(HAPUtilityBrick.getDescdentBrickLocal(bundle, path), data);
 			return true;
@@ -19,7 +19,7 @@ public abstract class HAPHandlerDownwardImpAttribute extends HAPHandlerDownward{
 	}
 
 	@Override
-	public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		if(this.isRoot(path)) {
 			this.postProcessRootEntity(HAPUtilityBrick.getDescdentBrickLocal(bundle, path), data);
 		}

@@ -55,7 +55,7 @@ public class HAPManagerApplicationBrick {
 		}
 	}
 	
-	public HAPBundle getBrickBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick getBrickBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		String division = brickId.getDivision();
 		if(division==null) {
 			division = this.m_divisionByBrickType.get(brickId.getBrickTypeId());
@@ -65,7 +65,7 @@ public class HAPManagerApplicationBrick {
 		}
 		
 		HAPPluginDivision divisionPlugin = this.m_divisionPlugin.get(division);
-		HAPBundle bundle = divisionPlugin.getBundle(brickId, runtimeInfo);
+		HAPBundleForBrick bundle = divisionPlugin.getBundle(brickId, runtimeInfo);
 		
 		List<HAPInfoExportBrick> exposes = this.getBrickPlugin(brickId.getBrickTypeId()).getExposeResourceInfo(bundle.getMainBrickWrapper().getBrick());
 		for(HAPInfoExportBrick expose : exposes) {
@@ -198,7 +198,7 @@ public class HAPManagerApplicationBrick {
 		if(!dependency.contains(complexEntityResourceId)) {
 			dependency.add(complexEntityResourceId);
 
-			HAPBundle bundle = this.getBrickBundle(HAPUtilityBrickId.parseBrickId(complexEntityResourceId));
+			HAPBundleForBrick bundle = this.getBrickBundle(HAPUtilityBrickId.parseBrickId(complexEntityResourceId));
 			Set<HAPResourceIdSimple> bundleDependency = bundle.getResourceDependency();
 			for(HAPResourceIdSimple id : bundleDependency) {
 				buildDependencyGroup(id, dependency);

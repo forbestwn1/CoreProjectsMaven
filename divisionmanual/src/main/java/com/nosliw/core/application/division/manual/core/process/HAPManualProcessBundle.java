@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
@@ -25,7 +25,7 @@ import com.nosliw.core.runtime.HAPRuntimeManager;
 
 public class HAPManualProcessBundle {
 
-	public static HAPBundle buildBundle(
+	public static HAPBundleForBrick buildBundle(
 			HAPManualContentProvider contentProvider, 
 			HAPRuntimeInfo runtimeInfo, 
 			HAPManualManagerBrick manualBrickMan, 
@@ -36,7 +36,7 @@ public class HAPManualProcessBundle {
 			HAPManagerDataRule dataRuleManager,
 			HAPParserDataExpression dataExpressionParser
 			) {
-		HAPBundle bundle = new HAPBundle();
+		HAPBundleForBrick bundle = new HAPBundleForBrick();
 		bundle.setDynamicInfo(contentProvider.getDynamicDefinition());
 
 		Map<String, HAPManualDefinitionWrapperBrickRoot> definitions = new LinkedHashMap();

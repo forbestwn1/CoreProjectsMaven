@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -31,14 +31,14 @@ public class HAPManualUtilityProcessorVariable {
 		HAPManualUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)manualBrickMan.getBlockProcessPlugin(complexBrick.getBrickType())).processVariableResolve(path, processContext);
 				return true;
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)manualBrickMan.getBlockProcessPlugin(complexBrick.getBrickType())).postProcessVariableResolve(path, processContext);
 			}
@@ -50,14 +50,14 @@ public class HAPManualUtilityProcessorVariable {
 		HAPManualUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPManualBrick complexBrick = (HAPManualBrick)HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				HAPUtilityValuePortVariable.buildVariableInfo(complexBrick.getVariableInfoContainer(), processContext.getCurrentBundle().getValueStructureDomain());
 				return true;
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {	}
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {	}
 
 		}, null);
 	}
@@ -67,14 +67,14 @@ public class HAPManualUtilityProcessorVariable {
 		HAPManualUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)manualBrickMan.getBlockProcessPlugin(complexBrick.getBrickType())).processValueContextDiscovery(path, processContext);
 				return true;
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)manualBrickMan.getBlockProcessPlugin(complexBrick.getBrickType())).postProcessValueContextDiscovery(path, processContext);
 			}
@@ -86,14 +86,14 @@ public class HAPManualUtilityProcessorVariable {
 		HAPManualUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPManualBrick complexBrick = (HAPManualBrick)HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				HAPUtilityValuePortVariable.updateValuePortElements(complexBrick.getVariableInfoContainer(), processContext.getCurrentBundle().getValueStructureDomain());
 				return true;
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {	}
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {	}
 
 		}, null);
 	}

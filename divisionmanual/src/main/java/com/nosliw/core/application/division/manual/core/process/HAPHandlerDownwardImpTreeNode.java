@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.process;
 import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBundle;
@@ -16,13 +16,13 @@ import com.nosliw.core.application.division.manual.core.HAPTreeNodeBrick;
 public abstract class HAPHandlerDownwardImpTreeNode extends HAPHandlerDownward{
 
 	@Override
-	public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		HAPTreeNodeBrick childTreeNode = getDescdentTreeNode(bundle, path);
 		return this.processTreeNode(childTreeNode, data);
 	}
 
 	@Override
-	public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		HAPTreeNodeBrick childTreeNode = getDescdentTreeNode(bundle, path);
 		this.postProcessTreeNode(childTreeNode, data);
 	}
@@ -46,7 +46,7 @@ public abstract class HAPHandlerDownwardImpTreeNode extends HAPHandlerDownward{
 		return out;
 	}
 
-	protected HAPTreeNodeBrick getDescdentTreeNode(HAPBundle bundle, HAPPath path) {
+	protected HAPTreeNodeBrick getDescdentTreeNode(HAPBundleForBrick bundle, HAPPath path) {
 		HAPTreeNodeBrick out = null;
 
 		HAPComplexPath fullPathInfo = HAPUtilityBundle.getBrickFullPathInfo(path);

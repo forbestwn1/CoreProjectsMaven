@@ -20,7 +20,7 @@ public abstract class HAPHandlerBrickWrapper extends HAPHandlerDownward{
 	abstract protected boolean isValidAttribute(HAPAttributeInBrick attr);
 	
 	@Override
-	public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		if(this.isRoot(path)) {
 			return this.m_processor.processBrickNode(bundle, path, data);
 		}
@@ -34,7 +34,7 @@ public abstract class HAPHandlerBrickWrapper extends HAPHandlerDownward{
 	}
 
 	@Override
-	public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+	public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 		if(this.isRoot(path)) {
 			this.m_processor.postProcessBrickNode(bundle, path, data);
 		}

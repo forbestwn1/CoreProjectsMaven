@@ -10,7 +10,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.path.HAPUtilityPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.HAPUtilityBrickReference;
@@ -117,7 +117,7 @@ public class HAPUtilityValuePort {
 	}
 	
 
-	public static HAPIdValuePortInBundle normalizeInBundleValuePortId(HAPIdValuePortInBundle valuePortIdInBundle, String valuePortSideIfNotProvided, String ioDirection, HAPPath blockPathFromRootIfNotProvided, HAPPath baseBlockPathFromRoot, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundle currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPIdValuePortInBundle normalizeInBundleValuePortId(HAPIdValuePortInBundle valuePortIdInBundle, String valuePortSideIfNotProvided, String ioDirection, HAPPath blockPathFromRootIfNotProvided, HAPPath baseBlockPathFromRoot, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundleForBrick currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPIdValuePortInBundle out = valuePortIdInBundle;
 		if(out==null) {
 			out = new HAPIdValuePortInBundle();

@@ -14,7 +14,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.path.HAPUtilityPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPHandlerDownwardImpAttribute;
@@ -79,7 +79,7 @@ public class HAPManualUtilityProcessorValuePort {
 			@Override
 			protected boolean processTreeNode(HAPTreeNodeBrick treeNode, Object data) {
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick complexBlock = this.getBrickFromNode(treeNode);
@@ -128,7 +128,7 @@ public class HAPManualUtilityProcessorValuePort {
 		HAPManualUtilityBrickTraverse.traverseTree(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPResultBrickDescentValue result = HAPUtilityBrick.getDescdentBrickResult(bundle, path);
 				if(result.getBrick()!=null) {
 					HAPBrick complexBrick = result.getBrick();
@@ -145,7 +145,7 @@ public class HAPManualUtilityProcessorValuePort {
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPResultBrickDescentValue result = HAPUtilityBrick.getDescdentBrickResult(bundle, path);
 				if(result.getBrick()!=null) {
 					HAPBrick complexBrick = result.getBrick();
@@ -163,7 +163,7 @@ public class HAPManualUtilityProcessorValuePort {
 			@Override
 			protected boolean processTreeNode(HAPTreeNodeBrick treeNode, Object data) {
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick complexEntityExe = this.getBrickFromNode(treeNode);
@@ -192,7 +192,7 @@ public class HAPManualUtilityProcessorValuePort {
 			public boolean processAttribute(HAPBrick parentBrick, String attributeName, Object data) {
 				HAPManualBrick parentBrickManual = (HAPManualBrick)parentBrick;
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick childBrick = (HAPManualBrick)this.getChildBrick(parentBrickManual, attributeName);
@@ -240,7 +240,7 @@ public class HAPManualUtilityProcessorValuePort {
 			public boolean processAttribute(HAPBrick parentBrick, String attributeName, Object data) {
 				HAPManualBrick parentBrickManual = (HAPManualBrick)parentBrick;
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick childBrick = (HAPManualBrick)this.getChildBrick(parentBrickManual, attributeName);

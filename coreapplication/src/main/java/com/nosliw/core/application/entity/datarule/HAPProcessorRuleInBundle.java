@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
@@ -24,7 +24,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPProcessorRuleInBundle {
 
-	public static void process(HAPBundle bundle, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
+	public static void process(HAPBundleForBrick bundle, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
 		
 		//build new branch to host data rule tasks
 		String validationTaskBranchName = HAPConstantShared.BUNDLEBRANCH_NAME_RULETASKS;

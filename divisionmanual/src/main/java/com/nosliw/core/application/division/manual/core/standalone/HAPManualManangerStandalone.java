@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.standalone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -15,7 +15,7 @@ public class HAPManualManangerStandalone {
 	@Autowired
 	private HAPManualManagerBrick m_manualBrickMan;
 
-	public HAPBundle buildStandalone(HAPStandaloneDefinition definition, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick buildStandalone(HAPStandaloneDefinition definition, HAPRuntimeInfo runtimeInfo) {
 		
 		HAPManualContentProviderText contentProvider = new HAPManualContentProviderText();
 

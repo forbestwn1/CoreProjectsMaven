@@ -1,10 +1,16 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.resource;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPInfoExportBrick;
+import com.nosliw.core.application.HAPResultBrickDescentValue;
+import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResource;
@@ -22,7 +28,7 @@ public class HAPUtilityBrickResource {
 	}
 
 
-	public static HAPResourceDataBrick getExportResourceData(HAPBundle bundle, String name, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPResourceDataBrick getExportResourceData(HAPBundleForBrick bundle, String name, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		if(name==null) {
 			name = HAPConstantShared.NAME_DEFAULT;
 		}

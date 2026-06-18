@@ -5,7 +5,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
@@ -21,7 +21,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 
 public class HAPManualUtilityProcess {
 
-	public static HAPManualBrick newRootBrickInstance(HAPIdBrickType brickTypeId, String rootName, HAPBundle bundle, HAPManualManagerBrick manualBrickMan) {
+	public static HAPManualBrick newRootBrickInstance(HAPIdBrickType brickTypeId, String rootName, HAPBundleForBrick bundle, HAPManualManagerBrick manualBrickMan) {
 		HAPManualBrick brick = manualBrickMan.newBrick(brickTypeId, bundle);
 		
 		if(HAPUtilityBasic.isStringEmpty(rootName)) {
@@ -33,7 +33,7 @@ public class HAPManualUtilityProcess {
 		return brick;
 	}
 
-	public static HAPManualBrick newRootBrickInstanceWithInit(HAPIdBrickType brickTypeId, String rootName, HAPBundle bundle, HAPManualManagerBrick manualBrickMan) {
+	public static HAPManualBrick newRootBrickInstanceWithInit(HAPIdBrickType brickTypeId, String rootName, HAPBundleForBrick bundle, HAPManualManagerBrick manualBrickMan) {
 		HAPManualBrick out = newRootBrickInstance(brickTypeId, rootName, bundle, manualBrickMan);
 		out.init();
 		return out;
@@ -48,7 +48,7 @@ public class HAPManualUtilityProcess {
 		HAPManualUtilityBrickTraverse.traverseTreeWithDynamic(processContext, new HAPHandlerDownward() {
 
 			@Override
-			public boolean processBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
 				
 				
@@ -58,7 +58,7 @@ public class HAPManualUtilityProcess {
 			}
 
 			@Override
-			public void postProcessBrickNode(HAPBundle bundle, HAPPath path, Object data) {
+			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).postProcessInit(path, processContext);
 			}

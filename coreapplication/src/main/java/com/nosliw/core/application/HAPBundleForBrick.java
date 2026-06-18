@@ -22,7 +22,7 @@ import com.nosliw.core.resource.HAPWithResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDependency{
+public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency{
 
 	@HAPAttribute
 	public final static String MAINBRICK = "mainBrick"; 
@@ -59,7 +59,7 @@ public class HAPBundle extends HAPSerializableImp implements HAPWithResourceDepe
 
 	private List<HAPInfoExportBrick> m_exportResourceInfos;
 	
-	public HAPBundle() {
+	public HAPBundleForBrick() {
 		this.m_valueStructureDomain = new HAPDomainValueStructure();
 		this.m_exportResourceInfos = new ArrayList<HAPInfoExportBrick>();
 		this.m_branchBricks = new LinkedHashMap<String, HAPWrapperBrickRoot>();

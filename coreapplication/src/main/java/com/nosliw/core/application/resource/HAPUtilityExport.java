@@ -1,4 +1,4 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.resource;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,6 +13,8 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.system.HAPSystem;
 import com.nosliw.core.system.HAPSystemFolderUtility;
@@ -21,11 +23,11 @@ public class HAPUtilityExport {
 
 	private static final String SESSIONID = "sessionId";
 	
-	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundle bundle) {
+	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle) {
 		exportBundle(resourceId, bundle, HAPSystem.id);
 	}
 	
-	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundle bundle, String sessionId) {
+	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle, String sessionId) {
 		String mainFolderSession = getResourceFolder(getRootFolderSession(sessionId), resourceId);
 		exportBundleToFolder(bundle, mainFolderSession);
 		
@@ -79,7 +81,7 @@ public class HAPUtilityExport {
 	}
 
 	
-	private static void exportBundleToFolder(HAPBundle bundle, String bundleFolder) {
+	private static void exportBundleToFolder(HAPBundleForBrick bundle, String bundleFolder) {
 		HAPUtilityFile.deleteFolder(bundleFolder);
 		
 		//write value structure domain
@@ -92,7 +94,7 @@ public class HAPUtilityExport {
 
 		//bundle infor
 		Map<String, String> bundleJsonMap = new LinkedHashMap<String, String>();
-		bundleJsonMap.put(HAPBundle.DYNAMIC, bundle.getDynamicInfo().toStringValue(HAPSerializationFormat.JSON));
+		bundleJsonMap.put(HAPBundleForBrick.DYNAMIC, bundle.getDynamicInfo().toStringValue(HAPSerializationFormat.JSON));
 		HAPUtilityFile.writeJsonFile(bundleFolder, "bundle.json", HAPUtilityJson.buildMapJson(bundleJsonMap));
 		
 		//write package definition

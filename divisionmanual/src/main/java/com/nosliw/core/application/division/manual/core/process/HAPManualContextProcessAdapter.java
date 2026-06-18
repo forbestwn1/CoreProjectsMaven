@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -12,7 +12,7 @@ public class HAPManualContextProcessAdapter extends HAPManualContextProcess{
 
 	private HAPPath m_baseBrickPath;
 	
-	public HAPManualContextProcessAdapter(HAPBundle bundle, 
+	public HAPManualContextProcessAdapter(HAPBundleForBrick bundle, 
 			String rootBrickName, 
 			HAPPath baseBrickPath, 
 			HAPManualManagerBrick manualBrickMan, 

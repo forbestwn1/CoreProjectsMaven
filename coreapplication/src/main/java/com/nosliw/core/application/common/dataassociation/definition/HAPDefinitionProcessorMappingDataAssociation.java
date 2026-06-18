@@ -9,7 +9,7 @@ import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstant;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociationMapping;
 import com.nosliw.core.application.common.dataassociation.HAPTunnel;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
@@ -36,7 +36,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 			HAPPath baseBlockPath, 
 			HAPPath secondBlockPath,
 			Map<String, HAPPath> aliasMapping,
-			HAPBundle currentBundle, 
+			HAPBundleForBrick currentBundle, 
 			String rootBrickName,
 			HAPDataTypeHelper dataTypeHelper,
 			HAPManagerResource resourceMan,
@@ -65,7 +65,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 		return out;
 	}	
 	
-	private static HAPElementStructure processElementStructure(HAPElementStructure defStructureElement, HAPConfigureProcessorRelative relativeEleProcessConfigure, HAPPath baseBlockPath, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundle currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	private static HAPElementStructure processElementStructure(HAPElementStructure defStructureElement, HAPConfigureProcessorRelative relativeEleProcessConfigure, HAPPath baseBlockPath, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundleForBrick currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPElementStructure out = defStructureElement;
 		switch(defStructureElement.getType()) {
 		case HAPConstantShared.CONTEXT_ELEMENTTYPE_RELATIVE_FOR_MAPPING:
@@ -110,7 +110,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 		}
 	}
 	
-	private static void normalizeValuePortId(HAPDefinitionMappingItemValue mappingItem, HAPPath baseBlockPath, HAPPath secondBlockPath, String direction, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundle currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	private static void normalizeValuePortId(HAPDefinitionMappingItemValue mappingItem, HAPPath baseBlockPath, HAPPath secondBlockPath, String direction, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundleForBrick currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPReferenceRootElement targetRef = mappingItem.getTarget();
 		
 		final HAPPath sourcePath;
@@ -133,7 +133,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 		}
 	}
 	
-	private static void normalizeRootReference(HAPReferenceRootElement rootRef, String ioDirection, HAPPath blockPathFromRootIfNotProvided, HAPPath baseBlockPathFromRoot, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundle currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	private static void normalizeRootReference(HAPReferenceRootElement rootRef, String ioDirection, HAPPath blockPathFromRootIfNotProvided, HAPPath baseBlockPathFromRoot, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundleForBrick currentBundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		rootRef.setValuePortId(HAPUtilityValuePort.normalizeInBundleValuePortId(rootRef.getValuePortId(), HAPConstantShared.VALUEPORTGROUP_SIDE_EXTERNAL, ioDirection, blockPathFromRootIfNotProvided, baseBlockPathFromRoot, brickRootNameIfNotProvided, aliasMapping, currentBundle, resourceMan, runtimeInfo));
 	}
 	

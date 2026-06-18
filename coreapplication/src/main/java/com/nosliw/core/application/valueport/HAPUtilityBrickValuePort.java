@@ -5,17 +5,17 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
-import com.nosliw.core.application.HAPResourceDataBrick;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPResultBrickDescentValue;
 import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.resource.HAPResourceDataBrick;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPUtilityResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPUtilityBrickValuePort {
 
-	public static HAPInfoValuePortContainer getDescdentValuePortContainerInfo(HAPBundle bundle, String rootBrickNameIfNotProvide, HAPPath path, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPInfoValuePortContainer getDescdentValuePortContainerInfo(HAPBundleForBrick bundle, String rootBrickNameIfNotProvide, HAPPath path, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPBrick brick = null;
 		HAPResultBrickDescentValue brickDescentValueResult = HAPUtilityBrick.getDescdentBrickResult(bundle, path, rootBrickNameIfNotProvide);
 		if(brickDescentValueResult.getBrick()!=null) {
@@ -34,7 +34,7 @@ public class HAPUtilityBrickValuePort {
 		return null;
 	}
 
-	public static HAPInfoValuePort getValuePortInBundle(HAPIdValuePortInBundle valuePortRef, HAPBundle bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPInfoValuePort getValuePortInBundle(HAPIdValuePortInBundle valuePortRef, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
 		HAPInfoValuePortContainer valuePortContainerInfo = HAPUtilityBrickValuePort.getDescdentValuePortContainerInfo(bundle, null, new HAPPath(valuePortRef.getBrickId().getIdPath()), resourceMan, runtimeInfo);
 		HAPContainerValuePorts valuePortContainer;
 		if(HAPConstantShared.VALUEPORTGROUP_SIDE_INTERNAL.equals(valuePortRef.getValuePortSide())) {

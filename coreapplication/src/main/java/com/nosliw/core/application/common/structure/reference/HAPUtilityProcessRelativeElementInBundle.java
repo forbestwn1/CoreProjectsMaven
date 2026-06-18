@@ -11,7 +11,7 @@ import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstant;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelative;
@@ -33,7 +33,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPUtilityProcessRelativeElementInBundle {
 
-	public static void processRelativeInStructure(HAPStructure valueStructure, HAPConfigureProcessorRelative processRelativeConfigure, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundle bundle, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo) {
+	public static void processRelativeInStructure(HAPStructure valueStructure, HAPConfigureProcessorRelative processRelativeConfigure, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo) {
 		if(processRelativeConfigure==null) {
 			processRelativeConfigure = new HAPConfigureProcessorRelative();
 		} 
@@ -44,7 +44,7 @@ public class HAPUtilityProcessRelativeElementInBundle {
 		}
 	}
 
-	private static HAPElementStructure processRelativeInStructureElement(HAPInfoElement structureEleInfo, HAPConfigureProcessorRelative relativeEleProcessConfigure, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundle bundle, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo) {
+	private static HAPElementStructure processRelativeInStructureElement(HAPInfoElement structureEleInfo, HAPConfigureProcessorRelative relativeEleProcessConfigure, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo) {
 		HAPElementStructure defStructureElement = structureEleInfo.getElement();
 		HAPElementStructure out = defStructureElement;
 		switch(defStructureElement.getType()) {
@@ -75,7 +75,7 @@ public class HAPUtilityProcessRelativeElementInBundle {
 		return out;
 	}
 	
-	private static HAPElementStructure processRelativeStructureElement(HAPElementStructureLeafRelative defStructureElementRelative, HAPConfigureProcessorRelative relativeEleProcessConfigure, List<HAPServiceData> errors, HAPBundle bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
+	private static HAPElementStructure processRelativeStructureElement(HAPElementStructureLeafRelative defStructureElementRelative, HAPConfigureProcessorRelative relativeEleProcessConfigure, List<HAPServiceData> errors, HAPBundleForBrick bundle, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo){
 		HAPElementStructureLeafRelative out = defStructureElementRelative;
 		
 		HAPReferenceElement pathReference = defStructureElementRelative.getReference();

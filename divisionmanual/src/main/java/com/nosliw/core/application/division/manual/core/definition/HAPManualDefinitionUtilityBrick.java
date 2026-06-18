@@ -6,7 +6,7 @@ import com.nosliw.common.interfac.HAPTreeNode;
 import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
@@ -23,27 +23,27 @@ import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManua
 
 public class HAPManualDefinitionUtilityBrick {
 
-	public static HAPManualDefinitionWrapperBrickRoot getBrickRootDefinition(String rootBrickName, HAPBundle bundle) {
+	public static HAPManualDefinitionWrapperBrickRoot getBrickRootDefinition(String rootBrickName, HAPBundleForBrick bundle) {
 		return ((HAPManualWrapperBrickRoot)bundle.getRootBrickWrapper(rootBrickName)).getDefinition();
 	}
 	
-	public static HAPTreeNode getDefTreeNodeFromExeTreeNode(HAPTreeNodeBrick treeNodeExe, HAPBundle bundle) {
+	public static HAPTreeNode getDefTreeNodeFromExeTreeNode(HAPTreeNodeBrick treeNodeExe, HAPBundleForBrick bundle) {
 		HAPComplexPath pathInfo = HAPManualUtilityBrick.getBrickFullPathInfo(treeNodeExe.getTreeNodeInfo());
 		HAPManualDefinitionWrapperBrickRoot rootEntityDefInfo = getBrickRootDefinition(pathInfo.getRoot(), bundle);
 		return HAPManualDefinitionUtilityBrick.getDescdentTreeNode(rootEntityDefInfo, pathInfo.getPath());
 	}
 
-	public static HAPManualDefinitionBrick getDescendantBrickDefinition(HAPBundle bundle, HAPInfoTreeNode treeNodeInfo) {
+	public static HAPManualDefinitionBrick getDescendantBrickDefinition(HAPBundleForBrick bundle, HAPInfoTreeNode treeNodeInfo) {
 		HAPComplexPath pathInfo = HAPManualUtilityBrick.getBrickFullPathInfo(treeNodeInfo);
 		HAPManualDefinitionWrapperBrickRoot rootBrickWrapper = getBrickRootDefinition(pathInfo.getRoot(), bundle);
 		return getDescendantBrickDefinition(rootBrickWrapper.getBrick(), pathInfo.getPath());
 	}
 
-	public static Pair<HAPManualDefinitionBrick, HAPManualBrick> getBrickPair(HAPInfoTreeNode treeNodeInfo, HAPBundle bundle){
+	public static Pair<HAPManualDefinitionBrick, HAPManualBrick> getBrickPair(HAPInfoTreeNode treeNodeInfo, HAPBundleForBrick bundle){
 		return getBrickPair(treeNodeInfo.getPathFromRoot(), bundle);
 	}
 	
-	public static Pair<HAPManualDefinitionBrick, HAPManualBrick> getBrickPair(HAPPath path, HAPBundle bundle){
+	public static Pair<HAPManualDefinitionBrick, HAPManualBrick> getBrickPair(HAPPath path, HAPBundleForBrick bundle){
 		Pair<HAPManualDefinitionWrapperBrickRoot, HAPPath> defPathInfo = getDefinitionPathInfo(bundle, new HAPPath(path));
 		HAPManualDefinitionBrick entityDef = getDescendantBrickDefinition(defPathInfo.getLeft(), defPathInfo.getRight());
 
@@ -51,7 +51,7 @@ public class HAPManualDefinitionUtilityBrick {
 		return Pair.of(entityDef, entityExe);
 	}
 	
-	private static Pair<HAPManualDefinitionWrapperBrickRoot, HAPPath> getDefinitionPathInfo(HAPBundle bundle, HAPPath path){
+	private static Pair<HAPManualDefinitionWrapperBrickRoot, HAPPath> getDefinitionPathInfo(HAPBundleForBrick bundle, HAPPath path){
 		HAPComplexPath fullPathInfo = HAPUtilityBundle.getBrickFullPathInfo(path.toString());
 		return Pair.of(((HAPManualWrapperBrickRoot)bundle.getRootBrickWrapper(fullPathInfo.getRoot())).getDefinition(), fullPathInfo.getPath());
 	}

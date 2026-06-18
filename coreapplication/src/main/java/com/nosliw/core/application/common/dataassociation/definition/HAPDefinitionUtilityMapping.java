@@ -7,7 +7,7 @@ import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.common.dataassociation.HAPEndPointInTunnelConstant;
 import com.nosliw.core.application.common.dataassociation.HAPEndPointInTunnelValuePort;
@@ -30,7 +30,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPDefinitionUtilityMapping {
 
-	public static List<HAPTunnel> buildRelativePathMapping(HAPIdRootElement rootEleId, HAPElementStructure structureEle, HAPBundle bundle, String rootBrickName, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo){
+	public static List<HAPTunnel> buildRelativePathMapping(HAPIdRootElement rootEleId, HAPElementStructure structureEle, HAPBundleForBrick bundle, String rootBrickName, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo){
 		
 		HAPIdValuePortInBundle toValuePortRef = rootEleId.getValuePortId();
 

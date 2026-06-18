@@ -8,7 +8,7 @@ import com.nosliw.common.path.HAPPath;
 
 public class HAPUtilityBrickTraverse {
 
-	public static void traverseTreeWithLocalBrick(HAPBundle bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
+	public static void traverseTreeWithLocalBrick(HAPBundleForBrick bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
 		traverseTree(
 			bundle, 
 			rootName,
@@ -25,7 +25,7 @@ public class HAPUtilityBrickTraverse {
 			data);
 	}
 	
-	public static void traverseTree(HAPBundle bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
+	public static void traverseTree(HAPBundleForBrick bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
 		Set<HAPPath> validPath = new HashSet<HAPPath>();
 		
 		traversePreTree(bundle, new HAPPath(rootName), processor, brickMan, data, validPath);
@@ -33,7 +33,7 @@ public class HAPUtilityBrickTraverse {
 		traversePostTree(bundle, new HAPPath(rootName), processor, brickMan, data, validPath);
 	}
 	
-	private static void traversePreTree(HAPBundle bundle, HAPPath path, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data, Set<HAPPath> validPath) {
+	private static void traversePreTree(HAPBundleForBrick bundle, HAPPath path, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data, Set<HAPPath> validPath) {
 		validPath.add(path);
 		if(processor.processBrickNode(bundle, path, data)) {
 			HAPBrick leafBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
@@ -49,7 +49,7 @@ public class HAPUtilityBrickTraverse {
 		}
 	}
 
-	private static void traversePostTree(HAPBundle bundle, HAPPath path, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data, Set<HAPPath> validPath) {
+	private static void traversePostTree(HAPBundleForBrick bundle, HAPPath path, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data, Set<HAPPath> validPath) {
 		if(validPath.contains(path)) {
 			processor.postProcessBrickNode(bundle, path, data);
 			HAPBrick leafBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);

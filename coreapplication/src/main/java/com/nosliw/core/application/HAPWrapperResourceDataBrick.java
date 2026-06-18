@@ -1,6 +1,7 @@
 package com.nosliw.core.application;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.resource.HAPUtilityBrickResource;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceData;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;
@@ -9,13 +10,13 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPWrapperResourceDataBrick extends HAPWrapperResourceDataImp{
 
-	private HAPBundle m_bundle;
+	private HAPBundleForBrick m_bundle;
 	
 	private HAPManagerResource m_resourceManager;
 	
 	private HAPRuntimeInfo m_runtimeInfo;
 	
-	public HAPWrapperResourceDataBrick(HAPBundle bundle, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
+	public HAPWrapperResourceDataBrick(HAPBundleForBrick bundle, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
 		this.m_bundle = bundle;
 		this.m_runtimeInfo = runtimeInfo;
 		this.m_resourceManager = resourceManager;

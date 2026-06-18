@@ -18,7 +18,6 @@ var packageObj = library;
 	var node_buildAdapterPlugInObject;
 	var node_createComponentRuntime;
 	var node_componentUtility;
-	var node_createPackageCore;
 	var node_createApplication;
 	var node_createLifeCycleRuntimeContext;
 	var node_buildComponentInterface;
@@ -459,7 +458,6 @@ nosliw.registerSetNodeDataEvent("complexentity.buildEntityPlugInObject", functio
 nosliw.registerSetNodeDataEvent("complexentity.buildAdapterPlugInObject", function(){node_buildAdapterPlugInObject = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createComponentRuntime", function(){node_createComponentRuntime = this.getData();});
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.createPackageCore", function(){node_createPackageCore = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.createApplication", function(){node_createApplication = this.getData();});
 nosliw.registerSetNodeDataEvent("component.buildComponentCore", function(){node_buildComponentInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createLifeCycleRuntimeContext", function(){node_createLifeCycleRuntimeContext = this.getData();});

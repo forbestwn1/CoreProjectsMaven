@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -49,7 +49,7 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 			if(bundleInfoFile.exists()) {
 				//if bundle file exists, parse bundle file
 				JSONObject bundleInfoObj = new JSONObject(HAPUtilityFile.readFile(bundleInfoFile));
-				Object dynamicTaskObj = bundleInfoObj.opt(HAPBundle.DYNAMIC);
+				Object dynamicTaskObj = bundleInfoObj.opt(HAPBundleForBrick.DYNAMIC);
 				if(dynamicTaskObj!=null) {
 					HAPDynamicUtilityParser.parseDynamicDefinitionContainer(dynamicTaskObj, m_dynamicDefContainer, this.m_brickCriteriaMan);
 				}

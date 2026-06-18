@@ -6,7 +6,7 @@ import java.util.Map;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
@@ -18,7 +18,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPStoryUtilityUITag {
 
-	public static HAPBundle buildStandaloneBundleForUITag(HAPDataDefinition dataDefinition, HAPManagerUITag uiTagMan, HAPManualManangerStandalone standaloneMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPBundleForBrick buildStandaloneBundleForUITag(HAPDataDefinition dataDefinition, HAPManagerUITag uiTagMan, HAPManualManangerStandalone standaloneMan, HAPRuntimeInfo runtimeInfo) {
 
 		HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataDefinition));
 

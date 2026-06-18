@@ -7,7 +7,7 @@ import com.nosliw.common.path.HAPUtilityPath;
 
 public class HAPUtilityBrickReference {
 
-	public static void normalizeBrickReferenceInBundle(HAPIdBrickInBundle brickIdInBundle, String basePath, boolean processEnd, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundle currentBundle) {
+	public static void normalizeBrickReferenceInBundle(HAPIdBrickInBundle brickIdInBundle, String basePath, boolean processEnd, String brickRootNameIfNotProvided, Map<String, HAPPath> aliasMapping, HAPBundleForBrick currentBundle) {
 		
 		if(brickIdInBundle.getAlias()!=null && brickIdInBundle.getRelativePath()==null && brickIdInBundle.getIdPath()==null) {
 			//only alias provided

@@ -5,7 +5,7 @@ import com.nosliw.core.application.common.task.HAPUtilityTask;
 
 public class HAPUtilityBrickPath {
 
-	public static HAPPath normalizeBrickPath(HAPPath path, String brickRootNameIfNotProvided, boolean processEnd, HAPBundle currentBundle) {
+	public static HAPPath normalizeBrickPath(HAPPath path, String brickRootNameIfNotProvided, boolean processEnd, HAPBundleForBrick currentBundle) {
 		//branch
 		path = new HAPPath(HAPUtilityBundle.normalizePathWithBranch(path.getPath(), brickRootNameIfNotProvided));
 		

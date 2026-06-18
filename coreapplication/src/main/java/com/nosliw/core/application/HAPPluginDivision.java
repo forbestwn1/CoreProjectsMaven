@@ -8,7 +8,7 @@ public interface HAPPluginDivision {
 
 	String getDivisionName();
 	
-	HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo);
+	HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo);
 
 	//what brick type related with this division
 	Set<HAPIdBrickType> getBrickTypes();

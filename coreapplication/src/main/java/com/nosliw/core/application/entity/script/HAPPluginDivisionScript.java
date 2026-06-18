@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
@@ -27,7 +27,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 	public String getDivisionName() {  return HAPConstantShared.BRICK_DIVISION_SCRIPT;  }
 
 	@Override
-	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPIdBrickType brickTypeId = brickId.getBrickTypeId();
 		
 		String scriptFileName = HAPSystemFolderUtility.getManualBrickBaseFolder() + brickTypeId.getBrickType() + "/" + brickId.getId() + ".js";
@@ -37,7 +37,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId);
 		scriptBrick.setScript(script);
 		
-		HAPBundle bundle = new HAPBundle();
+		HAPBundleForBrick bundle = new HAPBundleForBrick();
 		bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(scriptBrick));
 		return bundle;
 	}

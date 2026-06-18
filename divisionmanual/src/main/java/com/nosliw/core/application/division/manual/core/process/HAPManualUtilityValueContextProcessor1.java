@@ -11,7 +11,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.HAPHandlerDownwardImpAttribute;
 import com.nosliw.core.application.HAPInfoValueStructureRuntime;
@@ -66,7 +66,7 @@ public class HAPManualUtilityValueContextProcessor1 {
 			@Override
 			protected boolean processTreeNode(HAPTreeNodeBrick treeNode, Object data) {
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick complexEntityExe = this.getBrickFromNode(treeNode);
@@ -90,7 +90,7 @@ public class HAPManualUtilityValueContextProcessor1 {
 			@Override
 			protected boolean processTreeNode(HAPTreeNodeBrick treeNode, Object data) {
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick complexEntityExe = this.getBrickFromNode(treeNode);
@@ -135,7 +135,7 @@ public class HAPManualUtilityValueContextProcessor1 {
 			public boolean processAttribute(HAPBrick parentBrick, String attributeName, Object data) {
 				HAPManualBrick parentBrickManual = (HAPManualBrick)parentBrick;
 				HAPManualContextProcessBrick processContext = (HAPManualContextProcessBrick)data;
-				HAPBundle bundle = processContext.getCurrentBundle();
+				HAPBundleForBrick bundle = processContext.getCurrentBundle();
 				HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 
 				HAPManualBrick childBrick = (HAPManualBrick)this.getChildBrick(parentBrickManual, attributeName);

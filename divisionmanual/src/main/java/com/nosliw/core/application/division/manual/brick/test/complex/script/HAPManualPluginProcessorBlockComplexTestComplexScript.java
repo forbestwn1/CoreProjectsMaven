@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.script.HAPBlockTestComplexScript;
@@ -36,7 +36,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 
 	@Override
 	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
-		HAPBundle bundle = processContext.getCurrentBundle();
+		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
 		HAPManualBlockTestComplexScript executableBlock = (HAPManualBlockTestComplexScript)blockPair.getRight();
@@ -50,7 +50,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 	
 	@Override
 	public void postProcessOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
-		HAPBundle bundle = processContext.getCurrentBundle();
+		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
 		HAPManualBlockTestComplexScript executableBlock = (HAPManualBlockTestComplexScript)blockPair.getRight();

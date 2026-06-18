@@ -15,13 +15,13 @@ import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPBundle;
-import com.nosliw.core.application.HAPResourceDataBrick;
-import com.nosliw.core.application.HAPUtilityBrickResource;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.resource.HAPResourceDataBrick;
+import com.nosliw.core.application.resource.HAPUtilityBrickResource;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -45,7 +45,7 @@ public class HAPManualGatewayUITagStandalone extends HAPGatewayImp{
 		case COMMAND_BUILD:
 		{
 //			String uiTag = parms.getString(COMMAND_BUILD_UITAGID);
-			HAPBundle bundle = this.buildStandAloneApplication(null, null, null, runtimeInfo);
+			HAPBundleForBrick bundle = this.buildStandAloneApplication(null, null, null, runtimeInfo);
 			
 			HAPResourceDataBrick brickResourceData = HAPUtilityBrickResource.getExportResourceData(bundle, null, null, runtimeInfo);
 			
@@ -57,7 +57,7 @@ public class HAPManualGatewayUITagStandalone extends HAPGatewayImp{
 	}
 	
 	//build stand alone application 
-	public HAPBundle buildStandAloneApplication(String uiTagId, Map<String, String> tagAttributes, HAPDataDefinition dataDefinition, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick buildStandAloneApplication(String uiTagId, Map<String, String> tagAttributes, HAPDataDefinition dataDefinition, HAPRuntimeInfo runtimeInfo) {
 
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("uiTagName", uiTagId);

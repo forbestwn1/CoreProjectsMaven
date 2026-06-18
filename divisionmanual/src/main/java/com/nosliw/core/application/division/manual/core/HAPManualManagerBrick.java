@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundle;
+import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
@@ -90,11 +90,11 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public Set<HAPIdBrickType> getBrickTypes() {   return null;   }
 	
 	@Override
-	public HAPBundle getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		return this.buildBundle(new HAPManualContentProviderFile(brickId, this.m_brickCriteriaMan), runtimeInfo);
 	}
 	
-	public HAPBundle buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
 		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser);
 	}
 	
@@ -156,8 +156,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPManualDefinitionBrick newBrickDefinition(HAPIdBrickType brickType) {    
 		return this.getBrickParsePlugin(brickType).newBrick();      
 	}
-	public HAPManualBrick newBrick(HAPIdBrickType brickType, HAPBundle bundle) {    return this.getBrickProcessPlugin(brickType).newInstance(bundle, this);      }
-	public HAPManualBrick newBrickWithInit(HAPIdBrickType brickType, HAPBundle bundle) {
+	public HAPManualBrick newBrick(HAPIdBrickType brickType, HAPBundleForBrick bundle) {    return this.getBrickProcessPlugin(brickType).newInstance(bundle, this);      }
+	public HAPManualBrick newBrickWithInit(HAPIdBrickType brickType, HAPBundleForBrick bundle) {
 		HAPManualBrick out = this.newBrick(brickType, bundle);
 		out.init();
 		return out;
