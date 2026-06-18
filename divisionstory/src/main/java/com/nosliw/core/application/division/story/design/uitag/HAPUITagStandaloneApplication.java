@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.gateway;
+package com.nosliw.core.application.division.story.design.uitag;
 
 import java.util.Map;
 

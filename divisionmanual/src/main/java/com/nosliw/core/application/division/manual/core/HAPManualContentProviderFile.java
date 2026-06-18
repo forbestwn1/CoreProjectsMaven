@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core.process;
+package com.nosliw.core.application.division.manual.core;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -10,7 +10,6 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;

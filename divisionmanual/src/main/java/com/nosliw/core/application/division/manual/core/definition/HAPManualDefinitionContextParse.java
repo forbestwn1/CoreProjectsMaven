@@ -1,8 +1,8 @@
 package com.nosliw.core.application.division.manual.core.definition;
 
 import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProvider;
 
 public class HAPManualDefinitionContextParse {
 

@@ -17,12 +17,17 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
+import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.division.story.HAPStoryManagerStory;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
+import com.nosliw.core.application.division.story.design.uitag.HAPStoryUtilityUITag;
+import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -39,6 +44,12 @@ public class HAPAPIStory {
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
+	
+	@Autowired
+	private HAPManagerUITag m_uiTagMan;
+	
+	@Autowired
+	private HAPManualManangerStandalone m_standaloneMan;
 	
 	@PostMapping("/new")
     public String newDesign(@RequestParam String builderId) {
@@ -75,5 +86,13 @@ public class HAPAPIStory {
 		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
+
+	@PostMapping("/uitag")
+    public String uiTagForConstant(@RequestBody String requestBody) {
+		HAPDataDefinition dataDefinition = HAPParserDataDefinition.parseDataDefinition(new JSONObject(requestBody), m_entityParseService);
+		HAPBundle bundle = HAPStoryUtilityUITag.buildStandaloneBundleForUITag(dataDefinition, this.m_uiTagMan, this.m_standaloneMan, HAPRuntimeManager.RUNTIME_JS_BROWSER);
+		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
+	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}
 
 }

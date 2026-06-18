@@ -1,10 +1,9 @@
-package com.nosliw.core.application.division.manual.core.process;
+package com.nosliw.core.application.division.manual.core;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public class HAPManualContentProviderText implements HAPManualContentProvider{

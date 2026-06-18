@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.gateway;
+package com.nosliw.core.application.division.manual.core.standalone;
 
 import java.io.InputStream;
 import java.util.LinkedHashMap;
@@ -19,9 +19,9 @@ import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPResourceDataBrick;
 import com.nosliw.core.application.HAPUtilityBrickResource;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -33,10 +33,7 @@ public class HAPManualGatewayUITagStandalone extends HAPGatewayImp{
 	final public static String COMMAND_BUILD = "build";
 	
 	@HAPAttribute
-	final public static String COMMAND_BUILD_UITAGID = "uiTagId";
-	
-	@HAPAttribute
-	final public static String COMMAND_BUILD_DATADEFINITION = "dataDefinition";
+	final public static String COMMAND_BUILD_DEINITION = "definition";
 	
 	@Autowired
 	private HAPManualManagerBrick m_manualBrickMan;

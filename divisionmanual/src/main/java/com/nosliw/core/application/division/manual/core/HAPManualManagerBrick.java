@@ -17,8 +17,6 @@ import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProvider;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;

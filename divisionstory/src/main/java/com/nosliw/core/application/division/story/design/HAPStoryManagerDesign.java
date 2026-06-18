@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityExporterContentProviderText;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;

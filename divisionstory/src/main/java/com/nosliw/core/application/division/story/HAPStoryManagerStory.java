@@ -10,8 +10,8 @@ import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.division.manual.core.process.HAPManualContentProviderText;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

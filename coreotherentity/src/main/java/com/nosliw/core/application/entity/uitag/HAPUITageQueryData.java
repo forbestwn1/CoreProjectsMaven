@@ -8,33 +8,44 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
+import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
-import com.nosliw.core.data.criteria.HAPUtilityCriteria;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPUITageQueryData extends HAPSerializableImp{
 
 	@HAPAttribute
-	final public static String DATATYPECRITERIA = "dataTypeCriteria";
+	final public static String DATADEFINITION = "dataDefinition";
 
-	private HAPDataTypeCriteria m_dataTypeCriteria;
+	private HAPDataDefinition m_dataDefinition;
 	
-	public HAPUITageQueryData(HAPDataTypeCriteria dataTypeCriteria) {
-		this.m_dataTypeCriteria = dataTypeCriteria;
+	public HAPUITageQueryData() {	}
+
+	public HAPUITageQueryData(HAPDataDefinition dataDefinition) {
+		this.m_dataDefinition = dataDefinition;
 	}
 	
-	public HAPDataTypeCriteria getDataTypeCriterai() {   return this.m_dataTypeCriteria;  }
-	public void setDataTypeCriteria(HAPDataTypeCriteria dataTypeCriteria) {   this.m_dataTypeCriteria = dataTypeCriteria;     }
+	public HAPUITageQueryData(HAPDataTypeCriteria dataTypeCriteria) {
+		this(new HAPDataDefinitionWritable(dataTypeCriteria));
+	}
+	
+	public void setDataDefinition(HAPDataDefinition dataDefinition) {    this.m_dataDefinition = dataDefinition;         }
+	public HAPDataDefinition getDataDefinition() {     return this.m_dataDefinition;      }
+	
+	public HAPDataTypeCriteria getDataTypeCriterai() {   return this.m_dataDefinition.getCriteria();  }
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		jsonMap.put(DATATYPECRITERIA, this.m_dataTypeCriteria.toStringValue(HAPSerializationFormat.LITERATE));
+		jsonMap.put(DATADEFINITION, this.m_dataDefinition.toStringValue(HAPSerializationFormat.LITERATE));
 	}
 	
-	@Override
-	protected boolean buildObjectByJson(Object json){
-		JSONObject jsonObj = (JSONObject)json;
-		this.m_dataTypeCriteria = HAPUtilityCriteria.parseCriteria(jsonObj.getString(DATATYPECRITERIA));
-		return true;  
-	}	
+	public HAPUITageQueryData parseUITagQueryData(JSONObject jsonOb, HAPServiceParseEntity entityParseService) {
+		HAPUITageQueryData out = new HAPUITageQueryData();
+		out.setDataDefinition(HAPParserDataDefinition.parseDataDefinition(jsonOb.getJSONObject(DATADEFINITION), entityParseService));
+		return out;
+	}
+
 }

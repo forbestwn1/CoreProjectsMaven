@@ -9,6 +9,7 @@ import com.nosliw.core.application.HAPBundle;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;

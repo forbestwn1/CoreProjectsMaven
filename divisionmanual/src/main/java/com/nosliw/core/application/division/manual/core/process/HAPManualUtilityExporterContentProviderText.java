@@ -7,6 +7,7 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 
 public class HAPManualUtilityExporterContentProviderText {
