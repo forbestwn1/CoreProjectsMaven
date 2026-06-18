@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPBrick;
@@ -19,21 +18,6 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
 public class HAPResourceDataBrick extends HAPBundleForExecute implements HAPResourceData, HAPWithResourceDependency{
-
-	@HAPAttribute
-	public final static String BRICK = "brick"; 
-
-	@HAPAttribute
-	public final static String SUPPORTBRICKS = "supportBricks"; 
-
-	@HAPAttribute
-	public final static String ALIASMAPPING = "aliasMapping"; 
-
-	@HAPAttribute
-	public static final String VALUESTRUCTUREDOMAIN = "valueStructureDomain";
-
-	@HAPAttribute
-	public final static String EXPORTBRICKINFO = "exportBrickInfo"; 
 
 	public HAPResourceDataBrick(HAPBrick brick, Map<String, HAPBrick> supportBricks, HAPInfoExportBrick exportBrickInfo, Map<String, HAPPath> aliasMapping, HAPDomainValueStructure valueStructureDomain) {
 		super(brick, supportBricks, exportBrickInfo, aliasMapping, valueStructureDomain);

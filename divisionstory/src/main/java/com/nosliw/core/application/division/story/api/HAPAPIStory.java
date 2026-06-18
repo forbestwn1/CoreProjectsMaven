@@ -15,7 +15,9 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPBundleForExecute;
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPUtilityBundleForExecute;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
@@ -90,8 +92,11 @@ public class HAPAPIStory {
 	@PostMapping("/uitag")
     public String uiTagForConstant(@RequestBody String requestBody) {
 		HAPDataDefinition dataDefinition = HAPParserDataDefinition.parseDataDefinition(new JSONObject(requestBody), m_entityParseService);
-		HAPBundleForBrick bundle = HAPStoryUtilityUITag.buildStandaloneBundleForUITag(dataDefinition, this.m_uiTagMan, this.m_standaloneMan, HAPRuntimeManager.RUNTIME_JS_BROWSER);
-		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
+		HAPBundleForBrick bundleForBrick = HAPStoryUtilityUITag.buildStandaloneBundleForUITag(dataDefinition, this.m_uiTagMan, this.m_standaloneMan, HAPRuntimeManager.RUNTIME_JS_BROWSER);
+		
+		HAPBundleForExecute bundleForExe = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
+		
+		HAPServiceData out = HAPServiceData.createSuccessData(bundleForExe);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}
 

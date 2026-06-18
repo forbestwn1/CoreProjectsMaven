@@ -6,7 +6,7 @@ import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBundle;
+import com.nosliw.core.application.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.HAPWithBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -49,7 +49,7 @@ public abstract class HAPHandlerDownwardImpTreeNode extends HAPHandlerDownward{
 	protected HAPTreeNodeBrick getDescdentTreeNode(HAPBundleForBrick bundle, HAPPath path) {
 		HAPTreeNodeBrick out = null;
 
-		HAPComplexPath fullPathInfo = HAPUtilityBundle.getBrickFullPathInfo(path);
+		HAPComplexPath fullPathInfo = HAPUtilityBundleForBrick.getBrickFullPathInfo(path);
 		HAPManualWrapperBrickRoot rootWrapper = (HAPManualWrapperBrickRoot)bundle.getRootBrickWrapper(fullPathInfo.getRoot());
 		if(fullPathInfo.getPath()==null || fullPathInfo.getPath().isEmpty()) {
 			out = rootWrapper;

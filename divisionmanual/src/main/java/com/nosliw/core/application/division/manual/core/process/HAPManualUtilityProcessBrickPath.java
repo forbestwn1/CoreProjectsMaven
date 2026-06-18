@@ -10,7 +10,7 @@ import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.HAPPackageBrickInBundle;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickReference;
-import com.nosliw.core.application.HAPUtilityBundle;
+import com.nosliw.core.application.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItem;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItemMultiple;
@@ -52,7 +52,7 @@ public class HAPManualUtilityProcessBrickPath {
 					return true;
 				}
 				
-				if(HAPUtilityBundle.getBrickFullPathInfo(path).getPath().isEmpty()) {
+				if(HAPUtilityBundleForBrick.getBrickFullPathInfo(path).getPath().isEmpty()) {
 					return true;
 				}
 				

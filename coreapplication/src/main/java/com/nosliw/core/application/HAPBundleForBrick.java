@@ -73,7 +73,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	}
 	
 	public void addExportResourceInfo(HAPInfoExportBrick exportResourceInfo) {		
-		exportResourceInfo.setPathFromRoot(HAPUtilityBundle.normalizePathWithBranch(exportResourceInfo.getPathFromRoot().getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN));
+		exportResourceInfo.setPathFromRoot(HAPUtilityBundleForBrick.normalizePathWithBranch(exportResourceInfo.getPathFromRoot().getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN));
 		this.m_exportResourceInfos.add(exportResourceInfo);	
 	}
 	public List<HAPInfoExportBrick> getExportResourceInfos(){    return this.m_exportResourceInfos;    }
@@ -102,7 +102,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	public void setMainBrickWrapper(HAPWrapperBrickRoot brickWrapper) {     this.m_mainBrickWrapper = brickWrapper;      }
 	
 	public void setBranchBrickWrapper(String branch, HAPWrapperBrickRoot brickWrapper) {     this.m_branchBricks.put(branch, brickWrapper);        }
-	private HAPWrapperBrickRoot getBranchBrickWrapper(String branch) {     return this.m_branchBricks.get(branch);         }
+	public HAPWrapperBrickRoot getBranchBrickWrapper(String branch) {     return this.m_branchBricks.get(branch);         }
 	public Map<String, HAPWrapperBrickRoot> getBranchBrickWrappers() {     return this.m_branchBricks;         }
 	public Set<String> getBranchNames(){   return this.m_branchBricks.keySet();    }
 	

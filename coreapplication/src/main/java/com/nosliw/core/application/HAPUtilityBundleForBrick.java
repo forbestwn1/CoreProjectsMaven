@@ -10,7 +10,7 @@ import com.nosliw.core.application.resource.HAPUtilityExport;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
-public class HAPUtilityBundle {
+public class HAPUtilityBundleForBrick {
 
 	public static HAPBundleForBrick getBrickBundle(HAPResourceIdSimple resourceId, HAPManagerApplicationBrick brickMan, HAPRuntimeInfo runtimeInfo) {
 		HAPBundleForBrick bundle = brickMan.getBrickBundle(HAPUtilityBrickId.fromResourceId2BrickId(resourceId), runtimeInfo);

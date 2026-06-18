@@ -6,7 +6,7 @@ import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBundle;
+import com.nosliw.core.application.HAPUtilityBundleForBrick;
 
 public class HAPManualUtilityProcessAlias {
 
@@ -20,7 +20,7 @@ public class HAPManualUtilityProcessAlias {
 					return true;
 				}
 				
-				if(HAPUtilityBundle.getBrickFullPathInfo(path).getPath().isEmpty()) {
+				if(HAPUtilityBundleForBrick.getBrickFullPathInfo(path).getPath().isEmpty()) {
 					return true;
 				}
 				

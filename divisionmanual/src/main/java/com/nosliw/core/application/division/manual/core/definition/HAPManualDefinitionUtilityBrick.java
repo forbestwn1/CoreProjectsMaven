@@ -11,7 +11,7 @@ import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickId;
-import com.nosliw.core.application.HAPUtilityBundle;
+import com.nosliw.core.application.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.division.manual.core.HAPInfoTreeNode;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -52,7 +52,7 @@ public class HAPManualDefinitionUtilityBrick {
 	}
 	
 	private static Pair<HAPManualDefinitionWrapperBrickRoot, HAPPath> getDefinitionPathInfo(HAPBundleForBrick bundle, HAPPath path){
-		HAPComplexPath fullPathInfo = HAPUtilityBundle.getBrickFullPathInfo(path.toString());
+		HAPComplexPath fullPathInfo = HAPUtilityBundleForBrick.getBrickFullPathInfo(path.toString());
 		return Pair.of(((HAPManualWrapperBrickRoot)bundle.getRootBrickWrapper(fullPathInfo.getRoot())).getDefinition(), fullPathInfo.getPath());
 	}
 	

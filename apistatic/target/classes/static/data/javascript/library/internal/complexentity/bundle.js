@@ -71,14 +71,14 @@ var node_createBundleCore = function(parm, configure){
 					loc_bundleDef = node_resourceUtility.getResourceFromTree(resourceTree, loc_resourceId).resourceData;
 
 					//build variable domain in bundle
-					loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_VALUESTRUCTUREDOMAIN]);
+					loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
 
 					var branchBrickRequest = node_createServiceRequestInfoSequence(undefined, undefined, requestInfo);
-					var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_SUPPORTBRICKS];
+					var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_SUPPORTBRICKS];
 					_.each(brickDefs, function(brickDef, name){
 						branchBrickRequest.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
 							//build variable domain in bundle
-//							loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_VALUESTRUCTUREDOMAIN]);
+//							loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
 							return nosliw.runtime.getComplexEntityService().getCreateBrickRuntimeRequest(brickDef, undefined, loc_out, undefined, loc_configure, {
 								success : function(request, mainEntityRuntime){
 									var childTreeNodeEntityInterface = node_getEntityTreeNodeInterface(mainEntityRuntime.getCoreEntity());
@@ -99,12 +99,12 @@ var node_createBundleCore = function(parm, configure){
 		
 		//main brick
 		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-			var entityDef = loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_BRICK];
+			var entityDef = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_BRICK];
 			return nosliw.runtime.getComplexEntityService().getCreateBrickRuntimeRequest(entityDef, undefined, loc_out, undefined, loc_configure, {
 				success : function(request, mainEntityRuntime){
 					var childTreeNodeEntityInterface = node_getEntityTreeNodeInterface(mainEntityRuntime.getCoreEntity());
 					childTreeNodeEntityInterface.setParentCore(loc_out);
-					childTreeNodeEntityInterface.setDefPath(loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_EXPORTBRICKINFO][node_COMMONATRIBUTECONSTANT.INFOEXPORTBRICK_PATHFROMROOT]);
+					childTreeNodeEntityInterface.setDefPath(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EXPORTBRICKINFO][node_COMMONATRIBUTECONSTANT.INFOEXPORTBRICK_PATHFROMROOT]);
 					loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].addChild(node_COMMONCONSTANT.NAME_ROOTBRICK_MAIN, mainEntityRuntime, true);
 					
 					return node_getEntityObjectInterface(mainEntityRuntime.getCoreEntity()).getEntityInitRequest({
@@ -203,7 +203,7 @@ var node_createBundleCore = function(parm, configure){
 		
 		getValueContainer : function(){		return loc_valueContainer;	},
 		
-		getBrickDefPathByAlias : function(alias){    return loc_bundleDef[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_ALIASMAPPING][alias];      }
+		getBrickDefPathByAlias : function(alias){    return loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_ALIASMAPPING][alias];      }
 		
 	};
 	

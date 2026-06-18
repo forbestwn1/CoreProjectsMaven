@@ -7,7 +7,7 @@ public class HAPUtilityBrickPath {
 
 	public static HAPPath normalizeBrickPath(HAPPath path, String brickRootNameIfNotProvided, boolean processEnd, HAPBundleForBrick currentBundle) {
 		//branch
-		path = new HAPPath(HAPUtilityBundle.normalizePathWithBranch(path.getPath(), brickRootNameIfNotProvided));
+		path = new HAPPath(HAPUtilityBundleForBrick.normalizePathWithBranch(path.getPath(), brickRootNameIfNotProvided));
 		
 		//task
 		return HAPUtilityTask.normalizeBrickPathFroTask(path, processEnd, currentBundle);

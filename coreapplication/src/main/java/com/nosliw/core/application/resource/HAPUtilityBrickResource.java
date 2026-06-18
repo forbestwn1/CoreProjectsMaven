@@ -10,6 +10,7 @@ import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPInfoExportBrick;
 import com.nosliw.core.application.HAPResultBrickDescentValue;
 import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.HAPUtilityBundleForExecute;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceId;
@@ -29,16 +30,7 @@ public class HAPUtilityBrickResource {
 
 
 	public static HAPResourceDataBrick getExportResourceData(HAPBundleForBrick bundle, String name, HAPManagerResource resourceMan, HAPRuntimeInfo runtimeInfo) {
-		if(name==null) {
-			name = HAPConstantShared.NAME_DEFAULT;
-		}
-		HAPInfoExportBrick exportInfo = null;
-		for(HAPInfoExportBrick ei : bundle.getExportResourceInfos()) {
-			if(name.equals(ei.getName())) {
-				exportInfo = ei;
-				break;
-			}
-		}
+		HAPInfoExportBrick exportInfo = HAPUtilityBundleForExecute.getBrickExportInfo(bundle, name);
 		
 		HAPResourceDataBrick out = null;
 		HAPResultBrickDescentValue brickResult = HAPUtilityBrick.getDescdentBrickResult(bundle, exportInfo.getPathFromRoot(), HAPConstantShared.NAME_ROOTBRICK_MAIN);
