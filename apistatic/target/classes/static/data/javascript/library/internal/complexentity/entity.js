@@ -15,6 +15,14 @@ var packageObj = library.getChildPackage("entity");
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
+var node_BrickId = function(id, division, birckType){
+	this[node_COMMONATRIBUTECONSTANT.IDBRICK_ID] = id;
+	this[node_COMMONATRIBUTECONSTANT.IDBRICK_DIVISION] = division;
+	this[node_COMMONATRIBUTECONSTANT.IDBRICK_BRICKTYPEID] = brickType;
+};	
+
+
+
 var node_createRuntimeEnvironment = function(parent, values, configure){
 	
 	if(values==undefined && parent!=undefined)  return parent;
@@ -383,6 +391,7 @@ nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 
 //Register Node by Name
+packageObj.createChildNode("BrickId", node_BrickId); 
 packageObj.createChildNode("createRuntimeEnvironment", node_createRuntimeEnvironment); 
 packageObj.createChildNode("EntityIdInDomain", node_EntityIdInDomain); 
 packageObj.createChildNode("createBrickDefinition", node_createBrickDefinition); 

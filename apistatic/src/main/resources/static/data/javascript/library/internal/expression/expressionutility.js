@@ -341,7 +341,7 @@ var node_utility = function()
 		var refVarsInOperandRequest = node_createServiceRequestInfoSet(new node_ServiceInfo("CalRefVarsInOperandRequest", {"refVarsMapping":refVarsMapping}), {
 			success : function(request, setResult){
 				var out1 = node_createServiceRequestInfoSequence(undefined);
-				out1.addRequest(nosliw.runtime.getComplexEntityService().getCreateBundleRuntimeWithInitRequest(referenceOperand[node_COMMONATRIBUTECONSTANT.OPERAND_RESOURCEID], undefined, {
+				out1.addRequest(nosliw.runtime.getComplexEntityService().getCreateBundleRuntimeWithInitRequest({resourceId:referenceOperand[node_COMMONATRIBUTECONSTANT.OPERAND_RESOURCEID]}, undefined, {
 					success: function(request, bundleRuntime){
 						var dataExpressionLibEleCore = bundleRuntime.getCoreEntity().getMainEntityCore();
 						valuePortEnv = node_getWithValuePortInterface(dataExpressionLibEleCore);

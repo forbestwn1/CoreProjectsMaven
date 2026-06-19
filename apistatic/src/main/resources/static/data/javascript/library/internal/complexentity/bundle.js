@@ -29,8 +29,9 @@ var packageObj = library;
 //bundle is executable resource unit
 var node_createBundleCore = function(parm, configure){
 
-	var loc_resourceId;
 	var loc_bundleDef;
+	var loc_resourceId;
+	var loc_brickId;
 
 	var loc_configure;
 	var loc_configureValue;
@@ -54,10 +55,14 @@ var node_createBundleCore = function(parm, configure){
 			//parm is bundle entity
 			loc_bundleDef = parm.bundleDef;
 		}
-		else{
+		else if(parm.resourceId!=undefined){
 			//parm is global complex entity id
-			loc_resourceId = parm;
+			loc_resourceId = parm.resourceId;
 		}
+    	else if(parm.brickId!=undefined){
+	    	//parm is global complex entity id
+		    loc_brickId = parm.brickId;
+	    }
 	};
 	
 	var loc_getPreInitRequest = function(handlers, request){
@@ -95,6 +100,9 @@ var node_createBundleCore = function(parm, configure){
 					return branchBrickRequest;
 	 			}
 			}));
+		}
+		else if(loc_brickId!=null){
+			
 		}
 		
 		//main brick

@@ -123,7 +123,7 @@ var node_makeObjectEntityObjectInterface = function(rawEntity, internalValuePort
 				else if(attrValueWrapper.getValueType()==node_COMMONCONSTANT.ENTITYATTRIBUTE_VALUETYPE_RESOURCEID){
 					//external bundle reference attribute
 					
-					out.addRequest(nosliw.runtime.getComplexEntityService().getCreateBundleRuntimeRequest(attrValueWrapper.getResourceId(), childConfigure, {
+					out.addRequest(nosliw.runtime.getComplexEntityService().getCreateBundleRuntimeRequest({resourceId: attrValueWrapper.getResourceId()}, childConfigure, {
 						success: function(request, bundleRuntime){
 							var bundleCore = bundleRuntime.getCoreEntity();
 							node_getEntityTreeNodeInterface(bundleCore).setParentCore(rawEntity);
