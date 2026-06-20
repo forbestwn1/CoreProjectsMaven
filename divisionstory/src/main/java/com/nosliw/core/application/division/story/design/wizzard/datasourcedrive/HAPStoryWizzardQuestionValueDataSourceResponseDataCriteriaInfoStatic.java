@@ -5,6 +5,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -18,6 +19,7 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic extends HAPStoryWizzardValueInQuestionairImp{
 
+	@HAPAttribute
 	public static final String DATATYPECRITERIA = "dataTypeCriteria";
 	
 	private HAPDataTypeCriteria m_dataTypeCriteria;

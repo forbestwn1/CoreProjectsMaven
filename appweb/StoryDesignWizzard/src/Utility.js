@@ -38,17 +38,23 @@ export var questionairUtility = function () {
             return loc_getChildQuestionairByValueType(questionair, valueType);
         },
 
-        getValueFromQuestionairDynamic : function(questionair){
+        getValueFromQuestionairItem : function(questionair){
             var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	        var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
-            if(questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_ISDIRTY]==true){
-                return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_CHANGEDVALUE];
+
+            var questionairType = questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_TYPE];
+            if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC){
+                if(questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_ISDIRTY]==true){
+                    return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_CHANGEDVALUE];
+                }
+                else{
+                    return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_DEFAULTVALUE];
+                }
             }
-            else{
-                return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_DEFAULTVALUE];
+            else if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC){
+                return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMSTATIC_VALUE];
             }
         }
-
 
     };
 

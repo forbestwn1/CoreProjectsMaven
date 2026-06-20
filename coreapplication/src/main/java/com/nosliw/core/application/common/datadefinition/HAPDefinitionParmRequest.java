@@ -5,10 +5,12 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public class HAPDefinitionParmRequest extends HAPEntityInfoImp{
 
 	@HAPAttribute

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPEntityInfoImp;
@@ -18,6 +19,7 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic extends HAPStoryWizzardValueInQuestionairImp{
 
+	@HAPAttribute
 	public static final String ENTITYINFO = "entityInfo";
 	
 	private HAPEntityInfo m_entityInfo;
