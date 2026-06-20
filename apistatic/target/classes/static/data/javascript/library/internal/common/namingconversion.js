@@ -15,6 +15,10 @@ var node_namingConvensionUtility = function(){
 			return this.cascadeParts(seg1, seg2, node_COMMONCONSTANT.SEPERATOR_LEVEL1, normal);
 		},
 
+		cascadeLevel2 : function(seg1, seg2, normal){
+			return this.cascadeParts(seg1, seg2, node_COMMONCONSTANT.SEPERATOR_LEVEL2, normal);
+		},
+
 		cascadePath : function(path1, path2, normal){
 			return this.cascadeParts(path1, path2, node_COMMONCONSTANT.SEPERATOR_PATH, normal);
 		},
@@ -25,7 +29,7 @@ var node_namingConvensionUtility = function(){
 		
 		cascadeParts : function(part1, part2, seperator, normal){
 			//if normal, just put together
-			if(normal==true)  return part1 + seperator + part2;
+			if(normal==true)  return (part1==undefined?"":part1) + seperator + (part2==undefined?"":part2);
 			
 			//otherwise, do smart way
 			var out;

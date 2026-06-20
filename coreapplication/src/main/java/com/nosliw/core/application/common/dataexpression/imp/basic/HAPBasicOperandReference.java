@@ -99,4 +99,13 @@ public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOper
 		jsonMap.put(VARMATCHERS, HAPUtilityJson.buildJson(this.m_matchers, HAPSerializationFormat.JSON));
 	}
 	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(RESOURCEID, this.m_referedDataExpressionLibElementResourceId.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(VARMAPPING, HAPUtilityJson.buildJson(this.m_variableMapping, HAPSerializationFormat.JSON));
+		jsonMap.put(VARRESOLVE, HAPUtilityJson.buildJson(this.m_resolvedVariable, HAPSerializationFormat.JSON));
+		jsonMap.put(VARMATCHERS, HAPUtilityJson.buildJson(this.m_matchers, HAPSerializationFormat.JSON));
+	}
+	
 }

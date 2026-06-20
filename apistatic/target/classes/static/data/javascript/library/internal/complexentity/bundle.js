@@ -23,6 +23,7 @@ var packageObj = library;
 	var node_complexEntityUtility;
 	var node_getObjectType;
 	var node_getEntityObjectInterface;
+	var node_ResourceId;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -65,47 +66,33 @@ var node_createBundleCore = function(parm, configure){
 	    }
 	};
 	
-	var loc_getPreInitRequest = function(handlers, request){
-		var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("PreInitCoreBundle"), handlers, request);
-
-		if(loc_resourceId!=undefined){
-			//load related resources
-			out.addRequest(nosliw.runtime.getResourceService().getGetResourcesRequest(loc_resourceId, {
-				success : function(requestInfo, resourceTree){
-					//get bundle definition
-					loc_bundleDef = node_resourceUtility.getResourceFromTree(resourceTree, loc_resourceId).resourceData;
-
-					//build variable domain in bundle
-					loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
-
-					var branchBrickRequest = node_createServiceRequestInfoSequence(undefined, undefined, requestInfo);
-					var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_SUPPORTBRICKS];
-					_.each(brickDefs, function(brickDef, name){
-						branchBrickRequest.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-							//build variable domain in bundle
-//							loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
-							return nosliw.runtime.getComplexEntityService().getCreateBrickRuntimeRequest(brickDef, undefined, loc_out, undefined, loc_configure, {
-								success : function(request, mainEntityRuntime){
-									var childTreeNodeEntityInterface = node_getEntityTreeNodeInterface(mainEntityRuntime.getCoreEntity());
-									childTreeNodeEntityInterface.setParentCore(loc_out);
-									childTreeNodeEntityInterface.setDefPath(name);
-									loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].addChild(name, mainEntityRuntime, true);
-
-									return node_getEntityObjectInterface(mainEntityRuntime.getCoreEntity()).getEntityInitRequest();
-								}
-							});
-				
-						}));
-					});
-					return branchBrickRequest;
-	 			}
-			}));
-		}
-		else if(loc_brickId!=null){
-			
-		}
+	var loc_getPreInitBundleRequest = function(handlers, request){
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		
-		//main brick
+		//build variable domain in bundle
+		loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
+
+		var branchBrickRequest = node_createServiceRequestInfoSequence();
+		var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_SUPPORTBRICKS];
+		_.each(brickDefs, function(brickDef, name){
+			branchBrickRequest.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+				//build variable domain in bundle
+	//							loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
+				return nosliw.runtime.getComplexEntityService().getCreateBrickRuntimeRequest(brickDef, undefined, loc_out, undefined, loc_configure, {
+					success : function(request, mainEntityRuntime){
+						var childTreeNodeEntityInterface = node_getEntityTreeNodeInterface(mainEntityRuntime.getCoreEntity());
+						childTreeNodeEntityInterface.setParentCore(loc_out);
+						childTreeNodeEntityInterface.setDefPath(name);
+						loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].addChild(name, mainEntityRuntime, true);
+
+						return node_getEntityObjectInterface(mainEntityRuntime.getCoreEntity()).getEntityInitRequest();
+					}
+				});
+			
+			}));
+		});
+		out.addRequest(branchBrickRequest);
+		
 		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
 			var entityDef = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_BRICK];
 			return nosliw.runtime.getComplexEntityService().getCreateBrickRuntimeRequest(entityDef, undefined, loc_out, undefined, loc_configure, {
@@ -120,12 +107,46 @@ var node_createBundleCore = function(parm, configure){
 							return node_complexEntityUtility.getBuildAttributeWithResourceId(mainEntityRuntime.getCoreEntity());
 						}
 					});
-					
 				}
 			});
-
 		}));
+
+		return out;
+	};
+	
+	var loc_getPreInitRequest = function(handlers, request){
+		var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("PreInitCoreBundle"), handlers, request);
+
+		if(loc_resourceId!=undefined){
+			//load related resources
+			out.addRequest(nosliw.runtime.getResourceService().getGetResourcesRequest(loc_resourceId, {
+				success : function(requestInfo, resourceTree){
+					//get bundle definition
+					loc_bundleDef = node_resourceUtility.getResourceFromTree(resourceTree, loc_resourceId).resourceData;
+	 			}
+			}));
+		}
+		else if(loc_brickId!=null){
+			var gatewayParm = {};
+			gatewayParm[node_COMMONATRIBUTECONSTANT.GATEWAYBUNDLEEXECUTABLE_COMMAND_LOADEXECUTABLEBUNDLE_BRICKID] = loc_brickId;
+
+			out.addRequest(nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(
+					node_COMMONCONSTANT.GATEWAY_BUNDLEEXECUTABLE, 
+					node_COMMONATRIBUTECONSTANT.GATEWAYBUNDLEEXECUTABLE_COMMAND_LOADEXECUTABLEBUNDLE, 
+					gatewayParm,
+					{
+						success : function(requestInfo, bundleDef){
+							loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(loc_brickId.getKey(), node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0")).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
+							var kkk = 5;
+						}
+					}
+			));
+		}
 		
+		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+			return loc_getPreInitBundleRequest();
+		}));
+
 		return out;
 	};
 
@@ -244,6 +265,8 @@ nosliw.registerSetNodeDataEvent("common.interface.buildInterface", function(){no
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
+
 
 //Register Node by Name
 packageObj.createChildNode("createBundleCore", node_createBundleCore); 

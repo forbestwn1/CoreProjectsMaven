@@ -149,6 +149,25 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	public HAPContainerValuePorts getExternalValuePorts() {		return this.m_externalValuePortsContainer;	}
 	
 	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
+		
+		if(this.getInternalValuePorts()!=null) {
+			jsonMap.put(INTERNALVALUEPORT, this.getInternalValuePorts().toStringValue(HAPSerializationFormat.JSON));
+		}
+		if(this.getExternalValuePorts()!=null) {
+			jsonMap.put(EXTERNALVALUEPORT, this.getExternalValuePorts().toStringValue(HAPSerializationFormat.JSON));
+		}
+
+		List<String> attrJsonList = new ArrayList<String>();
+		for(HAPAttributeInBrick attr : this.getAttributes()) {
+			attrJsonList.add(attr.toStringValue(HAPSerializationFormat.JSON));
+		}
+		jsonMap.put(ATTRIBUTE, HAPUtilityJson.buildArrayJson(attrJsonList.toArray(new String[0])));
+		
+	}
+	
+	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		

@@ -12,13 +12,29 @@ var packageObj = library.getChildPackage("entity");
 	var node_complexEntityUtility;
 	var node_getApplicationInterface;
 	var node_basicUtility;
+	var node_namingConvensionUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_BrickId = function(id, division, birckType){
+var node_BrickId = function(id, division, brickType){
 	this[node_COMMONATRIBUTECONSTANT.IDBRICK_ID] = id;
 	this[node_COMMONATRIBUTECONSTANT.IDBRICK_DIVISION] = division;
 	this[node_COMMONATRIBUTECONSTANT.IDBRICK_BRICKTYPEID] = brickType;
+	
+	
+	this.getTypeKey = function(){
+		var typeObj = this[node_COMMONATRIBUTECONSTANT.IDBRICK_BRICKTYPEID];
+		if(node_basicUtility.isStringValue(typeObj)){
+			return typeObj;
+		}
+		else{
+			return typeObj.getKey();
+		}
+	};
+	
+	this.getKey = function(){
+		return node_namingConvensionUtility.cascadeLevel2(node_namingConvensionUtility.cascadeLevel2(this[node_COMMONATRIBUTECONSTANT.IDBRICK_ID], this.getTypeKey(), this[node_COMMONATRIBUTECONSTANT.IDBRICK_BRICKTYPEID], true), this[node_COMMONATRIBUTECONSTANT.IDBRICK_DIVISION], true);
+	};
 };	
 
 
@@ -389,6 +405,8 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", functi
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
+
 
 //Register Node by Name
 packageObj.createChildNode("BrickId", node_BrickId); 

@@ -22,4 +22,10 @@ public abstract class HAPAdapter extends HAPEntityInfoImp implements HAPWithReso
 		jsonMap.put(VALUEWRAPPER, this.getValueWrapper().toStringValue(HAPSerializationFormat.JAVASCRIPT));
 	}
 
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEWRAPPER, this.getValueWrapper().toStringValue(HAPSerializationFormat.JSON));
+	}
+
 }

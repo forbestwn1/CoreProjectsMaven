@@ -34,6 +34,12 @@ public class HAPWrapperValueOfDynamic extends HAPWrapperValue{
 	}
 
 	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(DYNAMIC, HAPManagerSerialize.getInstance().toStringValue(this.m_dynamicValue, HAPSerializationFormat.JSON));
+	}
+
+	@Override
 	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {
 	}
 

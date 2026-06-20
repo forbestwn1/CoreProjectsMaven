@@ -28,4 +28,10 @@ public class HAPManualDefinitionWrapperValueDynamic extends HAPManualDefinitionW
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(DYNAMIC, HAPManagerSerialize.getInstance().toStringValue(this.m_dynamicValue, HAPSerializationFormat.JAVASCRIPT));
 	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(DYNAMIC, HAPManagerSerialize.getInstance().toStringValue(this.m_dynamicValue, HAPSerializationFormat.JSON));
+	}
 }

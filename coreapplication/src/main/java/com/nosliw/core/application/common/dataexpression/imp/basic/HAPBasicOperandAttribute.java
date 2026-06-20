@@ -56,4 +56,11 @@ public class HAPBasicOperandAttribute extends HAPBasicOperand implements HAPOper
 		jsonMap.put(ATTRIBUTE, this.m_attribute);
 		jsonMap.put(BASEDATA, HAPManagerSerialize.getInstance().toStringValue(this.getBase(), HAPSerializationFormat.JAVASCRIPT));
 	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(ATTRIBUTE, this.m_attribute);
+		jsonMap.put(BASEDATA, HAPManagerSerialize.getInstance().toStringValue(this.getBase(), HAPSerializationFormat.JSON));
+	}
 }

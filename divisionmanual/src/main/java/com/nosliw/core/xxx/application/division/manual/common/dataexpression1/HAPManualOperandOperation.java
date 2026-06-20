@@ -181,4 +181,17 @@ public class HAPManualOperandOperation extends HAPManualOperand implements HAPOp
 		jsonMap.put(PARMS, HAPUtilityJson.buildJson(this.getParms(), HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(MATCHERSPARMS, HAPUtilityJson.buildJson(this.getParmMatchers(), HAPSerializationFormat.JAVASCRIPT));
 	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(OPERATION, this.m_operation);
+		jsonMap.put(DATATYPEID, HAPManagerSerialize.getInstance().toStringValue(this.m_dataTypeId, HAPSerializationFormat.LITERATE));
+		if(this.m_base!=null) {
+			jsonMap.put(BASE, HAPManagerSerialize.getInstance().toStringValue(this.getBase(), HAPSerializationFormat.JSON));
+		}
+
+		jsonMap.put(PARMS, HAPUtilityJson.buildJson(this.getParms(), HAPSerializationFormat.JSON));
+		jsonMap.put(MATCHERSPARMS, HAPUtilityJson.buildJson(this.getParmMatchers(), HAPSerializationFormat.JSON));
+	}
 }

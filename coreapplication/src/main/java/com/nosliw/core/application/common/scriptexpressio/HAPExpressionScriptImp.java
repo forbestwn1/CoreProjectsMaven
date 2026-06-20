@@ -90,6 +90,31 @@ public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExp
 		jsonMap.put(DATAEXPRESSION, this.m_dataExpressionContainer.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 	}
 
+	@Override
+	public void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		HAPInfoScriptFunction scriptFunctionInfo = HAPUtilityScriptForExecuteJSScript.buildExpressionFunctionInfo(this);
+		
+		String functionParmValue = "{}";
+		List<HAPJSScriptInfo> childrenFun = scriptFunctionInfo.getChildren();
+		if(!childrenFun.isEmpty()) {
+			Map<String, String> funScriptMap = new LinkedHashMap<String, String>();
+			Map<String, Class<?>> funScriptTypeMap = new LinkedHashMap<String, Class<?>>();
+			for(HAPJSScriptInfo childFun : childrenFun) {
+				funScriptMap.put(childFun.getName(), childFun.getScript());
+				funScriptTypeMap.put(childFun.getName(), HAPJsonTypeAsItIs.class);
+			}
+			functionParmValue = HAPUtilityJson.buildMapJson(funScriptMap, funScriptTypeMap);
+		}
+		jsonMap.put(SUPPORTFUNCTION, functionParmValue);
+		typeJsonMap.put(SUPPORTFUNCTION, HAPJsonTypeScript.class);
+
+		jsonMap.put(SCRIPTFUNCTION, new HAPJsonTypeScript(scriptFunctionInfo.getMainScript().getScript()).toStringValue(HAPSerializationFormat.JSON_FULL));
+		typeJsonMap.put(SCRIPTFUNCTION, HAPJsonTypeScript.class);
+		
+		jsonMap.put(DATAEXPRESSION, this.m_dataExpressionContainer.toStringValue(HAPSerializationFormat.JSON));
+	}
+
 //	@Override
 //	protected void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
 //		

@@ -36,6 +36,12 @@ public class HAPWrapperValueOfBrick extends HAPWrapperValue implements HAPWithBr
 	}
 
 	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(BRICK, HAPManagerSerialize.getInstance().toStringValue(this.m_brick, HAPSerializationFormat.JSON));
+	}
+
+	@Override
 	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {
 		this.m_brick.buildResourceDependency(dependency, runtimeInfo);
 	}

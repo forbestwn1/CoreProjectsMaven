@@ -49,14 +49,15 @@ public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSeri
 	public boolean isEmpty() {   return this.m_scriptExpressionInfoContainer.isEmpty();    }
 	
 	@Override
-	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		super.buildJsonMap(jsonMap, typeJsonMap);
-	}
-
-	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(CONTAINER, this.m_scriptExpressionInfoContainer.toStringValue(HAPSerializationFormat.JAVASCRIPT));
+	}
+	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(CONTAINER, this.m_scriptExpressionInfoContainer.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
 	class HAPItem extends HAPSerializableImp{
@@ -78,6 +79,13 @@ public class HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup extends HAPSeri
 			super.buildJSJsonMap(jsonMap, typeJsonMap);
 			jsonMap.put(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup.SCRIPTEXPRESSION, this.m_exprssionScript.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 			jsonMap.put(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup.CONSTANT, HAPManagerSerialize.getInstance().toStringValue(m_constants, HAPSerializationFormat.JAVASCRIPT));
+		}
+
+		@Override
+		protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+			super.buildJsonMap(jsonMap, typeJsonMap);
+			jsonMap.put(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup.SCRIPTEXPRESSION, this.m_exprssionScript.toStringValue(HAPSerializationFormat.JSON));
+			jsonMap.put(HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup.CONSTANT, HAPManagerSerialize.getInstance().toStringValue(m_constants, HAPSerializationFormat.JSON));
 		}
 	}
 

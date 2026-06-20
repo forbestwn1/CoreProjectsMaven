@@ -460,6 +460,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String RUNTIME_RESOURCE_TYPE_TRANSIENT = "transient";
 		public static final String RUNTIME_RESOURCE_TYPE_CONTAINER = "container";
 		public static final String RUNTIME_RESOURCE_TYPE_CONTAINERLIST = "containerList";
 		public static final String RUNTIME_RESOURCE_TYPE_CONTAINERCOMPLEX = "complexContainer";
