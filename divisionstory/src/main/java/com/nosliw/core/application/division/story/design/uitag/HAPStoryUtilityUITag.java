@@ -31,7 +31,7 @@ public class HAPStoryUtilityUITag {
 			attContent.append(name + "=\"" + attributes.get(name) + "\" ");
 		}
 
-		String content = new  HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryUtilityUITag.class, "uitag.temp"))
+		String content = new  HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryUtilityUITag.class, "uitag.html"))
 		     .setParm("tagName", uiTagInfo.getName())
 		     .setParm("dataVariableName", dataVariableName)
 		     .setParm("attributes", attContent.toString())

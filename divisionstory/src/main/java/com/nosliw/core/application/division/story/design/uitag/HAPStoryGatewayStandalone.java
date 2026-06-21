@@ -81,7 +81,7 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 				id = this.m_idGeneratorService.generateIdStr();
 			}
 			
-			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", id);
+			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", "12345678");
 			HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
 			HAPResource resource = new HAPResource(resourceId, resourceData, null);
 			

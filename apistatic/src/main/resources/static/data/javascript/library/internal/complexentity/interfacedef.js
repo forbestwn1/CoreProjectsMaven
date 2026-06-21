@@ -86,6 +86,8 @@ var node_makeObjectEntityObjectInterface = function(rawEntity, internalValuePort
 				var configure = basicEntityInterface.getConfigure();
 				var attrDef = complexEntityDef.getAttribute(attrName);
 
+				if(attrDef==undefined)   return undefined;
+				
 				var childConfigure = configure.getChildConfigure(attrName);
 
 				var attrValueWrapper = attrDef.getAttributeValueWrapper();
