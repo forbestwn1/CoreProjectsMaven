@@ -28,7 +28,7 @@ var node_createApplication = function(parm, configure){
 	var loc_configure = configure;
 	var loc_configureValue = node_createConfigure(configure).getConfigureValue();
 	
-	var loc_parentView;
+	var loc_parentView = $("<div></div>");
 
 	var loc_envInterface;
 	
@@ -59,8 +59,16 @@ var node_createApplication = function(parm, configure){
 		getPreInitRequest : function(handlers, request){   
 			return loc_createBundleRuntimeRequest(handlers, request);
 		},
-		
-		updateView : function(view){    
+
+		updateView : function(){
+			loc_getBundleRuntime().updateView(loc_parentView);     
+		},
+
+		getView : function(){
+			return loc_parentView.get();
+		},
+				
+		updateView1 : function(view){    
 			loc_parentView = view;
 			loc_getBundleRuntime().updateView(view);     
 		},

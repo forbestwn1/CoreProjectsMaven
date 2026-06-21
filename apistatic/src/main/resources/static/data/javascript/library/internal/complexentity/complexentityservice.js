@@ -325,9 +325,11 @@ var node_createComplexEntityRuntimeService = function() {
 							node_getComponentInterface(application).updateLifecycleEntityObject(lifecycleEntity);
 
 							//update view
+							application.updateView();
 							if(runtimeContext!=undefined && runtimeContext.view!=undefined){
-								node_getComponentInterface(application).updateView(runtimeContext.view);
+								$(runtimeContext.view).append($(application.getView()));
 							}
+							
 
 							return node_getComponentInterface(application).getPostInitRequest({
 								success : function(request){

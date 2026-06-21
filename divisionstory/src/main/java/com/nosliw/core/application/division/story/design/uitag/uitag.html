@@ -11,19 +11,20 @@
 
 
 	<valuecontext>
-		[
-			{
+		{
+			"item" : [{
 				"scope" : "public",
 				"valueStructure" : {
 					"root" : {
 						"||dataVariableName||": {
-							"definition": ||dataDefinition||
+							"definition": {
+							    "data":  ||dataDefinition||
+							}
 						}
 					}
 				}
-			}
-		]
+			}]
+		}
 	</valuecontext>
 
 </html>
-  
