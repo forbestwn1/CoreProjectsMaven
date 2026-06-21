@@ -20,6 +20,7 @@ import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.gateway.HAPGatewayImp;
+import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceData;
 import com.nosliw.core.resource.HAPResourceDataImpTransient;
@@ -81,14 +82,16 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 				id = this.m_idGeneratorService.generateIdStr();
 			}
 			
-			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", "12345678");
+			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", id);
 			HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
 			HAPResource resource = new HAPResource(resourceId, resourceData, null);
 			
 			Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
 			resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
 			
-			out = HAPServiceData.createSuccessData(this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource)));
+			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource));
+			
+			out = HAPServiceData.createSuccessData(gatewayOutput);
 			
 			break;
 		}

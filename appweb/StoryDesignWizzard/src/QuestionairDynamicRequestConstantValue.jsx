@@ -26,8 +26,9 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
 				node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE,
 				gatewayParm,
 				{
-					success: function (requestInfo, bundleDef) {
-						loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId("12345678", node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0")).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
+					success: function (requestInfo, resourceIds) {
+						loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(resourceIds[0])).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
+//						loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(id, node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0")).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
 						var kkk = 5;
 
 						var runtimeContext = {

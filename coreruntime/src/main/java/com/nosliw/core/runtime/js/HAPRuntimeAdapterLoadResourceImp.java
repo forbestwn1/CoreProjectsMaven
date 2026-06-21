@@ -22,13 +22,15 @@ public class HAPRuntimeAdapterLoadResourceImp implements HAPRuntimeAdapterLoadRe
 	
 	@Override
 	public Object buildLoadResourceData(Map<HAPResourceId, HAPResourceInfo> resourcesInfo, List<HAPResource> resources) {
+		List<HAPResourceId> resourceIds = new ArrayList<HAPResourceId>();
 		List<HAPJSScriptInfo> scriptsInfo = new ArrayList<HAPJSScriptInfo>();
 		for(HAPResource resource : resources){
 			//build scripts info
 			HAPResourceInfo resourceInfo = resourcesInfo.get(resource.getId());
 			scriptsInfo.addAll(HAPUtilityRuntimeJsScriptResource.buildScriptForResource(resourceInfo, resource, m_staticResourceService));
+			resourceIds.add(resource.getId());
 		}
-		return new HAPGatewayOutput(scriptsInfo, null);
+		return new HAPGatewayOutput(scriptsInfo, resourceIds);
 	}
 
 }

@@ -13,6 +13,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.gateway.HAPGatewayImp;
+import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceData;
 import com.nosliw.core.resource.HAPResourceDataImpTransient;
@@ -62,7 +63,8 @@ public class HAPGatewayBundleExecutable extends HAPGatewayImp{
 				Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
 				resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
 				
-				out = HAPServiceData.createSuccessData(this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource)));
+				HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource));
+				out = HAPServiceData.createSuccessData(gatewayOutput);
 				break;
 			}
 		}

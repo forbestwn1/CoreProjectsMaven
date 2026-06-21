@@ -35,6 +35,7 @@ public class HAPGatewayOutput extends HAPSerializableImp{
 	public List<HAPJSScriptInfo> getScripts(){  return this.m_scripts;  } 
 	
 	public Object getData(){  return this.m_data;  }
+	public void setData(Object data) {   this.m_data = data;      }
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
