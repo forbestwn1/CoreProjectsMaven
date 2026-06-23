@@ -35,6 +35,13 @@ public class HAPStoryWizzardQuestionairGroup extends HAPStoryWizzardQuestionair{
 	public List<HAPStoryWizzardQuestionair> getItems(){     return this.m_items;      }
 
 	@Override
+	void clear() {
+		for(HAPStoryWizzardQuestionair item : this.m_items) {
+			item.clear();
+		}
+	}
+
+	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(ITEM, HAPManagerSerialize.getInstance().toStringValue(this.m_items, HAPSerializationFormat.JSON));

@@ -48,8 +48,7 @@ public class HAPStoryDesignMetadataStepWizard extends HAPStoryDesignMetadataStep
 	
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		this.m_questionair.clear();
 	}
 
 	@Override

@@ -95,28 +95,22 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		this.m_changeHistory.remove(this.m_changeHistory.size()-1);
 	}
 
-	public void rollBackChaangesInStep() {
-		HAPStoryDesignStep step = this.getCurrentStep();
-		this.m_changeMan.revertChange(m_story, step.getChanges());
-	}
-
 	public void rollBackStep() {
 		HAPStoryDesignStep step = this.getCurrentStep();
-		this.rollBackChaangesInStep();
-		step.getMetaData().clear();
+		this.m_changeMan.revertChange(m_story, step.getChanges());
+		step.clear();
 	}
-	
 	
 	public List<HAPStoryDesignMetadataStep> getStepInfos(){
 		List<HAPStoryDesignMetadataStep> out = new ArrayList<HAPStoryDesignMetadataStep>();
 		for(int i=1; i<this.m_changeHistory.size(); i++) {
 			out.add(m_changeHistory.get(i).getMetaData());
-			
 		}
 		return out;      
 	}
 	
 	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.m_changeHistory.size()-1);    }
+	public boolean isFirstStep() {    return this.m_changeHistory.size()==2;      }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){  

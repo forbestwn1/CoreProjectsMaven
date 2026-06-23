@@ -72,6 +72,12 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 	public void setIsDirty(boolean isDirty) {     this.m_isDirty = isDirty;        }
 	
 	@Override
+	void clear() {
+		this.setIsDirty(false);
+		this.setChangedValue(null);
+	}
+	
+	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		
@@ -83,6 +89,7 @@ public class HAPStoryWizzardQuestionairItemDynamic extends HAPStoryWizzardQuesti
 		
 		jsonMap.put(ERROR, HAPManagerSerialize.getInstance().toStringValue(this.m_error, HAPSerializationFormat.JSON));
 	}
+
 }
 
 @Component

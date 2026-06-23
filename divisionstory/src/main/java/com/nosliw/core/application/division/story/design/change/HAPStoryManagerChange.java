@@ -19,10 +19,18 @@ public class HAPStoryManagerChange {
 
 	public void revertChange(HAPStoryStory story, List<HAPStoryChangeItem> changeItems) {
 		//apply in revert sequence
+	    for(int i=changeItems.size()-1; i>=0; i--) {
+	    	for(HAPStoryChangeItem changeItem : changeItems.get(i).getRevertChanges()) {
+		    	applySingleChange(story, changeItem, null, false);
+	    	}
+	    }
 	}
 	
 	//apply change, not triggured extend changes to story
-	public void applyChanges(HAPStoryStory story, List<HAPStoryChangeItem> changeItems) {		
+	public void applyChanges(HAPStoryStory story, List<HAPStoryChangeItem> changeItems) {
+		for(HAPStoryChangeItem change : changeItems) {
+			applyChange(story, change);
+		}
 	}
 
 	//apply change and triggued extend changes to story

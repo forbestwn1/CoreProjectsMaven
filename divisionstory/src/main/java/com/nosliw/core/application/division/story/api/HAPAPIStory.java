@@ -61,7 +61,7 @@ public class HAPAPIStory {
 	}	
 
 	@PostMapping("/build")
-    public String buildDesign(@RequestBody String requestBody) {
+    public String buildDesignNext(@RequestBody String requestBody) {
 		HAPStoryBuilderRequest request = (HAPStoryBuilderRequest)this.m_entityParseService.parseEntityJSONExplicit(new JSONObject(requestBody), HAPStoryBuilderRequest.PARSABLEENTITYTYPE);
 		HAPStoryBuilderResponseBuild buildResponse = m_designManager.designStory(request);
 		HAPServiceData out = HAPServiceData.createSuccessData(buildResponse);

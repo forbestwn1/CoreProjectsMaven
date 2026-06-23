@@ -39,6 +39,8 @@ public abstract class HAPStoryWizzardQuestionair extends HAPEntityInfoImp implem
 
 	public String getType() {    return this.m_type;  	}
 	
+	abstract void clear();
+	
 	public boolean isTag(String tag) {    return HAPUtilityBasic.isEquals(m_tag, tag);      }
 	public void setTag(String tag) {    this.m_tag = tag;       }
 

@@ -36,6 +36,10 @@ public class HAPStoryWizzardQuestionairItemStatic extends HAPStoryWizzardQuestio
 	}
 
 	@Override
+	void clear() {
+	}
+
+	@Override
 	public String getValueType() {   return this.getValue().getValueType();  }	// TODO Auto-generated method stub
     
     public HAPStoryWizzardValueInQuestionair getValue() {   	return this.m_value;    }

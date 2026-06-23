@@ -14,19 +14,13 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPStoryChangeItemConnectionDelete extends HAPStoryChangeItemConnection{
 
-	private HAPStoryChangeInfoConnection m_connectionInfo;
-	
 	public HAPStoryChangeItemConnectionDelete() {
 		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE);
 	}
 	
 	public HAPStoryChangeItemConnectionDelete(HAPStoryIdElement elementIdSource, HAPStoryIdElement elementIdTarget, HAPStoryChangeInfoConnection connectionInfo) {
 		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_CONNECTION_DELETE, elementIdSource, elementIdTarget, connectionInfo);
-		this.m_connectionInfo = connectionInfo;
 	}
-	
-	@Override
-	public HAPStoryChangeInfoConnection getConnectionInfo() {    return this.m_connectionInfo;     }
 	
 	@Override
 	protected boolean buildObjectByJson(Object json){
@@ -51,6 +45,7 @@ class HAPStoryChangeItemConnectionDelete_HAPEntityParsable extends HAPStoryChang
 	
 	protected void parseToEntity(JSONObject jsonObj, HAPStoryChangeItemConnectionDelete changeItem, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, changeItem, parseService);
+		
 	}
 
 	@Override
@@ -61,4 +56,3 @@ class HAPStoryChangeItemConnectionDelete_HAPEntityParsable extends HAPStoryChang
 	}
 
 }
-

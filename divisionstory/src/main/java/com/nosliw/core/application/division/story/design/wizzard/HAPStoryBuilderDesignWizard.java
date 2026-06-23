@@ -44,10 +44,11 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         switch(changeRequest.getCommand()) {
         case COMMAND_PREVIOUS:
         	
-        	//if no previous, 
-        	
-        	//roll back current unfinished step, remove current step
-        	storyDesign.removeStep();
+        	//if no previous,
+        	if(!storyDesign.isFirstStep()) {
+            	//roll back current unfinished step, remove current step
+            	storyDesign.removeStep();
+        	}
         	
         	//for previous step, roll back changes in step, remove answer
         	storyDesign.rollBackStep();
@@ -60,13 +61,16 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         	
         	HAPStoryWizzardRequestDataNext nextRequestData = (HAPStoryWizzardRequestDataNext)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)changeRequest.getRequestData(), HAPStoryWizzardRequestDataNext.PARSABLEENTITYTYPE);
         	
+        	if(((HAPStoryDesignMetadataStepWizard)storyDesign.getCurrentStep().getMetaData()).getStepDefinition().getName().equals(nextRequestData.getStepData().getStepDefinition().getName())) {
+            	storyDesign.rollBackStep();
+        	}
+        	
         	//if no previous, create a new step with question
         	this.m_wizzardDef.processNext(storyDesign, nextRequestData);
         	
         	out = this.createResultBuild(storyDesign);
         	
         	break;
-
         }
 		
 		return out;

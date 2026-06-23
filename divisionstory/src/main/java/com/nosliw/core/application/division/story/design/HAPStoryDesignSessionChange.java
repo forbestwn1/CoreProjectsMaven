@@ -39,7 +39,7 @@ public class HAPStoryDesignSessionChange {
 	}
 	
 	public void rollback() {
-		
+		//do nothing
 	}
 
 	public HAPStoryElement getElement(HAPStoryReferenceElement eleRef) {
