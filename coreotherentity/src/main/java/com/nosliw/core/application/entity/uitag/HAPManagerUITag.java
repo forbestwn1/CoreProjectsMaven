@@ -90,12 +90,14 @@ public class HAPManagerUITag{
 		HAPDataTypeCriteria queryDataTypeCriteria = query.getDataTypeCriterai();
 		for(String name : this.m_dataTagDefs.keySet()) {
 			HAPUITagDefinitionData uiTagDef = this.m_dataTagDefs.get(name);
-			Pair<String, HAPDataTypeCriteria> tagDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
-			HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria.getRight());
-			if(matchers!=null) {
-				double score = matchers.getScore();
-				if(score>0) {
-					candidates.add(new HAPUITagCandidate(uiTagDef, tagDataTypeCriteria.getLeft(), score, matchers));
+			List<Pair<String, HAPDataTypeCriteria>> tagsDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
+			for(Pair<String, HAPDataTypeCriteria> tagDataTypeCriteria : tagsDataTypeCriteria) {
+				HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria.getRight());
+				if(matchers!=null) {
+					double score = matchers.getScore();
+					if(score>0) {
+						candidates.add(new HAPUITagCandidate(uiTagDef, tagDataTypeCriteria.getLeft(), score, matchers));
+					}
 				}
 			}
 		}
@@ -131,10 +133,14 @@ public class HAPManagerUITag{
 		return HAPUtilityFile.readFile(file);
 	}
 	
-	private Pair<String, HAPDataTypeCriteria> getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
-		String attrName = uiTagDef.getAttributeForData();
-		HAPUITagDefinitionAttributeVariable attrDef = (HAPUITagDefinitionAttributeVariable)uiTagDef.getAttributeDefition(attrName);
-		return Pair.of(attrName, attrDef.getDataDefinition().getCriteria());
+	private List<Pair<String, HAPDataTypeCriteria>> getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
+		List<Pair<String, HAPDataTypeCriteria>> out = new ArrayList<Pair<String, HAPDataTypeCriteria>>();
+		List<String> attrNames = uiTagDef.getAttributeForData();
+		for(String attrName : attrNames) {
+			HAPUITagDefinitionAttributeVariable attrDef = (HAPUITagDefinitionAttributeVariable)uiTagDef.getAttributeDefition(attrName);
+			out.add(Pair.of(attrName, attrDef.getDataDefinition().getCriteria()));
+		}
+		return out;
 	}
 	
 	class HAPUITagCandidate{

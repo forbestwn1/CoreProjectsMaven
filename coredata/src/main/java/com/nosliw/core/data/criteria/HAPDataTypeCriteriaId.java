@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
-import com.nosliw.common.utils.HAPConstantShared;
 
 public class HAPDataTypeCriteriaId  extends HAPDataTypeCriteriaImp implements HAPDataTypeCriteriaWithSubCriteria{
 
@@ -75,6 +75,7 @@ public class HAPDataTypeCriteriaId  extends HAPDataTypeCriteriaImp implements HA
 		
 		if(this.m_subCriteriaGroup!=null){
 			out.append(HAPManagerSerialize.getInstance().toStringValue(m_subCriteriaGroup, HAPSerializationFormat.LITERATE));
+			int kkk = 555;
 		}
 		return out.toString(); 
 	}

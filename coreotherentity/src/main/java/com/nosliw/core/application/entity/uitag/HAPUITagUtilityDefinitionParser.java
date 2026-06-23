@@ -38,11 +38,22 @@ public class HAPUITagUtilityDefinitionParser {
 		String uiTagType = jsonObj.optString(HAPUITagDefinition.TYPE);
 		if(HAPConstantShared.UITAG_TYPE_DATA.equals(uiTagType)) {
 			out = new HAPUITagDefinitionData();
-			String attributeForData = (String)jsonObj.opt(HAPUITagDefinitionData.ATTRIBUTEFORDATA);
-			if(attributeForData==null) {
+			Object dataAttrJsonObj = jsonObj.opt(HAPUITagDefinitionData.ATTRIBUTEFORDATA);
+			if(dataAttrJsonObj==null) {
 				//default attribute name
+				((HAPUITagDefinitionData)out).addAttributeForData(HAPConstantShared.UITAG_ATTRIBUTE_DATA);
 			}
-			((HAPUITagDefinitionData)out).setAttributeForData(attributeForData);
+			else {
+				if(dataAttrJsonObj instanceof String) {
+					((HAPUITagDefinitionData)out).addAttributeForData((String)dataAttrJsonObj);
+				}
+				else if(dataAttrJsonObj instanceof JSONArray) {
+					JSONArray dataAttrJsonArray = (JSONArray)dataAttrJsonObj;
+					for(int i=0; i<dataAttrJsonArray.length(); i++) {
+						((HAPUITagDefinitionData)out).addAttributeForData(dataAttrJsonArray.getString(i));
+					}
+				}
+			}
 		}
 		else {
 			out = new HAPUITagDefinition();
