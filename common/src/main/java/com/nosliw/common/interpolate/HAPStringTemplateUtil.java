@@ -8,7 +8,7 @@ import com.nosliw.common.utils.HAPUtilityFile;
 
 public class HAPStringTemplateUtil {
 
-	public static final String SEPERATOR = "||";
+	public static final String SEPERATOR = "|||";
 
 	public static String getStringValue(InputStream templateStream, Map<String, String> parms){
 		return getStringValue(templateStream, parms, true);

@@ -1,8 +1,8 @@
     		{
-	    		"name" : "||name||",
+	    		"name" : "|||name|||",
 			    "description" : "",
 		        "brick" : {
-    			    "brickId":"||localId||"
+    			    "brickId":"|||localId|||"
    			    }
 			}
 			

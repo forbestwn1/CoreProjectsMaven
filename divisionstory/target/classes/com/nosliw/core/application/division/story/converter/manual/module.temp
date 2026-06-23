@@ -6,16 +6,16 @@
 	"brick": {
 	
 	    "page" : 
-            ||pages||
+            |||pages|||
 	    ,
 	    
 	    "valueContext" : {
 	    
-	        ||valueContext||
+	        |||valueContext|||
 	    },
 	
 	    "task" : 
-            ||tasks||
+            |||tasks|||
 	    ,
 	    
 	    

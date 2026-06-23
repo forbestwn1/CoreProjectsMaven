@@ -1,4 +1,4 @@
 {
-	"valuePortId": ||valuePortIdInBundle||,
-	"rootName" : "||variableName||"
+	"valuePortId": |||valuePortIdInBundle|||,
+	"rootName" : "|||variableName|||"
 }

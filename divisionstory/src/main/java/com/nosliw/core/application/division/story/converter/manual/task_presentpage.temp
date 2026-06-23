@@ -1,5 +1,5 @@
 	        {
-	    		"name" : "||taskName||",
+	    		"name" : "|||taskName|||",
 			    "description" : "Present page",
         		"brickType" : {
 		    	    "brickType" : "taskTaskScript",
@@ -7,11 +7,11 @@
 		        },
 		        "brick" : {
 					"info" : {
-						"nosliw_alias" : "||alias||"
+						"nosliw_alias" : "|||alias|||"
 					},
     				"scriptResourceId": "task_page_present",
     				"parm": {
-    				    "page" : "||pageId||"
+    				    "page" : "|||pageId|||"
     				}
 		        }
 	        }

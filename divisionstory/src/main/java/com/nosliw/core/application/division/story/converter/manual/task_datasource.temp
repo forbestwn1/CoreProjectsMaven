@@ -1,5 +1,5 @@
 			{
-				"name" : "||taskId||",
+				"name" : "|||taskId|||",
 			    "description" : "data source execute",
 				"brickType" : {
 				    "brickType" : "serviceprovider",
@@ -7,24 +7,24 @@
 			    },
 			    "brick" : {
                     "info": {
-                        "nosliw_alias": "||alias||"
+                        "nosliw_alias": "|||alias|||"
                     },
 					"brick" : {
     					"serviceKey" : {
-	    					"id" : "||dataSourceId||"
+	    					"id" : "|||dataSourceId|||"
 		    			}
 					},
     				"adapter" : [
  	    				{
-		    				"name" : "||adapterId||",
+		    				"name" : "|||adapterId|||",
 				    		"brickTypeId" : {
 					    		"brickType": "dataAssociationForTask",
     							"version": "1.0.0"
 	    					},
 		    				"brick" : {
 			    				"definition" : {
-				    				"in" : ||requestDataAssociation||,
-			    					"out" : ||responseDataAssociation||, 
+				    				"in" : |||requestDataAssociation|||,
+			    					"out" : |||responseDataAssociation|||, 
 			    				}
 		    				}
 	    				}

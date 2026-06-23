@@ -11,7 +11,7 @@
 								"name" : "tasks",
 				        		"type" : "multiple",
     						    "brickPackages" : 
-        		        		     ||subTasks|| 
+        		        		     |||subTasks||| 
 	    			    	}
     	    			]
 	    	    	}

@@ -1,3 +1,3 @@
-function(||functions||, ||expressionsData||, ||constantsData||, ||variablesData||){
-	return ||functionScript||;
+function(|||functions|||, |||expressionsData|||, |||constantsData|||, |||variablesData|||){
+	return |||functionScript|||;
 } 
