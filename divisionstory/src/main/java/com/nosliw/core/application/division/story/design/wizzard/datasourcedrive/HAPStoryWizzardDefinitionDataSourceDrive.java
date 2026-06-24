@@ -15,6 +15,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
@@ -189,7 +190,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					);
 
 			HAPStoryDataAssociation requestDataAssociationForConstant = new HAPStoryDataAssociation(
-					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithVariable.CHILD_VARIABLE),
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithConstant.CHILD_CONSTANT),
 					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);

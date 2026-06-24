@@ -28,7 +28,7 @@ public class HAPStoryChangeUtility {
 		//variable element
 		HAPStoryElementAccessoryConstant constantEle = new HAPStoryElementAccessoryConstant(entityInfo);
 		HAPStoryChangeItemElementNew newConstantChange = changeSession.addChangeItemNew(constantEle);
-		changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithConstant.getAddConstantChildPath()));
+		changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithConstant.getAddConstantChildPath(entityInfo.getName())));
 
 		//end point element
 		HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOConstant(constantData);
