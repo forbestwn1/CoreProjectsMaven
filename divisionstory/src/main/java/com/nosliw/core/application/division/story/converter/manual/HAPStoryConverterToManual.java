@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.json.JSONObject;
 
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -19,6 +21,8 @@ import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
@@ -60,6 +64,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRu
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.valueport.HAPIdValuePort;
 import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
+import com.nosliw.core.data.HAPData;
 
 public class HAPStoryConverterToManual {
 
@@ -343,6 +348,8 @@ public class HAPStoryConverterToManual {
 		
 		HAPValueStructureImp valueStructure = new HAPValueStructureImp();
 		
+		Map<String, Object> initValue = new LinkedHashMap<String, Object>();
+		
 		List<HAPStoryContainerChildrenElementsWrapper> variablesChildren =((HAPStoryElement)withVariableElement).getChildCollection(HAPStoryElementWithVariable.CHILD_VARIABLE);
 		
 		if(!returnSthWithEmpty&&variablesChildren.size()==0) {
@@ -354,10 +361,19 @@ public class HAPStoryConverterToManual {
 			String variableName = variableElement.getEntityInfo().getName();
 			
 			HAPStoryElementEndPointIOVariable variableEndpoint = (HAPStoryElementEndPointIOVariable)story.getElement(variableElement.getChildElement(HAPStoryElementWithEndPoint.CHILD_ENDPOINT).getElementId());
+			HAPDataDefinitionWritable writableDataDef = HAPUtilityDataDefinition.toWritableDataDefinition(variableEndpoint.getDataDefinition());
+			if(writableDataDef.getType().equals(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT)) {
+				HAPData initData = ((HAPDataDefinitionWritableWithInit)writableDataDef).getInitData();
+				if(initData!=null) {
+					initValue.put(variableName, initData);
+				}
+			}
 			
-			HAPRootInStructure rootInStructure = new HAPRootInStructure(new HAPElementStructureLeafData(HAPUtilityDataDefinition.toWritableDataDefinition(variableEndpoint.getDataDefinition())), variableElement.getEntityInfo());
+			HAPRootInStructure rootInStructure = new HAPRootInStructure(new HAPElementStructureLeafData(writableDataDef), variableElement.getEntityInfo());
 			valueStructure.addRoot(rootInStructure);
 		}
+		
+		valueStructure.setInitValue(new JSONObject(HAPManagerSerialize.getInstance().toStringValue(initValue, HAPSerializationFormat.JSON)));
 		
 		valueContext.addValueStructure(new HAPWrapperValueStructureDefinitionImp(valueStructure));
 		
