@@ -29,18 +29,15 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	private Map<String, HAPManualInfoContent> m_branchContents = new LinkedHashMap<String, HAPManualInfoContent>();
 	
 	private HAPManualInfoContent m_mainContent;
-	
-	public HAPManualContentProviderFile(HAPIdBrick brickId, HAPManagerBrickCriteria brickCriteriaMan) {
+
+	public HAPManualContentProviderFile(HAPIdBrick brickId, HAPManualDefinitionInfoBrickLocation entityLocationInfo, HAPManagerBrickCriteria brickCriteriaMan) {
 		this.m_brickCriteriaMan = brickCriteriaMan;
 		this.m_brickId = brickId;
+		this.m_entityLocationInfo = entityLocationInfo;
 		this.init();
 	}
-
 	
 	private void init() {
-		
-		this.m_entityLocationInfo = HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(this.m_brickId);
-		
 		
 		//bundle info
 		if(!this.m_entityLocationInfo.getIsSingleFile()) {

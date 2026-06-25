@@ -10,6 +10,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignUtilityExport;
 
 public class HAPStoryUtilityConverter {
 
@@ -21,6 +22,10 @@ public class HAPStoryUtilityConverter {
 		return HAPStringTemplateUtil.getStringValue(brickWrapperTemplateStream, templateParms);
 	}
 
+	public static String getDesignConverToManualFolder(String designId) {
+		return HAPStoryDesignUtilityExport.getDesignFolder(designId).getAbsolutePath()+"/manual";
+	}
+	
 	
 	
 }
