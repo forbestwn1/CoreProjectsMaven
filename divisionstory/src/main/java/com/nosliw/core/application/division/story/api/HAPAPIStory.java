@@ -14,11 +14,12 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPBundleForExecute;
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPUtilityBundleForExecute;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
@@ -54,8 +55,8 @@ public class HAPAPIStory {
 	private HAPManualManangerStandalone m_standaloneMan;
 	
 	@PostMapping("/new")
-    public String newDesign(@RequestParam String builderId) {
-		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(builderId, null);
+    public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
+		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(new HAPIdBrickType(brickType, brickVersion), builderId, null);
 		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
@@ -68,23 +69,23 @@ public class HAPAPIStory {
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@GetMapping("/{id}")
-    public String getDesign(@PathVariable String id) {
-		HAPStoryDesign design = m_designManager.getDesign(id);
+	@GetMapping("/{brickType}/{brickVersion}/{id}")
+    public String getDesign(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		HAPStoryDesign design = m_designManager.getDesign(buildBrickId(brickType, brickVersion, id));
 		HAPServiceData out = HAPServiceData.createSuccessData(design);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@PostMapping("/convert/{id}")
-    public String convertDesign(@PathVariable String id) {
-		m_designManager.convertDesignToManual(id);
+	@PostMapping("/convert/{brickType}/{brickVersion}/{id}")
+    public String convertDesign(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		m_designManager.convertDesignToManual(buildBrickId(brickType, brickVersion, id));
 		HAPServiceData out = HAPServiceData.createSuccessData();
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@PostMapping("/bundle/{id}")
-    public String buildBundle(@PathVariable String id) {
-		HAPBundleForBrick bundle = this.m_storyManager.getBundle(new HAPIdBrick(HAPEnumBrickType.MODULE_100, null, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
+	@PostMapping("/bundle/{brickType}/{brickVersion}/{id}")
+    public String buildBundle(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		HAPBundleForBrick bundle = this.m_storyManager.getBundle(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
 		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
@@ -98,6 +99,10 @@ public class HAPAPIStory {
 		
 		HAPServiceData out = HAPServiceData.createSuccessData(bundleForExe);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}
+	
+	private HAPIdBrick buildBrickId(String brickType, String brickVersion, String brickId) {
+		return new HAPIdBrick(new HAPIdBrickType(brickType, brickVersion), HAPConstantShared.BRICK_DIVISION_STORY, brickId);
 	}
 
 }

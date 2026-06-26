@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntity;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
@@ -17,7 +19,7 @@ public class HAPStoryBuilderRequest extends HAPSerializableImp implements HAPEnt
 	public static final String PARSABLEENTITYTYPE = "story.builder.request";
 	
 	@HAPAttribute
-	public static final String DESIGNID = "designId";
+	public static final String BRICKID = "brickId";
 	
 	@HAPAttribute
 	public static final String COMMAND = "command";
@@ -25,14 +27,14 @@ public class HAPStoryBuilderRequest extends HAPSerializableImp implements HAPEnt
 	@HAPAttribute
 	public static final String REQUESTDATA = "requestData";
 	
-	private String m_designId;
+	private HAPIdBrick m_brickId;
 	
 	private String m_command;
 	
 	private Object m_requestData;
 	
-    public String getDesignId() {     return this.m_designId;      }
-    public void setDesignId(String designId) {     this.m_designId = designId;     }
+    public HAPIdBrick getBrickId() {     return this.m_brickId;      }
+    public void setBrickId(HAPIdBrick brickId) {     this.m_brickId = brickId;     }
 	
 	public String getCommand() {	return this.m_command;	}
 	public void setCommand(String command) {    this.m_command = command;       }
@@ -53,7 +55,11 @@ class HAPStoryBuilderRequest_HAPEntityParsable implements HAPParserEntity{
 	    JSONObject jsonObj = (JSONObject)obj;
 
 	    HAPStoryBuilderRequest out = new HAPStoryBuilderRequest();
-	    out.setDesignId(jsonObj.getString(HAPStoryBuilderRequest.DESIGNID));
+	    
+	    HAPIdBrick brickId = new HAPIdBrick();
+	    brickId.buildObject(jsonObj.get(HAPStoryBuilderRequest.BRICKID), HAPSerializationFormat.JSON);
+	    out.setBrickId(brickId);
+	    
 	    out.setCommand(jsonObj.getString(HAPStoryBuilderRequest.COMMAND));
 	    out.setRequestData(jsonObj.optJSONObject(HAPStoryBuilderRequest.REQUESTDATA));
 		

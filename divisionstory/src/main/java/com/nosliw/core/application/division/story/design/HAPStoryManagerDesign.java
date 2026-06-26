@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityExporterContentProviderText;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
@@ -29,11 +31,11 @@ public class HAPStoryManagerDesign {
 	
     private Map<String, HAPStoryBuilder> m_builders;	
 	
-    private Map<String, HAPStoryDesign> m_designs;
+    private Map<String, Map<String, HAPStoryDesign>> m_designs;
     
     public HAPStoryManagerDesign() {
     	this.m_builders = new LinkedHashMap<String, HAPStoryBuilder>();
-    	this.m_designs = new LinkedHashMap<String, HAPStoryDesign>();
+    	this.m_designs = new LinkedHashMap<String, Map<String, HAPStoryDesign>>();
     }
     
 	@Autowired
@@ -43,43 +45,60 @@ public class HAPStoryManagerDesign {
 		}
 	}
 	
-	public HAPStoryDesign getDesign(String designId) {   
-		HAPStoryDesign out = this.m_designs.get(designId);      
-		out = null;
+	public HAPStoryDesign getDesign(HAPIdBrick brickId) {   
+		HAPStoryDesign out = null;
+		Map<String, HAPStoryDesign> byIds = this.m_designs.get(brickId.getBrickTypeId().getKey());
+		if(byIds!=null) {
+			out = byIds.get(brickId.getId());      
+		}
 		if(out==null) {
-			out = HAPStoryDesignUtilityExport.loadDesign(designId, this.m_entityParseService, this.m_changeMan);
+			out = HAPStoryDesignUtilityExport.loadDesign(brickId, this.m_entityParseService, this.m_changeMan);
 			if(out!=null) {
-				this.m_designs.put(out.getId(), out);
+				this.setDesign(out);
 			}
 		}
 		return out;
 	}
 	
-	public HAPStoryBuilderResponseNew newStoryDesign(String builderId, String designId) {
+	public HAPStoryBuilderResponseNew newStoryDesign(HAPIdBrickType brickTypeId, String builderId, String designId) {
 		HAPStoryBuilder storyBuilder = this.getBuilder(builderId);
-		HAPStoryDesign design = new HAPStoryDesign(designId!=null?designId:this.generateId(), builderId, this.m_changeMan);
+		HAPStoryDesign design = new HAPStoryDesign(designId!=null?designId:this.generateId(), brickTypeId, builderId, this.m_changeMan);
 		HAPStoryBuilderResponseNew out = storyBuilder.initDesign(design);
-		this.m_designs.put(designId, design);
+	
+		this.setDesign(design);
+		
 		HAPStoryDesignUtilityExport.saveStoryDesign(design);
 		return out;
 	}
 	
 	public HAPStoryBuilderResponseBuild designStory(HAPStoryBuilderRequest designRequest) {
-		String designId = designRequest.getDesignId();
-		HAPStoryDesign design = this.getDesign(designId);
+		HAPStoryDesign design = this.getDesign(designRequest.getBrickId());
 		HAPStoryBuilder builder = this.getBuilder(design.getBuilderId());
 		HAPStoryBuilderResponseBuild out = builder.buildStory(design, designRequest);
-		this.m_designs.put(designId, design);
+		
+		this.setDesign(design);
+
 		HAPStoryDesignUtilityExport.saveStoryDesign(design);
 		return out;
 	}
 
-	public String convertDesignToManual(String designId) {
-		HAPStoryDesign design = this.getDesign(designId);
+	public String convertDesignToManual(HAPIdBrick brickId) {
+		HAPStoryDesign design = this.getDesign(brickId);
 		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
-		String exportFolder = HAPStoryUtilityConverter.getDesignConverToManualFolder(designId);
+		String exportFolder = HAPStoryUtilityConverter.getDesignConverToManualFolder(brickId);
 		HAPManualUtilityExporterContentProviderText.export(contentProvider, exportFolder);
 		return exportFolder;
+	}
+	
+
+	private void setDesign(HAPStoryDesign design) {
+		String brickTypeKey = design.getRootBrickType().getKey();
+		Map<String, HAPStoryDesign> byIds = this.m_designs.get(brickTypeKey);
+		if(byIds == null) {
+			byIds = new LinkedHashMap<String, HAPStoryDesign>();
+			this.m_designs.put(brickTypeKey, byIds);
+		}
+		byIds.put(design.getId(), design);
 	}
 	
 	private HAPStoryBuilder getBuilder(String builderId) {	return this.m_builders.get(builderId);	}

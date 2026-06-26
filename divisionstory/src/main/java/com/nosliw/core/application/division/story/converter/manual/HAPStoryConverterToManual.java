@@ -206,7 +206,7 @@ public class HAPStoryConverterToManual {
 		
 		valuePortIdInBundle = new HAPIdValuePortInBundle(brickIdInBundle, HAPConstantShared.VALUEPORTGROUP_SIDE_EXTERNAL, valuePortId);
 		
-		return Pair.of(new HAPStoryPath(basePath.getBaseStoryElementId(), basePath.getPath().appendPath(subPath)), valuePortIdInBundle);
+		return Pair.of(new HAPStoryPath(basePath.getBaseStoryElementId(), basePath.getPath()==null?subPath : basePath.getPath().appendPath(subPath)), valuePortIdInBundle);
 	}
 	
 	private static String convertTunnel(HAPStoryTunnel tunnel, HAPStoryPath sourceBasePath, HAPIdValuePortInBundle sourceValuePort, HAPStoryPath targetBasePath, HAPIdValuePortInBundle targetValuePort, HAPStoryStory story) {

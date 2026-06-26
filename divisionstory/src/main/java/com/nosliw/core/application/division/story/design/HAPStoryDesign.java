@@ -12,6 +12,9 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
@@ -26,6 +29,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public static final String BUILDERID = "builderId";
 	
 	@HAPAttribute
+	public static final String ROOTBRICKTYPE = "rootBrickType";
+	
+	@HAPAttribute
 	public static final String STORY = "story";
 	
 	@HAPAttribute
@@ -34,6 +40,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	private HAPStoryManagerChange m_changeMan;
 
 	private String m_builderId;
+	
+	private HAPIdBrickType m_rootBrickType;
 	
 	private HAPStoryStory m_story;
 	
@@ -45,11 +53,16 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		this.m_changeMan = changeMan;
 	}
 	
-	public HAPStoryDesign(String id, String builderId, HAPStoryManagerChange changeMan) {
+	public HAPStoryDesign(String id, HAPIdBrickType rootBrickType, String builderId, HAPStoryManagerChange changeMan) {
 		this(changeMan);
 		this.setId(id);
+		this.m_rootBrickType = rootBrickType;
 		this.m_builderId = builderId;
 	}
+	
+	public HAPIdBrickType getRootBrickType() {    return this.m_rootBrickType;      }
+	public void setRootBrickType(HAPIdBrickType brickType) {      this.m_rootBrickType = brickType;       }
+	public HAPIdBrick getBrickId() {    return new HAPIdBrick(this.m_rootBrickType, HAPConstantShared.BRICK_DIVISION_STORY, this.getId());      }
 	
 	public String getBuilderId() {  return this.m_builderId;     }
 	public void setBuilderId(String builderId) {     this.m_builderId = builderId;     }
@@ -117,6 +130,12 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		JSONObject jsonObj = (JSONObject)json;
 		this.m_builderId = jsonObj.getString(BUILDERID);
 		
+		Object rootBrickTypeObj = jsonObj.opt(ROOTBRICKTYPE);
+		if(rootBrickTypeObj!=null) {
+			this.m_rootBrickType = new HAPIdBrickType();
+			this.m_rootBrickType.buildObject(rootBrickTypeObj, HAPSerializationFormat.JSON);
+		}
+		
 		this.m_story.buildObject(jsonObj.getJSONObject(STORY), HAPSerializationFormat.JSON);
 		
 		JSONArray stepJsonArray = jsonObj.optJSONArray(STEP);
@@ -134,6 +153,7 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(ROOTBRICKTYPE, this.m_rootBrickType.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(BUILDERID, this.m_builderId);
 		jsonMap.put(STORY, this.m_story.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(STEP, HAPUtilityJson.buildJson(this.m_changeHistory, HAPSerializationFormat.JSON));

@@ -36,10 +36,9 @@ public class HAPStoryManagerStory implements HAPPluginDivision{
 
 	@Override
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		String designId = brickId.getId();
-		File manualFolder = new File(HAPStoryUtilityConverter.getDesignConverToManualFolder(designId)); 
+		File manualFolder = new File(HAPStoryUtilityConverter.getDesignConverToManualFolder(brickId)); 
 		if(!manualFolder.exists()) {
-			manualFolder = new File(this.m_storyDesignMan.convertDesignToManual(brickId.getId()));
+			manualFolder = new File(this.m_storyDesignMan.convertDesignToManual(brickId));
 		}
 		
 		HAPManualContentProviderFile contentProvider = new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.buildBrickLocationInfoFromMainFolder(brickId.getBrickTypeId(), manualFolder), m_brickCriteriaMan);

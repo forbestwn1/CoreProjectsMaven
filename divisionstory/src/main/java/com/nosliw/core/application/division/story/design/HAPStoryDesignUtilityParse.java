@@ -5,7 +5,9 @@ import java.io.File;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
@@ -22,6 +24,13 @@ public class HAPStoryDesignUtilityParse {
 		
 		out.buildEntityInfoByJson(designJsonObj);
 		
+		Object rootBrickTypeObj = designJsonObj.opt(HAPStoryDesign.ROOTBRICKTYPE);
+		if(rootBrickTypeObj!=null) {
+			HAPIdBrickType rootBrickType = new HAPIdBrickType();
+			rootBrickType.buildObject(rootBrickTypeObj, HAPSerializationFormat.JSON);
+			out.setRootBrickType(rootBrickType);
+		}
+
 		out.setBuilderId(designJsonObj.getString(HAPStoryDesign.BUILDERID));
 
 		out.setStory(HAPStoryUtilityStoryParse.parseStory(designJsonObj.getJSONObject(HAPStoryDesign.STORY), entityParseService));

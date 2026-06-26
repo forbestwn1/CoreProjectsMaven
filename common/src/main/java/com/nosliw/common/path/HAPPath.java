@@ -53,7 +53,7 @@ public class HAPPath {
 	}
 	
 	public HAPPath appendPath(HAPPath path) {
-		this.init(HAPUtilityNamingConversion.cascadePath(this.m_path, path.m_path));
+		this.init(HAPUtilityNamingConversion.cascadePath(this.m_path, path==null?null:path.m_path));
 		return this;
 	}
 	

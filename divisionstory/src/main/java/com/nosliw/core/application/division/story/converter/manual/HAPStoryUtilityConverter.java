@@ -22,8 +22,8 @@ public class HAPStoryUtilityConverter {
 		return HAPStringTemplateUtil.getStringValue(brickWrapperTemplateStream, templateParms);
 	}
 
-	public static String getDesignConverToManualFolder(String designId) {
-		return HAPStoryDesignUtilityExport.getDesignFolder(designId).getAbsolutePath()+"/manual";
+	public static String getDesignConverToManualFolder(HAPIdBrick brickId) {
+		return HAPStoryDesignUtilityExport.getDesignFolder(brickId).getAbsolutePath()+"/manual";
 	}
 	
 	
