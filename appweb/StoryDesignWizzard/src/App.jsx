@@ -3,9 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import ChooseDataSourceStep from './ChooseDataSourceStep'
-import CustomerizeUI from './CustomerizeUI'
-import NewDesign from './NewDesign'
+import StepChooseDataSource from './StepChooseDataSource'
+import StepCustomerizeUI from './StepCustomerizeUI'
+import StepNewDesign from './StepNewDesign'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import {newDesignService, createComponentQuestionItemService} from './Service'
 import { DesignContext, DesignDispatchContext, DataSourceContext } from './DesignContext'
@@ -44,9 +44,9 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/new-design" element={<NewDesign />} />
-          <Route path="/choose-data-source" element={<ChooseDataSourceStep />} />
-          <Route path="/customerize-ui" element={<CustomerizeUI />} />
+          <Route path="/new-design" element={<StepNewDesign />} />
+          <Route path="/choose-data-source" element={<StepChooseDataSource />} />
+          <Route path="/customerize-ui" element={<StepCustomerizeUI />} />
         </Routes>
 
       </BrowserRouter>

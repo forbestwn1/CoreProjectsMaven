@@ -18,15 +18,15 @@ public class HAPStoryBuilderResponseNew extends HAPSerializableImp{
 	public static final String STEPINFO = "stepInfo";
 
 	@HAPAttribute
-	public static final String BRICKID = "brickId";
+	public static final String DESIGNID = "designId";
 
-	private HAPIdBrick m_brickId;
+	private HAPIdBrick m_designId;
 	
 	private List<HAPStoryDesignMetadataStep> m_stepsInfo;
 	
-	public HAPStoryBuilderResponseNew(HAPIdBrick brickId) {
+	public HAPStoryBuilderResponseNew(HAPIdBrick designId) {
 		this.m_stepsInfo = new ArrayList<HAPStoryDesignMetadataStep>();
-		this.m_brickId = brickId;
+		this.m_designId = designId;
 	}
 	
 	public void addStepInfo(HAPStoryDesignMetadataStep stepInfo) {		this.m_stepsInfo.add(stepInfo); 	}
@@ -36,7 +36,7 @@ public class HAPStoryBuilderResponseNew extends HAPSerializableImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(STEPINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_stepsInfo, HAPSerializationFormat.JSON));
-		jsonMap.put(BRICKID, this.m_brickId.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(DESIGNID, this.m_designId.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
 }

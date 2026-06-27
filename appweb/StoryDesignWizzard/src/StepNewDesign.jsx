@@ -3,7 +3,7 @@ import { newDesignService } from './Service'
 import { DesignContext, DesignDispatchContext } from './DesignContext'
 import { newDesign } from './reducers/designReducer';
 
-export default function NewDesign() {
+export default function StepNewDesign() {
 
   const dispatch = useContext(DesignDispatchContext);
   const designState = useContext(DesignContext);

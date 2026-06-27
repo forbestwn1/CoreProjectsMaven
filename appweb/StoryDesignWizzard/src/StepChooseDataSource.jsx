@@ -5,27 +5,33 @@ import { DesignContext, DesignDispatchContext } from './DesignContext'
 import QuestionairDynamicChooseDataSource from './QuestionairDynamicChooseDataSource';
 import Questionair from './Questionair';
 
-export default function ChooseDataSourceStep() {
+export default function StepChooseDataSource() {
     const [dataSources, setDataSources] = useState([]);
     const [selectedDataSource, setSelectedDataSource] = useState(null);
 
     const dispatch = useContext(DesignDispatchContext);
     const designState = useContext(DesignContext);
 
-    const currentStep = 0;
-
+    const designSteps = JSON.parse(JSON.stringify(designState.stepInfo));
+    const currentStep = designSteps[designState.currentStepUI];
+    const questionair = currentStep.questionair;
+    
     var onNext = function(){
-        nextStepDesignService(designState.designId, designState.stepInfo[currentStep]).then((response) => {
+        nextStepDesignService(designState.designId, currentStep).then((response) => {
             // Handle response
             dispatch(updateDesign(response.data.data.stepInfo));
         });
+    };
+
+    var onChange = function(){
+        dispatch(updateDesign(designSteps));
     };
 
     return (
         <>
 Hello ChooseDataSourceStep!!!!
 
-           <Questionair questionair={designState.stepInfo[currentStep].questionair} onChange={setSelectedDataSource}></Questionair>
+           <Questionair questionair={questionair} onChange={onChange}></Questionair>
 
             <button onClick={onNext}>
                 Next

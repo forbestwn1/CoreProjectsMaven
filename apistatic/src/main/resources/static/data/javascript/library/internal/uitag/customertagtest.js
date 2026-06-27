@@ -174,13 +174,15 @@ var node_createUICustomerTagTest = function(envObj){
 		triggueEventWrapperView.append(triggueEventButtonView);
 		loc_containerrView.append(triggueEventWrapperView);
 		
+/*	hide it now	
 		//attribute view
 		var attributesWrapperView = $('<div/>');
 		attributesWrapperView.append($('<br>Attributes: <br>'));
     	loc_attributesView = $('<textarea rows="2" cols="150" style="resize: none; border:solid 1px;" data-role="none"></textarea>');
 		attributesWrapperView.append(loc_attributesView);
 		loc_containerrView.append(attributesWrapperView);
-
+*/
+		
         //input variables view
 		var variablesWrapperView = $('<div/>');
 		variablesWrapperView.append($('<br>Variables: <br>'));
@@ -206,7 +208,7 @@ var node_createUICustomerTagTest = function(envObj){
 			});
         	
 			varWrapperView.append(varInfo.valueView);
-			varWrapperView.append(varInfo.ruleView);
+//			varWrapperView.append(varInfo.ruleView);   hide rule view
 			variablesWrapperView.append(varWrapperView);
 		});
 		loc_containerrView.append(variablesWrapperView);
@@ -271,7 +273,9 @@ var node_createUICustomerTagTest = function(envObj){
 	};
 	
 	var loc_updateAttributeView = function(){
-		loc_attributesView.val(node_basicUtility.stringify(loc_envObj.getAttributeValues()));
+		if(loc_attributesView!=undefined){
+			loc_attributesView.val(node_basicUtility.stringify(loc_envObj.getAttributeValues()));
+		}
 	};
 	
 	var loc_out = {

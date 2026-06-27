@@ -61,9 +61,14 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         	
         	HAPStoryWizzardRequestDataNext nextRequestData = (HAPStoryWizzardRequestDataNext)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)changeRequest.getRequestData(), HAPStoryWizzardRequestDataNext.PARSABLEENTITYTYPE);
         	
-        	if(((HAPStoryDesignMetadataStepWizard)storyDesign.getCurrentStep().getMetaData()).getStepDefinition().getName().equals(nextRequestData.getStepData().getStepDefinition().getName())) {
-            	storyDesign.rollBackStep();
+        	String requestStepName = nextRequestData.getStepData().getStepDefinition().getName();
+        	while(!getCurrentStepName(storyDesign).equals(requestStepName)) {
+        		//if request step name different from current step name, remove current step
+            	storyDesign.removeStep();
         	}
+        	
+        	//rollback whatever applied on current step
+        	storyDesign.rollBackStep();
         	
         	//if no previous, create a new step with question
         	this.m_wizzardDef.processNext(storyDesign, nextRequestData);
@@ -74,6 +79,10 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
         }
 		
 		return out;
+	}
+	
+	private String getCurrentStepName(HAPStoryDesign storyDesign) {
+		return ((HAPStoryDesignMetadataStepWizard)storyDesign.getCurrentStep().getMetaData()).getStepDefinition().getName();
 	}
 	
 	private HAPStoryBuilderResponseBuild createResultBuild(HAPStoryDesign storyDesign) {

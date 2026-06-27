@@ -122,7 +122,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		return out;      
 	}
 	
-	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.m_changeHistory.size()-1);    }
+	public int getCurrentStepIndex() {    return this.m_changeHistory.size()-1;      }
+	
+	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.getCurrentStepIndex());    }
 	public boolean isFirstStep() {    return this.m_changeHistory.size()==2;      }
 	
 	@Override

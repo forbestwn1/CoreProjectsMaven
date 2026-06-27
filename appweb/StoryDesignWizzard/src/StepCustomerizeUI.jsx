@@ -3,7 +3,7 @@ import { createComponentQuestionItemService } from './Service'
 import { DesignContext, DesignDispatchContext } from './DesignContext'
 import Questionair from './Questionair';
 
-export default function CustomerizeUI() {
+export default function StepCustomerizeUI() {
     const dispatch = useContext(DesignDispatchContext);
     const designState = useContext(DesignContext);
 

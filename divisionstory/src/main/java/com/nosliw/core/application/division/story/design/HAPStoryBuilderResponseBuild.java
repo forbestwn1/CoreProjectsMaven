@@ -16,7 +16,12 @@ public class HAPStoryBuilderResponseBuild extends HAPSerializableImp{
 	@HAPAttribute
 	public static final String STEPINFO = "stepInfo";
 	
+	@HAPAttribute
+	public static final String CURRENTSTEP = "currentStep";
+	
 	private List<HAPStoryDesignMetadataStep> m_stepsInfo;
+	
+	private int m_currentStep;
 	
 	public HAPStoryBuilderResponseBuild() {
 		this.m_stepsInfo = new ArrayList<HAPStoryDesignMetadataStep>();
@@ -25,10 +30,15 @@ public class HAPStoryBuilderResponseBuild extends HAPSerializableImp{
 	public void addStepInfo(HAPStoryDesignMetadataStep stepInfo) {	this.m_stepsInfo.add(stepInfo); 	}
 	public List<HAPStoryDesignMetadataStep> getStepInfos(){     return this.m_stepsInfo;       }
 	
+	public int getCurrentStep() {    return this.m_currentStep;    }
+	public void setCurrentSetp(int step) {    this.m_currentStep = step;      }
+	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(STEPINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_stepsInfo, HAPSerializationFormat.JSON));
+		jsonMap.put(CURRENTSTEP, this.m_currentStep+"");
+		typeJsonMap.put(CURRENTSTEP, Integer.class);
 	}
 	
 }
