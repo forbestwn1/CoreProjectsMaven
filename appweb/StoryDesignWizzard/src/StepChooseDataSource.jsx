@@ -17,6 +17,19 @@ export default function StepChooseDataSource() {
     const questionair = currentStep.questionair;
     
     var onNext = function(){
+        if(designState.currentStepUI==designState.currentStepServer){
+
+        }
+        else if(designState.currentStepUI<designState.currentStepServer){
+            if(designState.isStepDirty[designState.currentStepUI]==true){
+                dispatch(nextStep());
+            }
+            else{
+
+            }
+
+        }
+
         nextStepDesignService(designState.designId, currentStep).then((response) => {
             // Handle response
             dispatch(updateDesign(response.data.data.stepInfo));
@@ -25,6 +38,7 @@ export default function StepChooseDataSource() {
 
     var onChange = function(){
         dispatch(updateDesign(designSteps));
+        dispatch(stepDirt(designState.currentStepUI));
     };
 
     return (

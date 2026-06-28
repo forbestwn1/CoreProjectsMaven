@@ -3,14 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
-import StepChooseDataSource from './StepChooseDataSource'
-import StepCustomerizeUI from './StepCustomerizeUI'
-import StepNewDesign from './StepNewDesign'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import {newDesignService, createComponentQuestionItemService} from './Service'
+import {newDesignService, createComponentQuestionItemService, nextStepDesignService} from './Service'
 import { DesignContext, DesignDispatchContext, DataSourceContext } from './DesignContext'
-import { designReducer, initialState, newDesign } from './reducers/designReducer';
-
+import { designReducer, initialState, newDesign, updateDesignGlobal } from './reducers/designReducer';
+import Step from './Step'
 
 function App() {
 
@@ -26,34 +23,66 @@ function App() {
     }, []);
 
 
+ useEffect(() => {
+	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+    newDesignService().then((response) => {
+      console.log("newDesignService response: ", response);
+      designDispatch(newDesign(response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_DESIGNID], response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_STEPINFO]));
+    }).catch((error) => {
+      console.error("newDesignService error: ", error);
+    });
+  }, []);
+
+    const designSteps = designState.steps;
+    const currentStep = designSteps?designSteps[designState.currentStepUI]:undefined;
+
+
+    var onNext = function(){
+        if(designState.currentStepUI==designState.currentStepServer){
+
+        }
+        else if(designState.currentStepUI<designState.currentStepServer){
+            if(designState.isStepDirty[designState.currentStepUI]==true){
+                dispatch(nextStep());
+            }
+            else{
+
+            }
+
+        }
+
+        nextStepDesignService(designState.designId, currentStep).then((response) => {
+            // Handle response
+            designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
+        });
+
+    };
+
+
   return (
     <>
+    <div>
       <DesignContext value={designState}>
         <DesignDispatchContext value={designDispatch}>
           <DataSourceContext value={dataSources}>
 
-      <BrowserRouter>
+<Step></Step>
 
-        <nav>
-          <NavLink to="/new-design">New Design</NavLink>
-          <br></br>
-          <NavLink to="/choose-data-source">Choose Data Source</NavLink>
-          <br></br>
-          <NavLink to="/customerize-ui">Customerize UI</NavLink>
-          <br></br>
-        </nav>
-
-        <Routes>
-          <Route path="/new-design" element={<StepNewDesign />} />
-          <Route path="/choose-data-source" element={<StepChooseDataSource />} />
-          <Route path="/customerize-ui" element={<StepCustomerizeUI />} />
-        </Routes>
-
-      </BrowserRouter>
 
           </DataSourceContext>
         </DesignDispatchContext>
       </DesignContext>
+    </div>
+
+    <div>
+
+            <button onClick={onNext}>
+                Next
+            </button>
+
+    </div>
+
+
     </>
   )
 }

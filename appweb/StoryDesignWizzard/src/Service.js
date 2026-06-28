@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const nextStepDesignService = function(designId, step){
     const payload = {
-        designId: designId,
+        brickId: designId,
 		command : "next",
 		requestData: {
 			"step" : step
@@ -14,7 +14,7 @@ export const nextStepDesignService = function(designId, step){
 };
 
 export const newDesignService = function(payload = {}, config = {}){
-	const url = "http://localhost:8083/nosliw/design/new?builderId=dataSourceDrive";
+	const url = "http://localhost:8083/nosliw/design/new?builderId=dataSourceDrive&brickType=module&brickVersion=1.0.0";
 	return axios.post(url, payload, config);
 };
 /**

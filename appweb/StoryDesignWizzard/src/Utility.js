@@ -1,6 +1,30 @@
 
+export const stateUtility = function(){
 
-export var questionairUtility = function () {
+
+    var loc_out = {
+
+        getCurrentStepName : function(designState){
+            if(designState.steps.length!=0){
+                return designState.steps[designState.currentStepUI].stepDefinition.name;
+            }
+        },
+
+        buildCleanStepDirty : function(steps){
+            let isStepDirty = [];
+            for(let step in steps){
+                isStepDirty.push(false);
+            }
+            return isStepDirty;
+        },
+
+        
+    };
+    return loc_out;
+
+}();
+
+export const questionairUtility = function () {
 
     var loc_getAllItemsInGroup = function(questionair){
     	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
