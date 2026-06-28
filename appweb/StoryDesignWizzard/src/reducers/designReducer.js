@@ -18,6 +18,7 @@ export const DESIGN_ACTIONS = {
   DIRTY_STEP_CURRENT : "DIRTY_STEP_CURRENT",
 
   NEXT_STEP: 'NEXT_STEP',
+  LAST_STEP: 'LAST_STEP',
 };
 
 // Reducer function
@@ -42,6 +43,7 @@ export const designReducer = (state = initialState, action) => {
       return {
         ...state,
         steps: action.payload.steps,
+        isStepDirty : stateUtility.buildCleanStepDirty(action.payload.steps),
         currentStepUI : action.payload.currentStep,
         currentStepServer : action.payload.currentStep,
       };
@@ -54,12 +56,16 @@ export const designReducer = (state = initialState, action) => {
         isStepDirty: isStepDirty,
       };
     
-
-
     case DESIGN_ACTIONS.NEXT_STEP:
       return {
         ...state,
-        currentStep: state.currentStep + 1,
+        currentStepUI: state.currentStepUI + 1,
+      };
+
+    case DESIGN_ACTIONS.LAST_STEP:
+      return {
+        ...state,
+        currentStepUI: state.currentStepUI - 1,
       };
 
   }
@@ -91,6 +97,14 @@ export const updateDesignGlobal = (steps, currentStep) => ({
 
 export const dirtyCurrentStep = () => ({
   type: DESIGN_ACTIONS.DIRTY_STEP_CURRENT
+});
+
+export const nextStep = () => ({
+  type: DESIGN_ACTIONS.NEXT_STEP
+});
+
+export const lastStep = () => ({
+  type: DESIGN_ACTIONS.LAST_STEP
 });
 
 

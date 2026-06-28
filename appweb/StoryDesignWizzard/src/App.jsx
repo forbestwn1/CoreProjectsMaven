@@ -6,7 +6,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import {newDesignService, createComponentQuestionItemService, nextStepDesignService} from './Service'
 import { DesignContext, DesignDispatchContext, DataSourceContext } from './DesignContext'
-import { designReducer, initialState, newDesign, updateDesignGlobal } from './reducers/designReducer';
+import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
 import Step from './Step'
 
 function App() {
@@ -36,25 +36,23 @@ function App() {
     const designSteps = designState.steps;
     const currentStep = designSteps?designSteps[designState.currentStepUI]:undefined;
 
+    var onBack = function(){
+      if(designState.currentStepUI!=0){
+          designDispatch(lastStep());
+      }
+    };
+
 
     var onNext = function(){
-        if(designState.currentStepUI==designState.currentStepServer){
-
+        if(designState.currentStepUI<designState.currentStepServer && designState.isStepDirty[designState.currentStepUI]==true){
+            designDispatch(nextStep());
         }
-        else if(designState.currentStepUI<designState.currentStepServer){
-            if(designState.isStepDirty[designState.currentStepUI]==true){
-                dispatch(nextStep());
-            }
-            else{
-
-            }
-
+        else{
+            nextStepDesignService(designState.designId, currentStep).then((response) => {
+                // Handle response
+                designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
+            });
         }
-
-        nextStepDesignService(designState.designId, currentStep).then((response) => {
-            // Handle response
-            designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
-        });
 
     };
 
@@ -75,6 +73,10 @@ function App() {
     </div>
 
     <div>
+
+            <button onClick={onBack}>
+                Back
+            </button>
 
             <button onClick={onNext}>
                 Next

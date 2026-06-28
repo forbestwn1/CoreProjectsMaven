@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext} from 'react'
 import { DataSourceContext } from './DesignContext'
+import { questionairUtility } from './Utility'
 
 export default function QuestionairDynamicChooseDataSource({questionair, onChange}){ 
     const dataSources = useContext(DataSourceContext);
@@ -15,16 +16,31 @@ export default function QuestionairDynamicChooseDataSource({questionair, onChang
         onChange(dataSourceId);
     };
 
+    const selected = questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCECHOOSEDYNAMIC_DATASOURCEID];
+
     return (
         <>
         <div>
             <label>Choose a DataSource:</label>
             <select name="DataSource" id="dataSource" onChange={(e) => setSelectedDataSource(e.target.value)}>
-                {dataSources.map((source) => (
-                    <option key={source.id} value={source.name}>
-                        {source.name}
-                    </option>
-                ))}
+                {dataSources.map((source) => {
+                    if(selected==source.name){
+                        return (
+                           <option key={source.id} selected value={source.name}>
+                                {source.name}
+                           </option>
+
+                        );
+                    }
+                    else{
+                        return (
+                           <option key={source.id} value={source.name}>
+                                {source.name}
+                           </option>
+                        );
+
+                    }
+                })}
             </select>
         </div>
         </>
