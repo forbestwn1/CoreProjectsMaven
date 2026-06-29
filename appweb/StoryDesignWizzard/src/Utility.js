@@ -58,6 +58,15 @@ export const questionairUtility = function () {
 
     var loc_out = {
 
+        getErrorMessageFromQuesionair : function(questionair){
+        	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	        var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+            let error = questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_ERROR];
+            if(error!=undefined){
+                return error[node_COMMONATRIBUTECONSTANT.STORYWIZZARDERRORINQUESTIONAIR_MESSAGE];
+            }
+        },
+
         getChildQuestionairByValueType :function(questionair, valueType){
             return loc_getChildQuestionairByValueType(questionair, valueType);
         },

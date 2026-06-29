@@ -17,12 +17,10 @@ export default function Questionair ({questionair, onChange}){
             if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP){
                 return <QuestionairGroupRequestParm questionair={questionair} onChange={onChange} />;
             }
-
-
-                return <QuestionairGroup questionair={questionair} onChange={onChange} />;
+            return <QuestionairGroup questionair={questionair} onChange={onChange} />;
         }
         else if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC){
-                return <QuestionairStatic questionair={questionair} onChange={onChange} />;
+            return <QuestionairStatic questionair={questionair} onChange={onChange} />;
         }
         else if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC){
             if(questionairValueType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID){

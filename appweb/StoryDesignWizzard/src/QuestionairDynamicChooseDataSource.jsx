@@ -18,6 +18,7 @@ export default function QuestionairDynamicChooseDataSource({questionair, onChang
 
     const selected = questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCECHOOSEDYNAMIC_DATASOURCEID];
 
+
     return (
         <>
         <div>
@@ -42,6 +43,10 @@ export default function QuestionairDynamicChooseDataSource({questionair, onChang
                     }
                 })}
             </select>
+
+            {questionairUtility.getErrorMessageFromQuesionair(questionair)}
+
+
         </div>
         </>
     );

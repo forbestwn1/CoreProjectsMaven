@@ -46,6 +46,7 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeUtility;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryDesignMetadataStepWizard;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardDefinition;
+import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardErrorInQuestionair;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionair;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairGroup;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
@@ -137,24 +138,41 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 			//validation answer
 			HAPStoryWizzardQuestionairItemDynamic questionair = (HAPStoryWizzardQuestionairItemDynamic)stepData.getQuestionair();
-			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)questionair.getChangedValue();
+			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)questionair.getValue();
 
 			//set answer
 			this.setAnsweredQuestionairToStep(design.getCurrentStep(), questionair);
-			
-			String dataSourceId = choosServiceQuestion.getDataSourceName();
-			HAPServiceProfile dataSrouceProfile = this.m_serviceMan.getServiceProfile(dataSourceId, null);
-			HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 
 			//apply answer for data source selection
 			HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
-			this.applyDataSourceSelection(changeSession, dataSourceId, dataSrouceProfile);
-			changeSession.commit();
+			String dataSourceId = choosServiceQuestion.getDataSourceName();
+			HAPServiceProfile dataSrouceProfile = null;
+			if(dataSourceId!=null) {
+				dataSrouceProfile = this.m_serviceMan.getServiceProfile(dataSourceId, null);
+				this.applyDataSourceSelection(changeSession, dataSourceId, dataSrouceProfile);
+			}
 			
-	        //prepare next step + questionair
-			HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_CUSTOMIZEUI));
-			stepMetaData.setQuestionair(this.prepareChooseUIQuestionair(dataSrouceProfile));
-			design.newStep(stepMetaData);
+			HAPStoryWizzardErrorInQuestionair error = null;
+			if(dataSourceId==null) {
+				error = new HAPStoryWizzardErrorInQuestionair("Data source not selected");
+			}
+			else if(dataSourceId.equals("TestServiceError")){
+				error = new HAPStoryWizzardErrorInQuestionair("Wrong data source");
+			}
+
+			if(error!=null) {
+				questionair.setError(error);
+				changeSession.rollback();
+			}
+			else {
+				changeSession.commit();
+				
+		        //prepare next step + questionair
+				HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_CUSTOMIZEUI));
+				stepMetaData.setQuestionair(this.prepareChooseUIQuestionair(dataSrouceProfile));
+				design.newStep(stepMetaData);
+			}
+			
 		}
 		else if(STEP_CUSTOMIZEUI.equals(stepName)) {
 			HAPStoryWizzardQuestionairGroup questionair = (HAPStoryWizzardQuestionairGroup)stepData.getQuestionair();
