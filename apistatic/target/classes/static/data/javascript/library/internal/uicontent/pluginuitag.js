@@ -53,7 +53,7 @@ var node_createUITagPlugin = function(){
 			var uiTagDefinition = complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICUSTOMERTAG_TAGDEFINITION);
 			out.addRequest(node_uiTagUtility.getUITagFunctionRequest(uiTagDefinition, {
 				success : function(request, tagDefScriptFun){
-					return loc_createUITagComponentCore(complexEntityDef, tagDefScriptFun.fun, internalValuePortContainerId, bundleCore, configure);
+					return loc_createUITagComponentCore(uiTagDefinition, complexEntityDef, tagDefScriptFun.fun, internalValuePortContainerId, bundleCore, configure);
 				}
 			}));
 			return out;
@@ -64,7 +64,8 @@ var node_createUITagPlugin = function(){
 	return loc_out;
 };
 
-var loc_createUITagComponentCore = function(complexEntityDef, tagDefScriptFun, valueContextId, bundleCore, configure){
+var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, tagDefScriptFun, valueContextId, bundleCore, configure){
+	var loc_uiTagDefinition = uiTagDefinition;
 	var loc_tagDefScriptFun = tagDefScriptFun;
 	var loc_complexEntityDef = complexEntityDef;
 	var loc_valueContextId = valueContextId;
@@ -129,6 +130,9 @@ var loc_createUITagComponentCore = function(complexEntityDef, tagDefScriptFun, v
 				out.push(name);
 			});
 			return out;
+		},
+		getAttributForData : function(){
+			return loc_uiTagDefinition[node_COMMONATRIBUTECONSTANT.UITAGDEFINITION_ATTRIBUTEFORDATA];
 		},
 
 		//---------------------------------variable
@@ -251,11 +255,10 @@ var loc_createUITagComponentCore = function(complexEntityDef, tagDefScriptFun, v
 			
 			var uiTagCore;
 			var uiTagBase = loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICUSTOMERTAG_BASE); 
-			if(uiTagBase=="simpleData"){
-				uiTagCore = node_createUITagOnBaseSimple(loc_tagDefScriptFun, loc_coreEnvObj);
-			}
-			else if(uiTagBase=="arrayData"){
-				uiTagCore = node_createUITagOnBaseArray(loc_tagDefScriptFun, loc_coreEnvObj);
+			
+			if(uiTagBase!=null){
+				var node_uiTagBaseFun = nosliw.getNodeData("uitag."+uiTagBase);
+				uiTagCore = node_uiTagBaseFun(loc_tagDefScriptFun, loc_coreEnvObj);
 			}
 			else{
 				uiTagCore = loc_tagDefScriptFun.call(loc_out, loc_coreEnvObj);

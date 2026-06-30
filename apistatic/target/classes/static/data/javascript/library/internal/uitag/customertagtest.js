@@ -1,5 +1,5 @@
 //get/create package
-var packageObj = library.getChildPackage("test");    
+var packageObj = library.getChildPackage();    
 
 (function(packageObj){
 	//get used node
@@ -339,6 +339,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("createUICustomerTagTest", node_createUICustomerTagTest); 
+packageObj.createChildNode("debug_test", node_createUICustomerTagTest); 
 
 })(packageObj);

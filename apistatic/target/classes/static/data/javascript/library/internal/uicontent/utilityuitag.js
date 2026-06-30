@@ -9,16 +9,10 @@ var packageObj = library;
 	var node_createServiceRequestInfoSequence;
 	var node_createServiceRequestInfoSimple;
 	var node_createServiceRequestInfoService;
-	var node_createUICustomerTagTest;
-    var node_createUICustomerTagViewVariable;
-    var node_createUICustomerTagTestDataSimple;
-    var node_createUICustomerTagTestDataCollection;
     var node_uiContentUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_uiTagUtility = function(){
-	
-	
 	
 	var loc_out = {
 		
@@ -31,24 +25,12 @@ var node_uiTagUtility = function(){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 
 			var uiTagBase = uiTagDefinition[node_COMMONATRIBUTECONSTANT.UITAGDEFINITION_BASE];
-			if(uiTagBase=="debug_test"){
+			var uiTagName = uiTagDefinition[node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
+			
+			if(uiTagName.startsWith("debug_test")){
+				var node_uiTagFunction = nosliw.getNodeData("uitag."+uiTagName);
 				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-					return { fun : node_createUICustomerTagTest};
-				}));
-			} 
-			else if(uiTagBase=="debug_test_data_simple"){
-				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-					return { fun : node_createUICustomerTagTestDataSimple};
-				}));
-			} 
-			else if(uiTagBase=="debug_test_data_collection"){
-				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-					return { fun : node_createUICustomerTagTestDataCollection};
-				}));
-			} 
-			else if(uiTagBase=="debug_viewvariable"){
-				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-					return { fun : node_createUICustomerTagViewVariable};
+					return { fun : node_uiTagFunction};
 				}));
 			}
 			else{
@@ -57,7 +39,7 @@ var node_uiTagUtility = function(){
 					success : function(requestInfo, resourceData){
 						var tagDefScriptFun = resourceData[node_COMMONATRIBUTECONSTANT.WITHSCRIPT_SCRIPT];
 						return { fun : tagDefScriptFun };
-		 			}
+					}
 				}));
 			}
 			return out;
@@ -77,10 +59,6 @@ nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){no
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoService", function(){node_createServiceRequestInfoService = this.getData();});
-nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagTest", function(){node_createUICustomerTagTest = this.getData();	});
-nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagViewVariable", function(){node_createUICustomerTagViewVariable = this.getData();	});
-nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagTestDataSimple", function(){node_createUICustomerTagTestDataSimple = this.getData();	});
-nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagTestDataCollection", function(){node_createUICustomerTagTestDataCollection = this.getData();	});
 nosliw.registerSetNodeDataEvent("uicontent.uiContentUtility", function(){node_uiContentUtility = this.getData();});
 
 //Register Node by Name
