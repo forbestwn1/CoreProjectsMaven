@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext} from 'react'
-import { DataSourceContext } from './DesignContext'
 
 export default function QuestionairDynamicRequestIsConstant({questionair, onChange}){ 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");

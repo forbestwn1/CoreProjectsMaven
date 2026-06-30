@@ -37,27 +37,40 @@ public class HAPUITagUtilityDefinitionParser {
 		//parse uitag type
 		String uiTagType = jsonObj.optString(HAPUITagDefinition.TYPE);
 		if(HAPConstantShared.UITAG_TYPE_DATA.equals(uiTagType)) {
-			out = new HAPUITagDefinitionData();
+			HAPUITagDefinitionData dataUITagDef = new HAPUITagDefinitionData();
+			out = dataUITagDef;
 			Object dataAttrJsonObj = jsonObj.opt(HAPUITagDefinitionData.ATTRIBUTEFORDATA);
 			if(dataAttrJsonObj==null) {
 				//default attribute name
-				((HAPUITagDefinitionData)out).addAttributeForData(HAPConstantShared.UITAG_ATTRIBUTE_DATA);
+				dataUITagDef.addAttributeForData(HAPConstantShared.UITAG_ATTRIBUTE_DATA);
 			}
 			else {
 				if(dataAttrJsonObj instanceof String) {
-					((HAPUITagDefinitionData)out).addAttributeForData((String)dataAttrJsonObj);
+					dataUITagDef.addAttributeForData((String)dataAttrJsonObj);
 				}
 				else if(dataAttrJsonObj instanceof JSONArray) {
 					JSONArray dataAttrJsonArray = (JSONArray)dataAttrJsonObj;
 					for(int i=0; i<dataAttrJsonArray.length(); i++) {
-						((HAPUITagDefinitionData)out).addAttributeForData(dataAttrJsonArray.getString(i));
+						dataUITagDef.addAttributeForData(dataAttrJsonArray.getString(i));
 					}
 				}
 			}
+			
+			Object ioModeObj = jsonObj.opt(HAPUITagDefinitionData.IOMODE);
+			if(ioModeObj==null) {
+				dataUITagDef.setIOMode(HAPConstantShared.IO_DIRECTION_IN);
+			}
+			else {
+				dataUITagDef.setIOMode((String)ioModeObj);
+			}
+			
 		}
 		else {
 			out = new HAPUITagDefinition();
 		}
+		
+		//parse priority
+		out.setPriority(jsonObj.optInt(HAPUITagDefinition.PRIORITY, 0));
 		
 		//parse value context
 		HAPValueContextDefinition valueContext = new HAPValueContextDefinitionImp();

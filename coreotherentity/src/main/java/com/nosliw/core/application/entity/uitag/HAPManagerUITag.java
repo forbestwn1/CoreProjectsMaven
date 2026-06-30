@@ -101,6 +101,20 @@ public class HAPManagerUITag{
 				}
 			}
 		}
+		
+//		candidates.stream().filter(c->{
+//			String ioMode = query.getIOMode();
+//			if(ioMode==null) {
+//				return true;
+//			}
+//			if(ioMode.equals(HAPConstantShared.IO_DIRECTION_IN) && c.getUITagDef().getIOMode().equals(HAPConstantShared.IO_DIRECTION_IN)) {
+//				return false;
+//			}
+//			
+//			return true;
+//		});
+		
+		
 		HAPUITagCandidate[] candiateArray = candidates.toArray(new HAPUITagCandidate[0]);
 		Arrays.sort(candiateArray, new Comparator<HAPUITagCandidate>() {
 			@Override
@@ -145,7 +159,7 @@ public class HAPManagerUITag{
 	
 	class HAPUITagCandidate{
 		
-		private HAPUITagDefinition m_uiTagDef;
+		private HAPUITagDefinitionData m_uiTagDef;
 		
 		private String m_dataAttrName;
 		
@@ -153,14 +167,14 @@ public class HAPManagerUITag{
 		
 		private HAPMatchers m_matchers;
 		
-		public HAPUITagCandidate(HAPUITagDefinition uiTagDef, String dataAttrName, double score, HAPMatchers matchers) {
+		public HAPUITagCandidate(HAPUITagDefinitionData uiTagDef, String dataAttrName, double score, HAPMatchers matchers) {
 			this.m_uiTagDef = uiTagDef;
 			this.m_dataAttrName = dataAttrName;
 			this.m_score = score;
 			this.m_matchers = matchers;
 		}
 		
-		public HAPUITagDefinition getUITagDef() {		return this.m_uiTagDef;		}
+		public HAPUITagDefinitionData getUITagDef() {		return this.m_uiTagDef;		}
 		public String getDataAttributeName() {     return this.m_dataAttrName;       }
 		public double getScore() {   return this.m_score;    }
 		public HAPMatchers getMatchers() {    return this.m_matchers;    }

@@ -124,6 +124,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	private void setAnsweredQuestionairToStep(HAPStoryDesignStep step, HAPStoryWizzardQuestionair answeredQuestionair) {
 		HAPStoryDesignMetadataStepWizard stepMetaData = (HAPStoryDesignMetadataStepWizard)step.getMetaData();
 		stepMetaData.setQuestionair(answeredQuestionair);
+		HAPStoryWizzardUtilityQuestion.cleanError(answeredQuestionair);
 	}
 	
 	//error: attach error to answer
@@ -136,7 +137,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		if(STEP_SELECTDATASOURCE.equals(stepName)) {
 			//validation lifecycle first
 
-			//validation answer
 			HAPStoryWizzardQuestionairItemDynamic questionair = (HAPStoryWizzardQuestionairItemDynamic)stepData.getQuestionair();
 			HAPStoryWizzardQuestionValueDataSourceChooseDynamic choosServiceQuestion = (HAPStoryWizzardQuestionValueDataSourceChooseDynamic)questionair.getValue();
 

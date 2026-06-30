@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext, useRef} from 'react'
-import { DataSourceContext } from './DesignContext'
 
 export default function QuestionairDynamicRequestConstantValue({questionair, datadefinition, onChange}){ 
     const contentRef = useRef(null);

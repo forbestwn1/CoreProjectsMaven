@@ -67,6 +67,22 @@ export const questionairUtility = function () {
             }
         },
 
+        clearError : function(questionair){
+            var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	        var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+
+            var questionairType = questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_TYPE];
+            if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC){
+                questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIRITEMDYNAMIC_ERROR] = undefined;
+            }
+            else if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_GROUP){
+                for(let child in questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_ITEM]){
+                    this.clearError(child);
+                }
+            }
+
+        },
+
         getChildQuestionairByValueType :function(questionair, valueType){
             return loc_getChildQuestionairByValueType(questionair, valueType);
         },

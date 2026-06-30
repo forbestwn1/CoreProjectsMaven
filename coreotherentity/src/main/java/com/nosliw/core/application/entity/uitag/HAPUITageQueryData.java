@@ -20,7 +20,17 @@ public class HAPUITageQueryData extends HAPSerializableImp{
 	@HAPAttribute
 	final public static String DATADEFINITION = "dataDefinition";
 
+	@HAPAttribute
+	final public static String IOMODE = "ioMode";
+
+	@HAPAttribute
+	final public static String DATAMODE = "dataMode";
+
 	private HAPDataDefinition m_dataDefinition;
+
+	private String m_ioMode;
+	
+	private String m_dataMode;
 	
 	public HAPUITageQueryData() {	}
 
@@ -37,14 +47,24 @@ public class HAPUITageQueryData extends HAPSerializableImp{
 	
 	public HAPDataTypeCriteria getDataTypeCriterai() {   return this.m_dataDefinition.getCriteria();  }
 
+	public void setIOMode(String ioMode) {    this.m_ioMode = ioMode;       }
+	public String getIOMode() {     return this.m_ioMode;       }
+	
+	public void setDataMode(String dataMode) {     this.m_dataMode = dataMode;       }
+	public String getDataMode() {      return this.m_dataMode;      }
+	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(DATADEFINITION, this.m_dataDefinition.toStringValue(HAPSerializationFormat.LITERATE));
+		jsonMap.put(IOMODE, this.m_ioMode);
+		jsonMap.put(DATAMODE, this.m_dataMode);
 	}
 	
 	public HAPUITageQueryData parseUITagQueryData(JSONObject jsonOb, HAPServiceParseEntity entityParseService) {
 		HAPUITageQueryData out = new HAPUITageQueryData();
 		out.setDataDefinition(HAPParserDataDefinition.parseDataDefinition(jsonOb.getJSONObject(DATADEFINITION), entityParseService));
+		out.setIOMode((String)jsonOb.opt(IOMODE));
+		out.setDataMode((String)jsonOb.opt(DATAMODE));
 		return out;
 	}
 

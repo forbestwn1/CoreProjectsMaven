@@ -7,6 +7,20 @@ import com.nosliw.common.utils.HAPConstantShared;
 
 public class HAPStoryWizzardUtilityQuestion {
 
+	public static void cleanError(HAPStoryWizzardQuestionair questionair) {
+		String type = questionair.getType();
+		if(type.equals(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_ITEM_DYNAMIC)) {
+			HAPStoryWizzardQuestionairItemDynamic dynamicQ = (HAPStoryWizzardQuestionairItemDynamic)questionair;
+			dynamicQ.setError(null);
+		}
+		else if(type.equals(HAPConstantShared.STORYDESIGN_QUESTIONTYPE_GROUP)) {
+			HAPStoryWizzardQuestionairGroup groupQ = (HAPStoryWizzardQuestionairGroup)questionair;
+			for(HAPStoryWizzardQuestionair item : groupQ.getItems()) {
+				cleanError(item);
+			}
+		}
+	}
+	
 	public static HAPStoryWizzardQuestionair findSingleQuestionairByTag(HAPStoryWizzardQuestionair questionair, String tag){
 		HAPStoryWizzardQuestionair out = null;
 		List<HAPStoryWizzardQuestionair> qs = findQuestionairsByTag(questionair, tag);

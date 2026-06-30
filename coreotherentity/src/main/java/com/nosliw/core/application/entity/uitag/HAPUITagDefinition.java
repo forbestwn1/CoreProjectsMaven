@@ -21,7 +21,9 @@ import com.nosliw.core.resource.HAPResourceId;
 public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvents{
 
 	@HAPAttribute
-	public static final String VERSION = "version";
+	public static final String TYPE = "type";
+	@HAPAttribute
+	public static final String PRIORITY = "priority";
 	@HAPAttribute
 	public static final String VALUECONTEXT = "valueContext";
 	@HAPAttribute
@@ -29,19 +31,20 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvent
 	@HAPAttribute
 	public static final String SCRIPTRESOURCEID = "scriptResourceId";
 	@HAPAttribute
-	public static final String BASE = "base";
-	@HAPAttribute
-	public static final String PARENTRELATION = "parentRelation";
-	@HAPAttribute
 	public static final String ATTRIBUTE = "attribute";
 
 	
 	@HAPAttribute
-	public static final String TYPE = "type";
+	public static final String PARENTRELATION = "parentRelation";
+	@HAPAttribute
+	public static final String BASE = "base";
+	@HAPAttribute
+	public static final String VERSION = "version";
 	@HAPAttribute
 	public static final String REQUIRES = "requires";
 	
-	private String m_version;
+
+	private int m_priority;
 	
 	private HAPValueContextDefinition m_valueContext;
 	
@@ -52,6 +55,9 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvent
 	private Map<String, HAPEventDefinition> m_events;
 	
 	private HAPResourceId m_scriptResourceId;
+	
+	
+	private String m_version;
 	
 	private String m_base;
 	
@@ -66,8 +72,8 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvent
 	
 	public String getType() {  return null;   }
 	
-	public String getVersion() {   return this.m_version;    }
-	public void setVersion(String version) {    this.m_version = version;     }
+	public int getPriority() {     return this.m_priority;      }
+	public void setPriority(int priority) {     this.m_priority = priority;     }
 	
 	public HAPValueContextDefinition getValueContext() {    return this.m_valueContext;     }
 	public void setValueContext(HAPValueContextDefinition valueContext) {    this.m_valueContext = valueContext;       }
@@ -92,6 +98,9 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvent
 	public HAPResourceId getScriptResourceId() {     return this.m_scriptResourceId;     }
 	public void setScriptResourceId(HAPResourceId scriptResourceId) {     this.m_scriptResourceId = scriptResourceId;         }
 
+	public String getVersion() {   return this.m_version;    }
+	public void setVersion(String version) {    this.m_version = version;     }
+	
 	public String getBase() {    return this.m_base;     }
 	public void setBase(String base) {     this.m_base = base;       }
 

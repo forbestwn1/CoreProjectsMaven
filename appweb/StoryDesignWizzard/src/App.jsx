@@ -1,27 +1,17 @@
-import { useState, useReducer, useEffect } from 'react'
+import { useState, useReducer, useEffect, useRef } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import {newDesignService, createComponentQuestionItemService, nextStepDesignService} from './Service'
-import { DesignContext, DesignDispatchContext, DataSourceContext } from './DesignContext'
+import {newDesignService, nextStepDesignService} from './Service'
+import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
 import Step from './Step'
 
 function App() {
-
   const [designState, designDispatch] = useReducer(designReducer, initialState);
-  const [dataSources, setDataSources] = useState([]);
-
-    useEffect(() => {
-      console.log("load all services response");
-        const service = createComponentQuestionItemService();
-        service.getLoadServicesRequest((services) => {
-            setDataSources(services);
-        });
-    }, []);
-
+  const cacheRef = useRef({});
 
  useEffect(() => {
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
@@ -62,12 +52,11 @@ function App() {
     <div>
       <DesignContext value={designState}>
         <DesignDispatchContext value={designDispatch}>
-          <DataSourceContext value={dataSources}>
+          <CacheContext value={cacheRef}>
 
 <Step></Step>
 
-
-          </DataSourceContext>
+          </CacheContext>
         </DesignDispatchContext>
       </DesignContext>
     </div>
