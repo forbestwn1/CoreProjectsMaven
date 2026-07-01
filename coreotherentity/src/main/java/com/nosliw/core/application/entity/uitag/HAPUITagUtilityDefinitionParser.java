@@ -57,13 +57,22 @@ public class HAPUITagUtilityDefinitionParser {
 			}
 			
 			Object ioModeObj = jsonObj.opt(HAPUITagDefinitionData.IOMODE);
-			if(ioModeObj==null) {
-				dataUITagDef.setIOMode(HAPConstantShared.IO_DIRECTION_IN);
+			if(ioModeObj!=null) {
+				if(ioModeObj instanceof String) {
+					dataUITagDef.addIOMode((String)ioModeObj);
+				}
+				else if(ioModeObj instanceof JSONArray) {
+					JSONArray ioModeArray = (JSONArray)ioModeObj;
+					for(int i=0; i<ioModeArray.length(); i++) {
+						dataUITagDef.addIOMode(ioModeArray.getString(i));
+					}
+				}
 			}
 			else {
-				dataUITagDef.setIOMode((String)ioModeObj);
+				dataUITagDef.addIOMode(HAPConstantShared.IO_DIRECTION_IN);
+				dataUITagDef.addIOMode(HAPConstantShared.IO_DIRECTION_OUT);
 			}
-			
+
 		}
 		else {
 			out = new HAPUITagDefinition();

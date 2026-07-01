@@ -140,8 +140,8 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 			return loc_envInterface[node_CONSTANT.INTERFACE_WITHVALUEPORT].createVariableByName(variableName);
 		},
 		
-		getVariableDefinition : function(varibleName){
-			
+		getVariableRulesInfo : function(variable){
+			return node_ruleUtility.collectRuleInfo(variable);
 		},
 		
 		//---------------------------------operation request

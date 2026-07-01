@@ -16,6 +16,9 @@ var packageObj = library;
 	var node_expressionUtility;
 	var node_dataRuleUtility;
 	var node_uiTagUtility;
+	var node_ruleUtility;
+	var node_getObjectType;
+	
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
@@ -26,6 +29,9 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	
 	var loc_dataVariable;
 	var loc_currentData;
+	
+	var loc_isDataEnum;
+	var loc_enumDatas;
 	
 	var loc_createCoreObj = function(){
 		loc_coreObj = loc_tagDefScriptFun(loc_coreEnvObj); 
@@ -47,6 +53,40 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 
 	var loc_coreEnvObj = {
 			
+		isDataEnum : function(){
+			if(loc_isDataEnum==undefined){
+				var ruleInfos = loc_envObj.getVariableRulesInfo(loc_dataVariable);
+				_.each(ruleInfos, function(ruleInfo, i){
+					var rule = ruleInfo.ruleDef[node_COMMONATRIBUTECONSTANT.DEFINITIONDATARULE_DATARULE];
+					var ruleType = rule[node_COMMONATRIBUTECONSTANT.DATARULE_RULETYPE];
+					if(ruleType==node_COMMONCONSTANT.DATARULE_TYPE_ENUM){
+						loc_isDataEnum = rule;
+						return loc_isDataEnum;
+					}
+				});
+			}
+			return loc_isDataEnum;
+		},
+		
+		getDataEnumRequest : function(handlers, request){
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+			if(loc_enumDatas==null){
+				var dataSet = loc_isDataEnum[node_COMMONATRIBUTECONSTANT.DATARULEENUM_DATASET];
+				if(dataSet!=undefined){
+					loc_enumDatas = dataSet;
+    				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+	    				return loc_enumDatas;
+		    		}));
+				}
+			}
+			else{
+				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+					return loc_enumDatas;
+				}));
+			}
+			return out;
+		},
+		
 		onDataChange : function(data){
 			if(data==undefined){
 				loc_currentData = data;
@@ -83,6 +123,14 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		preInit : function(request){
 			var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("uiTagPreInitRequest", {}), undefined, request);
 			loc_dataVariable = loc_envObj.createVariableByName(envObj.getAttributForData()[0]);
+			
+			if(loc_coreObj.preInit!=undefined){
+				var initObj = loc_coreObj.preInit();
+				if(initObj!=undefined && node_CONSTANT.TYPEDOBJECT_TYPE_REQUEST==node_getObjectType(initObj)){
+					out.addRequest(initObj);
+				}				
+			}
+			
 			return out;
 		},
 		initViews : function(handlers, request){
@@ -120,6 +168,9 @@ nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_Se
 nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("data.dataRuleUtility", function(){node_dataRuleUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("uitag.uiTagUtility", function(){node_uiTagUtility = this.getData();	});
+nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();	});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
+
 
 //Register Node by Name
 packageObj.createChildNode("base_simple", node_createUITagOnBaseSimple); 

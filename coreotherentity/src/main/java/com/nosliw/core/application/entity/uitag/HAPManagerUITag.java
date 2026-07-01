@@ -2,11 +2,11 @@ package com.nosliw.core.application.entity.uitag;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
@@ -102,21 +102,14 @@ public class HAPManagerUITag{
 			}
 		}
 		
-//		candidates.stream().filter(c->{
-//			String ioMode = query.getIOMode();
-//			if(ioMode==null) {
-//				return true;
-//			}
-//			if(ioMode.equals(HAPConstantShared.IO_DIRECTION_IN) && c.getUITagDef().getIOMode().equals(HAPConstantShared.IO_DIRECTION_IN)) {
-//				return false;
-//			}
-//			
-//			return true;
-//		});
-		
-		
-		HAPUITagCandidate[] candiateArray = candidates.toArray(new HAPUITagCandidate[0]);
-		Arrays.sort(candiateArray, new Comparator<HAPUITagCandidate>() {
+		candidates = candidates.stream().filter(c->{
+			String ioMode = query.getIOMode();
+			if(ioMode==null) {
+				return true;
+			}
+			return c.getUITagDef().getIOModes().contains(ioMode);
+		})
+		.sorted(new Comparator<HAPUITagCandidate>() {
 			@Override
 			public int compare(HAPUITagCandidate arg0, HAPUITagCandidate arg1) {
 				if(arg0.getScore()>arg1.getScore()) {
@@ -127,10 +120,12 @@ public class HAPManagerUITag{
 				}
 				return 0;
 			}
-		});
+		})
+		.collect(Collectors.toList());
+		
 
 		HAPUITagQueryResultSet out = new HAPUITagQueryResultSet();
-		for(HAPUITagCandidate candidate : candiateArray) {
+		for(HAPUITagCandidate candidate : candidates) {
 			HAPUITagInfo result = new HAPUITagInfo(candidate.getUITagDef());
 			result.setAttributeForData(candidate.getDataAttributeName());
 			result.addMatchers("internal_data", candidate.getMatchers());

@@ -20,7 +20,38 @@
 					    ],
 						"initData" : {
 							"dataTypeId": "test.string;1.0.0",
-							"value": "default value of request string1"
+							"value": "default value of request parm string1"
+						}
+					}
+				},
+				{
+					"name" : "serviceParm2",
+					"dataDefinition" : {
+						"criteria" : "test.string;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "enum",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "dataSet" : [
+       								{
+	                					dataTypeId: "test.string;1.0.0",
+					                	value: "serviceParm2_value1"
+					                },
+       								{
+	                					dataTypeId: "test.string;1.0.0",
+					                	value: "serviceParm2_value2"
+					                },
+       								{
+	                					dataTypeId: "test.string;1.0.0",
+					                	value: "serviceParm2_value3"
+					                }
+					            ]
+					        }
+					    ],
+						"initData" : {
+							"dataTypeId": "test.string;1.0.0",
+							"value": "serviceParm2_value2"
 						}
 					}
 				}

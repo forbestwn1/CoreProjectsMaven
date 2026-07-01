@@ -1,8 +1,10 @@
 package com.nosliw.core.application.entity.uitag;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
@@ -22,12 +24,13 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 	
 	private List<String> m_attributeForData;
 	
-	private String m_ioMode;
+	private Set<String> m_ioModes;
 	
 	private String m_dataMode;
 	
 	public HAPUITagDefinitionData() {
 		this.m_attributeForData = new ArrayList<String>();
+		this.m_ioModes = new HashSet<String>();
 	}
 
 	@Override
@@ -36,8 +39,8 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 	public List<String> getAttributeForData() {     return this.m_attributeForData;      }
 	public void addAttributeForData(String attributeForData) {    this.m_attributeForData.add(attributeForData);         }
 
-	public String getIOMode() {    return this.m_ioMode;      }
-	public void setIOMode(String ioMode) {     this.m_ioMode = ioMode;        }
+	public void addIOMode(String ioMode) {    this.m_ioModes.add(ioMode);       }
+	public Set<String> getIOModes() {     return this.m_ioModes;       }
 	
 	public String getDataMode() {    return this.m_dataMode;      }
 	public void setDataMode(String dataMode) {     this.m_dataMode = dataMode;        }
@@ -48,6 +51,6 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 		
 		jsonMap.put(ATTRIBUTEFORDATA, HAPManagerSerialize.getInstance().toStringValue(this.m_attributeForData, HAPSerializationFormat.JSON));
 		jsonMap.put(DATAMODE, this.m_dataMode);
-		jsonMap.put(IOMODE, this.m_ioMode);
+		jsonMap.put(IOMODE, HAPManagerSerialize.getInstance().toStringValue(this.m_ioModes, HAPSerializationFormat.JSON));
 	}
 }

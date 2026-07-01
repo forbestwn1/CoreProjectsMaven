@@ -418,7 +418,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag
-			HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataTypeCriteria));
+			HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
+			uiTagQuery.setIOMode(HAPConstantShared.IO_DIRECTION_IN);
+			HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(uiTagQuery);
 			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
 			wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), requestParm.getName());
 			
@@ -473,7 +475,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		out.addItem(dataCriteriaInfoStaticQ);
 
 		//dynamic of uitag
-		HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataTypeCriteria));
+		HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
+		uiTagQuery.setIOMode(HAPConstantShared.IO_DIRECTION_OUT);
+		HAPUITagInfo uiTagInfo = this.m_uiTagMan.getDefaultUITagData(uiTagQuery);
 		HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
 		wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), dataVariableName);
 		
