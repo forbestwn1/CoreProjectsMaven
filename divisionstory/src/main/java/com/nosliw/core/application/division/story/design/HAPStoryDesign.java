@@ -32,6 +32,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public static final String STORY = "story";
 	
 	@HAPAttribute
+	public static final String INITSTEP = "initStep";
+	
+	@HAPAttribute
 	public static final String STEP = "step";
 	
 	private HAPStoryManagerChange m_changeMan;
@@ -41,6 +44,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	private HAPIdBrickType m_rootBrickType;
 	
 	private HAPStoryStory m_story;
+	
+	private HAPStoryDesignStep m_initStep;
 	
 	private List<HAPStoryDesignStep> m_changeHistory;
 	
@@ -70,9 +75,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public void addStep(HAPStoryDesignStep step) {    this.m_changeHistory.add(step);     }
 	
 	public void newInitStep() {
-		HAPStoryDesignStep step = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_INIT, new HAPStoryDesignMetadataStepInit());
-		this.addStep(step);
-	}
+		this.m_initStep = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_INIT, new HAPStoryDesignMetadataStepInit());
+}
 	
 	public void newStep(HAPStoryDesignMetadataStep metaData) {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_WIZZARD, metaData);
@@ -118,15 +122,22 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	
 	public List<HAPStoryDesignMetadataStep> getStepInfos(){
 		List<HAPStoryDesignMetadataStep> out = new ArrayList<HAPStoryDesignMetadataStep>();
-		for(int i=1; i<this.m_changeHistory.size(); i++) {
+		for(int i=0; i<this.m_changeHistory.size(); i++) {
 			out.add(m_changeHistory.get(i).getMetaData());
 		}
 		return out;      
 	}
 	
-	public int getCurrentStepIndex() {    return this.m_changeHistory.size()-2;      }
+	public int getCurrentStepIndex() {    return this.m_changeHistory.size()-1;      }
 	
-	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.m_changeHistory.size()-1);    }
+	public HAPStoryDesignStep getCurrentStep() {
+		if(this.m_changeHistory.size()==0) {
+			return this.m_initStep;
+		}
+		else {
+			return this.m_changeHistory.get(this.m_changeHistory.size()-1);    
+		}
+	}
 	public boolean isFirstStep() {    return this.getCurrentStepIndex()==0;      }
 	
 	
@@ -136,6 +147,7 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 		jsonMap.put(ROOTBRICKTYPE, this.m_rootBrickType.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(BUILDERID, this.m_builderId);
 		jsonMap.put(STORY, this.m_story.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(INITSTEP, this.m_initStep.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(STEP, HAPUtilityJson.buildJson(this.m_changeHistory, HAPSerializationFormat.JSON));
 	}
 	
