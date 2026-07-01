@@ -44,11 +44,12 @@ var node_createUICustomerTagTestString = function(envObj){
 		},
 				
 		updateView : function(currentData){
+			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 			if(loc_dataView!=undefined){
-				loc_dataView.val(currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE]);
+				loc_dataView.val(value);
 			}
 			else if(loc_dataViewForEnum!=undefined){
-				loc_dataViewForEnum.val(currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE]);
+				loc_dataViewForEnum.val(value);
 			}
 		},
 

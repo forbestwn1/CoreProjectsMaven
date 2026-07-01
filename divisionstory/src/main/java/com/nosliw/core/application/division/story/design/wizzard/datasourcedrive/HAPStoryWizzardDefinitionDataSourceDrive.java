@@ -38,6 +38,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRu
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStepEnd;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignStep;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeInfoConnectionContainer;
@@ -365,8 +366,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.commit();
 			
 			//end step
-//			HAPStoryDesignMetadataStepEnd stepMetaData = new HAPStoryDesignMetadataStepEnd();
-//			design.newStep(stepMetaData);
+			HAPStoryDesignMetadataStepEnd stepMetaData = new HAPStoryDesignMetadataStepEnd();
+			design.newStep(stepMetaData);
 			
 		}
 		

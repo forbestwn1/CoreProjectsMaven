@@ -15,6 +15,9 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 public class HAPStoryDesignStep extends HAPSerializableImp{
 
 	@HAPAttribute
+	public static final String STEPTYPE = "stepType";
+	
+	@HAPAttribute
 	public static final String METADATA = "metaData";
 	
 	@HAPAttribute
@@ -22,6 +25,8 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 	
 	@HAPAttribute
 	public static final String REQUESTCHANGE = "requestChange";
+	
+	private String m_stepType;
 	
 	private HAPStoryDesignMetadataStep m_metaData;
 	
@@ -35,7 +40,7 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 		this.m_allChanages = new ArrayList<HAPStoryChangeItem>();
 	}
 	
-	public HAPStoryDesignStep(HAPStoryDesignMetadataStep metaData) {
+	public HAPStoryDesignStep(String stepType, HAPStoryDesignMetadataStep metaData) {
 		this();
 		this.m_metaData = metaData;
 	}
@@ -46,6 +51,9 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 		this.m_metaData.clear();
 	}
 
+	public String getStepType() {   return this.m_stepType;     }
+	public void setStepType(String type) {     this.m_stepType = type;       }
+	
 	public HAPStoryDesignMetadataStep getMetaData() {     return this.m_metaData;      }
 	public void setMetaData(HAPStoryDesignMetadataStep metaData) {    this.m_metaData = metaData;     }
 	
@@ -62,6 +70,7 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(STEPTYPE, this.m_stepType);
 		jsonMap.put(METADATA, this.m_metaData.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(ALLCHANGE, HAPUtilityJson.buildJson(this.m_allChanages, HAPSerializationFormat.JSON));
 		jsonMap.put(REQUESTCHANGE, HAPUtilityJson.buildJson(this.m_requestChanges, HAPSerializationFormat.JSON));

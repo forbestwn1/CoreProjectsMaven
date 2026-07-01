@@ -926,6 +926,11 @@
 			<definition name="STORYDESIGN_STEP_METADATATYPE_WIZZARD" value="wizzard"/>
 			<definition name="STORYDESIGN_STEP_METADATATYPE_END" value="end"/>
 
+			<definition type="space"/>
+			<definition name="STORYDESIGN_STEP_TYPE_INIT" value="init"/>
+			<definition name="STORYDESIGN_STEP_TYPE_WIZZARD" value="wizzard"/>
+			<definition name="STORYDESIGN_STEP_TYPE_END" value="end"/>
+
 
 			<definition type="space"/>
 			<definition name="STORY_ELEMENT_REFERENCE_ID" value="id"/>

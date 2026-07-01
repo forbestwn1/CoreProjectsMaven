@@ -27,7 +27,8 @@ var node_createUICustomerTagTestStringReadOnly = function(envObj){
 	var loc_out = {
 		
 		updateView : function(currentData){
-			loc_dataView.html(currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE]);
+			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+			loc_dataView.html(value);
 		},
 
 		initViews : function(handlers, request){

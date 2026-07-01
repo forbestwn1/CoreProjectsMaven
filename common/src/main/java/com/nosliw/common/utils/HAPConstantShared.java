@@ -847,6 +847,12 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYDESIGN_STEP_TYPE_INIT = "init";
+		public static final String STORYDESIGN_STEP_TYPE_WIZZARD = "wizzard";
+		public static final String STORYDESIGN_STEP_TYPE_END = "end";
+
+
+
 		public static final String STORY_ELEMENT_REFERENCE_ID = "id";
 		public static final String STORY_ELEMENT_REFERENCE_ALIAS = "alias";
 

@@ -49,6 +49,8 @@ public class HAPStoryDesignUtilityParse {
 	private static HAPStoryDesignStep parseDesignStep(JSONObject stepJsonObj, HAPServiceParseEntity entityParseService) {
 		HAPStoryDesignStep out = new HAPStoryDesignStep();
 		
+		out.setStepType(stepJsonObj.getString(HAPStoryDesignStep.STEPTYPE));
+		
 		JSONObject metaDataJsonObj = stepJsonObj.optJSONObject(HAPStoryDesignStep.METADATA);
 		if(metaDataJsonObj!=null) {
 			out.setMetaData((HAPStoryDesignMetadataStep)entityParseService.parseEntityJSONImplicitAttribute(metaDataJsonObj, HAPStoryDesignMetadataStep.TYPE, HAPStoryDesignMetadataStep.PARSABLEENTITYDOMAIN));
