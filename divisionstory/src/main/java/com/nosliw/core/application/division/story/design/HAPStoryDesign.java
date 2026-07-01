@@ -129,30 +129,6 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public HAPStoryDesignStep getCurrentStep() {     return this.m_changeHistory.get(this.m_changeHistory.size()-1);    }
 	public boolean isFirstStep() {    return this.getCurrentStepIndex()==0;      }
 	
-//	@Override
-//	protected boolean buildObjectByJson(Object json){  
-//		JSONObject jsonObj = (JSONObject)json;
-//		this.m_builderId = jsonObj.getString(BUILDERID);
-//		
-//		Object rootBrickTypeObj = jsonObj.opt(ROOTBRICKTYPE);
-//		if(rootBrickTypeObj!=null) {
-//			this.m_rootBrickType = new HAPIdBrickType();
-//			this.m_rootBrickType.buildObject(rootBrickTypeObj, HAPSerializationFormat.JSON);
-//		}
-//		
-//		this.m_story.buildObject(jsonObj.getJSONObject(STORY), HAPSerializationFormat.JSON);
-//		
-//		JSONArray stepJsonArray = jsonObj.optJSONArray(STEP);
-//		if(stepJsonArray!=null) {
-//			for(int i=0; i<stepJsonArray.length(); i++) {
-//				HAPStoryDesignStep step = new HAPStoryDesignStep();
-//				step.buildObject(stepJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
-//				this.m_changeHistory.add(step);
-//			}
-//		}
-//		
-//		return true;
-//	}
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
