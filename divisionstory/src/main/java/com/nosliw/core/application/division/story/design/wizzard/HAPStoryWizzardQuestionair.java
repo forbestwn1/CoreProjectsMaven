@@ -64,6 +64,8 @@ abstract class HAPStoryWizzardQuestionair_Parsable extends HAPParserEntityImpWit
 	public String getDomain() {   return HAPStoryWizzardQuestionair.PARSE_DOMAIN;  }
 
     protected void parseQuestionair(HAPStoryWizzardQuestionair questionair, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+    	questionair.buildEntityInfoByJson(jsonObj);
+    	
     	String tag = (String)jsonObj.opt(HAPStoryWizzardQuestionair.TAG);
     	if(tag!=null) {
 			questionair.setTag(tag);

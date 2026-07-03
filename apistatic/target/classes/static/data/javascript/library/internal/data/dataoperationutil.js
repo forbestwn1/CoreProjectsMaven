@@ -85,6 +85,18 @@ var node_dataOperationUtility = function()
 							
 						}
 						else{
+							
+							return node_createServiceRequestInfoSimple({}, function(request){
+								var elements = [];
+								_.each(value.value, function(ele, id){
+									elements.push({
+										value : ele
+									});
+								});
+								return elements;
+							});
+							
+/*	loop through data operation, now comment out
 							//throught index,
 							//get length first
 							var operationParms = [];
@@ -122,6 +134,7 @@ var node_dataOperationUtility = function()
 										return allElesRequest;
 									}
 							});
+*/							
 						}
 					}
 				})

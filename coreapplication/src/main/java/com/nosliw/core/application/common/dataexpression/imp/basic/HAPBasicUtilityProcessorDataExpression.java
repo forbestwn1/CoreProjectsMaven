@@ -1,5 +1,7 @@
 package com.nosliw.core.application.common.dataexpression.imp.basic;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
@@ -13,6 +15,7 @@ import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitio
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandOperation;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandReference;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandVariable;
+import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionParmInOperationOperand;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
@@ -21,6 +24,8 @@ import com.nosliw.core.application.resource.HAPResourceDataBrick;
 import com.nosliw.core.application.resource.HAPUtilityBrickResource;
 import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
 import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.HAPDataTypeId;
+import com.nosliw.core.data.HAPDataWrapper;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceId;
@@ -57,20 +62,56 @@ public class HAPBasicUtilityProcessorDataExpression {
 		return out;
 	}
 	
-	private static HAPBasicOperandAttribute buildBasicOperandAttribute(HAPDefinitionOperandAttribute operandDef) {
+	private static HAPBasicOperandAttribute buildBasicOperandAttributeXXX(HAPDefinitionOperandAttribute operandDef) {
 		HAPBasicOperandAttribute out = new HAPBasicOperandAttribute(operandDef);
 		out.setBase(buildBasicOperand(operandDef.getBase()));
 		return out;
 	}
-	
+
+	private static HAPBasicOperand buildBasicOperandAttribute(HAPDefinitionOperandAttribute operandDef) {
+		//turn attribute operand to operation operand
+		List<HAPDefinitionParmInOperationOperand> parms = new ArrayList<HAPDefinitionParmInOperationOperand>();
+		parms.add(new HAPDefinitionParmInOperationOperand(HAPConstantShared.DATAOPERATION_COMPLEX_GETCHILDDATA_NAME, new HAPDefinitionOperandConstant(new HAPDataWrapper(new HAPDataTypeId("test.string;1.0.0"), operandDef.getAttribute()))));
+		HAPDefinitionOperandOperation operationOprand = new HAPDefinitionOperandOperation(operandDef.getBase(), HAPConstantShared.DATAOPERATION_COMPLEX_GETCHILDDATA, parms);
+		
+		return buildBasicOperand(operationOprand);
+		
+//		HAPBasicOperandOperation out = new HAPBasicOperandOperation(operationOprand);
+//		out.setBase(buildBasicOperand(operandDef.getBase()));
+//		return out;
+	}
+
 	private static HAPBasicOperandConstant buildBasicOperandConstant(HAPDefinitionOperandConstant operandDef) {
 		HAPBasicOperandConstant out = new HAPBasicOperandConstant(operandDef);
 		return out;
 	}
 	
-	private static HAPBasicOperandVariable buildBasicOperandVariable(HAPDefinitionOperandVariable operandDef) {
+	private static HAPBasicOperandVariable buildBasicOperandVariableXXX(HAPDefinitionOperandVariable operandDef) {
 		HAPBasicOperandVariable out = new HAPBasicOperandVariable(operandDef);
 		return out;
+	}
+
+	private static HAPBasicOperand buildBasicOperandVariable(HAPDefinitionOperandVariable operandDef) {
+		String varName = operandDef.getVariableName();
+		String[] segs = varName.split("\\.");
+		
+		if(segs.length==1) {
+			//single variable
+			return new HAPBasicOperandVariable(operandDef);
+		}
+		else {
+			//variable with attributes
+			HAPDefinitionOperand operandDefOut = null;
+			for(int i=0; i<segs.length; i++) {
+				if(i==0) {
+					operandDefOut = new HAPDefinitionOperandVariable(segs[0]);
+				}
+				else {
+					operandDefOut = new HAPDefinitionOperandAttribute(operandDefOut, segs[i]);
+				}
+			}
+			return buildBasicOperand(operandDefOut);
+		}
 	}
 
 	private static HAPBasicOperandOperation buildOperandOperation(HAPDefinitionOperandOperation operandDef) {

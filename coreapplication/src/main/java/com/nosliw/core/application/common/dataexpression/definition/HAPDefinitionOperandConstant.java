@@ -14,6 +14,12 @@ public class HAPDefinitionOperandConstant extends HAPDefinitionOperand{
 		this.m_constantStr = constantStr;
 	}
 
+	public HAPDefinitionOperandConstant(HAPData data) {
+		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT);
+		this.m_data = data;
+	}
+
 	public String getStringValue(){  return this.m_constantStr;  }
 
+	public HAPData getData() {   return this.m_data;    }
 }

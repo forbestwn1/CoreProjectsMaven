@@ -1,11 +1,14 @@
 import { useState, useEffect, useContext, useRef} from 'react'
+import { CacheContext } from './DesignContext'
 
 export default function QuestionairDynamicRequestConstantValue({questionair, datadefinition, onChange}){ 
+	const cache = useContext(CacheContext);
     const contentRef = useRef(null);
-	const [uiTagApp, setUiTagApp] = useState(null);
+    const [, forceUpdate] = useState(0);
 
     useEffect(() => {
-		if (!uiTagApp) {
+		let uiTagApp = cache.current[questionair.id];
+        if(uiTagApp==undefined){
 			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 			var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
@@ -27,20 +30,14 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
 				{
 					success: function (requestInfo, resourceIds) {
 						loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(resourceIds[0])).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
-//						loc_bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(id, node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0")).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
-						var kkk = 5;
 
 						var runtimeContext = {
 						};
 
 						return nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({ bundleDef: loc_bundleDef }, undefined, runtimeContext, undefined, {
 							success: function (requestInfo, application) {
-								setUiTagApp(application);
-
-								if(contentRef.current)
-								{
-									$(contentRef.current).append(application.getView());
-								}
+								cache.current[questionair.id] = application;
+                                forceUpdate(c=>c+1);
 							}
 						});
 
@@ -49,16 +46,11 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
 			));
 			node_requestServiceProcessor.processRequest(request);
 		}
-
-		if(uiTagApp){
+		else{
             $(uiTagApp.getView()).remove();
 	     	$(contentRef.current).append(uiTagApp.getView());
 		}
-
     });
-
-
-
 
     return (
         <>

@@ -26,13 +26,18 @@ public class HAPBasicOperandConstant extends HAPBasicOperand implements HAPOpera
 		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT, operandDefinition);
 		
 		String stringValue = operandDefinition.getStringValue();
-		HAPData data = HAPUtilityData.buildDataWrapper(stringValue);
-		if(data==null){
-			//not a valid data literate, then it is a constant name
-			this.m_name = stringValue;
+		if(stringValue!=null) {
+			HAPData data = HAPUtilityData.buildDataWrapper(stringValue);
+			if(data==null){
+				//not a valid data literate, then it is a constant name
+				this.m_name = stringValue;
+			}
+			else{
+				this.m_data = data;
+			}
 		}
-		else{
-			this.m_data = data;
+		else if(operandDefinition.getData()!=null) {
+			this.m_data = operandDefinition.getData();
 		}
 	}
 

@@ -23,6 +23,9 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryManagerC
 public class HAPStoryDesign extends HAPEntityInfoImp{
 
 	@HAPAttribute
+	public static final String IDINDEX = "idIndex";
+
+	@HAPAttribute
 	public static final String BUILDERID = "builderId";
 	
 	@HAPAttribute
@@ -39,6 +42,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	
 	private HAPStoryManagerChange m_changeMan;
 
+	private int m_index = 0;
+	
 	private String m_builderId;
 	
 	private HAPIdBrickType m_rootBrickType;
@@ -140,6 +145,10 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	}
 	public boolean isFirstStep() {    return this.getCurrentStepIndex()==0;      }
 	
+	public String generateId() {    
+		this.m_index++;
+		return this.m_index+"";
+	}
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

@@ -8,11 +8,11 @@ export default function QuestionairDynamicChooseDataSource({questionair, onChang
     const [, forceUpdate] = useState(0);
 
     useEffect(() => {
-        if(cache.current.dataSources==undefined){
+        if(cache.current[questionair.id]==undefined){
             console.log("load all services response");
             const service = createComponentQuestionItemService();
             service.getLoadServicesRequest((services) => {
-                cache.current.dataSources = services;
+                cache.current[questionair.id] = services;
                 forceUpdate(c=>c+1);
             });
         }
@@ -36,7 +36,7 @@ export default function QuestionairDynamicChooseDataSource({questionair, onChang
         <div>
             <label>Choose a DataSource:</label>
             <select name="DataSource" id="dataSource" onChange={(e) => setSelectedDataSource(e.target.value)}>
-                {cache.current.dataSources&&cache.current.dataSources.map((source) => {
+                {cache.current[questionair.id]&&cache.current[questionair.id].map((source) => {
                     if(selected==source.name){
                         return (
                            <option key={source.id} selected value={source.name}>
