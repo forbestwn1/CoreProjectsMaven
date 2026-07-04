@@ -6,6 +6,7 @@ public interface HAPInfoRuntimeTask {
 	public static final String RUNTIMETASK_TYPE_EXECUTEDATAOPERATION = "executeDataOperation";
 	public static final String RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSION = "executeScriptExpression";
 	public static final String RUNTIMETASK_TYPE_LOADRESOURCES = "loadResources";
+	public static final String RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSIONCONSTANTGROUP = "executeScriptExpressionConstantGroup";
 	
 	
     String getTaskType();

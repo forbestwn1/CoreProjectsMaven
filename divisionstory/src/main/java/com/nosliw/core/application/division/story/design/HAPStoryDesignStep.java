@@ -42,6 +42,7 @@ public class HAPStoryDesignStep extends HAPSerializableImp{
 	
 	public HAPStoryDesignStep(String stepType, HAPStoryDesignMetadataStep metaData) {
 		this();
+		this.m_stepType = stepType;
 		this.m_metaData = metaData;
 	}
 

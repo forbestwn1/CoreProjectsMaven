@@ -21,6 +21,14 @@ public class HAPStoryWizzardUtilityQuestion {
 		}
 	}
 	
+	public static HAPStoryWizzardQuestionair findChildSingleQuestionairByTag(HAPStoryWizzardQuestionairGroup questionair, String tag) {
+		return questionair.getItems().stream().filter(q->q.isTag(tag)).findFirst().orElse(null);
+	}
+
+	public static List<HAPStoryWizzardQuestionair> findChildMultipleQuestionairByTag(HAPStoryWizzardQuestionairGroup questionair, String tag) {
+		return questionair.getItems().stream().filter(q->q.isTag(tag)).toList();
+	}
+
 	public static HAPStoryWizzardQuestionair findSingleQuestionairByTag(HAPStoryWizzardQuestionair questionair, String tag){
 		HAPStoryWizzardQuestionair out = null;
 		List<HAPStoryWizzardQuestionair> qs = findQuestionairsByTag(questionair, tag);
