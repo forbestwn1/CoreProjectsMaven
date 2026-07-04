@@ -435,7 +435,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryWizzardQuestionairGroup dataQ = (HAPStoryWizzardQuestionairGroup)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(childDataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA);
 					
 					HAPStoryChangeItemElementNew newChildDataContentChange = buildResponseUIByData(changeSession, dataQ, childInfoValue.getEntityInfo().getName());
-					changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newChildDataContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("children")));
+					changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newChildDataContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("children")));
 				}
 			}
 		}

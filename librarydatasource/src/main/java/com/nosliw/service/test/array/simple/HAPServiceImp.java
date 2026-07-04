@@ -1,4 +1,4 @@
-package com.nosliw.service.test.array;
+package com.nosliw.service.test.array.simple;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -62,6 +62,6 @@
 		}
 	},
 	"runtime": {
-	    "implementation" : "com.nosliw.service.test.array.HAPServiceImp",
+	    "implementation" : "com.nosliw.service.test.array.simple.HAPServiceImp",
 	}
 }]
