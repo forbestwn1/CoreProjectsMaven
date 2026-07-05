@@ -1,13 +1,13 @@
 package com.nosliw.core.data.criteria;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.utils.HAPUtilityBasic;
 
 public class HAPDataTypeSubCriteriaGroupImp extends HAPSerializableImp implements HAPDataTypeSubCriteriaGroup{
@@ -38,16 +38,18 @@ public class HAPDataTypeSubCriteriaGroupImp extends HAPSerializableImp implement
 	}
 
 	@Override
-	public Set<String> getSubCriteriaNames() {
-		Set<String> out = new HashSet<String>();
+	public List<String> getSubCriteriaNames() {
+		List<String> out = new ArrayList<String>();
 		out.addAll(this.m_subCriterias.keySet());
-		if(this.isOpen())  out.add(ANY);
+		if(this.isOpen()) {
+			out.add(ANY);
+		}
 		return out;
 	}
 
 	@Override
-	public Set<String> getDefinedSubCriteriaNames(){
-		return this.m_subCriterias.keySet();
+	public List<String> getDefinedSubCriteriaNames(){
+		return new ArrayList<String>(this.m_subCriterias.keySet());
 	}
 
 	protected void setOpen(boolean isOpen){  this.m_isOpen = isOpen;  }
@@ -69,20 +71,28 @@ public class HAPDataTypeSubCriteriaGroupImp extends HAPSerializableImp implement
 	protected String buildLiterate(){
 		StringBuffer out = new StringBuffer();
 
-		if(this.m_isOpen)		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_SUBCRITERIA_OPEN));
-		else		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_SUBCRITERIA_CLOSE));
+		if(this.m_isOpen) {
+			out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_SUBCRITERIA_OPEN));
+		} else {
+			out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_SUBCRITERIA_CLOSE));
+		}
 		
 		int i = 0;
 		for(String name : this.m_subCriterias.keySet()){
-			if(i!=0)   out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.COMMAR));
+			if(i!=0) {
+				out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.COMMAR));
+			}
 			out.append(name);
 			out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.ASSIGNMENT));
 			out.append(HAPManagerSerialize.getInstance().toStringValue(this.m_subCriterias.get(name), HAPSerializationFormat.LITERATE));
 			i++;
 		}
 		
-		if(this.m_isOpen)		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.END_SUBCRITERIA_OPEN));
-		else		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.END_SUBCRITERIA_CLOSE));
+		if(this.m_isOpen) {
+			out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.END_SUBCRITERIA_OPEN));
+		} else {
+			out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.END_SUBCRITERIA_CLOSE));
+		}
 
 		return out.toString(); 
 	}

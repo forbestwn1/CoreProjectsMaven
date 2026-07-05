@@ -304,43 +304,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemElementNew newResponseInputContentChange = buildResponseUIByData(changeSession, dataQ, parmDef.getName());
 					changeSession.addChangeConnectionNew(newResponseContentChange.getElementId(), newResponseInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("output")));
 				}
-				
-				
-/*				
-				if(parmIsShowQValue.getIsShow()) {
-					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(responseParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);
-					HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic)parmUITagChooseQ.getValue();
-					HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
-					
-					//add variable
-					HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), new HAPDataDefinitionWritable(parmDef.getDataDefinition()), parmDef);
-
-					//build tunnel between variable endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
-					responseDataAssociation.addTunnel(tunnel);
-					
-					//append input content
-					HAPStoryChangeItemElementNew newResponseInputContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "output.html");
-					changeSession.addChangeConnectionNew(newResponseContentChange.getElementId(), newResponseInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("output")));
-					
-					//inject label
-					HAPStoryChangeItemElementNew newResponseInputLabelContentChange = HAPStoryWizzardUtility.newUIContentHtmlFromFile(changeSession, "inputlabel.html");
-					changeSession.addChangeConnectionNew(newResponseInputContentChange.getElementId(), newResponseInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
-
-					//inject title
-					HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryWizzardUtility.newUIContentHtml(changeSession, parmDef.getName());
-					changeSession.addChangeConnectionNew(newResponseInputContentChange.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
-					
-					//inject uiTag
-					HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
-					changeSession.addChangeConnectionNew(newResponseInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
-					
-					//inject content wrapper into uitag
-					HAPStoryChangeItemElementNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
-					changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
-					
-				}
-*/				
 			}
 
 			//present page task

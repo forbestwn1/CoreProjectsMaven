@@ -1,6 +1,6 @@
 package com.nosliw.core.data.criteria;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * SubCriteria refer to addition criteria information besides the DataTypeCriteria itself
@@ -23,14 +23,14 @@ public interface HAPDataTypeSubCriteriaGroup {
 	 * @return 
 	 * 		null or empty: no names
 	 */
-	Set<String> getSubCriteriaNames();
+	List<String> getSubCriteriaNames();
 
 	/**
 	 * Only defined sub criteria name, 
 	 * Not include all if is open
 	 * @return
 	 */
-	Set<String> getDefinedSubCriteriaNames();
+	List<String> getDefinedSubCriteriaNames();
 	
 	/**
 	 * 
