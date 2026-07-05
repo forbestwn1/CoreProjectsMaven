@@ -2,6 +2,7 @@ import QuestionairDynamicChooseDataSource from './QuestionairDynamicChooseDataSo
 import QuestionairGroup from './QuestionairGroup'
 import QuestionairStatic from './QuestionairStatic'
 import QuestionairGroupRequestParm from './QuestionairGroupRequestParm'
+import QuestionairGroupResponseParm from './QuestionairGroupResponseParm'
 
 export default function Questionair ({questionair, onChange}){
 
@@ -16,6 +17,9 @@ export default function Questionair ({questionair, onChange}){
         if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_GROUP){
             if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP){
                 return <QuestionairGroupRequestParm questionair={questionair} onChange={onChange} />;
+            }
+            else if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP){
+                return <QuestionairGroupResponseParm questionair={questionair} onChange={onChange} />;
             }
             return <QuestionairGroup questionair={questionair} onChange={onChange} />;
         }

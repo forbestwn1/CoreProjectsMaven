@@ -55,6 +55,21 @@ export const questionairUtility = function () {
         return null;
     };
 
+    var loc_getChildQuestionairByTag = function(questionair, tag){
+        var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	    var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+        
+        var items = loc_getAllItemsInGroup(questionair);
+
+        for(var i=0; i<items.length; i++){
+            var item = items[i];
+            if(items[i][node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_TAG] === tag){
+                return items[i];
+            }
+        }
+        return null;
+    };
+
 
     var loc_out = {
 
@@ -81,6 +96,10 @@ export const questionairUtility = function () {
                 }
             }
 
+        },
+
+        getChildQuestionairByTag : function(questionair, tag){
+            return loc_getChildQuestionairByTag(questionair, tag);
         },
 
         getChildQuestionairByValueType :function(questionair, valueType){

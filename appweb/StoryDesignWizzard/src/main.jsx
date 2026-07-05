@@ -7,10 +7,11 @@ import App from './App.jsx'
 $(document).on("nosliwActive", function(){
 
   createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <App />
-  </StrictMode>,
-)
+  )
+
+//  <！--StrictMode>
+//  </StrictMode-->,
 
 });
 

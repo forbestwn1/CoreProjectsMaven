@@ -503,6 +503,12 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		HAPStoryWizzardQuestionairItemStatic dataCriteriaInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic(dataTypeCriteria));
 		out.addItem(dataCriteriaInfoStaticQ);
 
+		//child info (name)
+		HAPEntityInfo dataEntityInfo = new HAPEntityInfoImp();
+		dataEntityInfo.setName(dataVariableName);
+		HAPStoryWizzardQuestionairItemStatic dataEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(dataEntityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_ENTITYINFO);
+		out.addItem(dataEntityInfoStaticQ);
+		
 		//dyanmic of is show 
 		HAPStoryWizzardQuestionairItemDynamic dataIsShowQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceResponseParmChooseIsShowDynamic(true), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAISSHOW);
 		out.addItem(dataIsShowQ);

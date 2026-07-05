@@ -7,7 +7,6 @@ export default function QuestionairGroup({ questionair, onChange }) {
 
   return (
     <div className="questionnaire-group">
-        group questionair!!!!
       {questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_ITEM].map((item) => (
         <Questionair
           key={item.id}

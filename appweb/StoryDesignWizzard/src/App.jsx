@@ -34,7 +34,7 @@ function App() {
 
 
     var onNext = function(){
-        if(designState.currentStepUI<designState.currentStepServer && designState.isStepDirty[designState.currentStepUI]==true){
+        if(designState.currentStepUI<designState.currentStepServer && designState.isStepDirty[designState.currentStepUI]==false){
             designDispatch(nextStep());
         }
         else{

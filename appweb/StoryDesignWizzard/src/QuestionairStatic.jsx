@@ -6,7 +6,6 @@ export default function QuestionairStatic({ questionair, onChange }) {
 
   return (
     <div>
-        static questionair!!!!
     </div>
   );
 }

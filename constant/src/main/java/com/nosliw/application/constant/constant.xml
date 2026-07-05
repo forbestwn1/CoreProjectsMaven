@@ -977,6 +977,7 @@
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG" value="dataSourceResponseDataUITagTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDREN" value="dataSourceResponseDataChildren"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO" value="dataSourceResponseDataChildInfo"/>
+			<definition name="STORYDESIGN_QUESTION_TAG_ENTITYINFO" value="entityInfo"/>
 I
 			<definition type="space"/>
 			<definition name="BRICK" value="brick"/>
