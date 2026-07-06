@@ -90,9 +90,7 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 			resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
 			
 			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource));
-			
 			out = HAPServiceData.createSuccessData(gatewayOutput);
-			
 			break;
 		}
 

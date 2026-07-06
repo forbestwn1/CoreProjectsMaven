@@ -6,6 +6,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPBundleForExecute;
 import com.nosliw.core.application.HAPResultBrickDescentValue;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.resource.HAPResourceDataBrick;
@@ -23,13 +24,12 @@ public class HAPUtilityBrickValuePort {
 			return new HAPInfoValuePortContainer(Pair.of(brick.getInternalValuePorts(), brick.getExternalValuePorts()), bundle.getValueStructureDomain(), true);
 		}
 		else if(brickDescentValueResult.getResourceId()!=null){
-			HAPResourceDataBrick resourceData =(HAPResourceDataBrick)HAPUtilityResource.getResource(brickDescentValueResult.getResourceId(), resourceMan, runtimeInfo).getResourceData();
-			brick = resourceData.getBrick();
-			return new HAPInfoValuePortContainer(Pair.of(brick.getInternalValuePorts(), brick.getExternalValuePorts()), resourceData.getValueStructureDomain(), false);
+			HAPBundleForExecute bundleExe = ((HAPResourceDataBrick)HAPUtilityResource.getResource(brickDescentValueResult.getResourceId(), resourceMan, runtimeInfo).getResourceData()).getBundle();
+			brick = bundleExe.getBrick();
+			return new HAPInfoValuePortContainer(Pair.of(brick.getInternalValuePorts(), brick.getExternalValuePorts()), bundleExe.getValueStructureDomain(), false);
 		}
 		else if(brickDescentValueResult.getDyanmicValue()!=null) {
 			return new HAPInfoValuePortContainer(Pair.of(null, brickDescentValueResult.getDyanmicValue().getExternalValuePorts()), bundle.getValueStructureDomain(), true);
-			
 		}
 		return null;
 	}

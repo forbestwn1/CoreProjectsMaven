@@ -27,12 +27,12 @@ public class HAPWrapperResourceDataBrick extends HAPWrapperResourceDataImp{
 		if(path.getLength()>=2) {
 			throw new RuntimeException();
 		}
-		return HAPUtilityBrickResource.getExportResourceData(this.m_bundle, path.toString(), this.m_resourceManager, this.m_runtimeInfo);
+		return HAPUtilityBrickResource.buildResourceDataBrick(this.m_bundle, path.toString(), this.m_resourceManager, this.m_runtimeInfo);
 	}
 
 	@Override
 	public HAPResourceData getResourceData() {
-		return HAPUtilityBrickResource.getExportResourceData(this.m_bundle, null, this.m_resourceManager, this.m_runtimeInfo);
+		return HAPUtilityBrickResource.buildResourceDataBrick(this.m_bundle, null, this.m_resourceManager, this.m_runtimeInfo);
 	}
 
 }

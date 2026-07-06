@@ -8,13 +8,22 @@ import com.nosliw.common.utils.HAPConstantShared;
 public class HAPUtilityBundleForExecute {
 
 	public static HAPBundleForExecute toBundleExecutable(HAPBundleForBrick bundleForBrick, String exportName) {
-		Map<String, HAPBrick> supportBricks = new LinkedHashMap<>();
-		for(String branchName : bundleForBrick.getBranchNames()) {
-			supportBricks.put(branchName, bundleForBrick.getBranchBrickWrapper(branchName).getBrick());
-		}
+		HAPBundleForExecute out = new HAPBundleForExecute();
+
+		HAPInfoExportBrick exportInfo = HAPUtilityBundleForExecute.getBrickExportInfo(bundleForBrick, exportName);
+		HAPResultBrickDescentValue brickResult = HAPUtilityBrick.getDescdentBrickResult(bundleForBrick, exportInfo.getPathFromRoot(), HAPConstantShared.NAME_ROOTBRICK_MAIN);
+		out.setBrick(brickResult.getBrick());
+		out.setExportBrickInfo(exportInfo);
+		out.addAliasMappings(bundleForBrick.getAliasMappings());
+		out.setValueStructureDomain(bundleForBrick.getValueStructureDomain());
 		
-		HAPBundleForExecute bundleForExe = new HAPBundleForExecute(bundleForBrick.getMainBrickWrapper().getBrick(), supportBricks, HAPUtilityBundleForExecute.getBrickExportInfo(bundleForBrick, null), bundleForBrick.getAliasMappings(), bundleForBrick.getValueStructureDomain());
-		return bundleForExe;
+		Map<String, HAPBrick> suportBricks = new LinkedHashMap<String, HAPBrick>();
+		Map<String, HAPWrapperBrickRoot> branches = bundleForBrick.getBranchBrickWrappers();
+		for(String n : branches.keySet()) {
+			out.addSupportBrick(n, branches.get(n).getBrick());
+			suportBricks.put(n, branches.get(n).getBrick());
+		}
+		return out;
 	}
 	
 	public static HAPInfoExportBrick getBrickExportInfo(HAPBundleForBrick bundle, String name) {
@@ -30,6 +39,5 @@ public class HAPUtilityBundleForExecute {
 		}
 		return exportInfo;
 	}
-	
 	
 }

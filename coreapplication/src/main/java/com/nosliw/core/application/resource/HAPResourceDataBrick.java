@@ -1,43 +1,45 @@
 package com.nosliw.core.application.resource;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.HAPBundleForExecute;
-import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.HAPInfoExportBrick;
-import com.nosliw.core.resource.HAPResourceData;
-import com.nosliw.core.resource.HAPResourceDataOrWrapper;
+import com.nosliw.core.resource.HAPResourceDataImp;
 import com.nosliw.core.resource.HAPResourceDependency;
-import com.nosliw.core.resource.HAPWithResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPResourceDataBrick extends HAPBundleForExecute implements HAPResourceData, HAPWithResourceDependency{
+public class HAPResourceDataBrick extends HAPResourceDataImp{
 
-	public HAPResourceDataBrick(HAPBrick brick, Map<String, HAPBrick> supportBricks, HAPInfoExportBrick exportBrickInfo, Map<String, HAPPath> aliasMapping, HAPDomainValueStructure valueStructureDomain) {
-		super(brick, supportBricks, exportBrickInfo, aliasMapping, valueStructureDomain);
+	@HAPAttribute
+	public final static String BUNDLE = "bundle"; 
+	
+	private HAPBundleForExecute m_bundle;
+	
+	public HAPResourceDataBrick(HAPBundleForExecute bundle) {
+		this.m_bundle = bundle;
+	}
+
+	public HAPBundleForExecute getBundle() {     return this.m_bundle;     }
+	
+	@Override
+	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {	
+		this.getBundle().getBrick().buildResourceDependency(dependency, runtimeInfo);
+	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(BUNDLE, this.m_bundle.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
 	@Override
-	public HAPResourceDataOrWrapper getDescendant(HAPPath path) {
-		throw new RuntimeException();
-	}
-
-	@Override
-	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {
-		this.getBrick().buildResourceDependency(dependency, runtimeInfo);
-	}
-
-	@Override
-	public List<HAPResourceDependency> getResourceDependency(HAPRuntimeInfo runtimeInfo) {
-		List<HAPResourceDependency> out = new ArrayList<HAPResourceDependency>();
-		this.buildResourceDependency(out, runtimeInfo);
-		return out;
-	}
+	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		this.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(BUNDLE, this.m_bundle.toStringValue(HAPSerializationFormat.JAVASCRIPT));
+	}	
 
 }

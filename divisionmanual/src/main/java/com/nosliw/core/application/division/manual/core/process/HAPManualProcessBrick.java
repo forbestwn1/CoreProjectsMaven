@@ -15,23 +15,6 @@ public class HAPManualProcessBrick {
 		//init brick
 		HAPManualWrapperBrickRoot out = HAPManualUtilityProcessorInit.process(rootBrickDefWrapper, processContext);
 		
-//		HAPManualUtilityProcessBrickPath.processComplexBrickNormalizeBrickPath(processContext);
-//		
-//		//process value port
-//		HAPManualUtilityProcessorValuePort.process(processContext);
-//		
-//		//process variable
-//		HAPManualUtilityProcessorVariable.process(processContext);
-//		
-//		//process brick
-//		HAPManualUtilityProcessorBrick.process(processContext);
-//		
-//		//process adapter
-//		HAPManualUtilityProcessorAdapter.processAdapterInAttribute(processContext);
-//		
-//		//post process
-//		HAPManualUtilityProcessorPost.process(processContext);
-		
 		return out;
 	}
 
@@ -55,7 +38,4 @@ public class HAPManualProcessBrick {
 		HAPManualUtilityProcessorPost.process(processContext);
 		
 	}
-
-
-
 }

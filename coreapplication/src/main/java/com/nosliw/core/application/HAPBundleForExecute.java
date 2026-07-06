@@ -9,6 +9,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.core.application.valueport.HAPIdElement;
 
 @HAPEntityWithAttribute
 public class HAPBundleForExecute extends HAPSerializableImp{
@@ -28,7 +29,6 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	@HAPAttribute
 	public final static String EXPORTBRICKINFO = "exportBrickInfo"; 
 	
-
 	private HAPBrick m_brick;
 	
 	private Map<String, HAPBrick> m_supportBricks;
@@ -40,18 +40,28 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	
 	private HAPInfoExportBrick m_exportBrickInfo;
 	
-	public HAPBundleForExecute(HAPBrick brick, Map<String, HAPBrick> supportBricks, HAPInfoExportBrick exportBrickInfo, Map<String, HAPPath> aliasMapping, HAPDomainValueStructure valueStructureDomain) {
-		this.m_supportBricks = new LinkedHashMap<String, HAPBrick>();
-		this.m_supportBricks.putAll(supportBricks);
-		this.m_brick = brick;
-		this.m_exportBrickInfo = exportBrickInfo;
-		this.m_valueStructureDomain = valueStructureDomain;
-		this.m_aliasMapping = aliasMapping;
-	}
+	private Map<String, HAPIdElement> m_exportVariableInfos;
 	
+	public HAPBundleForExecute() {
+		this.m_supportBricks = new LinkedHashMap<String, HAPBrick>();
+		this.m_aliasMapping = new LinkedHashMap<String, HAPPath>();
+		this.m_exportVariableInfos = new LinkedHashMap<String, HAPIdElement>();
+	}
+
 	public HAPBrick getBrick() {    return this.m_brick;     }
+	public void setBrick(HAPBrick brick) {      this.m_brick = brick;      }
 	
 	public HAPDomainValueStructure getValueStructureDomain() {   return this.m_valueStructureDomain;    }
+	public void setValueStructureDomain(HAPDomainValueStructure valueStructureDomain) {     this.m_valueStructureDomain = valueStructureDomain;      }
+	
+	public void addSupportBrick(String name, HAPBrick brick) {    this.m_supportBricks.put(name, brick);     }
+	public void setExportBrickInfo(HAPInfoExportBrick exportBrickInfo) {    this.m_exportBrickInfo = exportBrickInfo;      }
+	
+	public void addAliasMapping(String name, HAPPath path) {   this.m_aliasMapping.put(name, path);     }
+	public void addAliasMappings(Map<String, HAPPath> mappings) {    this.m_aliasMapping.putAll(mappings);      }
+	
+	public void addExportVariableInfo(String name, HAPIdElement variableId) {      this.m_exportVariableInfos.put(name, variableId);          }
+	
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

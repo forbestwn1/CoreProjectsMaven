@@ -122,7 +122,7 @@ var node_createBundleCore = function(parm, configure){
 			out.addRequest(nosliw.runtime.getResourceService().getGetResourcesRequest(loc_resourceId, {
 				success : function(requestInfo, resourceTree){
 					//get bundle definition
-					loc_bundleDef = node_resourceUtility.getResourceFromTree(resourceTree, loc_resourceId).resourceData;
+					loc_bundleDef = node_resourceUtility.getResourceFromTree(resourceTree, loc_resourceId).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATABRICK_BUNDLE];
 	 			}
 			}));
 		}

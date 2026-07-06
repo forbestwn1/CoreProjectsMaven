@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.HAPBundleForExecute;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.dataexpression.HAPOperand;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
@@ -20,7 +21,6 @@ import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.application.resource.HAPResourceDataBrick;
 import com.nosliw.core.application.resource.HAPUtilityBrickResource;
 import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
 import com.nosliw.core.data.HAPData;
@@ -170,12 +170,12 @@ public class HAPBasicUtilityProcessorDataExpression {
 
 					HAPResourceId refResourceId = HAPFactoryResourceId.newInstance(referenceOperandDef.getReference());
 					referenceOperand.setResourceId(refResourceId);
-					HAPResourceDataBrick resourceData = HAPUtilityBrickResource.getResourceData(refResourceId, resourceMan, runtimeInfo);
-					HAPBrick referedResourceBrick = resourceData.getBrick();
+					HAPBundleForExecute bundleExe = HAPUtilityBrickResource.getResourceData(refResourceId, resourceMan, runtimeInfo).getBundle();
+					HAPBrick referedResourceBrick = bundleExe.getBrick();
 					
 					Map<String, HAPOperand> referenceMapping = referenceOperand.getMapping();
 					for(String varName : referenceMapping.keySet()) {
-						HAPInfoElementResolve varInfo = HAPUtilityResovleElement.resolveNameFromExternal(varName, HAPConstantShared.IO_DIRECTION_IN, referedResourceBrick, null, resourceData.getValueStructureDomain());
+						HAPInfoElementResolve varInfo = HAPUtilityResovleElement.resolveNameFromExternal(varName, HAPConstantShared.IO_DIRECTION_IN, referedResourceBrick, null, bundleExe.getValueStructureDomain());
 						HAPElementStructure eleStructure = varInfo.getElementStructure();
 						String eleType = eleStructure.getType();
 						if(eleType.equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_DATA)) {
