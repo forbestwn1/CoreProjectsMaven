@@ -1,5 +1,8 @@
 package com.nosliw.core.application.division.manual.core;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -96,7 +99,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	public HAPContainerValuePorts getInternalValuePorts(){
 		HAPContainerValuePorts out = new HAPContainerValuePorts();
 		
-		HAPGroupValuePorts valueContextValuePortGroup = this.getValueContextValuePortGroup();
+		HAPGroupValuePorts valueContextValuePortGroup = this.getValueContextValuePortGroup(null);
 		if(valueContextValuePortGroup!=null) {
 			out.addValuePortGroup(valueContextValuePortGroup);
 		}
@@ -111,7 +114,10 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	public HAPContainerValuePorts getExternalValuePorts(){
 		HAPContainerValuePorts out = new HAPContainerValuePorts();
 		
-		HAPGroupValuePorts valueContextValuePortGroup = this.getValueContextValuePortGroup();
+		Set<String> scopes = new HashSet<>();
+		scopes.add(HAPConstantShared.UIRESOURCE_CONTEXTTYPE_PUBLIC);
+		
+		HAPGroupValuePorts valueContextValuePortGroup = this.getValueContextValuePortGroup(scopes);
 		if(valueContextValuePortGroup!=null) {
 			out.addValuePortGroup(valueContextValuePortGroup);
 		}
@@ -122,14 +128,14 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 		return out;
 	}
 	
-	private HAPGroupValuePorts getValueContextValuePortGroup() {
+	private HAPGroupValuePorts getValueContextValuePortGroup(Set<String> scopes) {
 		HAPGroupValuePorts out = null; 
 		if(!this.getManualValueContext().isEmpty(this.m_bundle.getValueStructureDomain())) {
 			out = new HAPGroupValuePorts(HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT);
 			out.setName(HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT);
 
 			HAPValuePort valuePort = new HAPValuePort(HAPConstantShared.VALUEPORT_TYPE_VALUECONTEXT, HAPConstantShared.IO_DIRECTION_BOTH);
-			valuePort.setValueStructuredSorted(this.getManualValueContext().getValueStructuresSorted());
+			valuePort.setValueStructuredSorted(this.getManualValueContext().getValueStructuresSorted(scopes));
 			out.addValuePort(valuePort);
 		}
 		return out;

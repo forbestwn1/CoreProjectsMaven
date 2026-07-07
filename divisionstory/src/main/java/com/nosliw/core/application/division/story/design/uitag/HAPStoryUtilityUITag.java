@@ -9,11 +9,13 @@ import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.division.manual.core.standalone.HAPStandaloneDefinition;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.application.entity.uitag.HAPUITagInfo;
 import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
+import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPStoryUtilityUITag {
@@ -31,11 +33,18 @@ public class HAPStoryUtilityUITag {
 			attContent.append(name + "=\"" + attributes.get(name) + "\" ");
 		}
 
+		String initDataStr = "";
+		HAPData initData = HAPUtilityDataDefinition.getInitData(dataDefinition);
+		if(initData!=null) {
+			initDataStr = "\"" + dataVariableName + "\"" + ":" + initData.toStringValue(HAPSerializationFormat.JSON);
+		}
+		
 		String content = new  HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryUtilityUITag.class, "uitag.html"))
 		     .setParm("tagName", uiTagInfo.getName())
 		     .setParm("dataVariableName", dataVariableName)
 		     .setParm("attributes", attContent.toString())
 		     .setParm("dataDefinition", dataDefinition.toStringValue(HAPSerializationFormat.JSON))
+		     .setParm("initData", initDataStr)
 		     .getContent();
 		
 		return standaloneMan.buildStandalone(new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100), runtimeInfo);

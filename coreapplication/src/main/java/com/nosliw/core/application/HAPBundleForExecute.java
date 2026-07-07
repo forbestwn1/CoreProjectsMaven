@@ -29,6 +29,9 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	@HAPAttribute
 	public final static String EXPORTBRICKINFO = "exportBrickInfo"; 
 	
+	@HAPAttribute
+	public final static String EXPORTVARIABLEINFO = "exportVariableInfo"; 
+	
 	private HAPBrick m_brick;
 	
 	private Map<String, HAPBrick> m_supportBricks;
@@ -78,6 +81,12 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 		jsonMap.put(SUPPORTBRICKS, HAPUtilityJson.buildMapJson(supportBrickMap));
 		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JSON));
 		jsonMap.put(EXPORTBRICKINFO, this.m_exportBrickInfo.toStringValue(HAPSerializationFormat.JSON));
+		
+		Map<String, String> exportVariableMap = new LinkedHashMap<String, String>();
+		for(String varName : this.m_exportVariableInfos.keySet()) {
+			exportVariableMap.put(varName, this.m_exportVariableInfos.get(varName).toStringValue(HAPSerializationFormat.JSON));
+		}
+		jsonMap.put(EXPORTVARIABLEINFO, HAPUtilityJson.buildMapJson(exportVariableMap));
 	}
 	
 	@Override
@@ -95,5 +104,11 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 		jsonMap.put(SUPPORTBRICKS, HAPUtilityJson.buildMapJson(supportBrickMap));
 		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(EXPORTBRICKINFO, this.m_exportBrickInfo.toStringValue(HAPSerializationFormat.JSON));
-	}	
+
+		Map<String, String> exportVariableMap = new LinkedHashMap<String, String>();
+		for(String varName : this.m_exportVariableInfos.keySet()) {
+			exportVariableMap.put(varName, this.m_exportVariableInfos.get(varName).toStringValue(HAPSerializationFormat.JSON));
+		}
+		jsonMap.put(EXPORTVARIABLEINFO, HAPUtilityJson.buildMapJson(exportVariableMap));
+	}
 }

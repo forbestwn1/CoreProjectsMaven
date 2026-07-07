@@ -7,8 +7,8 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
     const [, forceUpdate] = useState(0);
 
     useEffect(() => {
-		let uiTagApp = cache.current[questionair.id];
-        if(uiTagApp==undefined){
+		let uiTagAppInfo = cache.current[questionair.id];
+        if(uiTagAppInfo==undefined){
 			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 			var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
@@ -36,7 +36,15 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
 
 						return nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({ bundleDef: loc_bundleDef }, undefined, runtimeContext, undefined, {
 							success: function (requestInfo, application) {
-								cache.current[questionair.id] = application;
+								var variable = application.getVariable("data");
+								cache.current[questionair.id] = { 
+									application :application,
+									variable : variable
+								};
+
+								variable.registerDataChangeEventListener(undefined, function(event, data){
+									setSelectedConstantData(data);
+								});
                                 forceUpdate(c=>c+1);
 							}
 						});
@@ -47,10 +55,18 @@ export default function QuestionairDynamicRequestConstantValue({questionair, dat
 			node_requestServiceProcessor.processRequest(request);
 		}
 		else{
-            $(uiTagApp.getView()).remove();
-	     	$(contentRef.current).append(uiTagApp.getView());
+            $(uiTagAppInfo.application.getView()).remove();
+	     	$(contentRef.current).append(uiTagAppInfo.application.getView());
 		}
     });
+
+    var setSelectedConstantData = function(data){
+        questionair.isDirty = true;
+        questionair.changedValue = {};
+        questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = questionair.defaultValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE];
+        questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_CONSTANTDATA] = data;
+        onChange(data);
+    };
 
     return (
         <>

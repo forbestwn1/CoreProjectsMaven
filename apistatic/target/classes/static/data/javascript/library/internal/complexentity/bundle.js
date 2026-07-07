@@ -182,6 +182,12 @@ var node_createBundleCore = function(parm, configure){
 
 	var loc_out = {
 
+		getVariable : function(name){    
+			var varInfo = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EXPORTVARIABLEINFO][name];
+			var mainCore = loc_out.getMainEntityCore();
+			return node_getEntityObjectInterface(mainCore).getExternalValuePortContainer().createVariableById(varInfo);
+		},
+		
 		getDataType: function(){    return  "bundle";   },
 
 		getMainEntityCore : function(){

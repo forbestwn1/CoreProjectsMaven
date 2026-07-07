@@ -48,6 +48,7 @@ public class HAPValuePort extends HAPEntityInfoImp{
 	public void setValueStructuredSorted(List<HAPInfoValueStructure> valueStructureInfos) {		
 		this.m_valueStructures.addAll(valueStructureInfos);
 	}
+	public List<HAPInfoValueStructure> getValueStructureInfos(){     return this.m_valueStructures;       }
 	
 	public void addValueStructureInfo(HAPInfoValueStructure valueStructureInfo) {
 		this.m_valueStructures.add(valueStructureInfo);

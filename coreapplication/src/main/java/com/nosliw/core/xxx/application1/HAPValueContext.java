@@ -1,6 +1,7 @@
 package com.nosliw.core.xxx.application1;
 
 import java.util.List;
+import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -15,6 +16,6 @@ public interface HAPValueContext extends HAPSerializable{
 
 	List<String> getValueStructureIds();
 
-	List<HAPInfoValueStructure> getValueStructuresSorted();
+	List<HAPInfoValueStructure> getValueStructuresSorted(Set<String> scopes);
 	
 }

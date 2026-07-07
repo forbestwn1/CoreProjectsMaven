@@ -13,6 +13,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
+import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
@@ -60,6 +61,7 @@ import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.application.entity.uitag.HAPUITagInfo;
 import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
+import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -447,7 +449,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			parmDynamicGroupQ.addItem(parmIsConstantQ);
 
 			//dynamic of constant value
-			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(null), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
+			HAPData initData = HAPUtilityDataDefinition.getInitData(requestParm.getDataDefinition());
+			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(initData), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag

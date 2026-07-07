@@ -46,8 +46,14 @@ var node_createApplication = function(parm, configure){
 		return loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].getChild(loc_BUNDLE_NAME).getChildValue();
 	};
 	
+	var loc_getBundleCore = function(){
+		return loc_getBundleRuntime().getCoreEntity();
+	};
+	
 	var loc_out = {
 
+		getVariable : function(name){    return loc_getBundleCore().getVariable(name)    },
+		
 		getDataType: function(){    return  "application";   },
 
 		getBundleRuntime : function(){   return loc_getBundleRuntime();   },

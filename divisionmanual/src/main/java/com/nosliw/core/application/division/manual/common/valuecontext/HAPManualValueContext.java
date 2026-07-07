@@ -51,11 +51,17 @@ public class HAPManualValueContext extends HAPSerializableImp implements HAPValu
 	}
 	
 	@Override
-	public List<HAPInfoValueStructure> getValueStructuresSorted(){
+	public List<HAPInfoValueStructure> getValueStructuresSorted(Set<String> scopes){
 		List<HAPInfoValueStructure> out = new ArrayList<HAPInfoValueStructure>();
 		List<HAPManualInfoValueStructureSorting> valueStructureInfos = HAPManualUtilityValueContext.getAllValueStructuresSorted(this);
 		for(HAPManualInfoValueStructureSorting valueStructureInfo : valueStructureInfos) {
-			out.add(new HAPInfoValueStructure(valueStructureInfo.getValueStructure().getValueStructureRuntimeId(), valueStructureInfo.getPriority()));
+			boolean valid = true;
+			if(scopes!=null&&scopes.size()!=0) {
+				valid = !scopes.contains(valueStructureInfo.getValueStructure().getStructureInfo().getScope());
+			}
+		    if(valid) {
+				out.add(new HAPInfoValueStructure(valueStructureInfo.getValueStructure().getValueStructureRuntimeId(), valueStructureInfo.getPriority()));
+		    }
 		}
 		return out;
 	}

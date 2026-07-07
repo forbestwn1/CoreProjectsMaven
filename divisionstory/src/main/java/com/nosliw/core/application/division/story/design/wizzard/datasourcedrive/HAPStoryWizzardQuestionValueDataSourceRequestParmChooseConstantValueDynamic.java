@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.design.wizzard.datasourcedrive;
 
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -22,8 +23,13 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	@HAPAttribute
 	public static final String CONSTANTDATA = "constantData";
 	
+	@HAPAttribute
+	public static final String CONSTANTDATA_MULTIPLE = "constantDataMultiple";
+
 	private HAPData m_constantData;
 	
+	private List<HAPData> m_constantDatas;
+
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
 	}

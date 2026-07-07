@@ -1,6 +1,7 @@
 package com.nosliw.core.application.common.datadefinition;
 
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.data.HAPData;
 
 public class HAPUtilityDataDefinition {
 
@@ -15,5 +16,12 @@ public class HAPUtilityDataDefinition {
 		
 	}
 	
+    public static HAPData getInitData(HAPDataDefinition dataDefinition) {
+    	HAPData out = null;
+		if(dataDefinition.getType().equals(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT)){
+			out = ((HAPDataDefinitionWritableWithInit)dataDefinition).getInitData();
+		}
+		return out;
+    }
 	
 }
