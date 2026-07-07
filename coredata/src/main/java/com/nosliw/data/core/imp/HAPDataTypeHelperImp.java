@@ -531,6 +531,14 @@ public class HAPDataTypeHelperImp implements HAPDataTypeHelper{
 		this.discoverExpressionCriteria(criteria, expCriterias);
 		for(HAPDataTypeCriteriaExpression expCriteria : expCriterias){
 			String expressionStr = expCriteria.getExpression();
+			
+//			HAPInfoRuntimeTaskExecuteDataExpresion exeDataExpressionTaskInfo = new HAPInfoRuntimeTaskExecuteDataExpresion();
+//			
+//			HAPServiceData serviceData = this.m_runtimeMan.getRuntimeExecutor(HAPRuntimeManager.RUNTIME_JS_RHION).executeTaskSync(taskInfo);
+//			JSONObject serviceDataJson = (JSONObject)serviceData.getData();
+
+			
+			
 			HAPServiceData serviceData = null;  //this.m_runtime.executeExpressionSync(expressionStr, parms);
 			HAPData expressionResult = (HAPData)serviceData.getData();
 			String criteriaStr = expressionResult.getValue().toString();

@@ -519,8 +519,8 @@ var node_utility = function()
 		},
 		
 		//execute general operand
-		getExecuteOperandRequest : function(operand, variables, handlers, requester_parent){
-			return loc_getExecuteOperandRequest(operand, variables, handlers, requester_parent);
+		getExecuteOperandRequest : function(operand, variables, constants, handlers, requester_parent){
+			return loc_getExecuteOperandRequest(operand, variables, constants, handlers, requester_parent);
 		},
 
 		getMatchDataTaskRequest : function(data, matchers, handlers, requester_parent){

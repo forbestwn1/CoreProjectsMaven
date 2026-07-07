@@ -11,12 +11,10 @@ import com.nosliw.core.runtime.js.rhino.HAPRuntimeTaskRhino;
 
 public class HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup extends HAPRuntimeTaskRhino{
 
-	final public static String TASK = "ExecuteScriptExpressionConstantGroup"; 
-
 	private HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup m_scriptExpressionGroupInfo;
 	
 	public HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(HAPInfoRuntimeTask scriptExpressionGroupInfo) {
-		super(TASK);
+		super(HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSIONCONSTANTGROUP);
 		this.m_scriptExpressionGroupInfo = (HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup)scriptExpressionGroupInfo;
 	}
 

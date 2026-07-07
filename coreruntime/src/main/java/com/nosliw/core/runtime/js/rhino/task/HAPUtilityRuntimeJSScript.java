@@ -9,10 +9,12 @@ import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.serialization.HAPJsonTypeAsItIs;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.common.dataexpression.HAPInfoRuntimeTaskExecuteDataExpresion;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoScriptFunction;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPUtilityScriptForExecuteJSScript;
@@ -24,6 +26,21 @@ import com.nosliw.core.runtime.js.rhino.HAPGatewayRhinoTaskResponse;
 
 public class HAPUtilityRuntimeJSScript {
 
+	public static HAPJSScriptInfo buildRequestScriptForExecuteDataExpression(HAPInfoRuntimeTaskExecuteDataExpresion dataExpressionTaskInfo, String taskId, HAPExecutorRuntimeImpRhino runtime) {
+		Map<String, String> templateParms = new LinkedHashMap<String, String>();
+		
+		templateParms.put("operand", dataExpressionTaskInfo.getOperand().toStringValue(HAPSerializationFormat.JAVASCRIPT));
+		templateParms.put("variableDatas", HAPManagerSerialize.getInstance().toStringValue(dataExpressionTaskInfo.getVariableDatas(), HAPSerializationFormat.JSON));
+		templateParms.put("constantDatas", HAPManagerSerialize.getInstance().toStringValue(dataExpressionTaskInfo.getConstantDatas(), HAPSerializationFormat.JSON));
+		
+		buildCommonTemplateParms(templateParms, taskId, runtime);
+		
+		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPUtilityRuntimeJSScript.class, "ExecuteDataExpression.temp");
+		String script = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);
+		HAPJSScriptInfo out = HAPJSScriptInfo.buildByScript(script, taskId);
+		return out;
+	}
+	
 	public static HAPJSScriptInfo buildRequestScriptForLoadResourceTask(HAPRuntimeTaskLoadResources loadResourcesTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);

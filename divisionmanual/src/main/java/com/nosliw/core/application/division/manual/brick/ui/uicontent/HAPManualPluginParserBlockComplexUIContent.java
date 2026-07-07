@@ -229,7 +229,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		}
 	}
 	
-	private void parseValueContext(Element ele, HAPManualDefinitionBlockComplexUIContent brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
+	private void parseValueContext(Element ele, HAPManualDefinitionBrick brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
 		List<Element> valueContextEles = HAPUtilityUIResourceParser.getChildElementsByTag(ele, HAPWithValueContext.VALUECONTEXT);
 		for(Element valueContextEle : valueContextEles){
 			HAPManualParserValueContext.parseValueContextContentJson(brickManualDef.getValueContextBrick(), new JSONObject(Parser.unescapeEntities(valueContextEle.html(), false)), parseContext, entityParseService);
