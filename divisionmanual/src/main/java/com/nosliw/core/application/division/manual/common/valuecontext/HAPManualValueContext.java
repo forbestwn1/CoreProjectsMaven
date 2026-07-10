@@ -57,7 +57,7 @@ public class HAPManualValueContext extends HAPSerializableImp implements HAPValu
 		for(HAPManualInfoValueStructureSorting valueStructureInfo : valueStructureInfos) {
 			boolean valid = true;
 			if(scopes!=null&&scopes.size()!=0) {
-				valid = !scopes.contains(valueStructureInfo.getValueStructure().getStructureInfo().getScope());
+				valid = scopes.contains(valueStructureInfo.getValueStructure().getStructureInfo().getScope());
 			}
 		    if(valid) {
 				out.add(new HAPInfoValueStructure(valueStructureInfo.getValueStructure().getValueStructureRuntimeId(), valueStructureInfo.getPriority()));
