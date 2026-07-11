@@ -54,6 +54,16 @@ nosliw.utility = function(){
 				callBackFunction);
 		},
 
+		requestLoadFileResources : function(fileFolders, callBackFunction){
+			loc_requestLoadFileResources(
+				"loadfile", 
+				"requestLoadFileResources", 
+				{
+					"fileFolders" : fileFolders
+				}, 
+				function(serviceData){return serviceData.data;}, 
+				callBackFunction);
+		},
 		
 		
 		
@@ -66,6 +76,17 @@ nosliw.utility = function(){
 			return loc_out.getServerBase()+url;
 		},
 		
+		requestLoadFileResources1 : function(fileFolders, callBackFunction){
+			loc_requestLoadFileResources(
+				"loadfile", 
+				"requestLoadFileResources", 
+				{
+					"fileFolders" : fileFolders
+				}, 
+				function(serviceData){return serviceData.data;}, 
+				callBackFunction);
+		},
+
 		//load librarys by name
 		requestLoadLibraryResources1 : function(libNames, version, callBackFunction){
 			var resourceIds = [];
@@ -86,16 +107,6 @@ nosliw.utility = function(){
 				callBackFunction);
 		},
 		
-		requestLoadFileResources : function(fileFolders, callBackFunction){
-			loc_requestLoadFileResources(
-				"loadfile", 
-				"requestLoadFileResources", 
-				{
-					"fileFolders" : fileFolders
-				}, 
-				function(serviceData){return serviceData.data;}, 
-				callBackFunction);
-		}
 	};
 	return loc_out;
 }();

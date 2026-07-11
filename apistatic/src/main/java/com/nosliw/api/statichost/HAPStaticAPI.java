@@ -6,7 +6,9 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.Collections;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
@@ -30,6 +33,9 @@ import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 public class HAPStaticAPI {
 
 	private static final String DOMAIN_JAVASCRIPT_INTERNAL = "data.javascript.library.internal";
+	
+	@Autowired
+	private HAPServiceParseEntity m_paserEntity;
 	
 	@Value("${application.directory.temp}")
 	private String m_tempDir;
@@ -45,11 +51,9 @@ public class HAPStaticAPI {
 		request.buildObject(new JSONObject(requestJson), HAPSerializationFormat.JSON);
 		
 		for(HAPStaticRequestInfo staticInfo : request.getStaticInfos()) {
-			
-			String domain = staticInfo.getDomain();
-
 			if(HAPStaticRequestInfo.STATIC_TYPE_LIBRARY.equals(staticInfo.getType())) {
 				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+				String domain = staticInfo.getDomain();
 				String path = "static/" + getFilePathForStatic(domain, staticInfo.getName(), staticInfo.getVersion());
 				Resource[] resources = resolver.getResources("classpath:"+path+"/*"); 
 				for(Resource resource : resources) {
@@ -62,6 +66,17 @@ public class HAPStaticAPI {
 		
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
+	
+	private HAPStaticRequest parseStaticRequest(JSONObject requestJsonObj) {
+		JSONArray statiInfoArray = requestJsonObj.getJSONArray(HAPStaticRequest.STATICINFO);
+        for(int i=0; i<statiInfoArray.length(); i++) {
+        	HAPStaticRequestInfo info = new HAPStaticRequestInfo();
+        	info.buildObject(statiInfoArray.get(i), HAPSerializationFormat.JSON);
+        	this.m_staticInfo.add(info);
+        }
+		
+	}
+	
 	
 	private String getFilePathForStatic(String domain, String name, String version) {
 		return this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);

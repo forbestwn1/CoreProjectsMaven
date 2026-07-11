@@ -6,9 +6,9 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPGeneratorId;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.HAPExpressionData;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;
+import com.nosliw.core.data.expression.HAPExpressionData;
+import com.nosliw.core.data.expression.HAPUtilityExpressionData;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 public class HAPUtilityScriptExpressionParser {
 
@@ -200,7 +200,7 @@ public class HAPUtilityScriptExpressionParser {
 	}
 
 	private static HAPSegmentScriptExpressionScriptDataExpression parseDefinitionSegmentExpressionData(String dataExpressionScript, HAPContainerDataExpression dataExpressionGroup, HAPParserDataExpression expressionParser, HAPGeneratorId idGenerator) {
-		HAPExpressionData dataExpression = HAPBasicUtilityProcessorDataExpression.buildBasicDataExpression(expressionParser.parseExpression(dataExpressionScript));
+		HAPExpressionData dataExpression = HAPUtilityExpressionData.buildDataExpression(dataExpressionScript, expressionParser);
 		String dataExpressionId = dataExpressionGroup.addDataExpression(dataExpression);
 		return new HAPSegmentScriptExpressionScriptDataExpression(idGenerator.generateId(), dataExpressionId);
 	}

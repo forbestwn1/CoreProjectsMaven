@@ -4,7 +4,6 @@ import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionProcessorBrickNodeDownwardWithPath;
@@ -14,6 +13,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperBrickRoot;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValue;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueReferenceResource;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 public class HAPManualUtilityProcessorPre {

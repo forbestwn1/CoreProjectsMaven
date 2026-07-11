@@ -9,17 +9,17 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperand;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandAttribute;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandConstant;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandOperation;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandReference;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandVariable;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionParmInOperationOperand;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.data.dataexpression.definition.parser.imp.generated.NosliwExpressionParser;
 import com.nosliw.core.data.dataexpression.definition.parser.imp.generated.SimpleNode;
+import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperand;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandAttribute;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandConstant;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandOperation;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandReference;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandVariable;
+import com.nosliw.core.data.expression.definition.HAPDefinitionParmInOperationOperand;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 /**
  * This is utility class to parse a expression as a string

@@ -10,6 +10,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithInteractiveExpression;
+import com.nosliw.core.data.expression.HAPExpressionData;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceDependency;

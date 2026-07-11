@@ -3,8 +3,8 @@ package com.nosliw.core.application.common.scriptexpressio;
 import java.util.Map;
 
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionScriptExpression;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 public class HAPUtilityScriptExpressionConstant {
 

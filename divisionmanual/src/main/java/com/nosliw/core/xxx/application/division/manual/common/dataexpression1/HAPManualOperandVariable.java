@@ -4,13 +4,13 @@ import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
-import com.nosliw.core.application.common.dataexpression.HAPOperandVariable;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandVariable;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPInfoCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
+import com.nosliw.core.data.expression.HAPOperandVariable;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandVariable;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPManualOperandVariable extends HAPManualOperand implements HAPOperandVariable{

@@ -6,14 +6,14 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
-import com.nosliw.core.application.common.dataexpression.HAPOperandConstant;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandConstant;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
+import com.nosliw.core.data.expression.HAPOperandConstant;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandConstant;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPManualOperandConstant extends HAPManualOperand implements HAPOperandConstant{

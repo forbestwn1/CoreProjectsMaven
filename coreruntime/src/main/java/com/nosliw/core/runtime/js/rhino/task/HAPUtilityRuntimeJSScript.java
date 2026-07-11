@@ -14,11 +14,11 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.common.dataexpression.HAPInfoRuntimeTaskExecuteDataExpresion;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoScriptFunction;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPUtilityScriptForExecuteJSScript;
 import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.expression.HAPInfoRuntimeTaskExecuteDataExpresion;
 import com.nosliw.core.resource.infrastructure.HAPRuntimeTaskLoadResources;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
@@ -29,7 +29,7 @@ public class HAPUtilityRuntimeJSScript {
 	public static HAPJSScriptInfo buildRequestScriptForExecuteDataExpression(HAPInfoRuntimeTaskExecuteDataExpresion dataExpressionTaskInfo, String taskId, HAPExecutorRuntimeImpRhino runtime) {
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		
-		templateParms.put("operand", dataExpressionTaskInfo.getOperand().toStringValue(HAPSerializationFormat.JAVASCRIPT));
+		templateParms.put("operand", dataExpressionTaskInfo.getDataExpression().getOperand().toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		templateParms.put("variableDatas", HAPManagerSerialize.getInstance().toStringValue(dataExpressionTaskInfo.getVariableDatas(), HAPSerializationFormat.JSON));
 		templateParms.put("constantDatas", HAPManagerSerialize.getInstance().toStringValue(dataExpressionTaskInfo.getConstantDatas(), HAPSerializationFormat.JSON));
 		

@@ -6,11 +6,11 @@ import org.json.JSONObject;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
+import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
 import com.nosliw.data.core.runtime.HAPRuntimeEnvironment;
 

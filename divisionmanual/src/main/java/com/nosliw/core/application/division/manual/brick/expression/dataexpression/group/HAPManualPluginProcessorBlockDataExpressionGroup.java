@@ -5,9 +5,10 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.expression.dataexpression.group.HAPBlockDataExpressionGroup;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
@@ -17,9 +18,9 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityExpressionData;
 import com.nosliw.core.data.matcher.HAPMatchers;
-import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
-import com.nosliw.core.xxx.application1.brick.dataexpression.group.HAPBlockDataExpressionGroup;
 import com.nosliw.data.core.runtime.HAPRuntimeEnvironment;
 
 public class HAPManualPluginProcessorBlockDataExpressionGroup extends HAPManualPluginProcessorBlockImp{
@@ -37,7 +38,7 @@ public class HAPManualPluginProcessorBlockDataExpressionGroup extends HAPManualP
 		for(HAPManualDefinitionDataExpressionItemInContainer itemDef : groupDef.getItems()) {
 			HAPItemInContainerDataExpression itemExe = new HAPItemInContainerDataExpression();
 			itemDef.cloneToEntityInfo(itemExe);
-			itemExe.setDataExpression(HAPBasicUtilityProcessorDataExpression.buildBasicDataExpression(itemDef.getExpression()));
+			itemExe.setDataExpression(HAPBasicUtilityExpressionData.buildBasicDataExpression(itemDef.getExpression()));
 			groupExe.addItem(itemExe);
 		}
 	}

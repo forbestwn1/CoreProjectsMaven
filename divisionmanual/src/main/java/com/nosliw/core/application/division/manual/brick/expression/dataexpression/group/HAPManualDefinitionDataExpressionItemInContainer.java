@@ -5,7 +5,7 @@ import java.util.Map;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
+import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 
 public class HAPManualDefinitionDataExpressionItemInContainer extends HAPEntityInfoImp{
 

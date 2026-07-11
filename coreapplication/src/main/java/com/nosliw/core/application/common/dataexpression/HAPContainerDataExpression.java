@@ -2,6 +2,7 @@ package com.nosliw.core.application.common.dataexpression;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.container.HAPContainer;
+import com.nosliw.core.data.expression.HAPExpressionData;
 
 @HAPEntityWithAttribute
 public class HAPContainerDataExpression extends HAPContainer<HAPItemInContainerDataExpression>{

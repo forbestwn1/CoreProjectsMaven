@@ -1125,6 +1125,10 @@ public class HAPConstantShared {
 
 
 
+		public static final String VARIABLEID_TYPE_VALUEPORT = "valuePortVarId";
+
+
+
 		public static final int VALUESTRUCTURE_PRIORITY_DEFINED = 0;
 		public static final int VALUESTRUCTURE_PRIORITY_IMPLIED = 10;
 

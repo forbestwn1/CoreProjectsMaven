@@ -3,9 +3,8 @@ package com.nosliw.core.application.division.manual.brick.expression.dataexpress
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.variable.HAPBasicUtilityProcessorDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicExpressionData;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;
 import com.nosliw.core.application.common.dataexpression.imp.basic.HAPUtilityExpressionProcessor;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -14,6 +13,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
 import com.nosliw.core.xxx.application1.brick.dataexpression.group.HAPBlockDataExpressionGroup;
 import com.nosliw.core.xxx.application1.brick.dataexpression.group.HAPGroupDataExpression;

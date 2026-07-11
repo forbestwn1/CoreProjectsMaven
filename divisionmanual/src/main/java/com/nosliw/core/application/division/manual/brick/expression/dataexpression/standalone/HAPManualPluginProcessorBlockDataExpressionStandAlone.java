@@ -11,10 +11,7 @@ import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.expression.dataexpression.standalone.HAPBlockDataExpressionStandAlone;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicPluginProcessorEntityWithVariableDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicWrapperOperand;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
@@ -26,6 +23,9 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualContext
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityOperand;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicWrapperOperand;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPManualPluginProcessorBlockDataExpressionStandAlone extends HAPManualPluginProcessorBlockImp{
@@ -44,7 +44,7 @@ public class HAPManualPluginProcessorBlockDataExpressionStandAlone extends HAPMa
 		HAPDefinitionDataExpressionStandAlone def = ((HAPManualDefinitionBlockDataExpressionStandAlone)brickInfo.getLeft()).getValue();
 		
 		//build expression in executable
-		exe.setExpression(new HAPBasicExpressionData(HAPBasicUtilityProcessorDataExpression.buildBasicOperand(def.getExpression().getOperand())));
+		exe.setExpression(new HAPBasicExpressionData(HAPBasicUtilityOperand.buildBasicOperand(def.getExpression().getOperand())));
 		
 		//interactive request
 		exe.setExpressionInteractive(new HAPInteractiveExpression(def.getRequestParms(), def.getResult()));

@@ -9,6 +9,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
+import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionDataExpressionStandAlone extends HAPSerializableImp{

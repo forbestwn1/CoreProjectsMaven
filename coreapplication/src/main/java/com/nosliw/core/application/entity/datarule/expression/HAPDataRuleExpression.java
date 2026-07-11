@@ -10,10 +10,10 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpression;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.application.entity.datarule.HAPParserDataRule;
+import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 

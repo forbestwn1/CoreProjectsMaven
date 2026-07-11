@@ -10,7 +10,6 @@ import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventReferenceHandler;
 import com.nosliw.core.application.common.event.HAPEventReferenceHandlerTask;
@@ -30,6 +29,7 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualContext
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessBrickPath;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProcessorBlockImp{

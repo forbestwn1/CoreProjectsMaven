@@ -7,8 +7,6 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
-import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionScriptExpressionItemInContainer;
@@ -16,6 +14,8 @@ import com.nosliw.core.application.common.structure.reference.HAPConfigureResolv
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPUtilityScriptExpression {

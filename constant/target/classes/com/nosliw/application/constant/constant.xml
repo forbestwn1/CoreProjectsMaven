@@ -1174,6 +1174,9 @@ I
 			<definition name="WITHVARIABLE_ENTITYTYPE_SCRIPTEXPRESSION" value="scriptExpression"/>
 
 			<definition type="space"/>
+			<definition name="VARIABLEID_TYPE_VALUEPORT" value="valuePortVarId"/>
+
+			<definition type="space"/>
 			<definition name="VALUESTRUCTURE_PRIORITY_DEFINED" value="0" type="int"/>
 			<definition name="VALUESTRUCTURE_PRIORITY_IMPLIED" value="10" type="int"/>
 

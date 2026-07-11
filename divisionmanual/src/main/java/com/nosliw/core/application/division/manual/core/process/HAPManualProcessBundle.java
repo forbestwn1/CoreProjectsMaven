@@ -8,7 +8,6 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -19,6 +18,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.application.entity.datarule.HAPProcessorRuleInBundle;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;

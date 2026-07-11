@@ -1,0 +1,22 @@
+package com.nosliw.common.variable;
+
+import java.util.Map;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+
+@HAPEntityWithAttribute
+public interface HAPWithVariable {
+
+	@HAPAttribute
+	public static String VARIABLEINFOS = "variableInfos";
+
+	@HAPAttribute
+	public static String ENTITYTYPE = "entityType";
+
+	Map<String, HAPVariableInfo> getVariablesInfo();
+	void addVariableInfo(HAPVariableInfo variableInfo);
+
+	String getWithVariableEntityType();
+	
+}

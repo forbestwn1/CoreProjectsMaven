@@ -5,6 +5,7 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.container.HAPItemWrapper;
+import com.nosliw.core.data.expression.HAPExpressionData;
 
 @HAPEntityWithAttribute
 public class HAPItemInContainerDataExpression extends HAPItemWrapper{

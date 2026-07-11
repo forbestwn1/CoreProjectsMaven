@@ -11,13 +11,13 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.dataexpression.HAPExpressionData;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.common.withvariable.HAPPluginProcessorEntityWithVariable;
 import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
+import com.nosliw.core.data.expression.HAPExpressionData;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

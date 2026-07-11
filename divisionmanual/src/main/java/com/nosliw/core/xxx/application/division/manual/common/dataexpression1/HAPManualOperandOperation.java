@@ -10,9 +10,6 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
-import com.nosliw.core.application.common.dataexpression.HAPOperand;
-import com.nosliw.core.application.common.dataexpression.HAPOperandOperation;
-import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionOperandOperation;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -24,6 +21,9 @@ import com.nosliw.core.data.HAPOperationParmInfo;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
+import com.nosliw.core.data.expression.HAPOperand;
+import com.nosliw.core.data.expression.HAPOperandOperation;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperandOperation;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPManualOperandOperation extends HAPManualOperand implements HAPOperandOperation{

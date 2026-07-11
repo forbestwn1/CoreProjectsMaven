@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.variable.HAPVariableInfo;
 import com.nosliw.core.application.brick.test.complex.task.script.HAPBlockTestComplexTaskScript;
-import com.nosliw.core.application.common.withvariable.HAPVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugExecutable;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.resource.HAPResourceId;

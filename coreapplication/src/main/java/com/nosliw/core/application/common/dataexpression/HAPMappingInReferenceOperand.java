@@ -1,5 +1,7 @@
 package com.nosliw.core.application.common.dataexpression;
 
+import com.nosliw.core.data.expression.HAPOperand;
+
 public class HAPMappingInReferenceOperand {
 
 	private String m_name;

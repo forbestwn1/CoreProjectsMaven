@@ -3,8 +3,8 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task.scri
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.variable.HAPVariableInfo;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.common.withvariable.HAPVariableInfo;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;

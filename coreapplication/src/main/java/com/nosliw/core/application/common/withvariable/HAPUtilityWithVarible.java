@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.common.variable.HAPVariableInfo;
+import com.nosliw.common.variable.HAPWithVariable;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.matcher.HAPMatchers;

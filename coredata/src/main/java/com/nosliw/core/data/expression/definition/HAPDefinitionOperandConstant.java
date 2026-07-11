@@ -1,0 +1,25 @@
+package com.nosliw.core.data.expression.definition;
+
+import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.data.HAPData;
+
+public class HAPDefinitionOperandConstant extends HAPDefinitionOperand{
+
+	protected HAPData m_data;
+
+	protected String m_constantStr;
+
+	public HAPDefinitionOperandConstant(String constantStr) {
+		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT);
+		this.m_constantStr = constantStr;
+	}
+
+	public HAPDefinitionOperandConstant(HAPData data) {
+		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT);
+		this.m_data = data;
+	}
+
+	public String getStringValue(){  return this.m_constantStr;  }
+
+	public HAPData getData() {   return this.m_data;    }
+}

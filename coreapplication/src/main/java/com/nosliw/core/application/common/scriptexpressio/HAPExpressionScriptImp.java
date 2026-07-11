@@ -14,10 +14,10 @@ import com.nosliw.common.serialization.HAPJsonTypeScript;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.variable.HAPWithVariableImp;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoScriptFunction;
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPUtilityScriptForExecuteJSScript;
-import com.nosliw.core.application.common.withvariable.HAPWithVariableImp;
 
 @HAPEntityWithAttribute
 public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExpressionScript{

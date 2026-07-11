@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRule;
 import com.nosliw.core.application.entity.datarule.HAPProviderDataRule;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 @Component
 public class HAPProviderDataRuleExpression implements HAPProviderDataRule{

@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.core.application.HAPWrapperBrickRoot;
-import com.nosliw.core.application.common.dataexpression.definition.HAPParserDataExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperBrickRoot;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 public class HAPManualProcessBrick {

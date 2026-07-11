@@ -2,6 +2,7 @@ package com.nosliw.core.application.common.dataexpression.definition;
 
 import java.util.List;
 
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperand;
 import com.nosliw.core.xxx.application.common.dataexpression1.HAPInterfaceProcessOperand;
 
 

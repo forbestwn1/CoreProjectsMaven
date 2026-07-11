@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
+import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
@@ -20,6 +21,14 @@ import com.nosliw.core.application.common.withvariable.HAPPluginProcessorEntityW
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaAny;
+import com.nosliw.core.data.criteria.HAPInfoCriteria;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicContainerVariable;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicHandlerOperand;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicOperand;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicOperandVariable;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityOperand;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicWrapperOperand;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -98,7 +107,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 			expectOutputs.add(HAPDataTypeCriteriaAny.getCriteria()); 
 		}
 		List<HAPMatchers> matchers = new ArrayList<HAPMatchers>();
-		varInfoContainer = HAPBasicUtilityOperand.discover(
+		varInfoContainer = discover(
 				operands,
 				expectOutputs,
 				varInfoContainer,
@@ -111,4 +120,47 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 		return Pair.of(varInfoContainer, outMatchers);
 	}
 
+	private HAPContainerVariableInfo discover(
+			List<HAPBasicOperand> operands, 
+			List<HAPDataTypeCriteria> expectOutputs,
+			HAPContainerVariableInfo inVariablesInfo, 
+			List<HAPMatchers> matchers,
+			HAPDataTypeHelper dataTypeHelper,
+			HAPProcessTracker processTracker) {
+		//do discovery on operand
+		HAPContainerVariableInfo varsInfo = inVariablesInfo.clone();
+		
+		HAPContainerVariableInfo oldVarsInfo;
+		//Do discovery until local vars definition not change or fail 
+		do{
+			matchers.clear();
+			oldVarsInfo = varsInfo;
+			varsInfo = varsInfo.clone();
+			processTracker.clear();
+			for(int i=0; i<operands.size(); i++) {
+				HAPDataTypeCriteria expectOutput = null;
+				if(expectOutputs==null||expectOutputs.get(i)==null) {
+					expectOutput = HAPDataTypeCriteriaAny.getCriteria(); 
+				}
+				
+				matchers.add(operands.get(i).discover(new HAPInnContainerVariable(varsInfo), expectOutput, processTracker, dataTypeHelper));
+			}
+		}while(!HAPUtilityBasic.isEqualMaps(varsInfo.getVariableCriteriaInfos(), oldVarsInfo.getVariableCriteriaInfos()) && processTracker.isSuccess());
+		return varsInfo;
+	}
+
+	class HAPInnContainerVariable implements HAPBasicContainerVariable{
+
+		private HAPContainerVariableInfo m_inVariablesInfo;
+		
+		public HAPInnContainerVariable(HAPContainerVariableInfo inVariablesInfo) {
+			this.m_inVariablesInfo = inVariablesInfo;
+		}
+		
+		@Override
+		public HAPInfoCriteria getVaraibleCriteriaInfo(String key) {
+			return this.m_inVariablesInfo.getVaraibleCriteriaInfo(key);
+		}
+	}
+	
 }

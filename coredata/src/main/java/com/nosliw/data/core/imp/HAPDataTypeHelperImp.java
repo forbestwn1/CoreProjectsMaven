@@ -33,6 +33,10 @@ import com.nosliw.core.data.criteria.HAPDataTypeCriteriaIds;
 import com.nosliw.core.data.criteria.HAPDataTypeSubCriteriaGroup;
 import com.nosliw.core.data.criteria.HAPDataTypeSubCriteriaGroupImp;
 import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
+import com.nosliw.core.data.expression.HAPExpressionData;
+import com.nosliw.core.data.expression.HAPInfoRuntimeTaskExecuteDataExpresion;
+import com.nosliw.core.data.expression.HAPUtilityExpressionData;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.data.matcher.HAPMatcher;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.runtime.HAPRuntimeManager;
@@ -45,7 +49,10 @@ public class HAPDataTypeHelperImp implements HAPDataTypeHelper{
 	private HAPRuntimeManager m_runtimeMan;
 	private HAPDataAccessDataType m_dataAccess = null;
 	private HAPExecutorRuntime m_runtimeExecutor;
-		
+
+	@Autowired
+	private HAPParserDataExpression m_dataExpressionParser;
+	
 //	public HAPDataTypeHelperImp(HAPRuntimeManager runtimeMan, HAPModuleRuntimeJS jsRuntimeModule){
 //		this.m_runtime = runtimeMan.getDefaultRuntime();
 //		this.m_dataAccess = jsRuntimeModule.getDataTypeDataAccess();
@@ -531,16 +538,23 @@ public class HAPDataTypeHelperImp implements HAPDataTypeHelper{
 		this.discoverExpressionCriteria(criteria, expCriterias);
 		for(HAPDataTypeCriteriaExpression expCriteria : expCriterias){
 			String expressionStr = expCriteria.getExpression();
+			HAPExpressionData dataExpression = HAPUtilityExpressionData.buildDataExpression(expressionStr, this.m_dataExpressionParser);
+
+			HAPInfoRuntimeTaskExecuteDataExpresion exeDataExpressionTaskInfo = new HAPInfoRuntimeTaskExecuteDataExpresion();
+			exeDataExpressionTaskInfo.setDataExpression(dataExpression);
 			
-//			HAPInfoRuntimeTaskExecuteDataExpresion exeDataExpressionTaskInfo = new HAPInfoRuntimeTaskExecuteDataExpresion();
-//			
-//			HAPServiceData serviceData = this.m_runtimeMan.getRuntimeExecutor(HAPRuntimeManager.RUNTIME_JS_RHION).executeTaskSync(taskInfo);
-//			JSONObject serviceDataJson = (JSONObject)serviceData.getData();
+			for(String parmName : parms.keySet()) {
+				exeDataExpressionTaskInfo.addVariableData(parmName, parms.get(parmName));
+			}
+			
+			HAPServiceData serviceData = this.m_runtimeMan.getRuntimeExecutor(HAPRuntimeManager.RUNTIME_JS_RHION).executeTaskSync(exeDataExpressionTaskInfo);
+			JSONObject serviceDataJson = (JSONObject)serviceData.getData();
+			HAPData expressionResult = HAPUtilityData.buildDataWrapperFromObject(serviceDataJson);
 
 			
-			
-			HAPServiceData serviceData = null;  //this.m_runtime.executeExpressionSync(expressionStr, parms);
-			HAPData expressionResult = (HAPData)serviceData.getData();
+//			HAPServiceData serviceData = null;  //this.m_runtime.executeExpressionSync(expressionStr, parms);
+//			HAPData expressionResult = (HAPData)serviceData.getData();
+
 			String criteriaStr = expressionResult.getValue().toString();
 			HAPDataTypeCriteria solidCriteria = HAPParserCriteriaImp.getInstance().parseCriteria(criteriaStr);
 			expCriteria.setSolidCriteria(solidCriteria);

@@ -10,9 +10,10 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.common.variable.HAPIdVariable;
 
 @HAPEntityWithAttribute
-public class HAPIdElement extends HAPSerializableImp{
+public class HAPIdElement extends HAPSerializableImp implements HAPIdVariable{
 
 	@HAPAttribute
 	public static final String ROOTELEMENTID = "rootElementId";
@@ -31,6 +32,9 @@ public class HAPIdElement extends HAPSerializableImp{
 		this.m_rootElementId = rootEleId;
 		this.m_elementPath = new HAPPath(elePath);
 	}
+	
+	@Override
+	public String getType() {   return HAPConstantShared.VARIABLEID_TYPE_VALUEPORT;   }
 	
 	public HAPIdRootElement getRootElementId() {    return this.m_rootElementId;     }
 	
@@ -65,4 +69,5 @@ public class HAPIdElement extends HAPSerializableImp{
 		jsonMap.put(ELEMENTPATH, this.m_elementPath.getPath());
 		jsonMap.put(KEY, this.getKey());
 	}
+
 }

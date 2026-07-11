@@ -5,9 +5,9 @@ import java.util.Map;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.dataexpression.HAPExpressionData;
-import com.nosliw.core.application.common.dataexpression.HAPOperand;
-import com.nosliw.core.application.common.withvariable.HAPWithVariableImp;
+import com.nosliw.common.variable.HAPWithVariableImp;
+import com.nosliw.core.data.expression.HAPExpressionData;
+import com.nosliw.core.data.expression.HAPOperand;
 
 public class HAPManualExpressionData extends HAPWithVariableImp implements HAPExpressionData{
 
