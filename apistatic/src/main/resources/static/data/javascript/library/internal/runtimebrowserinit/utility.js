@@ -44,7 +44,16 @@ nosliw.utility = function(){
 	
 	var loc_out = {
 		
-		//load librarys by name
+		requestLoadStaticResources : function(staticInfos, callBackFunction){
+			loc_requestLoadFileResources(
+				staticInfos,
+				function(serviceData){
+					return serviceData.data.item;
+			    }, 
+				callBackFunction);
+		},
+
+				//load librarys by name
 		requestLoadLibraryResources : function(staticInfos, version, callBackFunction){
 			loc_requestLoadFileResources(
 				staticInfos,

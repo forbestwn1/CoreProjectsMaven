@@ -34,7 +34,7 @@ public class HAPStaticRequest extends HAPSerializableImp{
 		
 		JSONArray statiInfoArray = jsonObj.getJSONArray(STATICINFO);
         for(int i=0; i<statiInfoArray.length(); i++) {
-        	HAPStaticRequestInfo info = new HAPStaticRequestInfo();
+        	HAPStaticRequestInfoLibrary info = new HAPStaticRequestInfoLibrary();
         	info.buildObject(statiInfoArray.get(i), HAPSerializationFormat.JSON);
         	this.m_staticInfo.add(info);
         }

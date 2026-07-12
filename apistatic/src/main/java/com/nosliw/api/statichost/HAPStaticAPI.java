@@ -1,5 +1,6 @@
 package com.nosliw.api.statichost;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -24,6 +25,8 @@ import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfoFolder;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 
@@ -46,35 +49,46 @@ public class HAPStaticAPI {
 
 		HAPStaticResponse response = new HAPStaticResponse();
  
-		HAPStaticRequest request = new HAPStaticRequest();
-		requestJson = URLDecoder.decode(requestJson);
-		request.buildObject(new JSONObject(requestJson), HAPSerializationFormat.JSON);
+		HAPStaticRequest request = parseStaticRequest(new JSONObject(URLDecoder.decode(requestJson)));
 		
 		for(HAPStaticRequestInfo staticInfo : request.getStaticInfos()) {
-			if(HAPStaticRequestInfo.STATIC_TYPE_LIBRARY.equals(staticInfo.getType())) {
+			if(HAPStaticRequestInfoLibrary.STATIC_TYPE_LIBRARY.equals(staticInfo.getType())) {
+				HAPStaticRequestInfoLibrary staticInfoLib = (HAPStaticRequestInfoLibrary)staticInfo;
 				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-				String domain = staticInfo.getDomain();
-				String path = "static/" + getFilePathForStatic(domain, staticInfo.getName(), staticInfo.getVersion());
+				String domain = staticInfoLib.getDomain();
+				String path = "static/" + getFilePathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion());
 				Resource[] resources = resolver.getResources("classpath:"+path+"/*"); 
 				for(Resource resource : resources) {
-					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForStatic(domain, staticInfo.getName(), staticInfo.getVersion()) + "/" + resource.getFilename())));
+					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
 				}
 				Collections.sort(response.getItems(), (item1, item2)->item1.getURI().toString().compareTo(item2.getURI().toString()));
 			}
-			
+			else if(HAPStaticRequestInfoLibrary.STATIC_TYPE_FOLDER.equals(staticInfo.getType())) {
+				HAPStaticRequestInfoFolder staticInfoFolder = (HAPStaticRequestInfoFolder)staticInfo;
+				
+				for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
+					String folderPath = childFile.getAbsolutePath();
+					String relativePath = folderPath.substring(m_tempDir.length());
+					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForTemp(relativePath))));
+				}
+			}
 		}
 		
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
 	
+	private String getUriPathForTemp(String path) {
+		return this.normaliizePath("http://localhost:8081/temp/"+ path);
+	}
+
 	private HAPStaticRequest parseStaticRequest(JSONObject requestJsonObj) {
+		HAPStaticRequest out = new HAPStaticRequest();
 		JSONArray statiInfoArray = requestJsonObj.getJSONArray(HAPStaticRequest.STATICINFO);
         for(int i=0; i<statiInfoArray.length(); i++) {
-        	HAPStaticRequestInfo info = new HAPStaticRequestInfo();
-        	info.buildObject(statiInfoArray.get(i), HAPSerializationFormat.JSON);
-        	this.m_staticInfo.add(info);
+        	HAPStaticRequestInfo requestInfo = (HAPStaticRequestInfo)this.m_paserEntity.parseEntityJSONImplicitAttribute(statiInfoArray.getJSONObject(i), HAPStaticRequestInfo.TYPE, HAPStaticRequestInfo.DOMAIN_PARSE);
+        	out.addStaticInfo(requestInfo);
         }
-		
+        return out;		
 	}
 	
 	
@@ -117,4 +131,7 @@ public class HAPStaticAPI {
         return path;
 	}
  	
+	private String normaliizePath(String path) {
+		return path.replace("\\", "/");
+	}
 }

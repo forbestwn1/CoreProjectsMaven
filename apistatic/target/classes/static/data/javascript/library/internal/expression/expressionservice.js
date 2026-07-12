@@ -86,6 +86,11 @@ var node_createExpressionService = function(){
 			return node_expressionUtility.getExecuteOperandRequest(operand, variables, constants, handlers, requester_parent);
 		},
 		
+		executeExecuteOperandRequest : function(operand, variables, constants, handlers, requester_parent){
+			var requestInfo = this.getExecuteOperandRequest(operand, variables, constants, handlers, requester_parent);
+			node_requestServiceProcessor.processRequest(requestInfo);
+  	    },
+		
 		getExecuteExpressionRequest : function(expression, eleName, variables, constants, references, handlers, requester_parent){
 			return node_expressionUtility.getExecuteExpressionRequest(expression, eleName, variables, constants, references, handlers, requester_parent);
 		},

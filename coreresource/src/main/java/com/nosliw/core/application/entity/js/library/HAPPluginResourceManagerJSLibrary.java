@@ -18,7 +18,7 @@ import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
-import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 import com.nosliw.core.system.HAPSystemFolderUtility;
@@ -50,7 +50,7 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 			domain = "data.javascript.library.external";
 		}
 		
-		staticRequest.addStaticInfo(new HAPStaticRequestInfo(HAPStaticRequestInfo.STATIC_TYPE_LIBRARY, domain, name, libraryId.getVersion()));
+		staticRequest.addStaticInfo(new HAPStaticRequestInfoLibrary(HAPStaticRequestInfoLibrary.STATIC_TYPE_LIBRARY, domain, name, libraryId.getVersion()));
 		
 		HAPServiceData serviceData = m_staticResourceService.getStatic(staticRequest);
 		HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();

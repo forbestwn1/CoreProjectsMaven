@@ -92,6 +92,7 @@ public class HAPRhinoRuntimeUtility {
 				//ppppp			
 				String folder = getScriptTempFolder();
 				String scriptTempFile = folder + "/" + String.format("%03d", index++) + "_" + name;  //+".js";
+				scriptTempFile = scriptTempFile.replaceAll(";", "_");
 				HAPUtilityFile.writeFile(scriptTempFile, script);
 			}
 			context.evaluateString(scope, script, name, 1, null);

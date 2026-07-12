@@ -21,7 +21,14 @@
 $(document).on("nosliwActive", function(){
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
 	var parms = node_basicUtility.getParmsInUrl();
-	nosliw.utility.requestLoadFileResources(["C:/temp/nosliw/temp/scriptexport/scripts/"+parms.name], 
+	
+	var requestStaticInfos = [];
+	requestStaticInfos.push({
+		"type" : "folder",
+		"folder" : "C:/temp/nosliw/temp/scriptexport/scripts/"+parms.name
+	});
+
+	nosliw.utility.requestLoadStaticResources({"staticInfo" : requestStaticInfos}, 
 			function(){
 		});
 });
