@@ -56,5 +56,8 @@ public class HAPManualOperandVariable extends HAPManualOperand implements HAPOpe
 		if(m_variableKey!=null) {
 			jsonMap.put(VARIABLEKEY, this.m_variableKey);
 		}
+		else {
+			jsonMap.put(VARIABLEKEY, this.m_variableName);
+		}
 	}
 }

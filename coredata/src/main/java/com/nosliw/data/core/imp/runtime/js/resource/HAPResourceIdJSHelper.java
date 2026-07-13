@@ -1,8 +1,9 @@
-package com.nosliw.core.data;
+package com.nosliw.data.core.imp.runtime.js.resource;
 
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.data.HAPJSHelperId;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 
 public class HAPResourceIdJSHelper extends HAPResourceIdSimple{

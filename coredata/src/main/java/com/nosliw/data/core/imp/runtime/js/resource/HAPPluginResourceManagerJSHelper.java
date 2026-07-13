@@ -3,7 +3,6 @@ package com.nosliw.data.core.imp.runtime.js.resource;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPJSHelperId;
-import com.nosliw.core.data.HAPResourceIdJSHelper;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;
 import com.nosliw.core.resource.HAPResourceHelper;
 import com.nosliw.core.resource.HAPResourceIdSimple;

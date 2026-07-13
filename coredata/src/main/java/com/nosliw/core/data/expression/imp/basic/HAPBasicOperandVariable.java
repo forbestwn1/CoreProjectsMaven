@@ -55,5 +55,8 @@ public class HAPBasicOperandVariable extends HAPBasicOperand implements HAPOpera
 		if(m_variableKey!=null) {
 			jsonMap.put(VARIABLEKEY, this.m_variableKey);
 		}
+		else {
+			jsonMap.put(VARIABLEKEY, this.m_variableName);
+		}
 	}
 }

@@ -132,9 +132,11 @@ public class HAPManagerResourceImp implements HAPManagerResource{
 			HAPResourceInfo resourceInfo = new HAPResourceInfo(resourceId); 
 			//add dependency first
 			List<HAPResourceDependency> dependencys = getResourceData(resourceId, runtimeInfo).getResourceDependency(runtimeInfo);
-			for(HAPResourceDependency dependency : dependencys){
-				resourceInfo.addDependency(dependency);
-				this.discoverResource(dependency.getId(), resourceInfos, processedResourceIds, runtimeInfo);
+			if(dependencys!=null) {
+				for(HAPResourceDependency dependency : dependencys){
+					resourceInfo.addDependency(dependency);
+					this.discoverResource(dependency.getId(), resourceInfos, processedResourceIds, runtimeInfo);
+				}
 			}
 			//then add itself
 			resourceInfos.add(resourceInfo);
