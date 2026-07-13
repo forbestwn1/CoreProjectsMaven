@@ -4,13 +4,16 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
+@Component
 public class HAPGatewayCriteriaOperation extends HAPGatewayImp{
 
 	@HAPAttribute
@@ -34,6 +37,8 @@ public class HAPGatewayCriteriaOperation extends HAPGatewayImp{
 	@HAPAttribute
 	final public static String COMMAND_ADDCHILDCRITERIA_CHILD = "child";
 	
+	@Override
+	public String getName() {   return HAPConstantShared.GATEWAY_CRITERIA;   }
 	
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {
@@ -81,4 +86,6 @@ public class HAPGatewayCriteriaOperation extends HAPGatewayImp{
 		
 		return out;
 	}
+
+
 }

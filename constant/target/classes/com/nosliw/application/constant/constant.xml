@@ -762,6 +762,7 @@
 			<definition type="space"/>
 			<definition name="GATEWAY_OPTIONS" value="options"/>
 
+			<definition name="GATEWAY_CRITERIA" value="criteria"/>
 			<definition name="GATEWAY_RESOURCE" value="resource"/>
 			<definition name="GATEWAY_BUNDLEEXECUTABLE" value="bundleExecutable"/>
 			<definition name="GATEWAY_PACKAGE" value="package"/>

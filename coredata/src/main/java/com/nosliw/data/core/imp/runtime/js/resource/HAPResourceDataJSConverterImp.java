@@ -2,10 +2,8 @@ package com.nosliw.data.core.imp.runtime.js.resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.serialization.HAPJsonTypeScript;
 import com.nosliw.common.strvalue.HAPStringableValueEntityWithID;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPDataTypeConverter;
@@ -43,9 +41,4 @@ public class HAPResourceDataJSConverterImp extends HAPStringableValueEntityWithI
 	@Override
 	public List<HAPResourceDependency> getResourceDependency(HAPRuntimeInfo runtimeInfo) {   return new ArrayList<HAPResourceDependency>();  }
 
-	@Override
-	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
-		super.buildJsonMap(jsonMap, typeJsonMap);
-		typeJsonMap.put(VALUE, HAPJsonTypeScript.class);
-	}
 }

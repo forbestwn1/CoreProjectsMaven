@@ -139,7 +139,13 @@ var node_createGatewayService = function(){
 	
 	nosliw.createNode(node_COMMONATRIBUTECONSTANT.EXECUTORRUNTIMEWITHSCRIPT_NODENAME_GATEWAY, {
 		executeGateway : function(gatewayId, command, parms){
-			
+			var out;
+			loc_out.executeExecuteGatewayCommandRequest(gatewayId, command, parms, {
+				success : function(request, gatewayOut){
+					out = gatewayOut;
+				}
+			});
+			return out;
 		}
 	});
 	

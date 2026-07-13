@@ -677,6 +677,7 @@ public class HAPConstantShared {
 
 
 		public static final String GATEWAY_OPTIONS = "options";
+		public static final String GATEWAY_CRITERIA = "criteria";
 		public static final String GATEWAY_RESOURCE = "resource";
 		public static final String GATEWAY_BUNDLEEXECUTABLE = "bundleExecutable";
 		public static final String GATEWAY_PACKAGE = "package";
