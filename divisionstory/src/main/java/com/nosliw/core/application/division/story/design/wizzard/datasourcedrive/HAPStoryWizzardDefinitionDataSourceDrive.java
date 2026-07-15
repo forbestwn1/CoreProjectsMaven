@@ -102,9 +102,11 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		
 		HAPStoryWizzardStepDefinition step1 = new HAPStoryWizzardStepDefinition();
 		step1.setId(STEP_SELECTDATASOURCE);
+		step1.setDescription(STEP_SELECTDATASOURCE);
 		
 		HAPStoryWizzardStepDefinition step2 = new HAPStoryWizzardStepDefinition();
 		step2.setId(STEP_CUSTOMIZEUI);
+		step2.setDescription(STEP_CUSTOMIZEUI);
 
 		this.m_stepDefinitions.add(step1);
 		this.m_stepDefinitions.add(step2);

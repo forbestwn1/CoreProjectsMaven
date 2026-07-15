@@ -4,7 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
-import {newDesignService, nextStepDesignService} from './Service'
+import { newDesignService, nextStepDesignService } from './Service'
 import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
 import Step from './Step'
@@ -13,8 +13,8 @@ function App() {
   const [designState, designDispatch] = useReducer(designReducer, initialState);
   const cacheRef = useRef({});
 
- useEffect(() => {
-	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+  useEffect(() => {
+    var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
     newDesignService().then((response) => {
       console.log("newDesignService response: ", response);
       designDispatch(newDesign(response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_DESIGNID], response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_STEPINFO]));
@@ -23,56 +23,75 @@ function App() {
     });
   }, []);
 
-    const designSteps = designState.steps;
-    const currentStep = designSteps?designSteps[designState.currentStepUI]:undefined;
+  const designSteps = designState.steps;
+  const currentStep = designSteps ? designSteps[designState.currentStepUI] : undefined;
 
-    var onBack = function(){
-      if(designState.currentStepUI!=0){
-          designDispatch(lastStep());
-      }
-    };
+  var onBack = function () {
+    if (designState.currentStepUI != 0) {
+      designDispatch(lastStep());
+    }
+  };
 
 
-    var onNext = function(){
-        if(designState.currentStepUI<designState.currentStepServer && designState.isStepDirty[designState.currentStepUI]==false){
-            designDispatch(nextStep());
-        }
-        else{
-            nextStepDesignService(designState.designId, currentStep).then((response) => {
-                // Handle response
-                designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
-            });
-        }
+  var onNext = function () {
+    if (designState.currentStepUI < designState.currentStepServer && designState.isStepDirty[designState.currentStepUI] == false) {
+      designDispatch(nextStep());
+    }
+    else {
+      nextStepDesignService(designState.designId, currentStep).then((response) => {
+        // Handle response
+        designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
+      });
+    }
 
-    };
-
+  };
 
   return (
     <>
-    <div>
-      <DesignContext value={designState}>
-        <DesignDispatchContext value={designDispatch}>
-          <CacheContext value={cacheRef}>
+      <div className="wizard-container">
+        <div className="wizard-card">
+          <div className="progress-bar">
 
-<Step></Step>
 
-          </CacheContext>
-        </DesignDispatchContext>
-      </DesignContext>
-    </div>
+            {designSteps.map((step, index) => {
+              return (<div className={`step-wrapper`} key={index}>
+                <div className={`step-arrow ${designState.currentStepUI >= index ? 'active' : ''}`}>
+                  <span className="step-arrow-text">{step.stepDefinition.name}</span>
+                </div>
+                <div className="step-tooltip">{step.stepDefinition.name}</div>
+              </div>);
+            })}
 
-    <div>
+
+
+          </div>
+          <div>
+            <DesignContext value={designState}>
+              <DesignDispatchContext value={designDispatch}>
+                <CacheContext value={cacheRef}>
+
+                  <div className="form-container">
+
+                    <Step></Step>
+                  </div>
+                </CacheContext>
+              </DesignDispatchContext>
+            </DesignContext>
+          </div>
+
+          <div>
 
             <button onClick={onBack}>
-                Back
+              Back
             </button>
 
             <button onClick={onNext}>
-                Next
+              Next
             </button>
 
-    </div>
-
+          </div>
+        </div>
+      </div>
 
     </>
   )
