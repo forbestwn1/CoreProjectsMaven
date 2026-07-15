@@ -18,3 +18,44 @@
   gap: 16px;
 }
 
+.build-app-button {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+.build-app-button:disabled {
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+  color: #f3f4f6;
+  cursor: not-allowed;
+  box-shadow: 0 3px 8px rgba(107, 114, 128, 0.25);
+  opacity: 1;
+}
+
+.build-app-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+@media (max-width: 768px) {
+  .split-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-right {
+    order: 2;
+  }
+
+  .panel-left {
+    order: 1;
+  }
+}
+

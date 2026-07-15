@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
-import { CacheContext } from './DesignContext'
-import { questionairUtility } from './Utility'
+import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
+import { questionairUtility, naviationUtility } from './Utility'
 import { createComponentQuestionItemService } from './Service'
 import './QuestionairDynamicChooseDataSource.css'
 
 export default function QuestionairDynamicChooseDataSource({ questionair, onChange }) {
     const cache = useContext(CacheContext);
+    const designDispatch = useContext(DesignDispatchContext);
+    const designState = useContext(DesignContext);
     const [, forceUpdate] = useState(0);
 
     useEffect(() => {
@@ -32,6 +34,10 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
 
     const selected = questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCECHOOSEDYNAMIC_DATASOURCEID];
 
+    var onNext = function(){
+        naviationUtility.next(designState, designDispatch);
+    };
+
     return (
         <>
             <div className="split-panels">
@@ -40,7 +46,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                     <div className="form-group">
                         <label htmlFor="dataSource">Please select data source *</label>
                         <select name="DataSource" id="dataSource" value={selected} onChange={(e) => setSelectedDataSource(e.target.value)}>
-                            <option value="" disabled selected hidden>-- Please choose an option --</option>
+                            <option value="" disabled selected hidden>-- Please choose an data source --</option>
                             {cache.current[questionair.id] && cache.current[questionair.id].map((source) => {
                                 return (<option key={source.id} value={source.name}>
                                     {source.name}
@@ -50,13 +56,17 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
 
                         <span className="error">{questionairUtility.getErrorMessageFromQuesionair(questionair)}</span>
 
+                        <button type="button" className="build-app-button" onClick={onNext} disabled={!selected}>
+                            Start building your own APP
+                        </button>
+
                     </div>
                 </div>
 
                 <div className="panel panel-right">
                     <div className="source-description">
                         <h4>Description</h4>
-                        <p>'Select a data source to view a description.'</p>
+                        <p>description</p>
                     </div>
                 </div>
 
