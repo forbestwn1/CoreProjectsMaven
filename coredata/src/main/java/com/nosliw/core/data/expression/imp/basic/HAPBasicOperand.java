@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
@@ -58,6 +60,7 @@ public abstract class HAPBasicOperand extends HAPSerializableImp implements HAPO
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(TYPE, this.getType());
+		jsonMap.put(OUTPUTCRITERIA, HAPManagerSerialize.getInstance().toStringValue(this.getOutputCriteria(), HAPSerializationFormat.LITERATE));
 	}
 	
 }
