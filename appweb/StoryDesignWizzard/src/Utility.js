@@ -145,6 +145,10 @@ export const questionairUtility = function () {
 
         },
 
+        getAllItemsInGroup : function (questionair){
+            return loc_getAllItemsInGroup(questionair);
+        },
+
         getChildQuestionairByTag: function (questionair, tag) {
             return loc_getChildQuestionairByTag(questionair, tag);
         },

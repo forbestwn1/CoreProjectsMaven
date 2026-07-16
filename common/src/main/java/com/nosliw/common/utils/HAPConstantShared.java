@@ -888,11 +888,13 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO = "dataSourceResponseDataCriteriaInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP = "dataSourceGroupTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTGROUP = "dataSourceRequestGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfoTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstantTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE = "dataSourceRequestParmConstantValueTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG = "dataSourceRequestParmUITagTag";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEGROUP = "dataSourceResponseGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP = "dataSourceResponseParmGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO = "dataSourceResponseParmInfoTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA = "dataSourceResponseData";

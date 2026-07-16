@@ -966,12 +966,15 @@
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO" value="dataSourceResponseDataCriteriaInfo"/>
 
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP" value="dataSourceGroupTag"/>
+
+			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTGROUP" value="dataSourceRequestGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP" value="dataSourceRequestParmGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO" value="dataSourceRequestParmInfoTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT" value="dataSourceRequestParmIsConstantTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE" value="dataSourceRequestParmConstantValueTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG" value="dataSourceRequestParmUITagTag"/>
 
+			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEGROUP" value="dataSourceResponseGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP" value="dataSourceResponseParmGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMINFO" value="dataSourceResponseParmInfoTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA" value="dataSourceResponseData"/>

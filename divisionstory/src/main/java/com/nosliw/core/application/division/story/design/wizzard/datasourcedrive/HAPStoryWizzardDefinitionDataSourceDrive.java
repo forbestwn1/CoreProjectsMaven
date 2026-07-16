@@ -431,7 +431,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		out.addItem(dataSourceInfoStaticQ);
 		
 		//group for requests
-		HAPStoryWizzardQuestionairGroup serviceRequestGroupQ = new HAPStoryWizzardQuestionairGroup();
+		HAPStoryWizzardQuestionairGroup serviceRequestGroupQ = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTGROUP);
 		for(HAPDefinitionParmRequest requestParm : dataSourceInterface.getRequestParms()) {
 			HAPDataTypeCriteria dataTypeCriteria = requestParm.getDataDefinition().getCriteria();
 			
@@ -471,7 +471,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		out.addItem(serviceRequestGroupQ);
 		
 		//group for response
-		HAPStoryWizzardQuestionairGroup serviceResponseGroupQ = new HAPStoryWizzardQuestionairGroup();
+		HAPStoryWizzardQuestionairGroup serviceResponseGroupQ = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEGROUP);
 		
 		for(HAPDefinitionParmResponse responseParm : dataSourceInterface.getResult(HAPConstantShared.SERVICE_RESULT_SUCCESS).getOutput()) {
 			HAPDataTypeCriteria dataTypeCriteria = responseParm.getDataDefinition().getCriteria();

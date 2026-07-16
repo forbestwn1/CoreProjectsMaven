@@ -64,6 +64,12 @@
   							"dataDefinition" : {
 	    						"criteria" : "test.string;1.0.0"
 	    					}
+						},
+						{
+							"name" : "outputInService2",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
 						}
 					]
 				}

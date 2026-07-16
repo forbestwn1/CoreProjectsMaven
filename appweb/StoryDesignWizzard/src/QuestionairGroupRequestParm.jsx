@@ -1,12 +1,14 @@
-import { useState, useReducer, useEffect } from 'react'
+import { useState } from 'react'
 import Questionair from './Questionair'
 import {questionairUtility} from './Utility'
 import QuestionairDynamicRequestIsConstant from './QuestionairDynamicRequestIsConstant'
 import QuestionairDynamicRequestConstantValue from './QuestionairDynamicRequestConstantValue'
 import QuestionairDynamicRequestInputTag from './QuestionairDynamicRequestInputTag'
+import './QuestionairGroupRequestParm.css'
 
 export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   const [update, setUpdate] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -35,12 +37,20 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   };
 
   return (
-    <div className="questionnaire-group">
-        request parm group questionair!!!! : {loc_requestParmName}
+    <div className="request-parm-card">
+      <button
+        type="button"
+        className="request-parm-toggle"
+        onClick={() => setCollapsed(!collapsed)}
+      >
+        <span>{loc_requestParmName}</span>
+        <span className="toggle-icon">{collapsed ? '+' : '-'}</span>
+      </button>
 
+      <div className={`request-parm-content ${collapsed ? 'collapsed' : ''}`}>
         <QuestionairDynamicRequestIsConstant questionair={questionairIsConstant} onChange={loc_onChange} />
         {loc_getQuestionairComponent()}
-
+      </div>
     </div>
   );
 }
