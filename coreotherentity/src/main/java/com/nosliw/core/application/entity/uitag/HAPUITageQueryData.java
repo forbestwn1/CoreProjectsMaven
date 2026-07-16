@@ -60,7 +60,7 @@ public class HAPUITageQueryData extends HAPSerializableImp{
 		jsonMap.put(DATAMODE, this.m_dataMode);
 	}
 	
-	public HAPUITageQueryData parseUITagQueryData(JSONObject jsonOb, HAPServiceParseEntity entityParseService) {
+	public static HAPUITageQueryData parseUITagQueryData(JSONObject jsonOb, HAPServiceParseEntity entityParseService) {
 		HAPUITageQueryData out = new HAPUITageQueryData();
 		out.setDataDefinition(HAPParserDataDefinition.parseDataDefinition(jsonOb.getJSONObject(DATADEFINITION), entityParseService));
 		out.setIOMode((String)jsonOb.opt(IOMODE));

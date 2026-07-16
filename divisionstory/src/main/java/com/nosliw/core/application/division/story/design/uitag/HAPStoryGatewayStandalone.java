@@ -1,9 +1,11 @@
 package com.nosliw.core.application.division.story.design.uitag;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,13 +14,13 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPBundleForExecute;
 import com.nosliw.core.application.HAPUtilityBundleForExecute;
-import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
-import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
+import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
@@ -43,10 +45,16 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 	public static final String COMMAND_CEATESTANDALONE = "createStandalone";
 
 	@HAPAttribute
-	public static final String COMMAND_CEATESTANDALONE_DATADEFINITION = "dataDefinition";
+	public static final String COMMAND_CEATESTANDALONE_PARM = "parm";
 
 	@HAPAttribute
-	public static final String COMMAND_CEATESTANDALONE_RESOURCEID = "resourceId";
+	public static final String COMMAND_CEATESTANDALONE_PARM_UITAGQUERY = "uiTagQuery";
+
+	@HAPAttribute
+	public static final String COMMAND_CEATESTANDALONE_PARM_ID = "resourceId";
+
+	@HAPAttribute
+	public static final String COMMAND_CEATESTANDALONE_PARM_DOMAIN = "domain";
 
 	
 	@Autowired
@@ -72,24 +80,34 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 		HAPServiceData out = null;
 		switch(command) {
 		case COMMAND_CEATESTANDALONE:
-			JSONObject dataDefinitionJsonObj = parms.getJSONObject(COMMAND_CEATESTANDALONE_DATADEFINITION);
-			HAPDataDefinition dataDefinition = HAPParserDataDefinition.parseDataDefinition(dataDefinitionJsonObj, m_entityParseService);
-			HAPBundleForBrick bundleForBrick = HAPStoryUtilityUITag.buildStandaloneBundleForUITag(dataDefinition, this.m_uiTagMan, this.m_standaloneMan, HAPRuntimeManager.RUNTIME_JS_BROWSER);
-			HAPBundleForExecute bundleForExecutable = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
+
+			Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
+			List<HAPResource> resources = new ArrayList<HAPResource>();
 			
-			String id = (String)parms.opt(COMMAND_CEATESTANDALONE_RESOURCEID);
-			if(id==null) {
-				id = this.m_idGeneratorService.generateIdStr();
+			JSONArray parmsArray = parms.getJSONArray(COMMAND_CEATESTANDALONE_PARM);
+			for(int i=0; i<parmsArray.length(); i++) {
+				JSONObject parmJsonObj = parmsArray.getJSONObject(i);
+				JSONObject uiTagQueryJsonObj = parmJsonObj.getJSONObject(COMMAND_CEATESTANDALONE_PARM_UITAGQUERY);
+				HAPUITageQueryData uiTagQuery = HAPUITageQueryData.parseUITagQueryData(uiTagQueryJsonObj, m_entityParseService);
+				HAPBundleForBrick bundleForBrick = HAPStoryUtilityUITag.buildStandaloneBundleForUITag(uiTagQuery, this.m_uiTagMan, this.m_standaloneMan, HAPRuntimeManager.RUNTIME_JS_BROWSER);
+				HAPBundleForExecute bundleForExecutable = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
+				
+				String id = (String)parmJsonObj.opt(COMMAND_CEATESTANDALONE_PARM_ID);
+				if(id==null) {
+					String domain = (String)parmJsonObj.opt(COMMAND_CEATESTANDALONE_PARM_DOMAIN);
+					id = this.m_idGeneratorService.generateIdStr();
+					id = HAPUtilityNamingConversion.cascadeNameSegment(domain, id);
+				}
+				
+				HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", id);
+				HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
+				HAPResource resource = new HAPResource(resourceId, resourceData, null);
+				
+				resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
+				resources.add(resource);
 			}
 			
-			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", id);
-			HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
-			HAPResource resource = new HAPResource(resourceId, resourceData, null);
-			
-			Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
-			resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
-			
-			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, List.of(resource));
+			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, resources);
 			out = HAPServiceData.createSuccessData(gatewayOutput);
 			break;
 		}

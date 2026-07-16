@@ -20,9 +20,10 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPStoryUtilityUITag {
 
-	public static HAPBundleForBrick buildStandaloneBundleForUITag(HAPDataDefinition dataDefinition, HAPManagerUITag uiTagMan, HAPManualManangerStandalone standaloneMan, HAPRuntimeInfo runtimeInfo) {
+	public static HAPBundleForBrick buildStandaloneBundleForUITag(HAPUITageQueryData dataUITagQuery, HAPManagerUITag uiTagMan, HAPManualManangerStandalone standaloneMan, HAPRuntimeInfo runtimeInfo) {
+		HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(dataUITagQuery);
 
-		HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(new HAPUITageQueryData(dataDefinition));
+		HAPDataDefinition dataDefinition = dataUITagQuery.getDataDefinition();
 
 		String dataVariableName = "data";
 		
@@ -49,6 +50,5 @@ public class HAPStoryUtilityUITag {
 		
 		return standaloneMan.buildStandalone(new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100), runtimeInfo);
 	}
-	
 	
 }
