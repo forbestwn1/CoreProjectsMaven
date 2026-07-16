@@ -887,6 +887,7 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMISSHOW = "dataSourceResponseParmIsShow";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG = "dataSourceResponseParmUITag";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO = "dataSourceResponseDataCriteriaInfo";
+		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP = "dataSourceGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP = "dataSourceRequestParmGroupTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMINFO = "dataSourceRequestParmInfoTag";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT = "dataSourceRequestParmIsConstantTag";

@@ -3,6 +3,7 @@ import QuestionairGroup from './QuestionairGroup'
 import QuestionairStatic from './QuestionairStatic'
 import QuestionairGroupRequestParm from './QuestionairGroupRequestParm'
 import QuestionairGroupResponseParm from './QuestionairGroupResponseParm'
+import QuestionairGroupDataSourceUICustomize from './QuestionairGroupDataSourceUICustomize'
 
 export default function Questionair ({questionair, onChange}){
 
@@ -15,11 +16,8 @@ export default function Questionair ({questionair, onChange}){
 
     var getQuestionairComponent = function(questionair, onChange){
         if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_GROUP){
-            if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP){
-                return <QuestionairGroupRequestParm questionair={questionair} onChange={onChange} />;
-            }
-            else if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEPARMGROUP){
-                return <QuestionairGroupResponseParm questionair={questionair} onChange={onChange} />;
+            if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP){
+                return <QuestionairGroupDataSourceUICustomize questionair={questionair} onChange={onChange} />;
             }
             return <QuestionairGroup questionair={questionair} onChange={onChange} />;
         }

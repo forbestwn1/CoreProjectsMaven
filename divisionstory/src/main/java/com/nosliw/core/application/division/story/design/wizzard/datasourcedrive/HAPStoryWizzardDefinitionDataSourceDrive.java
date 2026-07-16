@@ -424,7 +424,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 
 		//root group
-		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup();
+		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP);
 
 		//data source profile info
 		HAPStoryWizzardQuestionairItemStatic dataSourceInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceInfoStatic(dataSrouceProfile));

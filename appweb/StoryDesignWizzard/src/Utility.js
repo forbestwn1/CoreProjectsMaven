@@ -60,6 +60,25 @@ export const questionairUtility = function () {
         return questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_ITEM];
     };
 
+    var loc_getDecendentQuestionairByTag = function (questionair, tag) {
+        var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+        var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+
+        if (questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_TAG] === tag) {
+            return questionair;
+        }
+
+        var questionairType = questionair[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_TYPE];
+        if (questionairType == node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_GROUP) {
+            var children = loc_getAllItemsInGroup(questionair);
+            for (let i in children) {
+                var child = children[i];
+                var result = loc_getDecendentQuestionairByTag(child, tag);
+                if (result) return result;
+            }
+        }
+    };
+
     var loc_getChildQuestionairByValueType = function (questionair, valueType) {
         var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
         var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -132,6 +151,10 @@ export const questionairUtility = function () {
 
         getChildQuestionairByValueType: function (questionair, valueType) {
             return loc_getChildQuestionairByValueType(questionair, valueType);
+        },
+
+        getDecendentQuestionairByTag : function (questionair, tag){
+            return loc_getDecendentQuestionairByTag(questionair, tag);
         },
 
         getValueFromQuestionairItem: function (questionair) {
