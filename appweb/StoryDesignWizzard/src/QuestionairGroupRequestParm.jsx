@@ -23,7 +23,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   var loc_dataDefinition = loc_requestParmDef[node_COMMONATRIBUTECONSTANT.DEFINITIONPARMREQUEST_DATADEFINITION];
   var loc_isConstant = questionairUtility.getValueFromQuestionairItem(questionairIsConstant)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSEISCONSTANTDYNAMIC_ISCONSTANT];
 
-  var loc_onChange = function(isCnst){
+  var loc_onChangeIsConstant = function(){
     setUpdate(!update);
     onChange();
   };
@@ -36,6 +36,9 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
     }
   };
 
+  const stateIcon = loc_isConstant ? '🔒' : '🔓';
+  const stateTitle = loc_isConstant ? 'constant' : 'not constant';
+
   return (
     <div className="request-parm-card">
       <button
@@ -44,11 +47,14 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
         onClick={() => setCollapsed(!collapsed)}
       >
         <span>{loc_requestParmName}</span>
-        <span className="toggle-icon">{collapsed ? '+' : '-'}</span>
+        <span className="request-parm-state-group">
+          <span className={`request-parm-state-icon ${loc_isConstant ? 'is-constant' : 'is-input'}`} title={stateTitle} aria-label={stateTitle}>{stateIcon}</span>
+          <span className="toggle-icon">{collapsed ? '+' : '-'}</span>
+        </span>
       </button>
 
       <div className={`request-parm-content ${collapsed ? 'collapsed' : ''}`}>
-        <QuestionairDynamicRequestIsConstant questionair={questionairIsConstant} onChange={loc_onChange} />
+        <QuestionairDynamicRequestIsConstant questionair={questionairIsConstant} onChange={loc_onChangeIsConstant} />
         {loc_getQuestionairComponent()}
       </div>
     </div>

@@ -4,14 +4,18 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public abstract class HAPStoryDesignMetadataStep extends HAPSerializableImp implements HAPEntityParsable{
 
 	public static final String PARSABLEENTITYDOMAIN = "story.wizzard.metadata";
 	
+	@HAPAttribute
 	public static final String TYPE = "type";
 	
 	private String m_type;

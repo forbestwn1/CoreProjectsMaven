@@ -4,7 +4,16 @@ import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, l
 
 export const naviationUtility = function () {
 
+	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+
     var loc_out = {
+
+        isFinished : function(designState){
+            const designSteps = designState.steps;
+            const currentStep = designSteps ? designSteps[designState.currentStepServer] : undefined;
+            return currentStep[node_COMMONATRIBUTECONSTANT.STORYDESIGNMETADATASTEP_TYPE]==node_COMMONCONSTANT.STORYDESIGN_STEP_METADATATYPE_END;
+        },
 
         back: function (designState, designDispatch) {
             if (designState.currentStepUI != 0) {
