@@ -160,6 +160,10 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 		setShowPopup(false);
 	};
 
+	var onRestChangeValue = function () {
+		updateUITagForChange();
+	};
+
 	var okAndClose = function () {
 		try {
            var request = loc_getUITappAppInfoForChange().variable.getGetValueRequest({
@@ -195,6 +199,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 						<div className="modal-body" ref={contentRefForChange}></div>
 						<div className="modal-footer">
 							<button className="btn-secondary" onClick={closePopup}>Cancel</button>
+							<button className="btn-reset" onClick={onRestChangeValue}>Reset</button>
 							<button className="btn-primary" onClick={okAndClose}>OK</button>
 						</div>
 					</div>

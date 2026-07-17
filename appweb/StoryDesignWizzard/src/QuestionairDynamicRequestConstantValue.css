@@ -82,6 +82,7 @@
   cursor: pointer;
 }
 
+.modal-footer .btn-reset,
 .modal-footer .btn-primary {
   padding: 8px 14px;
   border-radius: 8px;
