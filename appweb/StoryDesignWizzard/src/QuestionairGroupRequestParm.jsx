@@ -29,7 +29,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   };
   var loc_getQuestionairComponent = function(){
     if(loc_isConstant){
-      return <QuestionairDynamicRequestConstantValue questionair={questionairConstantValue} datadefinition={loc_dataDefinition}/>;
+      return <QuestionairDynamicRequestConstantValue questionair={questionairConstantValue} datadefinition={loc_dataDefinition} onChange={onChange}/>;
     }
     else{
       return <QuestionairDynamicRequestInputTag questionair={questionairInputTag}/>;

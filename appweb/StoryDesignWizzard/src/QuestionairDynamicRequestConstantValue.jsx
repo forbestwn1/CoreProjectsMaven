@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useRef } from 'react'
 import { CacheContext } from './DesignContext'
 import './QuestionairDynamicRequestConstantValue.css'
+import { questionairUtility, naviationUtility } from './Utility'
 
 export default function QuestionairDynamicRequestConstantValue({ questionair, datadefinition, onChange }) {
 	const cache = useContext(CacheContext);
@@ -17,10 +18,10 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 	var node_ResourceId = nosliw.getNodeData("resource.entity.ResourceId");
 	var node_ServiceInfo = nosliw.getNodeData("common.service.ServiceInfo");
+	var node_valueInVarOperationServiceUtility = nosliw.getNodeData("variable.valueinvar.operation.valueInVarOperationServiceUtility");
 
-	var loc_nameForchange = "forChange";
+	var loc_nameForChange = "forChange";
 	var loc_nameForDisplay = "forDisplay";
-
 
 	useEffect(() => {
 		let uiTagAppInfo = cache.current[questionair.id];
@@ -48,7 +49,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			uiTagParmForChange[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForChange;
 			uiTagParmForDisplay[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForDisplay;
 
-			uiTagParmForChange[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_DOMAIN] = loc_nameForchange;
+			uiTagParmForChange[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_DOMAIN] = loc_nameForChange;
 			uiTagParmForDisplay[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_DOMAIN] = loc_nameForDisplay;
 
 			uitages.push(uiTagParmForChange);
@@ -71,14 +72,12 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 								var uiTagAppsInfo = uiTagAppsResult.getResults();
 								cache.current[questionair.id] = uiTagAppsInfo;
 
-								uiTagAppsInfo[loc_nameForchange].variable.registerDataChangeEventListener(undefined, function (event, data) {
-									//									setSelectedConstantData(data);
-								});
-
+								updateUITagForDisplay();
+								updateUITagForChange();
 								forceUpdate(c => c + 1);
 							}
 						});
-						uiTagAppsRequest.addRequest(loc_nameForchange, buildUITagStandAloneAppRequest(loc_bundleDefForChange, loc_nameForchange));
+						uiTagAppsRequest.addRequest(loc_nameForChange, buildUITagStandAloneAppRequest(loc_bundleDefForChange, loc_nameForChange));
 						uiTagAppsRequest.addRequest(loc_nameForDisplay, buildUITagStandAloneAppRequest(loc_bundleDefForDisplay, loc_nameForDisplay));
 
 						out.addRequest(uiTagAppsRequest);
@@ -89,15 +88,30 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			node_requestServiceProcessor.processRequest(request);
 		}
 		else {
-			var forChangeAppInfo = uiTagAppInfo[loc_nameForchange];
-			$(forChangeAppInfo.application.getView()).remove();
+			var forChangeAppInfo = loc_getUITappAppInfoForChange();
+//			$(forChangeAppInfo.application.getView()).remove();
 			$(contentRefForChange.current).append(forChangeAppInfo.application.getView());
 
-			var forDisplayAppInfo = uiTagAppInfo[loc_nameForDisplay];
-			$(forDisplayAppInfo.application.getView()).remove();
+			var forDisplayAppInfo = loc_getUITappAppInfoForDisplay();
+//			$(forDisplayAppInfo.application.getView()).remove();
 			$(contentRefForDisplay.current).append(forDisplayAppInfo.application.getView());
 		}
 	});
+
+
+	var loc_getCurrentConstantData = function () {
+		return questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_CONSTANTDATA];
+	}
+
+
+	var loc_getUITappAppInfoForDisplay = function(){
+		return  cache.current[questionair.id][loc_nameForDisplay];
+	};
+
+	var loc_getUITappAppInfoForChange = function(){
+		return  cache.current[questionair.id][loc_nameForChange];
+	};
+
 
 	var buildUITagStandAloneAppRequest = function (bundleDef, name, handlers, request) {
 		var out = node_createServiceRequestInfoSequence({}, handlers, request);
@@ -115,44 +129,45 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 	};
 
+	var updateUITagForDisplay = function () {
+		var data = loc_getCurrentConstantData();
+        var request = loc_getUITappAppInfoForDisplay().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
+		node_requestServiceProcessor.processRequest(request);
+	};
+
+	var updateUITagForChange = function () {
+		var data = loc_getCurrentConstantData();
+        var request = loc_getUITappAppInfoForChange().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
+		node_requestServiceProcessor.processRequest(request);
+	};
+
 	var setSelectedConstantData = function (data) {
 		questionair.isDirty = true;
 		questionair.changedValue = {};
 		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = questionair.defaultValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE];
 		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_CONSTANTDATA] = data;
+
+		updateUITagForDisplay();
 		onChange(data);
 	};
 
 	var openPopup = function (e) {
 		if (e) e.preventDefault();
-		// const uiTagAppInfo = cache.current[questionair.id];
-		// if(uiTagAppInfo){
-		// 	$(uiTagAppInfo.application.getView()).remove();
-		// 	$(modalContentRef.current).append(uiTagAppInfo.application.getView());
-		// }
 		setShowPopup(true);
 	};
 
 	var closePopup = function () {
-		// const uiTagAppInfo = cache.current[questionair.id];
-		// if(uiTagAppInfo){
-		// 	$(uiTagAppInfo.application.getView()).remove();
-		// 	$(contentRef.current).append(uiTagAppInfo.application.getView());
-		// }
 		setShowPopup(false);
 	};
 
 	var okAndClose = function () {
 		try {
-			// const uiTagAppInfo = cache.current[questionair.id];
-			// if(uiTagAppInfo && uiTagAppInfo.variable){
-			// 	let val = undefined;
-			// 	if(typeof uiTagAppInfo.variable.getValue === 'function') val = uiTagAppInfo.variable.getValue();
-			// 	else if(typeof uiTagAppInfo.variable.getData === 'function') val = uiTagAppInfo.variable.getData();
-			// 	if(val!==undefined){
-			// 		setSelectedConstantData(val);
-			// 	}
-			// }
+           var request = loc_getUITappAppInfoForChange().variable.getGetValueRequest({
+			success: function (request, data) {
+				setSelectedConstantData(data.value);
+			}
+		   });
+			node_requestServiceProcessor.processRequest(request);
 		} catch (e) {
 			// ignore read errors
 		}

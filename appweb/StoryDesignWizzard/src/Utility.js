@@ -6,7 +6,13 @@ export const naviationUtility = function () {
 
     var loc_out = {
 
-        next: function (designState, designDispatch,) {
+        back: function (designState, designDispatch) {
+            if (designState.currentStepUI != 0) {
+                designDispatch(lastStep());
+            }
+        },
+
+        next: function (designState, designDispatch) {
             const designSteps = designState.steps;
             const currentStep = designSteps ? designSteps[designState.currentStepUI] : undefined;
             if (designState.currentStepUI < designState.currentStepServer && designState.isStepDirty[designState.currentStepUI] == false) {
@@ -145,7 +151,7 @@ export const questionairUtility = function () {
 
         },
 
-        getAllItemsInGroup : function (questionair){
+        getAllItemsInGroup: function (questionair) {
             return loc_getAllItemsInGroup(questionair);
         },
 
@@ -157,7 +163,7 @@ export const questionairUtility = function () {
             return loc_getChildQuestionairByValueType(questionair, valueType);
         },
 
-        getDecendentQuestionairByTag : function (questionair, tag){
+        getDecendentQuestionairByTag: function (questionair, tag) {
             return loc_getDecendentQuestionairByTag(questionair, tag);
         },
 
