@@ -1,5 +1,5 @@
 
-export default function DesignFinish() {
+export default function StepComplete() {
 
 
     return (

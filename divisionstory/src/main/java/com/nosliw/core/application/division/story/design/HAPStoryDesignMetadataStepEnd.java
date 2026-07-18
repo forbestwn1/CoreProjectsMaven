@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
 
-public abstract class HAPStoryDesignMetadataStepEnd extends HAPStoryDesignMetadataStep{
+public class HAPStoryDesignMetadataStepEnd extends HAPStoryDesignMetadataStep{
 
 	public HAPStoryDesignMetadataStepEnd() {
 		super(HAPConstantShared.STORYDESIGN_STEP_METADATATYPE_END);

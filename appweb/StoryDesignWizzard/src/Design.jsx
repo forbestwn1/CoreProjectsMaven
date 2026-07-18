@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
 import { newDesignService, nextStepDesignService } from './Service'
 import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
+import { stateUtility } from './Utility'
 import Step from './Step'
 
 export default function Design() {
@@ -36,9 +37,9 @@ export default function Design() {
             {designSteps.map((step, index) => {
               return (<div className={`step-wrapper`} key={index}>
                 <div className={`step-arrow ${designState.currentStepUI >= index ? 'active' : ''}`}>
-                  <span className="step-arrow-text">{step.stepDefinition.name}</span>
+                  <span className="step-arrow-text">{stateUtility.getStepDisplayInfo(step).name}</span>
                 </div>
-                <div className="step-tooltip">{step.stepDefinition.name}</div>
+                <div className="step-tooltip">{stateUtility.getStepDisplayInfo(step).description}</div>
               </div>);
             })}
 

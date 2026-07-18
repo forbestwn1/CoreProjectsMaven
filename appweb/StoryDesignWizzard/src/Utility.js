@@ -4,27 +4,13 @@ import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, l
 
 export const naviationUtility = function () {
 
-	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
-
     var loc_out = {
 
-        isLastStep : function(designState){
+        isFinishStep: function (designState) {
             const designSteps = designState.steps;
-
-        },
-
-
-        navigateToDesignFinish: function (setView) {
-            if (typeof setView === 'function') {
-                setView('designFinish');
-            }
-        },
-
-        navigateToDesign: function (setView) {
-            if (typeof setView === 'function') {
-                setView('design');
-            }
+            if (!designSteps || designSteps.length === 0) return false;
+            const currentStep = designSteps[designState.currentStepUI];
+            return stateUtility.isFinishStep(currentStep);
         },
 
         back: function (designState, designDispatch) {
@@ -44,18 +30,9 @@ export const naviationUtility = function () {
                     // Handle response
                     var steps = response.data.data.stepInfo;
                     var currentStepIndex = response.data.data.currentStep;
-                    const currentStep = steps[currentStepIndex];
-                    if(currentStep[node_COMMONATRIBUTECONSTANT.STORYDESIGNMETADATASTEP_TYPE]==node_COMMONCONSTANT.STORYDESIGN_STEP_METADATATYPE_END){
-                        //last step
-
-                    }
-                    else{
-                        //not last step, normal step
-                        designDispatch(updateDesignGlobal(steps, currentStep));
-                    }
+                    designDispatch(updateDesignGlobal(steps, currentStepIndex));
                 });
             }
-
         }
 
     };
@@ -69,9 +46,31 @@ export const stateUtility = function () {
 
     var loc_out = {
 
-        getCurrentStepName: function (designState) {
+        isFinishStep: function (step) {
+            var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+            var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+            return step[node_COMMONATRIBUTECONSTANT.STORYDESIGNMETADATASTEP_TYPE] == node_COMMONCONSTANT.STORYDESIGN_STEP_METADATATYPE_END;
+        },
+
+        getStepDisplayInfo : function(step){
+            if(this.isFinishStep(step)){
+                return {
+                    "name" : "Complete",
+                    "description" : "Complete"
+                };
+            }
+            else{
+                return {
+                    name : step.stepDefinition.name,
+                    description : step.stepDefinition.description
+                }
+            }
+
+        },
+
+        getCurrentStepDisplayInfo: function (designState) {
             if (designState.steps.length != 0) {
-                return designState.steps[designState.currentStepUI].stepDefinition.name;
+                return this.getStepDisplayInfo(designState.steps[designState.currentStepUI]);
             }
         },
 

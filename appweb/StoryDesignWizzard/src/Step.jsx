@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { DesignContext, DesignDispatchContext } from './DesignContext'
 import { dirtyCurrentStep, updateDesignLocal } from './reducers/designReducer';
-import { stateUtility } from "./Utility"
+import { stateUtility, naviationUtility } from "./Utility"
 import Questionair from './Questionair';
+import StepComplete from './StepComplete';
 
 
 export default function Step() {
@@ -11,8 +12,9 @@ export default function Step() {
 
     const designSteps = JSON.parse(JSON.stringify(designState.steps));
     const currentStep = designSteps ? designSteps[designState.currentStepUI] : undefined;
+    const stepDisplayInfo = stateUtility.getCurrentStepDisplayInfo(designState);
     const questionair = currentStep ? currentStep.questionair : undefined;
-    const stepName = stateUtility.getCurrentStepName(designState);
+    const isFinishStep = naviationUtility.isFinishStep(designState);
 
     var onChange = function () {
         dispatch(updateDesignLocal(designSteps));
@@ -23,9 +25,11 @@ export default function Step() {
         <>
             <div className="step-content">
 
-                Hello Step  {stepName}!!!!
+                Hello Step  {stepDisplayInfo?stepDisplayInfo.name:null}!!!!
 
-                {questionair && <Questionair questionair={questionair} onChange={onChange}></Questionair>}
+                {!isFinishStep ? questionair && (<Questionair questionair={questionair} onChange={onChange}></Questionair>) : (<StepComplete/> )}
+
+
             </div>
         </>
     );

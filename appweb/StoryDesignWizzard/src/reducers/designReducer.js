@@ -5,8 +5,8 @@ export const initialState = {
   designId : null,
   steps: [],
   isStepDirty : null,
-  currentStepUI: 0,
-  currentStepServer: 0,
+  currentStepUI: -1,
+  currentStepServer: -1,
 };
 
 // Action types

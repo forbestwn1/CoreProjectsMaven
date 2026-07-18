@@ -1,5 +1,7 @@
 package com.nosliw.core.application.division.story.design.wizzard;
 
+import java.util.List;
+
 import org.json.JSONObject;
 
 import com.nosliw.core.application.division.story.design.HAPStoryBuilder;
@@ -8,6 +10,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponse
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
+import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStepEnd;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
@@ -88,30 +91,37 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 	private HAPStoryBuilderResponseBuild createResultBuild(HAPStoryDesign storyDesign) {
 		HAPStoryBuilderResponseBuild out = new HAPStoryBuilderResponseBuild();
 		out.setCurrentSetp(storyDesign.getCurrentStepIndex());
-		
-		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
-			out.addStepInfo(stepInfo);
-		}
-
-		for(int i=out.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
-			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
-		}
-		
+		this.buildStepInfo(storyDesign, m_wizzardDef, out.getStepInfos());
 		return out;
 	}
 	
 	private HAPStoryBuilderResponseNew createResultNew(HAPStoryDesign storyDesign) {
 		HAPStoryBuilderResponseNew out = new HAPStoryBuilderResponseNew(storyDesign.getBrickId());
-		
-		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
-			out.addStepInfo(stepInfo);
-		}
 
-		for(int i=out.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
-			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
-		}
+		this.buildStepInfo(storyDesign, m_wizzardDef, out.getStepInfos());
+
+		
+//		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
+//			out.addStepInfo(stepInfo);
+//		}
+//
+//		for(int i=out.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
+//			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
+//		}
 		
 		return out;
+	}
+	
+	private void buildStepInfo(HAPStoryDesign storyDesign, HAPStoryWizzardDefinition m_wizzardDef, List<HAPStoryDesignMetadataStep> steInfos) {
+		for(int i=0; i<m_wizzardDef.getStepsDefinition().size(); i++) {
+			steInfos.add(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
+		}
+		steInfos.add(new HAPStoryDesignMetadataStepEnd());
+		
+		List<HAPStoryDesignMetadataStep> existingStepInfos = storyDesign.getStepInfos();
+		for(int i=0; i<existingStepInfos.size(); i++) {
+			steInfos.set(i, existingStepInfos.get(i));
+		}
 	}
 	
 }
