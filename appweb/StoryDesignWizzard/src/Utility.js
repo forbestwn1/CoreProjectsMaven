@@ -9,10 +9,22 @@ export const naviationUtility = function () {
 
     var loc_out = {
 
-        isFinished : function(designState){
+        isLastStep : function(designState){
             const designSteps = designState.steps;
-            const currentStep = designSteps ? designSteps[designState.currentStepServer] : undefined;
-            return currentStep[node_COMMONATRIBUTECONSTANT.STORYDESIGNMETADATASTEP_TYPE]==node_COMMONCONSTANT.STORYDESIGN_STEP_METADATATYPE_END;
+
+        },
+
+
+        navigateToDesignFinish: function (setView) {
+            if (typeof setView === 'function') {
+                setView('designFinish');
+            }
+        },
+
+        navigateToDesign: function (setView) {
+            if (typeof setView === 'function') {
+                setView('design');
+            }
         },
 
         back: function (designState, designDispatch) {
@@ -30,7 +42,17 @@ export const naviationUtility = function () {
             else {
                 nextStepDesignService(designState.designId, currentStep).then((response) => {
                     // Handle response
-                    designDispatch(updateDesignGlobal(response.data.data.stepInfo, response.data.data.currentStep));
+                    var steps = response.data.data.stepInfo;
+                    var currentStepIndex = response.data.data.currentStep;
+                    const currentStep = steps[currentStepIndex];
+                    if(currentStep[node_COMMONATRIBUTECONSTANT.STORYDESIGNMETADATASTEP_TYPE]==node_COMMONCONSTANT.STORYDESIGN_STEP_METADATATYPE_END){
+                        //last step
+
+                    }
+                    else{
+                        //not last step, normal step
+                        designDispatch(updateDesignGlobal(steps, currentStep));
+                    }
                 });
             }
 
