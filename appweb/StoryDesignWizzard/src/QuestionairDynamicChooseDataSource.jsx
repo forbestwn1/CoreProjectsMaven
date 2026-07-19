@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
 import { questionairUtility, naviationUtility } from './Utility'
 import { createComponentQuestionItemService } from './Service'
+import ErrorInQuestionair from './ErrorInQuestionair'
 import './QuestionairDynamicChooseDataSource.css'
 
 export default function QuestionairDynamicChooseDataSource({ questionair, onChange }) {
@@ -54,7 +55,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                             })}
                         </select>
 
-                        <span className="error">{questionairUtility.getErrorMessageFromQuesionair(questionair)}</span>
+                        <ErrorInQuestionair questionair={questionair} />
 
                         <button type="button" className="build-app-button" onClick={onNext} disabled={!selected}>
                             Start building your own APP

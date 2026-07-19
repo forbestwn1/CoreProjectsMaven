@@ -30,6 +30,19 @@
 						"criteria" : "test.string;1.0.0",
 					    "rule" : [
 					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        },
+					    ]
+					}
+				},
+				{
+					"name" : "serviceParm3",
+					"dataDefinition" : {
+						"criteria" : "test.string;1.0.0",
+					    "rule" : [
+					        {
                    				"name" : "enum",
 	                            "status": "disabled1",
 					            "ruleType" : "enum",

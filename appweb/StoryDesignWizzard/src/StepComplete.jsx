@@ -1,5 +1,5 @@
 
-export default function StepComplete() {
+export default function StepComplete({step}) {
 
 
     return (
@@ -7,7 +7,9 @@ export default function StepComplete() {
 
         <div>
 
-          Design Finished
+          Design Finished 
+          <br/>
+          {step.url}
 
         </div>
         

@@ -97,18 +97,7 @@ public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 	
 	private HAPStoryBuilderResponseNew createResultNew(HAPStoryDesign storyDesign) {
 		HAPStoryBuilderResponseNew out = new HAPStoryBuilderResponseNew(storyDesign.getBrickId());
-
 		this.buildStepInfo(storyDesign, m_wizzardDef, out.getStepInfos());
-
-		
-//		for(HAPStoryDesignMetadataStep stepInfo : storyDesign.getStepInfos()) {
-//			out.addStepInfo(stepInfo);
-//		}
-//
-//		for(int i=out.getStepInfos().size(); i<m_wizzardDef.getStepsDefinition().size(); i++) {
-//			out.addStepInfo(new HAPStoryDesignMetadataStepWizard(m_wizzardDef.getStepsDefinition().get(i)));
-//		}
-		
 		return out;
 	}
 	

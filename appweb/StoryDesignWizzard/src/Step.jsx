@@ -27,7 +27,7 @@ export default function Step() {
 
                 Hello Step  {stepDisplayInfo?stepDisplayInfo.name:null}!!!!
 
-                {!isFinishStep ? questionair && (<Questionair questionair={questionair} onChange={onChange}></Questionair>) : (<StepComplete/> )}
+                {!isFinishStep ? questionair && (<Questionair questionair={questionair} onChange={onChange}></Questionair>) : (<StepComplete step={currentStep}/> )}
 
 
             </div>
