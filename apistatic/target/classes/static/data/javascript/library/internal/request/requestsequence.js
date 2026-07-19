@@ -61,6 +61,70 @@ var node_createServiceRequestInfoSequence = function(service, handlers, requeste
 	}
 	
 	
+	var loc_processNextChildrenRequest = function(previousRequest, data){
+		
+		if(_.isFunction(data)){
+			data = data.call(loc_out, loc_out);
+		}
+
+		if(_.isArray(data)==true){
+			//check if this array is data or a array of request
+			var isRequestArray = true;
+			if(data.length==0)  isRequestArray = false;
+			else{
+				for(var i in data){
+					if(node_getObjectType(data[i])!=node_CONSTANT.TYPEDOBJECT_TYPE_REQUEST){
+						isRequestArray = false;
+						break;
+					}
+				}
+			}
+			if(isRequestArray==true){
+				//if data is an array of request
+				loc_addChildRequest(data);
+				data = undefined;
+			}
+		}
+		else{
+			if(node_getObjectType(data)==node_CONSTANT.TYPEDOBJECT_TYPE_REQUEST){
+				//for request
+				loc_addChildRequest(data);
+				data = undefined;
+			}
+		}
+
+		if(loc_out.pri_requestInfos.length<=loc_out.pri_cursor){
+			//not more request in queue
+			loc_out.successFinish(data, loc_out);
+		}
+		else{
+			var requestInfo = loc_out.pri_requestInfos[loc_out.pri_cursor];
+
+    		requestInfo.setParentRequest(loc_out);
+
+	    	//pass the result from previous request to input of current request
+		    if(previousRequest!=undefined)		requestInfo.setInput(previousRequest.getResult().data);
+
+    		node_requestProcessor.processRequest(requestInfo);
+
+    		requestInfo.pri_metaData.pri_promise.then((requestResult)=>{
+				if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_SUCCESS){
+					loc_out.pri_cursor++;
+					loc_processNextChildrenRequest(requestInfo, requestResult.data);
+				}
+				else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_ERROR){
+					loc_out.errorFinish(data, loc_out);
+				}
+				else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_EXCEPTION){
+					loc_out.exceptionFinish(data, loc_out);
+				}
+	    	});
+		}
+		
+	};
+	
+	
+	
 	/*
 	 * process request in sequence according to its index
 	 * data : return value from previous request
@@ -171,7 +235,13 @@ var node_createServiceRequestInfoSequence = function(service, handlers, requeste
 		//retrieve start handler out
 		var startHandlerOut = loc_out.getData(loc_startOutDataName);
 		//start process first request
-		loc_processNextRequestInSequence(undefined, startHandlerOut);
+		
+		if(nosliw.isPromiseSupported()){
+			loc_processNextChildrenRequest(undefined, startHandlerOut);
+		}
+		else{
+			loc_processNextRequestInSequence(undefined, startHandlerOut);
+		}
 	};
 	
 	var loc_out = {

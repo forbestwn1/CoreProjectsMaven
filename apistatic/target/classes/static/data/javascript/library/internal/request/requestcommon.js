@@ -14,6 +14,7 @@ var packageObj = library.getChildPackage("request");
 	var node_ServiceData;
 	var node_requestProcessErrorUtility;
 	var node_RequestResult;
+	var node_ServiceRequestExecuteInfo;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_RequestFinishInfo = function(finishType, data, thisContext){
@@ -82,6 +83,9 @@ var node_createServiceRequestInfoCommon = function(service, handlers, requester_
 			pri_eventObjectIndividual : node_createEventObject(),
 			//function for resume request process
 			pri_resumeProcessor : undefined,
+			pri_promise : undefined,
+			pri_promiseResolve: undefined,
+			pri_promiseReject: undefined
 		};
 		
 		//construct handlers
@@ -167,7 +171,9 @@ var node_createServiceRequestInfoCommon = function(service, handlers, requester_
 	var loc_requestFinish = function(requestFinishInfo){
 		try{
 			loc_finishRequest(requestFinishInfo.finishType, requestFinishInfo.data);
-			return loc_callHandler(requestFinishInfo.finishType, requestFinishInfo.thisContext, requestFinishInfo.data);
+			var out = loc_callHandler(requestFinishInfo.finishType, requestFinishInfo.thisContext, requestFinishInfo.data);
+			if(loc_out.pri_metaData.pri_promiseResolve!=undefined) loc_out.pri_metaData.pri_promiseResolve(new node_RequestResult(requestFinishInfo.finishType, out));
+			return out;
 		}
 		catch(err){
 			nosliw.runtime.getErrorManager().logError(err);
@@ -235,7 +241,19 @@ var node_createServiceRequestInfoCommon = function(service, handlers, requester_
 			 * execute info: provide function to run for this request
 			 */
 			getRequestExecuteInfo : function(){return this.pri_metaData.pri_execute;},
-			setRequestExecuteInfo : function(execute){this.pri_metaData.pri_execute=execute;},
+			setRequestExecuteInfo : function(execute){
+				this.prv_execute = execute;
+				this.pri_metaData.pri_execute=new node_ServiceRequestExecuteInfo(function(request){
+					if(nosliw.isPromiseSupported()){
+						loc_out.pri_metaData.pri_promise = new Promise((resolve, reject)=>{
+							loc_out.pri_metaData.pri_promiseResolve = resolve;
+							loc_out.pri_metaData.pri_promiseReject = reject;
+						});
+					}
+					
+					return loc_out.prv_execute.pri_method.call(loc_out.prv_execute.pri_thisContext, request);
+				}, execute.pri_thisContext);
+		    },
 			
 			/*
 			 * hanlers within metadata is current handlers for request
@@ -417,6 +435,7 @@ nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){nod
 nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
 nosliw.registerSetNodeDataEvent("request.errorUtility", function(){node_requestProcessErrorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.entity.RequestResult", function(){node_RequestResult = this.getData();});
+nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){node_ServiceRequestExecuteInfo = this.getData();});
 
 
 //Register Node by Name

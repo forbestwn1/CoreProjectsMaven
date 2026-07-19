@@ -13,6 +13,7 @@ if(typeof nosliw=="undefined")
 		var loc_configure = {};
 		
 		var loc_out = {
+			
 			getPackage : function(packageName){
 				return createPackage(packageName);
 			},
@@ -84,7 +85,12 @@ if(typeof nosliw=="undefined")
 				var out = loc_configure[name];
 				if(out==undefined)  out = defaultValue;
 				return out;
+			},
+			
+			isPromiseSupported : function(){
+				return typeof Promise !== 'undefined' && typeof Promise === 'function';
 			}
+			
 		};
 		
 		var createPackage = function(path){
