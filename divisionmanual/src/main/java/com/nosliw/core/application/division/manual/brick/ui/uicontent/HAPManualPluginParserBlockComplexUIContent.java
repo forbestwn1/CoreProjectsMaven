@@ -127,6 +127,22 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		}
 	}
 
+	//parse style 
+	private void parseStyle(Element ele, HAPIdEntityInDomain uiContentId, String uiId, HAPContextParser parserContext) {
+		HAPDefinitionEntityComplexUIContent uiContent = this.getUIContentEntityById(uiContentId, parserContext);
+		HAPDefinitionStyle style = new HAPDefinitionStyle(uiId);
+		List<TextNode> textNodes = ele.textNodes();
+		for(TextNode textNode : textNodes){
+			String text = textNode.text();
+			style.setTask(text);
+			break;
+		}
+		ele.remove();
+		uiContent.setStyle(style);
+	}
+
+
+	
 	/*
 	 * process key attribute within element 
 	 * key attribute means attribute that have predefined meaning within ui resource
@@ -374,20 +390,6 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		}
 	}
 	
-	//parse style 
-	private void parseStyle(Element ele, HAPIdEntityInDomain uiContentId, String uiId, HAPContextParser parserContext) {
-		HAPDefinitionEntityComplexUIContent uiContent = this.getUIContentEntityById(uiContentId, parserContext);
-		HAPDefinitionStyle style = new HAPDefinitionStyle(uiId);
-		List<TextNode> textNodes = ele.textNodes();
-		for(TextNode textNode : textNodes){
-			String text = textNode.text();
-			style.setTask(text);
-			break;
-		}
-		ele.remove();
-		uiContent.setStyle(style);
-	}
-
 	private HAPDefinitionEntityComplexUIContent getUIContentEntityById(HAPIdEntityInDomain entityId, HAPContextParser parserContext) {
 		return (HAPDefinitionEntityComplexUIContent)parserContext.getGlobalDomain().getEntityInfoDefinition(entityId).getEntity();
 	}

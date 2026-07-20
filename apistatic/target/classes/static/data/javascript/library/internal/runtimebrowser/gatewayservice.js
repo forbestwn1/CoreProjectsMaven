@@ -145,6 +145,7 @@ var node_createGatewayService = function(){
 					out = gatewayOut;
 				}
 			});
+			
 			return out;
 		}
 	});

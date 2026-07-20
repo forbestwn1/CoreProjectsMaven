@@ -126,14 +126,14 @@ var node_createServiceRequestInfoSequence = function(service, handlers, requeste
 			}
 			else{
 				requestInfo.addPostProcessor({
-					success : function(requestInfo, out){
+					success : function(request, out){
 						loc_out.pri_cursor++;
-						loc_processNextRequestInSequence(requestInfo, out);
+						loc_processNextChildrenRequest(requestInfo, out);
 					},
-					error : function(requestInfo, serviceData){
+					error : function(request, serviceData){
 						loc_out.errorFinish(serviceData, loc_out);
 					},
-					exception : function(requestInfo, serviceData){
+					exception : function(request, serviceData){
 						loc_out.exceptionFinish(serviceData, loc_out);
 					},
 				});

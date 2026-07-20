@@ -12,6 +12,9 @@ import com.nosliw.core.application.common.task.HAPWithBrickTasks;
 public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 
 	@HAPAttribute
+	static final public String STYLE = "style";
+
+	@HAPAttribute
 	static final public String HTML = "html";
 
 	@HAPAttribute
@@ -29,6 +32,7 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	@HAPAttribute
 	static final public String SCRIPTEXPRESSIONS = "scriptExpressions";
 
+	
 
 	String getHtml();
 	
