@@ -7,7 +7,7 @@ var packageObj = library;
 	var node_COMMONCONSTANT;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_utility = function(){
+var node_errorUtility = function(){
 	var loc_out = {
 		
 			isSuccess : function(serviceData){
@@ -69,6 +69,6 @@ nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = 
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("errorUtility", node_utility); 
+packageObj.createChildNode("errorUtility", node_errorUtility); 
 
 })(packageObj);
