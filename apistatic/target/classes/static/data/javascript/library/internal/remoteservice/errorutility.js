@@ -10,7 +10,7 @@ var node_ServiceData;
 /**
  * 
  */
-var node_errorUtility = function(){
+var node_remoteServiceErrorUtility = function(){
 	return {
 		/*
 		 * exception service data for suspended reason
@@ -47,6 +47,6 @@ nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMO
 nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("errorUtility", node_errorUtility); 
+packageObj.createChildNode("remoteServiceErrorUtility", node_remoteServiceErrorUtility); 
 
 })(packageObj);

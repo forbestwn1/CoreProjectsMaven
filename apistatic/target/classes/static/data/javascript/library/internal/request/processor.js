@@ -390,7 +390,7 @@ var node_createRequestServiceProcessor = function(){
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
-nosliw.registerSetNodeDataEvent("request.errorUtility", function(){node_requestProcessErrorUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("request.requestProcessErrorUtility", function(){node_requestProcessErrorUtility = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createRequestServiceProcessor", node_createRequestServiceProcessor); 

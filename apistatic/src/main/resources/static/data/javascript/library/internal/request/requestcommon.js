@@ -433,7 +433,7 @@ nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_b
 nosliw.registerSetNodeDataEvent("error.utility", function(){node_errorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
-nosliw.registerSetNodeDataEvent("request.errorUtility", function(){node_requestProcessErrorUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("request.requestProcessErrorUtility", function(){node_requestProcessErrorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.entity.RequestResult", function(){node_RequestResult = this.getData();});
 nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){node_ServiceRequestExecuteInfo = this.getData();});
 

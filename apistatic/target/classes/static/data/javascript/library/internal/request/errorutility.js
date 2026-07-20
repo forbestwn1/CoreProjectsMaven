@@ -10,7 +10,7 @@ var node_ServiceData;
 /**
  * 
  */
-var node_errorUtility = function(){
+var node_requestProcessErrorUtility = function(){
 	return {
 		/*
 		 * error service data for request process
@@ -43,6 +43,6 @@ nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMO
 nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("errorUtility", node_errorUtility); 
+packageObj.createChildNode("requestProcessErrorUtility", node_requestProcessErrorUtility); 
 
 })(packageObj);
