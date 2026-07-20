@@ -1,14 +1,13 @@
-package com.nosliw.core.application.division.story.design.wizzard.datasourcedrive;
+package com.nosliw.core.application.division.story.design;
 
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.division.story.definition.element.ui.HAPStoryElementUIContentHtml;
-import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItemElementNew;
 
-public class HAPStoryWizzardUtility {
+public class HAPStoryDesignUtilityUI {
 
 	public static HAPStoryChangeItemElementNew newUIContentHtmlFromFile(HAPStoryDesignSessionChange changeSession, String fileName) {
-		String content = HAPUtilityFile.readFile(HAPStoryWizzardUtility.class, fileName);
+		String content = HAPUtilityFile.readFile(HAPStoryDesignUtilityUI.class, fileName);
 		HAPStoryElementUIContentHtml htmlContentElement = new HAPStoryElementUIContentHtml(content);
 		return changeSession.addChangeItemNew(htmlContentElement);
 	}
