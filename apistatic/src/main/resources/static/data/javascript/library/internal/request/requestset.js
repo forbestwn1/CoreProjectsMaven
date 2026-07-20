@@ -24,7 +24,51 @@ var node_createServiceRequestInfoSet = function(service, handlers, requester_par
 		//request results (only exception)
 		loc_out.pri_requestResults = loc_reateRequestSetResult();
 	};
-	
+
+	var loc_processWithPromose = function(requestInfo){
+		
+		//if no child request, 
+		if(loc_out.pri_requestSum==0){
+			loc_out.successFinish(loc_out.pri_requestResults, loc_out);
+			return;
+		}
+		
+		_.each(loc_out.pri_requests, function(childRequestInfo, name, list){
+			node_requestProcessor.processRequest(childRequestInfo);
+		}, this);
+		
+
+		var setPromise = [];
+		_.each(loc_out.pri_requests, function(childRequestInfo, name, list){
+			setPromise.push(childRequestInfo.pri_metaData.pri_promise.then((childRequestResult)=>{
+				return {
+					"name" : name,
+					"result" : childRequestResult
+				}
+			}));
+		});
+		
+		Promise.allSettled(setPromise).then((allResults) =>{
+			for(var i in allResults){
+				var result = allResults[i].value;
+				var requestResult = result.result;
+				if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_SUCCESS){
+					loc_out.pri_requestResults.addResult(result.name, requestResult.data);
+				}
+				else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_ERROR){
+					loc_out.errorFinish(requestResult.data, loc_out);
+					return;
+				}
+				else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_EXCEPTION){
+					loc_out.exceptionFinish(requestResult.data, loc_out);
+					return;
+				}
+			}	
+			loc_out.successFinish(loc_out.pri_requestResults, loc_out);
+		  }
+		);		
+	};
+		
 	/*
 	 * exectue function 
 	 */
@@ -117,8 +161,13 @@ var node_createServiceRequestInfoSet = function(service, handlers, requester_par
 	//request type
 	loc_out.setType(node_CONSTANT.REQUEST_TYPE_SET);
 	
-	loc_out.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(loc_process, this));
-	
+	if(nosliw.isPromiseSupported()){
+    	loc_out.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(loc_processWithPromose, this));
+	}
+	else{
+		loc_out.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(loc_process, this));
+	}
+
 	return loc_out;
 };
 
