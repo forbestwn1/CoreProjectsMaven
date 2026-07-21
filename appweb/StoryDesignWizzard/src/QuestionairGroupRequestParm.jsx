@@ -49,7 +49,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
         <span>{loc_requestParmName}</span>
         <span className="request-parm-state-group">
           <span className={`request-parm-state-icon ${loc_isConstant ? 'is-constant' : 'is-input'}`} title={stateTitle} aria-label={stateTitle}>{stateIcon}</span>
-          <span className="toggle-icon">{collapsed ? '+' : '-'}</span>
+          <span className="toggle-icon">{collapsed ? '⌄' : '⌃'}</span>
         </span>
       </button>
 

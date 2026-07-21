@@ -92,4 +92,7 @@
   background: #e5e7eb;
   color: #1f2937;
   font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+  text-align: center;
 }

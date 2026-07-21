@@ -41,7 +41,7 @@ export default function QuestionairGroupResponseData({ questionair, onChange }) 
             <span className={`response-data-visibility-icon ${isShow ? 'is-visible' : 'is-hidden'}`} title={isShow ? 'visible' : 'hidden'}>
               {isShow ? '👁' : '🙈'}
             </span>
-            <span className="toggle-icon">{collapsed ? '+' : '-'}</span>
+            <span className="toggle-icon">{collapsed ? '⌄' : '⌃'}</span>
           </span>
         </button>
       </div>
