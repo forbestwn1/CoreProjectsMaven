@@ -6,8 +6,8 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryChangeIt
 
 public class HAPStoryDesignUtilityUI {
 
-	public static HAPStoryChangeItemElementNew newUIContentHtmlFromFile(HAPStoryDesignSessionChange changeSession, String fileName) {
-		String content = HAPUtilityFile.readFile(HAPStoryDesignUtilityUI.class, fileName);
+	public static HAPStoryChangeItemElementNew newUIContentHtmlFromFile(HAPStoryDesignSessionChange changeSession, String fileName, Class className) {
+		String content = HAPUtilityFile.readFile(className, fileName);
 		HAPStoryElementUIContentHtml htmlContentElement = new HAPStoryElementUIContentHtml(content);
 		return changeSession.addChangeItemNew(htmlContentElement);
 	}

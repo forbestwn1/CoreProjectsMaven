@@ -22,23 +22,33 @@ public class HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStati
 	@HAPAttribute
 	public static final String DATATYPECRITERIA = "dataTypeCriteria";
 	
+	@HAPAttribute
+	public static final String DATANAME = "dataName";
+	
 	private HAPDataTypeCriteria m_dataTypeCriteria;
+	
+	private String m_dataName;
 
 	public HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO);
 	}
 	
-	public HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic(HAPDataTypeCriteria dataTypeCriteria) {
+	public HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic(HAPDataTypeCriteria dataTypeCriteria, String dataName) {
 		this();
 		this.m_dataTypeCriteria = dataTypeCriteria;
+		this.m_dataName = dataName;
 	}
 	
 	public void setDataTypeCriteria(HAPDataTypeCriteria dataTypeCriteria) {     this.m_dataTypeCriteria = dataTypeCriteria;       }
+	
+	public String getDataName() {      return this.m_dataName;      }
+	public void setDataName(String dataName) {     this.m_dataName = dataName;      }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(DATATYPECRITERIA, this.m_dataTypeCriteria.toStringValue(HAPSerializationFormat.LITERATE));
+		jsonMap.put(DATANAME, this.m_dataName);
 	}
 
 }
@@ -59,6 +69,8 @@ class HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic_HAPEn
 		if(dataCriteriaDefObj!=null) {
 			out.setDataTypeCriteria(HAPParserCriteriaImp.getInstance().parseCriteria(dataCriteriaDefObj));
 		}
+		
+		out.setDataName((String)jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic.DATANAME));
 		
 		return out;
 	}

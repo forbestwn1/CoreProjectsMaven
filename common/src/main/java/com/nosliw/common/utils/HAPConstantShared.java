@@ -903,6 +903,7 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDREN = "dataSourceResponseDataChildren";
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO = "dataSourceResponseDataChildInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_ENTITYINFO = "entityInfo";
+		public static final String STORYDESIGN_QUESTION_TAG_DATAINFO = "dataInfo";
 
 
 

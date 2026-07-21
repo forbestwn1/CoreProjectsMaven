@@ -81,7 +81,8 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 		//group for response
 		HAPStoryWizzardQuestionairGroup serviceResponseGroupQ = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEGROUP);
 		
-		for(HAPDefinitionParmResponse responseParm : dataSourceInterface.getResult(HAPConstantShared.SERVICE_RESULT_SUCCESS).getOutput()) {
+		List<HAPDefinitionParmResponse> outputs = dataSourceInterface.getResult(HAPConstantShared.SERVICE_RESULT_SUCCESS).getOutput();
+		for(HAPDefinitionParmResponse responseParm : outputs) {
 			HAPDataTypeCriteria dataTypeCriteria = responseParm.getDataDefinition().getCriteria();
 		
 			//group for parm
@@ -96,7 +97,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			parmGroupQ.addItem(parmDynamicGroupQ);
 
 			//group for response data
-			HAPStoryWizzardQuestionairGroup parmDataGroupQ = prepareQuestionairForResponseData(dataTypeCriteria, responseParm.getName(), uiTagMan, dataTypeHelper, dataTypeMan);
+			HAPStoryWizzardQuestionairGroup parmDataGroupQ = prepareQuestionairForResponseData(outputs.size()>1, dataTypeCriteria, responseParm, responseParm.getName(), uiTagMan, dataTypeHelper, dataTypeMan);
 			parmGroupQ.addItem(parmDataGroupQ);
 			
 			serviceResponseGroupQ.addItem(parmGroupQ);
@@ -107,23 +108,23 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 		return out;
 	}
 	
-	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(HAPDataTypeCriteria dataTypeCriteria, String dataVariableName, HAPManagerUITag uiTagMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(boolean hiddenable, HAPDataTypeCriteria dataTypeCriteria, HAPEntityInfo dataEntityInfo, String dataVariableName, HAPManagerUITag uiTagMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		//data type criter group
 		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA);
 
 		//data static info
-		HAPStoryWizzardQuestionairItemStatic dataCriteriaInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic(dataTypeCriteria));
+		HAPStoryWizzardQuestionairItemStatic dataCriteriaInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic(dataTypeCriteria, dataVariableName), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATAINFO);
 		out.addItem(dataCriteriaInfoStaticQ);
 
 		//child info (name)
-		HAPEntityInfo dataEntityInfo = new HAPEntityInfoImp();
-		dataEntityInfo.setName(dataVariableName);
 		HAPStoryWizzardQuestionairItemStatic dataEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(dataEntityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_ENTITYINFO);
 		out.addItem(dataEntityInfoStaticQ);
 		
-		//dyanmic of is show 
-		HAPStoryWizzardQuestionairItemDynamic dataIsShowQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceResponseParmChooseIsShowDynamic(true), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAISSHOW);
-		out.addItem(dataIsShowQ);
+		if(hiddenable) {
+			//dyanmic of is show 
+			HAPStoryWizzardQuestionairItemDynamic dataIsShowQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceResponseParmChooseIsShowDynamic(true), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAISSHOW);
+			out.addItem(dataIsShowQ);
+		}
 		
 		//dynamic of uitag
 		HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
@@ -148,36 +149,27 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			
 			if(dataTypeId.getFullName().contains("array")){
 				//child group
-				HAPStoryWizzardQuestionairGroup childGroupQ = new HAPStoryWizzardQuestionairGroup();
 
 				//child info (name)
 				HAPEntityInfo entityInfo = new HAPEntityInfoImp();
 				entityInfo.setName(HAPConstantShared.NAME_DEFAULT);
-				HAPStoryWizzardQuestionairItemStatic childEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(entityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO);
-				childGroupQ.addItem(childEntityInfoStaticQ);
+//				HAPStoryWizzardQuestionairItemStatic childEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(entityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO);
 				
 				//child data criteria
-				childGroupQ.addItem(prepareQuestionairForResponseData(HAPUtilityCriteria.getElementCriteria(dataTypeCriteria), "element", uiTagMan, dataTypeHelper, dataTypeMan));
-				
-				childrenGroupQ.addItem(childGroupQ);
+				childrenGroupQ.addItem(prepareQuestionairForResponseData(false, HAPUtilityCriteria.getElementCriteria(dataTypeCriteria), entityInfo, "element", uiTagMan, dataTypeHelper, dataTypeMan));
 			}
 			else if(dataTypeId.getFullName().contains("map")){
 				//map
 				List<String> names = HAPUtilityCriteria.getCriteriaChildrenNames(dataTypeCriteria);
 				for(String name : names) {
 					//child group
-					HAPStoryWizzardQuestionairGroup childGroupQ = new HAPStoryWizzardQuestionairGroup();
 					
 					//child info (name)
 					HAPEntityInfo entityInfo = new HAPEntityInfoImp();
 					entityInfo.setName(name);
-					HAPStoryWizzardQuestionairItemStatic childEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(entityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO);
-					childGroupQ.addItem(childEntityInfoStaticQ);
 
 					//child data criteria
-					childGroupQ.addItem(prepareQuestionairForResponseData(HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), dataVariableName+"."+name, uiTagMan, dataTypeHelper, dataTypeMan));
-					
-					childrenGroupQ.addItem(childGroupQ);
+					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, dataVariableName+"."+name, uiTagMan, dataTypeHelper, dataTypeMan));
 				}
 			}
 		}

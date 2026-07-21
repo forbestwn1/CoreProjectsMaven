@@ -11,7 +11,6 @@ export default function QuestionairGroupResponseParm({ questionair, onChange }) 
 
   return (
     <div className="questionnaire-group">
-        response data questionair!!!! 
 
         <QuestionairGroupResponseData questionair={dataQ} onChange={onChange} />
 
