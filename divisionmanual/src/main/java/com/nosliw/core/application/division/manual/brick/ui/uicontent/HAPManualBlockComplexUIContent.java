@@ -3,6 +3,8 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.nosliw.core.application.brick.container.HAPBrickContainer;
+import com.nosliw.core.application.brick.container.HAPBrickContainerList;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
@@ -30,6 +32,9 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 	public void setHtml(String html) {    this.setAttributeValueWithValue(HTML, html);      }
 
 	@Override
+	public HAPBrickContainerList getCustomerTags() {    return (HAPBrickContainerList)this.getAttributeValueOfBrickLocal(CUSTOMERTAG);   }
+	
+	@Override
 	public List<HAPUIEmbededScriptExpressionInContent> getScriptExpressionInContent() {    return (List<HAPUIEmbededScriptExpressionInContent>)this.getAttributeValueOfValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCONTENT);  }
 
 	@Override
@@ -45,5 +50,10 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 	public List<HAPUIEventHandlerInfoNormal> getNormalTagEvents(){    return (List<HAPUIEventHandlerInfoNormal>)this.getAttributeValueOfValue(HAPBlockComplexUIContent.NORMALTAGEVENT);       }
 	public void addNormalTagEvent(HAPUIEventHandlerInfoNormal event) {    this.getNormalTagEvents().add(event);     }
 
+	@Override
+	public HAPBrickContainer getTasks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

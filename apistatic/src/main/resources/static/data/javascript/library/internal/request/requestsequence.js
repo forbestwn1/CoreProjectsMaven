@@ -117,10 +117,10 @@ var node_createServiceRequestInfoSequence = function(service, handlers, requeste
 						loc_processNextChildrenRequest(requestInfo, requestResult.data);
 					}
 					else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_ERROR){
-						loc_out.errorFinish(data, loc_out);
+						loc_out.errorFinish(requestResult.data, loc_out);
 					}
 					else if(requestResult.type == node_CONSTANT.REQUEST_FINISHTYPE_EXCEPTION){
-						loc_out.exceptionFinish(data, loc_out);
+						loc_out.exceptionFinish(requestResult.data, loc_out);
 					}
 				});
 			}

@@ -3,8 +3,10 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
+import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
@@ -50,6 +52,10 @@ public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implem
 	public Map<String, HAPUITagDefinitionAttribute> getAttributeDefinitions(){   return (Map<String, HAPUITagDefinitionAttribute>)this.getAttributeValueOfValue(HAPBlockComplexUICustomerTag.ATTRIBUTEDEFINITION);      }
 	public void addAttributeDefinition(HAPUITagDefinitionAttribute attrDef) {    this.getAttributeDefinitions().put(attrDef.getName(), attrDef);     }
 
-	
-	
+	@Override
+	public HAPBlockComplexUIContent getUIContent() {    return (HAPBlockComplexUIContent)this.getAttributeValueOfBrickLocal(UICONTENT);   }
+
+	@Override
+	public HAPUIStyle getStyle() {      return (HAPUIStyle)this.getAttributeValueOfValue(STYLE);   }
+
 }

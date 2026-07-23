@@ -25,16 +25,14 @@ import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualUtilityValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttributeVariable;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
 
-public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualDefinitionPluginParserBrickImpComplex{
+public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPluginParserBlockComplexWithUIContent{
 
 	private HAPManagerUITag m_uiTagMan;
 	
@@ -44,10 +42,9 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualDef
 	}
 
 	@Override
-	protected void parseDefinitionContentHtml(HAPManualDefinitionBrick brickManualDef, Object obj, HAPManualDefinitionContextParse parseContext) {
-		HAPManualDefinitionBlockComplexUICustomerTag uiCustomerTag = (HAPManualDefinitionBlockComplexUICustomerTag)brickManualDef;
+	protected void parseDefinitionContentElement(HAPManualDefinitionBlockComplxWithUIContent uiWithContent, Element ele, HAPManualDefinitionContextParse parseContext) {
+		HAPManualDefinitionBlockComplexUICustomerTag uiCustomerTag = (HAPManualDefinitionBlockComplexUICustomerTag)uiWithContent;
 		
-		Element ele = (Element)obj;
 		String customTagName = HAPUtilityUIResourceParser.isCustomTag(ele);
 		uiCustomerTag.setTagId(customTagName);
 

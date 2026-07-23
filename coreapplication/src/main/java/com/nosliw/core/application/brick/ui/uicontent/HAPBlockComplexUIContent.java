@@ -5,6 +5,7 @@ import java.util.List;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.container.HAPBrickContainerList;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.common.task.HAPWithBrickTasks;
 
@@ -12,11 +13,11 @@ import com.nosliw.core.application.common.task.HAPWithBrickTasks;
 public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 
 	@HAPAttribute
-	static final public String STYLE = "style";
-
-	@HAPAttribute
 	static final public String HTML = "html";
 
+	@HAPAttribute
+	static final public String CUSTOMERTAG = "customerTag";  
+	
 	@HAPAttribute
 	static final public String SCRIPTEXPRESSIONINCONTENT = "scriptExpressionInContent";
 
@@ -32,9 +33,9 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	@HAPAttribute
 	static final public String SCRIPTEXPRESSIONS = "scriptExpressions";
 
-	
-
 	String getHtml();
+	
+	HAPBrickContainerList getCustomerTags();
 	
 	List<HAPUIEmbededScriptExpressionInContent> getScriptExpressionInContent();
 	
@@ -47,8 +48,6 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	List<HAPUIEventHandlerInfoNormal> getNormalTagEvents();
 	
 	
-	@HAPAttribute
-	static final public String CUSTOMERTAG = "customerTag";  
 	
 	
 	@HAPAttribute

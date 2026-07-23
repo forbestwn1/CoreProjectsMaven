@@ -41,11 +41,31 @@ var loc_createUIPageComponentCore = function(complexEntityDef, valueContextId, b
 	var loc_bundleCore = bundleCore;
 	var loc_envInterface = {};
 	
+	var loc_styleScript;
+	
 	var loc_uiContent;
 
+	var loc_getStyleScript = function(){
+		var styleScript = loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUIPAGE_STYLESCRIPT);
+		if(styleScript!=undefined){
+			return _.unescape(styleScript);
+		}
+	};
+
+	var loc_attachStyle = function(){
+	//				var sheet = document.createElement('style')
+	//				sheet.id = id;
+	//				sheet.innerHTML = _.unescape(defScript);
+	//				document.style.appendChild(sheet);
+					
+					$('<style>').text(loc_styleScript).appendTo(document.head);
+	};
+	
 	var loc_out = {
 		
 		getEntityInitRequest : function(handlers, request){
+			loc_styleScript = loc_getStyleScript();
+			
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(loc_envInterface[node_CONSTANT.INTERFACE_ENTITY].createBrickAttributeRequest(node_COMMONATRIBUTECONSTANT.WITHUICONTENT_UICONTENT, undefined, {
 				success : function(request, childNode){
@@ -57,6 +77,7 @@ var loc_createUIPageComponentCore = function(complexEntityDef, valueContextId, b
 		},
 
 		updateView : function(view){
+			loc_attachStyle();
 			return node_getComponentInterface(loc_uiContent).updateView(view);
 		},
 		

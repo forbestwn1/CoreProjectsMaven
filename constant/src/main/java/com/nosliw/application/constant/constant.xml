@@ -404,6 +404,7 @@
 			<definition type="space"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_CONTEXT" value="context"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_UIID" value="nosliwid"/>
+			<definition name="UIRESOURCE_ATTRIBUTE_STYLEID" value="nosliwstyleid"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_STATICID" value="nosliwstaticid"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_GROUP" value="group"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_GROUP_DATAVALIDATION" value="valueValidation"/>

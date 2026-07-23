@@ -3,8 +3,6 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import java.util.List;
 
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
@@ -15,11 +13,10 @@ import com.nosliw.core.application.division.manual.common.valuecontext.HAPManual
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
-public class HAPManualPluginParserBlockComplexUIPage extends HAPManualDefinitionPluginParserBrickImpComplex{
+public class HAPManualPluginParserBlockComplexUIPage extends HAPManualPluginParserBlockComplexWithUIContent{
 
 	private HAPServiceParseEntity m_entityParseService;
 	
@@ -29,27 +26,16 @@ public class HAPManualPluginParserBlockComplexUIPage extends HAPManualDefinition
 	}
 
 	@Override
-	protected void parseDefinitionContentHtml(HAPManualDefinitionBrick brickManualDef, Object obj, HAPManualDefinitionContextParse parseContext) {
-		HAPManualDefinitionBlockComplexUIPage uiPage = (HAPManualDefinitionBlockComplexUIPage)brickManualDef;
-		
-		String content = (String)obj;
-		try{ 
-			Document doc = Jsoup.parse(content, "UTF-8");
-
-			List<Element> pageEles = HAPUtilityUIResourceParser.getChildElementsByTag(doc.body(), "page");
-			if(!pageEles.isEmpty()) {
-				this.parseValueContext(pageEles.get(0), brickManualDef, parseContext, m_entityParseService);
-			}
-			
-			this.parseBrickAttributeHtml(uiPage, doc.body(), HAPWithUIContent.UICONTENT, HAPEnumBrickType.UICONTENT_100, null, parseContext);
-			
-		}
-		catch(Exception e){
-			e.printStackTrace();
+	protected void parseDefinitionContentElement(HAPManualDefinitionBlockComplxWithUIContent uiWithContent, Element element, HAPManualDefinitionContextParse parseContext) {
+		HAPManualDefinitionBlockComplexUIPage uiPage = (HAPManualDefinitionBlockComplexUIPage)uiWithContent;
+		List<Element> pageEles = HAPUtilityUIResourceParser.getChildElementsByTag(element, "page");
+		if(!pageEles.isEmpty()) {
+			this.parseValueContext(pageEles.get(0), uiPage, parseContext, m_entityParseService);
 		}
 		
+		this.parseBrickAttributeHtml(uiPage, element, HAPWithUIContent.UICONTENT, HAPEnumBrickType.UICONTENT_100, null, parseContext);
 	}
-	
+
 	private void parseValueContext(Element ele, HAPManualDefinitionBrick brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
 		List<Element> valueContextEles = HAPUtilityUIResourceParser.getChildElementsByTag(ele, HAPWithValueContext.VALUECONTEXT);
 		for(Element valueContextEle : valueContextEles){

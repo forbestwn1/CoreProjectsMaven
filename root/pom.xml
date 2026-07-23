@@ -16,6 +16,12 @@
   <dependencies>
 
     <dependency>
+       <groupId>net.sourceforge.cssparser</groupId>
+       <artifactId>cssparser</artifactId>
+       <version>0.9.29</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>

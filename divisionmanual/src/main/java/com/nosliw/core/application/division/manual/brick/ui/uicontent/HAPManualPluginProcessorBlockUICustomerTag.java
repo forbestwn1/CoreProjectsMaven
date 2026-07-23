@@ -9,6 +9,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
+import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventReferenceHandler;
 import com.nosliw.core.application.common.event.HAPEventReferenceHandlerTask;
@@ -31,6 +32,8 @@ public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginP
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUICustomerTag uiCustomerTagDef = (HAPManualDefinitionBlockComplexUICustomerTag)blockPair.getLeft();
 		HAPManualBlockComplexUICustomerTag uiCustomerTagExe = (HAPManualBlockComplexUICustomerTag)blockPair.getRight();
+
+		uiCustomerTagExe.setAttributeValueWithValue(HAPWithUIContent.STYLE, uiCustomerTagDef.getStyle());
 
 		uiCustomerTagExe.setUITagDefinition(uiCustomerTagDef.getUITagDefinition());
 		

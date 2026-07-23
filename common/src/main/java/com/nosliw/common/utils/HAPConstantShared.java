@@ -290,6 +290,7 @@ public class HAPConstantShared {
 
 		public static final String UIRESOURCE_ATTRIBUTE_CONTEXT = "context";
 		public static final String UIRESOURCE_ATTRIBUTE_UIID = "nosliwid";
+		public static final String UIRESOURCE_ATTRIBUTE_STYLEID = "nosliwstyleid";
 		public static final String UIRESOURCE_ATTRIBUTE_STATICID = "nosliwstaticid";
 		public static final String UIRESOURCE_ATTRIBUTE_GROUP = "group";
 		public static final String UIRESOURCE_ATTRIBUTE_GROUP_DATAVALIDATION = "valueValidation";
