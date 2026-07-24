@@ -283,7 +283,9 @@ var node_CONSTANT=
 	  "CONFIGURE_VALUE_SYNCOUT_MANUAL" : "manual",
 
 	  "EVENT_UIMODULE_UI_VALUE_CHANGE" : "uimodule_ui_value_change",
-	  
+
+	  "EVENT_UI_VALUE_CHANGE" : "ui_value_change",
+	  	  
 	  "LOGGING_MODE_ALL" : "all",
 	  "LOGGING_MODE_NONE" : "none",
 	  "LOGGING_MODE_DEPEND" : "depend",

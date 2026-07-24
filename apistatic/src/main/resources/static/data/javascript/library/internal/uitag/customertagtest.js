@@ -199,7 +199,7 @@ var node_createUICustomerTagTest = function(envObj){
 					loc_envObj.getDataOperationSet(loc_inputVariableInfos[varName].variable, "", currentData)
 				], {
 					success : function(requet){
-						var kkkk = 5555;
+						loc_envObj.trigueEvent(node_CONSTANT.EVENT_UI_VALUE_CHANGE);
 					},
 					error : function(request, serviceData){
 						loc_envObj.trigueEvent(serviceData.code, serviceData.data);

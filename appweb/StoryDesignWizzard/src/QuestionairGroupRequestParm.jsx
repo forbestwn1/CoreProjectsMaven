@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Questionair from './Questionair'
-import {questionairUtility} from './Utility'
+import { questionairUtility } from './Utility'
 import QuestionairDynamicRequestIsConstant from './QuestionairDynamicRequestIsConstant'
 import QuestionairDynamicRequestConstantValue from './QuestionairDynamicRequestConstantValue'
 import QuestionairDynamicRequestInputTag from './QuestionairDynamicRequestInputTag'
@@ -10,9 +10,9 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   const [update, setUpdate] = useState(false);
   const [collapsed, setCollapsed] = useState(true);
 
-	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
-  
+  var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+  var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+
   var questionairIsConstant = questionairUtility.getChildQuestionairByValueType(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMISCONSTANT);
   var questionairConstantValue = questionairUtility.getChildQuestionairByValueType(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
   var questionairInputTag = questionairUtility.getChildQuestionairByValueType(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMUITAG);
@@ -23,16 +23,16 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
   var loc_dataDefinition = loc_requestParmDef[node_COMMONATRIBUTECONSTANT.DEFINITIONPARMREQUEST_DATADEFINITION];
   var loc_isConstant = questionairUtility.getValueFromQuestionairItem(questionairIsConstant)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSEISCONSTANTDYNAMIC_ISCONSTANT];
 
-  var loc_onChangeIsConstant = function(){
+  var loc_onChangeIsConstant = function () {
     setUpdate(!update);
     onChange();
   };
-  var loc_getQuestionairComponent = function(){
-    if(loc_isConstant){
-      return <QuestionairDynamicRequestConstantValue questionair={questionairConstantValue} datadefinition={loc_dataDefinition} onChange={onChange}/>;
+  var loc_getQuestionairComponent = function () {
+    if (loc_isConstant) {
+      return <QuestionairDynamicRequestConstantValue questionair={questionairConstantValue} datadefinition={loc_dataDefinition} onChange={onChange} />;
     }
-    else{
-      return <QuestionairDynamicRequestInputTag questionair={questionairInputTag}/>;
+    else {
+      return <QuestionairDynamicRequestInputTag questionair={questionairInputTag} />;
     }
   };
 
@@ -54,8 +54,12 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
       </button>
 
       <div className={`request-parm-content ${collapsed ? 'collapsed' : ''}`}>
-        <QuestionairDynamicRequestIsConstant questionair={questionairIsConstant} onChange={loc_onChangeIsConstant} />
-        {loc_getQuestionairComponent()}
+        <div className="is-constant-selection">
+          <QuestionairDynamicRequestIsConstant questionair={questionairIsConstant} onChange={loc_onChangeIsConstant} />
+        </div>
+        <div className="choose-constant">
+          {loc_isConstant ? (<QuestionairDynamicRequestConstantValue questionair={questionairConstantValue} datadefinition={loc_dataDefinition} onChange={onChange} />) : (<QuestionairDynamicRequestInputTag questionair={questionairInputTag} />)}
+        </div>
       </div>
     </div>
   );

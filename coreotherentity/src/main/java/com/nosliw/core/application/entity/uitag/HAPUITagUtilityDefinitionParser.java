@@ -83,12 +83,12 @@ public class HAPUITagUtilityDefinitionParser {
 		
 		//parse value context
 		HAPValueContextDefinition valueContext = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContext, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXT), entityParseService);
+		parseValueContext(valueContext, jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXT), entityParseService);
 		out.setValueContext(valueContext);
 
 		//parse value context embeded
 		HAPValueContextDefinition valueContextEmbeded = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContextEmbeded, jsonObj.getJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), entityParseService);
+		parseValueContext(valueContextEmbeded, jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), entityParseService);
 		out.setValueContextEmbeded(valueContextEmbeded);
 
 		//attribute

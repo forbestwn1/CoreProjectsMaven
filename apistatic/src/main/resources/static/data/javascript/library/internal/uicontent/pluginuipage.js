@@ -45,6 +45,8 @@ var loc_createUIPageComponentCore = function(complexEntityDef, valueContextId, b
 	
 	var loc_uiContent;
 
+	var loc_wrapperView = $("<div></div>");
+	
 	var loc_getStyleScript = function(){
 		var styleScript = loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUIPAGE_STYLESCRIPT);
 		if(styleScript!=undefined){
@@ -78,7 +80,10 @@ var loc_createUIPageComponentCore = function(complexEntityDef, valueContextId, b
 
 		updateView : function(view){
 			loc_attachStyle();
-			return node_getComponentInterface(loc_uiContent).updateView(view);
+			
+			$(view).append(loc_wrapperView);
+			node_getComponentInterface(loc_uiContent).updateView(loc_wrapperView);
+			return loc_wrapperView;
 		},
 		
 		setEnvironmentInterface : function(envInterface){
