@@ -88,6 +88,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		},
 		
 		onDataChange : function(data){
+/*			
 			if(data==undefined){
 				loc_currentData = data;
 			}
@@ -100,11 +101,19 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 					loc_currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE] = data[node_COMMONATRIBUTECONSTANT.DATA_VALUE]; 
 				}
 			}
-			
+*/	
+					
 			loc_envObj.executeBatchDataOperationRequest([
-				loc_envObj.getDataOperationSet(loc_dataVariable, "", loc_currentData)
-			]);
-//			loc_envObj.trigueEvent("valueChanged", loc_currentData);
+				loc_envObj.getDataOperationSet(loc_dataVariable, "", data)
+			], {
+				success : function(requet){
+					loc_currentData = data;
+					loc_envObj.trigueEvent(node_CONSTANT.EVENT_UI_VALUE_CHANGE, loc_currentData);
+				},
+				error : function(request, serviceData){
+					loc_envObj.trigueEvent(serviceData.code, serviceData.data);
+				}
+			});
 		},
 		
 		trigueEvent : function(eventName, eventData){

@@ -8,7 +8,7 @@
 		"taskInterface" : {
 			"request" : [
 				{
-					"name" : "serviceParm1",
+					"name" : "serviceParmStringMandatory",
 					"dataDefinition" : {
 						"criteria" : "test.string;1.0.0",
 					    "rule" : [
@@ -25,7 +25,7 @@
 					}
 				},
 				{
-					"name" : "serviceParm2",
+					"name" : "serviceParmStringMandatoryWithoutInit",
 					"dataDefinition" : {
 						"criteria" : "test.string;1.0.0",
 					    "rule" : [
@@ -38,7 +38,7 @@
 					}
 				},
 				{
-					"name" : "serviceParm3",
+					"name" : "serviceParmStringEnumWithInit",
 					"dataDefinition" : {
 						"criteria" : "test.string;1.0.0",
 					    "rule" : [
@@ -65,6 +65,25 @@
 						"initData" : {
 							"dataTypeId": "test.string;1.0.0",
 							"value": "serviceParm2_value2"
+						}
+					}
+				},
+				{
+					"name" : "serviceParmFloatWithInit",
+					"dataDefinition" : {
+						"criteria" : "test.float;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "expression",
+	                            "status": "disabled1",
+					            "ruleType" : "expression",
+								"expression":"?(data)?.largerThan(data:&(#test##float___9)&).opposite()",
+								"description" : "value should not larger than 9"
+					        },
+					    ],
+						"initData" : {
+							"dataTypeId": "test.float;1.0.0",
+							"value": 7
 						}
 					}
 				}

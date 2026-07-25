@@ -70,7 +70,7 @@ var node_createUICustomerTagTestString = function(envObj){
 				return loc_dataViewForEnum;
 			}
 			else{
-				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="event from reference customer tag"></input>');
+				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
 
 				loc_dataView.bind('change', function(){
 					var currentData = {

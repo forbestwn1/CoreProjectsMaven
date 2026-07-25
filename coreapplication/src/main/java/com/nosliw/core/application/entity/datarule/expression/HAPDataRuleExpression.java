@@ -67,7 +67,16 @@ class HAPDataRuleExpression_parser extends HAPParserDataRule{
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		JSONObject jsonObj = (JSONObject)obj;
 		HAPDataRuleExpression out = new HAPDataRuleExpression();
-		out.setExpressionDefinition(this.m_dataExpressionParser.parseExpression(jsonObj.getString(HAPDataRuleExpression.EXPRESSION)));
+		
+		HAPDefinitionDataExpression dataExpressionDef = null;
+		Object expressionObj = jsonObj.get(HAPDataRuleExpression.EXPRESSION);
+		if(expressionObj instanceof String) {
+			dataExpressionDef = this.m_dataExpressionParser.parseExpression((String)expressionObj);
+		}
+		else if(expressionObj instanceof JSONObject) {
+			dataExpressionDef = HAPDefinitionDataExpression.buildDataExpressionDefinition((JSONObject)expressionObj, parseService);
+		}
+		out.setExpressionDefinition(dataExpressionDef);
 		return out;
 	}
 

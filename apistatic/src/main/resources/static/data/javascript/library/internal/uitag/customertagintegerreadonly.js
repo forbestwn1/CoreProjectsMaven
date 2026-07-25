@@ -19,67 +19,21 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestError = function(envObj){
+var node_createUICustomerTagTestIntegerReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
-	var loc_containerrView;
-
-	var wrapperView = $("<div></div>");	
-	var eventView = $('<textarea rows="2" cols="150" style="resize: none; border:solid 1px;" data-role="none" placeholder="event from reference customer tag"></textarea>');
-	var errorView = $("<span style='color: red;' ></span>");
-
-    var loc_referencedCustomTags;
-
-    var loc_processReferencedCustomerTag = function(){
-		var query = {
-			elements : []
-		};
-		var queryStr = loc_envObj.getAttributeValue("reference_tag");
-		if(queryStr!=undefined){
-			var parmSegs = node_namingConvensionUtility.parseLevel1(queryStr);
-			_.each(parmSegs, function(parmSeg){
-    			var segs = node_namingConvensionUtility.parsePart(parmSeg);
-				query.elements.push({
-					key : segs[0],
-					value : segs[1]
-				});
-			});
-    		loc_referencedCustomTags = loc_envObj.queryCustomTagInstance(query);
-    		_.each(loc_referencedCustomTags, function(customTag, i){
-				customTag.registerEventListener(undefined, function(event, eventData){
-					eventView.val(node_basicUtility.stringify({
-						event : event,
-						eventData : eventData
-					}));
-
-					var erroeMsg = "";					
-					if(event==node_CONSTANT.ERROR_VALIDATION_VALUE){
-						_.each(eventData, function(item){
-							_.each(item.resultValue, function(r){{
-								erroeMsg = erroeMsg + r.description + "\n";
-							}});
-						});
-						
-						errorView.text(erroeMsg);
-						errorView.show();
-					}
-					else if(event==node_CONSTANT.EVENT_UI_VALUE_CHANGE){
-						errorView.text("");
-						errorView.hide();
-					}
-				});
-			});
-		}
-	};
-
+    var loc_dataView;
+	
 	var loc_out = {
 		
+		updateView : function(currentData){
+			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+			loc_dataView.html(value+"");
+		},
+
 		initViews : function(handlers, request){
-//			wrapperView.append(eventView);
-			wrapperView.append(errorView);
-			errorView.hide();
-            loc_processReferencedCustomerTag();
-			return wrapperView;
+			loc_dataView = $('<div></div>');
+			return loc_dataView;
 		}
 	};
 	
@@ -105,6 +59,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_error", node_createUICustomerTagTestError); 
+packageObj.createChildNode("debug_test_integer_readonly", node_createUICustomerTagTestIntegerReadOnly); 
 
 })(packageObj);

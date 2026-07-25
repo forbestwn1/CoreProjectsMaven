@@ -302,7 +302,8 @@ var node_ruleExecuteUtility = function(){
 											ifSuccess = false;
 											errorInfos.push({
 												resultData: ruleValidationResult.resultValue,
-												ruleName: ruleValidationItem.ruleDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME]
+												ruleName: ruleValidationItem.ruleDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME],
+												description: ruleValidationItem.ruleDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DESCRIPTION]
 											});
 										}
 									});
