@@ -18,6 +18,7 @@ var packageObj = library;
 	var node_uiTagUtility;
 	var node_ruleUtility;
 	var node_getObjectType;
+	var node_enumUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -71,13 +72,13 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		getDataEnumRequest : function(handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			if(loc_enumDatas==null){
-				var dataSet = loc_isDataEnum[node_COMMONATRIBUTECONSTANT.DATARULEENUM_DATASET];
-				if(dataSet!=undefined){
-					loc_enumDatas = dataSet;
-    				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-	    				return loc_enumDatas;
-		    		}));
-				}
+				
+				out.addRequest(node_enumUtility.getEnumDataSetFromEnumRuleRequest(loc_isDataEnum, {
+					success : function(request, dataSet){
+						loc_enumDatas = dataSet;
+						return loc_enumDatas;
+					}
+				}));
 			}
 			else{
 				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
@@ -179,7 +180,7 @@ nosliw.registerSetNodeDataEvent("data.dataRuleUtility", function(){node_dataRule
 nosliw.registerSetNodeDataEvent("uitag.uiTagUtility", function(){node_uiTagUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
-
+nosliw.registerSetNodeDataEvent("enum.enumUtility", function(){node_enumUtility = this.getData();	});
 
 //Register Node by Name
 packageObj.createChildNode("base_simple", node_createUITagOnBaseSimple); 

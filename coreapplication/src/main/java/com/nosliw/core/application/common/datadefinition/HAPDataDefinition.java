@@ -24,6 +24,8 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 	
 	public static final String TYPE = "type";
 	
+	public static final String ISMULTIPLEALLOWED = "isMultipleAllowed";
+	
 	@HAPAttribute
 	public static String CRITERIA = "criteria";
 
@@ -32,8 +34,11 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 	//data type
 	private HAPDataTypeCriteria m_criteria;
 	
+	private boolean m_isMultipleAllowed;
+	
 	public HAPDataDefinition(String type) {
 		this.m_type = type;
+		this.m_isMultipleAllowed = false;
 	}
 
 	public HAPDataDefinition(String type, HAPDataTypeCriteria criteria) {
@@ -45,6 +50,9 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 	
 	public HAPDataTypeCriteria getCriteria() {   return this.m_criteria; }
 	public void setCriteria(HAPDataTypeCriteria criteria) {    this.m_criteria = criteria;     }
+	
+	public boolean getIsMultipleAllowed() {    return this.m_isMultipleAllowed;   }
+	public void setIsMultipleAllowed(boolean allowed) {     this.m_isMultipleAllowed = allowed;        }
 	
 	@Override
 	public boolean equals(Object obj){
@@ -66,6 +74,8 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 		if(this.getCriteria()!=null) {
 			jsonMap.put(CRITERIA, HAPManagerSerialize.getInstance().toStringValue(this.getCriteria(), HAPSerializationFormat.LITERATE));
 		}
+		jsonMap.put(ISMULTIPLEALLOWED, this.m_isMultipleAllowed+"");
+		typeJsonMap.put(ISMULTIPLEALLOWED, Boolean.class);
 	}
 	
 	@Override
@@ -96,6 +106,10 @@ abstract class HAPDataDefinition__HAPEntityParsable extends HAPParserEntityImpWi
 
 	protected void parseToEntity(JSONObject jsonObj, HAPDataDefinition dataDefinition, HAPServiceParseEntity parseService) {
 		dataDefinition.setCriteria(HAPParserCriteriaImp.getInstance().parseCriteria((String)jsonObj.opt(HAPDataDefinition.CRITERIA)));
+		Object isMultipleAllowedObje = jsonObj.opt(HAPDataDefinition.ISMULTIPLEALLOWED);
+		if(isMultipleAllowedObje!=null) {
+			dataDefinition.setIsMultipleAllowed((Boolean)isMultipleAllowedObje);
+		}
 	}
 	
 }

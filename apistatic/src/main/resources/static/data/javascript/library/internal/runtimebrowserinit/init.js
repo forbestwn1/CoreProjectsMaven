@@ -48,6 +48,7 @@ nosliw.init = function(configure){
 		"uiapp",
 		"iovalue",
 		"valueport",
+		"enum",
 		"scriptbased",
 		"statemachine",
 		"runtimebrowsertest",

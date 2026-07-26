@@ -69,6 +69,25 @@
 					}
 				},
 				{
+					"name" : "serviceParmStringEnumWithInitMultiple",
+					"dataDefinition" : {
+					    "isMultipleAllowed" : true,
+						"criteria" : "test.string;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "enum",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "test_string"
+					        }
+					    ],
+						"initData" : {
+							"dataTypeId": "test.string;1.0.0",
+							"value": "serviceParm2_value2"
+						}
+					}
+				},
+				{
 					"name" : "serviceParmFloatWithInit",
 					"dataDefinition" : {
 						"criteria" : "test.float;1.0.0",
