@@ -20,10 +20,18 @@ public class HAPManualProcessBrick {
 
 	public static void processRootBrick(HAPManualContextProcessBrick processContext) {
 		
+		//process event process
+		HAPManualUtilityProcessEvent.processBrickEvent(processContext);
+		//normalize path in event process
+		HAPManualUtilityProcessEvent.processBrickEventNormalizePath(processContext);
+		
 		HAPManualUtilityProcessBrickPath.processComplexBrickNormalizeBrickPath(processContext);
 		
 		//process value port
 		HAPManualUtilityProcessorValuePort.process(processContext);
+		
+		//process value port for event handler
+		HAPManualUtilityProcessEvent.processBrickEventValuePortInHandler(processContext);
 		
 		//process variable
 		HAPManualUtilityProcessorVariable.process(processContext);

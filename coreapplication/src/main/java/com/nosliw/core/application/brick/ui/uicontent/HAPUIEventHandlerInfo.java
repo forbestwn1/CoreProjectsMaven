@@ -6,7 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.common.event.HAPEventReferenceHandler;
+import com.nosliw.core.application.common.event.HAPEventHandlerReference;
 
 @HAPEntityWithAttribute
 public abstract class HAPUIEventHandlerInfo extends HAPSerializableImp{
@@ -20,12 +20,12 @@ public abstract class HAPUIEventHandlerInfo extends HAPSerializableImp{
 	private String m_event;
 	
     //how to handle the event
-	private HAPEventReferenceHandler m_handlerInfo;
+	private HAPEventHandlerReference m_handlerInfo;
 	
 	public HAPUIEventHandlerInfo() {
 	}
 	
-	public HAPUIEventHandlerInfo(String event, HAPEventReferenceHandler handlerInfo) {
+	public HAPUIEventHandlerInfo(String event, HAPEventHandlerReference handlerInfo) {
 		this.m_event = event;
 		this.m_handlerInfo = handlerInfo;
 	}
@@ -33,8 +33,8 @@ public abstract class HAPUIEventHandlerInfo extends HAPSerializableImp{
 	public String getEvent() {     return this.m_event;     }
 	public void setEvent(String event) {    this.m_event = event;     }
 	
-	public HAPEventReferenceHandler getHandlerInfo() {    return this.m_handlerInfo;     }
-	public void setHandlerInfo(HAPEventReferenceHandler handlerInfo) {    this.m_handlerInfo = handlerInfo;     }
+	public HAPEventHandlerReference getHandlerInfo() {    return this.m_handlerInfo;     }
+	public void setHandlerInfo(HAPEventHandlerReference handlerInfo) {    this.m_handlerInfo = handlerInfo;     }
 
 	public abstract void parseContent(String content);
 

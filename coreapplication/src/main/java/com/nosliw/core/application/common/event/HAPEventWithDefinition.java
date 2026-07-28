@@ -6,7 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 
 @HAPEntityWithAttribute
-public interface HAPWithEvents {
+public interface HAPEventWithDefinition {
 
 	@HAPAttribute
 	public static String EVENT = "event";

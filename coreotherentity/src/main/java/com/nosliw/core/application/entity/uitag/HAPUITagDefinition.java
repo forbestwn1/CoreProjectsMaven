@@ -12,13 +12,13 @@ import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
-import com.nosliw.core.application.common.event.HAPWithEvents;
+import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.resource.HAPResourceId;
 
 @HAPEntityWithAttribute
-public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPWithEvents{
+public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition{
 
 	@HAPAttribute
 	public static final String TYPE = "type";

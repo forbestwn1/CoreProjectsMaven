@@ -111,35 +111,46 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 	/*
 	 * init element event object
 	 */
-	var loc_initElementEvent = function(eleEvent){
-		var uiId = eleEvent[node_COMMONATRIBUTECONSTANT.WITHUIID_UIID];
-		//get element for this event
-		var ele = loc_getLocalElementByUIId(uiId);
-		var subEle = ele;
-		//if have sel attribute set, then find sub element according to sel
-//		var selection = eleEvent[node_COMMONATRIBUTECONSTANT.ELEMENTEVENT_SELECTION];
-//		if(!node_basicUtility.isStringEmpty(selection))		subEle = ele.find(selection);
-
-		//register event
-		var eventValue = eleEvent;
-		var eventName = eleEvent[node_COMMONATRIBUTECONSTANT.UIEVENTHANDLERINFO_EVENT];
-		subEle.bind(eventName, function(event){
-			event.preventDefault();
+		var loc_initElementEvents = function(){
 			
-			var eventData = {
-				eventData : event, 
-				source : this,
-			};
-    	    var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(loc_normalEventHandlerInfoDef[uiId][eventName][node_COMMONATRIBUTECONSTANT.UIEVENTHANDLERINFO_HANDLERREFERENCE], eventData, loc_out);
-	    	node_requestServiceProcessor.processRequest(evenHandleReqeust);
-		});
-		
-		return {
-			source : subEle,
-			event :  eventName,
-		};
-	};
+			var bundleDef = loc_bundleCore.getBundleDefinition();
+			var eventProcesses = bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EVENTPROCESS];
+			
+			var eventIds = loc_complexEntityDef.getEventIds();
+			_.each(eventIds, function(eventId, i){
+				var eventProcess = eventProcesses[eventId];
 
+				var eventEmitter = eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_EVENTEMITTER];
+				var uiId = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_CHILDID];
+				var brickIdPath = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EMITTERID][node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH];
+				var eventName = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EVENTDEFINITION][node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
+
+				
+						//get element for this event
+						var ele = loc_getLocalElementByUIId(uiId);
+						var subEle = ele;
+						//if have sel attribute set, then find sub element according to sel
+				//		var selection = eleEvent[node_COMMONATRIBUTECONSTANT.ELEMENTEVENT_SELECTION];
+				//		if(!node_basicUtility.isStringEmpty(selection))		subEle = ele.find(selection);
+
+						//register event
+						subEle.bind(eventName, function(event){
+							event.preventDefault();
+							
+							var eventData = {
+								eventData : event, 
+								source : this,
+							};
+							var emitterBrickDefPath = loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].getDefPath();
+							loc_bundleCore.triggerEvent(loc_out, emitterBrickDefPath, uiId, eventName, eventData);
+						});
+				
+			});
+
+		};
+
+
+	
     var loc_queryCustomTag = function(query){
 		var outUIIds;
 		_.each(query.elements, function(ele, i){
@@ -199,6 +210,10 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 			loc_viewContainer = node_createViewContainer(loc_idNameSpace);
 			var html = _.unescape(loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICONTENT_HTML));
 			loc_viewContainer.setContentView(node_uiContentUtility.updateHtmlUIId(html, loc_idNameSpace));
+			
+			
+			loc_initElementEvents();
+
 			
 			//init expression in content
 			out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
@@ -278,11 +293,7 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 					byEventName[eventName] = eventHandlerInfoDef;
 				});
 
-				_.each(loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICONTENT_NORMALTAGEVENT), function(eleEvent, key, list){
-					loc_elementEvents.push(loc_initElementEvent(eleEvent));
-				});
 			}));
-
 
 			return out;
 		},

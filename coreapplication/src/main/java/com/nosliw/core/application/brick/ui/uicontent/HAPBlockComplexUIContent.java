@@ -28,9 +28,6 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	static final public String SCRIPTEXPRESSIONINCUSTOMERTAGATTRIBUTE = "scriptExpressionInCustomerTagAttribute";
 
 	@HAPAttribute
-	static final public String NORMALTAGEVENT = "normalTagEvent";  
-	
-	@HAPAttribute
 	static final public String SCRIPTEXPRESSIONS = "scriptExpressions";
 
 	String getHtml();
@@ -45,8 +42,6 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	
 	HAPContainerScriptExpression getScriptExpressions();
 
-	List<HAPUIEventHandlerInfoNormal> getNormalTagEvents();
-	
 	
 	
 	

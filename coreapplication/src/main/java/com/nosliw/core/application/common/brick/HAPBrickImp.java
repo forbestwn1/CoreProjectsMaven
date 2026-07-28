@@ -34,6 +34,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	//all attributes
 	private List<HAPAttributeInBrick> m_attributes;
 	
+	private List<String> m_eventIds;
+	
 	public HAPBrickImp(HAPIdBrickType brickTypeId) {
 		this();
 		this.m_brickTypeId = brickTypeId;
@@ -43,6 +45,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		this.m_attributes = new ArrayList<HAPAttributeInBrick>();
 		this.m_internalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_externalValuePortsContainer = new HAPContainerValuePorts();
+		this.m_eventIds = new ArrayList<String>();
 	}
 
 	@Override
@@ -52,6 +55,11 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	@Override
 	public HAPIdBrickType getBrickType() {   return this.m_brickTypeId;     }
+	
+	@Override
+	public List<String> getEventIds(){     return this.m_eventIds;      }
+	public void addEventId(String eventId) {   this.m_eventIds.add(eventId);      }
+
 	
 	@Override
 	public List<HAPAttributeInBrick> getAttributes(){     return this.m_attributes;	}
@@ -165,6 +173,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		}
 		jsonMap.put(ATTRIBUTE, HAPUtilityJson.buildArrayJson(attrJsonList.toArray(new String[0])));
 		
+		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
 	}
 	
 	@Override
@@ -184,6 +193,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		}
 		jsonMap.put(ATTRIBUTE, HAPUtilityJson.buildArrayJson(attrJsonList.toArray(new String[0])));
 		
+		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
 	}
 	
 	@Override

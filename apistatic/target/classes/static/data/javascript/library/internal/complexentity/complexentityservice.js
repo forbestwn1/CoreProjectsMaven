@@ -352,7 +352,7 @@ var node_createComplexEntityRuntimeService = function() {
 		getCreateBundleRuntimeRequest : function(parm, configure, handlers, request){
 			return node_createServiceRequestInfoSimple("createBundleRuntimeRequest", function(request){
 				var bundleCore = node_createBundleCore(parm, configure);
-				bundleCore = loc_buildBundleCore(bundleCore, parm, configure);
+				bundleCore = loc_buildBundleCore(bundleCore, undefined, configure);
 				var bundleRuntime = node_createComponentRuntime(bundleCore, undefined);
 				return bundleRuntime;
 			}, handlers, request);
@@ -362,7 +362,7 @@ var node_createComplexEntityRuntimeService = function() {
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(node_createServiceRequestInfoSimple("createBundleRuntimeRequest", function(request){
 				var bundleCore = node_createBundleCore(parm, configure);
-				bundleCore = loc_buildBundleCore(bundleCore, parm, configure);
+				bundleCore = loc_buildBundleCore(bundleCore, undefined, configure);
 				var bundleRuntime = node_createComponentRuntime(bundleCore, undefined);
 				return node_getComponentInterface(bundleRuntime.getCoreEntity()).getPreInitRequest({
 					success : function(request){

@@ -19,6 +19,8 @@ import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.constant.HAPWithConstantDefinition;
+import com.nosliw.core.application.common.event.HAPEventProcess;
+import com.nosliw.core.application.common.event.HAPEventWithProcess;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelationValueContext;
 import com.nosliw.core.application.common.scriptexpressio.HAPWithScriptExpressionConstantMaster;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
@@ -32,7 +34,7 @@ import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionUtilityValueContext;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
 
-public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implements HAPEntityOrReference, HAPWithConstantDefinition, HAPWithScriptExpressionConstantMaster{
+public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implements HAPEntityOrReference, HAPEventWithProcess, HAPWithConstantDefinition, HAPWithScriptExpressionConstantMaster{
 
 	public final static String ATTRIBUTE = "attribute"; 
 	
@@ -45,6 +47,9 @@ public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implem
 	//all attributes
 	private List<HAPManualDefinitionAttributeInBrick> m_attributes;
 
+	//event emitted
+	private List<HAPEventProcess> m_eventProcesses;
+	
 	//attachment
 	private HAPManualDefinitionAttachment m_attachment;
 	
@@ -59,6 +64,7 @@ public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implem
 	
 	public HAPManualDefinitionBrick (HAPIdBrickType brickTypeId) {
 		this.m_attributes = new ArrayList<HAPManualDefinitionAttributeInBrick>();
+		this.m_eventProcesses = new ArrayList<HAPEventProcess>();
 		this.m_attachment = new HAPManualDefinitionAttachment();
 		this.m_brickTypeId = brickTypeId;
 		this.m_constantScriptExpressions = new HAPDefinitionContainerScriptExpression();
@@ -71,6 +77,11 @@ public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implem
 
 	public HAPIdBrickType getBrickTypeId() {  return this.m_brickTypeId;	}
 
+	@Override
+	public List<HAPEventProcess> getEventProcesses(){	return this.m_eventProcesses;	}
+	@Override
+	public void addEventProcess(HAPEventProcess eventProcess) {    this.m_eventProcesses.add(eventProcess);   }
+	
 	public HAPManualDefinitionBrickValueContext getValueContextBrick() {    return (HAPManualDefinitionBrickValueContext)this.getAttributeValueOfBrick(VALUECONTEXT);       }
 	public void setValueContextBrick(HAPManualDefinitionBrickValueContext valueContext) {    this.setAttributeValueWithBrick(VALUECONTEXT, valueContext);      }
 

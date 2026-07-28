@@ -268,6 +268,10 @@ var node_createBrickDefinition = function(original){
 			return loc_entityDef[node_COMMONATRIBUTECONSTANT.BRICK_BRICKTYPE];
 		},
 		
+		getEventIds : function(){
+			return loc_entityDef[node_COMMONATRIBUTECONSTANT.BRICK_EVENTID];
+		},
+		
 		original : loc_entityDef
 		
 	};

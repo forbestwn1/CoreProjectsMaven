@@ -205,7 +205,12 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 		queryCustomTagInstance : function(query){    return node_uiTagUtility.queryCustomTag(loc_out, query);      },
 		
 		//--------------------------------- event
-		trigueEvent : function(event, eventData, requestInfo){   loc_trigueEvent(event, eventData, requestInfo);  },
+		trigueEvent : function(event, eventData, requestInfo){   
+//			loc_trigueEvent(event, eventData, requestInfo);  
+			
+			var emitterBrickDefPath = loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].getDefPath();
+			loc_bundleCore.triggerEvent(loc_out, emitterBrickDefPath, undefined, event, eventData, requestInfo)
+	    },
 
 		//---------------------------------ui resource view
 		getCreateDefaultUIContentRequest : function(variationPoints, handlers, requestInfo){

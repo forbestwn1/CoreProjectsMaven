@@ -18,7 +18,7 @@ var packageObj = library;
 var node_uiEventUtility = function(){
 	
     var loc_getHandleEventWithTask = function(eventHandlerRefTask, eventData, currentBrickCore, handlers, request){
-		var taskBrickPackage = eventHandlerRefTask[node_COMMONATRIBUTECONSTANT.EVENTREFERENCEHANDLER_TASKBRICKPACKAGE];
+		var taskBrickPackage = eventHandlerRefTask[node_COMMONATRIBUTECONSTANT.EVENTHANDLERREFERENCE_TASKBRICKPACKAGE];
 		
 		var coreEntityPackage = node_complexEntityUtility.getBrickPackageByRelativePath(currentBrickCore, taskBrickPackage);
 		
@@ -47,7 +47,7 @@ var node_uiEventUtility = function(){
 		
         getHandleEventRequest : function(eventHandlerRef, eventData, currentBrickCore, handlers, request){
 	    	var out;
-		    var handlerType = eventHandlerRef[node_COMMONATRIBUTECONSTANT.EVENTREFERENCEHANDLER_TYPE];
+		    var handlerType = eventHandlerRef[node_COMMONATRIBUTECONSTANT.EVENTHANDLERREFERENCE_TYPE];
     		if(handlerType==node_COMMONCONSTANT.EVENT_HANDLERTYPE_TASK){
 	        	out = loc_getHandleEventWithTask(eventHandlerRef, eventData, currentBrickCore, handlers, request);
 		    }

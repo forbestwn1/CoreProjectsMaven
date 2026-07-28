@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
@@ -26,7 +25,6 @@ public class HAPManualDefinitionBlockComplexUICustomerTag extends HAPManualDefin
 		this.setAttributeValueWithValue(PARENTRELATIONS, new ArrayList<HAPManualDefinitionBrickRelation>());
 		this.setAttributeValueWithValue(HAPBlockComplexUICustomerTag.ATTRIBUTEDEFINITION, new LinkedHashMap<String, HAPUITagDefinitionAttribute>());
 		this.setAttributeValueWithValue(HAPBlockComplexUICustomerTag.METADATA, new LinkedHashMap<String, String>());
-		this.setAttributeValueWithValue(HAPBlockComplexUICustomerTag.EVENT, new ArrayList<HAPUIEventHandlerInfoCustom>());
 	}
 
 	@Override
@@ -58,10 +56,6 @@ public class HAPManualDefinitionBlockComplexUICustomerTag extends HAPManualDefin
 	public void addMetaData(String key, String value) {    this.getMetaData().put(key, value);      }
 	public Map<String, String> getMetaData(){   return (Map<String, String>)this.getAttributeValueOfValue(HAPBlockComplexUICustomerTag.METADATA);     }
 	
-	public List<HAPUIEventHandlerInfoCustom> getEvents(){    return (List<HAPUIEventHandlerInfoCustom>)this.getAttributeValueOfValue(HAPBlockComplexUICustomerTag.EVENT);       }
-	public void addEvent(HAPUIEventHandlerInfoCustom event) {    this.getEvents().add(event);     }
-
-
 	@Override
 	public Map<String, HAPDefinitionConstant> getConstantDefinitions(){
 		Map<String, HAPDefinitionConstant> out = new LinkedHashMap<String, HAPDefinitionConstant>();

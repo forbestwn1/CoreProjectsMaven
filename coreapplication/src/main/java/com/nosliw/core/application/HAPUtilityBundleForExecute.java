@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
@@ -32,6 +33,12 @@ public class HAPUtilityBundleForExecute {
 		for(String n : branches.keySet()) {
 			out.addSupportBrick(n, branches.get(n).getBrick());
 			suportBricks.put(n, branches.get(n).getBrick());
+		}
+		
+		//event process
+		Map<String, HAPEventProcess> eventProcesses = bundleForBrick.getEventProcesses();
+		for(String id : eventProcesses.keySet()) {
+			out.addEventProcess(id, eventProcesses.get(id));
 		}
 		
 		//figure out exported variables

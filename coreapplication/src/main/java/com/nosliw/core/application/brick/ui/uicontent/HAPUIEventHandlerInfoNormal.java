@@ -2,7 +2,7 @@ package com.nosliw.core.application.brick.ui.uicontent;
 
 import java.util.Map;
 
-import com.nosliw.core.application.common.event.HAPEventReferenceHandler;
+import com.nosliw.core.application.common.event.HAPEventHandlerReference;
 
 public class HAPUIEventHandlerInfoNormal extends HAPUIEventHandlerInfo implements HAPWithUIId{
 
@@ -12,7 +12,7 @@ public class HAPUIEventHandlerInfoNormal extends HAPUIEventHandlerInfo implement
 	public HAPUIEventHandlerInfoNormal() {
 	}
 	
-	public HAPUIEventHandlerInfoNormal(String uiId, String event, HAPEventReferenceHandler handlerInfo) {
+	public HAPUIEventHandlerInfoNormal(String uiId, String event, HAPEventHandlerReference handlerInfo) {
 		super(event, handlerInfo);
 		this.m_uiId = uiId;
 	}
@@ -23,7 +23,7 @@ public class HAPUIEventHandlerInfoNormal extends HAPUIEventHandlerInfo implement
 	
 	@Override
 	public void parseContent(String content) {
-		this.setHandlerInfo(HAPEventReferenceHandler.parseHandlerInfo(content));
+		this.setHandlerInfo(HAPEventHandlerReference.parseHandlerInfo(content));
 	}
 
 	@Override

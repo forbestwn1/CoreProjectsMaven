@@ -8,7 +8,6 @@ import com.nosliw.core.application.brick.container.HAPBrickContainerList;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 
@@ -20,11 +19,7 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCONTENT, new ArrayList<HAPUIEmbededScriptExpressionInContent>());
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINNORMALTAGATTRIBUTE, new ArrayList<HAPUIEmbededScriptExpressionInAttribute>());
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCUSTOMERTAGATTRIBUTE, new ArrayList<HAPUIEmbededScriptExpressionInAttribute>());
-
-		this.setAttributeValueWithValue(HAPBlockComplexUIContent.NORMALTAGEVENT, new ArrayList<HAPUIEventHandlerInfoNormal>());
-		
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONS, new HAPContainerScriptExpression());
-		
 	}
 	
 	@Override
@@ -45,10 +40,6 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 
 	@Override
 	public HAPContainerScriptExpression getScriptExpressions() {   return (HAPContainerScriptExpression)this.getAttributeValueOfValue(SCRIPTEXPRESSIONS);  }
-
-	@Override
-	public List<HAPUIEventHandlerInfoNormal> getNormalTagEvents(){    return (List<HAPUIEventHandlerInfoNormal>)this.getAttributeValueOfValue(HAPBlockComplexUIContent.NORMALTAGEVENT);       }
-	public void addNormalTagEvent(HAPUIEventHandlerInfoNormal event) {    this.getNormalTagEvents().add(event);     }
 
 	@Override
 	public HAPBrickContainer getTasks() {

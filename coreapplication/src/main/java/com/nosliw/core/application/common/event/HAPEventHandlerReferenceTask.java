@@ -7,7 +7,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPPackageBrickInBundle;
 
-public class HAPEventReferenceHandlerTask extends HAPEventReferenceHandler{
+public class HAPEventHandlerReferenceTask extends HAPEventHandlerReference{
 
 	@HAPAttribute
 	public static final String TASKBRICKPACKAGE = "taskBrickPackage";

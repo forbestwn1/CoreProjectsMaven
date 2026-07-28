@@ -21,8 +21,15 @@ import com.nosliw.core.application.brick.ui.uicontent.HAPElementEvent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
+import com.nosliw.core.application.common.event.HAPEventDefinition;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.common.scriptexpressio.HAPUtilityScriptExpressionParser;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
+import com.nosliw.core.application.common.structure.HAPElementStructureLeafValue;
+import com.nosliw.core.application.common.structure.HAPRootInStructure;
+import com.nosliw.core.application.common.structure.HAPStructure;
+import com.nosliw.core.application.common.structure.HAPStructureImp;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualDefinitionBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
@@ -147,7 +154,22 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 						normalEventHandler.setUIId(uiId);
 						normalEventHandler.setEvent(eventName);
 						normalEventHandler.parseContent(eleAttrValue);
-						uiContent.addNormalTagEvent(normalEventHandler);
+						
+						HAPEventDefinition eventDefinition = new HAPEventDefinition();
+						eventDefinition.setName(eventName);
+						
+						HAPStructure structure = new HAPStructureImp();
+
+						//event data
+						HAPRootInStructure eventDataRoot = new HAPRootInStructure();
+						eventDataRoot.setName(HAPConstantShared.NAME_ROOT_EVENT_DATA);
+						eventDataRoot.setDefinition(new HAPElementStructureLeafValue());
+						structure.addRoot(eventDataRoot);
+						
+						eventDefinition.setDataDefinition(structure);
+
+						HAPEventEmitter eventEmitter = new HAPEventEmitter(null, uiId, eventDefinition);
+						uiContent.addEventProcess(new HAPEventProcess(eventEmitter, normalEventHandler.getHandlerInfo()));
 					}
 				}
 				

@@ -24,6 +24,8 @@ var packageObj = library;
 	var node_getObjectType;
 	var node_getEntityObjectInterface;
 	var node_ResourceId;
+	var node_uiEventUtility;
+	var node_requestServiceProcessor;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -47,6 +49,8 @@ var node_createBundleCore = function(parm, configure){
 	var loc_parentView;
 	
 	var loc_dynamicInputContainer;
+	
+	var loc_eventProcess = {};
 	
 	var loc_init = function(parm, configure){
 		loc_configure = configure;
@@ -72,6 +76,15 @@ var node_createBundleCore = function(parm, configure){
 		//build variable domain in bundle
 		loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
 
+		//event process
+		_.each(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EVENTPROCESS], function(eventProcess, i){
+			var eventEmitter = eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_EVENTEMITTER];
+			var childId = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_CHILDID];
+			var brickIdPath = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EMITTERID][node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH];
+			var eventName = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EVENTDEFINITION][node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
+			loc_eventProcess[loc_buildEventKey(brickIdPath, childId, eventName)] = eventProcess;
+		});
+		
 		var branchBrickRequest = node_createServiceRequestInfoSequence();
 		var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_SUPPORTBRICKS];
 		_.each(brickDefs, function(brickDef, name){
@@ -180,6 +193,16 @@ var node_createBundleCore = function(parm, configure){
 		},
 	};
 
+	var loc_buildEventKey = function(emitterBrickPath, child, eventName){
+		return emitterBrickPath + "__" + child + "__" + eventName;
+	}
+	
+	var loc_triggerEvent = function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){
+		var eventProcess = loc_eventProcess[loc_buildEventKey(emitterBrickPath, child, eventName)];
+		var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_HANDLERREFERENCE], eventValue, emitterBrickCore);
+		node_requestServiceProcessor.processRequest(evenHandleReqeust);
+	};
+	
 	var loc_out = {
 
 		getVariable : function(name){    
@@ -238,7 +261,11 @@ var node_createBundleCore = function(parm, configure){
 		
 		getValueContainer : function(){		return loc_valueContainer;	},
 		
-		getBrickDefPathByAlias : function(alias){    return loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_ALIASMAPPING][alias];      }
+		getBrickDefPathByAlias : function(alias){    return loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_ALIASMAPPING][alias];      },
+		
+		
+		triggerEvent : function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){  loc_triggerEvent(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request);  }
+		
 		
 	};
 	
@@ -272,6 +299,8 @@ nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function()
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
+nosliw.registerSetNodeDataEvent("uicontent.uiEventUtility", function(){node_uiEventUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 
 
 //Register Node by Name

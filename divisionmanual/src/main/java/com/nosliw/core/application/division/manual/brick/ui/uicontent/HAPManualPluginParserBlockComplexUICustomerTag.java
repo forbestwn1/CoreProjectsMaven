@@ -15,6 +15,9 @@ import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
+import com.nosliw.core.application.common.event.HAPEventDefinition;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelativeForValue;
@@ -79,11 +82,14 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPlu
 					//event handler attribute
 					String eventName = keyAttrName.substring(HAPConstantShared.UIRESOURCE_ATTRIBUTE_EVENT.length());
 					
-					if(uiTagDef.getEventDefinition(eventName)!=null) {
+					HAPEventDefinition eventDefinition = uiTagDef.getEventDefinition(eventName);
+					if(eventDefinition!=null) {
 						HAPUIEventHandlerInfoCustom eventHandler = new HAPUIEventHandlerInfoCustom();
 						eventHandler.setEvent(eventName);
 						eventHandler.parseContent(eleAttrValue);
-						uiCustomerTag.addEvent(eventHandler);
+					
+						HAPEventEmitter eventEmitter = new HAPEventEmitter(null, null, eventDefinition);
+						uiCustomerTag.addEventProcess(new HAPEventProcess(eventEmitter, eventHandler.getHandlerInfo()));
 					}
 				}
 			}

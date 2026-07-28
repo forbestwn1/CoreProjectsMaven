@@ -8,17 +8,11 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
-import com.nosliw.core.application.common.event.HAPEventDefinition;
-import com.nosliw.core.application.common.event.HAPEventReferenceHandler;
-import com.nosliw.core.application.common.event.HAPEventReferenceHandlerTask;
-import com.nosliw.core.application.division.manual.common.event.HAPManualUtilityEvent;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
-import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessBrickPath;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 
 public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginProcessorBlockImp{
@@ -59,11 +53,6 @@ public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginP
 		uiCustomerTagExe.addMetaData(HAPConstantShared.UITAG_METADATA_UITAGNAME, uiCustomerTagDef.getUITagDefinition().getName());
 		uiCustomerTagExe.addMetaData(HAPConstantShared.UITAG_METADATA_UITAGVERSION, uiCustomerTagDef.getUITagDefinition().getVersion());
 		
-		//event in custom tag
-		for(HAPUIEventHandlerInfoCustom event : uiCustomerTagDef.getEvents()) {
-			uiCustomerTagExe.addEvent(event);
-		}
-
 
 		
 		if(uiCustomerTagDef.getScriptResourceId()!=null) {
@@ -77,14 +66,6 @@ public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginP
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockComplexUICustomerTag executableBlock = (HAPManualBlockComplexUICustomerTag)blockPair.getRight();
 
-		for(HAPUIEventHandlerInfoCustom eventHandler : executableBlock.getEvents().values()) {
-			HAPEventReferenceHandler handler = eventHandler.getHandlerInfo();
-			String handlerType = handler.getHandlerType();
-			if(handlerType.equals(HAPConstantShared.EVENT_HANDLERTYPE_TASK)) {
-				HAPEventReferenceHandlerTask handlerTask = (HAPEventReferenceHandlerTask)handler;
-				HAPManualUtilityProcessBrickPath.normalizeBrickReferenceInBundle(handlerTask.getTaskBrickPackage().getBrickId(), pathFromRoot, true, processContext);
-			}
-		}
 	}
 	
 	@Override
@@ -94,14 +75,6 @@ public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginP
 		HAPManualDefinitionBlockComplexUICustomerTag blockDef = (HAPManualDefinitionBlockComplexUICustomerTag)blockPair.getLeft();
 		HAPManualBlockComplexUICustomerTag executableBlock = (HAPManualBlockComplexUICustomerTag)blockPair.getRight();
 
-		for(HAPUIEventHandlerInfoCustom eventHandler : executableBlock.getEvents().values()) {
-			HAPEventReferenceHandler handler = eventHandler.getHandlerInfo();
-			String handlerType = handler.getHandlerType();
-			if(handlerType.equals(HAPConstantShared.EVENT_HANDLERTYPE_TASK)) {
-				HAPEventDefinition eventDef = blockDef.getUITagDefinition().getEventDefinition(eventHandler.getEvent());
-				HAPManualUtilityEvent.buildValuePortForEventHandlerTask(eventDef, (HAPEventReferenceHandlerTask)handler, processContext.getRootBrickName(), processContext.getCurrentBundle());
-			}
-		}
 	}
 
 }
