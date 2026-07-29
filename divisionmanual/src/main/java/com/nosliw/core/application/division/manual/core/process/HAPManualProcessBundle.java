@@ -7,7 +7,9 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
+import com.nosliw.core.application.HAPUtilityBrickReference;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -73,6 +75,12 @@ public class HAPManualProcessBundle {
 		
 		//process data rule
 		HAPProcessorRuleInBundle.process(bundle, dataRuleManager, brickManager, runtimeInfo);
+		
+		//process export event
+		for(HAPEventEmitter eventEmitter : contentProvider.getExposedEvent()){
+			HAPUtilityBrickReference.normalizeBrickReferenceInBundle(eventEmitter.getEmitterBrickId(), null, true, HAPConstantShared.NAME_ROOTBRICK_MAIN, bundle.getAliasMappings(), bundle);
+			bundle.addExportEvent(eventEmitter);
+		}
 		
 		bundle.setExtraData(definitions);
 		return bundle;

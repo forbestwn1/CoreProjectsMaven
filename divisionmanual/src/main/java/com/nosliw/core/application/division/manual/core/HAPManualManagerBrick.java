@@ -29,6 +29,7 @@ import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPManualManagerBrick implements HAPPluginDivision{
@@ -52,6 +53,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	private HAPManagerDataRule m_dataRuleManager;
 	
 	private HAPManagerBrickCriteria m_brickCriteriaMan;
+	
+	private HAPServiceParseEntity m_parseService;
 	
 	public HAPManualManagerBrick() {
 		this.m_brickParserPlugin = new LinkedHashMap<String, HAPManualDefinitionPluginParserBrick>();
@@ -84,6 +87,10 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	@Autowired
 	private void setDataRuleManager(HAPManagerDataRule dataRuleManager) {   this.m_dataRuleManager = dataRuleManager;        }
 	
+	@Autowired
+	private void setParseService(HAPServiceParseEntity parseService) {   this.m_parseService = parseService;        }
+	
+	
 	@Override
 	public String getDivisionName() {   return HAPConstantShared.BRICK_DIVISION_MANUAL;   }
 	
@@ -92,7 +99,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	@Override
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		return this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan), runtimeInfo);
+		return this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {

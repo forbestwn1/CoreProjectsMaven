@@ -2,14 +2,20 @@ package com.nosliw.core.application.common.event;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.HAPIdBrickInBundle;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPEventEmitter extends HAPSerializableImp{
+public class HAPEventEmitter extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
 	public static final String EMITTERID = "emitterId";
@@ -26,6 +32,7 @@ public class HAPEventEmitter extends HAPSerializableImp{
 	
 	private HAPEventDefinition m_eventDefinition;
 	
+	public HAPEventEmitter() {	}
 
 	public HAPEventEmitter(HAPIdBrickInBundle emitterBrickId, String childId, HAPEventDefinition eventDefinition) {
 		this.m_emitterBrickId = emitterBrickId;
@@ -36,8 +43,16 @@ public class HAPEventEmitter extends HAPSerializableImp{
 	public HAPIdBrickInBundle getEmitterBrickId() {     return this.m_emitterBrickId;       }
 	public void setEmitterBrickId(HAPIdBrickInBundle emitterBrickId) {    this.m_emitterBrickId = emitterBrickId;        }
 	
-    public HAPEventDefinition getEventDefinition() {      return this.m_eventDefinition;      }
+	public String getChildId() {    return this.m_childId;      }
+	public void setChildId(String childId) {     this.m_childId = childId;        }
 	
+    public HAPEventDefinition getEventDefinition() {      return this.m_eventDefinition;      }
+    public void setEventDefinition(HAPEventDefinition eventDef) {     this.m_eventDefinition = eventDef;       }
+
+    public static HAPEventEmitter parseEventEmitter(Object obj, HAPServiceParseEntity entityParseService) {
+    	return (HAPEventEmitter)entityParseService.parseEntityJSONExplicit((JSONObject)obj, HAPEventEmitter.class.getName());
+    }
+    
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
@@ -49,4 +64,29 @@ public class HAPEventEmitter extends HAPSerializableImp{
 		}
 		jsonMap.put(CHILDID, this.m_childId);
 	}
+}
+
+@Component
+class HAPEventEmitter_Parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {   return HAPEventEmitter.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPEventEmitter out = new HAPEventEmitter();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		out.setChildId((String)jsonObj.opt(HAPEventEmitter.CHILDID));
+		
+		JSONObject emitterIdJsonobj = jsonObj.getJSONObject(HAPEventEmitter.EMITTERID);
+		HAPIdBrickInBundle emmiterBrickId = new HAPIdBrickInBundle();
+		emmiterBrickId.buildObject(emitterIdJsonobj, HAPSerializationFormat.JSON);
+		out.setEmitterBrickId(emmiterBrickId);
+		
+		out.setEventDefinition(HAPEventDefinition.parseEventDefinition(jsonObj.optJSONObject(HAPEventEmitter.EVENTDEFINITION), parseService));
+		
+		return out;
+	}
+	
 }

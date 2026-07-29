@@ -8,9 +8,11 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.valueport.HAPIdElement;
 
@@ -30,6 +32,9 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	public final static String EVENTPROCESS = "eventProcess"; 
 
 	@HAPAttribute
+	public final static String EXPORTEVENT = "eventExport"; 
+
+	@HAPAttribute
 	public static final String VALUESTRUCTUREDOMAIN = "valueStructureDomain";
 
 	@HAPAttribute
@@ -47,6 +52,9 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	//all events and their handler reference pair in bundle
 	private Map<String, HAPEventProcess> m_eventProcesses;
 	
+	//event that will expose to external
+	private List<HAPEventEmitter> m_exportEvents;
+	
 	//processed value structure
 	private HAPDomainValueStructure m_valueStructureDomain;
 	
@@ -59,6 +67,7 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 		this.m_aliasMapping = new LinkedHashMap<String, HAPPath>();
 		this.m_exportVariableInfos = new LinkedHashMap<String, HAPIdElement>();
 		this.m_eventProcesses = new LinkedHashMap<String, HAPEventProcess>();
+		this.m_exportEvents = new ArrayList<HAPEventEmitter>();
 	}
 
 	public HAPBrick getBrick() {    return this.m_brick;     }
@@ -67,6 +76,9 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 	public void addEventProcess(String id, HAPEventProcess eventProcess) {     this.m_eventProcesses.put(id, eventProcess);       }
 	public HAPEventProcess getEventProcess(String id) {       return this.m_eventProcesses.get(id);       }
 	public Map<String, HAPEventProcess> getEventProcesses(){    return this.m_eventProcesses;       }
+	
+	public void addExportEvent(HAPEventEmitter eventEmitter) {     this.m_exportEvents.add(eventEmitter);    }
+	public List<HAPEventEmitter> getExportEvents(){    return this.m_exportEvents;      }
 	
 	public HAPDomainValueStructure getValueStructureDomain() {   return this.m_valueStructureDomain;    }
 	public void setValueStructureDomain(HAPDomainValueStructure valueStructureDomain) {     this.m_valueStructureDomain = valueStructureDomain;      }
@@ -107,7 +119,9 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 			eventStrArray.add(eventProcess.toStringValue(HAPSerializationFormat.JSON));
 		}
 		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
-	}
+
+		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
+}
 	
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -136,5 +150,7 @@ public class HAPBundleForExecute extends HAPSerializableImp{
 			eventStrArray.add(eventProcess.toStringValue(HAPSerializationFormat.JSON));
 		}
 		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
+
+		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
 	}
 }

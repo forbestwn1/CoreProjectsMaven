@@ -67,6 +67,12 @@ $(document).on("nosliwActive", function(){
 	
 	out.addRequest(nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({brickId:brickId, resourceId:resourceId}, configure==""?undefined:configure, runtimeContext, undefined, {
 		success : function(request, application){
+           application.registerExposeEventListener(undefined, function(eventName, eventValue, request){
+         		console.log(JSON.stringify(eventName));
+         		console.log(JSON.stringify(eventValue));
+           }, application);
+			
+			
 			var event = new CustomEvent("nosliwApplicationActive", {
 				bubbles: true,
 				detail: application

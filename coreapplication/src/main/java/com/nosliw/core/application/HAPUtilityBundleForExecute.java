@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
@@ -39,6 +40,11 @@ public class HAPUtilityBundleForExecute {
 		Map<String, HAPEventProcess> eventProcesses = bundleForBrick.getEventProcesses();
 		for(String id : eventProcesses.keySet()) {
 			out.addEventProcess(id, eventProcesses.get(id));
+		}
+		
+		//event exposed
+		for(HAPEventEmitter event : bundleForBrick.getExportEvents()){
+			out.addExportEvent(event);
 		}
 		
 		//figure out exported variables

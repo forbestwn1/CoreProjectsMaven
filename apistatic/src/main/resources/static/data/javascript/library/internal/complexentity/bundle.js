@@ -26,6 +26,7 @@ var packageObj = library;
 	var node_ResourceId;
 	var node_uiEventUtility;
 	var node_requestServiceProcessor;
+	var node_createEventObject;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -51,6 +52,9 @@ var node_createBundleCore = function(parm, configure){
 	var loc_dynamicInputContainer;
 	
 	var loc_eventProcess = {};
+	var loc_eventExport = {};
+	
+	var loc_eventObject = node_createEventObject();
 	
 	var loc_init = function(parm, configure){
 		loc_configure = configure;
@@ -84,6 +88,15 @@ var node_createBundleCore = function(parm, configure){
 			var eventName = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EVENTDEFINITION][node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
 			loc_eventProcess[loc_buildEventKey(brickIdPath, childId, eventName)] = eventProcess;
 		});
+		
+		//export event
+		_.each(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EXPORTEVENT], function(eventEmitter, i){
+			var childId = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_CHILDID];
+			var brickIdPath = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EMITTERID][node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH];
+			var eventName = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EVENTDEFINITION][node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
+			loc_eventExport[loc_buildEventKey(brickIdPath, childId, eventName)] = eventEmitter;
+		});
+		
 		
 		var branchBrickRequest = node_createServiceRequestInfoSequence();
 		var brickDefs = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_SUPPORTBRICKS];
@@ -198,9 +211,24 @@ var node_createBundleCore = function(parm, configure){
 	}
 	
 	var loc_triggerEvent = function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){
-		var eventProcess = loc_eventProcess[loc_buildEventKey(emitterBrickPath, child, eventName)];
-		var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_HANDLERREFERENCE], eventValue, emitterBrickCore);
-		node_requestServiceProcessor.processRequest(evenHandleReqeust);
+		var eventKey = loc_buildEventKey(emitterBrickPath, child, eventName);
+		
+		//try process event internally
+		var eventProcess = loc_eventProcess[eventKey];
+		if(eventProcess!=undefined){
+			var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_HANDLERREFERENCE], eventValue, emitterBrickCore);
+			node_requestServiceProcessor.processRequest(evenHandleReqeust);
+		}
+		
+		//try export event
+		var eventExport = loc_eventExport[eventKey];
+		if(eventExport!=undefined){
+			loc_triggerExposeEvent(eventName, eventValue, request);
+		}
+	};
+
+	var loc_triggerExposeEvent = function(eventName, eventValue, request){
+		loc_eventObject.triggerEvent(eventName, eventValue, request);
 	};
 	
 	var loc_out = {
@@ -263,6 +291,8 @@ var node_createBundleCore = function(parm, configure){
 		
 		getBrickDefPathByAlias : function(alias){    return loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_ALIASMAPPING][alias];      },
 		
+		registerExposeEventListener : function(listenerEventObj, handler, thisContext){return loc_eventObject.registerListener(undefined, listenerEventObj, handler, thisContext);		},
+		
 		
 		triggerEvent : function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){  loc_triggerEvent(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request);  }
 		
@@ -301,6 +331,7 @@ nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", functi
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
 nosliw.registerSetNodeDataEvent("uicontent.uiEventUtility", function(){node_uiEventUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
+nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 
 
 //Register Node by Name

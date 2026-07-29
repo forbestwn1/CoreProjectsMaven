@@ -55,6 +55,12 @@ public class HAPManualDefinitionBlockComplexUIContent extends HAPManualDefinitio
 		for(HAPManualDefinitionBrickRelation relation : customerTag.getParentRelations()) {
 			attr.addRelation(relation);
 		}
+		
+		Map<String, String> customerTagMetaData = customerTag.getMetaData();
+		for(String name : customerTagMetaData.keySet()) {
+			attr.getInfo().setValue(name, customerTagMetaData.get(name));
+		}
+		
 		container.addElementWithAttribute(attr);
 	}
 	

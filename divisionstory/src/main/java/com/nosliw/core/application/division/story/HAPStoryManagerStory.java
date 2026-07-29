@@ -18,6 +18,7 @@ import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtili
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPStoryManagerStory implements HAPPluginDivision{
@@ -31,6 +32,9 @@ public class HAPStoryManagerStory implements HAPPluginDivision{
 	@Autowired
 	private HAPManagerBrickCriteria m_brickCriteriaMan;
 	
+	@Autowired
+	private HAPServiceParseEntity m_parseService;
+	
 	@Override
 	public String getDivisionName() {  return HAPConstantShared.BRICK_DIVISION_STORY;   }
 
@@ -41,7 +45,7 @@ public class HAPStoryManagerStory implements HAPPluginDivision{
 			manualFolder = new File(this.m_storyDesignMan.convertDesignToManual(brickId));
 		}
 		
-		HAPManualContentProviderFile contentProvider = new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.buildBrickLocationInfoFromMainFolder(brickId.getBrickTypeId(), manualFolder), m_brickCriteriaMan);
+		HAPManualContentProviderFile contentProvider = new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.buildBrickLocationInfoFromMainFolder(brickId.getBrickTypeId(), manualFolder), m_brickCriteriaMan, this.m_parseService);
 		return this.m_manulBrickManager.buildBundle(contentProvider, runtimeInfo);
 	}
 

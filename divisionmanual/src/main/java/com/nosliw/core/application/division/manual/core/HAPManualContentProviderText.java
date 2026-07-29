@@ -1,9 +1,12 @@
 package com.nosliw.core.application.division.manual.core;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public class HAPManualContentProviderText implements HAPManualContentProvider{
@@ -53,6 +56,11 @@ public class HAPManualContentProviderText implements HAPManualContentProvider{
 	
 	public void addLocalBrickContent(HAPIdBrick brickId, HAPManualInfoContent contentInfo) {
 		this.m_localContentInfos.put(brickId.getKey(), contentInfo);
+	}
+
+	@Override
+	public List<HAPEventEmitter> getExposedEvent() {
+		return new ArrayList<HAPEventEmitter>();
 	}
 
 }

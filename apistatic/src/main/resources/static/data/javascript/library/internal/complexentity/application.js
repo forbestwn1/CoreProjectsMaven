@@ -14,6 +14,7 @@ var packageObj = library;
 	var node_createConfigure;
 	var node_basicUtility;
 	var node_componentUtility;
+	var node_createEventObject;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -32,11 +33,17 @@ var node_createApplication = function(parm, configure){
 
 	var loc_envInterface;
 	
+	var loc_eventObject = node_createEventObject();
+
 	var loc_createBundleRuntimeRequest = function(handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		out.addRequest(nosliw.runtime.getComplexEntityService().getCreateBundleRuntimeRequest(loc_bundleParm, loc_configure, {
 			success : function(request, bundleRuntime){
 				loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].addChild(loc_BUNDLE_NAME, bundleRuntime);
+				
+				loc_getBundleCore().registerExposeEventListener(undefined, function(eventName, eventValue, request){
+					loc_triggerExposeEvent(eventName, eventValue, request);
+				});
 			}
 		}));
 		return out;
@@ -48,6 +55,10 @@ var node_createApplication = function(parm, configure){
 	
 	var loc_getBundleCore = function(){
 		return loc_getBundleRuntime().getCoreEntity();
+	};
+	
+	var loc_triggerExposeEvent = function(eventName, eventValue, request){
+		loc_eventObject.triggerEvent(eventName, eventValue, request);
 	};
 	
 	var loc_out = {
@@ -79,6 +90,8 @@ var node_createApplication = function(parm, configure){
 			loc_getBundleRuntime().updateView(view);     
 		},
 		
+		registerExposeEventListener : function(listenerEventObj, handler, thisContext){return loc_eventObject.registerListener(undefined, listenerEventObj, handler, thisContext);		},
+		
 	};
 	
 	loc_out = node_makeObjectWithType(loc_out, node_CONSTANT.TYPEDOBJECT_TYPE_APPLICATION);
@@ -100,6 +113,7 @@ nosliw.registerSetNodeDataEvent("component.debug.createPackageDebugView", functi
 nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createApplication", node_createApplication); 

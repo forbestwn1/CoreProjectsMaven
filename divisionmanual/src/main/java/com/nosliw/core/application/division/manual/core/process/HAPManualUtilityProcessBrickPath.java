@@ -21,6 +21,8 @@ public class HAPManualUtilityProcessBrickPath {
 	public static void normalizeBrickReferenceInBundle(HAPIdBrickInBundle brickIdInBundle, HAPPath basePath, boolean processEnd, HAPManualContextProcessBrick processContext) {
 		HAPUtilityBrickReference.normalizeBrickReferenceInBundle(brickIdInBundle, basePath.getPath(), processEnd, processContext.getRootBrickName(), processContext.getCurrentBundle().getAliasMappings() , processContext.getCurrentBundle());
 	}
+
+
 	
 //	public static void normalizeBrickPath(HAPIdBrickInBundle brickIdInBundle, HAPManualContextProcessBrick processContext) {
 //		brickIdInBundle.setIdPath(HAPUtilityBrickPath.normalizeBrickPath(new HAPPath(brickIdInBundle.getIdPath()), processContext.getRootBrickName(), false, processContext.getCurrentBundle()).toString());
