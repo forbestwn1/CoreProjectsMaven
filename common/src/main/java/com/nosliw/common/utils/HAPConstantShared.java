@@ -1202,4 +1202,12 @@ public class HAPConstantShared {
 		public static final String DATADEFINITION_TYPE_WRITEABLEWITHINIT = "writablewithinit";
 
 
+
+		public static final String EVENT_UI_VALUE_CHANGE = "ui_value_change";
+
+
+
+		public static final String ERROR_VALIDATION_VALUE = "ERROR_VALIDATION_VALUE";
+
+
 }

@@ -211,6 +211,7 @@ var node_createBundleCore = function(parm, configure){
 	}
 	
 	var loc_triggerEvent = function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){
+		
 		//multiple eventkey
 		var eventKeys = [];
 		if(child==undefined){
@@ -226,6 +227,10 @@ var node_createBundleCore = function(parm, configure){
 				eventKeys.push(loc_buildEventKey(emitterBrickPath, child, eventName));
 			}
 		}
+
+		_.each(eventKeys, function(key){
+			console.log("Event was triggered: " + key);
+		});		
 		
 		//try process event internally
 		for(var i in eventKeys){

@@ -164,7 +164,7 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 						//validation failed
                 		var validationFailRequest = node_createServiceRequestInfoCommon(undefined);		
                 		validationFailRequest.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(function(requestInfo){
-            				requestInfo.errorFinish(new node_ServiceData(node_CONSTANT.ERROR_VALIDATION_VALUE, node_CONSTANT.ERROR_VALIDATION_VALUE, errorData));
+            				requestInfo.errorFinish(new node_ServiceData(node_COMMONCONSTANT.ERROR_VALIDATION_VALUE, node_COMMONCONSTANT.ERROR_VALIDATION_VALUE, errorData));
                 		}, validationFailRequest));
                 		return validationFailRequest;
 					}

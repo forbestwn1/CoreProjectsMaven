@@ -109,7 +109,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 			], {
 				success : function(requet){
 					loc_currentData = data;
-					loc_envObj.trigueEvent(node_CONSTANT.EVENT_UI_VALUE_CHANGE, loc_currentData);
+					loc_envObj.trigueEvent(node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE, loc_currentData);
 				},
 				error : function(request, serviceData){
 					loc_envObj.trigueEvent(serviceData.code, serviceData.data);

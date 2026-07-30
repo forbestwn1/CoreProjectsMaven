@@ -5,11 +5,15 @@ import java.util.Map;
 
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
+import com.nosliw.core.application.common.event.HAPEventDefinition;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.division.manual.core.standalone.HAPStandaloneDefinition;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
@@ -26,6 +30,7 @@ public class HAPStoryUtilityUITag {
 		HAPDataDefinition dataDefinition = dataUITagQuery.getDataDefinition();
 
 		String dataVariableName = "data";
+		String tagAlias = "tagAlias";
 		
 		StringBuffer attContent = new StringBuffer();
 		Map<String, String> attributes = new LinkedHashMap<>(uiTagInfo.getAttributes());
@@ -46,9 +51,37 @@ public class HAPStoryUtilityUITag {
 		     .setParm("attributes", attContent.toString())
 		     .setParm("dataDefinition", dataDefinition.toStringValue(HAPSerializationFormat.JSON))
 		     .setParm("initData", initDataStr)
+		     .setParm("tagAlias", tagAlias)
 		     .getContent();
 		
-		return standaloneMan.buildStandalone(new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100), runtimeInfo);
+		
+		HAPStandaloneDefinition standAloneDef = new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100);
+		
+		{
+			HAPEventEmitter eventEmitter = new HAPEventEmitter();
+			HAPIdBrickInBundle emitterBrickId = new HAPIdBrickInBundle();
+			emitterBrickId.setAlias(tagAlias);
+			eventEmitter.setEmitterBrickId(emitterBrickId);
+			
+			HAPEventDefinition eventDef = new HAPEventDefinition();
+			eventDef.setName(HAPConstantShared.EVENT_UI_VALUE_CHANGE);
+			eventEmitter.setEventDefinition(eventDef);
+			standAloneDef.addExposeEvent(eventEmitter);
+		}
+		
+		{
+			HAPEventEmitter eventEmitter = new HAPEventEmitter();
+			HAPIdBrickInBundle emitterBrickId = new HAPIdBrickInBundle();
+			emitterBrickId.setAlias(tagAlias);
+			eventEmitter.setEmitterBrickId(emitterBrickId);
+			
+			HAPEventDefinition eventDef = new HAPEventDefinition();
+			eventDef.setName(HAPConstantShared.ERROR_VALIDATION_VALUE);
+			eventEmitter.setEventDefinition(eventDef);
+			standAloneDef.addExposeEvent(eventEmitter);
+		}
+
+		return standaloneMan.buildStandalone(standAloneDef, runtimeInfo);
 	}
 	
 }

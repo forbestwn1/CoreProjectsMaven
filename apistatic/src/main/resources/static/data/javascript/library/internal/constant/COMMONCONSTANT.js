@@ -740,7 +740,9 @@ var COMMONCONSTANT=
   "BUNDLEBRANCH_NAME_RULETASKS": "#ruleTasks",
   "DATADEFINITION_TYPE_READONLY": "readonly",
   "DATADEFINITION_TYPE_WRITABLE": "writable",
-  "DATADEFINITION_TYPE_WRITEABLEWITHINIT": "writablewithinit"
+  "DATADEFINITION_TYPE_WRITEABLEWITHINIT": "writablewithinit",
+  "EVENT_UI_VALUE_CHANGE": "ui_value_change",
+  "ERROR_VALIDATION_VALUE": "ERROR_VALIDATION_VALUE"
 };
 
 //*******************************************   End Node Definition  ************************************** 	

@@ -53,7 +53,7 @@ var node_createUICustomerTagTestError = function(envObj){
 					}));
 
 					var erroeMsg = "";					
-					if(event==node_CONSTANT.ERROR_VALIDATION_VALUE){
+					if(event==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
 						_.each(eventData, function(item){
 							_.each(item.resultValue, function(r){{
 								erroeMsg = erroeMsg + r.description + "\n";
@@ -63,7 +63,7 @@ var node_createUICustomerTagTestError = function(envObj){
 						errorView.text(erroeMsg);
 						errorView.show();
 					}
-					else if(event==node_CONSTANT.EVENT_UI_VALUE_CHANGE){
+					else if(event==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
 						errorView.text("");
 						errorView.hide();
 					}

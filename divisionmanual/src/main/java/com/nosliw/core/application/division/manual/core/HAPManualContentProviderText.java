@@ -17,9 +17,12 @@ public class HAPManualContentProviderText implements HAPManualContentProvider{
 	
 	private Map<String, HAPManualInfoContent> m_localContentInfos;
 	
+	private List<HAPEventEmitter> m_eventExpose;
+	
 	public HAPManualContentProviderText() {
 		this.m_branchContentInfos = new LinkedHashMap<String, HAPManualInfoContent>();
 		this.m_localContentInfos = new LinkedHashMap<String, HAPManualInfoContent>();
+		this.m_eventExpose = new ArrayList<HAPEventEmitter>();
 	}
 	
 	@Override
@@ -60,7 +63,10 @@ public class HAPManualContentProviderText implements HAPManualContentProvider{
 
 	@Override
 	public List<HAPEventEmitter> getExposedEvent() {
-		return new ArrayList<HAPEventEmitter>();
+		return this.m_eventExpose;
+	}
+	public void addExposedEvent(HAPEventEmitter exposedEvent) {
+		this.m_eventExpose.add(exposedEvent);
 	}
 
 }

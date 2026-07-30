@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -22,8 +23,11 @@ public class HAPManualManangerStandalone {
 		HAPManualInfoContent maintContentInfo = new HAPManualInfoContent(definition.getContent(), definition.getFormat(), definition.getBrickTypeId());
 		contentProvider.setMainContent(maintContentInfo);
 		
-		return this.m_manualBrickMan.buildBundle(contentProvider, runtimeInfo);
+		for(HAPEventEmitter eventEmitter : definition.getExposeEvents()) {
+			contentProvider.addExposedEvent(eventEmitter);
+		}
 		
+		return this.m_manualBrickMan.buildBundle(contentProvider, runtimeInfo);
 	}
 	
 }

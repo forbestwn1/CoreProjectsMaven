@@ -1239,6 +1239,11 @@ I
 			<definition name="DATADEFINITION_TYPE_WRITABLE" value="writable"/>
 			<definition name="DATADEFINITION_TYPE_WRITEABLEWITHINIT" value="writablewithinit"/>
 
+			<definition type="space"/>
+			<definition name="EVENT_UI_VALUE_CHANGE" value="ui_value_change"/>
+
+			<definition type="space"/>
+			<definition name="ERROR_VALIDATION_VALUE" value="ERROR_VALIDATION_VALUE"/>
 
 		</definitions>
 	</constants>
