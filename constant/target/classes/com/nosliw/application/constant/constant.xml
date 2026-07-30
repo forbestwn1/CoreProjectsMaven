@@ -410,6 +410,7 @@
 			<definition name="UIRESOURCE_ATTRIBUTE_GROUP_DATAVALIDATION" value="valueValidation"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_METADATA" value="metadata"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_EVENT" value="event_"/>
+			<definition name="UIRESOURCE_ATTRIBUTE_ALIAS" value="alias"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_DATABINDING" value="data"/>
 			<definition name="UIRESOURCE_TAG_PLACEHOLDER" value="nosliw"/>
 			<definition name="UIRESOURCE_CUSTOMTAG_KEYATTRIBUTE_PREFIX" value="nosliw-"/>

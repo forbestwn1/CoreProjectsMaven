@@ -1,6 +1,7 @@
 package com.nosliw.core.application.brick.ui.uicontent;
 
 import java.util.List;
+import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -30,6 +31,9 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	@HAPAttribute
 	static final public String SCRIPTEXPRESSIONS = "scriptExpressions";
 
+	@HAPAttribute
+	static final public String TAGALIASMAPPING = "tagAliasMapping";
+
 	String getHtml();
 	
 	HAPBrickContainerList getCustomerTags();
@@ -41,6 +45,9 @@ public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{
 	List<HAPUIEmbededScriptExpressionInAttribute> getScriptExpressionInCustomerTagAttribute();
 	
 	HAPContainerScriptExpression getScriptExpressions();
+	
+	//uiid - alias for tag in content
+	Map<String, String> getTagAliasMapping();
 
 	
 	

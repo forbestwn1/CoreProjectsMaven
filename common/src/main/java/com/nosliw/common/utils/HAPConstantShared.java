@@ -296,6 +296,7 @@ public class HAPConstantShared {
 		public static final String UIRESOURCE_ATTRIBUTE_GROUP_DATAVALIDATION = "valueValidation";
 		public static final String UIRESOURCE_ATTRIBUTE_METADATA = "metadata";
 		public static final String UIRESOURCE_ATTRIBUTE_EVENT = "event_";
+		public static final String UIRESOURCE_ATTRIBUTE_ALIAS = "alias";
 		public static final String UIRESOURCE_ATTRIBUTE_DATABINDING = "data";
 		public static final String UIRESOURCE_TAG_PLACEHOLDER = "nosliw";
 		public static final String UIRESOURCE_CUSTOMTAG_KEYATTRIBUTE_PREFIX = "nosliw-";

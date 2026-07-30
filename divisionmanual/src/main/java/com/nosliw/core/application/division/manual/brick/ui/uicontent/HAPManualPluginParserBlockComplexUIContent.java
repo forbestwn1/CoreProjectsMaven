@@ -147,7 +147,12 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 			String keyAttrName = HAPUtilityUIResourceParser.isKeyAttribute(eleAttrName);
 			
 			if(keyAttrName!=null){
-				if(keyAttrName.startsWith(HAPConstantShared.UIRESOURCE_ATTRIBUTE_EVENT)) {
+				if(keyAttrName.equals(HAPConstantShared.UIRESOURCE_ATTRIBUTE_ALIAS)) {
+					//alias for tag
+					uiContent.addTagAliasMapping(uiId, eleAttrValue);
+				}
+				else if(keyAttrName.startsWith(HAPConstantShared.UIRESOURCE_ATTRIBUTE_EVENT)) {
+					//event on tag
 					String eventName = keyAttrName.substring(HAPConstantShared.UIRESOURCE_ATTRIBUTE_EVENT.length());
 					if(!isCustomerTag){
 						HAPUIEventHandlerInfoNormal normalEventHandler = new HAPUIEventHandlerInfoNormal();
@@ -172,6 +177,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 						uiContent.addEventProcess(new HAPEventProcess(eventEmitter, normalEventHandler.getHandlerInfo()));
 					}
 				}
+				ele.removeAttr(eleAttrName);
 				
 /*				
 				if(keyAttrName.contains(HAPConstantShared.UIRESOURCE_ATTRIBUTE_EVENT)){

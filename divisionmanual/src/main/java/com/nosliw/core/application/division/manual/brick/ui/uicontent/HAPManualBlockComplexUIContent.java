@@ -1,7 +1,9 @@
 package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.brick.container.HAPBrickContainerList;
@@ -20,11 +22,16 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINNORMALTAGATTRIBUTE, new ArrayList<HAPUIEmbededScriptExpressionInAttribute>());
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCUSTOMERTAGATTRIBUTE, new ArrayList<HAPUIEmbededScriptExpressionInAttribute>());
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONS, new HAPContainerScriptExpression());
+		this.setAttributeValueWithValue(HAPBlockComplexUIContent.TAGALIASMAPPING, new LinkedHashMap<String, String>());
 	}
 	
 	@Override
 	public String getHtml() {    return (String)this.getAttributeValueOfValue(HAPBlockComplexUIContent.HTML);  }
 	public void setHtml(String html) {    this.setAttributeValueWithValue(HTML, html);      }
+
+	@Override
+	public Map<String, String> getTagAliasMapping(){       return (Map<String, String>)this.getAttributeValueOfValue(HAPBlockComplexUIContent.TAGALIASMAPPING);        }
+	public void addAllTagAliasMapping(Map<String, String> mapping) {     this.getTagAliasMapping().putAll(mapping);       }
 
 	@Override
 	public HAPBrickContainerList getCustomerTags() {    return (HAPBrickContainerList)this.getAttributeValueOfBrickLocal(CUSTOMERTAG);   }

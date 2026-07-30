@@ -50,6 +50,8 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 
 		//customer tag
 		
+		//tag alias
+		uiContentExe.addAllTagAliasMapping(uiContentDef.getTagAliasMapping());
 	}
 	
 	@Override

@@ -39,6 +39,7 @@ public class HAPManualDefinitionBlockComplexUIContent extends HAPManualDefinitio
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCUSTOMERTAGATTRIBUTE, new ArrayList<HAPUIEmbededScriptExpressionInAttribute>());
 		this.setAttributeValueWithValue(CONSTANTFROMPARENT, new LinkedHashMap<String, HAPDefinitionConstant>());
 		this.setAttributeValueWithValue(ID_INDEX, new Integer(0));
+		this.setAttributeValueWithValue(HAPBlockComplexUIContent.TAGALIASMAPPING, new LinkedHashMap<String, String>());
 	}
 
 	@Override
@@ -68,6 +69,9 @@ public class HAPManualDefinitionBlockComplexUIContent extends HAPManualDefinitio
 		return (HAPManualDefinitionBrickContainerList)this.getAttributeValueOfBrick(HAPBlockComplexUIContent.CUSTOMERTAG);
 	}
 
+	public Map<String, String> getTagAliasMapping(){       return (Map<String, String>)this.getAttributeValueOfValue(HAPBlockComplexUIContent.TAGALIASMAPPING);        }
+	public void addTagAliasMapping(String uiid, String alias) {     this.getTagAliasMapping().put(uiid, alias);        }
+	
 	public String getHtml() {    return (String)this.getAttributeValueOfValue(HAPBlockComplexUIContent.HTML);  }
 	public void setHtml(String html) {    
 		this.setAttributeValueWithValue(HAPBlockComplexUIContent.HTML, StringEscapeUtils.escapeHtml4(html).replaceAll("(\\r|\\n)", ""));      }

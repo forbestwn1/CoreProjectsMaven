@@ -64,6 +64,8 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 
     var loc_tasks;
 
+	var loc_tagAliasMapping = loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICONTENT_TAGALIASMAPPING);
+	
 	//object store all the functions for js block
 	var loc_scriptObject = loc_complexEntityDef.getAttributeValue(node_COMMONATRIBUTECONSTANT.BLOCKCOMPLEXUICONTENT_SCRIPT);
 
@@ -122,10 +124,10 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 
 				var eventEmitter = eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_EVENTEMITTER];
 				var uiId = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_CHILDID];
+				var tagAlias = loc_tagAliasMapping[uiId];
 				var brickIdPath = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EMITTERID][node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH];
 				var eventName = eventEmitter[node_COMMONATRIBUTECONSTANT.EVENTEMITTER_EVENTDEFINITION][node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
 
-				
 						//get element for this event
 						var ele = loc_getLocalElementByUIId(uiId);
 						var subEle = ele;
@@ -142,7 +144,11 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 								source : this,
 							};
 							var emitterBrickDefPath = loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].getDefPath();
-							loc_bundleCore.triggerEvent(loc_out, emitterBrickDefPath, uiId, eventName, eventData);
+							
+							var childId = [];
+							childId.push(uiId);
+							if(tagAlias!=undefined)   childId.push(tagAlias);
+							loc_bundleCore.triggerEvent(loc_out, emitterBrickDefPath, childId, eventName, eventData);
 						});
 				
 			});

@@ -211,20 +211,43 @@ var node_createBundleCore = function(parm, configure){
 	}
 	
 	var loc_triggerEvent = function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){
-		var eventKey = loc_buildEventKey(emitterBrickPath, child, eventName);
+		//multiple eventkey
+		var eventKeys = [];
+		if(child==undefined){
+			 eventKeys.push(loc_buildEventKey(emitterBrickPath, child, eventName));
+		}
+		else{
+			if(node_basicUtility.isArray(child)){
+				_.each(child, function(c){
+					eventKeys.push(loc_buildEventKey(emitterBrickPath, c, eventName));
+				});
+			}
+			else{
+				eventKeys.push(loc_buildEventKey(emitterBrickPath, child, eventName));
+			}
+		}
 		
 		//try process event internally
-		var eventProcess = loc_eventProcess[eventKey];
-		if(eventProcess!=undefined){
-			var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_HANDLERREFERENCE], eventValue, emitterBrickCore);
-			node_requestServiceProcessor.processRequest(evenHandleReqeust);
+		for(var i in eventKeys){
+			var eventKey = eventKeys[i];
+	    	var eventProcess = loc_eventProcess[eventKey];
+		    if(eventProcess!=undefined){
+    			var evenHandleReqeust = node_uiEventUtility.getHandleEventRequest(eventProcess[node_COMMONATRIBUTECONSTANT.EVENTPROCESS_HANDLERREFERENCE], eventValue, emitterBrickCore);
+	     		node_requestServiceProcessor.processRequest(evenHandleReqeust);
+				break;
+		     }
 		}
 		
 		//try export event
-		var eventExport = loc_eventExport[eventKey];
-		if(eventExport!=undefined){
-			loc_triggerExposeEvent(eventName, eventValue, request);
+		for(var i in eventKeys){
+			var eventKey = eventKeys[i];
+			var eventExport = loc_eventExport[eventKey];
+			if(eventExport!=undefined){
+				loc_triggerExposeEvent(eventName, eventValue, request);
+				break;
+			}
 		}
+
 	};
 
 	var loc_triggerExposeEvent = function(eventName, eventValue, request){
