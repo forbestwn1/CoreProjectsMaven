@@ -9,6 +9,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	const contentRefForDisplay = useRef(null);
 	const [, forceUpdate] = useState(0);
 	const [showPopup, setShowPopup] = useState(false);
+	const [saveDataEnable, setSaveDataEnable] = useState(false);
 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -71,6 +72,16 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 							success: function (request, uiTagAppsResult) {
 								var uiTagAppsInfo = uiTagAppsResult.getResults();
 								cache.current[questionair.id] = uiTagAppsInfo;
+
+								loc_getUITappAppInfoForChange().application.registerExposeEventListener(undefined, function(eventName, eventValue){
+									if(eventName==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
+										setSaveDataEnable(true);
+									}
+									else if(eventName==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
+										setSaveDataEnable(false);
+									}
+								});
+
 
 								updateUITagForDisplay();
 								updateUITagForChange();
@@ -200,7 +211,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 						<div className="modal-footer">
 							<button className="btn-secondary" onClick={closePopup}>Cancel</button>
 							<button className="btn-reset" onClick={onRestChangeValue}>Reset</button>
-							<button className="btn-primary" onClick={okAndClose}>OK</button>
+							<button className="btn-primary" onClick={okAndClose} disabled={!saveDataEnable}>OK</button>
 						</div>
 					</div>
 				</div>

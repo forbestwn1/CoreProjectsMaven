@@ -207,7 +207,10 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 		//--------------------------------- event
 		trigueEvent : function(event, eventData, requestInfo){   
 //			loc_trigueEvent(event, eventData, requestInfo);  
+            //trigger event itself
+            loc_eventObject.triggerEvent(event, eventData, requestInfo);
 			
+			//process event by bundle
 			var emitterBrickDefPath = loc_envInterface[node_CONSTANT.INTERFACE_TREENODEENTITY].getDefPath();
 			loc_bundleCore.triggerEvent(loc_out, emitterBrickDefPath, undefined, event, eventData, requestInfo)
 	    },
