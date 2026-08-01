@@ -1,10 +1,12 @@
 package com.nosliw.core.application.common.brick;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
@@ -18,6 +20,7 @@ import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.HAPWrapperValueOfDynamic;
 import com.nosliw.core.application.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.HAPWrapperValueOfValue;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPResourceId;
@@ -36,6 +39,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	private List<String> m_eventIds;
 	
+	private Map<String, HAPCommandProcess> m_commandExports;
+	
 	public HAPBrickImp(HAPIdBrickType brickTypeId) {
 		this();
 		this.m_brickTypeId = brickTypeId;
@@ -46,6 +51,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		this.m_internalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_externalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_eventIds = new ArrayList<String>();
+		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
 	}
 
 	@Override
@@ -60,7 +66,11 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	public List<String> getEventIds(){     return this.m_eventIds;      }
 	public void addEventId(String eventId) {   this.m_eventIds.add(eventId);      }
 
-	
+	@Override
+	public List<String> getCommandExportNames() {    return new ArrayList<>(this.m_commandExports.keySet());  }
+	@Override
+	public HAPCommandProcess getCommandExport(String name) {   return this.m_commandExports.get(name);   }
+
 	@Override
 	public List<HAPAttributeInBrick> getAttributes(){     return this.m_attributes;	}
 	public HAPAttributeInBrick getAttribute(String attrName) {
@@ -174,6 +184,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		jsonMap.put(ATTRIBUTE, HAPUtilityJson.buildArrayJson(attrJsonList.toArray(new String[0])));
 		
 		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
+		
+		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
 	}
 	
 	@Override
@@ -194,6 +206,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		jsonMap.put(ATTRIBUTE, HAPUtilityJson.buildArrayJson(attrJsonList.toArray(new String[0])));
 		
 		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
+
+		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
 	}
 	
 	@Override
@@ -202,4 +216,5 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 			attr.buildResourceDependency(dependency, runtimeInfo);
 		}
 	}
+
 }

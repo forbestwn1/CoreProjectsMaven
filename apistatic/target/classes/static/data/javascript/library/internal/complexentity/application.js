@@ -92,6 +92,10 @@ var node_createApplication = function(parm, configure){
 		
 		registerExposeEventListener : function(listenerEventObj, handler, thisContext){return loc_eventObject.registerListener(undefined, listenerEventObj, handler, thisContext);		},
 		
+		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			return loc_getBundleCore().getExecuteCommandRequest(commandName, commandData, handlers, request);
+		}
+		
 	};
 	
 	loc_out = node_makeObjectWithType(loc_out, node_CONSTANT.TYPEDOBJECT_TYPE_APPLICATION);

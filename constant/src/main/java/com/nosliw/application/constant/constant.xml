@@ -1245,6 +1245,11 @@ I
 			<definition type="space"/>
 			<definition name="ERROR_VALIDATION_VALUE" value="ERROR_VALIDATION_VALUE"/>
 
+			<definition type="space"/>
+			<definition name="COMMAND_HANDLER_TYPE_COMMAND" value="command"/>
+			<definition name="COMMAND_HANDLER_TYPE_TASK" value="task"/>
+
+
 		</definitions>
 	</constants>
 </root>

@@ -6,11 +6,12 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializable;
+import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.valueport.HAPWithBothsideValuePort;
 import com.nosliw.core.resource.HAPWithResourceDependency;
 
 @HAPEntityWithAttribute
-public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency{
+public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency, HAPCommandWithExport{
 
 	@HAPAttribute
 	public final static String BRICKTYPE = "brickType"; 
@@ -26,5 +27,5 @@ public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWith
 	List<HAPAttributeInBrick> getAttributes();
 
 	List<String> getEventIds();
-	
+
 }

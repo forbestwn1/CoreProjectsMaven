@@ -15,6 +15,8 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
@@ -24,7 +26,7 @@ import com.nosliw.core.resource.HAPWithResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency{
+public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency, HAPCommandWithExport{
 
 	@HAPAttribute
 	public final static String MAINBRICK = "mainBrick"; 
@@ -63,6 +65,8 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	//event that will expose to external
 	private List<HAPEventEmitter> m_exportEvents;
 	
+	private Map<String, HAPCommandProcess> m_commandExports;
+
 	//need dynamic input during runtime
 	private HAPDynamicDefinitionContainer m_dynamicInfo;
 
@@ -79,7 +83,9 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		this.m_eventProcesses = new LinkedHashMap<String, HAPEventProcess>();
 		this.m_exportEvents = new ArrayList<HAPEventEmitter>();
 		this.m_aliasMapping = new LinkedHashMap<String, HAPPath>();
-	
+
+		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
+
 		this.m_dynamicInfo = new HAPDynamicDefinitionContainer(); 
 		
 		HAPInfoExportBrick defaultExport = new HAPInfoExportBrick(new HAPPath());
@@ -93,6 +99,11 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	
 	public void addExportEvent(HAPEventEmitter eventEmitter) {     this.m_exportEvents.add(eventEmitter);    }
 	public List<HAPEventEmitter> getExportEvents(){    return this.m_exportEvents;      }
+	
+	@Override
+	public List<String> getCommandExportNames() {    return new ArrayList<>(this.m_commandExports.keySet());  }
+	@Override
+	public HAPCommandProcess getCommandExport(String name) {   return this.m_commandExports.get(name);   }
 	
 	public void addExportResourceInfo(HAPInfoExportBrick exportResourceInfo) {		
 		exportResourceInfo.setPathFromRoot(HAPUtilityBundleForBrick.normalizePathWithBranch(exportResourceInfo.getPathFromRoot().getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN));
@@ -168,7 +179,9 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
 		
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
-	}
+
+		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
+    }
 	
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -192,10 +205,13 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
 
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
-}
+
+		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
+	}
 	
 	@Override
 	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {
 		this.m_mainBrickWrapper.buildResourceDependency(dependency, runtimeInfo);
 	}
+
 }

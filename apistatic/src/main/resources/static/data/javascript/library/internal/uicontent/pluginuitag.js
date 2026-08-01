@@ -312,6 +312,10 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 //		registerTagEventListener : function(eventName, handler, thisContext){	return loc_tagEventObject.registerListener(eventName, undefined, handler, thisContext);	},
 		registerEventListener : function(listener, handler, thisContext){	return loc_eventObject.registerListener(undefined, listener, handler, thisContext);	},
 		
+		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			return loc_uiTagCore.getExecuteCommandRequest(commandName, commandData, handlers, request);
+		}
+
 	};
 	
 	return loc_out;	

@@ -88,22 +88,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 			return out;
 		},
 		
-		onDataChange : function(data){
-/*			
-			if(data==undefined){
-				loc_currentData = data;
-			}
-			else{
-				if(loc_currentData==undefined){
-					loc_currentData = data;
-				}
-				else{
-					loc_currentData[node_COMMONATRIBUTECONSTANT.DATA_DATATYPEID] = data[node_COMMONATRIBUTECONSTANT.DATA_DATATYPEID]; 
-					loc_currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE] = data[node_COMMONATRIBUTECONSTANT.DATA_VALUE]; 
-				}
-			}
-*/	
-					
+		onDataChange : function(data, reqeust){
 			loc_envObj.executeBatchDataOperationRequest([
 				loc_envObj.getDataOperationSet(loc_dataVariable, "", data)
 			], {
@@ -126,7 +111,19 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	};
 	
 	var loc_out = {
-		
+
+		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			if(commandData=="setData"){
+				var data = commandData.data;
+				loc_coreObj.updateView(data);
+				onDataChange(data, reqeust);
+			}
+			else{
+				
+			}
+			
+		},
+				
 		created : function(){
 			loc_createCoreObj();
 		},

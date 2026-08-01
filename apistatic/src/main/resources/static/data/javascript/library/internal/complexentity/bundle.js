@@ -259,6 +259,18 @@ var node_createBundleCore = function(parm, configure){
 		loc_eventObject.triggerEvent(eventName, eventValue, request);
 	};
 	
+	var loc_getExecuteCommandRequest = function(commandName, commandData, handlers, request){
+		var commandProcess = loc_bundleDef[node_COMMONATRIBUTECONSTANT.COMMANDWITHEXPORT_EXPORTCOMMAND][commandName];
+		var handler = commandProcess[node_COMMONATRIBUTECONSTANT.COMMANDPROCESS_HANDLER];
+		var handlerType = handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCE_HANDLERTYPE];
+		if(handlerType==node_COMMONCONSTANT.COMMAND_HANDLER_TYPE_COMMAND){
+			var brickId = handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCECOMMAND_BRICKID];
+			var commandCoreEntity = node_complexEntityUtility.getCoreEntityReferenceByPath(loc_out, brickId[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH]);
+			return commandCoreEntity.getExecuteCommandRequest(handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCECOMMAND_COMMANDNAME], commandData, handlers, request);
+		}
+		
+	};
+	
 	var loc_out = {
 
 		getVariable : function(name){    
@@ -322,8 +334,11 @@ var node_createBundleCore = function(parm, configure){
 		registerExposeEventListener : function(listenerEventObj, handler, thisContext){return loc_eventObject.registerListener(undefined, listenerEventObj, handler, thisContext);		},
 		
 		
-		triggerEvent : function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){  loc_triggerEvent(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request);  }
+		triggerEvent : function(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request){  loc_triggerEvent(emitterBrickCore, emitterBrickPath, child, eventName, eventValue, request);  },
 		
+		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			return loc_getExecuteCommandRequest(commandName, commandData, handlers, request);
+		}
 		
 	};
 	

@@ -11,6 +11,8 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.common.command.HAPCommandDefinition;
+import com.nosliw.core.application.common.command.HAPCommandWithDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
@@ -18,7 +20,7 @@ import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.resource.HAPResourceId;
 
 @HAPEntityWithAttribute
-public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition{
+public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition, HAPCommandWithDefinition{
 
 	@HAPAttribute
 	public static final String TYPE = "type";
@@ -54,6 +56,8 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 
 	private Map<String, HAPEventDefinition> m_events;
 	
+	private Map<String, HAPCommandDefinition> m_commands;
+	
 	private HAPResourceId m_scriptResourceId;
 	
 	
@@ -68,6 +72,7 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 		this.m_parentRelations = new ArrayList<HAPManualDefinitionBrickRelation>();
 		this.m_attributes = new LinkedHashMap<String, HAPUITagDefinitionAttribute>();
 		this.m_events = new LinkedHashMap<String, HAPEventDefinition>();
+		this.m_commands = new LinkedHashMap<String, HAPCommandDefinition>();
 	}
 	
 	public String getType() {  return null;   }
@@ -91,6 +96,11 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 	public HAPEventDefinition getEventDefinition(String name) {  return this.m_events.get(name);   }
 	public void addEvent(HAPEventDefinition eventDef) {    this.m_events.put(eventDef.getName(), eventDef);     }
 	
+	@Override
+	public Set<String> getCommandNames() {   return this.m_commands.keySet();      } 
+	@Override
+	public HAPCommandDefinition getCommandDefinition(String name) {    return this.m_commands.get(name);        }
+	public void addCommand(HAPCommandDefinition commandDef) {    this.m_commands.put(commandDef.getName(), commandDef);       }
 	
 	
 	
