@@ -25,8 +25,14 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	var loc_nameForDisplay = "forDisplay";
 
 	useEffect(() => {
-		let uiTagAppInfo = cache.current[questionair.id];
-		if (uiTagAppInfo == undefined) {
+		let questionairData = cache.current[questionair.id];
+		if(questionairData==undefined){
+			questionairData = {};
+			cache.current[questionair.id] = questionairData;
+		}
+
+		if (questionairData.loading == undefined) {
+			questionairData.loading = true;
 
 			var loc_questionair = questionair;
 			var loc_bundleDefForChange;
@@ -71,7 +77,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 						var uiTagAppsRequest = node_createServiceRequestInfoSet({}, {
 							success: function (request, uiTagAppsResult) {
 								var uiTagAppsInfo = uiTagAppsResult.getResults();
-								cache.current[questionair.id] = uiTagAppsInfo;
+								cache.current[questionair.id].uiTagAppsInfo = uiTagAppsInfo;
 
 								loc_getUITappAppInfoForChange().application.registerExposeEventListener(undefined, function(eventName, eventValue){
 									if(eventName==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
@@ -85,6 +91,8 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 								updateUITagForDisplay();
 								updateUITagForChange();
+								questionairData.loading = false;
+
 								forceUpdate(c => c + 1);
 							}
 						});
@@ -98,7 +106,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			));
 			node_requestServiceProcessor.processRequest(request);
 		}
-		else {
+		else if(questionairData.loading == false) {
 			var forChangeAppInfo = loc_getUITappAppInfoForChange();
 //			$(forChangeAppInfo.application.getView()).remove();
 			$(contentRefForChange.current).append(forChangeAppInfo.application.getView());
@@ -116,11 +124,11 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 
 	var loc_getUITappAppInfoForDisplay = function(){
-		return  cache.current[questionair.id][loc_nameForDisplay];
+		return  cache.current[questionair.id].uiTagAppsInfo[loc_nameForDisplay];
 	};
 
 	var loc_getUITappAppInfoForChange = function(){
-		return  cache.current[questionair.id][loc_nameForChange];
+		return  cache.current[questionair.id].uiTagAppsInfo[loc_nameForChange];
 	};
 
 
