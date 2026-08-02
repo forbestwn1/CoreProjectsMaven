@@ -137,18 +137,27 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			}
 		}));
 		return out;
-
 	};
 
 	var updateUITagForDisplay = function () {
 		var data = loc_getCurrentConstantData();
-        var request = loc_getUITappAppInfoForDisplay().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
+		
+   	    var request = loc_getUITappAppInfoForDisplay().application.executeExecuteCommandRequest("setData", {
+            "data" : data
+        });
+
+//        var request = loc_getUITappAppInfoForDisplay().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
 		node_requestServiceProcessor.processRequest(request);
 	};
 
 	var updateUITagForChange = function () {
 		var data = loc_getCurrentConstantData();
-        var request = loc_getUITappAppInfoForChange().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
+
+   	    var request = loc_getUITappAppInfoForChange().application.executeExecuteCommandRequest("setData", {
+            "data" : data
+        });
+
+//		var request = loc_getUITappAppInfoForChange().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
 		node_requestServiceProcessor.processRequest(request);
 	};
 
@@ -175,7 +184,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 		updateUITagForChange();
 	};
 
-	var okAndClose = function () {
+	var saveAndClose = function () {
 		try {
            var request = loc_getUITappAppInfoForChange().variable.getGetValueRequest({
 			success: function (request, data) {
@@ -211,7 +220,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 						<div className="modal-footer">
 							<button className="btn-secondary" onClick={closePopup}>Cancel</button>
 							<button className="btn-reset" onClick={onRestChangeValue}>Reset</button>
-							<button className="btn-primary" onClick={okAndClose} disabled={!saveDataEnable}>OK</button>
+							<button className="btn-primary" onClick={saveAndClose} disabled={!saveDataEnable}>Save</button>
 						</div>
 					</div>
 				</div>

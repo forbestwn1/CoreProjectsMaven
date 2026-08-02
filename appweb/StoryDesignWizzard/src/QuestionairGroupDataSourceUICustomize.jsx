@@ -28,12 +28,12 @@ export default function QuestionairGroupDataSourceUICustomize({ questionair, onC
         <div className="request-response-wrapper">
             <div className="request-response-panels">
                 <div className="panel request-panel">
-                    <h3>Request</h3>
+                    <h3>Filter:</h3>
                     <QuestionairGroupRequest questionair={requestQ} onChange={onChange} />
                 </div>
 
                 <div className="panel response-panel">
-                    <h3>Response</h3>
+                    <h3>Output:</h3>
                     <QuestionairGroupResponse questionair={responseQ} onChange={onChange} />
                 </div>
             </div>

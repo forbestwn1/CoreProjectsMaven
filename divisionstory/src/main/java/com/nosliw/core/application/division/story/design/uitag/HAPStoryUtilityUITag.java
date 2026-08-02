@@ -1,6 +1,7 @@
 package com.nosliw.core.application.division.story.design.uitag;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.interpolate.HAPStringTemplate;
@@ -10,10 +11,16 @@ import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.common.command.HAPCommandDefinition;
+import com.nosliw.core.application.common.command.HAPCommandHandlerReferenceCommand;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
 import com.nosliw.core.application.division.manual.core.standalone.HAPStandaloneDefinition;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
@@ -56,7 +63,8 @@ public class HAPStoryUtilityUITag {
 		
 		
 		HAPStandaloneDefinition standAloneDef = new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100);
-		
+
+		//events
 		{
 			HAPEventEmitter eventEmitter = new HAPEventEmitter();
 			HAPIdBrickInBundle emitterBrickId = new HAPIdBrickInBundle();
@@ -79,6 +87,33 @@ public class HAPStoryUtilityUITag {
 			eventDef.setName(HAPConstantShared.ERROR_VALIDATION_VALUE);
 			eventEmitter.setEventDefinition(eventDef);
 			standAloneDef.addExposeEvent(eventEmitter);
+		}
+		
+		//command
+		{
+			HAPCommandProcess commandProcess = new HAPCommandProcess();
+			
+			String commandName = "setData";
+			
+			HAPCommandHandlerReferenceCommand handler = new HAPCommandHandlerReferenceCommand();
+			handler.setCommandName(commandName);
+			HAPIdBrickInBundle commandHandlerBrickId = new HAPIdBrickInBundle();
+			commandHandlerBrickId.setAlias(tagAlias);
+			handler.setBrickId(commandHandlerBrickId);
+			commandProcess.setCommandHandler(handler);
+			
+			HAPCommandDefinition commandDef = new HAPCommandDefinition();
+			commandDef.setName(commandName);
+
+			HAPDefinitionParmRequest requestParm = new HAPDefinitionParmRequest();
+			requestParm.setName("data");
+			requestParm.setDataDefinition(new HAPDataDefinitionWritableWithInit(dataDefinition));
+
+			HAPInteractiveTask taskInteractive = new HAPInteractiveTask(List.of(requestParm), null);
+			commandDef.setTaskInterface(taskInteractive);
+			
+			commandProcess.setCommandDefinition(commandDef);
+			standAloneDef.addExposeCommand(commandProcess);
 		}
 
 		return standaloneMan.buildStandalone(standAloneDef, runtimeInfo);
