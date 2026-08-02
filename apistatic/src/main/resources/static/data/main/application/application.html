@@ -20,6 +20,11 @@
 
 <body>
 	
+	<div>
+	
+	<a Id="command">HHHHHHEEEEELLLLLLLOOOOOOOOWWWWWWW</a>
+	</div>
+	
    <div id="moduleDiv"></div>
 
 	<!--div id="mainDiv" style="overflow-y: scroll; height:800px;">
@@ -73,6 +78,16 @@ $(document).on("nosliwActive", function(){
            }, application);
 			
 			
+           $("#command").on("click", function(event) {
+        	    event.preventDefault(); // Stop the default page navigation
+        	    application.executeExecuteCommandRequest("setData", {
+                    "data" : {
+    					dataTypeId: "test.string;1.0.0",
+	                	value: "value from command"
+	                }
+        	    });
+        	});
+           
 			var event = new CustomEvent("nosliwApplicationActive", {
 				bubbles: true,
 				detail: application

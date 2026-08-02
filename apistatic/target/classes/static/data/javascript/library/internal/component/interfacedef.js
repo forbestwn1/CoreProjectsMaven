@@ -116,7 +116,9 @@ var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debu
 	var loc_interfaceEntity = {
 
 		//execute command
-		getExecuteCommandRequest : function(commandName, parm, handlers, requestInfo){},
+		getExecuteCommandRequest : function(commandName, parm, handlers, requestInfo){
+			return loc_rawComponentCore.getExecuteCommandRequest==undefined?null:loc_rawComponentCore.getExecuteCommandRequest(commandName, parm, handlers, requestInfo);
+		},
 		getExecuteNosliwCommandRequest : function(commandName, parm, handlers, requestInfo){   this.getExecuteCommandRequest(node_basicUtility.buildNosliwFullName(commandName), parm, handlers, requestInfo);    },
 
 		//get part by id

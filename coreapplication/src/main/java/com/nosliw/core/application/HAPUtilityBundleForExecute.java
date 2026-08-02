@@ -47,6 +47,12 @@ public class HAPUtilityBundleForExecute {
 			out.addExportEvent(event);
 		}
 		
+		//command exposed
+		for(String commandName : bundleForBrick.getCommandExportNames()) {
+			out.addCommandExport(bundleForBrick.getCommandExport(commandName));
+		}
+		
+		
 		//figure out exported variables
 		HAPIdBrickInBundle brickId = new HAPIdBrickInBundle();
 		brickId.setIdPath(exportInfo.getPathFromRoot().toString());

@@ -1210,4 +1210,9 @@ public class HAPConstantShared {
 		public static final String ERROR_VALIDATION_VALUE = "ERROR_VALIDATION_VALUE";
 
 
+
+		public static final String COMMAND_HANDLER_TYPE_COMMAND = "command";
+		public static final String COMMAND_HANDLER_TYPE_TASK = "task";
+
+
 }

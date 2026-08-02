@@ -92,18 +92,18 @@ var node_complexEntityUtility = function(){
 	var loc_getCoreEntityReferenceByPath = function(baseEntityCore, path){
 			var hostEntityCore = baseEntityCore;
 			var remainPath;
-			if(relativePath!=undefined && relativePath!=""){
-				var segs = node_pathUtility.parsePathSegments(relativePath); 
+			if(path!=undefined && path!=""){
+				var segs = node_pathUtility.parsePathSegments(path); 
 				_.each(segs, function(seg, i){
 					if(remainPath!=undefined){
-					     remainPath.push(childName);
+					     remainPath.push(set);
 					}
 					else{
-						var childInfo = loc_getChildCoreEntityInfo(hostEntityCore, childName, i==0);
+						var childInfo = loc_getChildCoreEntityInfo(hostEntityCore, seg, i==0);
 						if(childInfo.remainPath!=undefined){
     					     //for attribute need interpret
 	    				     remainPath = [];
-		    			     remainPath.push(childName);
+		    			     remainPath.push(seg);
 						}
 						else{
         					hostEntityCore = childInfo.coreEntity;

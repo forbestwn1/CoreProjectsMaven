@@ -742,7 +742,9 @@ var COMMONCONSTANT=
   "DATADEFINITION_TYPE_WRITABLE": "writable",
   "DATADEFINITION_TYPE_WRITEABLEWITHINIT": "writablewithinit",
   "EVENT_UI_VALUE_CHANGE": "ui_value_change",
-  "ERROR_VALIDATION_VALUE": "ERROR_VALIDATION_VALUE"
+  "ERROR_VALIDATION_VALUE": "ERROR_VALIDATION_VALUE",
+  "COMMAND_HANDLER_TYPE_COMMAND": "command",
+  "COMMAND_HANDLER_TYPE_TASK": "task"
 };
 
 //*******************************************   End Node Definition  ************************************** 	

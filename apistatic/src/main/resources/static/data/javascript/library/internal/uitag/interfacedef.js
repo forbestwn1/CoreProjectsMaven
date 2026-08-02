@@ -19,15 +19,19 @@ var node_buildUITagCoreObject = function(rawEntity){
 		initViews : function(request){    return loc_rawEntity.initViews==undefined?undefined:loc_rawEntity.initViews(request);     },
 		postInit : function(request){    return loc_rawEntity.postInit==undefined?undefined:loc_rawEntity.postInit(request);     },
 		destroy : function(request){    return loc_rawEntity.destroy==undefined?undefined:loc_rawEntity.destroy(request);     },
+		getExecuteCommandRequest : function(commandName, parm, handlers, requestInfo){
+			return loc_rawEntity.getExecuteCommandRequest==undefined?null:loc_rawEntity.getExecuteCommandRequest(commandName, parm, handlers, requestInfo);
+		},
 
+		
 		updateAttributes : function(attributes, request){return loc_rawEntity.updateAttributes==undefined?undefined:loc_rawEntity.updateAttributes(attributes, request);     },
 
 
 
-		findFunctionDown : function(name){    return loc_rawEntity.findFunctionDown==undefined?undefined:loc_rawEntity.findFunctionDown(name);     },	
-		getChildUIViews : function(){    return loc_rawEntity.getChildUIViews==undefined?undefined:loc_rawEntity.getChildUIViews();     },
-		getValidateDataRequest : function(handlers, request){    return loc_rawEntity.getValidateDataRequest==undefined?undefined:loc_rawEntity.getValidateDataRequest(handlers, request);     },
-		createContextForDemo : function(id, parentContext){    return loc_rawEntity.createContextForDemo==undefined?undefined:loc_rawEntity.createContextForDemo(handlers, request);     },
+//		findFunctionDown : function(name){    return loc_rawEntity.findFunctionDown==undefined?undefined:loc_rawEntity.findFunctionDown(name);     },	
+//		getChildUIViews : function(){    return loc_rawEntity.getChildUIViews==undefined?undefined:loc_rawEntity.getChildUIViews();     },
+//		getValidateDataRequest : function(handlers, request){    return loc_rawEntity.getValidateDataRequest==undefined?undefined:loc_rawEntity.getValidateDataRequest(handlers, request);     },
+//		createContextForDemo : function(id, parentContext){    return loc_rawEntity.createContextForDemo==undefined?undefined:loc_rawEntity.createContextForDemo(handlers, request);     },
 	};
 	
 	return loc_out;

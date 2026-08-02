@@ -104,6 +104,8 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	public List<String> getCommandExportNames() {    return new ArrayList<>(this.m_commandExports.keySet());  }
 	@Override
 	public HAPCommandProcess getCommandExport(String name) {   return this.m_commandExports.get(name);   }
+	public void addCommandExport(HAPCommandProcess command) {    this.m_commandExports.put(command.getCommandDefinition().getName(), command);         }
+	public Map<String, HAPCommandProcess> getCommandExorts(){     return this.m_commandExports;       }
 	
 	public void addExportResourceInfo(HAPInfoExportBrick exportResourceInfo) {		
 		exportResourceInfo.setPathFromRoot(HAPUtilityBundleForBrick.normalizePathWithBranch(exportResourceInfo.getPathFromRoot().getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN));

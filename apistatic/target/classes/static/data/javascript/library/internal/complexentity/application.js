@@ -15,6 +15,7 @@ var packageObj = library;
 	var node_basicUtility;
 	var node_componentUtility;
 	var node_createEventObject;
+	var node_requestServiceProcessor;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -94,7 +95,13 @@ var node_createApplication = function(parm, configure){
 		
 		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
 			return loc_getBundleCore().getExecuteCommandRequest(commandName, commandData, handlers, request);
-		}
+		},
+		
+		executeExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			var request = this.getExecuteCommandRequest(commandName, commandData, handlers, request);
+			node_requestServiceProcessor.processRequest(request);
+		},
+		
 		
 	};
 	
@@ -118,6 +125,7 @@ nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_cre
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
+nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createApplication", node_createApplication); 

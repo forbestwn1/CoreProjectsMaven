@@ -13,6 +13,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -37,14 +39,17 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	
 	private HAPManualInfoContent m_mainContent;
 
-	private List<HAPEventEmitter> m_eventEmitters;
+	private List<HAPEventEmitter> m_eventExpose;
+	
+	private List<HAPCommandProcess> m_commandExpose;
 	
 	public HAPManualContentProviderFile(HAPIdBrick brickId, HAPManualDefinitionInfoBrickLocation entityLocationInfo, HAPManagerBrickCriteria brickCriteriaMan, HAPServiceParseEntity parseService) {
 		this.m_brickCriteriaMan = brickCriteriaMan;
 		this.m_parseService = parseService;
 		this.m_brickId = brickId;
 		this.m_entityLocationInfo = entityLocationInfo;
-		this.m_eventEmitters = new ArrayList<HAPEventEmitter>();
+		this.m_eventExpose = new ArrayList<HAPEventEmitter>();
+		this.m_commandExpose = new ArrayList<HAPCommandProcess>();
 		this.init();
 	}
 	
@@ -65,7 +70,14 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 				JSONArray exportEventArrayJson = bundleInfoObj.optJSONArray(HAPBundleForBrick.EXPORTEVENT);
 				if(exportEventArrayJson!=null) {
 					for(int i=0; i<exportEventArrayJson.length(); i++) {
-						this.m_eventEmitters.add(HAPEventEmitter.parseEventEmitter(exportEventArrayJson.getJSONObject(i), this.m_parseService));
+						this.m_eventExpose.add(HAPEventEmitter.parseEventEmitter(exportEventArrayJson.getJSONObject(i), this.m_parseService));
+					}
+				}
+
+				JSONArray exportCommandArrayJson = bundleInfoObj.optJSONArray(HAPCommandWithExport.EXPORTCOMMAND);
+				if(exportCommandArrayJson!=null) {
+					for(int i=0; i<exportCommandArrayJson.length(); i++) {
+						this.m_commandExpose.add(HAPCommandProcess.parseCommandProcess(exportCommandArrayJson.getJSONObject(i), this.m_parseService));
 					}
 				}
 			}
@@ -83,8 +95,13 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	}
 
 	@Override
-	public List<HAPEventEmitter> getExposedEvent() {   return this.m_eventEmitters;   }
+	public List<HAPEventEmitter> getExposedEvent() {   return this.m_eventExpose;   }
 
+	@Override
+	public List<HAPCommandProcess> getExposedCommand(){     return this.m_commandExpose;      }
+	
+
+	
 	private HAPManualInfoContent buildContentInfo(HAPManualDefinitionInfoBrickLocation locationInfo) {
 		HAPSerializationFormat format = locationInfo.getFormat();
 		String content = HAPUtilityFile.readFile(locationInfo.getFiile());

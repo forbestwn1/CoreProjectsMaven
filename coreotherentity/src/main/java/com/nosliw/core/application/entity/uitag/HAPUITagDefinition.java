@@ -105,6 +105,7 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 	
 	
 	
+	
 	public HAPResourceId getScriptResourceId() {     return this.m_scriptResourceId;     }
 	public void setScriptResourceId(HAPResourceId scriptResourceId) {     this.m_scriptResourceId = scriptResourceId;         }
 

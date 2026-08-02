@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
@@ -19,10 +20,13 @@ public class HAPManualContentProviderText implements HAPManualContentProvider{
 	
 	private List<HAPEventEmitter> m_eventExpose;
 	
+	private List<HAPCommandProcess> m_commandExpose;
+	
 	public HAPManualContentProviderText() {
 		this.m_branchContentInfos = new LinkedHashMap<String, HAPManualInfoContent>();
 		this.m_localContentInfos = new LinkedHashMap<String, HAPManualInfoContent>();
 		this.m_eventExpose = new ArrayList<HAPEventEmitter>();
+		this.m_commandExpose = new ArrayList<HAPCommandProcess>();
 	}
 	
 	@Override
@@ -62,11 +66,10 @@ public class HAPManualContentProviderText implements HAPManualContentProvider{
 	}
 
 	@Override
-	public List<HAPEventEmitter> getExposedEvent() {
-		return this.m_eventExpose;
-	}
-	public void addExposedEvent(HAPEventEmitter exposedEvent) {
-		this.m_eventExpose.add(exposedEvent);
-	}
+	public List<HAPEventEmitter> getExposedEvent() {		return this.m_eventExpose;	}
+	public void addExposedEvent(HAPEventEmitter exposedEvent) {		this.m_eventExpose.add(exposedEvent);	}
 
+	@Override
+	public List<HAPCommandProcess> getExposedCommand(){     return this.m_commandExpose;      }
+	public void addExposedCommand(HAPCommandProcess exposedCommand) {    this.m_commandExpose.add(exposedCommand);         }
 }

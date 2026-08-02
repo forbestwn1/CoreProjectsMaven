@@ -27,6 +27,7 @@ var packageObj = library;
 	var node_uiEventUtility;
 	var node_requestServiceProcessor;
 	var node_createEventObject;
+	var node_getComponentInterface;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -262,11 +263,11 @@ var node_createBundleCore = function(parm, configure){
 	var loc_getExecuteCommandRequest = function(commandName, commandData, handlers, request){
 		var commandProcess = loc_bundleDef[node_COMMONATRIBUTECONSTANT.COMMANDWITHEXPORT_EXPORTCOMMAND][commandName];
 		var handler = commandProcess[node_COMMONATRIBUTECONSTANT.COMMANDPROCESS_HANDLER];
-		var handlerType = handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCE_HANDLERTYPE];
+		var handlerType = handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCE_TYPE];
 		if(handlerType==node_COMMONCONSTANT.COMMAND_HANDLER_TYPE_COMMAND){
 			var brickId = handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCECOMMAND_BRICKID];
-			var commandCoreEntity = node_complexEntityUtility.getCoreEntityReferenceByPath(loc_out, brickId[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH]);
-			return commandCoreEntity.getExecuteCommandRequest(handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCECOMMAND_COMMANDNAME], commandData, handlers, request);
+			var commandCoreEntity = node_complexEntityUtility.getDescendantCore(loc_out, brickId[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_IDPATH]);
+			return node_getComponentInterface(commandCoreEntity).getExecuteCommandRequest(handler[node_COMMONATRIBUTECONSTANT.COMMANDHANDLERREFERENCECOMMAND_COMMANDNAME], commandData, handlers, request);
 		}
 		
 	};
@@ -375,6 +376,7 @@ nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_Re
 nosliw.registerSetNodeDataEvent("complexentity.uiEventUtility", function(){node_uiEventUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
+nosliw.registerSetNodeDataEvent("component.getComponentInterface", function(){node_getComponentInterface = this.getData();});
 
 
 //Register Node by Name

@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.common.command.HAPCommandDefinition;
+import com.nosliw.core.application.common.command.HAPCommandWithDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
@@ -108,6 +110,17 @@ public class HAPUITagUtilityDefinitionParser {
 				out.addEvent(eventDef);
 			}
 		}
+		
+		//command definition
+		JSONArray commandArray = jsonObj.optJSONArray(HAPCommandWithDefinition.COMMAND);
+		if(commandArray!=null) {
+			for(int i=0; i<commandArray.length(); i++) {
+				HAPCommandDefinition commandDef = HAPCommandDefinition.parseCommandDefinition(commandArray.getJSONObject(i), entityParseService);
+				out.addCommand(commandDef);
+			}
+		}
+		
+		
 		
 		
 		

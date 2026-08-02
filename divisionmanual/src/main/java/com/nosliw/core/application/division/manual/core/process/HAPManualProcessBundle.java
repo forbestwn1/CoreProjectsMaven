@@ -9,6 +9,9 @@ import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrickReference;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.common.command.HAPCommandHandlerReference;
+import com.nosliw.core.application.common.command.HAPCommandHandlerReferenceCommand;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
@@ -80,6 +83,17 @@ public class HAPManualProcessBundle {
 		for(HAPEventEmitter eventEmitter : contentProvider.getExposedEvent()){
 			HAPUtilityBrickReference.normalizeBrickReferenceInBundle(eventEmitter.getEmitterBrickId(), null, true, HAPConstantShared.NAME_ROOTBRICK_MAIN, bundle.getAliasMappings(), bundle);
 			bundle.addExportEvent(eventEmitter);
+		}
+		
+		//process export command
+		for(HAPCommandProcess commandProcess : contentProvider.getExposedCommand()) {
+			HAPCommandHandlerReference handler = commandProcess.getCommandHandler();
+			String handlerType = handler.getHandlerType();
+			if(HAPConstantShared.COMMAND_HANDLER_TYPE_COMMAND.equals(handlerType)) {
+				HAPCommandHandlerReferenceCommand handlerWithCommand = (HAPCommandHandlerReferenceCommand)handler;
+				HAPUtilityBrickReference.normalizeBrickReferenceInBundle(handlerWithCommand.getBrickId(), null, true, HAPConstantShared.NAME_ROOTBRICK_MAIN, bundle.getAliasMappings(), bundle);
+				bundle.addCommandExport(commandProcess);
+			}
 		}
 		
 		bundle.setExtraData(definitions);

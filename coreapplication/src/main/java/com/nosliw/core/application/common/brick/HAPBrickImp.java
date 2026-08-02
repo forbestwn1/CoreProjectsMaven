@@ -185,7 +185,9 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		
 		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
 		
-		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
+		if(this.m_commandExports.size()>0) {
+			jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
+		}
 	}
 	
 	@Override
@@ -207,7 +209,9 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		
 		jsonMap.put(EVENTID, HAPUtilityJson.buildArrayJson(this.m_eventIds.toArray(new String[0])));
 
-		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
+		if(this.m_commandExports.size()>0) {
+			jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
+		}
 	}
 	
 	@Override

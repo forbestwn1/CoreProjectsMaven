@@ -113,10 +113,10 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	var loc_out = {
 
 		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
-			if(commandData=="setData"){
+			if(commandName=="setData"){
 				var data = commandData.data;
 				loc_coreObj.updateView(data);
-				onDataChange(data, reqeust);
+				loc_coreEnvObj.onDataChange(data, request);
 			}
 			else{
 				
