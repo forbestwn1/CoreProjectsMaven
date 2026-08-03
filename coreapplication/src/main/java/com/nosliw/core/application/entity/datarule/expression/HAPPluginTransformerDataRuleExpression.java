@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.task.wrapper.dataexpression.HAPBlockTaskWrapperDataExpressionImp;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
@@ -38,7 +39,7 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
 		HAPDataRuleExpression expressionDataRule = (HAPDataRuleExpression)dataRule;
 
-		HAPBlockTaskWrapperDataExpressionImp brick = new HAPBlockTaskWrapperDataExpressionImp();
+		HAPBlockTaskWrapperDataExpressionImp brick = new HAPBlockTaskWrapperDataExpressionImp(HAPConstantShared.NAME_DEFAULT);
 
 		HAPInteractiveTask interactive = this.buildValuePortGroupForRuleTaskBrickTask(expressionDataRule, brick, valueStructureDomian); 
 		
