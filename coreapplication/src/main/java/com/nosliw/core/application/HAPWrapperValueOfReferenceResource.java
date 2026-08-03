@@ -24,9 +24,13 @@ public class HAPWrapperValueOfReferenceResource extends HAPWrapperValue{
 	
 	//for resource need dynamic input
 	private HAPDynamicExecuteInputContainer m_dynamicInput;
+
+	public HAPWrapperValueOfReferenceResource() {
+		super(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_RESOURCEID);
+	}
 	
 	public HAPWrapperValueOfReferenceResource(HAPResourceId resourceId) {
-		super(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_RESOURCEID);
+		this();
 		this.m_resourceId = resourceId;
 		this.m_dynamicInput = new HAPDynamicExecuteInputContainer();
 	}
@@ -35,8 +39,10 @@ public class HAPWrapperValueOfReferenceResource extends HAPWrapperValue{
 	public Object getValue() {     return this.m_resourceId;      }
 
 	public HAPResourceId getResourceId() {    return this.m_resourceId;     }
+	public void setResourceId(HAPResourceId resourceId) {      this.m_resourceId = resourceId;         }
 	
 	public HAPDynamicExecuteInputContainer getDynamicInput(){    return this.m_dynamicInput;        }
+	public void setDynamicInput(HAPDynamicExecuteInputContainer dynamicInput) {     this.m_dynamicInput = dynamicInput;         }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

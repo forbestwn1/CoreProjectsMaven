@@ -6,8 +6,10 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
@@ -34,7 +36,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		File scriptFile = new File(scriptFileName);
 		String script = HAPUtilityFile.readFile(scriptFile);
 
-		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId);
+		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId, this.getDivisionName());
 		scriptBrick.setScript(script);
 		
 		HAPBundleForBrick bundle = new HAPBundleForBrick();
@@ -47,5 +49,11 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		Set<HAPIdBrickType> out = new HashSet<HAPIdBrickType>();
 		out.add(HAPEnumBrickType.DECORATIONSCRIPT_100);
 		return out;
+	}
+
+	@Override
+	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

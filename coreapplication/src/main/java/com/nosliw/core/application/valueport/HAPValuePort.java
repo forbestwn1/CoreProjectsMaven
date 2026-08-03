@@ -7,6 +7,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
@@ -36,6 +39,8 @@ public class HAPValuePort extends HAPEntityInfoImp{
 	
 	private String m_ioDirection; 
 
+	public HAPValuePort() {}
+	
 	public HAPValuePort(String type, String ioDirection) {
 		this.m_type = type;
 		this.m_ioDirection = ioDirection;
@@ -78,4 +83,20 @@ public class HAPValuePort extends HAPEntityInfoImp{
 		jsonMap.put(VALUESTRUCTUREINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_valueStructures, HAPSerializationFormat.JSON));
 	}
 
+	@Override
+	protected boolean buildObjectByJson(Object obj){
+		JSONObject jsonObj = (JSONObject)obj;
+		this.m_type = (String)jsonObj.opt(TYPE);
+		this.m_ioDirection = (String)jsonObj.opt(IODIRECTION);
+		
+		JSONArray vsInfosJsonArray = jsonObj.optJSONArray(VALUESTRUCTUREINFO);
+		for(int i=0; i<vsInfosJsonArray.length(); i++) {
+			HAPInfoValueStructure vsInfo = new HAPInfoValueStructure();
+			vsInfo.buildObject(vsInfosJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			this.addValueStructureInfo(vsInfo);
+		}
+		
+		return true;  
+	}
+	
 }

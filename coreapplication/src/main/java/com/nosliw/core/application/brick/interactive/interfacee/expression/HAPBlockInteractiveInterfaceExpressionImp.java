@@ -6,8 +6,8 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 
 public class HAPBlockInteractiveInterfaceExpressionImp extends HAPBrickImp implements HAPBlockInteractiveInterfaceExpression{
 
-	public HAPBlockInteractiveInterfaceExpressionImp(){
-		this.setBrickType(HAPEnumBrickType.INTERACTIVEEXPRESSIONINTERFACE_100);
+	public HAPBlockInteractiveInterfaceExpressionImp(String division){
+		super(HAPEnumBrickType.INTERACTIVEEXPRESSIONINTERFACE_100, division);
 	}
 	
 	@Override

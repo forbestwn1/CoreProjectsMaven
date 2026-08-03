@@ -11,14 +11,15 @@ public class HAPManualAdapter extends HAPAdapter{
 
 	private HAPWrapperValue m_valueWrapper;
 	
+	public HAPManualAdapter() {}
+	
 	public HAPManualAdapter(HAPWrapperValue valueWrapper) {
 		this.m_valueWrapper = valueWrapper;
 	}
 	
 	@Override
-	public HAPWrapperValue getValueWrapper() {
-		return this.m_valueWrapper;
-	}
+	public HAPWrapperValue getValueWrapper() {		return this.m_valueWrapper;	}
+	public void setValueWrapper(HAPWrapperValue valueWrapper) {     this.m_valueWrapper = valueWrapper;       }
 
 	@Override
 	public void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo) {

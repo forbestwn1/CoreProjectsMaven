@@ -6,8 +6,8 @@ import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandA
 
 public class HAPBlockTaskWrapperDataExpressionImp extends HAPBrickImp implements HAPBlockTaskWrapperDataExpression{
 
-	public HAPBlockTaskWrapperDataExpressionImp() {
-		super(HAPEnumBrickType.TASKWRAPPERDATAEXPRESSION);
+	public HAPBlockTaskWrapperDataExpressionImp(String division) {
+		super(HAPEnumBrickType.TASKWRAPPERDATAEXPRESSION, division);
 		this.setAttributeValueWithValue(DATAEXPRESSION, new HAPDataExpressionStandAlone());;
 	}
 	

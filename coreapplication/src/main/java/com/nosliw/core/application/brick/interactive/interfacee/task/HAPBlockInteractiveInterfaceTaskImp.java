@@ -6,8 +6,8 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 
 public class HAPBlockInteractiveInterfaceTaskImp extends HAPBrickImp implements HAPBlockInteractiveInterfaceTask{
 
-	public HAPBlockInteractiveInterfaceTaskImp(){
-		this.setBrickType(HAPEnumBrickType.INTERACTIVETASKINTERFACE_100);
+	public HAPBlockInteractiveInterfaceTaskImp(String division){
+		super(HAPEnumBrickType.INTERACTIVETASKINTERFACE_100, division);
 	}
 	
 	@Override

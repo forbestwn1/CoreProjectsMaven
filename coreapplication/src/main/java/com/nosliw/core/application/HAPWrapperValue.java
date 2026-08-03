@@ -23,6 +23,7 @@ public abstract class HAPWrapperValue extends HAPSerializableImp implements HAPW
 
 	abstract public Object getValue();
 	
+	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);

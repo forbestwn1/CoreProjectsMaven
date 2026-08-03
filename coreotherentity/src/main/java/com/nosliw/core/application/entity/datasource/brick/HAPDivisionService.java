@@ -6,7 +6,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
@@ -54,15 +56,21 @@ public class HAPDivisionService implements HAPPluginDivision{
 	}
 
 	private HAPBlockServiceProfile fromObjToBlockServiceProfile(HAPServiceProfile serviceProfile, HAPRuntimeInfo runtimeInfo) {
-		HAPBlockServiceProfileImp blockServiceProfile = new HAPBlockServiceProfileImp();
+		HAPBlockServiceProfileImp blockServiceProfile = new HAPBlockServiceProfileImp(this.getDivisionName());
 		serviceProfile.cloneToEntityInfo(blockServiceProfile);
 		blockServiceProfile.setTags(serviceProfile.getTags());
 		blockServiceProfile.setDisplayResource(serviceProfile.getDisplayResource());
 		
-		HAPBlockInteractiveInterfaceTaskImp interfacBlock = new HAPBlockInteractiveInterfaceTaskImp();
+		HAPBlockInteractiveInterfaceTaskImp interfacBlock = new HAPBlockInteractiveInterfaceTaskImp(this.getDivisionName());
 		interfacBlock.setValue(serviceProfile.getInterface());
 		blockServiceProfile.setTaskInterface(interfacBlock);
 		return blockServiceProfile;
+	}
+
+	@Override
+	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //	private HAPServiceProfile fromBlockToObjServiceProfile(HAPBlockServiceProfile blockServiceProfile, HAPRuntimeInfo runtimeInfo) {

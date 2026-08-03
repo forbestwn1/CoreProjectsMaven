@@ -6,8 +6,8 @@ import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandA
 
 public class HAPBlockDataExpressionStandAloneImp extends HAPBrickImp implements HAPBlockDataExpressionStandAlone{
 
-	public HAPBlockDataExpressionStandAloneImp() {
-		super(HAPEnumBrickType.DATAEXPRESSIONSTANDALONE_100);
+	public HAPBlockDataExpressionStandAloneImp(String division) {
+		super(HAPEnumBrickType.DATAEXPRESSIONSTANDALONE_100, division);
 		this.setAttributeValueWithValue(VALUE, new HAPDataExpressionStandAlone());;
 	}
 	

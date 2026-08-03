@@ -13,7 +13,8 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPBrickScript extends HAPBrickImp implements HAPWithScript{
 
-	public HAPBrickScript(HAPIdBrickType brickTypeId) {
+	public HAPBrickScript(HAPIdBrickType brickTypeId, String division) {
+		super(division);
 		this.setBrickType(brickTypeId);
 	}
 	

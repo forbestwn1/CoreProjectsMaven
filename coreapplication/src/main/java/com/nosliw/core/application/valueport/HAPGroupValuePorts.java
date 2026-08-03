@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
@@ -24,6 +27,9 @@ public class HAPGroupValuePorts extends HAPEntityInfoImp{
 	@HAPAttribute
 	public static String GROUPTYPE = "groupType";
 
+	@HAPAttribute
+	public static String IDINDEX = "idIndex";
+
 
 	private List<HAPValuePort> m_valuePorts;
 	
@@ -31,7 +37,9 @@ public class HAPGroupValuePorts extends HAPEntityInfoImp{
 	private String m_groupType;
 	
 	private int m_idIndex = 0;
-	
+
+	public HAPGroupValuePorts() {}
+
 	public HAPGroupValuePorts(String groupType) {
 		this.m_groupType = groupType;
 		this.m_valuePorts = new ArrayList<HAPValuePort>();
@@ -122,6 +130,25 @@ public class HAPGroupValuePorts extends HAPEntityInfoImp{
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(GROUPTYPE, this.m_groupType);
 		jsonMap.put(VALUEPORT, HAPManagerSerialize.getInstance().toStringValue(this.m_valuePorts, HAPSerializationFormat.JSON));
+		jsonMap.put(IDINDEX, this.m_idIndex+"");
+		typeJsonMap.put(IDINDEX, Integer.class);
 	}
 	
+	@Override
+	protected boolean buildObjectByJson(Object obj){
+		JSONObject jsonObj = (JSONObject)obj;
+		this.m_groupType = (String)jsonObj.opt(GROUPTYPE);
+		this.m_idIndex = (int)jsonObj.opt(IDINDEX);
+
+		JSONArray vpJsonArray = jsonObj.optJSONArray(VALUEPORT);
+		if(vpJsonArray!=null) {
+			for(int i=0; i<vpJsonArray.length(); i++) {
+				HAPValuePort valuePort = new HAPValuePort();
+				valuePort.buildObject(vpJsonArray.get(i), HAPSerializationFormat.JSON);
+				this.addValuePort(valuePort);
+			}
+		}
+		
+		return true;
+	}	
 }

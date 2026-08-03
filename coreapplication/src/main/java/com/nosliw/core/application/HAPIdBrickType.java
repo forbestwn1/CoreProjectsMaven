@@ -18,6 +18,9 @@ public class HAPIdBrickType extends HAPSerializableImp{
 	@HAPAttribute
 	public static final String VERSION = "version";
 	
+	@HAPAttribute
+	public static final String KEY = "key";
+	
 	//type of entity
 	private String m_brickType;
 	
@@ -63,6 +66,7 @@ public class HAPIdBrickType extends HAPSerializableImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(BRICKTYPE, this.m_brickType);
 		jsonMap.put(VERSION, this.m_version);
+		jsonMap.put(KEY, this.getKey());
 	}
 
 	@Override

@@ -12,8 +12,8 @@ import com.nosliw.core.application.common.brick.HAPBrickImp;
 
 public class HAPBrickContainerImp extends HAPBrickImp implements HAPBrickContainer{
 
-	public HAPBrickContainerImp() {
-		super(HAPEnumBrickType.CONTAINER_100);
+	public HAPBrickContainerImp(String division) {
+		super(HAPEnumBrickType.CONTAINER_100, division);
 	}
 	
 	@Override

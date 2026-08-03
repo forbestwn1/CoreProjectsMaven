@@ -17,8 +17,12 @@ public class HAPWrapperValueOfDynamic extends HAPWrapperValue{
 	
 	private HAPValueOfDynamic m_dynamicValue;
 	
-	public HAPWrapperValueOfDynamic(HAPValueOfDynamic dynamicValue) {
+	public HAPWrapperValueOfDynamic() {
 		super(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_DYNAMIC);
+	}
+
+	public HAPWrapperValueOfDynamic(HAPValueOfDynamic dynamicValue) {
+		this();
 		this.m_dynamicValue = dynamicValue;
 	}
 	
@@ -26,6 +30,7 @@ public class HAPWrapperValueOfDynamic extends HAPWrapperValue{
 	public Object getValue() {    return this.getDynamicValue();     }
 	
 	public HAPValueOfDynamic getDynamicValue() {    return this.m_dynamicValue;     }
+	public void setDynamicValue(HAPValueOfDynamic dynamicValue) {       this.m_dynamicValue = dynamicValue;       }
 	
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

@@ -29,7 +29,7 @@ public class HAPProcessorRuleInBundle {
 		//build new branch to host data rule tasks
 		String validationTaskBranchName = HAPConstantShared.BUNDLEBRANCH_NAME_RULETASKS;
 		
-		HAPBrickContainerImp containerBrick = new HAPBrickContainerImp(); 
+		HAPBrickContainerImp containerBrick = new HAPBrickContainerImp(HAPConstantShared.NAME_DEFAULT); 
 		
 		HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 		Map<String, HAPStructure> structures = valueStructureDomain.getValueStructureDefinitions();
@@ -64,7 +64,7 @@ public class HAPProcessorRuleInBundle {
     		HAPDataTypeCriteria ruleCriteria = HAPUtilityCriteria.getChildCriteriaByPath(dataEle.getCriteria(), ruleDef.getPath());
     		rule.setDataCriteria(ruleCriteria);
     		
-    		HAPBlockTaskWrapperImp taskWrapperBrick = new HAPBlockTaskWrapperImp(); 
+    		HAPBlockTaskWrapperImp taskWrapperBrick = new HAPBlockTaskWrapperImp(HAPConstantShared.NAME_DEFAULT); 
     		String attrName = containerBrick.addElementWithBrickOrReference(taskWrapperBrick);
     		HAPDataRuleImplementationLocal dataRuleImp = new HAPDataRuleImplementationLocal(validationTaskBranchName + "."+attrName);
     		rule.setImplementation(dataRuleImp);

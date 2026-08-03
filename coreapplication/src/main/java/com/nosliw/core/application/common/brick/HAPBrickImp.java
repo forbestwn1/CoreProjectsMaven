@@ -28,6 +28,8 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 
+	private String m_division;
+	
 	private HAPIdBrickType m_brickTypeId;
 
 	private HAPContainerValuePorts m_internalValuePortsContainer;
@@ -41,12 +43,13 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	private Map<String, HAPCommandProcess> m_commandExports;
 	
-	public HAPBrickImp(HAPIdBrickType brickTypeId) {
-		this();
+	public HAPBrickImp(HAPIdBrickType brickTypeId, String division) {
+		this(division);
 		this.m_brickTypeId = brickTypeId;
 	}
 	
-	public HAPBrickImp() {
+	public HAPBrickImp(String division) {
+		this.m_division = division;
 		this.m_attributes = new ArrayList<HAPAttributeInBrick>();
 		this.m_internalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_externalValuePortsContainer = new HAPContainerValuePorts();
@@ -54,6 +57,9 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
 	}
 
+	@Override
+	public String getDivision() {     return this.m_division;      }
+	
 	@Override
 	public String getEntityOrReferenceType() {   return HAPConstantShared.BRICK;   }
 
@@ -70,6 +76,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	public List<String> getCommandExportNames() {    return new ArrayList<>(this.m_commandExports.keySet());  }
 	@Override
 	public HAPCommandProcess getCommandExport(String name) {   return this.m_commandExports.get(name);   }
+	public void addCommandExport(HAPCommandProcess command) {      this.m_commandExports.put(command.getCommandDefinition().getName(), command);          }
 
 	@Override
 	public List<HAPAttributeInBrick> getAttributes(){     return this.m_attributes;	}
@@ -168,6 +175,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {
@@ -192,6 +200,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {
@@ -222,3 +231,4 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	}
 
 }
+

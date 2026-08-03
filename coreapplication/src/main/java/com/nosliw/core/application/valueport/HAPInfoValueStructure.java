@@ -2,6 +2,8 @@ package com.nosliw.core.application.valueport;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 
@@ -15,7 +17,9 @@ public class HAPInfoValueStructure extends HAPSerializableImp{
 	private String m_valueStructureId;
 	
 	private double m_priority;
-	
+
+	public HAPInfoValueStructure() {}
+
 	public HAPInfoValueStructure(String valueStructureId, double priority) {
 		this.m_valueStructureId = valueStructureId;
 		this.m_priority = priority;
@@ -32,4 +36,13 @@ public class HAPInfoValueStructure extends HAPSerializableImp{
 		jsonMap.put(PRIORITY, this.getPriority()+"");
 		typeJsonMap.put(PRIORITY, Double.class);
 	}
+
+	@Override
+	protected boolean buildObjectByJson(Object obj){
+		JSONObject jsonObj = (JSONObject)obj;
+		this.m_valueStructureId = (String)jsonObj.opt(VALUESTRUCTUREID);
+		this.m_priority = (double)jsonObj.opt(PRIORITY);
+		return true;  
+	}
+
 }

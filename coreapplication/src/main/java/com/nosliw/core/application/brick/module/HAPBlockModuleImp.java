@@ -1,14 +1,16 @@
 package com.nosliw.core.application.brick.module;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.brick.container.HAPBrickContainerImp;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 
 public class HAPBlockModuleImp extends HAPBrickImp implements HAPBlockModule{
 
-	public HAPBlockModuleImp() {
-		this.setAttributeValueWithBrick(HAPBlockModule.COMMAND, new HAPBrickContainerImp());
-		this.setAttributeValueWithBrick(HAPBlockModule.PAGE, new HAPBrickContainerImp());
+	public HAPBlockModuleImp(String division) {
+		super(HAPEnumBrickType.MODULE_100, division);
+		this.setAttributeValueWithBrick(HAPBlockModule.COMMAND, new HAPBrickContainerImp(division));
+		this.setAttributeValueWithBrick(HAPBlockModule.PAGE, new HAPBrickContainerImp(division));
 	}
 	
 	@Override

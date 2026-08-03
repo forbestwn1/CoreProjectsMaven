@@ -12,6 +12,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.resource.HAPIdResourceType;
@@ -53,6 +54,10 @@ public class HAPManagerApplicationBrick {
 				this.registerBrickPlugin(brickPlugin);
 			}
 		}
+	}
+	
+	public HAPBrick deserializeBrick(Object obj,  HAPSerializationFormat format, String division) {
+		return this.m_divisionPlugin.get(division).deserializeBrick(obj, format);
 	}
 	
 	public HAPBundleForBrick getBrickBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {

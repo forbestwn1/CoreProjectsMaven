@@ -24,9 +24,12 @@ import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.resource.HAPWithResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency, HAPCommandWithExport{
+public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{
 
 	@HAPAttribute
 	public final static String MAINBRICK = "mainBrick"; 
@@ -217,3 +220,18 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	}
 
 }
+
+
+class HAPBundleForBrick_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {    return HAPBundleForBrick.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
+

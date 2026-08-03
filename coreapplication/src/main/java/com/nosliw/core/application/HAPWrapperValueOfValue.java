@@ -16,14 +16,19 @@ public class HAPWrapperValueOfValue extends HAPWrapperValue{
 	public static final String VALUE = "value";
 	
 	private Object m_value;
-	
-	public HAPWrapperValueOfValue(Object value) {
+
+	public HAPWrapperValueOfValue() {
 		super(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_VALUE);
-		this.m_value = value;
+	}
+
+	public HAPWrapperValueOfValue(Object value) {
+		this();
+		this.setValue(value);
 	}
  
 	@Override
 	public Object getValue() {    return this.m_value;    }
+	public void setValue(Object value) {    this.m_value = value;       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

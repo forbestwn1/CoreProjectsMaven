@@ -24,8 +24,8 @@ import com.nosliw.core.resource.HAPResourceId;
 @HAPEntityWithAttribute
 public class HAPBlockServiceProfileImp extends HAPBrickImpWithEntityInfo implements HAPBlockServiceProfile{
 
-	public HAPBlockServiceProfileImp(){
-		this.setBrickType(HAPEnumBrickType.SERVICEPROFILE_100);
+	public HAPBlockServiceProfileImp(String division){
+		super(HAPEnumBrickType.SERVICEPROFILE_100, division);
 	} 
 	
 	@Override

@@ -6,8 +6,8 @@ import com.nosliw.core.application.common.brick.HAPBrickImp;
 
 public class HAPBlockTaskWrapperImp extends HAPBrickImp implements HAPBlockTaskWrapper{
 
-	public HAPBlockTaskWrapperImp() {
-		super(HAPEnumBrickType.TASKWRAPPER_100);
+	public HAPBlockTaskWrapperImp(String division) {
+		super(HAPEnumBrickType.TASKWRAPPER_100, division);
 	}
 	
 	@Override

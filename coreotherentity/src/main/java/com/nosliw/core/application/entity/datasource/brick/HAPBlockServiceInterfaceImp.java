@@ -26,8 +26,8 @@ public class HAPBlockServiceInterfaceImp extends HAPBrickImpWithEntityInfo imple
 	@HAPAttribute
 	public static String DISPLAY = "display";
 
-	public HAPBlockServiceInterfaceImp() {
-		this.setBrickType(HAPEnumBrickType.SERVICEINTERFACE_100);
+	public HAPBlockServiceInterfaceImp(String division) {
+		super(HAPEnumBrickType.SERVICEINTERFACE_100, division);
 	}
 	
 	@Override

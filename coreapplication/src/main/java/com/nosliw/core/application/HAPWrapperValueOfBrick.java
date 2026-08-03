@@ -17,9 +17,13 @@ public class HAPWrapperValueOfBrick extends HAPWrapperValue implements HAPWithBr
 	
 	private HAPBrick m_brick;
 	
-	public HAPWrapperValueOfBrick(HAPBrick brick) {
+	public HAPWrapperValueOfBrick() {
 		super(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_BRICK);
-		this.m_brick = brick;
+	}
+
+	public HAPWrapperValueOfBrick(HAPBrick brick) {
+		this();
+		this.setBrick(brick);
 	}
 	
 	@Override
@@ -28,6 +32,7 @@ public class HAPWrapperValueOfBrick extends HAPWrapperValue implements HAPWithBr
 	
 	@Override
 	public HAPBrick getBrick() {    return this.m_brick;    }
+	public void setBrick(HAPBrick brick) {      this.m_brick = brick;      }
 
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

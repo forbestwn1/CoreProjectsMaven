@@ -32,9 +32,23 @@ public class HAPServiceParseEntity {
 		if(jsonObj==null) {
 			return null;
 		}
-		String attributeName = attributNameForEntityType!=null?attributNameForEntityType:HAPEntityParsable.ENTITYTYPE;
-		String subType = jsonObj.getString(attributeName);
+		String subType = getSubTypeFromAttribute(jsonObj, attributNameForEntityType);
 		return this.parseEntityJSONExplicit(jsonObj, subType, domain);
+	}
+	
+	private String getSubTypeFromAttribute(JSONObject jsonObj, String attributNameForEntityType) {
+		String out = null;
+		String attributeName = attributNameForEntityType!=null?attributNameForEntityType:HAPEntityParsable.ENTITYTYPE;
+		String[] segs = attributeName.split("\\.");
+		for(int i=0; i<segs.length; i++) {
+			if(i==segs.length-1) {
+				out = jsonObj.getString(segs[i]);
+			}
+			else {
+				jsonObj = jsonObj.getJSONObject(segs[i]);
+			}
+		}
+		return out;
 	}
 
 	//explicit entity type
@@ -43,7 +57,6 @@ public class HAPServiceParseEntity {
 			return null;
 		}
 		return this.m_parsers.get(entityType).parseEntityJson(jsonObj, this);
-		
 	}
 
 	public HAPEntityParsable parseEntityJSONExplicit(JSONObject jsonObj, String subType, String domain) {

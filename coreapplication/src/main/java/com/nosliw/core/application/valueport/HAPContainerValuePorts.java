@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
@@ -18,6 +21,9 @@ public class HAPContainerValuePorts extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static String VALUEPORTGROUP = "valuePortGroup";
+	
+	@HAPAttribute
+	public static String IDINDEX = "idIndex";
 	
 	private List<HAPGroupValuePorts> m_valuePortGroups;
 
@@ -123,5 +129,26 @@ public class HAPContainerValuePorts extends HAPSerializableImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(VALUEPORTGROUP, HAPManagerSerialize.getInstance().toStringValue(m_valuePortGroups, HAPSerializationFormat.JSON));
+		jsonMap.put(IDINDEX, this.m_idIndex+"");
+		typeJsonMap.put(IDINDEX, Integer.class);
 	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object obj){
+		JSONObject jsonObj = (JSONObject)obj;
+
+		this.m_idIndex = (int)jsonObj.opt(IDINDEX);
+		
+		JSONArray vpgJsonArray = jsonObj.optJSONArray(VALUEPORTGROUP);
+		if(vpgJsonArray!=null) {
+			for(int i=0; i<vpgJsonArray.length(); i++) {
+				HAPGroupValuePorts valuePortGroup = new HAPGroupValuePorts();
+				valuePortGroup.buildObject(vpgJsonArray.get(i), HAPSerializationFormat.JSON);
+				this.addValuePortGroup(valuePortGroup);
+			}
+		}
+		
+		return true;
+	}	
+	
 }

@@ -9,8 +9,8 @@ import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPBlockTaskTaskScriptImp extends HAPBrickImp implements HAPBlockTaskTaskScript{
 
-	public HAPBlockTaskTaskScriptImp() {
-		super(HAPEnumBrickType.TASK_TASK_SCRIPT_100);
+	public HAPBlockTaskTaskScriptImp(String division) {
+		super(HAPEnumBrickType.TASK_TASK_SCRIPT_100, division);
 		this.setParms(new HAPParms());
 	}
 	
