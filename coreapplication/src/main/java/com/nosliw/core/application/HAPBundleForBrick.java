@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
@@ -27,6 +31,78 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntity;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+
+@Component
+class HAPBundleForBrick_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {    return HAPBundleForBrick.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBundleForBrick out = new HAPBundleForBrick(); 
+
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		//main brick
+		out.setMainBrickWrapper((HAPWrapperBrickRoot)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPBundleForBrick.MAINBRICK), HAPWrapperBrickRoot.class.getName()));
+		
+		//branch bricks
+		JSONObject branchBricksJsonObj = jsonObj.optJSONObject(HAPBundleForBrick.BRANCHBRICKS);
+		for(Object key : branchBricksJsonObj.keySet()) {
+			String name = (String)key;
+			out.setBranchBrickWrapper(name, (HAPWrapperBrickRoot)parseService.parseEntityJSONExplicit(branchBricksJsonObj.getJSONObject(name), HAPWrapperBrickRoot.class.getName()));
+		}
+		
+		//event process
+		JSONObject eventProcessJsonObj = jsonObj.getJSONObject(HAPBundleForBrick.EVENTPROCESS);
+		for(Object key : eventProcessJsonObj.keySet()) {
+			String name  = (String)key;
+			HAPEventProcess eventProcess = (HAPEventProcess)parseService.parseEntityJSONExplicit(eventProcessJsonObj.getJSONObject(name), HAPEventProcess.class.getName());
+			out.addEventProcess(name, eventProcess);
+		}
+		
+		//exposed event
+		JSONArray exposedEventJsonArray = jsonObj.getJSONArray(HAPBundleForBrick.EXPORTEVENT);
+		for(int i=0; i<exposedEventJsonArray.length(); i++) {
+			out.addExportEvent((HAPEventEmitter)parseService.parseEntityJSONExplicit(exposedEventJsonArray.getJSONObject(i), HAPEventEmitter.class.getName()));
+		}
+		
+		//command exposed
+		JSONObject commandExposesJsonObj = jsonObj.getJSONObject(HAPBundleForBrick.EXPORTCOMMAND);
+		for(Object key : commandExposesJsonObj.keySet()) {
+			String name  = (String)key;
+			HAPCommandProcess command = (HAPCommandProcess)parseService.parseEntityJSONExplicit(commandExposesJsonObj.getJSONObject(name), HAPCommandProcess.class.getName());
+			out.addCommandExport(command);
+		}
+		
+		//alias mapping
+		JSONObject aliasMappingJsonObj = jsonObj.getJSONObject(HAPBundleForBrick.ALIASMAPPING);
+		for(Object key : aliasMappingJsonObj.keySet()) {
+			String name  = (String)key;
+			out.addAliasMapping(name, new HAPPath(aliasMappingJsonObj.getString(name)));
+		}
+		
+		//export resource info
+		JSONArray exposeResourceInfosJsonArray = jsonObj.getJSONArray(HAPBundleForBrick.EXPORTRESOURCE);
+		for(int i=0; i<exposeResourceInfosJsonArray.length(); i++) {
+			HAPInfoExportBrick exportBrickInfo = new HAPInfoExportBrick();
+			exportBrickInfo.buildObject(exposeResourceInfosJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			out.addExportResourceInfo(exportBrickInfo);
+		}
+		
+		//value structure domain
+		out.setValueStructureDomain((HAPDomainValueStructure)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPBundleForBrick.VALUESTRUCTUREDOMAIN), HAPDomainValueStructure.class.getName()));
+		
+		//dynamic info
+		
+		
+		return out;
+	}
+	
+}
+
+
 
 @HAPEntityWithAttribute
 public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{
@@ -54,6 +130,9 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 
 	@HAPAttribute
 	public final static String EXTRADATA = "extraData"; 
+
+	@HAPAttribute
+	public final static String EXPORTRESOURCE = "exportResource"; 
 
 	private HAPWrapperBrickRoot m_mainBrickWrapper;
 
@@ -117,6 +196,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	public List<HAPInfoExportBrick> getExportResourceInfos(){    return this.m_exportResourceInfos;    }
 	
 	public HAPDomainValueStructure getValueStructureDomain() {	return this.m_valueStructureDomain;	}
+	public void setValueStructureDomain(HAPDomainValueStructure valueStructureDomain) {      this.m_valueStructureDomain = valueStructureDomain;         }
 	
 	public void addRootBrickWrapper(HAPWrapperBrickRoot brickWrapper) {
 		String name = brickWrapper.getName();
@@ -186,6 +266,8 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
 
 		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
+
+		jsonMap.put(EXPORTRESOURCE, HAPManagerSerialize.getInstance().toStringValue(this.m_exportResourceInfos, HAPSerializationFormat.JSON));
     }
 	
 	@Override
@@ -203,15 +285,13 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		}
 		jsonMap.put(BRANCHBRICKS, HAPUtilityJson.buildMapJson(branchJsonMap));
 
-		List<String> eventStrArray = new ArrayList<String>();
-		for(HAPEventProcess eventProcess : this.m_eventProcesses.values()) {
-			eventStrArray.add(eventProcess.toStringValue(HAPSerializationFormat.JSON));
-		}
-		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
+		jsonMap.put(EVENTPROCESS, HAPManagerSerialize.getInstance().toStringValue(this.m_eventProcesses, HAPSerializationFormat.JSON)); 
 
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
 
 		jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
+
+		jsonMap.put(EXPORTRESOURCE, HAPManagerSerialize.getInstance().toStringValue(this.m_exportResourceInfos, HAPSerializationFormat.JSON));
 	}
 	
 	@Override
@@ -219,19 +299,5 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		this.m_mainBrickWrapper.buildResourceDependency(dependency, runtimeInfo);
 	}
 
-}
-
-
-class HAPBundleForBrick_parser implements HAPParserEntity{
-
-	@Override
-	public String getEntityType() {    return HAPBundleForBrick.class.getName();   }
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
 

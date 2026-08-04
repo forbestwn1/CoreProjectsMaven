@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -39,6 +42,33 @@ public class HAPManualValueContext extends HAPSerializableImp implements HAPValu
 		this.m_valueStructureRuntimeIdByName = new LinkedHashMap<String, String>();
 		this.m_valueStructureRuntimeNameById = new LinkedHashMap<String, String>();
 	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		
+		JSONArray partsJsonArray = jsonObj.optJSONArray(PART);
+		if(partsJsonArray!=null) {
+			for(int i=0; i<partsJsonArray.length(); i++) {
+				this.addPart(HAPManualPartInValueContext.parse(partsJsonArray.getJSONObject(i)));
+			}
+		}
+		
+		JSONObject byNameJsonObj = jsonObj.optJSONObject(VALUESTRUCTURERUNTIMEIDBYNAME);
+		for(Object key : byNameJsonObj.keySet()) {
+			String keyStr = (String)key;
+			this.m_valueStructureRuntimeIdByName.put(keyStr, byNameJsonObj.getString(keyStr));
+		}
+		
+		JSONObject byIdJsonObj = jsonObj.optJSONObject(VALUESTRUCTURERUNTIMENAMEBYID);
+		for(Object key : byIdJsonObj.keySet()) {
+			String keyStr = (String)key;
+			this.m_valueStructureRuntimeNameById.put(keyStr, byIdJsonObj.getString(keyStr));
+		}
+		
+		return true;  
+	}
+
 	
 	@Override
 	public List<String> getValueStructureIds() {

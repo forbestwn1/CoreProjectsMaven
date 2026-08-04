@@ -2,6 +2,7 @@ import { useState, useEffect, useContext, useRef } from 'react'
 import { CacheContext } from './DesignContext'
 import './QuestionairDynamicRequestConstantValue.css'
 import { questionairUtility, naviationUtility } from './Utility'
+import { setGlobalLoading } from './globalLoading'
 
 export default function QuestionairDynamicRequestConstantValue({ questionair, datadefinition, onChange }) {
 	const cache = useContext(CacheContext);
@@ -33,6 +34,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 		if (questionairData.loading == undefined) {
 			questionairData.loading = true;
+			setGlobalLoading(true);
 
 			var loc_questionair = questionair;
 			var loc_bundleDefForChange;
@@ -92,6 +94,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 								updateUITagForDisplay();
 								updateUITagForChange();
 								questionairData.loading = false;
+								setGlobalLoading(false);
 
 								forceUpdate(c => c + 1);
 							}

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -15,6 +18,8 @@ public class HAPManualPartInValueContextSimple extends HAPManualPartInValueConte
 	public static final String STRUCTURE = "structure";
 	
 	private List<HAPManualWrapperStructure> m_structureWrappers;
+
+	public HAPManualPartInValueContextSimple() {}
 	
 	public HAPManualPartInValueContextSimple(HAPManualInfoPartInValueContext partInfo) {
 		super(partInfo);
@@ -118,4 +123,20 @@ public class HAPManualPartInValueContextSimple extends HAPManualPartInValueConte
 		}
 		return HAPUtilityJson.buildArrayJson(arrayJson.toArray(new String[0]));
 	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		super.buildObjectByJson(json);
+		JSONObject jsonObj = (JSONObject)json;
+		
+		JSONArray structJsonArray = jsonObj.optJSONArray(STRUCTURE);
+		for(int i=0; i<structJsonArray.length(); i++) {
+			HAPManualWrapperStructure structure = new HAPManualWrapperStructure();
+			structure.buildObject(structJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			this.addValueStructure(structure);
+		}
+		
+		return true;  
+	}
+	
 }

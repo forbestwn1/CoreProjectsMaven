@@ -176,6 +176,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(DIVISION, this.getDivision());
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {
@@ -201,6 +202,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(DIVISION, this.getDivision());
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {

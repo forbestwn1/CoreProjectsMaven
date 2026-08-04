@@ -1,12 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Design from './Design';
-import DesignFinish from './StepComplete';
-import { naviationUtility } from './Utility';
+import { isGlobalLoading, subscribeToGlobalLoading } from './globalLoading';
 
-export default function App() {
+function GlobalLoadingSpinner() {
+    const [isLoading, setIsLoading] = useState(isGlobalLoading());
+
+    useEffect(() => {
+        const syncLoadingState = () => setIsLoading(isGlobalLoading());
+        syncLoadingState();
+        const unsubscribe = subscribeToGlobalLoading(syncLoadingState);
+        return unsubscribe;
+    }, []);
+
+    if (!isLoading) {
+        return null;
+    }
 
     return (
-        <div>
+        <div className="global-loading-overlay" role="status" aria-live="polite" aria-label="Loading">
+            <div className="global-loading-spinner" />
+        </div>
+    );
+}
+
+export default function App() {
+    return (
+        <div className="app-shell">
+            <GlobalLoadingSpinner />
             <Design />
         </div>
     );

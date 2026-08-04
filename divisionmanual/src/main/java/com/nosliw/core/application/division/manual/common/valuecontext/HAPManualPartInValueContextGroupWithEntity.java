@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -15,6 +18,8 @@ public class HAPManualPartInValueContextGroupWithEntity extends HAPManualPartInV
 	public static final String CHILDREN = "children";
 
 	private List<HAPManualPartInValueContext> m_children;
+	
+	public HAPManualPartInValueContextGroupWithEntity() {}
 	
 	public HAPManualPartInValueContextGroupWithEntity(HAPManualInfoPartInValueContext partInfo) {
 		super(partInfo);
@@ -93,6 +98,20 @@ public class HAPManualPartInValueContextGroupWithEntity extends HAPManualPartInV
 			childrenJsonArray.add(child.toStringValue(HAPSerializationFormat.JSON));
 		}
 		jsonMap.put(CHILDREN, HAPUtilityJson.buildArrayJson(childrenJsonArray.toArray(new String[0])));
+	}
+
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		
+		JSONArray childrenJsonArray = jsonObj.optJSONArray(CHILDREN);
+		if(childrenJsonArray!=null) {
+			for(int i=0; i<childrenJsonArray.length(); i++) {
+				this.addChild(HAPManualPartInValueContext.parse(childrenJsonArray.getJSONObject(i)));
+			}
+		}
+		
+		return true;  
 	}
 
 }

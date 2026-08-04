@@ -29,4 +29,5 @@ public class HAPManualPartInValueContextGroupWithReference extends HAPManualPart
 
 	@Override
 	public HAPManualPartInValueContext cloneValueContextPart() {   return this.cloneValueStructureComplexPartGroup();  }
+	
 }

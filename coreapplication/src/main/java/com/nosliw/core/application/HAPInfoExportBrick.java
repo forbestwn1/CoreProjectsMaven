@@ -2,6 +2,8 @@ package com.nosliw.core.application;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
@@ -14,6 +16,8 @@ public class HAPInfoExportBrick extends HAPEntityInfoImp{
 	public final static String PATHFROMROOT = "pathFromRoot"; 
 
 	private HAPPath m_pathFromRoot;
+	
+	public HAPInfoExportBrick() {}
 	
 	public HAPInfoExportBrick(HAPPath pathFromRoot) {
 		this.m_pathFromRoot = pathFromRoot;
@@ -28,4 +32,12 @@ public class HAPInfoExportBrick extends HAPEntityInfoImp{
 		jsonMap.put(PATHFROMROOT, this.m_pathFromRoot.getPath());
 	}
 	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		
+		this.setPathFromRoot((String)jsonObj.opt(PATHFROMROOT));
+		
+		return true;  
+	}
 }

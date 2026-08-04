@@ -16,7 +16,7 @@ public class HAPPluginTransformerDataRuleEnum extends HAPPluginTransformerDataRu
 	
 	@Override
 	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
-		HAPBlockTaskTaskScriptImp out = new HAPBlockTaskTaskScriptImp();
+		HAPBlockTaskTaskScriptImp out = new HAPBlockTaskTaskScriptImp(HAPConstantShared.NAME_DEFAULT);
 		
 		this.buildInterfaceTask(dataRule, out, valueStructureDomian);
 		

@@ -2,6 +2,8 @@ package com.nosliw.core.application.division.manual.common.valuecontext;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.serialization.HAPSerializableImp;
 
 public class HAPManualInfoPartInValueContext extends HAPSerializableImp{
@@ -16,7 +18,7 @@ public class HAPManualInfoPartInValueContext extends HAPSerializableImp{
 	//priority within value structure complex
 	private int m_priority;
 	
-	private HAPManualInfoPartInValueContext() {
+	public HAPManualInfoPartInValueContext() {
 		this.m_priority = 0;
 	}
 	
@@ -41,6 +43,14 @@ public class HAPManualInfoPartInValueContext extends HAPSerializableImp{
 		jsonMap.put(NAME, this.m_name);
 		jsonMap.put(PRIORITY, this.m_priority+"");
 		typeJsonMap.put(PRIORITY, Integer.class);
+	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		this.m_name = (String)jsonObj.opt(NAME);
+		this.m_priority = (int)jsonObj.opt(PRIORITY);
+		return true;  
 	}
 
 }

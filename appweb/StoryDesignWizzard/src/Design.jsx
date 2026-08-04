@@ -9,6 +9,7 @@ import { DesignContext, DesignDispatchContext, CacheContext } from './DesignCont
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
 import { stateUtility } from './Utility'
 import Step from './Step'
+import { setGlobalLoading } from './globalLoading'
 
 export default function Design() {
   const [designState, designDispatch] = useReducer(designReducer, initialState);
@@ -16,11 +17,14 @@ export default function Design() {
 
   useEffect(() => {
     var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+    setGlobalLoading(true);
     newDesignService().then((response) => {
       console.log("newDesignService response: ", response);
       designDispatch(newDesign(response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_DESIGNID], response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_STEPINFO]));
     }).catch((error) => {
       console.error("newDesignService error: ", error);
+    }).finally(() => {
+      setGlobalLoading(false);
     });
   }, []);
 

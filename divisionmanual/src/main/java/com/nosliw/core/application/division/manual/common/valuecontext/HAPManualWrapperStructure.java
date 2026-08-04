@@ -2,6 +2,8 @@ package com.nosliw.core.application.division.manual.common.valuecontext;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.structure.HAPInfoStructureInWrapper;
@@ -44,6 +46,15 @@ public class HAPManualWrapperStructure extends HAPSerializableImp{
 		}
 	}
 
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		this.m_structureRuntimeId = (String)jsonObj.opt(RUNTIMEID);
+		this.m_structureInfo = new HAPInfoStructureInWrapper();
+		this.m_structureInfo.buildObject(jsonObj.opt(STRWUCTUREINFO), HAPSerializationFormat.JSON);
+		return true;  
+	}
+	
 	public HAPManualWrapperStructure cloneValueStructureWrapper() {
 		HAPManualWrapperStructure out = new HAPManualWrapperStructure();
 		out.m_structureRuntimeId = this.m_structureRuntimeId;

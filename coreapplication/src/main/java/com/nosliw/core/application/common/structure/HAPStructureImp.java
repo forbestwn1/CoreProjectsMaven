@@ -4,14 +4,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPStructureImp extends HAPSerializableImp implements HAPStructure{
+public class HAPStructureImp extends HAPSerializableImp implements HAPStructure, HAPEntityParsable{
 
 	private Map<String, HAPRootInStructure> m_roots;
 	
@@ -52,4 +58,22 @@ public class HAPStructureImp extends HAPSerializableImp implements HAPStructure{
 		jsonMap.put(ROOT, HAPManagerSerialize.getInstance().toStringValue(m_roots, HAPSerializationFormat.JSON));
 	}
 
+}
+
+@Component
+class HAPStructureImp_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {   return HAPStructureImp.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPStructureImp out = new HAPStructureImp();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		HAPUtilityParserStructure.parseStuctureJson(jsonObj, out, parseService);
+		return out;
+	}
+	
 }

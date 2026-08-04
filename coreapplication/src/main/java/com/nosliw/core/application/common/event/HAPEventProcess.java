@@ -2,13 +2,19 @@ package com.nosliw.core.application.common.event;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPEventProcess extends HAPSerializableImp{
+public class HAPEventProcess extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
 	public static String EVENTEMITTER = "eventEmitter";
@@ -20,6 +26,7 @@ public class HAPEventProcess extends HAPSerializableImp{
 	
 	private HAPEventHandlerReference m_handlerReference;
 	
+	public HAPEventProcess() {}
 	
 	public HAPEventProcess(HAPEventEmitter emitter, HAPEventHandlerReference handlerReference) {
 		this.m_eventEmmitter = emitter;
@@ -27,8 +34,10 @@ public class HAPEventProcess extends HAPSerializableImp{
 	}
 	
 	public HAPEventEmitter getEventEmitter() {      return this.m_eventEmmitter;         }
+	public void setEventEmitter(HAPEventEmitter eventEmitter) {       this.m_eventEmmitter = eventEmitter;       }
 	
 	public HAPEventHandlerReference getEventHandlerReference() {      return this.m_handlerReference;       }
+	public void setEventHandlerReference(HAPEventHandlerReference handler) {     this.m_handlerReference = handler;       }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -40,3 +49,27 @@ public class HAPEventProcess extends HAPSerializableImp{
 	}
 
 }
+
+@Component
+class HAPEventProcess_Parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {   return HAPEventProcess.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPEventProcess out = new HAPEventProcess();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		out.setEventEmitter((HAPEventEmitter)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPEventProcess.EVENTEMITTER), HAPEventEmitter.class.getName()));
+		
+		out.setEventHandlerReference(HAPEventHandlerReference.parseHandlerInfo(jsonObj.optJSONObject(HAPEventProcess.HANDLERREFERENCE)));
+		
+		return out;
+	}
+	
+}
+
+
+
