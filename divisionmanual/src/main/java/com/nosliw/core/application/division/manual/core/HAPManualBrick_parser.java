@@ -8,6 +8,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPAdapter;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPValueOfDynamic;
 import com.nosliw.core.application.HAPWrapperValue;
@@ -36,6 +37,14 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 
 	protected void parseBrickJson(JSONObject jsonObj, HAPManualBrick brick, HAPServiceParseEntity parseService) {
 
+		//division
+		brick.setDivision(jsonObj.getString(HAPBrick.DIVISION));
+		
+		//brick type
+		HAPIdBrickType brickTypeId = new HAPIdBrickType();
+		brickTypeId.buildObject(jsonObj.getJSONObject(HAPBrick.BRICKTYPE), HAPSerializationFormat.JSON);
+		brick.setBrickType(brickTypeId);
+		
 		//attributes
 		JSONObject attrsJsonObj = jsonObj.optJSONObject(HAPBrick.ATTRIBUTE);
 		if(attrsJsonObj!=null) {

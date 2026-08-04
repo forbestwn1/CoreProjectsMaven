@@ -36,13 +36,17 @@ public class HAPWrapperBrickRoot extends HAPEntityInfoImp implements HAPWithBric
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JAVASCRIPT));
+		if(this.m_brick!=null) {
+			jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JAVASCRIPT));
+		}
 	}
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JSON));
+		if(this.m_brick!=null) {
+			jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JSON));
+		}
 	}
 
 	@Override

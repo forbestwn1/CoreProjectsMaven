@@ -125,11 +125,7 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 		}
 		jsonMap.put(EXPORTVARIABLEINFO, HAPUtilityJson.buildMapJson(exportVariableMap));
 
-		List<String> eventStrArray = new ArrayList<String>();
-		for(HAPEventProcess eventProcess : this.m_eventProcesses.values()) {
-			eventStrArray.add(eventProcess.toStringValue(HAPSerializationFormat.JSON));
-		}
-		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
+		jsonMap.put(EVENTPROCESS, HAPManagerSerialize.getInstance().toStringValue(this.m_eventProcesses, HAPSerializationFormat.JSON));
 
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
     
@@ -158,11 +154,7 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 		}
 		jsonMap.put(EXPORTVARIABLEINFO, HAPUtilityJson.buildMapJson(exportVariableMap));
 
-		List<String> eventStrArray = new ArrayList<String>();
-		for(HAPEventProcess eventProcess : this.m_eventProcesses.values()) {
-			eventStrArray.add(eventProcess.toStringValue(HAPSerializationFormat.JSON));
-		}
-		jsonMap.put(EVENTPROCESS, HAPUtilityJson.buildArrayJson(eventStrArray.toArray(new String[0])));
+		jsonMap.put(EVENTPROCESS, HAPManagerSerialize.getInstance().toStringValue(this.m_eventProcesses, HAPSerializationFormat.JSON));
 
 		jsonMap.put(EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_exportEvents, HAPSerializationFormat.JSON));
 		

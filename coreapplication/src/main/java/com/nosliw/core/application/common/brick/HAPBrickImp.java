@@ -44,12 +44,11 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	private Map<String, HAPCommandProcess> m_commandExports;
 	
 	public HAPBrickImp(HAPIdBrickType brickTypeId, String division) {
-		this(division);
 		this.m_brickTypeId = brickTypeId;
+		this.m_division = division;
 	}
 	
-	public HAPBrickImp(String division) {
-		this.m_division = division;
+	public HAPBrickImp() {
 		this.m_attributes = new ArrayList<HAPAttributeInBrick>();
 		this.m_internalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_externalValuePortsContainer = new HAPContainerValuePorts();
@@ -59,14 +58,14 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 
 	@Override
 	public String getDivision() {     return this.m_division;      }
+	public void setDivision(String division) {      this.m_division = division;       }
 	
 	@Override
 	public String getEntityOrReferenceType() {   return HAPConstantShared.BRICK;   }
 
-	public void setBrickType(HAPIdBrickType brickTypeId) {   this.m_brickTypeId = brickTypeId;     }
-	
 	@Override
 	public HAPIdBrickType getBrickType() {   return this.m_brickTypeId;     }
+	public void setBrickType(HAPIdBrickType brickTypeId) {   this.m_brickTypeId = brickTypeId;     }
 	
 	@Override
 	public List<String> getEventIds(){     return this.m_eventIds;      }

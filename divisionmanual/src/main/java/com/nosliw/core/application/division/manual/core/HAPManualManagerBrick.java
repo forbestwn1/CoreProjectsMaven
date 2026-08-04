@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -107,12 +108,18 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPBundleForBrick out = null;
 		
-		File bundle = HAPUtilityFile.getOrCreateFolder(getBundleExportFolder(brickId));
-		out = HAPUtilityExport.importBundle(bundle.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
-		if(out==null) {
-			out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
-			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
-		}
+		File bundleFolder = HAPUtilityFile.getOrCreateFolder(getBundleExportFolder(brickId));
+
+//		out = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
+//		if(out==null) {
+//			out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+//			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
+//		}
+
+		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
+		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
+		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
 		
 		return out;
 	}
@@ -200,10 +207,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
 		HAPManualBrick out = null;
 		if(format== HAPSerializationFormat.JSON) {
-			
-			
+			out = (HAPManualBrick)m_parseService.parseEntityJSONImplicitAttribute((JSONObject)obj, HAPBrick.BRICKTYPE+"."+HAPIdBrickType.KEY, HAPManualBrick.PARSE_DOMAIN);
 		}
-		
 		return out;
 	}
 

@@ -19,7 +19,9 @@ public class HAPManualPartInValueContextSimple extends HAPManualPartInValueConte
 	
 	private List<HAPManualWrapperStructure> m_structureWrappers;
 
-	public HAPManualPartInValueContextSimple() {}
+	public HAPManualPartInValueContextSimple() {
+		this.m_structureWrappers = new ArrayList<HAPManualWrapperStructure>();
+	}
 	
 	public HAPManualPartInValueContextSimple(HAPManualInfoPartInValueContext partInfo) {
 		super(partInfo);
