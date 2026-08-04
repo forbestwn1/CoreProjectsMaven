@@ -7,12 +7,19 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.HAPAttributeInBrick;
+import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
 
 public class HAPManualBrickContainer extends HAPManualBrickWithEntityInfo implements HAPBrickContainer{
 
+	protected HAPManualBrickContainer(HAPIdBrickType brickTypeId){
+		super(brickTypeId);
+	}
+	
 	public HAPManualBrickContainer() {
+		super(HAPEnumBrickType.CONTAINER_100);
 	}
 	
 	@Override

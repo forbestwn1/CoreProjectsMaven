@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.script.HAPBlockTestComplexScript;
 import com.nosliw.core.application.brick.test.complex.script.HAPExecutableVariableExpected;
 import com.nosliw.core.application.brick.test.complex.script.HAPInfoAttachmentResolve;
@@ -16,6 +17,7 @@ import com.nosliw.core.resource.HAPResourceId;
 public class HAPManualBlockTestComplexScript extends HAPManualBrickImp implements HAPBlockTestComplexScript{
 
 	public HAPManualBlockTestComplexScript() {
+		super(HAPEnumBrickType.TEST_COMPLEX_SCRIPT_100);
 	}
 
 	@Override

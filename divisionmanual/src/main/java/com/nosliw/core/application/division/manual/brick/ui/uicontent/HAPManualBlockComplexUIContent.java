@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.brick.container.HAPBrickContainerList;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
@@ -14,6 +15,10 @@ import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpr
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 
 public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements HAPBlockComplexUIContent{
+
+	public HAPManualBlockComplexUIContent() {
+		super(HAPEnumBrickType.UICONTENT_100);
+	}
 
 	@Override
 	public void init() {

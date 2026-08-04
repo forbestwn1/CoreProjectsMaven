@@ -5,8 +5,13 @@ import com.nosliw.common.info.HAPInfo;
 import com.nosliw.common.info.HAPInfoImpSimple;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.HAPIdBrickType;
 
 public class HAPManualBrickWithEntityInfo extends HAPManualBrickImp implements HAPEntityInfo{
+
+	public HAPManualBrickWithEntityInfo(HAPIdBrickType brickTypeId) {
+		super(brickTypeId);
+	}
 
 	@Override
 	public void init() {

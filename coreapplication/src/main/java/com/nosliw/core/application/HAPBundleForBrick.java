@@ -216,6 +216,13 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		}
 	}
 	
+	public List<String> getAllRootBrickName(){
+		List<String> out = new ArrayList<String>();
+		out.add(HAPConstantShared.NAME_ROOTBRICK_MAIN);
+		out.addAll(this.m_branchBricks.keySet());
+		return out;
+	}
+	
 	public HAPWrapperBrickRoot getMainBrickWrapper() {    return this.m_mainBrickWrapper;     }
 	public void setMainBrickWrapper(HAPWrapperBrickRoot brickWrapper) {     this.m_mainBrickWrapper = brickWrapper;      }
 	

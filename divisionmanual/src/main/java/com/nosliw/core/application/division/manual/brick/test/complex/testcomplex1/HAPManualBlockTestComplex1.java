@@ -13,6 +13,10 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualBlockTestComplex1 extends HAPManualBrickImp implements HAPBlockTestComplex1{
 
+	public HAPManualBlockTestComplex1() {
+		super(HAPEnumBrickType.TEST_COMPLEX_1_100);
+	}
+
 	@Override
 	public void init() {
 		super.init();
@@ -41,6 +45,4 @@ class HAPManualBlockTestComplex1_parser extends HAPManualBrick_parser{
 	protected Object parseValueInAttribute(Object obj, HAPServiceParseEntity parseService) {
 		return null;
 	}
-
-	
 }

@@ -1,10 +1,15 @@
 package com.nosliw.core.application.division.manual.brick.task.wrapper.dataexpression;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.task.wrapper.dataexpression.HAPBlockTaskWrapperDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 
 public class HAPManualBlockDataTaskWrapperDataExpression extends HAPManualBrickImp implements HAPBlockTaskWrapperDataExpression{
+
+	public HAPManualBlockDataTaskWrapperDataExpression() {
+		super(HAPEnumBrickType.TASKWRAPPERDATAEXPRESSION);
+	}
 
 	@Override
 	public void init() {

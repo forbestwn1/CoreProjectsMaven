@@ -44,6 +44,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	private Map<String, HAPCommandProcess> m_commandExports;
 	
 	public HAPBrickImp(HAPIdBrickType brickTypeId, String division) {
+		this();
 		this.m_brickTypeId = brickTypeId;
 		this.m_division = division;
 	}

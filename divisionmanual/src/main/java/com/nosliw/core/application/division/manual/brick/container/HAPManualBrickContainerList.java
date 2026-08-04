@@ -4,10 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nosliw.core.application.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainerList;
 
 public class HAPManualBrickContainerList extends HAPManualBrickContainer implements HAPBrickContainerList{
 
+	public HAPManualBrickContainerList() {
+		super(HAPEnumBrickType.CONTAINER_100);
+	}
+	
 	@Override
 	public void init() {
 		super.init();

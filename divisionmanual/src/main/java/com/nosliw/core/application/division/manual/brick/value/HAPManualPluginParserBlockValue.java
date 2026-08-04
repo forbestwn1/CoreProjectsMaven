@@ -5,7 +5,6 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.xxx.runtimeenv.HAPRuntimeEnvironment;
 
 public class HAPManualPluginParserBlockValue extends HAPManualDefinitionPluginParserBrickImpSimple{
 

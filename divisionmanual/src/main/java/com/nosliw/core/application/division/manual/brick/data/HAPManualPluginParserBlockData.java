@@ -7,12 +7,11 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
-import com.nosliw.core.xxx.runtimeenv.HAPRuntimeEnvironment;
 
 public class HAPManualPluginParserBlockData extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	public HAPManualPluginParserBlockData(HAPManualManagerBrick manualDivisionEntityMan, HAPRuntimeEnvironment runtimeEnv) {
-		super(HAPEnumBrickType.DATA_100, HAPManualDefinitionBlockData.class, manualDivisionEntityMan, runtimeEnv);
+	public HAPManualPluginParserBlockData(HAPManualManagerBrick manualDivisionEntityMan) {
+		super(HAPEnumBrickType.DATA_100, HAPManualDefinitionBlockData.class, manualDivisionEntityMan);
 	}
 
 	@Override

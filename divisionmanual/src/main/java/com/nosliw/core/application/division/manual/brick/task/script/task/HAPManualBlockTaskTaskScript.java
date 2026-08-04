@@ -3,11 +3,16 @@ package com.nosliw.core.application.division.manual.brick.task.script.task;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockTaskTaskScript extends HAPManualBrickImp implements HAPBlockTaskTaskScript{
+
+	public HAPManualBlockTaskTaskScript() {
+		super(HAPEnumBrickType.TASK_TASK_SCRIPT_100);
+	}
 
 	@Override
 	public void init() {

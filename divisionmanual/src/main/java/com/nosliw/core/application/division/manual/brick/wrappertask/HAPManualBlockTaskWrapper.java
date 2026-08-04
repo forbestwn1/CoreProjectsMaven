@@ -1,10 +1,15 @@
 package com.nosliw.core.application.division.manual.brick.wrappertask;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 
 public class HAPManualBlockTaskWrapper extends HAPManualBrickImp implements HAPBlockTaskWrapper{
+
+	public HAPManualBlockTaskWrapper() {
+		super(HAPEnumBrickType.TASKWRAPPER_100);
+	}
 
 	@Override
 	public void init() {

@@ -21,6 +21,10 @@ import com.nosliw.core.xxx.application.division.manual.core.b.HAPUtilitySerializ
 
 public class HAPManualBrickImp extends HAPManualBrick{
 
+	public HAPManualBrickImp(HAPIdBrickType brickTypeId) {
+		super(brickTypeId);
+	}
+
 	@Override
 	public void init() {
 		super.init();

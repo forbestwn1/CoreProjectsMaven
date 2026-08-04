@@ -3,6 +3,7 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
 import com.nosliw.core.application.common.style.HAPUIStyle;
@@ -12,6 +13,10 @@ import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implements HAPBlockComplexUICustomerTag{
+
+	public HAPManualBlockComplexUICustomerTag() {
+		super(HAPEnumBrickType.UICUSTOMERTAG_100);
+	}
 
 	@Override
 	public void init() {

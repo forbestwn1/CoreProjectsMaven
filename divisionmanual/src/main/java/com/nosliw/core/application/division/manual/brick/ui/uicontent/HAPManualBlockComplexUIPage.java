@@ -1,11 +1,16 @@
 package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIPage;
 import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 
 public class HAPManualBlockComplexUIPage extends HAPManualBrickImp implements HAPBlockComplexUIPage{
+
+	public HAPManualBlockComplexUIPage() {
+		super(HAPEnumBrickType.UIPAGE_100);
+	}
 
 	@Override
 	public void init() {

@@ -3,6 +3,7 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.brick.test.complex.task.HAPBlockTestComplexTask;
@@ -12,7 +13,9 @@ import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
 
 public class HAPManualBlockTestComplexTask extends HAPManualBrickImp implements HAPBlockTestComplexTask{
 
+
 	public HAPManualBlockTestComplexTask() {
+		super(HAPEnumBrickType.TEST_COMPLEX_TASK_100);
 	}
 
 	@Override

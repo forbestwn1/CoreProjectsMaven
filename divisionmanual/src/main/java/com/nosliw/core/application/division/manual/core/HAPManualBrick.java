@@ -55,10 +55,6 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 
 	private HAPBundleForBrick m_bundle; 
 
-	public HAPManualBrick() {
-		this(null);
-	}
-
 	public HAPManualBrick(HAPIdBrickType brickTypeId) {
 		super(brickTypeId, HAPConstantShared.BRICK_DIVISION_MANUAL);
 		this.m_valueContext = new HAPManualValueContext(); 

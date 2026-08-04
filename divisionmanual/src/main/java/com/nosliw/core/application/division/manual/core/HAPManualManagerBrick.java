@@ -19,7 +19,6 @@ import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPPluginDivision;
-import com.nosliw.core.application.common.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -117,9 +116,35 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 //		}
 
 		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+
+/*		
 		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
+		
+		for(String rootName : out1.getAllRootBrickName()) {
+			HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
+
+				@Override
+				public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+					HAPBrick brick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
+					if(brick instanceof HAPManualBrick) {
+						HAPManualBrick manualBrick = (HAPManualBrick)brick;
+						manualBrick.setBundle(out1);
+						manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+					}
+					
+					return true;
+				}
+
+				@Override
+				public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+				}
+				
+			}, m_brickManager, this);
+		}
+		
 		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
+*/
 		
 		return out;
 	}

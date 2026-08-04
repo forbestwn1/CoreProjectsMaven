@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.variable.HAPVariableInfo;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.task.script.HAPBlockTestComplexTaskScript;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugExecutable;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
@@ -13,6 +14,7 @@ import com.nosliw.core.resource.HAPResourceId;
 public class HAPManualBlockTestComplexTaskScript extends HAPManualBrickImp implements HAPBlockTestComplexTaskScript{
 
 	public HAPManualBlockTestComplexTaskScript() {
+		super(HAPEnumBrickType.TEST_COMPLEX_TASK_SCRIPT_100);
 	}
 
 	@Override
