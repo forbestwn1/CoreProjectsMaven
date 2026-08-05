@@ -30,24 +30,36 @@ public class HAPUtilityParserStructure {
 		valueStructureWrapper.setStructureInfo(structureInfo);
 	}
 	
-	static public void parseValueStructureJson(JSONObject structureJson, HAPValueStructure valueStructure, HAPServiceParseEntity entityParseService) {
-		if(structureJson!=null) {
-			Object rootsObj = structureJson.opt(HAPStructure.ROOT);
-			if(rootsObj==null) {
-				rootsObj = structureJson;
+	static public void parseValueStructureJson(Object structureJsonObj, HAPValueStructure valueStructure, HAPServiceParseEntity entityParseService) {
+		if(structureJsonObj!=null) {
+			if(structureJsonObj instanceof JSONObject) {
+				JSONObject structureJson = (JSONObject)structureJsonObj;
+				if(structureJson.opt(HAPStructure.ROOT)!=null) {
+					valueStructure.setInitValue(structureJson.opt(HAPValueStructure.INITVALUE));
+				}
 			}
-			else {
-				valueStructure.setInitValue(structureJson.opt(HAPValueStructure.INITVALUE));
-			}
-			
-			parseStuctureJson(rootsObj, valueStructure, entityParseService);
-		}
+			parseStuctureJson(structureJsonObj, valueStructure, entityParseService);
+	    }
 	}
 	
 	static public void parseStuctureJson(Object structureJsonObj, HAPStructure structure, HAPServiceParseEntity entityParseService) {
-		List<HAPRootInStructure> roots = parseStructureRoots(structureJsonObj, entityParseService);
-		for(HAPRootInStructure root : roots) {
-			structure.addRoot(root);
+		if(structureJsonObj!=null) {
+			Object rootsObj = null;
+			if(structureJsonObj instanceof JSONObject) {
+				JSONObject structureJson = (JSONObject)structureJsonObj;
+				rootsObj = structureJson.opt(HAPStructure.ROOT);
+				if(rootsObj==null) {
+					rootsObj = structureJson;
+				}
+			}
+			else if(structureJsonObj instanceof JSONArray) {
+				rootsObj = structureJsonObj;
+			}
+
+			List<HAPRootInStructure> roots = parseStructureRoots(rootsObj, entityParseService);
+			for(HAPRootInStructure root : roots) {
+				structure.addRoot(root);
+			}
 		}
 	}
 	

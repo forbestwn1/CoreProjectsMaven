@@ -70,7 +70,7 @@ class HAPWrapperBrickRoot_parser implements HAPParserEntity{
 		JSONObject jsonObj = (JSONObject)obj;
 		
 		HAPWrapperBrickRoot out = new HAPWrapperBrickRoot();
-		
+		out.buildEntityInfoByJson(jsonObj);
 		out.setEntity(HAPUtilityExport.parseBrickJson(jsonObj.getJSONObject(HAPWithBrick.BRICK), m_brickMan));
 		return out;
 	}

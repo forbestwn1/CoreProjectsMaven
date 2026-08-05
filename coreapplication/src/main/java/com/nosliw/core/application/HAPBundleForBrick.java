@@ -169,10 +169,6 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
 
 		this.m_dynamicInfo = new HAPDynamicDefinitionContainer(); 
-		
-		HAPInfoExportBrick defaultExport = new HAPInfoExportBrick(new HAPPath());
-		defaultExport.setName(HAPConstantShared.NAME_DEFAULT);
-		this.addExportResourceInfo(defaultExport);
 	}
 	
 	public void addEventProcess(String id, HAPEventProcess eventProcess) {     this.m_eventProcesses.put(id, eventProcess);       }
@@ -255,7 +251,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		jsonMap.put(MAINBRICK, this.m_mainBrickWrapper.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JSON));
-		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JSON));
+//		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JSON));
 		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JSON));
 		
 		Map<String, String> branchJsonMap = new LinkedHashMap<String, String>();
@@ -279,7 +275,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		jsonMap.put(MAINBRICK, this.m_mainBrickWrapper.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JAVASCRIPT));
-		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JAVASCRIPT));
+//		jsonMap.put(EXTRADATA, HAPManagerSerialize.getInstance().toStringValue(m_extraData, HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(ALIASMAPPING, HAPUtilityJson.buildJsonStringValue(this.m_aliasMapping, HAPSerializationFormat.JAVASCRIPT));
 
 		Map<String, String> branchJsonMap = new LinkedHashMap<String, String>();

@@ -10,15 +10,20 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPPluginDivision;
+import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.HAPUtilityBrickTraverse;
+import com.nosliw.core.application.common.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -117,7 +122,6 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 
 		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
-/*		
 		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
 		
@@ -144,9 +148,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 		}
 		
 		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
-*/
 		
-		return out;
+		return out1;
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {

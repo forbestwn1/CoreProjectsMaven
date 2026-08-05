@@ -25,8 +25,8 @@ public class HAPInfoValueStructureRuntime extends HAPEntityInfoImp{
 	public HAPInfoValueStructureRuntime() {}
 	
 	public HAPInfoValueStructureRuntime(String id, HAPInfo info, String name) {
-		this.setId(id);
 		this.setName(name);
+		this.setId(id);
 		this.setInfo(info);
 	}
 
