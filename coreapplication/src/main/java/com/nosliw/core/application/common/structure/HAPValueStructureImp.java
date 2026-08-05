@@ -22,3 +22,4 @@ public class HAPValueStructureImp extends HAPStructureImp implements HAPValueStr
 		jsonMap.put(INITVALUE, HAPManagerSerialize.getInstance().toStringValue(this.m_initValue, HAPSerializationFormat.JSON));
 	}
 }
+

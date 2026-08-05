@@ -2,11 +2,17 @@ package com.nosliw.core.application.common.structure;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
-public class HAPWrapperValueStructureDefinitionImp extends HAPEntityInfoImp implements HAPWrapperValueStructureDefinition{
+public class HAPWrapperValueStructureDefinitionImp extends HAPEntityInfoImp implements HAPWrapperValueStructureDefinition, HAPEntityParsable{
 
 	private HAPValueStructure m_valueStructure;
 	
@@ -41,3 +47,39 @@ public class HAPWrapperValueStructureDefinitionImp extends HAPEntityInfoImp impl
 	}
 
 }
+
+@Component
+class HAPWrapperValueStructureDefinitionImp_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {     return HAPWrapperValueStructureDefinitionImp.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPWrapperValueStructureDefinitionImp out = new HAPWrapperValueStructureDefinitionImp();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		out.buildEntityInfoByJson(jsonObj);
+		
+		JSONObject vsJsonObj = jsonObj.optJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTURE);
+		if(vsJsonObj!=null) {
+			HAPValueStructureImp vs = new HAPValueStructureImp(); 
+			HAPUtilityParserStructure.parseValueStructureJson(vsJsonObj, vs, parseService);
+			out.setValueStructure(vs);
+		}
+		
+		JSONObject vsInfoJsonObj = jsonObj.optJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTUREINFO);
+		if(vsInfoJsonObj!=null) {
+			
+			out.setStructureInfo(HAPUtilityParserStructure.parseValueStructureWrapper(vsInfoJsonObj, parseService));
+			
+			HAPInfoStructureInWrapper vsInfo = new HAPInfoStructureInWrapper(); 
+			out.setValueStructure(vs);
+		}
+
+		
+		return out;
+	}
+	
+}
+

@@ -27,11 +27,8 @@ public class HAPManualBlockTestComplex1 extends HAPManualBrickImp implements HAP
 @Component
 class HAPManualBlockTestComplex1_parser extends HAPManualBrick_parser{
 
-	@Override
-	public String getSubName() {    return HAPEnumBrickType.TEST_COMPLEX_1_100.getKey();    }
-	
 	public HAPManualBlockTestComplex1_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager);
+		super(brickManager, HAPManualBlockTestComplex1.class, HAPEnumBrickType.TEST_COMPLEX_1_100);
 	}
 
 	@Override
@@ -39,10 +36,5 @@ class HAPManualBlockTestComplex1_parser extends HAPManualBrick_parser{
 		HAPManualBlockTestComplex1 out = new HAPManualBlockTestComplex1();
 		this.parseBrickJson((JSONObject)obj, out, parseService);
 		return out;
-	}
-
-	@Override
-	protected Object parseValueInAttribute(Object obj, HAPServiceParseEntity parseService) {
-		return null;
 	}
 }

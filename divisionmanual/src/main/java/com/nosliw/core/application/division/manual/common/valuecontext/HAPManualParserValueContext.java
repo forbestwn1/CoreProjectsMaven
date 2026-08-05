@@ -48,7 +48,7 @@ public class HAPManualParserValueContext {
 		HAPManualDefinitionAttributeInBrick valueStructureAttr = HAPManualDefinitionUtilityParserBrickFormatJson.parseAttribute(HAPManualDefinitionBrickWrapperValueStructure.VALUESTRUCTURE, valueStructureJsonObj, HAPManualEnumBrickType.VALUESTRUCTURE_100, null, parseContext);
 		out.setAttribute(valueStructureAttr);
 
-		HAPUtilityParserStructure.parseValueStructureWrapper(out, wrapperObj);
+		HAPUtilityParserStructure.parseValueStructureWrapperOtherData(out, wrapperObj);
 
 		return out;
 	}

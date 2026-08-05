@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
@@ -16,11 +18,16 @@ import com.nosliw.core.application.common.command.HAPCommandWithDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
+import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
+import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.core.service.entityparse.HAPParserEntity;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
-public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition, HAPCommandWithDefinition{
+public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition, HAPCommandWithDefinition, HAPEntityParsable{
 
 	@HAPAttribute
 	public static final String TYPE = "type";
@@ -102,19 +109,15 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 	public HAPCommandDefinition getCommandDefinition(String name) {    return this.m_commands.get(name);        }
 	public void addCommand(HAPCommandDefinition commandDef) {    this.m_commands.put(commandDef.getName(), commandDef);       }
 	
-	
-	
-	
-	
+	public String getBase() {    return this.m_base;     }
+	public void setBase(String base) {     this.m_base = base;       }
+
 	public HAPResourceId getScriptResourceId() {     return this.m_scriptResourceId;     }
 	public void setScriptResourceId(HAPResourceId scriptResourceId) {     this.m_scriptResourceId = scriptResourceId;         }
 
 	public String getVersion() {   return this.m_version;    }
 	public void setVersion(String version) {    this.m_version = version;     }
 	
-	public String getBase() {    return this.m_base;     }
-	public void setBase(String base) {     this.m_base = base;       }
-
 	public List<HAPManualDefinitionBrickRelation> getParentRelations(){  return this.m_parentRelations;  }
 	public void addParentRelation(HAPManualDefinitionBrickRelation parentRelation) {     this.m_parentRelations.add(parentRelation);       }
 
@@ -132,4 +135,39 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 		jsonMap.put(EVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_events, HAPSerializationFormat.JSON));
 	}
 
+}
+
+class HAPUITagDefinition_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {    return HAPUITagDefinition.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPUITagDefinition out = new HAPUITagDefinition();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		out.setBase((String)jsonObj.opt(HAPUITagDefinition.BASE));
+		out.setScriptResourceId(HAPFactoryResourceId.newInstance(jsonObj.opt(HAPUITagDefinition.SCRIPTRESOURCEID)));
+
+		JSONObject valueContextJsonObj = jsonObj.optJSONObject(HAPUITagDefinition.VALUECONTEXT);
+		if(valueContextJsonObj!=null) {
+			out.setValueContext(HAPUtilityParserStructure.parseValueContext(valueContextJsonObj, parseService));
+		}
+		
+		JSONObject attrDefsJsonObj = jsonObj.optJSONObject(HAPUITagDefinition.ATTRIBUTE);
+		for(Object key : attrDefsJsonObj.keySet()) {
+			String name = (String)key;
+			out.addAttributeDefinition(HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(attrDefsJsonObj.getJSONObject(name), parseService));
+		}
+		
+		JSONObject eventDefsJsonObj = jsonObj.optJSONObject(HAPUITagDefinition.EVENT);
+		for(Object key : eventDefsJsonObj.keySet()) {
+			String name = (String)key;
+			out.addEvent(HAPEventDefinition.parseEventDefinition(eventDefsJsonObj.getJSONObject(name), parseService));
+		}
+		
+		return out;
+	}
+	
 }

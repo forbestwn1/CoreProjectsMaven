@@ -7,8 +7,9 @@ import java.util.Map;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
-public class HAPValueContextDefinitionImp extends HAPSerializableImp implements HAPValueContextDefinition{
+public class HAPValueContextDefinitionImp extends HAPSerializableImp implements HAPValueContextDefinition, HAPEntityParsable{
 
 	private List<HAPWrapperValueStructureDefinition> m_valueStructures;
 	
@@ -28,3 +29,4 @@ public class HAPValueContextDefinitionImp extends HAPSerializableImp implements 
 	}
 	
 }
+

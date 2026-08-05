@@ -12,7 +12,43 @@ import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityParserStructure {
 
-	static public void parseValueStructureWrapper(HAPWrapperValueStructureDefinition valueStructureWrapper, JSONObject wrapperObj) {
+	static public HAPValueContextDefinitionImp parseValueContext(Object obj, HAPServiceParseEntity entityParseService) {
+		HAPValueContextDefinitionImp valueContext = new HAPValueContextDefinitionImp();
+		
+		JSONArray valueStructuresArray = null;
+		if(obj instanceof JSONObject) {
+			valueStructuresArray = ((JSONObject)obj).optJSONArray(HAPValueContextDefinition.ITEM);
+		}
+		else if(obj instanceof JSONArray) {
+			valueStructuresArray = (JSONArray)obj;
+		}
+		
+		if(valueStructuresArray!=null) {
+			for(int i=0; i<valueStructuresArray.length(); i++) {
+				JSONObject valueStructureWrapperObj = valueStructuresArray.getJSONObject(i);
+				HAPWrapperValueStructureDefinitionImp valueStructureWrapper = HAPUtilityParserStructure.parseValueStructureWrapper(valueStructureWrapperObj, entityParseService); 
+				valueContext.getValueStructures().add(valueStructureWrapper);
+			}
+		}
+		return valueContext;
+	}
+
+	static public HAPWrapperValueStructureDefinitionImp parseValueStructureWrapper(JSONObject wrapperObj, HAPServiceParseEntity entityParseService) {
+		HAPWrapperValueStructureDefinitionImp valueStructureWrapper = new HAPWrapperValueStructureDefinitionImp();
+		
+		JSONObject vsInfoJsonObj = wrapperObj.optJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTUREINFO);
+		if(vsInfoJsonObj==null) {
+			vsInfoJsonObj = wrapperObj;
+		}
+		HAPUtilityParserStructure.parseValueStructureWrapperOtherData(valueStructureWrapper, vsInfoJsonObj);
+		
+		HAPValueStructure valueStructure = new HAPValueStructureImp();
+		HAPUtilityParserStructure.parseValueStructureJson(wrapperObj.getJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTURE), valueStructure, entityParseService);
+		valueStructureWrapper.setValueStructure(valueStructure);
+		return valueStructureWrapper;
+	}
+	
+	static public void parseValueStructureWrapperOtherData(HAPWrapperValueStructureDefinition valueStructureWrapper, JSONObject wrapperObj) {
 		HAPUtilityEntityInfo.buildEntityInfoByJson(wrapperObj, valueStructureWrapper);
 
 		HAPInfoStructureInWrapper structureInfo = new HAPInfoStructureInWrapper();

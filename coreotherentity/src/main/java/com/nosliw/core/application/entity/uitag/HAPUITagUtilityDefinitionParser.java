@@ -15,11 +15,6 @@ import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
-import com.nosliw.core.application.common.structure.HAPValueContextDefinitionImp;
-import com.nosliw.core.application.common.structure.HAPValueStructure;
-import com.nosliw.core.application.common.structure.HAPValueStructureImp;
-import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinition;
-import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
@@ -83,13 +78,11 @@ public class HAPUITagUtilityDefinitionParser {
 		out.setPriority(jsonObj.optInt(HAPUITagDefinition.PRIORITY, 0));
 		
 		//parse value context
-		HAPValueContextDefinition valueContext = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContext, jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXT), entityParseService);
+		HAPValueContextDefinition valueContext = HAPUtilityParserStructure.parseValueContext(jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXT), entityParseService);
 		out.setValueContext(valueContext);
 
 		//parse value context embeded
-		HAPValueContextDefinition valueContextEmbeded = new HAPValueContextDefinitionImp();
-		parseValueContext(valueContextEmbeded, jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), entityParseService);
+		HAPValueContextDefinition valueContextEmbeded = HAPUtilityParserStructure.parseValueContext(jsonObj.optJSONArray(HAPUITagDefinition.VALUECONTEXTEMBEDED), entityParseService);
 		out.setValueContextEmbeded(valueContextEmbeded);
 
 		//attribute
@@ -238,22 +231,5 @@ public class HAPUITagUtilityDefinitionParser {
 		return out;
 	}
 	
-	static private void parseValueContext(HAPValueContextDefinition valueContext, JSONArray valueStructuresArray, HAPServiceParseEntity entityParseService) {
-		if(valueStructuresArray!=null) {
-			for(int i=0; i<valueStructuresArray.length(); i++) {
-				JSONObject valueStructureWrapperObj = valueStructuresArray.getJSONObject(i);
-				
-				HAPWrapperValueStructureDefinitionImp valueStructureWrapper = new HAPWrapperValueStructureDefinitionImp();
-				
-				HAPUtilityParserStructure.parseValueStructureWrapper(valueStructureWrapper, valueStructureWrapperObj);
-				
-				HAPValueStructure valueStructure = new HAPValueStructureImp();
-				HAPUtilityParserStructure.parseValueStructureJson(valueStructureWrapperObj.getJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTURE), valueStructure, entityParseService);
-				valueStructureWrapper.setValueStructure(valueStructure);
-				
-				valueContext.getValueStructures().add(valueStructureWrapper);
-			}
-		}
-	}
 
 }

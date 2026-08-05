@@ -21,6 +21,7 @@ import com.nosliw.core.application.division.manual.common.valuecontext.HAPManual
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputContainer;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPFactoryResourceId;
+import com.nosliw.core.service.entityparse.HAPEntityParsable;
 import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
 import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
@@ -28,13 +29,34 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 
 	private HAPManagerApplicationBrick m_brickManager;
 	
-	public HAPManualBrick_parser(HAPManagerApplicationBrick brickManager) {
+	private Class<? extends HAPManualBrick> m_manualBrickClass;
+	
+	private HAPIdBrickType m_brickTypeId;
+	
+	public HAPManualBrick_parser(HAPManagerApplicationBrick brickManager, Class<? extends HAPManualBrick> manualBrickClass, HAPIdBrickType brickTypeId) {
 		this.m_brickManager = brickManager;
+		this.m_manualBrickClass = manualBrickClass;
+		this.m_brickTypeId = brickTypeId;
 	}
 	
 	@Override
 	public String getDomain() {     return HAPManualBrick.PARSE_DOMAIN;    }
 
+	@Override
+	public String getSubName() {    return this.m_brickTypeId.getKey();    }
+	
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPManualBrick out = null;
+		try {
+			out = this.m_manualBrickClass.newInstance();
+			this.parseBrickJson((JSONObject)obj, out, parseService);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return out;
+	}
+	
 	protected void parseBrickJson(JSONObject jsonObj, HAPManualBrick brick, HAPServiceParseEntity parseService) {
 
 		//division
@@ -53,7 +75,7 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 				JSONObject attrJsonObj = attrsJsonObj.getJSONObject(attrName);
 			
 				//value in attribute
-				HAPWrapperValue valueWrapperInAttr = this.parseValueWrapper(attrJsonObj.getJSONObject(HAPAttributeInBrick.VALUEWRAPPER), parseService); 
+				HAPWrapperValue valueWrapperInAttr = this.parseValueWrapper(attrName, attrJsonObj.getJSONObject(HAPAttributeInBrick.VALUEWRAPPER), parseService); 
 				HAPAttributeInBrick attribute = new HAPAttributeInBrick(attrName, valueWrapperInAttr);
 				attribute.buildEntityInfoByJson(attrsJsonObj);
 				
@@ -64,7 +86,7 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 
 					HAPManualAdapter adapter = new HAPManualAdapter();
 					adapter.buildEntityInfoByJson(adapterJsonObj);
-					adapter.setValueWrapper(this.parseValueWrapper(adapterJsonObj.getJSONObject(HAPAdapter.VALUEWRAPPER), parseService));
+					adapter.setValueWrapper(this.parseValueWrapper(null, adapterJsonObj.getJSONObject(HAPAdapter.VALUEWRAPPER), parseService));
 					attribute.addAdapter(adapter);
 				}
 				
@@ -86,7 +108,6 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 		otherExternalValuePortsContainer.buildObject(jsonObj.getJSONObject(HAPManualBrick.OTHEREXTERNALVALUEPORTSCONTAINER), HAPSerializationFormat.JSON);
 		brick.setOtherExternalValuePortContainer(otherExternalValuePortsContainer);
 		
-		
 		//command expose
 		JSONObject commandJsonObj = jsonObj.optJSONObject(HAPBrick.EXPORTCOMMAND);
 		if(commandJsonObj!=null) {
@@ -105,9 +126,7 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 
 	}
 	
-	abstract protected Object parseValueInAttribute(Object obj, HAPServiceParseEntity parseService);
-
-	protected HAPWrapperValue parseValueWrapper(JSONObject valueWrapperJsonObj, HAPServiceParseEntity parseService) {
+	protected HAPWrapperValue parseValueWrapper(String attrName, JSONObject valueWrapperJsonObj, HAPServiceParseEntity parseService) {
 		HAPWrapperValue valueWrapperInAttr = null;
 		
 		String valueType = valueWrapperJsonObj.getString(HAPWrapperValue.VALUETYPE);
@@ -121,7 +140,7 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 			break;
 		case HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_VALUE:
 			HAPWrapperValueOfValue valueWrapper = new HAPWrapperValueOfValue();
-			valueWrapper.setValue(this.parseValueInAttribute(valueWrapperJsonObj.opt(HAPWrapperValueOfValue.VALUE), parseService));
+			valueWrapper.setValue(this.parseValueInAttribute(attrName, valueWrapperJsonObj.opt(HAPWrapperValueOfValue.VALUE), parseService));
 			valueWrapperInAttr = valueWrapper;
 			break;
 		case HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_RESOURCEID:
@@ -146,4 +165,6 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 		return valueWrapperInAttr;
 	}
 	
+	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {     return null;     }
+
 }

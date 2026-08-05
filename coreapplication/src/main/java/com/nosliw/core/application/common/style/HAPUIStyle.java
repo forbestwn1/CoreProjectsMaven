@@ -2,6 +2,8 @@ package com.nosliw.core.application.common.style;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
@@ -29,13 +31,19 @@ public class HAPUIStyle extends HAPSerializableImp{
 	public String getDefinition() {   return this.m_definition;   }
 	public void setDefinition(String def) {    this.m_definition = def;     }
 
-
-
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(ID, HAPUtilityJson.buildJson(this.m_id, HAPSerializationFormat.JSON));
 		jsonMap.put(DEFINITION, HAPUtilityJson.escape(this.m_definition));
+	}
+
+	@Override
+	protected boolean buildObjectByJson(Object json){  
+		JSONObject jsonObj = (JSONObject)json;
+		this.setId((String)jsonObj.opt(ID));
+		this.setDefinition((String)jsonObj.opt(DEFINITION));
+		return true;  
 	}
 
 }

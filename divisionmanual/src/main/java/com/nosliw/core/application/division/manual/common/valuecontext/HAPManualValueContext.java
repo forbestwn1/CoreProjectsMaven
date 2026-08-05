@@ -1,6 +1,7 @@
 package com.nosliw.core.application.division.manual.common.valuecontext;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,7 +110,7 @@ public class HAPManualValueContext extends HAPSerializableImp implements HAPValu
 			this.m_valueStructureRuntimeNameById.remove(vsId);
 		}
 		
-		for(String name : this.m_valueStructureRuntimeIdByName.keySet()) {
+		for(String name : new HashSet<String>(this.m_valueStructureRuntimeIdByName.keySet())) {
 			if(valueStrucutreIds.contains(this.m_valueStructureRuntimeIdByName.get(name))) {
 				this.m_valueStructureRuntimeIdByName.remove(name);
 			}

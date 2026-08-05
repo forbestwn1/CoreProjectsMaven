@@ -3,14 +3,23 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
+import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
+import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIId;
 import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.resource.HAPResourceId;
+import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implements HAPBlockComplexUICustomerTag{
 
@@ -57,5 +66,67 @@ public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implem
 
 	@Override
 	public HAPUIStyle getStyle() {      return (HAPUIStyle)this.getAttributeValueOfValue(STYLE);   }
+
+}
+
+@Component
+class HAPManualBlockComplexUICustomerTag_parser extends HAPManualBrick_parser{
+
+	public HAPManualBlockComplexUICustomerTag_parser(HAPManagerApplicationBrick brickManager) {
+		super(brickManager, HAPManualBlockComplexUICustomerTag.class, HAPEnumBrickType.UICUSTOMERTAG_100);
+	}
+
+	@Override
+	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
+		switch(attrName) {
+		case HAPWithUIContent.STYLE:
+		{
+			JSONObject jsonObj = (JSONObject)obj; 
+			HAPUIStyle out = new HAPUIStyle();
+			out.buildObject(jsonObj, HAPSerializationFormat.JSON);
+			return out;
+		}
+		case HAPBlockComplexUICustomerTag.ATTRIBUTE:
+		{
+			Map<String, String> out = new LinkedHashMap<String, String>();
+			JSONObject attrJsonObj = (JSONObject)obj;
+			for(Object key : attrJsonObj.keySet()) {
+				String name = (String)key;
+				out.put(name, attrJsonObj.getString(name));
+			}
+			return out;
+		}
+		case HAPBlockComplexUICustomerTag.METADATA:
+		{
+			Map<String, String> out = new LinkedHashMap<String, String>();
+			JSONObject attrJsonObj = (JSONObject)obj;
+			for(Object key : attrJsonObj.keySet()) {
+				String name = (String)key;
+				out.put(name, attrJsonObj.getString(name));
+			}
+			return out;
+		}
+		case HAPBlockComplexUICustomerTag.TAGDEFINITION:
+		{
+			JSONObject jsonObj = (JSONObject)obj; 
+			return parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPBlockComplexUICustomerTag.TAGDEFINITION), HAPUITagDefinition.class.getName());
+		}
+		case HAPBlockComplexUICustomerTag.ATTRIBUTEDEFINITION:
+		{
+			JSONObject jsonObj = (JSONObject)obj; 
+			for(Object key : jsonObj.keySet()) {
+				String name = (String)key;
+				return HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(jsonObj.getJSONObject(name), parseService);
+			}
+			
+		}
+		case HAPBlockComplexUICustomerTag.UITAGID:
+		case HAPBlockComplexUICustomerTag.BASE:
+		case HAPWithUIId.UIID:
+			return obj;
+		}
+		
+		return null;     
+	}
 
 }

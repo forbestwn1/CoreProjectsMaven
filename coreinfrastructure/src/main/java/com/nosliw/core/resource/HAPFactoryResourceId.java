@@ -79,6 +79,9 @@ public class HAPFactoryResourceId {
 	}
 	
 	public static HAPResourceId newInstance(Object content) {
+		if(content==null) {
+			return null;
+		}
 		HAPResourceId out = null;
 		if(content instanceof String) {
 			String literate = (String)content;
