@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.division.story.definition.HAPStoryMetaDataChildElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryMetaDataChildElementParser;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public abstract class HAPStoryMetaDataChildElementUI extends HAPStoryMetaDataChildElement{
 

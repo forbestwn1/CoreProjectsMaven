@@ -2,13 +2,19 @@ package com.nosliw.core.application.common.dataexpression;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.container.HAPItemWrapper;
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPParserEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.data.expression.HAPExpressionData;
 
 @HAPEntityWithAttribute
-public class HAPItemInContainerDataExpression extends HAPItemWrapper{
+public class HAPItemInContainerDataExpression extends HAPItemWrapper implements HAPEntityParsable{
 
 	@HAPAttribute
 	public static String DATAEXPRESSION = "dataExpression";
@@ -26,4 +32,22 @@ public class HAPItemInContainerDataExpression extends HAPItemWrapper{
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
 	}
+}
+
+@Component
+class HAPItemInContainerDataExpression_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {    return HAPItemInContainerDataExpression.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPItemInContainerDataExpression out = new HAPItemInContainerDataExpression();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		out.setDataExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPExpressionData.class.getName()));
+		
+		return out;
+	}
+	
 }

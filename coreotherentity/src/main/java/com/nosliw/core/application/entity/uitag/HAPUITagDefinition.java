@@ -11,8 +11,11 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.command.HAPCommandDefinition;
 import com.nosliw.core.application.common.command.HAPCommandWithDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
@@ -22,9 +25,6 @@ import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntity;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition, HAPCommandWithDefinition, HAPEntityParsable{

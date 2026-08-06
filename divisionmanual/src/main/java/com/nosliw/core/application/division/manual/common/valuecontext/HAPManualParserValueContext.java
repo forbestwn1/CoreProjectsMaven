@@ -3,6 +3,7 @@ package com.nosliw.core.application.division.manual.common.valuecontext;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
@@ -11,7 +12,6 @@ import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrickFormatJson;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualParserValueContext {
 

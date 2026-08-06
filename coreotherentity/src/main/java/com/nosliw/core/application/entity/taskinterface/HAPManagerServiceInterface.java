@@ -6,11 +6,11 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.brick.service.interfacee.HAPBlockServiceInterface;
 import com.nosliw.core.application.entity.datasource.HAPIdServcieInterface;
 import com.nosliw.core.application.entity.datasource.HAPUtilityServiceParse;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.system.HAPSystemFolderUtility;
 
 @Component

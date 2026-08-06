@@ -6,10 +6,10 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.entity.brickcriteria.HAPRestrainBrick;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPRestrainBrickTypeFacadeTaskInterface extends HAPRestrainBrick{
 

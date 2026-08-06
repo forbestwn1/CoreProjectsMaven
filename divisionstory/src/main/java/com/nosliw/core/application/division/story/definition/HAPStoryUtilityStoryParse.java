@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.story.definition;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 public class HAPStoryUtilityStoryParse {
 

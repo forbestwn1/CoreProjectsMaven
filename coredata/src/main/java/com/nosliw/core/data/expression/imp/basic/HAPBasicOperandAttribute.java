@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -20,6 +24,8 @@ public class HAPBasicOperandAttribute extends HAPBasicOperand implements HAPOper
 	private String m_attribute;
 	
 	private HAPBasicWrapperOperand m_base;
+	
+	public HAPBasicOperandAttribute() {}
 	
 	public HAPBasicOperandAttribute(HAPDefinitionOperandAttribute operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_ATTRIBUTEOPERATION, operandDefinition);
@@ -62,4 +68,21 @@ public class HAPBasicOperandAttribute extends HAPBasicOperand implements HAPOper
 		jsonMap.put(ATTRIBUTE, this.m_attribute);
 		jsonMap.put(BASEDATA, HAPManagerSerialize.getInstance().toStringValue(this.getBase(), HAPSerializationFormat.JSON));
 	}
+}
+
+class HAPBasicOperandAttribute_parser extends HAPBasicOperand_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicOperandAttribute out = new HAPBasicOperandAttribute();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.EXPRESSION_OPERAND_ATTRIBUTEOPERATION;   }
+	
 }

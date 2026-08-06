@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoFolder;

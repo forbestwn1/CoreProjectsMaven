@@ -6,9 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 
@@ -17,8 +23,11 @@ public class HAPSegmentScriptExpressionScriptSimple extends HAPSegmentScriptExpr
 	@HAPAttribute
 	public static String PART = "part";
 
+	//string, constant or variable
 	private List<Object> m_parts;
 
+	public HAPSegmentScriptExpressionScriptSimple() {}
+	
 	public HAPSegmentScriptExpressionScriptSimple(String id) {
 		super(id);
 		this.m_parts = new ArrayList<Object>();
@@ -76,5 +85,46 @@ public class HAPSegmentScriptExpressionScriptSimple extends HAPSegmentScriptExpr
 		}
 		this.m_parts = newEles;
 	}
+	
+}
+
+@Component
+class HAPSegmentScriptExpressionScriptSimple_parser extends HAPSegmentScriptExpression_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPSegmentScriptExpressionScriptSimple out = new HAPSegmentScriptExpressionScriptSimple();
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		this.parseToSegmentJson(jsonObj, out, parseService);
+		
+		JSONArray partsJsonArray = jsonObj.optJSONArray(HAPSegmentScriptExpressionScriptSimple.PART);
+		for(int i=0; i<partsJsonArray.length(); i++) {
+			Object partObj = partsJsonArray.get(i);
+			if(partObj instanceof JSONObject) {
+				JSONObject partJsonObj = (JSONObject)partObj;
+				if(partJsonObj.opt(HAPConstantInScript.CONSTANTNAME)!=null) {
+					//constant
+					HAPConstantInScript constant = new HAPConstantInScript();
+					constant.buildObject(constant, HAPSerializationFormat.JSON);
+					out.addPart(constant);
+				}
+				else {
+					//variable
+					HAPVariableInScript variable = new HAPVariableInScript();
+					variable.buildObject(variable, HAPSerializationFormat.JSON);
+					out.addPart(variable);
+				}
+			}
+			else {
+				out.addPart(partObj);
+			}
+		}
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {   return HAPConstantShared.EXPRESSION_SEG_TYPE_SCRIPTSIMPLE;   }
 	
 }

@@ -5,7 +5,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
@@ -17,6 +22,7 @@ import com.nosliw.core.data.expression.HAPOperand;
 import com.nosliw.core.data.expression.HAPOperandReference;
 import com.nosliw.core.data.expression.definition.HAPDefinitionOperandReference;
 import com.nosliw.core.data.matcher.HAPMatchers;
+import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOperandReference{
@@ -30,6 +36,8 @@ public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOper
 
 	private Map<String, HAPMatchers> m_matchers;
 
+	public HAPBasicOperandReference() {}
+	
 	public HAPBasicOperandReference(HAPDefinitionOperandReference operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_REFERENCE, operandDefinition);
 		this.m_variableMapping = new LinkedHashMap<String, HAPBasicWrapperOperand>();
@@ -108,3 +116,27 @@ public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOper
 	}
 	
 }
+
+@Component
+class HAPBasicOperandReference_parser extends HAPBasicOperand_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicOperandReference out = new HAPBasicOperandReference();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		JSONObject resourceIdJsonObj = jsonObj.optJSONObject(HAPBasicOperandReference.RESOURCEID);
+		if(resourceIdJsonObj!=null) {
+			out.setResourceId(HAPFactoryResourceId.newInstance(resourceIdJsonObj));
+		}
+		
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.EXPRESSION_OPERAND_REFERENCE;   }
+	
+}
+

@@ -2,6 +2,8 @@ package com.nosliw.core.application.valueport;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPComplexPath;
@@ -28,7 +30,9 @@ public class HAPIdRootElement extends HAPSerializableImp{
 	private String m_valueStructureId;
 	
 	private String m_rootName;
-	
+
+	public HAPIdRootElement() {}
+
 	public HAPIdRootElement(String reference) {
 		String[] parts = HAPUtilityNamingConversion.splitTextByTwoPart(reference, HAPConstantShared.SEPERATOR_LEVEL1);
 		this.m_rootName = parts[0];
@@ -51,10 +55,13 @@ public class HAPIdRootElement extends HAPSerializableImp{
 	}
 
 	public HAPIdValuePortInBundle getValuePortId() {    return this.m_valuePortId;    }
+	public void setValuePortId(HAPIdValuePortInBundle valuePortId) {      this.m_valuePortId = valuePortId;      }
 	
 	public String getValueStructureId() {    return this.m_valueStructureId;     }
+	public void setValueStructureId(String id) {      this.m_valueStructureId = id;        }
 	
 	public String getRootName() {    return this.m_rootName;   }
+	public void setRootName(String rootName) {     this.m_rootName = rootName;       }
 
 	public HAPComplexPath getPath() {    return new HAPComplexPath(this.m_valueStructureId, this.m_rootName);     }
 	
@@ -85,5 +92,22 @@ public class HAPIdRootElement extends HAPSerializableImp{
 			return HAPUtilityBasic.isEquals(this.m_rootName, rootEleId.m_rootName) && HAPUtilityBasic.isEquals(this.m_valueStructureId, rootEleId.m_valueStructureId);
 		}
 		return false;
+	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+
+		this.setRootName((String)jsonObj.opt(ROOTNAME));
+		this.setValueStructureId((String)jsonObj.opt(VALUESTRUCTUREID));
+
+		JSONObject valuePortIdJsonObj = jsonObj.optJSONObject(VALUEPORTID);
+		if(valuePortIdJsonObj!=null) {
+			HAPIdValuePortInBundle valuePortId = new HAPIdValuePortInBundle();
+			valuePortId.buildObject(valuePortIdJsonObj, HAPSerializationFormat.JSON);
+			this.setValuePortId(valuePortId);
+		}
+		
+		return true;  
 	}
 }

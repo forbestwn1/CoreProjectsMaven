@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.nosliw.common.parm.HAPWithParms;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
@@ -15,7 +16,6 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityDataRule {
 

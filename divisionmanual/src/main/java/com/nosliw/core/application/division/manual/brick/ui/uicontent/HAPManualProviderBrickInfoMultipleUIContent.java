@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
@@ -18,7 +19,6 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBri
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPManualProviderBrickInfoMultipleUIContent implements HAPManualProviderBrickInfoMultiple{

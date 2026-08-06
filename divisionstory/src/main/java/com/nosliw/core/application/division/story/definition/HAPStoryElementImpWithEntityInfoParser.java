@@ -6,7 +6,7 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.info.HAPWithEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 abstract public class HAPStoryElementImpWithEntityInfoParser extends HAPStoryParserElement{
 

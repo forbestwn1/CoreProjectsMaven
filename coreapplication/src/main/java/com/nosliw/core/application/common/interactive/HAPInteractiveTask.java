@@ -11,9 +11,9 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPInteractiveTask extends HAPSerializableImp implements HAPInteractive{
 

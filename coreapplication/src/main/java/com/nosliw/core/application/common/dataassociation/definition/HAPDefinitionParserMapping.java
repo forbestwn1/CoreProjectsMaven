@@ -9,10 +9,10 @@ import org.json.JSONObject;
 
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.structure.HAPUtilityParserElement;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
 import com.nosliw.core.application.valueport.HAPReferenceRootElement;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionParserMapping {
 

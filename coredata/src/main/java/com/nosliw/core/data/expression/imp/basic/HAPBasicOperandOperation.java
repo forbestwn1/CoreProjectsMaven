@@ -5,8 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
@@ -36,7 +41,9 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 	private Map<String, HAPBasicWrapperOperand> m_parms;
 	
 	private Map<String, HAPMatchers> m_parmsMatchers;
-	
+
+	public HAPBasicOperandOperation() {};
+
 	public HAPBasicOperandOperation(HAPDefinitionOperandOperation operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_OPERATION, operandDefinition);
 		this.m_parms = new LinkedHashMap<String, HAPBasicWrapperOperand>(); 
@@ -69,12 +76,15 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 
 	@Override
 	public HAPDataTypeId getDataTypeId() {   return this.m_dataTypeId;   }
+	public void setDataTypeId(HAPDataTypeId dataTypeId) {      this.m_dataTypeId = dataTypeId;       }
 
 	@Override
 	public String getOperaion() {   return this.m_operation;   }
+	public void setOperation(String operation) {     this.m_operation = operation;       }
 
 	@Override
 	public Map<String, HAPMatchers> getParmMatchers() {   return this.m_parmsMatchers;   }
+	public void setParmMatchers(String parmName, HAPMatchers matchers) {     this.m_parmsMatchers.put(parmName, matchers);      }
 
 	@Override
 	public List<HAPBasicWrapperOperand> getChildren(){   
@@ -199,4 +209,49 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 		jsonMap.put(PARMS, HAPUtilityJson.buildJson(this.getParms(), HAPSerializationFormat.JSON));
 		jsonMap.put(MATCHERSPARMS, HAPUtilityJson.buildJson(this.getParmMatchers(), HAPSerializationFormat.JSON));
 	}
+}
+
+@Component
+class HAPBasicOperandOperation_parser extends HAPBasicOperand_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicOperandOperation out = new HAPBasicOperandOperation();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		out.setOperation((String)jsonObj.opt(HAPBasicOperandOperation.OPERATION));
+		
+		String dataTypeIdStr = (String)jsonObj.opt(HAPBasicOperandOperation.DATATYPEID);
+		if(dataTypeIdStr!=null) {
+			HAPDataTypeId dataTypeId = new HAPDataTypeId();
+			dataTypeId.buildObject(dataTypeIdStr, HAPSerializationFormat.LITERATE);
+			out.setDataTypeId(dataTypeId);
+		}
+		
+		JSONObject baseOperandJsonObj = jsonObj.optJSONObject(HAPBasicOperandOperation.BASE);
+		if(baseOperandJsonObj!=null) {
+			out.setBase(HAPBasicOperand.parseOperandJson(baseOperandJsonObj, parseService));
+		}
+
+		JSONObject parmOperandsJsonObj = jsonObj.optJSONObject(HAPBasicOperandOperation.PARMS);
+		for(Object key : parmOperandsJsonObj.keySet()) {
+			String name = (String)key;
+			out.setParm(name, HAPBasicOperand.parseOperandJson(parmOperandsJsonObj.getJSONObject(name), parseService));
+		}
+		
+		JSONObject parmMatchersJsonObj = jsonObj.optJSONObject(HAPBasicOperandOperation.MATCHERSPARMS);
+		for(Object key : parmMatchersJsonObj.keySet()) {
+			String name = (String)key;
+			HAPMatchers matchers = new HAPMatchers();
+			matchers.buildObject(parmMatchersJsonObj.get(name), HAPSerializationFormat.JSON);
+			out.setParmMatchers(name, matchers);
+		}
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.EXPRESSION_OPERAND_OPERATION;   }
+	
 }

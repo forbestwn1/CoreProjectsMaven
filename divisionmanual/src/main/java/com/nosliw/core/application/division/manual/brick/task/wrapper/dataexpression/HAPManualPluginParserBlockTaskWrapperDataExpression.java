@@ -2,6 +2,7 @@ package com.nosliw.core.application.division.manual.brick.task.wrapper.dataexpre
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
@@ -10,7 +11,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualPluginParserBlockTaskWrapperDataExpression extends HAPManualDefinitionPluginParserBrickImpSimple{
 

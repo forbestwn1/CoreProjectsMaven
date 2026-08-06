@@ -1,4 +1,4 @@
-package com.nosliw.core.service.entityparse;
+package com.nosliw.common.serialization;
 
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 

@@ -5,10 +5,10 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializableImp;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 public class HAPStaticRequestInfo extends HAPSerializableImp implements HAPEntityParsable{
 

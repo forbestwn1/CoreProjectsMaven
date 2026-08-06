@@ -3,11 +3,11 @@ package com.nosliw.core.application.common.structure;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.common.structure.reference.HAPInfoRelativeResolve;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUtilityParserElement {
 

@@ -8,15 +8,18 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPParserEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
 @Component
-public class HAPServiceParseEntity {
+public class HAPServiceParseEntityImp implements HAPServiceParseEntity{
 
 	private Map<String, HAPParserEntity> m_parsers;
 	
-	public HAPServiceParseEntity() {
+	public HAPServiceParseEntityImp() {
 		this.m_parsers = new LinkedHashMap<String, HAPParserEntity>();
 	}
 	
@@ -28,6 +31,7 @@ public class HAPServiceParseEntity {
 	}
 
 	//entity type through attribute
+	@Override
 	public HAPEntityParsable parseEntityJSONImplicitAttribute(JSONObject jsonObj, String attributNameForEntityType, String domain) {
 		if(jsonObj==null) {
 			return null;
@@ -52,6 +56,7 @@ public class HAPServiceParseEntity {
 	}
 
 	//explicit entity type
+	@Override
 	public HAPEntityParsable parseEntityJSONExplicit(JSONObject jsonObj, String entityType) {
 		if(jsonObj==null || HAPUtilityBasic.isStringEmpty(entityType)) {
 			return null;
@@ -59,6 +64,7 @@ public class HAPServiceParseEntity {
 		return this.m_parsers.get(entityType).parseEntityJson(jsonObj, this);
 	}
 
+	@Override
 	public HAPEntityParsable parseEntityJSONExplicit(JSONObject jsonObj, String subType, String domain) {
 		if(jsonObj==null) {
 			return null;
@@ -67,11 +73,11 @@ public class HAPServiceParseEntity {
 		return this.m_parsers.get(entityType).parseEntityJson(jsonObj, this);
 	}
 
+	@Override
 	public HAPEntityParsable parseEntityJSONImplicitAttribute(JSONObject jsonObj) {
 		if(jsonObj==null) {
 			return null;
 		}
 		return this.parseEntityJSONImplicitAttribute(jsonObj, null, null);
 	}
-	
 }

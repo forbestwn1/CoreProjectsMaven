@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilder;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
@@ -11,7 +12,6 @@ import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponse
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStep;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataStepEnd;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public abstract class HAPStoryBuilderDesignWizard implements HAPStoryBuilder{
 

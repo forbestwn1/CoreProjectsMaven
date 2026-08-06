@@ -6,11 +6,11 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 @HAPEntityWithAttribute
 public abstract class HAPDataRule extends HAPSerializableImp implements HAPEntityParsable{

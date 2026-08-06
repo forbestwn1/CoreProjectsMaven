@@ -3,9 +3,15 @@ package com.nosliw.core.data.expression.imp.basic;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.variable.HAPVariableInfo;
@@ -19,6 +25,8 @@ public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExp
 	
 	private Map<String, HAPVariableInfo> m_variablesInfo;
 
+	public HAPBasicExpressionData() {}
+	
 	public HAPBasicExpressionData(HAPBasicOperand operand) {
 		this.m_variablesInfo = new LinkedHashMap<String, HAPVariableInfo>();
 		this.m_operand = new HAPBasicWrapperOperand(operand);
@@ -32,7 +40,8 @@ public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExp
 	@Override
 	public HAPOperand getOperand() {   return this.m_operand.getOperand();  }
 	public HAPBasicWrapperOperand getOperandWrapper() {   return this.m_operand;     }
-
+	public void setOperand(HAPBasicOperand operand) {   this.m_operand = new HAPBasicWrapperOperand(operand);      }
+	
 	@Override
 	public Map<String, HAPVariableInfo> getVariablesInfo() {   return this.m_variablesInfo;   }
 	@Override
@@ -52,4 +61,34 @@ public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExp
 		jsonMap.put(HAPWithVariable.VARIABLEINFOS, HAPUtilityJson.buildJson(this.m_variablesInfo, HAPSerializationFormat.JSON));
 	}
 
+}
+
+@Component
+class HAPBasicExpressionData_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {    return HAPBasicExpressionData.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicExpressionData out = new HAPBasicExpressionData();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		JSONObject operandJsonObj = jsonObj.optJSONObject(HAPBasicExpressionData.OPERAND);
+		if(operandJsonObj!=null) {
+			out.setOperand(HAPBasicOperand.parseOperandJson(operandJsonObj, parseService));
+		}
+		
+		JSONObject varInfosJsonObj = jsonObj.optJSONObject(HAPWithVariable.VARIABLEINFOS);
+		if(varInfosJsonObj!=null) {
+			for(Object key : varInfosJsonObj.keySet()) {
+				String name = (String)key;
+				out.addVariableInfo((HAPVariableInfo)parseService.parseEntityJSONExplicit(varInfosJsonObj.getJSONObject(name), HAPVariableInfo.class.getName()));
+			}
+		}
+		
+		return out;
+	}
+	
 }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
@@ -20,7 +21,6 @@ import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressi
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements HAPBlockComplexUIContent{
 
@@ -101,16 +101,6 @@ class HAPManualBlockComplexUIContent_parser extends HAPManualBrick_parser{
 			return out;
 		}
 		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONINNORMALTAGATTRIBUTE:
-		{
-			List<HAPUIEmbededScriptExpressionInAttribute> out = new ArrayList<HAPUIEmbededScriptExpressionInAttribute>();
-			JSONArray jsonArray = (JSONArray)obj; 
-			for(int i=0; i<jsonArray.length(); i++) {
-				HAPUIEmbededScriptExpressionInAttribute item = new HAPUIEmbededScriptExpressionInAttribute();
-				item.buildObject(jsonArray.get(i), HAPSerializationFormat.JSON);
-				out.add(item);
-			}
-			return out;
-		}
 		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCUSTOMERTAGATTRIBUTE:
 		{
 			List<HAPUIEmbededScriptExpressionInAttribute> out = new ArrayList<HAPUIEmbededScriptExpressionInAttribute>();

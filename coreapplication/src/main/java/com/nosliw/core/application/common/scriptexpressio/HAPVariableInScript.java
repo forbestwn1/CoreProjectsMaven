@@ -2,6 +2,8 @@ package com.nosliw.core.application.common.scriptexpressio;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.resource.infrastructure.HAPExecutableImp;
@@ -19,6 +21,8 @@ public class HAPVariableInScript extends HAPExecutableImp{
 	
 	private String m_variableKey;
 	
+	public HAPVariableInScript(){}
+
 	public HAPVariableInScript(String name){
 		this.m_variableName = name;
 	}
@@ -29,6 +33,7 @@ public class HAPVariableInScript extends HAPExecutableImp{
 	}
 	
 	public String getVariableName(){	return this.m_variableName;	}
+	public void setVariableName(String variableName) {      this.m_variableName = variableName;          }
 
 	public String getVariableKey() {    return this.m_variableKey;     }
 	public void setVariableKey(String varKey) {     this.m_variableKey = varKey;      }
@@ -42,5 +47,13 @@ public class HAPVariableInScript extends HAPExecutableImp{
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(VARIABLENAME, this.m_variableName);
 		jsonMap.put(VARIABLEKEY, this.m_variableKey);
+	}
+
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		this.setVariableName((String)jsonObj.opt(VARIABLENAME));
+		this.setVariableKey((String)jsonObj.opt(VARIABLEKEY));
+		return true;
 	}
 }

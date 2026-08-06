@@ -6,13 +6,13 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable{
 

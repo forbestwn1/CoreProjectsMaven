@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.common.command.HAPCommandDefinition;
@@ -17,7 +18,6 @@ import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPUITagUtilityDefinitionParser {
 

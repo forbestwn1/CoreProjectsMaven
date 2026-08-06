@@ -2,9 +2,9 @@ package com.nosliw.core.application.common.datadefinition;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPParserDataDefinition {
 

@@ -6,11 +6,11 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionOperandReference extends HAPDefinitionOperand{
 

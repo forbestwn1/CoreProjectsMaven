@@ -6,16 +6,16 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPParserEntityImpWithDomain;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public abstract class HAPDataDefinition extends HAPSerializableImp implements HAPEntityParsable{

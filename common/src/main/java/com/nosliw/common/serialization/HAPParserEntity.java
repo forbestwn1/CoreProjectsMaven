@@ -1,4 +1,4 @@
-package com.nosliw.core.service.entityparse;
+package com.nosliw.common.serialization;
 
 public interface HAPParserEntity {
 

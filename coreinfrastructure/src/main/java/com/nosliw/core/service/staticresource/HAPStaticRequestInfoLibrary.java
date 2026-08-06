@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public class HAPStaticRequestInfoLibrary extends HAPStaticRequestInfo{

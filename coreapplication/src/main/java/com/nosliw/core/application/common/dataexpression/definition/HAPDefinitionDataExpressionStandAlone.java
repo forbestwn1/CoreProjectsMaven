@@ -5,12 +5,12 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionDataExpressionStandAlone extends HAPSerializableImp{
 

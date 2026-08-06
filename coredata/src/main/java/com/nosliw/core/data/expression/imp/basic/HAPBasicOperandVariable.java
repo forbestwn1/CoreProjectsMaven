@@ -2,6 +2,11 @@ package com.nosliw.core.data.expression.imp.basic;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -17,7 +22,9 @@ public class HAPBasicOperandVariable extends HAPBasicOperand implements HAPOpera
 	private String m_variableKey;
 	
 	private String m_variableName;
-	
+
+	public HAPBasicOperandVariable() {}
+
 	public HAPBasicOperandVariable(HAPDefinitionOperandVariable operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_VARIABLE, operandDefinition);
 		this.m_variableName = operandDefinition.getVariableName();
@@ -29,6 +36,7 @@ public class HAPBasicOperandVariable extends HAPBasicOperand implements HAPOpera
 
 	@Override
 	public String getVariableName() {   return this.m_variableName;   }
+	public void setVariableName(String varName) {     this.m_variableName = varName;        }
 
 	@Override
 	public HAPMatchers discover(
@@ -59,4 +67,24 @@ public class HAPBasicOperandVariable extends HAPBasicOperand implements HAPOpera
 			jsonMap.put(VARIABLEKEY, this.m_variableName);
 		}
 	}
+}
+
+@Component
+class HAPBasicOperandVariable_parser extends HAPBasicOperand_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicOperandVariable out = new HAPBasicOperandVariable();
+		JSONObject jsonObj = (JSONObject)obj;
+
+		this.parseToOperandJson(jsonObj, out, parseService);
+		out.setVariableName((String)jsonObj.opt(HAPBasicOperandVariable.VARIABLENAME));
+		out.setVariableKey((String)jsonObj.opt(HAPBasicOperandVariable.VARIABLEKEY));
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {   return HAPConstantShared.EXPRESSION_OPERAND_VARIABLE;    }
+	
 }

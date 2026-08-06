@@ -6,12 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryDesignUtilityParse {
 

@@ -6,9 +6,9 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 abstract public class HAPStoryChangeItemModifyElement extends HAPStoryChangeItem{
 

@@ -6,11 +6,11 @@ import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 //root class for all element
 public abstract class HAPStoryElement extends HAPSerializableImp implements HAPEntityParsable{

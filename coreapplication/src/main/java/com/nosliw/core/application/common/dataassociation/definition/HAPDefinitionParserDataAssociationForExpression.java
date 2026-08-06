@@ -2,8 +2,8 @@ package com.nosliw.core.application.common.dataassociation.definition;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPDefinitionParserDataAssociationForExpression {
 

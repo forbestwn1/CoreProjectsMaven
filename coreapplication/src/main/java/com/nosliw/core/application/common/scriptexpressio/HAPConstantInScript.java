@@ -2,6 +2,8 @@ package com.nosliw.core.application.common.scriptexpressio;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
@@ -21,6 +23,8 @@ public class HAPConstantInScript extends HAPExecutableImp{
 	
 	private Object m_value;
 
+	public HAPConstantInScript(){}
+	
 	public HAPConstantInScript(String name){
 		this.m_constantName = name;
 	}
@@ -31,6 +35,7 @@ public class HAPConstantInScript extends HAPExecutableImp{
 	}
 	
 	public String getConstantName(){	return this.m_constantName;	}
+	public void setConstantName(String name) {       this.m_constantName = name;        }
 
 	public Object getValue() {    return this.m_value;    }
 	public void setValue(Object value) {  this.m_value = value;      }
@@ -45,5 +50,13 @@ public class HAPConstantInScript extends HAPExecutableImp{
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(CONSTANTNAME, this.m_constantName);
 		jsonMap.put(VALUE, HAPManagerSerialize.getInstance().toStringValue(m_value, HAPSerializationFormat.JSON));
+	}
+
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		this.setConstantName((String)jsonObj.opt(CONSTANTNAME));
+		this.setValue(jsonObj.opt(VALUE));
+		return true;  
 	}
 }

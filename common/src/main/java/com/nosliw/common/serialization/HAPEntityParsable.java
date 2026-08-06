@@ -1,6 +1,4 @@
-package com.nosliw.core.service.entityparse;
-
-import com.nosliw.common.serialization.HAPSerializable;
+package com.nosliw.common.serialization;
 
 public interface HAPEntityParsable extends HAPSerializable{
 

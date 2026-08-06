@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.HAPBundleForBrick;
@@ -31,7 +32,6 @@ import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
 @HAPEntityWithAttribute

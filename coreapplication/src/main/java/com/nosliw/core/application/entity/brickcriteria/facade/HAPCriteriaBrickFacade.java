@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.entity.brickcriteria.HAPCriteriaBrick;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPCriteriaBrickFacade extends HAPCriteriaBrick{
 

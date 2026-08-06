@@ -6,9 +6,9 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializableImp;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 @HAPEntityWithAttribute
 public abstract class HAPStoryDesignMetadataStep extends HAPSerializableImp implements HAPEntityParsable{

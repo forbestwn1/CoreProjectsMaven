@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
@@ -56,7 +57,6 @@ import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDefinition{
 

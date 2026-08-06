@@ -2,8 +2,13 @@ package com.nosliw.core.data.expression.imp.basic;
 
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPData;
@@ -20,6 +25,8 @@ public class HAPBasicOperandConstant extends HAPBasicOperand implements HAPOpera
 	private HAPData m_data;
 	
 	private String m_name;
+
+	public HAPBasicOperandConstant() {}
 	
 	public HAPBasicOperandConstant(HAPDefinitionOperandConstant operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT, operandDefinition);
@@ -65,4 +72,27 @@ public class HAPBasicOperandConstant extends HAPBasicOperand implements HAPOpera
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(DATA, HAPManagerSerialize.getInstance().toStringValue(this.m_data, HAPSerializationFormat.JSON));
 	}
+}
+
+@Component
+class HAPBasicOperandConstant_parser extends HAPBasicOperand_parser{
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPBasicOperandConstant out = new HAPBasicOperandConstant();
+		JSONObject jsonObj = (JSONObject)obj;
+
+		this.parseToOperandJson(jsonObj, out, parseService);
+		
+		Object dataObj = jsonObj.opt(HAPBasicOperandConstant.DATA);
+		if(dataObj!=null) {
+			out.setData(HAPUtilityData.buildDataWrapperFromObject(dataObj));
+		}
+		
+		return out;
+	}
+
+	@Override
+	public String getSubName() {   return HAPConstantShared.EXPRESSION_OPERAND_CONSTANT;    }
+	
 }

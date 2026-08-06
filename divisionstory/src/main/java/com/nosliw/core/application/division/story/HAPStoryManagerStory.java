@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
@@ -21,7 +22,6 @@ import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtili
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @Component
 public class HAPStoryManagerStory implements HAPPluginDivision{

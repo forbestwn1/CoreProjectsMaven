@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.story.definition;
 import java.util.Map;
 
 import com.nosliw.common.info.HAPEntityInfoImp;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPEntityParsable;
 
 public abstract class HAPStoryRunnable extends HAPEntityInfoImp implements HAPEntityParsable{
 

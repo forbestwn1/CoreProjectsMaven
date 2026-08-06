@@ -7,6 +7,7 @@ import com.nosliw.common.exception.HAPErrorUtility;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
@@ -44,9 +45,13 @@ public class HAPUtilityCriteria {
 	 * @return
 	 */
 	public static HAPMatchers isMatchable(HAPDataTypeCriteria criteria, HAPDataTypeCriteria expectCriteria, HAPDataTypeHelper dataTypeHelper){
-		if(expectCriteria==null)   return null;
+		if(expectCriteria==null) {
+			return null;
+		}
 		
-		if(expectCriteria==HAPDataTypeCriteriaAny.getCriteria())   expectCriteria = criteria;
+		if(expectCriteria==HAPDataTypeCriteriaAny.getCriteria()) {
+			expectCriteria = criteria;
+		}
 		
 		HAPMatchers out = dataTypeHelper.buildMatchers(criteria, expectCriteria);
 		if(out==null){
@@ -59,7 +64,9 @@ public class HAPUtilityCriteria {
 
 	
 	public static HAPDataTypeCriteria cloneDataTypeCriteria(HAPDataTypeCriteria criteria) {
-		if(criteria==null)  return null;
+		if(criteria==null) {
+			return null;
+		}
 		String str = criteria.toStringValue(HAPSerializationFormat.LITERATE);
 		HAPDataTypeCriteria out = HAPParserCriteriaImp.getInstance().parseCriteria(str);
 		if(criteria instanceof HAPDataTypeCriteriaAbstract) {
@@ -83,7 +90,9 @@ public class HAPUtilityCriteria {
 		HAPDataTypeCriteria out = null;
 		if(criteria instanceof HAPDataTypeCriteriaWithSubCriteria){
 			HAPDataTypeSubCriteriaGroup subGroup = ((HAPDataTypeCriteriaWithSubCriteria)criteria).getSubCriteria();
-			if(subGroup!=null)		out = subGroup.getSubCriteria(childName);
+			if(subGroup!=null) {
+				out = subGroup.getSubCriteria(childName);
+			}
 		}
 		return out;
 	}
@@ -92,7 +101,9 @@ public class HAPUtilityCriteria {
 		List<String> out = new ArrayList<String>();
 		if(criteria instanceof HAPDataTypeCriteriaWithSubCriteria){
 			HAPDataTypeSubCriteriaGroup subGroup = ((HAPDataTypeCriteriaWithSubCriteria)criteria).getSubCriteria();
-			if(subGroup!=null)		out = new ArrayList<String>(subGroup.getSubCriteriaNames());
+			if(subGroup!=null) {
+				out = new ArrayList<String>(subGroup.getSubCriteriaNames());
+			}
 		}
 		return out;
 	}
@@ -123,6 +134,9 @@ public class HAPUtilityCriteria {
 	}
 	
 	  public static HAPDataTypeCriteria parseCriteria(String criteria){
+		  if(HAPUtilityBasic.isStringEmpty(criteria)) {
+			return null;
+		  }
 		  return HAPParserCriteriaImp.getInstance().parseCriteria(criteria);
 	  }	
 }

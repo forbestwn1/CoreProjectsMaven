@@ -29,11 +29,15 @@ public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExp
 	private Set<String> m_varKeys = new HashSet<String>();
 
 	private HAPContainerDataExpression m_dataExpressionContainer;
-	
-	public HAPExpressionScriptImp(String type) {
+
+	public HAPExpressionScriptImp() {
 		this.m_segments = new ArrayList<HAPSegmentScriptExpression>();
-		this.m_type = type;
 		this.m_dataExpressionContainer = new HAPContainerDataExpression(); 
+	}
+
+	public HAPExpressionScriptImp(String type) {
+		this();
+		this.m_type = type;
 	}
 	
 	@Override

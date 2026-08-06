@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
@@ -21,7 +22,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 import com.nosliw.core.application.dynamic.HAPDynamicUtilityParser;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 public class HAPManualContentProviderFile implements HAPManualContentProvider{
 

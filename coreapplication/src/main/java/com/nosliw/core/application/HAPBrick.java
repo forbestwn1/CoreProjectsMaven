@@ -5,11 +5,11 @@ import java.util.List;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializable;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.valueport.HAPWithBothsideValuePort;
 import com.nosliw.core.resource.HAPWithResourceDependency;
-import com.nosliw.core.service.entityparse.HAPEntityParsable;
 
 @HAPEntityWithAttribute
 public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{

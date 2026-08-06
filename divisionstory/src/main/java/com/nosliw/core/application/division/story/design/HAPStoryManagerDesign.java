@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
@@ -14,7 +15,6 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualUtility
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtilityConverter;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
 @Component

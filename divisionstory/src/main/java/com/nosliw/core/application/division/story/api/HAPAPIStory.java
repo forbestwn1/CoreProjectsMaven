@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
@@ -27,7 +28,6 @@ import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.runtime.HAPRuntimeManager;
-import com.nosliw.core.service.entityparse.HAPServiceParseEntity;
 
 @RestController
 @RequestMapping("/nosliw/design")
