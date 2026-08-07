@@ -109,16 +109,17 @@ class HAPManualBlockComplexUICustomerTag_parser extends HAPManualBrick_parser{
 		case HAPBlockComplexUICustomerTag.TAGDEFINITION:
 		{
 			JSONObject jsonObj = (JSONObject)obj; 
-			return parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPBlockComplexUICustomerTag.TAGDEFINITION), HAPUITagDefinition.class.getName());
+			return HAPUITagDefinition.parseUITagDefinition(jsonObj, parseService);
 		}
 		case HAPBlockComplexUICustomerTag.ATTRIBUTEDEFINITION:
 		{
+			Map<String, HAPUITagDefinitionAttribute> out = new LinkedHashMap<String, HAPUITagDefinitionAttribute>();
 			JSONObject jsonObj = (JSONObject)obj; 
 			for(Object key : jsonObj.keySet()) {
 				String name = (String)key;
-				return HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(jsonObj.getJSONObject(name), parseService);
+				out.put(name, HAPUITagDefinitionAttribute.parseUITagDefinitionAttribute(jsonObj.getJSONObject(name), parseService));
 			}
-			
+			return out;
 		}
 		case HAPBlockComplexUICustomerTag.UITAGID:
 		case HAPBlockComplexUICustomerTag.BASE:

@@ -3,12 +3,20 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task.scri
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.interfac.HAPEntityOrReference;
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.variable.HAPVariableInfo;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.task.script.HAPBlockTestComplexTaskScript;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugExecutable;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockTestComplexTaskScript extends HAPManualBrickImp implements HAPBlockTestComplexTaskScript{
@@ -47,3 +55,49 @@ public class HAPManualBlockTestComplexTaskScript extends HAPManualBrickImp imple
 
 }
  
+@Component
+class HAPManualBlockTestComplexTaskScript_parser extends HAPManualBrick_parser{
+
+	public HAPManualBlockTestComplexTaskScript_parser(HAPManagerApplicationBrick brickManager) {
+		super(brickManager, HAPManualBlockTestComplexTaskScript.class, HAPEnumBrickType.TEST_COMPLEX_TASK_SCRIPT_100);
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPManualBlockTestComplexTaskScript out = new HAPManualBlockTestComplexTaskScript();
+		this.parseBrickJson((JSONObject)obj, out, parseService);
+		return out;
+	}
+	
+	@Override
+	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
+		switch(attrName) {
+		case HAPBlockTestComplexTaskScript.PARM:
+		{
+			Map<String, Object> out = new LinkedHashMap<String, Object>();
+			JSONObject parmsJsonObj = (JSONObject)obj;
+			for(Object key : parmsJsonObj.keySet()) {
+				String name = (String)key;
+				out.put(name, parmsJsonObj.get(name));
+			}
+			return out;
+		}
+    	case HAPBlockTestComplexTaskScript.SCRIPTRESOURCEID:
+    	{
+    		return HAPFactoryResourceId.newInstance(obj);
+    	}
+    	case HAPBlockTestComplexTaskScript.VARIABLE:
+    	{
+    		Map<String, HAPVariableInfo> out = new LinkedHashMap<String, HAPVariableInfo>();
+			JSONObject varsJsonObj = (JSONObject)obj;
+			for(Object key : varsJsonObj.keySet()) {
+				String name = (String)key;
+				out.put(name, (HAPVariableInfo)parseService.parseEntityJSONExplicit(varsJsonObj.getJSONObject(name), HAPVariableInfo.class.getName()));
+			}
+			return out;
+    	}
+	    }
+		return null;
+	}
+	
+}

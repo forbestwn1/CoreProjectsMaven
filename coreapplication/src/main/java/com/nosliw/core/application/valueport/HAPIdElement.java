@@ -96,7 +96,7 @@ class HAPIdElement_parser extends HAPIdVariable_parser{
 		JSONObject rootEleIdJsonObj = jsonObj.optJSONObject(HAPIdElement.ROOTELEMENTID);
 		if(rootEleIdJsonObj!=null) {
 			HAPIdRootElement rootEleId = new HAPIdRootElement();
-			rootEleId.buildObject(rootEleId, HAPSerializationFormat.JSON);
+			rootEleId.buildObject(rootEleIdJsonObj, HAPSerializationFormat.JSON);
 			out.setRootElementId(rootEleId);
 		}
 		
@@ -104,6 +104,6 @@ class HAPIdElement_parser extends HAPIdVariable_parser{
 	}
 
 	@Override
-	public String getSubName() {   return HAPIdElement.class.getName();   }
+	public String getSubName() {   return HAPConstantShared.VARIABLEID_TYPE_VALUEPORT;   }
 	
 }

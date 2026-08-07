@@ -6,9 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 
 public class HAPUITagDefinitionData extends HAPUITagDefinition{
@@ -53,4 +59,33 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 		jsonMap.put(DATAMODE, this.m_dataMode);
 		jsonMap.put(IOMODE, HAPManagerSerialize.getInstance().toStringValue(this.m_ioModes, HAPSerializationFormat.JSON));
 	}
+}
+
+@Component
+class HAPUITagDefinitionData_parser extends HAPUITagDefinition_parser{
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.UITAG_TYPE_DATA;     }
+	
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPUITagDefinitionData out = new HAPUITagDefinitionData();
+		JSONObject jsonObj = (JSONObject)obj;
+		this.parseToUITagDefinitionJson(out, jsonObj, parseService);
+		
+		out.setDataMode((String)jsonObj.opt(HAPUITagDefinitionData.DATAMODE));
+		
+		JSONArray ioModeArray = jsonObj.optJSONArray(HAPUITagDefinitionData.IOMODE);
+		for(int i=0; i<ioModeArray.length(); i++) {
+			out.addIOMode(ioModeArray.getString(i));
+		}
+		
+		JSONArray attrForDatasArray = jsonObj.optJSONArray(HAPUITagDefinitionData.ATTRIBUTEFORDATA);
+		for(int i=0; i<attrForDatasArray.length(); i++) {
+			out.addAttributeForData(attrForDatasArray.getString(i));
+		}
+		
+		return out;
+	}
+
 }

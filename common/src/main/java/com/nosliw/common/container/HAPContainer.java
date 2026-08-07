@@ -7,12 +7,13 @@ import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 
 @HAPEntityWithAttribute
-public class HAPContainer<T extends HAPItemWrapper> extends HAPSerializableImp{
+public class HAPContainer<T extends HAPItemWrapper> extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
 	public static String ITEM = "item";

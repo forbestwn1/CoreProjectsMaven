@@ -26,7 +26,9 @@ public class HAPSegmentScriptExpressionScriptSimple extends HAPSegmentScriptExpr
 	//string, constant or variable
 	private List<Object> m_parts;
 
-	public HAPSegmentScriptExpressionScriptSimple() {}
+	public HAPSegmentScriptExpressionScriptSimple() {
+		this.m_parts = new ArrayList<Object>();
+	}
 	
 	public HAPSegmentScriptExpressionScriptSimple(String id) {
 		super(id);
@@ -106,13 +108,13 @@ class HAPSegmentScriptExpressionScriptSimple_parser extends HAPSegmentScriptExpr
 				if(partJsonObj.opt(HAPConstantInScript.CONSTANTNAME)!=null) {
 					//constant
 					HAPConstantInScript constant = new HAPConstantInScript();
-					constant.buildObject(constant, HAPSerializationFormat.JSON);
+					constant.buildObject(partJsonObj, HAPSerializationFormat.JSON);
 					out.addPart(constant);
 				}
 				else {
 					//variable
 					HAPVariableInScript variable = new HAPVariableInScript();
-					variable.buildObject(variable, HAPSerializationFormat.JSON);
+					variable.buildObject(partJsonObj, HAPSerializationFormat.JSON);
 					out.addPart(variable);
 				}
 			}

@@ -39,12 +39,14 @@ public class HAPValuePort extends HAPEntityInfoImp{
 	
 	private String m_ioDirection; 
 
-	public HAPValuePort() {}
+	public HAPValuePort() {
+		this.m_valueStructures = new ArrayList<HAPInfoValueStructure>();
+	}
 	
 	public HAPValuePort(String type, String ioDirection) {
+		this();
 		this.m_type = type;
 		this.m_ioDirection = ioDirection;
-		this.m_valueStructures = new ArrayList<HAPInfoValueStructure>();
 	}
 	
 	public List<String> getValueStructureIds(){	return this.m_valueStructures.stream().map(HAPInfoValueStructure::getValueStructureId).collect(Collectors.toList());	}
@@ -86,6 +88,7 @@ public class HAPValuePort extends HAPEntityInfoImp{
 	@Override
 	protected boolean buildObjectByJson(Object obj){
 		JSONObject jsonObj = (JSONObject)obj;
+		this.buildEntityInfoByJson(jsonObj);
 		this.m_type = (String)jsonObj.opt(TYPE);
 		this.m_ioDirection = (String)jsonObj.opt(IODIRECTION);
 		

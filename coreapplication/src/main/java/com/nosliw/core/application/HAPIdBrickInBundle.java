@@ -76,7 +76,7 @@ public class HAPIdBrickInBundle extends HAPSerializableImp{
 			JSONObject jsonObj = (JSONObject)obj;
 			this.m_idPath = (String)jsonObj.opt(IDPATH);
 			this.m_relativePath = (String)jsonObj.opt(RELATIVEPATH);
-			this.m_alias = jsonObj.optString(ALIAS);
+			this.m_alias = (String)jsonObj.opt(ALIAS);
 		}
 		return true;  
 	}

@@ -22,7 +22,9 @@ public class HAPSegmentScriptExpressionScriptComplex extends HAPSegmentScriptExp
 	
 	private List<HAPSegmentScriptExpressionScript> m_children;
 
-	public HAPSegmentScriptExpressionScriptComplex() {}
+	public HAPSegmentScriptExpressionScriptComplex() {
+		this.m_children = new ArrayList<HAPSegmentScriptExpressionScript>();
+	}
 
 	public HAPSegmentScriptExpressionScriptComplex(String id) {
 		super(id);

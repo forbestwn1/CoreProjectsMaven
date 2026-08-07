@@ -7,15 +7,17 @@ import java.util.Map;
 import java.util.Set;
 
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
-import com.nosliw.common.serialization.HAPParserEntity;
+import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.command.HAPCommandDefinition;
 import com.nosliw.core.application.common.command.HAPCommandWithDefinition;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
@@ -29,6 +31,8 @@ import com.nosliw.core.resource.HAPResourceId;
 @HAPEntityWithAttribute
 public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWithDefinition, HAPCommandWithDefinition, HAPEntityParsable{
 
+	public static final String DOMAIN_PARSER = "ui.tag.definition";
+	
 	@HAPAttribute
 	public static final String TYPE = "type";
 	@HAPAttribute
@@ -82,7 +86,7 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 		this.m_commands = new LinkedHashMap<String, HAPCommandDefinition>();
 	}
 	
-	public String getType() {  return null;   }
+	public String getType() {  return HAPConstantShared.UITAG_TYPE_OTHER;   }
 	
 	public int getPriority() {     return this.m_priority;      }
 	public void setPriority(int priority) {     this.m_priority = priority;     }
@@ -124,6 +128,7 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(TYPE, this.getType());
 		jsonMap.put(BASE, this.m_base);
 		if(this.m_scriptResourceId!=null) {
 			jsonMap.put(SCRIPTRESOURCEID, this.m_scriptResourceId.toStringValue(HAPSerializationFormat.JSON));
@@ -134,19 +139,19 @@ public class HAPUITagDefinition extends HAPEntityInfoImp implements HAPEventWith
 		
 		jsonMap.put(EVENT, HAPManagerSerialize.getInstance().toStringValue(this.m_events, HAPSerializationFormat.JSON));
 	}
+	
+	public static HAPUITagDefinition parseUITagDefinition(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		return (HAPUITagDefinition)parseService.parseEntityJSONImplicitAttribute(jsonObj, HAPUITagDefinition.TYPE, HAPUITagDefinition.DOMAIN_PARSER);
+	}
 
 }
 
-class HAPUITagDefinition_parser implements HAPParserEntity{
+abstract class HAPUITagDefinition_parser extends HAPParserEntityImpWithDomain{
+	
+    @Override
+	public String getDomain() {   return  HAPUITagDefinition.DOMAIN_PARSER;      }
 
-	@Override
-	public String getEntityType() {    return HAPUITagDefinition.class.getName();   }
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPUITagDefinition out = new HAPUITagDefinition();
-		
-		JSONObject jsonObj = (JSONObject)obj;
+	protected void parseToUITagDefinitionJson(HAPUITagDefinition out, JSONObject jsonObj, HAPServiceParseEntity parseService) {
 		out.setBase((String)jsonObj.opt(HAPUITagDefinition.BASE));
 		out.setScriptResourceId(HAPFactoryResourceId.newInstance(jsonObj.opt(HAPUITagDefinition.SCRIPTRESOURCEID)));
 
@@ -166,8 +171,22 @@ class HAPUITagDefinition_parser implements HAPParserEntity{
 			String name = (String)key;
 			out.addEvent(HAPEventDefinition.parseEventDefinition(eventDefsJsonObj.getJSONObject(name), parseService));
 		}
-		
+	}
+}
+
+@Component
+class HAPUITagDefinitionOther_parser extends HAPUITagDefinition_parser{
+
+	@Override
+	public String getSubName() {    return HAPConstantShared.UITAG_TYPE_OTHER;     }
+	
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPUITagDefinition out = new HAPUITagDefinition();
+		JSONObject jsonObj = (JSONObject)obj;
+		out.buildEntityInfoByJson(jsonObj);
+		this.parseToUITagDefinitionJson(out, jsonObj, parseService);
 		return out;
 	}
-	
+
 }

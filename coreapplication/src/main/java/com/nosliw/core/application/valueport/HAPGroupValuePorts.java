@@ -38,11 +38,13 @@ public class HAPGroupValuePorts extends HAPEntityInfoImp{
 	
 	private int m_idIndex = 0;
 
-	public HAPGroupValuePorts() {}
+	public HAPGroupValuePorts() {
+		this.m_valuePorts = new ArrayList<HAPValuePort>();
+	}
 
 	public HAPGroupValuePorts(String groupType) {
+		this();
 		this.m_groupType = groupType;
-		this.m_valuePorts = new ArrayList<HAPValuePort>();
 	}
 	
 	public String getGroupType() {    return this.m_groupType;   }
@@ -137,6 +139,7 @@ public class HAPGroupValuePorts extends HAPEntityInfoImp{
 	@Override
 	protected boolean buildObjectByJson(Object obj){
 		JSONObject jsonObj = (JSONObject)obj;
+		this.buildEntityInfoByJson(jsonObj);
 		this.m_groupType = (String)jsonObj.opt(GROUPTYPE);
 		this.m_idIndex = (int)jsonObj.opt(IDINDEX);
 

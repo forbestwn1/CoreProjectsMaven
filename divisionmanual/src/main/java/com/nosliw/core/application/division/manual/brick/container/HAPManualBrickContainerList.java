@@ -3,9 +3,18 @@ package com.nosliw.core.application.division.manual.brick.container;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPAttributeInBrick;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
 
 public class HAPManualBrickContainerList extends HAPManualBrickContainer implements HAPBrickContainerList{
 
@@ -31,4 +40,37 @@ public class HAPManualBrickContainerList extends HAPManualBrickContainer impleme
 		return out;
 	}
 	 
+}
+
+@Component
+class HAPManualBrickContainerList_parser extends HAPManualBrick_parser{
+
+	public HAPManualBrickContainerList_parser(HAPManagerApplicationBrick brickManager) {
+		super(brickManager, HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINERLIST_100);
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPManualBrickContainerList out = new HAPManualBrickContainerList();
+		this.parseBrickJson((JSONObject)obj, out, parseService);
+		return out;
+	}
+
+	@Override
+	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
+		if(attrName.equals(HAPBrickContainer.ATTRINDEX)) {
+			return obj;
+		}
+		else if(attrName.equals(HAPBrickContainerList.ATTRSORT)) {
+			List<String> out = new ArrayList<String>();
+			JSONArray sorts = (JSONArray)obj;
+			for(int i=0; i<sorts.length(); i++) {
+				out.add(sorts.getString(i));
+			}
+			return out;
+		}
+		
+		return null;     
+	}
+
 }

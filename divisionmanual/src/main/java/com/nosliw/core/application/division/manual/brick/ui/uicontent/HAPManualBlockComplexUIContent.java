@@ -89,6 +89,10 @@ class HAPManualBlockComplexUIContent_parser extends HAPManualBrick_parser{
 			}
 			return out;
 		}
+		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONS:
+		{
+			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPContainerScriptExpression.class.getName());
+		}
 		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCONTENT:
 		{
 			List<HAPUIEmbededScriptExpressionInContent> out = new ArrayList<HAPUIEmbededScriptExpressionInContent>();

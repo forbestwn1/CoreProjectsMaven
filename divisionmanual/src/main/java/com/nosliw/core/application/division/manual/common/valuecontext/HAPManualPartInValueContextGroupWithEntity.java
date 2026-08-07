@@ -19,7 +19,9 @@ public class HAPManualPartInValueContextGroupWithEntity extends HAPManualPartInV
 
 	private List<HAPManualPartInValueContext> m_children;
 	
-	public HAPManualPartInValueContextGroupWithEntity() {}
+	public HAPManualPartInValueContextGroupWithEntity() {
+		this.m_children = new ArrayList<HAPManualPartInValueContext>();
+	}
 	
 	public HAPManualPartInValueContextGroupWithEntity(HAPManualInfoPartInValueContext partInfo) {
 		super(partInfo);
@@ -102,6 +104,7 @@ public class HAPManualPartInValueContextGroupWithEntity extends HAPManualPartInV
 
 	@Override
 	protected boolean buildObjectByJson(Object json){
+		super.buildObjectByJson(json);
 		JSONObject jsonObj = (JSONObject)json;
 		
 		JSONArray childrenJsonArray = jsonObj.optJSONArray(CHILDREN);

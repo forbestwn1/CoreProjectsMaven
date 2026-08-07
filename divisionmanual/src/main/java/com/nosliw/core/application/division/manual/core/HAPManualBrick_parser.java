@@ -68,16 +68,18 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 		brick.setBrickType(brickTypeId);
 		
 		//attributes
-		JSONObject attrsJsonObj = jsonObj.optJSONObject(HAPBrick.ATTRIBUTE);
-		if(attrsJsonObj!=null) {
-			for(Object key : attrsJsonObj.keySet()) {
-				String attrName = (String) key;
-				JSONObject attrJsonObj = attrsJsonObj.getJSONObject(attrName);
-			
+		JSONArray attrsJsonArray = jsonObj.optJSONArray(HAPBrick.ATTRIBUTE);
+		if(attrsJsonArray!=null) {
+			for(int j=0; j<attrsJsonArray.length(); j++) {
+				JSONObject attrJsonObj = attrsJsonArray.getJSONObject(j);
+
+				//attribute
+				HAPManualAttributeInBrick attribute = new HAPManualAttributeInBrick();
+				attribute.buildEntityInfoByJson(attrJsonObj);
+
 				//value in attribute
-				HAPWrapperValue valueWrapperInAttr = this.parseValueWrapper(attrName, attrJsonObj.getJSONObject(HAPAttributeInBrick.VALUEWRAPPER), parseService); 
-				HAPAttributeInBrick attribute = new HAPAttributeInBrick(attrName, valueWrapperInAttr);
-				attribute.buildEntityInfoByJson(attrsJsonObj);
+				HAPWrapperValue valueWrapperInAttr = this.parseValueWrapper(attribute.getName(), attrJsonObj.getJSONObject(HAPAttributeInBrick.VALUEWRAPPER), parseService);
+				attribute.setValueWrapper(valueWrapperInAttr);
 				
 				//adapter
 				JSONArray adaptersJsonArray = attrJsonObj.optJSONArray(HAPAttributeInBrick.ADAPTER);

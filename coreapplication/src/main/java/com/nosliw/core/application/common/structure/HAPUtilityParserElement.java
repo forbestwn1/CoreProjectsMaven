@@ -66,7 +66,13 @@ public class HAPUtilityParserElement {
 		else if(criteriaDef!=null) {
 			//data
 			HAPDataDefinitionWritable dataDef = HAPParserDataDefinition.parseDataDefinitionWritable(criteriaDef, entityParseService); 
-			out = new HAPElementStructureLeafData(dataDef);   
+			out = new HAPElementStructureLeafData(dataDef);
+			
+			String status = (String)eleDefJson.opt(HAPElementStructureLeafData.STATUS);
+			if(status!=null) {
+				((HAPElementStructureLeafData)out).setStatus(status);
+			}
+
 		}
 		else if(valueJsonObj!=null){
 			//constant

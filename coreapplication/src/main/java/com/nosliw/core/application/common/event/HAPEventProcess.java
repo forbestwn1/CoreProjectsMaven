@@ -45,7 +45,9 @@ public class HAPEventProcess extends HAPSerializableImp implements HAPEntityPars
 		if(this.m_eventEmmitter!=null) {
 			jsonMap.put(EVENTEMITTER, this.m_eventEmmitter.toStringValue(HAPSerializationFormat.JSON));
 		}
-		jsonMap.put(HANDLERREFERENCE, this.m_handlerReference.toStringValue(HAPSerializationFormat.JSON));
+		if(m_handlerReference!=null) {
+			jsonMap.put(HANDLERREFERENCE, this.m_handlerReference.toStringValue(HAPSerializationFormat.JSON));
+		}
 	}
 
 }
