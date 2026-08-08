@@ -28,11 +28,12 @@ class HAPDataRuleEnumCode_Parser extends HAPParserDataRule{
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		JSONObject jsonObj = (JSONObject)obj;
 		
+		HAPDataRule out = null;
 		String enumCode = (String)jsonObj.opt(HAPDataRuleEnumCode.ENUMCODE);
 		if(enumCode!=null) {
 			HAPDataRuleEnumCode codeEnum = new HAPDataRuleEnumCode();
 			codeEnum.setEnumCode(enumCode);
-			return codeEnum;
+			out = codeEnum;
 		}
 		else{
 			HAPDataRuleEnumData dataEnum = new HAPDataRuleEnumData();
@@ -42,8 +43,12 @@ class HAPDataRuleEnumCode_Parser extends HAPParserDataRule{
 					dataEnum.addData(HAPUtilityData.buildDataWrapperFromObject(dataArray.get(i)));
 				}
 			}
-			return dataEnum;
+			out = dataEnum;
 		}
+
+		this.parseToDataRule(jsonObj, out, parseService);
+		return out;
+
 	}
 
 	@Override

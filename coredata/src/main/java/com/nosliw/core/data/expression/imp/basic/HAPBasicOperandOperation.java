@@ -42,14 +42,18 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 	
 	private Map<String, HAPMatchers> m_parmsMatchers;
 
-	public HAPBasicOperandOperation() {};
+	public HAPBasicOperandOperation() {
+		super(HAPConstantShared.EXPRESSION_OPERAND_OPERATION);
+		this.m_parms = new LinkedHashMap<String, HAPBasicWrapperOperand>(); 
+		this.m_parmsMatchers = new LinkedHashMap<String, HAPMatchers>();
+	};
 
 	public HAPBasicOperandOperation(HAPDefinitionOperandOperation operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_OPERATION, operandDefinition);
-		this.m_parms = new LinkedHashMap<String, HAPBasicWrapperOperand>(); 
-		this.m_parmsMatchers = new LinkedHashMap<String, HAPMatchers>();
 		this.m_dataTypeId = operandDefinition.getDataTypeId();
 		this.m_operation = operandDefinition.getOperaion();
+		this.m_parms = new LinkedHashMap<String, HAPBasicWrapperOperand>(); 
+		this.m_parmsMatchers = new LinkedHashMap<String, HAPMatchers>();
 	}
 
 	@Override
@@ -219,6 +223,8 @@ class HAPBasicOperandOperation_parser extends HAPBasicOperand_parser{
 		HAPBasicOperandOperation out = new HAPBasicOperandOperation();
 		
 		JSONObject jsonObj = (JSONObject)obj;
+		
+		this.parseToOperandJson(jsonObj, out, parseService);
 		
 		out.setOperation((String)jsonObj.opt(HAPBasicOperandOperation.OPERATION));
 		

@@ -124,3 +124,4 @@ public class HAPManualBrickWithEntityInfo extends HAPManualBrickImp implements H
 		return out;
 	}
 }
+

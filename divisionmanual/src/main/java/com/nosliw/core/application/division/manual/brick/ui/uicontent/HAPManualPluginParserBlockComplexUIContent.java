@@ -158,7 +158,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 						HAPUIEventHandlerInfoNormal normalEventHandler = new HAPUIEventHandlerInfoNormal();
 						normalEventHandler.setUIId(uiId);
 						normalEventHandler.setEvent(eventName);
-						normalEventHandler.parseContent(eleAttrValue);
+						normalEventHandler.parseContent(eleAttrValue, this.m_entityParseService);
 						
 						HAPEventDefinition eventDefinition = new HAPEventDefinition();
 						eventDefinition.setName(eventName);

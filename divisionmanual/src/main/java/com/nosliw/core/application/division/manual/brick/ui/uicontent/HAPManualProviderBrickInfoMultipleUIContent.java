@@ -73,7 +73,7 @@ public class HAPManualProviderBrickInfoMultipleUIContent implements HAPManualPro
 			@Override
 			public HAPIdBrickType getBrickTypeId() {  return HAPEnumBrickType.UICUSTOMERTAG_100;	}
 			@Override
-			protected HAPManualDefinitionPluginParserBrick newBrickParser() {	return new HAPManualPluginParserBlockComplexUICustomerTag(m_manualBrickMan, m_brickMan, m_uiTagMan);	}
+			protected HAPManualDefinitionPluginParserBrick newBrickParser() {	return new HAPManualPluginParserBlockComplexUICustomerTag(m_manualBrickMan, m_brickMan, m_uiTagMan, m_entityParseService);	}
 			@Override
 			protected HAPManualPluginProcessorBrick newBrickProcessor() {   return new HAPManualPluginProcessorBlockUICustomerTag();	}
 			@Override

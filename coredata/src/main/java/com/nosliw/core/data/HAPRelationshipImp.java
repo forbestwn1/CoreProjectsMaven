@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.utils.HAPUtilityBasic;
 
 public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelationship{
@@ -14,6 +14,7 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 	private HAPDataTypeId m_source;
 	private HAPDataTypeId m_taget;
 	private HAPRelationshipPath m_path;
+	private String m_targetType;
 	
 	public HAPRelationshipImp() {}
 	
@@ -31,6 +32,8 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 
 	@Override
 	public HAPRelationshipPath getPath() {  return this.m_path;  }
+	
+	public void setTargetType(String targetType) {    this.m_targetType = targetType;    }
 
 	@Override
 	protected boolean buildObjectByJson(Object json){
@@ -41,6 +44,8 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 		this.m_taget.buildObject(jsonObj.getString(TARGET), HAPSerializationFormat.LITERATE);
 		this.m_path = new HAPRelationshipPath();
 		this.m_path.buildObject(jsonObj.getJSONArray(PATH)+"", HAPSerializationFormat.LITERATE);
+		
+		this.setTargetType((String)jsonObj.opt(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE));
 		return true;
 	}
 	
@@ -49,6 +54,7 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 		jsonMap.put(SOURCE, HAPManagerSerialize.getInstance().toStringValue(this.getSource(), HAPSerializationFormat.LITERATE));
 		jsonMap.put(TARGET, HAPManagerSerialize.getInstance().toStringValue(this.getTarget(), HAPSerializationFormat.LITERATE));
 		jsonMap.put(PATH, HAPManagerSerialize.getInstance().toStringValue(this.getPath(), HAPSerializationFormat.LITERATE));
+		jsonMap.put(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE, m_targetType);
 	}
 
 	@Override
@@ -56,9 +62,15 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 		boolean out = false;
 		if(obj instanceof HAPRelationshipImp) {
 			HAPRelationshipImp relationship = (HAPRelationshipImp)obj;
-			if(!HAPUtilityBasic.isEquals(this.m_source, relationship.m_source))  return false;
-			if(!HAPUtilityBasic.isEquals(this.m_taget, relationship.m_taget))  return false;
-			if(!HAPUtilityBasic.isEquals(this.m_path, relationship.m_path))  return false;
+			if(!HAPUtilityBasic.isEquals(this.m_source, relationship.m_source)) {
+				return false;
+			}
+			if(!HAPUtilityBasic.isEquals(this.m_taget, relationship.m_taget)) {
+				return false;
+			}
+			if(!HAPUtilityBasic.isEquals(this.m_path, relationship.m_path)) {
+				return false;
+			}
 			out = true;
 		}
 		return out;

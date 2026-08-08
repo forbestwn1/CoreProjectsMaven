@@ -142,7 +142,10 @@ public abstract class HAPManualBrick_parser extends HAPParserEntityImpWithDomain
 			break;
 		case HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_VALUE:
 			HAPWrapperValueOfValue valueWrapper = new HAPWrapperValueOfValue();
-			valueWrapper.setValue(this.parseValueInAttribute(attrName, valueWrapperJsonObj.opt(HAPWrapperValueOfValue.VALUE), parseService));
+			Object valueObj = valueWrapperJsonObj.opt(HAPWrapperValueOfValue.VALUE);
+			if(valueObj!=null) {
+				valueWrapper.setValue(this.parseValueInAttribute(attrName, valueObj, parseService));
+			}
 			valueWrapperInAttr = valueWrapper;
 			break;
 		case HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_RESOURCEID:

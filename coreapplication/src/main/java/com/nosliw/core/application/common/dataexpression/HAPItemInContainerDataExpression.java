@@ -12,6 +12,7 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.data.expression.HAPExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 
 @HAPEntityWithAttribute
 public class HAPItemInContainerDataExpression extends HAPItemWrapper implements HAPEntityParsable{
@@ -45,7 +46,7 @@ class HAPItemInContainerDataExpression_parser implements HAPParserEntity{
 		HAPItemInContainerDataExpression out = new HAPItemInContainerDataExpression();
 		
 		JSONObject jsonObj = (JSONObject)obj;
-		out.setDataExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPExpressionData.class.getName()));
+		out.setDataExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPBasicExpressionData.class.getName()));
 		
 		return out;
 	}

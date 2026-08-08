@@ -30,10 +30,12 @@ public abstract class HAPBasicOperand extends HAPSerializableImp implements HAPO
 	
 	private HAPDefinitionOperand m_operandDefinition;
 
-	public HAPBasicOperand() {}
+	public HAPBasicOperand(String type) {
+		this.m_type = type;
+	}
 	
 	public HAPBasicOperand(String type, HAPDefinitionOperand operandDefinition) {
-		this.m_type = type;
+		this(type);
 		this.m_operandDefinition = operandDefinition;
 	}
 	

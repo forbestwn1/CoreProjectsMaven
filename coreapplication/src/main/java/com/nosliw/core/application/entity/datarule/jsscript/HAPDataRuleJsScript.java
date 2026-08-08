@@ -65,6 +65,7 @@ class HAPDataRuleJsScript_Parser extends HAPParserDataRule{
 		JSONObject jsonObj = (JSONObject)obj;
 		HAPDataRuleJsScript out = new HAPDataRuleJsScript();
 		out.setScript(jsonObj.getString(HAPDataRuleJsScript.SCRIPT));
+		this.parseToDataRule(jsonObj, out, parseService);
 		return out;
 	}
 

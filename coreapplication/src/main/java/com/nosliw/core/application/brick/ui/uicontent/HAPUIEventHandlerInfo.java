@@ -6,6 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.event.HAPEventHandlerReference;
 
 @HAPEntityWithAttribute
@@ -36,7 +37,7 @@ public abstract class HAPUIEventHandlerInfo extends HAPSerializableImp{
 	public HAPEventHandlerReference getHandlerInfo() {    return this.m_handlerInfo;     }
 	public void setHandlerInfo(HAPEventHandlerReference handlerInfo) {    this.m_handlerInfo = handlerInfo;     }
 
-	public abstract void parseContent(String content);
+	public abstract void parseContent(String content, HAPServiceParseEntity parseService);
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){

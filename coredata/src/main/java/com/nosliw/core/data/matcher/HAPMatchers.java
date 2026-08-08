@@ -88,6 +88,7 @@ public class HAPMatchers extends HAPExecutableImp{
 			dataTypeId.buildObject(key, HAPSerializationFormat.LITERATE);
 			HAPMatcher matcher = new HAPMatcher();
 			matcher.buildObject(jsonObj.getJSONObject((String)key), HAPSerializationFormat.JSON);
+			this.addMatcher(matcher);
 		}
 		return true;
 	}

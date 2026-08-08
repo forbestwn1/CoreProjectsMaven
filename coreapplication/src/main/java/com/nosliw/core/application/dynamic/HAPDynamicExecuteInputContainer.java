@@ -37,10 +37,21 @@ public class HAPDynamicExecuteInputContainer extends HAPSerializableImp{
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
 		
-		JSONArray dynamicTaskRefsArray = jsonObj.optJSONArray(ELEMENT);
-		for(int i=0; i<dynamicTaskRefsArray.length(); i++) {
-			this.addDynamicTaskReference(HAPDynamicExecuteInputItem.parse(dynamicTaskRefsArray.getJSONObject(i)));
+		Object dynamicInputObj = jsonObj.opt(ELEMENT);
+		if(dynamicInputObj instanceof JSONObject) {
+			JSONObject dynamicInputJsonObj = (JSONObject)dynamicInputObj;
+			for(Object key : dynamicInputJsonObj.keySet()) {
+				String name = (String)key;
+				this.addDynamicTaskReference(HAPDynamicExecuteInputItem.parse(dynamicInputJsonObj.getJSONObject(name)));
+			}
 		}
+		else if(dynamicInputObj instanceof JSONArray) {
+			JSONArray dynamicInputJsonArray = (JSONArray)dynamicInputObj;
+			for(int i=0; i<dynamicInputJsonArray.length(); i++) {
+				this.addDynamicTaskReference(HAPDynamicExecuteInputItem.parse(dynamicInputJsonArray.getJSONObject(i)));
+			}
+		}
+		
 		return true;  
 	}
 }

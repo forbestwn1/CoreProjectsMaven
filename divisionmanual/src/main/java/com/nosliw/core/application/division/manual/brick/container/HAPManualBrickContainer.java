@@ -17,7 +17,7 @@ import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.container.HAPBrickContainer;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
-import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo_parser;
 
 public class HAPManualBrickContainer extends HAPManualBrickWithEntityInfo implements HAPBrickContainer{
 
@@ -67,7 +67,7 @@ public class HAPManualBrickContainer extends HAPManualBrickWithEntityInfo implem
 }
 
 @Component
-class HAPManualBrickContainer_parser extends HAPManualBrick_parser{
+class HAPManualBrickContainer_parser extends HAPManualBrickWithEntityInfo_parser{
 
 	public HAPManualBrickContainer_parser(HAPManagerApplicationBrick brickManager) {
 		super(brickManager, HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINER_100);
@@ -82,6 +82,10 @@ class HAPManualBrickContainer_parser extends HAPManualBrick_parser{
 
 	@Override
 	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
+		Object out = super.parseValueInAttribute(attrName, obj, parseService);
+		if(out!=null) {
+			return out;
+		}
 		if(attrName.equals(HAPBrickContainer.ATTRINDEX)) {
 			return obj;
 		}

@@ -23,7 +23,9 @@ public class HAPBasicOperandVariable extends HAPBasicOperand implements HAPOpera
 	
 	private String m_variableName;
 
-	public HAPBasicOperandVariable() {}
+	public HAPBasicOperandVariable() {
+		super(HAPConstantShared.EXPRESSION_OPERAND_VARIABLE);
+	}
 
 	public HAPBasicOperandVariable(HAPDefinitionOperandVariable operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_VARIABLE, operandDefinition);
@@ -77,6 +79,8 @@ class HAPBasicOperandVariable_parser extends HAPBasicOperand_parser{
 		HAPBasicOperandVariable out = new HAPBasicOperandVariable();
 		JSONObject jsonObj = (JSONObject)obj;
 
+		this.parseToOperandJson(jsonObj, out, parseService);
+		
 		this.parseToOperandJson(jsonObj, out, parseService);
 		out.setVariableName((String)jsonObj.opt(HAPBasicOperandVariable.VARIABLENAME));
 		out.setVariableKey((String)jsonObj.opt(HAPBasicOperandVariable.VARIABLEKEY));

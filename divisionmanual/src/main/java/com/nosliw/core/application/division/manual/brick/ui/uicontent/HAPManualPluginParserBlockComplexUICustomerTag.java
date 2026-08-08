@@ -8,6 +8,7 @@ import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
@@ -39,7 +40,9 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPlu
 
 	private HAPManagerUITag m_uiTagMan;
 	
-	public HAPManualPluginParserBlockComplexUICustomerTag(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerUITag uiTagMan) {
+	private HAPServiceParseEntity m_parseService;
+	
+	public HAPManualPluginParserBlockComplexUICustomerTag(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPManagerUITag uiTagMan, HAPServiceParseEntity parseService) {
 		super(HAPEnumBrickType.UICUSTOMERTAG_100, HAPManualDefinitionBlockComplexUICustomerTag.class, manualDivisionEntityMan, brickMan);
 		this.m_uiTagMan = uiTagMan;
 	}
@@ -86,7 +89,7 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPlu
 					if(eventDefinition!=null) {
 						HAPUIEventHandlerInfoCustom eventHandler = new HAPUIEventHandlerInfoCustom();
 						eventHandler.setEvent(eventName);
-						eventHandler.parseContent(eleAttrValue);
+						eventHandler.parseContent(eleAttrValue, this.m_parseService);
 					
 						HAPEventEmitter eventEmitter = new HAPEventEmitter(null, null, eventDefinition);
 						uiCustomerTag.addEventProcess(new HAPEventProcess(eventEmitter, eventHandler.getHandlerInfo()));

@@ -15,6 +15,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.core.application.HAPAdapter;
+import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
@@ -24,6 +26,8 @@ import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickTraverse;
+import com.nosliw.core.application.HAPWrapperValue;
+import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.common.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
@@ -130,11 +134,27 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 
 				@Override
 				public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+					
 					HAPBrick brick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
 					if(brick instanceof HAPManualBrick) {
 						HAPManualBrick manualBrick = (HAPManualBrick)brick;
 						manualBrick.setBundle(out1);
 						manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+					}
+					
+					HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
+					if(attr!=null) {
+						for(HAPAdapter adapter : attr.getAdapters()) {
+							HAPWrapperValue valueWrapper = adapter.getValueWrapper();
+							if(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_BRICK.equals(valueWrapper.getValueType())) {
+								HAPBrick brickInAdapter = ((HAPWrapperValueOfBrick)	valueWrapper).getBrick();
+								if(brickInAdapter instanceof HAPManualBrick) {
+									HAPManualBrick manualBrick = (HAPManualBrick)brickInAdapter;
+									manualBrick.setBundle(out1);
+									manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+								}
+							}
+						}
 					}
 					
 					return true;

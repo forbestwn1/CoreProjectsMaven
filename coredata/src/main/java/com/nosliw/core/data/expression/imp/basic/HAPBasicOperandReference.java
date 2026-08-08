@@ -36,7 +36,9 @@ public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOper
 
 	private Map<String, HAPMatchers> m_matchers;
 
-	public HAPBasicOperandReference() {}
+	public HAPBasicOperandReference() {
+		super(HAPConstantShared.EXPRESSION_OPERAND_REFERENCE);
+	}
 	
 	public HAPBasicOperandReference(HAPDefinitionOperandReference operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_REFERENCE, operandDefinition);
@@ -125,6 +127,8 @@ class HAPBasicOperandReference_parser extends HAPBasicOperand_parser{
 		HAPBasicOperandReference out = new HAPBasicOperandReference();
 		
 		JSONObject jsonObj = (JSONObject)obj;
+		
+		this.parseToOperandJson(jsonObj, out, parseService);
 		
 		JSONObject resourceIdJsonObj = jsonObj.optJSONObject(HAPBasicOperandReference.RESOURCEID);
 		if(resourceIdJsonObj!=null) {

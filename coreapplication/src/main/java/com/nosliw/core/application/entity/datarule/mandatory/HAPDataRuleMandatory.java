@@ -30,6 +30,7 @@ class HAPDataRuleMandatory_parser extends HAPParserDataRule{
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		JSONObject jsonObj = (JSONObject)obj;
 		HAPDataRuleMandatory out = new HAPDataRuleMandatory();
+		this.parseToDataRule(jsonObj, out, parseService);
 		return out;
 	}
 

@@ -1,11 +1,20 @@
 package com.nosliw.core.application.division.manual.brick.task.script.task;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
+import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockTaskTaskScript extends HAPManualBrickImp implements HAPBlockTaskTaskScript{
@@ -35,3 +44,35 @@ public class HAPManualBlockTaskTaskScript extends HAPManualBrickImp implements H
 
 }
  
+@Component
+class HAPManualBlockTaskTaskScript_parser extends HAPManualBrick_parser{
+
+	public HAPManualBlockTaskTaskScript_parser(HAPManagerApplicationBrick brickManager) {
+		super(brickManager, HAPManualBlockTaskTaskScript.class, HAPEnumBrickType.TASK_TASK_SCRIPT_100);
+	}
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPManualBlockTaskTaskScript out = new HAPManualBlockTaskTaskScript();
+		this.parseBrickJson((JSONObject)obj, out, parseService);
+		return out;
+	}
+
+	@Override
+	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {    
+		switch(attrName){
+		case HAPBlockTaskTaskScript.SCRIPTRESOURCEID:
+		{
+			return HAPFactoryResourceId.newInstance(obj);
+		}
+		case HAPBlockTaskTaskScript.PARM:
+		{
+			HAPParms parms = new HAPParms();
+			parms.buildObject(obj, HAPSerializationFormat.JSON);
+			return parms;
+		}
+		}
+		return null;     
+	}
+
+}

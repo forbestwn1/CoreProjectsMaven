@@ -26,7 +26,9 @@ public class HAPBasicOperandConstant extends HAPBasicOperand implements HAPOpera
 	
 	private String m_name;
 
-	public HAPBasicOperandConstant() {}
+	public HAPBasicOperandConstant() {
+		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT);
+	}
 	
 	public HAPBasicOperandConstant(HAPDefinitionOperandConstant operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_CONSTANT, operandDefinition);

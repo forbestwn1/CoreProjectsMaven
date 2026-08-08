@@ -152,6 +152,7 @@ abstract class HAPUITagDefinition_parser extends HAPParserEntityImpWithDomain{
 	public String getDomain() {   return  HAPUITagDefinition.DOMAIN_PARSER;      }
 
 	protected void parseToUITagDefinitionJson(HAPUITagDefinition out, JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		out.buildEntityInfoByJson(jsonObj);
 		out.setBase((String)jsonObj.opt(HAPUITagDefinition.BASE));
 		out.setScriptResourceId(HAPFactoryResourceId.newInstance(jsonObj.opt(HAPUITagDefinition.SCRIPTRESOURCEID)));
 
@@ -184,7 +185,6 @@ class HAPUITagDefinitionOther_parser extends HAPUITagDefinition_parser{
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		HAPUITagDefinition out = new HAPUITagDefinition();
 		JSONObject jsonObj = (JSONObject)obj;
-		out.buildEntityInfoByJson(jsonObj);
 		this.parseToUITagDefinitionJson(out, jsonObj, parseService);
 		return out;
 	}

@@ -2,6 +2,7 @@ package com.nosliw.core.application.brick.ui.uicontent;
 
 import java.util.Map;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.event.HAPEventHandlerReference;
 
 public class HAPUIEventHandlerInfoCustom extends HAPUIEventHandlerInfo{
@@ -15,8 +16,8 @@ public class HAPUIEventHandlerInfoCustom extends HAPUIEventHandlerInfo{
 	}
 
 	@Override
-	public void parseContent(String content) {
-		this.setHandlerInfo(HAPEventHandlerReference.parseHandlerInfo(content));
+	public void parseContent(String content, HAPServiceParseEntity parseService) {
+		this.setHandlerInfo(HAPEventHandlerReference.parseHandlerInfo(content, parseService));
 	}
 
 	@Override

@@ -25,7 +25,9 @@ public class HAPBasicOperandAttribute extends HAPBasicOperand implements HAPOper
 	
 	private HAPBasicWrapperOperand m_base;
 	
-	public HAPBasicOperandAttribute() {}
+	public HAPBasicOperandAttribute() {
+		super(HAPConstantShared.EXPRESSION_OPERAND_ATTRIBUTEOPERATION);
+	}
 	
 	public HAPBasicOperandAttribute(HAPDefinitionOperandAttribute operandDefinition) {
 		super(HAPConstantShared.EXPRESSION_OPERAND_ATTRIBUTEOPERATION, operandDefinition);
@@ -77,7 +79,7 @@ class HAPBasicOperandAttribute_parser extends HAPBasicOperand_parser{
 		HAPBasicOperandAttribute out = new HAPBasicOperandAttribute();
 		
 		JSONObject jsonObj = (JSONObject)obj;
-		
+		this.parseToOperandJson(jsonObj, out, parseService);
 		
 		return out;
 	}

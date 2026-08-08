@@ -66,7 +66,7 @@ class HAPEventProcess_Parser implements HAPParserEntity{
 		
 		out.setEventEmitter((HAPEventEmitter)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPEventProcess.EVENTEMITTER), HAPEventEmitter.class.getName()));
 		
-		out.setEventHandlerReference(HAPEventHandlerReference.parseHandlerInfo(jsonObj.optJSONObject(HAPEventProcess.HANDLERREFERENCE)));
+		out.setEventHandlerReference(HAPEventHandlerReference.parseHandlerInfo(jsonObj.optJSONObject(HAPEventProcess.HANDLERREFERENCE), parseService));
 		
 		return out;
 	}

@@ -85,7 +85,12 @@ public class HAPUtilityBrick {
 	
 	public static HAPAttributeInBrick getDescendantAttribute(HAPBundleForBrick bundle, HAPPath path) {
 		HAPComplexPath fullPathInfo = HAPUtilityBundleForBrick.getBrickFullPathInfo(path);
-		return getDescendantAttribute(bundle.getRootBrickWrapper(fullPathInfo.getRoot()).getBrick(), fullPathInfo.getPath());
+		if(fullPathInfo.getPath()!=null&&!fullPathInfo.getPath().isEmpty()) {
+			return getDescendantAttribute(bundle.getRootBrickWrapper(fullPathInfo.getRoot()).getBrick(), fullPathInfo.getPath());
+		}
+		else {
+			return null;
+		}
 	}
 
 	public static boolean isBrickTask(HAPIdBrickType brickTypeId, HAPManagerApplicationBrick brickMan) {

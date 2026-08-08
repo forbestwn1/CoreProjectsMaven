@@ -77,6 +77,8 @@ class HAPDataRuleExpression_parser extends HAPParserDataRule{
 			dataExpressionDef = HAPDefinitionDataExpression.buildDataExpressionDefinition((JSONObject)expressionObj, parseService);
 		}
 		out.setExpressionDefinition(dataExpressionDef);
+		
+		this.parseToDataRule(jsonObj, out, parseService);
 		return out;
 	}
 
