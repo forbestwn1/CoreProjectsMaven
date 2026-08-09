@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.brick.interactive.interfacee.task;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 

@@ -9,12 +9,11 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
-import com.nosliw.core.application.common.serialize.HAPUtilityExport;
+import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -68,11 +67,4 @@ public class HAPStoryManagerStory implements HAPPluginDivision{
 		return null;
 	}
 
-	@Override
-	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

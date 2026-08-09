@@ -11,10 +11,9 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.container.HAPBrickContainer;
-import com.nosliw.core.application.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
@@ -72,8 +71,8 @@ public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements
 @Component
 class HAPManualBlockComplexUIContent_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockComplexUIContent_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockComplexUIContent.class, HAPEnumBrickType.UICONTENT_100);
+	public HAPManualBlockComplexUIContent_parser() {
+		super(HAPManualBlockComplexUIContent.class, HAPEnumBrickType.UICONTENT_100);
 	}
 	
 	@Override

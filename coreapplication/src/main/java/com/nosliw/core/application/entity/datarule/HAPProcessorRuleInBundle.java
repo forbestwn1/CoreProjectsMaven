@@ -10,8 +10,8 @@ import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
-import com.nosliw.core.application.brick.container.HAPBrickContainerImp;
-import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapperImp;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskWrapper;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBrickContainer;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionDataRule;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
@@ -29,7 +29,7 @@ public class HAPProcessorRuleInBundle {
 		//build new branch to host data rule tasks
 		String validationTaskBranchName = HAPConstantShared.BUNDLEBRANCH_NAME_RULETASKS;
 		
-		HAPBrickContainerImp containerBrick = new HAPBrickContainerImp(HAPConstantShared.NAME_DEFAULT); 
+		HAPBasicBrickContainer containerBrick = new HAPBasicBrickContainer(); 
 		
 		HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 		Map<String, HAPStructure> structures = valueStructureDomain.getValueStructureDefinitions();
@@ -58,13 +58,13 @@ public class HAPProcessorRuleInBundle {
 		}
 	}
 	
-	private static void buildRuildForDataElement(HAPElementStructureLeafData dataEle, HAPBrickContainerImp containerBrick, String validationTaskBranchName, HAPDomainValueStructure valueStructureDomain, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
+	private static void buildRuildForDataElement(HAPElementStructureLeafData dataEle, HAPBasicBrickContainer containerBrick, String validationTaskBranchName, HAPDomainValueStructure valueStructureDomain, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
     	for(HAPDefinitionDataRule ruleDef : dataEle.getDataDefinition().getRules()) {
     		HAPDataRule rule = ruleDef.getDataRule();
     		HAPDataTypeCriteria ruleCriteria = HAPUtilityCriteria.getChildCriteriaByPath(dataEle.getCriteria(), ruleDef.getPath());
     		rule.setDataCriteria(ruleCriteria);
     		
-    		HAPBlockTaskWrapperImp taskWrapperBrick = new HAPBlockTaskWrapperImp(HAPConstantShared.NAME_DEFAULT); 
+    		HAPBasicBlockTaskWrapper taskWrapperBrick = new HAPBasicBlockTaskWrapper(); 
     		String attrName = containerBrick.addElementWithBrickOrReference(taskWrapperBrick);
     		HAPDataRuleImplementationLocal dataRuleImp = new HAPDataRuleImplementationLocal(validationTaskBranchName + "."+attrName);
     		rule.setImplementation(dataRuleImp);

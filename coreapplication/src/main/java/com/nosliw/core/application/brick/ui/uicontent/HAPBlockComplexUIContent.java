@@ -6,7 +6,7 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.common.task.HAPWithBrickTasks;
 

@@ -9,10 +9,10 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPInfoBrickType;
 import com.nosliw.core.application.HAPPluginBrick;
 import com.nosliw.core.application.HAPProviderPluginBrick;
-import com.nosliw.core.application.brick.expression.dataexpression.library.HAPPluginBrickDataExpressionLibrary;
-import com.nosliw.core.application.brick.expression.scriptexpression.library.HAPPluginBrickScriptExpressionLibrary;
-import com.nosliw.core.application.brick.service.interfacee.HAPPluginBrickServiceInterface;
-import com.nosliw.core.application.brick.service.profile.HAPPluginBrickServiceProfile;
+import com.nosliw.core.application.brick.spec.expression.dataexpression.library.HAPPluginBrickDataExpressionLibrary;
+import com.nosliw.core.application.brick.spec.expression.scriptexpression.library.HAPPluginBrickScriptExpressionLibrary;
+import com.nosliw.core.application.brick.spec.service.interfacee.HAPPluginBrickServiceInterface;
+import com.nosliw.core.application.brick.spec.service.profile.HAPPluginBrickServiceProfile;
 import com.nosliw.core.application.brick.wrappertask.HAPPluginBrickTaskWrapper;
 
 @Component

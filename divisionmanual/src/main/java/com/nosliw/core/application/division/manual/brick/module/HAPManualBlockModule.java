@@ -5,10 +5,9 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.container.HAPBrickContainer;
-import com.nosliw.core.application.brick.module.HAPBlockModule;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
+import com.nosliw.core.application.brick.spec.module.HAPBlockModule;
 import com.nosliw.core.application.division.manual.brick.test.complex.testcomplex1.HAPManualBlockTestComplex1;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
@@ -33,8 +32,8 @@ public class HAPManualBlockModule extends HAPManualBrickImp implements HAPBlockM
 @Component
 class HAPManualBlockModule_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockModule_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockTestComplex1.class, HAPEnumBrickType.MODULE_100);
+	public HAPManualBlockModule_parser() {
+		super(HAPManualBlockTestComplex1.class, HAPEnumBrickType.MODULE_100);
 	}
 
 	@Override

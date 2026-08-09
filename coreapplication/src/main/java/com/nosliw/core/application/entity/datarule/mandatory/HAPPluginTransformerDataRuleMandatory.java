@@ -3,7 +3,7 @@ package com.nosliw.core.application.entity.datarule.mandatory;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.brick.task.script.task.HAPBlockTaskTaskScriptImp;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskTaskScript;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;
 import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
@@ -16,7 +16,7 @@ public class HAPPluginTransformerDataRuleMandatory extends HAPPluginTransformerD
 	
 	@Override
 	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
-		HAPBlockTaskTaskScriptImp out = new HAPBlockTaskTaskScriptImp(HAPConstantShared.NAME_DEFAULT);
+		HAPBasicBlockTaskTaskScript out = new HAPBasicBlockTaskTaskScript();
 
 		this.buildInterfaceTask(dataRule, out, valueStructureDomian);
 		

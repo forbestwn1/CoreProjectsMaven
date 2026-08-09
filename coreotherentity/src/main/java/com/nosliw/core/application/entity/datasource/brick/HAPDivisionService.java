@@ -6,17 +6,15 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTaskImp;
-import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.brick.spec.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.entity.datasource.HAPIdServcieInterface;
 import com.nosliw.core.application.entity.datasource.HAPManagerService;
 import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
@@ -61,18 +59,12 @@ public class HAPDivisionService implements HAPPluginDivision{
 		blockServiceProfile.setTags(serviceProfile.getTags());
 		blockServiceProfile.setDisplayResource(serviceProfile.getDisplayResource());
 		
-		HAPBlockInteractiveInterfaceTaskImp interfacBlock = new HAPBlockInteractiveInterfaceTaskImp(this.getDivisionName());
+		HAPBasicBlockInteractiveInterfaceTask interfacBlock = new HAPBasicBlockInteractiveInterfaceTask();
 		interfacBlock.setValue(serviceProfile.getInterface());
 		blockServiceProfile.setTaskInterface(interfacBlock);
 		return blockServiceProfile;
 	}
 
-	@Override
-	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 //	private HAPServiceProfile fromBlockToObjServiceProfile(HAPBlockServiceProfile blockServiceProfile, HAPRuntimeInfo runtimeInfo) {
 //		HAPServiceProfile profile = new HAPServiceProfile();
 //		blockServiceProfile.cloneToEntityInfo(profile);

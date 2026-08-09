@@ -3,14 +3,21 @@ package com.nosliw.core.application.common.dataexpression;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithInteractiveExpression;
 import com.nosliw.core.data.expression.HAPExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceDependency;
@@ -18,7 +25,7 @@ import com.nosliw.core.resource.infrastructure.HAPExecutableImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPDataExpressionStandAlone extends HAPExecutableImp implements HAPWithInteractiveExpression{
+public class HAPDataExpressionStandAlone extends HAPExecutableImp implements HAPWithInteractiveExpression, HAPEntityParsable{
 
 	@HAPAttribute
 	public static String EXPRESSION = "expression";
@@ -72,3 +79,33 @@ public class HAPDataExpressionStandAlone extends HAPExecutableImp implements HAP
 	}
 	
 }
+
+@Component
+class HAPDataExpressionStandAlone_parser implements HAPParserEntity{
+
+	@Override
+	public String getEntityType() {   return HAPDataExpressionStandAlone.class.getName();   }
+
+	@Override
+	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
+		HAPDataExpressionStandAlone out = new HAPDataExpressionStandAlone();
+		
+		JSONObject jsonObj = (JSONObject)obj;
+		
+		out.setExpressionInteractive(HAPInteractiveExpression.parse(jsonObj.optJSONObject(HAPWithInteractiveExpression.EXPRESSIONINTERFACE), parseService));
+		
+		JSONObject matchersJsonObj = jsonObj.optJSONObject(HAPDataExpressionStandAlone.RESULTMATCHERS);
+		if(matchersJsonObj!=null) {
+			HAPMatchers matchers = new HAPMatchers();
+			matchers.buildObject(matchersJsonObj, HAPSerializationFormat.JSON);
+			out.setResultMatchers(matchers);
+		}
+		
+		out.setExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPDataExpressionStandAlone.EXPRESSION), HAPBasicExpressionData.class.getName()));
+		
+		return out;
+	}
+	
+}
+
+

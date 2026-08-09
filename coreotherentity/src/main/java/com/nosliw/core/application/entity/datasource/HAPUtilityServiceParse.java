@@ -3,8 +3,8 @@ package com.nosliw.core.application.entity.datasource;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTaskImp;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 
@@ -15,7 +15,7 @@ public class HAPUtilityServiceParse {
 		if(serviceInterfaceJsonObj==null) {
 			serviceInterfaceJsonObj = jsonObj;
 		}
-		HAPBlockInteractiveInterfaceTaskImp interfaceBlock = new HAPBlockInteractiveInterfaceTaskImp();
+		HAPBasicBlockInteractiveInterfaceTask interfaceBlock = new HAPBasicBlockInteractiveInterfaceTask();
 		HAPInteractiveTask taskInterface = HAPInteractiveTask.parse(serviceInterfaceJsonObj, entityParseService); 
 		interfaceBlock.setValue(taskInterface);
 		return interfaceBlock;

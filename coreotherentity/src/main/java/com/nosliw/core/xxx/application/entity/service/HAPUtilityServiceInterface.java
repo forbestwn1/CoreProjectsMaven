@@ -5,7 +5,7 @@ import java.util.List;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.brick.spec.service.interfacee.HAPBlockServiceInterface;
 import com.nosliw.core.dataassociation.HAPExecutableTask;
 import com.nosliw.core.dataassociation.HAPIOTask;
 import com.nosliw.core.resource.HAPFactoryResourceId;

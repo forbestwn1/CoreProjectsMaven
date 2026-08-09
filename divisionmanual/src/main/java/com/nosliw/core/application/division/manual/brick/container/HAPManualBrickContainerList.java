@@ -10,10 +10,9 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.container.HAPBrickContainer;
-import com.nosliw.core.application.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
 
 public class HAPManualBrickContainerList extends HAPManualBrickContainer implements HAPBrickContainerList{
@@ -45,8 +44,8 @@ public class HAPManualBrickContainerList extends HAPManualBrickContainer impleme
 @Component
 class HAPManualBrickContainerList_parser extends HAPManualBrick_parser{
 
-	public HAPManualBrickContainerList_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINERLIST_100);
+	public HAPManualBrickContainerList_parser() {
+		super(HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINERLIST_100);
 	}
 
 	@Override

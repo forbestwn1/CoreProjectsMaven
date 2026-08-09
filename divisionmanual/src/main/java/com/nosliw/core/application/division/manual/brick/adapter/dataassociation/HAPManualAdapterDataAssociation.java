@@ -5,9 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.adapter.dataassociation.HAPAdapterDataAssociation;
+import com.nosliw.core.application.brick.spec.adapter.dataassociation.HAPAdapterDataAssociation;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociation;
 import com.nosliw.core.application.division.manual.brick.adapter.dataassociationfortask.HAPManualAdapterDataAssociationForTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
@@ -29,8 +28,8 @@ public class HAPManualAdapterDataAssociation extends HAPManualBrickImp implement
 @Component
 class HAPManualAdapterDataAssociation_parser extends HAPManualBrick_parser{
 
-	public HAPManualAdapterDataAssociation_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualAdapterDataAssociationForTask.class, HAPEnumBrickType.DATAASSOCIATION_100);
+	public HAPManualAdapterDataAssociation_parser() {
+		super(HAPManualAdapterDataAssociationForTask.class, HAPEnumBrickType.DATAASSOCIATION_100);
 	}
 
 	@Override

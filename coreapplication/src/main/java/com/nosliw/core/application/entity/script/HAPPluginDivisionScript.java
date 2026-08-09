@@ -6,10 +6,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.HAPBrick;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
@@ -51,9 +49,4 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		return out;
 	}
 
-	@Override
-	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIPage;
@@ -41,8 +40,8 @@ public class HAPManualBlockComplexUIPage extends HAPManualBrickImp implements HA
 @Component
 class HAPManualBlockComplexUIPage_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockComplexUIPage_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockComplexUIPage.class, HAPEnumBrickType.UIPAGE_100);
+	public HAPManualBlockComplexUIPage_parser() {
+		super(HAPManualBlockComplexUIPage.class, HAPEnumBrickType.UIPAGE_100);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.module.HAPBlockModule;
+import com.nosliw.core.application.brick.spec.module.HAPBlockModule;
 import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualDefinitionBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;

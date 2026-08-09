@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.testcomplex1.HAPBlockTestComplex1;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
@@ -27,8 +26,8 @@ public class HAPManualBlockTestComplex1 extends HAPManualBrickImp implements HAP
 @Component
 class HAPManualBlockTestComplex1_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockTestComplex1_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockTestComplex1.class, HAPEnumBrickType.TEST_COMPLEX_1_100);
+	public HAPManualBlockTestComplex1_parser() {
+		super(HAPManualBlockTestComplex1.class, HAPEnumBrickType.TEST_COMPLEX_1_100);
 	}
 
 	@Override

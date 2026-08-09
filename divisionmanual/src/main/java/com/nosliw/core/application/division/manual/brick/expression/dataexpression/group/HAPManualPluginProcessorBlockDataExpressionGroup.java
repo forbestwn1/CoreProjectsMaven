@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.expression.dataexpression.group.HAPBlockDataExpressionGroup;
+import com.nosliw.core.application.brick.spec.expression.dataexpression.group.HAPBlockDataExpressionGroup;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.imp.basic.HAPBasicUtilityProcessorDataExpression;

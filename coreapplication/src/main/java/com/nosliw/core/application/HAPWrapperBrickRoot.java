@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -13,7 +12,7 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.serialize.HAPUtilityExport;
+import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPWithResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -59,9 +58,6 @@ public class HAPWrapperBrickRoot extends HAPEntityInfoImp implements HAPWithBric
 @Component
 class HAPWrapperBrickRoot_parser implements HAPParserEntity{
 
-	@Autowired
-	private HAPManagerApplicationBrick m_brickMan;
-	
 	@Override
 	public String getEntityType() {    return HAPWrapperBrickRoot.class.getName();   }
 
@@ -71,7 +67,7 @@ class HAPWrapperBrickRoot_parser implements HAPParserEntity{
 		
 		HAPWrapperBrickRoot out = new HAPWrapperBrickRoot();
 		out.buildEntityInfoByJson(jsonObj);
-		out.setEntity(HAPUtilityExport.parseBrickJson(jsonObj.getJSONObject(HAPWithBrick.BRICK), m_brickMan));
+		out.setEntity(HAPUtilityExport.parseBrickJson(jsonObj.getJSONObject(HAPWithBrick.BRICK), parseService));
 		return out;
 	}
 	

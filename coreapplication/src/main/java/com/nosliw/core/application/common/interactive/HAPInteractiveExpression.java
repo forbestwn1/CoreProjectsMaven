@@ -36,6 +36,10 @@ public class HAPInteractiveExpression extends HAPSerializableImp implements HAPI
 	public HAPDefinitionParmResponse getResult() {   return this.m_result;  }
 	
 	public static HAPInteractiveExpression parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
+		if(jsonObj==null) {
+			return null;
+		}
+		
 		HAPInteractiveExpression out = new HAPInteractiveExpression();
 		
 		JSONArray parmsArray = jsonObj.optJSONArray(REQUEST);

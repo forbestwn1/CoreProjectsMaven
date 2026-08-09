@@ -25,7 +25,7 @@ import com.nosliw.core.application.valueport.HAPValuePort;
 @HAPEntityWithAttribute
 public abstract class HAPManualBrick extends HAPBrickImp{
 
-	public final static String PARSE_DOMAIN = "brick.division.manual";
+	public final static String PARSE_DOMAIN = "brick.manual";
 	
 	public final static String ISCOMPLEX = "isComplex"; 
 
@@ -56,7 +56,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	private HAPBundleForBrick m_bundle; 
 
 	public HAPManualBrick(HAPIdBrickType brickTypeId) {
-		super(brickTypeId, HAPConstantShared.BRICK_DIVISION_MANUAL);
+		super(brickTypeId, PARSE_DOMAIN);
 		this.m_valueContext = new HAPManualValueContext(); 
 		this.m_otherInternalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_otherExternalValuePortsContainer = new HAPContainerValuePorts();

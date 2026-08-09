@@ -12,7 +12,7 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.service.profile.HAPBlockServiceProfile;
+import com.nosliw.core.application.brick.spec.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.brick.HAPBrickImpWithEntityInfo;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.entity.datasource.HAPUtilityServiceParse;

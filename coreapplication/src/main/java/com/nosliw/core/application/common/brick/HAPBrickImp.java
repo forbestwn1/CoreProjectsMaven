@@ -10,6 +10,7 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.serialization.HAPWithDomain;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBrick;
@@ -26,10 +27,10 @@ import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
-public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
+public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWithDomain{
 
-	private String m_division;
-	
+	private String m_parseDomain;
+
 	private HAPIdBrickType m_brickTypeId;
 
 	private HAPContainerValuePorts m_internalValuePortsContainer;
@@ -43,10 +44,10 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	private Map<String, HAPCommandProcess> m_commandExports;
 	
-	public HAPBrickImp(HAPIdBrickType brickTypeId, String division) {
+	public HAPBrickImp(HAPIdBrickType brickTypeId, String domain) {
 		this();
 		this.m_brickTypeId = brickTypeId;
-		this.m_division = division;
+		this.m_parseDomain = domain;
 	}
 	
 	public HAPBrickImp() {
@@ -58,8 +59,9 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	}
 
 	@Override
-	public String getDivision() {     return this.m_division;      }
-	public void setDivision(String division) {      this.m_division = division;       }
+	public String getParseDomain() {     return this.m_parseDomain;      }
+	public void setParseDomain(String domain) {      this.m_parseDomain = domain;       }
+	
 	
 	@Override
 	public String getEntityOrReferenceType() {   return HAPConstantShared.BRICK;   }
@@ -169,14 +171,16 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	
 	@Override
 	public HAPContainerValuePorts getInternalValuePorts() {  		return this.m_internalValuePortsContainer;	}
+	public void setInternalValuePorts(HAPContainerValuePorts valuePortContainer) {    this.m_internalValuePortsContainer = valuePortContainer;     }
 
 	@Override
 	public HAPContainerValuePorts getExternalValuePorts() {		return this.m_externalValuePortsContainer;	}
+	public void setExternalValuePorts(HAPContainerValuePorts valuePortContainer) {    this.m_externalValuePortsContainer = valuePortContainer;     }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(DIVISION, this.getDivision());
+		jsonMap.put(PARSEDOMAIN, this.getParseDomain());
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {
@@ -202,7 +206,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(DIVISION, this.getDivision());
+		jsonMap.put(PARSEDOMAIN, this.getParseDomain());
 		jsonMap.put(BRICKTYPE, this.getBrickType().toStringValue(HAPSerializationFormat.JSON));
 		
 		if(this.getInternalValuePorts()!=null) {
@@ -233,4 +237,3 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick{
 	}
 
 }
-

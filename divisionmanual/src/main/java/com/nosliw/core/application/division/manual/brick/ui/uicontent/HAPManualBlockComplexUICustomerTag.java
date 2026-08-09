@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
@@ -72,8 +71,8 @@ public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implem
 @Component
 class HAPManualBlockComplexUICustomerTag_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockComplexUICustomerTag_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockComplexUICustomerTag.class, HAPEnumBrickType.UICUSTOMERTAG_100);
+	public HAPManualBlockComplexUICustomerTag_parser() {
+		super(HAPManualBlockComplexUICustomerTag.class, HAPEnumBrickType.UICUSTOMERTAG_100);
 	}
 
 	@Override

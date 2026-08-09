@@ -49,9 +49,9 @@ public class HAPInteractiveTask extends HAPSerializableImp implements HAPInterac
 	public static HAPInteractiveTask parse(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
 		HAPInteractiveTask out = new HAPInteractiveTask();
 		
-		JSONArray parmsArray = jsonObj.optJSONArray(REQUEST);
-		if(parmsArray!=null) {
-			out.setRequest(HAPInteractiveRequest.parse(parmsArray, entityParseService));
+		Object parmsObj = jsonObj.opt(REQUEST);
+		if(parmsObj!=null) {
+			out.setRequest(HAPInteractiveRequest.parse(parmsObj, entityParseService));
 		}
 		
 		Object resutltsObj = jsonObj.opt(RESULT);

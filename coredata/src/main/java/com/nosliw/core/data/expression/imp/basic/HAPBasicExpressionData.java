@@ -25,10 +25,12 @@ public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExp
 	
 	private Map<String, HAPVariableInfo> m_variablesInfo;
 
-	public HAPBasicExpressionData() {}
+	public HAPBasicExpressionData() {
+		this.m_variablesInfo = new LinkedHashMap<String, HAPVariableInfo>();
+	}
 	
 	public HAPBasicExpressionData(HAPBasicOperand operand) {
-		this.m_variablesInfo = new LinkedHashMap<String, HAPVariableInfo>();
+		this();
 		this.m_operand = new HAPBasicWrapperOperand(operand);
 	}
 	

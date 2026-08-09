@@ -6,8 +6,8 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.displayresource.HAPDisplayResourceNode;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.brick.spec.service.interfacee.HAPBlockServiceInterface;
 import com.nosliw.core.application.common.brick.HAPBrickImpWithEntityInfo;
 
 //static information for a service. readable, query for service

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +27,7 @@ import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWrapperValue;
 import com.nosliw.core.application.HAPWrapperValueOfBrick;
-import com.nosliw.core.application.common.serialize.HAPUtilityExport;
+import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
@@ -251,15 +250,6 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 		return new File(HAPSystemFolderUtility.getBundleExportFolderManaul() + "/" + brickId.getBrickTypeId().getKey() + "/" + brickId.getId());
 	}
 	
-	@Override
-	public HAPBrick deserializeBrick(Object obj, HAPSerializationFormat format) {
-		HAPManualBrick out = null;
-		if(format== HAPSerializationFormat.JSON) {
-			out = (HAPManualBrick)m_parseService.parseEntityJSONImplicitAttribute((JSONObject)obj, HAPBrick.BRICKTYPE+"."+HAPIdBrickType.KEY, HAPManualBrick.PARSE_DOMAIN);
-		}
-		return out;
-	}
-
 	private void init() {
 
 	}

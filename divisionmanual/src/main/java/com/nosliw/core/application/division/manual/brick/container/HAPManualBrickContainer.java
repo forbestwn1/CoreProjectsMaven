@@ -3,19 +3,16 @@ package com.nosliw.core.application.division.manual.brick.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.common.serialization.HAPEntityParsable;
-import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.container.HAPBrickContainer;
+import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
+import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBrickContainer;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo_parser;
 
@@ -69,28 +66,9 @@ public class HAPManualBrickContainer extends HAPManualBrickWithEntityInfo implem
 @Component
 class HAPManualBrickContainer_parser extends HAPManualBrickWithEntityInfo_parser{
 
-	public HAPManualBrickContainer_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINER_100);
-	}
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPManualBrickContainer out = new HAPManualBrickContainer();
-		this.parseBrickJson((JSONObject)obj, out, parseService);
-		return out;
-	}
-
-	@Override
-	protected Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
-		Object out = super.parseValueInAttribute(attrName, obj, parseService);
-		if(out!=null) {
-			return out;
-		}
-		if(attrName.equals(HAPBrickContainer.ATTRINDEX)) {
-			return obj;
-		}
-		
-		return null;     
+	public HAPManualBrickContainer_parser() {
+		super(HAPManualBrickContainerList.class, HAPEnumBrickType.CONTAINER_100);
+		this.addAttributeValueParser(new HAParserPValueInAttributeImpBrickContainer());
 	}
 
 }

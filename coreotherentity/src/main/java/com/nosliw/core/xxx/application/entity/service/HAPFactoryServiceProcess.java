@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.brick.service.profile.HAPInfoServiceStatic;
+import com.nosliw.core.application.brick.spec.service.profile.HAPInfoServiceStatic;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociation;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociationMirror;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;

@@ -10,7 +10,6 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.variable.HAPVariableInfo;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.test.complex.task.script.HAPBlockTestComplexTaskScript;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugExecutable;
@@ -58,8 +57,8 @@ public class HAPManualBlockTestComplexTaskScript extends HAPManualBrickImp imple
 @Component
 class HAPManualBlockTestComplexTaskScript_parser extends HAPManualBrick_parser{
 
-	public HAPManualBlockTestComplexTaskScript_parser(HAPManagerApplicationBrick brickManager) {
-		super(brickManager, HAPManualBlockTestComplexTaskScript.class, HAPEnumBrickType.TEST_COMPLEX_TASK_SCRIPT_100);
+	public HAPManualBlockTestComplexTaskScript_parser() {
+		super(HAPManualBlockTestComplexTaskScript.class, HAPEnumBrickType.TEST_COMPLEX_TASK_SCRIPT_100);
 	}
 
 	@Override

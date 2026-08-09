@@ -15,9 +15,6 @@ import com.nosliw.core.resource.HAPWithResourceDependency;
 public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{
 
 	@HAPAttribute
-	public final static String DIVISION = "division"; 
-
-	@HAPAttribute
 	public final static String BRICKTYPE = "brickType"; 
 
 	@HAPAttribute
@@ -26,9 +23,6 @@ public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWith
 	@HAPAttribute
 	public final static String EVENTID = "eventId"; 
 
-	//brick generated from which division
-	String getDivision();
-	
 	HAPIdBrickType getBrickType();
 
 	List<HAPAttributeInBrick> getAttributes();
