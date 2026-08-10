@@ -5,13 +5,13 @@ import java.util.List;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 
-public abstract class HAPRuntimeTaskLoadResources extends HAPTaskRuntime{
+public abstract class HAPTaskRuntimeLoadResources extends HAPTaskRuntime{
 
 	final public static String TASK = "LoadResources"; 
 
 	private List<HAPResourceInfo> m_resourcesInfo;
 	
-	public HAPRuntimeTaskLoadResources(List<HAPResourceInfo> resourcesInfo){
+	public HAPTaskRuntimeLoadResources(List<HAPResourceInfo> resourcesInfo){
 		this.m_resourcesInfo = resourcesInfo;
 	}
 	

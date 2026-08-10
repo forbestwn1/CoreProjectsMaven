@@ -19,7 +19,7 @@ import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoScri
 import com.nosliw.core.application.common.scriptexpression.serialize.HAPUtilityScriptForExecuteJSScript;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.expression.HAPInfoRuntimeTaskExecuteDataExpresion;
-import com.nosliw.core.resource.infrastructure.HAPRuntimeTaskLoadResources;
+import com.nosliw.core.resource.infrastructure.HAPTaskRuntimeLoadResources;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
 import com.nosliw.core.runtime.js.rhino.HAPGatewayRhinoTaskResponse;
@@ -41,7 +41,7 @@ public class HAPUtilityRuntimeJSScript {
 		return out;
 	}
 	
-	public static HAPJSScriptInfo buildRequestScriptForLoadResourceTask(HAPRuntimeTaskLoadResources loadResourcesTask, HAPExecutorRuntimeImpRhino runtime){
+	public static HAPJSScriptInfo buildRequestScriptForLoadResourceTask(HAPTaskRuntimeLoadResources loadResourcesTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
 		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);

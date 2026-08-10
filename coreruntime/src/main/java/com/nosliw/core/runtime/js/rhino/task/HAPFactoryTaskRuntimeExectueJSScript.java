@@ -14,7 +14,7 @@ public class HAPFactoryTaskRuntimeExectueJSScript implements HAPFactoryTaskRunti
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {
-		return new HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(taskInfo);
+		return new HAPTaskRuntimeExecuteRhinoScriptExpressionConstantGroup(taskInfo);
 	}
 
 }

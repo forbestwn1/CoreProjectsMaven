@@ -7,13 +7,13 @@ import com.nosliw.core.data.expression.HAPInfoRuntimeTaskExecuteDataExpresion;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
-import com.nosliw.core.runtime.js.rhino.HAPRuntimeTaskRhino;
+import com.nosliw.core.runtime.js.rhino.HAPTaskRuntimeRhino;
 
-public class HAPRuntimeTaskExecuteDataExpressionRhino extends HAPRuntimeTaskRhino{
+public class HAPTaskRuntimeExecuteDataExpressionRhino extends HAPTaskRuntimeRhino{
 
 	private HAPInfoRuntimeTaskExecuteDataExpresion m_dataExpressionTaskInfo;
 	
-	public HAPRuntimeTaskExecuteDataExpressionRhino(HAPInfoRuntimeTask taskInfo) {
+	public HAPTaskRuntimeExecuteDataExpressionRhino(HAPInfoRuntimeTask taskInfo) {
 		super(HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTEDATAEXPRESSION);
 		this.m_dataExpressionTaskInfo = (HAPInfoRuntimeTaskExecuteDataExpresion)taskInfo;
 	}

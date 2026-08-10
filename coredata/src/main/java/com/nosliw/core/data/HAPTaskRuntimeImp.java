@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 
-public abstract class HAPRuntimeTaskImp extends HAPTaskRuntime{
+public abstract class HAPTaskRuntimeImp extends HAPTaskRuntime{
 
 	@Override
 	protected HAPServiceData processResult(HAPServiceData serviceData) {

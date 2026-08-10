@@ -5,14 +5,14 @@ import java.util.List;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.core.resource.HAPResourceInfo;
-import com.nosliw.core.resource.infrastructure.HAPRuntimeTaskLoadResources;
+import com.nosliw.core.resource.infrastructure.HAPTaskRuntimeLoadResources;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
 
-public class HAPRuntimeTaskLoadResourcesRhino extends HAPRuntimeTaskLoadResources{
+public class HAPTaskRuntimeLoadResourcesRhino extends HAPTaskRuntimeLoadResources{
 
-	public HAPRuntimeTaskLoadResourcesRhino(List<HAPResourceInfo> resourcesInfo) {
+	public HAPTaskRuntimeLoadResourcesRhino(List<HAPResourceInfo> resourcesInfo) {
 		super(resourcesInfo);
 	}
 

@@ -7,13 +7,13 @@ import com.nosliw.core.application.common.scriptexpression.serialize.HAPInfoRunt
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
-import com.nosliw.core.runtime.js.rhino.HAPRuntimeTaskRhino;
+import com.nosliw.core.runtime.js.rhino.HAPTaskRuntimeRhino;
 
-public class HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup extends HAPRuntimeTaskRhino{
+public class HAPTaskRuntimeExecuteRhinoScriptExpressionConstantGroup extends HAPTaskRuntimeRhino{
 
 	private HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup m_scriptExpressionGroupInfo;
 	
-	public HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(HAPInfoRuntimeTask scriptExpressionGroupInfo) {
+	public HAPTaskRuntimeExecuteRhinoScriptExpressionConstantGroup(HAPInfoRuntimeTask scriptExpressionGroupInfo) {
 		super(HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSIONCONSTANTGROUP);
 		this.m_scriptExpressionGroupInfo = (HAPInfoRuntimeTaskTaskScriptExpressionConstantGroup)scriptExpressionGroupInfo;
 	}

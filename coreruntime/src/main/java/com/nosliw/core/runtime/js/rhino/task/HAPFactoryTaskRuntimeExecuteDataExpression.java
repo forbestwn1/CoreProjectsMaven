@@ -16,7 +16,7 @@ public class HAPFactoryTaskRuntimeExecuteDataExpression implements HAPFactoryTas
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {
-		return new HAPRuntimeTaskExecuteDataExpressionRhino(taskInfo);
+		return new HAPTaskRuntimeExecuteDataExpressionRhino(taskInfo);
 	}
 
 }

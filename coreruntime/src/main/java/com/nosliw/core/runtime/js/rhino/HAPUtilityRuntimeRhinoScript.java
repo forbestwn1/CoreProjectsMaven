@@ -12,13 +12,13 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.data.HAPOperationParm;
-import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskExecuteConverterRhino;
-import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskExecuteDataOperationRhino;
+import com.nosliw.core.runtime.js.rhino.task.HAPTaskRuntimeExecuteConverterRhino;
+import com.nosliw.core.runtime.js.rhino.task.HAPTaskRuntimeExecuteDataOperationRhino;
 import com.nosliw.core.runtime.js.rhino.task.HAPUtilityRuntimeJSScript;
 
 public class HAPUtilityRuntimeRhinoScript {
 
-	public static HAPJSScriptInfo buildRequestScriptForExecuteDataConvertTask(HAPRuntimeTaskExecuteConverterRhino executeConverterTask, HAPExecutorRuntimeImpRhino runtime){
+	public static HAPJSScriptInfo buildRequestScriptForExecuteDataConvertTask(HAPTaskRuntimeExecuteConverterRhino executeConverterTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("data", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getData().toStringValue(HAPSerializationFormat.JSON)));
 		templateParms.put("matchers", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getMatchers().toStringValue(HAPSerializationFormat.JSON)));
@@ -38,7 +38,7 @@ public class HAPUtilityRuntimeRhinoScript {
 		return out;
 	}
 	
-	public static HAPJSScriptInfo buildRequestScriptForExecuteDataOperationTask(HAPRuntimeTaskExecuteDataOperationRhino executeDataOperationTask, HAPExecutorRuntimeImpRhino runtime){
+	public static HAPJSScriptInfo buildRequestScriptForExecuteDataOperationTask(HAPTaskRuntimeExecuteDataOperationRhino executeDataOperationTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("dataTypeId", executeDataOperationTask.getTaskInfo().getDataTypeId().toStringValue(HAPSerializationFormat.LITERATE));
 		templateParms.put("operation", executeDataOperationTask.getTaskInfo().getOperation());

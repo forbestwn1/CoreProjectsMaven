@@ -14,7 +14,7 @@ public class HAPFactoryTaskRuntimeExectueScriptExpressionConstantGroup implement
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {
-		return new HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup(taskInfo);
+		return new HAPTaskRuntimeExecuteRhinoScriptExpressionConstantGroup(taskInfo);
 	}
 
 }

@@ -14,7 +14,7 @@ public class HAPFactoryTaskRuntimeExectueConverter implements HAPFactoryTaskRunt
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {
-		return new HAPRuntimeTaskExecuteConverterRhino(taskInfo);
+		return new HAPTaskRuntimeExecuteConverterRhino(taskInfo);
 	}
 
 }

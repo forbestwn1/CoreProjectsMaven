@@ -10,13 +10,13 @@ import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
-import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskLoadResourcesRhino;
+import com.nosliw.core.runtime.js.rhino.task.HAPTaskRuntimeLoadResourcesRhino;
 
-public abstract class HAPRuntimeTaskRhino extends HAPTaskRuntime{
+public abstract class HAPTaskRuntimeRhino extends HAPTaskRuntime{
 
 	private String m_taskType;
 	
-	public HAPRuntimeTaskRhino(String taskType) {
+	public HAPTaskRuntimeRhino(String taskType) {
 		this.m_taskType = taskType;
 	}
 	
@@ -37,7 +37,7 @@ public abstract class HAPRuntimeTaskRhino extends HAPTaskRuntime{
 					}
 				}
 
-				HAPTaskRuntime loadResourcesTask = new HAPRuntimeTaskLoadResourcesRhino(resourcesId);
+				HAPTaskRuntime loadResourcesTask = new HAPTaskRuntimeLoadResourcesRhino(resourcesId);
 
 				loadResourcesTask.registerListener(new HAPRunTaskEventListener() {
 					
