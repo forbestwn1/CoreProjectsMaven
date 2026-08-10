@@ -10,7 +10,7 @@ import com.nosliw.core.runtime.js.rhino.HAPFactoryTaskRuntime;
 public class HAPFactoryTaskRuntimeExectueScriptExpressionConstantGroup implements HAPFactoryTaskRuntime{
 
 	@Override
-	public String getRuntimeType() {    return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSIONCONSTANTGROUP;   }
+	public String getTaskType() {    return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSIONCONSTANTGROUP;   }
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {

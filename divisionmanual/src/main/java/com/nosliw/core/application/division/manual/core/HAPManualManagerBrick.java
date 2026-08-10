@@ -168,7 +168,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 		
 		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
 		
-		return out;
+		return out1;
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {

@@ -5,7 +5,7 @@ import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 
 public interface HAPFactoryTaskRuntime {
 
-    String getRuntimeType();
+    String getTaskType();
 	
 	HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo);
 	

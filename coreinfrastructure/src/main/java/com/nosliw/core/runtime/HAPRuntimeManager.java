@@ -52,13 +52,17 @@ public class HAPRuntimeManager {
 	}
 
 	public HAPExecutorRuntime getDefaultRuntimeExecutor() {
+		return this.getRuntimeExecutor(this.getDefaultRuntimeInfo());		
+	}
+
+	private HAPRuntimeInfo getDefaultRuntimeInfo() {
 		for(HAPRuntimeInfo runtimeInfo : this.m_runtimePlugins.keySet()) {
 			HAPFactoryExecutorRuntime factory = this.m_runtimePlugins.get(runtimeInfo).getRuntimeExecutorFactory();
 			if(factory!=null) {
-				return factory.newRuntimeExecutor();
+				return runtimeInfo;
 			}
 		}
 		return null;
 	}
-
+	
 }

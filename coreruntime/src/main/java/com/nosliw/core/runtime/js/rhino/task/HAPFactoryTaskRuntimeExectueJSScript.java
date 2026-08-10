@@ -10,7 +10,7 @@ import com.nosliw.core.runtime.js.rhino.HAPFactoryTaskRuntime;
 public class HAPFactoryTaskRuntimeExectueJSScript implements HAPFactoryTaskRuntime{
 
 	@Override
-	public String getRuntimeType() {    return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSION;   }
+	public String getTaskType() {    return HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTESCRIPTEXPRESSION;   }
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {

@@ -63,7 +63,7 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 		
 		this.m_taskFactory = new LinkedHashMap<String, HAPFactoryTaskRuntime>();
 		for(HAPFactoryTaskRuntime factory : taskFactory) {
-			this.m_taskFactory.put(factory.getRuntimeType(), factory);
+			this.m_taskFactory.put(factory.getTaskType(), factory);
 		}
 	}
 	
@@ -100,39 +100,6 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 		//register TaskResponse gateway
 		m_gatewayManager.registerGateway(new HAPGatewayRhinoTaskResponse(this));
 	}
-	
-//	@Override
-//	public HAPServiceData executeExpressionSync(String expressionStr, Map<String, HAPData> parmsData) {
-//		HAPExecutableEntityExpressionDataGroup expression = this.getRuntimeEnvironment().getExpressionManager().getExpression(expressionStr);
-//		//execute task
-//		HAPTaskRuntime task = new HAPRuntimeTaskExecuteRhinoDataExpressionGroup(new HAPInfoRuntimeTaskDataExpressionGroup(expression, null, parmsData, null), this.getRuntimeEnvironment());
-//		HAPServiceData serviceData = this.executeTaskSync(task);
-//		return serviceData;
-//
-//		return null;
-		
-//		//new expression definition
-//		HAPResourceDefinitionExpressionGroup expDefinition = new HAPResourceDefinitionExpressionGroup(expressionStr); 
-//		//build expression obj
-//		HAPProcessTracker processTracker = new HAPProcessTracker();
-//		HAPExecutableExpressionGroup expression = this.getRuntimeEnvironment().getExpressionSuiteManager().compileExpression(expDefinition, null, null, null, HAPUtilityExpressionProcessConfigure.setDontDiscovery(null), processTracker);
-//		//execute task
-//		HAPTaskRuntime task = new HAPRuntimeTaskExecuteExpressionRhino(expression, parmsData, null);
-//		HAPServiceData serviceData = this.executeTaskSync(task);
-//		return serviceData;
-//	}
-
-//	@Override
-//	public HAPServiceData executeDataOperationSync(HAPDataTypeId dataTypeId, String operation,
-//			List<HAPOperationParm> parmsData) {
-		//execute task
-//		HAPTaskRuntime task = new HAPRuntimeTaskExecuteDataOperationRhino(dataTypeId, operation, parmsData);
-//		HAPServiceData serviceData = this.executeTaskSync(task);
-//		return serviceData;
-//		
-//		return null;
-//	}
-
 	
 	//async request
 	@Override

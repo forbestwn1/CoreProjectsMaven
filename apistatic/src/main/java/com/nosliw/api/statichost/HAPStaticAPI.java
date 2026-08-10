@@ -76,7 +76,20 @@ public class HAPStaticAPI {
 		
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
+
+	@PostMapping("/upload")
+    public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
+		HAPStaticResponse response = new HAPStaticResponse();
+
+		String path = m_tempDir + "/" + getFilePathForTemp(domain, name);
+        HAPUtilityFile.writeFile(path, content);
+		
+        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfo(new URI(getUriPathForTemp(domain, name)));
+        response.addItem(responsInfo);
+		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
+	}
 	
+
 	private String getUriPathForTemp(String path) {
 		return this.normaliizePath("http://localhost:8081/temp/"+ path);
 	}
@@ -100,18 +113,6 @@ public class HAPStaticAPI {
 		return "http://localhost:8081/static/"+this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
 	}
 
-	
-	@PostMapping("/upload")
-    public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
-		HAPStaticResponse response = new HAPStaticResponse();
-
-		String path = m_tempDir + "/" + getFilePathForTemp(domain, name);
-        HAPUtilityFile.writeFile(path, content);
-		
-        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfo(new URI(getUriPathForTemp(domain, name)));
-        response.addItem(responsInfo);
-		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
-	}
 	
 	private String getFilePathForTemp(String domain, String name) {
 		String path = this.domainToPath(domain);

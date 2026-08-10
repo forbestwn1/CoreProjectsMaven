@@ -12,7 +12,7 @@ public class HAPFactoryTaskRuntimeExecuteDataExpression implements HAPFactoryTas
 	public HAPFactoryTaskRuntimeExecuteDataExpression() {}
 	
 	@Override
-	public String getRuntimeType() {   return  HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTEDATAEXPRESSION;   }
+	public String getTaskType() {   return  HAPInfoRuntimeTask.RUNTIMETASK_TYPE_EXECUTEDATAEXPRESSION;   }
 
 	@Override
 	public HAPTaskRuntime createRuntimeTask(HAPInfoRuntimeTask taskInfo) {

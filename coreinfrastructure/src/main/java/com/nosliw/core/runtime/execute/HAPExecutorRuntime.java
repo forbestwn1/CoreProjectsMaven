@@ -21,14 +21,6 @@ public interface HAPExecutorRuntime {
 	//sync request
 	HAPServiceData executeTaskSync(HAPTaskRuntime task);
 
-	//sync request
-	//individual expression execute
-//	public HAPServiceData executeExpressionSync(String expressionStr, Map<String, HAPData> parmsData);
-
-	//sync request
-	//individual data operation execute
-//	public HAPServiceData executeDataOperationSync(HAPDataTypeId dataTypeId, String operation, List<HAPOperationParm> parmsData);
-	
 	void close();
 	
 	void start();
