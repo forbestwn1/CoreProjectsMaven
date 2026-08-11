@@ -27,9 +27,10 @@ public class HAPGatewayErrorLogger extends HAPGatewayImp{
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {
 		if(COMMAND_LOGERRRO.equals(command)) {
-			JSONArray errorArray = parms.getJSONArray(PARMS_ERROR);
-			System.out.println(errorArray.toString());
-			LOGGER.severe(errorArray.toString());
+			JSONArray errorArray = parms.optJSONArray(PARMS_ERROR);
+			if(errorArray!=null) {
+				LOGGER.severe(errorArray.toString());
+			}
 			return this.createSuccessWithObject(null);
 		}
 		return null;

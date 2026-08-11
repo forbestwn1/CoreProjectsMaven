@@ -9,7 +9,6 @@ import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.data.HAPOperationParm;
 import com.nosliw.core.runtime.js.rhino.task.HAPTaskRuntimeExecuteConverterRhino;
@@ -23,14 +22,16 @@ public class HAPUtilityRuntimeRhinoScript {
 		templateParms.put("data", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getData().toStringValue(HAPSerializationFormat.JSON)));
 		templateParms.put("matchers", HAPUtilityJson.formatJson(executeConverterTask.getTaskInfo().getMatchers().toStringValue(HAPSerializationFormat.JSON)));
 
-		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
-		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
-		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
-		
-		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
-		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
-		templateParms.put("taskId", executeConverterTask.getTaskId());
-		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
+		HAPUtilityRuntimeJSScript.buildCommonTemplateParms(templateParms, executeConverterTask.getTaskId(), runtime);
+
+//		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
+//		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
+//		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
+//		
+//		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
+//		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
+//		templateParms.put("taskId", executeConverterTask.getTaskId());
+//		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
 		
 		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPUtilityRuntimeJSScript.class, "ExecuteDataConvertScript.temp");
 		String script = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);
@@ -44,14 +45,16 @@ public class HAPUtilityRuntimeRhinoScript {
 		templateParms.put("operation", executeDataOperationTask.getTaskInfo().getOperation());
 		templateParms.put("parmsArray", HAPUtilityJson.formatJson(HAPUtilityJson.buildJson(executeDataOperationTask.getTaskInfo().getParms()==null?new ArrayList<HAPOperationParm>() : executeDataOperationTask.getTaskInfo().getParms(), HAPSerializationFormat.JSON)));
 
-		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
-		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
-		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
-		
-		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
-		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
-		templateParms.put("taskId", executeDataOperationTask.getTaskId());
-		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
+		HAPUtilityRuntimeJSScript.buildCommonTemplateParms(templateParms, executeDataOperationTask.getTaskId(), runtime);
+
+//		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
+//		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
+//		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
+//		
+//		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
+//		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
+//		templateParms.put("taskId", executeDataOperationTask.getTaskId());
+//		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
 		
 		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPUtilityRuntimeJSScript.class, "ExecuteDataOperationScript.temp");
 		String script = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);

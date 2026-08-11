@@ -77,7 +77,7 @@ var node_createGatewayService = function(){
 			}
 			catch(err){
 				alert(dataStr);
-				requestInfo.errorFinish(new node_ServiceData(node_CONSTANT.ERROR_PARSE_JAVASCRIPT, node_CONSTANT.ERROR_PARSE_JAVASCRIPT, dataStr));
+				requestInfo.exceptionFinish(new node_ServiceData(node_CONSTANT.ERROR_PARSE_JAVASCRIPT, node_CONSTANT.ERROR_PARSE_JAVASCRIPT, dataStr));
 			}
 			
 		}, out));

@@ -43,14 +43,17 @@ public class HAPUtilityRuntimeJSScript {
 	
 	public static HAPJSScriptInfo buildRequestScriptForLoadResourceTask(HAPTaskRuntimeLoadResources loadResourcesTask, HAPExecutorRuntimeImpRhino runtime){
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
-		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
-		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
-		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
-		
-		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
-		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
-		templateParms.put("taskId", loadResourcesTask.getTaskId());
-		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
+
+		buildCommonTemplateParms(templateParms, loadResourcesTask.getTaskId(), runtime);
+
+//		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
+//		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
+//		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);
+//		
+//		templateParms.put("gatewayId", HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
+//		templateParms.put("parmTaskId", HAPGatewayRhinoTaskResponse.PARM_TASKID);
+//		templateParms.put("taskId", loadResourcesTask.getTaskId());
+//		templateParms.put("parmResponseData", HAPGatewayRhinoTaskResponse.PARM_RESPONSEDATA);
 
 		templateParms.put("resourceInfos", HAPUtilityJson.formatJson(HAPUtilityJson.buildJson(loadResourcesTask.getResourcesInfo(), HAPSerializationFormat.JSON)));
 		
@@ -122,7 +125,7 @@ public class HAPUtilityRuntimeJSScript {
 		return out;
 	}
 
-	private static void buildCommonTemplateParms(Map<String, String> templateParms, String taskId, HAPExecutorRuntimeImpRhino runtime) {
+	public static void buildCommonTemplateParms(Map<String, String> templateParms, String taskId, HAPExecutorRuntimeImpRhino runtime) {
 		templateParms.put("successCommand", HAPGatewayRhinoTaskResponse.COMMAND_SUCCESS);
 		templateParms.put("errorCommand", HAPGatewayRhinoTaskResponse.COMMAND_ERROR);
 		templateParms.put("exceptionCommand", HAPGatewayRhinoTaskResponse.COMMAND_EXCEPTION);

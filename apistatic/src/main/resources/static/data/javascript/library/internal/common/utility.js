@@ -10,6 +10,16 @@ var packageObj = library.getChildPackage("utility");
 
 var node_basicUtility = 
 {
+	escapeJsonString : function(str) {
+	  if(str==undefined)   return;
+	  return str
+	    .replace(/\\/g, '\\\\')  // Always escape backslashes first!
+	    .replace(/"/g, '\\"')    // Escape double quotes
+	    .replace(/\n/g, '\\n')   // Escape newlines
+	    .replace(/\r/g, '\\r')   // Escape carriage returns
+	    .replace(/\t/g, '\\t');  // Escape tabs
+	},
+	
 		isValueEqual : function(data1, data2){
 			if(data1==undefined && data2==undefined)   return true;
 			if(data1==undefined || data2==undefined)   return false;

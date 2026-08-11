@@ -7,6 +7,7 @@ var packageObj = library;
 	var node_COMMONCONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
 	var node_requestServiceProcessor;
+	var node_basicUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_createErrorManager = function(){
@@ -81,7 +82,7 @@ var node_createErrorManager = function(){
 		var gatewayId = node_COMMONCONSTANT.GATEWAY_ERRORLOG;
 		var command = node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_COMMAND_LOGERRRO;
 		var parms = {};
-		parms[node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_PARMS_ERROR] = errorData;
+		parms[node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_PARMS_ERROR] = node_basicUtility.escapeJsonString(JSON.stringify(errorData));
 		var gatewayRequest = nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(gatewayId, command, parms, {
 			success : function(request, data){
 				loc_clearErrorInStorage();
@@ -123,6 +124,7 @@ nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = 
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
+nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createErrorManager", node_createErrorManager); 

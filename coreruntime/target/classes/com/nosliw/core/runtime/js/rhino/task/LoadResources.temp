@@ -4,6 +4,10 @@ var resourceInfos = |||resourceInfos|||;
 	resourceService.executeRequireResourcesRequest(resourceInfos, {
 		success : function(){
 			var parms = {};
+			
+			var kkkkkkk;
+			parms = kkkkkkk.aaa;
+			
 			parms.|||parmTaskId||| = "|||taskId|||";
 			nosliw.runtime.getGatewayService().executeGatewayCommand("|||gatewayId|||", "|||successCommand|||", parms);
 		},
