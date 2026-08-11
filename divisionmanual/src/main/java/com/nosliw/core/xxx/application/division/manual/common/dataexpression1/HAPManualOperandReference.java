@@ -92,7 +92,7 @@ public class HAPManualOperandReference extends HAPManualOperand implements HAPOp
 
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		super.buildJsonMap(jsonMap, typeJsonMap);
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(RESOURCEID, this.m_referedDataExpressionLibElementResourceId.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(VARMAPPING, HAPUtilityJson.buildJson(this.m_variableMapping, HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(VARRESOLVE, HAPUtilityJson.buildJson(this.m_resolvedVariable, HAPSerializationFormat.JSON));

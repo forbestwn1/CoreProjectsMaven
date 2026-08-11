@@ -168,6 +168,8 @@ class HAPExpressionScriptImp_parser implements HAPParserEntity{
 		
 		JSONObject jsonObj = (JSONObject)obj;
 		
+		HAPWithVariableImp.buildToWithVariableImp(out, jsonObj, parseService);
+		
 		out.setType((String)jsonObj.opt(HAPExpressionScriptImp.TYPE));
 		
 		JSONArray segmentsJsonArray = jsonObj.optJSONArray(HAPExpressionScriptImp.SEGMENT);

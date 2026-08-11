@@ -190,7 +190,7 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		super.buildJsonMap(jsonMap, typeJsonMap);
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(OPERATION, this.m_operation);
 		jsonMap.put(DATATYPEID, HAPManagerSerialize.getInstance().toStringValue(this.m_dataTypeId, HAPSerializationFormat.LITERATE));
 		if(this.m_base!=null) {

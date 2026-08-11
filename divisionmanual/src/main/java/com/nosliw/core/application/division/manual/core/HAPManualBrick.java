@@ -177,7 +177,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		super.buildJsonMap(jsonMap, typeJsonMap);
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		
 		jsonMap.put(OTHERINTERNALVALUEPORTSCONTAINER, this.m_otherInternalValuePortsContainer.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(OTHEREXTERNALVALUEPORTSCONTAINER, this.m_otherExternalValuePortsContainer.toStringValue(HAPSerializationFormat.JSON));

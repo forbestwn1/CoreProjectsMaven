@@ -52,7 +52,7 @@ public class HAPContainer<T extends HAPItemWrapper> extends HAPSerializableImp i
 	
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		super.buildJsonMap(jsonMap, typeJsonMap);
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
 		Map<String, String> itemMap = new LinkedHashMap<String, String>();
 		for(T item : this.m_items) {
 			itemMap.put(item.getId(), item.toStringValue(HAPSerializationFormat.JAVASCRIPT));
