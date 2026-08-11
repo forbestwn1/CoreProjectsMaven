@@ -127,48 +127,49 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 
 		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
-		
-		for(String rootName : out1.getAllRootBrickName()) {
-			HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
+		if(out1!=null) {
+			for(String rootName : out1.getAllRootBrickName()) {
+				HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
 
-				@Override
-				public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-					
-					HAPBrick brick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
-					if(brick instanceof HAPManualBrick) {
-						HAPManualBrick manualBrick = (HAPManualBrick)brick;
-						manualBrick.setBundle(out1);
-						manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
-					}
-					
-					HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
-					if(attr!=null) {
-						for(HAPAdapter adapter : attr.getAdapters()) {
-							HAPWrapperValue valueWrapper = adapter.getValueWrapper();
-							if(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_BRICK.equals(valueWrapper.getValueType())) {
-								HAPBrick brickInAdapter = ((HAPWrapperValueOfBrick)	valueWrapper).getBrick();
-								if(brickInAdapter instanceof HAPManualBrick) {
-									HAPManualBrick manualBrick = (HAPManualBrick)brickInAdapter;
-									manualBrick.setBundle(out1);
-									manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+					@Override
+					public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+						
+						HAPBrick brick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
+						if(brick instanceof HAPManualBrick) {
+							HAPManualBrick manualBrick = (HAPManualBrick)brick;
+							manualBrick.setBundle(out1);
+							manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+						}
+						
+						HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
+						if(attr!=null) {
+							for(HAPAdapter adapter : attr.getAdapters()) {
+								HAPWrapperValue valueWrapper = adapter.getValueWrapper();
+								if(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_BRICK.equals(valueWrapper.getValueType())) {
+									HAPBrick brickInAdapter = ((HAPWrapperValueOfBrick)	valueWrapper).getBrick();
+									if(brickInAdapter instanceof HAPManualBrick) {
+										HAPManualBrick manualBrick = (HAPManualBrick)brickInAdapter;
+										manualBrick.setBundle(out1);
+										manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
+									}
 								}
 							}
 						}
+						
+						return true;
+					}
+
+					@Override
+					public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
 					}
 					
-					return true;
-				}
-
-				@Override
-				public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-				}
-				
-			}, m_brickManager, this);
+				}, m_brickManager, this);
+			}
 		}
 		
 		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
 		
-		return out1;
+		return out;
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {

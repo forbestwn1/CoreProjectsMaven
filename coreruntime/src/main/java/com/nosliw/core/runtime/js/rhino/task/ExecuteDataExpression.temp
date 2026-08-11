@@ -3,6 +3,7 @@ var expressionService = nosliw.runtime.getExpressionService();
 
 		success : function(requestInfo, data){
 			var parms = {};
+			
 			parms.|||parmTaskId||| = "|||taskId|||";
 			parms.|||parmResponseData||| = data;
 			nosliw.runtime.getGatewayService().executeGatewayCommand("|||gatewayId|||", "|||successCommand|||", parms);

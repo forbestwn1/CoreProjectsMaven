@@ -22,10 +22,15 @@ public class HAPUtilityExport{
 		
 	public static HAPBundleForBrick importBundle(String importFolder, HAPSerializationFormat format, HAPServiceParseEntity parseService) {
 		HAPBundleForBrick out = null;
-		File importFile = new File(importFolder + "/" + format.toString() + "/bundle.json");
-		if(importFile.exists()) {
-			String content = HAPUtilityFile.readFile(importFile);
-			out = (HAPBundleForBrick)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPBundleForBrick.class.getName());
+		try {
+			File importFile = new File(importFolder + "/" + format.toString() + "/bundle.json");
+			if(importFile.exists()) {
+				String content = HAPUtilityFile.readFile(importFile);
+				out = (HAPBundleForBrick)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPBundleForBrick.class.getName());
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 		return out;
