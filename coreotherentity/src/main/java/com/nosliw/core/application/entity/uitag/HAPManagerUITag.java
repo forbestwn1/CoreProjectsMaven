@@ -1,6 +1,9 @@
 package com.nosliw.core.application.entity.uitag;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -38,7 +41,16 @@ public class HAPManagerUITag{
 			version = "1.0.0";
 		}
 		String fileName = getUITagFolder(tagId, version) + "definition.json";
-		JSONObject jsonObj = new JSONObject(HAPUtilityFile.readFile(new File(fileName)));
+		
+		JSONObject jsonObj = null;
+		try {
+			String defContent = Files.readString(Path.of(fileName));
+			jsonObj = new JSONObject(defContent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+//		jsonObj = new JSONObject(HAPUtilityFile.readFile(new File(fileName)));
 		return HAPUITagUtilityDefinitionParser.parseUITagDefinition(jsonObj, tagId, version, this.m_entityParseService);
 	}
 	
