@@ -26,7 +26,7 @@ public class HAPTaskRuntimeExecuteDataExpressionRhino extends HAPTaskRuntimeRhin
 
 	@Override
 	protected HAPJSScriptInfo buildRuntimeScript(HAPExecutorRuntimeImpRhino runtime) {
-		return HAPUtilityRuntimeJSScript.buildRequestScriptForExecuteDataExpression(m_dataExpressionTaskInfo, getTaskId(), runtime);
+		return HAPUtilityRuntimeJSScriptTask.buildRequestScriptForExecuteDataExpression(m_dataExpressionTaskInfo, getTaskId(), runtime);
 	}
 
 }

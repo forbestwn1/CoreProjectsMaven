@@ -31,7 +31,7 @@ public class HAPTaskRuntimeExecuteRhinoScriptExpressionConstantGroup extends HAP
 
 	@Override
 	protected HAPJSScriptInfo buildRuntimeScript(HAPExecutorRuntimeImpRhino runtime) {
-		HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeJSScript.buildTaskRequestScriptForExecuteExpressionScriptConstant(m_scriptExpressionGroupInfo, getTaskId(), runtime);
+		HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeJSScriptTask.buildTaskRequestScriptForExecuteExpressionScriptConstant(m_scriptExpressionGroupInfo, getTaskId(), runtime);
 		return scriptInfo;
 	}
 }

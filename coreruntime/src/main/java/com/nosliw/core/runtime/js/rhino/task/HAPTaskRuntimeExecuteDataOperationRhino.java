@@ -13,7 +13,6 @@ import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
 import com.nosliw.core.runtime.js.rhino.HAPExecutorRuntimeImpRhino;
-import com.nosliw.core.runtime.js.rhino.HAPUtilityRuntimeRhinoScript;
 
 public class HAPTaskRuntimeExecuteDataOperationRhino extends HAPTaskRuntimeImp{
 
@@ -63,7 +62,7 @@ public class HAPTaskRuntimeExecuteDataOperationRhino extends HAPTaskRuntimeImp{
 			if(resourceTaskResult.isSuccess()){
 				//after resource loaded, execute expression
 				try{
-					HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeRhinoScript.buildRequestScriptForExecuteDataOperationTask(this.m_parent, this.m_runtime);
+					HAPJSScriptInfo scriptInfo = HAPUtilityRuntimeJSScriptTask.buildRequestScriptForExecuteDataOperationTask(this.m_parent, this.m_runtime);
 					this.m_runtime.loadTaskScript(scriptInfo, m_parent.getTaskId());
 				}
 				catch(Exception e){
