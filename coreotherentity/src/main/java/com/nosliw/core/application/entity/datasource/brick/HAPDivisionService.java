@@ -41,12 +41,12 @@ public class HAPDivisionService implements HAPPluginDivision{
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPIdBrickType brickTypeId = brickId.getBrickTypeId();
 		if(brickTypeId.equals(HAPEnumBrickType.SERVICEPROFILE_100)) {
-			HAPBundleForBrick bundle = new HAPBundleForBrick();
+			HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(fromObjToBlockServiceProfile(m_serviceMan.getServiceInfo(brickId.getId()).getServiceProfileInfo(), runtimeInfo)));
 			return bundle;
 		} 
 		else if(brickTypeId.equals(HAPEnumBrickType.SERVICEINTERFACE_100)) {
-			HAPBundleForBrick bundle = new HAPBundleForBrick();
+			HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(m_serviceMan.getServiceInterfaceManager().getServiceInterface(new HAPIdServcieInterface(brickId.getId()))));
 			return bundle;
 		}

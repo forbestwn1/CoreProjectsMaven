@@ -1,8 +1,5 @@
 package com.nosliw.core.application.entity.uitag;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,11 +15,10 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.matcher.HAPMatchers;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 @Component
 public class HAPManagerUITag{
@@ -36,22 +32,26 @@ public class HAPManagerUITag{
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
 	
+	@Autowired
+	private HAPUITagConfigure m_uiTagConfigure;
+	
+	public HAPManagerUITag(HAPUITagConfigure uiTagConfigure) {
+		this.m_uiTagConfigure = uiTagConfigure;
+		this.readAllTags();
+	}
+	
 	public HAPUITagDefinition getUITagDefinition(String tagId, String version) {
+		HAPUITagDefinition out = null;
+		
 		if(version==null) {
 			version = "1.0.0";
 		}
-		String fileName = getUITagFolder(tagId, version) + "definition.json";
-		
-		JSONObject jsonObj = null;
-		try {
-			String defContent = Files.readString(Path.of(fileName));
-			jsonObj = new JSONObject(defContent);
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		String content = HAPUtilityFileNio.readFile(this.getUITagFolderPath(tagId, version), "definition.json");
+		if(content!=null) {
+			out = HAPUITagUtilityDefinitionParser.parseUITagDefinition(new JSONObject(content), tagId, version, this.m_entityParseService);
 		}
-		
-//		jsonObj = new JSONObject(HAPUtilityFile.readFile(new File(fileName)));
-		return HAPUITagUtilityDefinitionParser.parseUITagDefinition(jsonObj, tagId, version, this.m_entityParseService);
+		return out;
 	}
 	
 	public HAPUITagInfo getDefaultUITagData(HAPUITageQueryData query) {
@@ -69,30 +69,33 @@ public class HAPManagerUITag{
 		this.m_otherTagDefs = null;
 	}
 	
-	private String getUITagFolder(String tagId, String version) {
-		return HAPSystemFolderUtility.getTagDefinitionFolder() + version + "/" + tagId +"/";
+	private Path getUITagFolderPath(String tagId, String version) {
+		return HAPUtilityFileNio.buildPath(getRootPath(), version, tagId);
 	}
+	
+	private Path getRootPath() {		return HAPUtilityFileNio.buildPath(m_uiTagConfigure.getPath()); 	}
 
 	private void readAllTags() {
 		this.m_dataTagDefs = new LinkedHashMap<String, HAPUITagDefinitionData>();
 		this.m_otherTagDefs = new LinkedHashMap<String, HAPUITagDefinition>();
 		
-		for(File versionFolder : HAPUtilityFile.getChildrenFolder(HAPSystemFolderUtility.getTagDefinitionFolder())) {
-			String version = versionFolder.getName();
-			for(File tagFolder : HAPUtilityFile.getChildrenFolder(versionFolder)) {
-				HAPUITagDefinition uiTagDef = getUITagDefinition(tagFolder.getName(), version);
-//				uiTagDef.setSourceFile(file);
-				String type = uiTagDef.getType();
-				if(HAPConstantShared.UITAG_TYPE_DATA.equals(type)) {
-					this.m_dataTagDefs.put(uiTagDef.getName(), (HAPUITagDefinitionData)uiTagDef);
-				}
-				else {
-					this.m_otherTagDefs.put(uiTagDef.getName(), uiTagDef);
-				}
+		for(Path versionPath : HAPUtilityFileNio.getChildrenPath(this.getRootPath())) {
+			String version = HAPUtilityFileNio.getLastNameOfPath(versionPath);
+			for(Path tagFolderPath : HAPUtilityFileNio.getChildrenPath(versionPath)) {
+				String tagName = HAPUtilityFileNio.getLastNameOfPath(tagFolderPath);
+				HAPUITagDefinition uiTagDef = getUITagDefinition(tagName, version);
+					String type = uiTagDef.getType();
+					if(HAPConstantShared.UITAG_TYPE_DATA.equals(type)) {
+						this.m_dataTagDefs.put(uiTagDef.getName(), (HAPUITagDefinitionData)uiTagDef);
+					}
+					else {
+						this.m_otherTagDefs.put(uiTagDef.getName(), uiTagDef);
+					}
 			}
+			
 		}
 	}
-	
+
 	public HAPUITagQueryResultSet queryUITagData(HAPUITageQueryData query) {
 		if(this.m_dataTagDefs==null) {
 			this.readAllTags();
@@ -148,12 +151,6 @@ public class HAPManagerUITag{
 		return out;
 	}
 
-	public String getUITagDefinitionContent(String tagId) {
-		String fileName = HAPSystemFolderUtility.getTagDefinitionFolder() + tagId + "/definition.json";
-		File file = new File(fileName);
-		return HAPUtilityFile.readFile(file);
-	}
-	
 	private List<Pair<String, HAPDataTypeCriteria>> getDataTypeCriteriaForUITagData(HAPUITagDefinitionData uiTagDef) {
 		List<Pair<String, HAPDataTypeCriteria>> out = new ArrayList<Pair<String, HAPDataTypeCriteria>>();
 		List<String> attrNames = uiTagDef.getAttributeForData();

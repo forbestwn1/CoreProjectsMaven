@@ -37,7 +37,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId, this.getDivisionName());
 		scriptBrick.setScript(script);
 		
-		HAPBundleForBrick bundle = new HAPBundleForBrick();
+		HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 		bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(scriptBrick));
 		return bundle;
 	}

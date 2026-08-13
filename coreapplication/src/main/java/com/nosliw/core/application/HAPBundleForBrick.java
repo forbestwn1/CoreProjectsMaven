@@ -158,7 +158,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 
 	private List<HAPInfoExportBrick> m_exportResourceInfos;
 	
-	public HAPBundleForBrick() {
+	protected HAPBundleForBrick() {
 		this.m_valueStructureDomain = new HAPDomainValueStructure();
 		this.m_exportResourceInfos = new ArrayList<HAPInfoExportBrick>();
 		this.m_branchBricks = new LinkedHashMap<String, HAPWrapperBrickRoot>();
@@ -169,6 +169,14 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
 
 		this.m_dynamicInfo = new HAPDynamicDefinitionContainer(); 
+	}
+	
+	public static HAPBundleForBrick newBundleForBrick() {
+		HAPBundleForBrick out = new HAPBundleForBrick();
+		HAPInfoExportBrick defaultExport = new HAPInfoExportBrick(new HAPPath());
+		defaultExport.setName(HAPConstantShared.NAME_DEFAULT);
+		out.addExportResourceInfo(defaultExport);
+		return out;
 	}
 	
 	public void addEventProcess(String id, HAPEventProcess eventProcess) {     this.m_eventProcesses.put(id, eventProcess);       }

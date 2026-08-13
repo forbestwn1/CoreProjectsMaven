@@ -41,7 +41,7 @@ public class HAPManualProcessBundle {
 			HAPManagerDataRule dataRuleManager,
 			HAPParserDataExpression dataExpressionParser
 			) {
-		HAPBundleForBrick bundle = new HAPBundleForBrick();
+		HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 		bundle.setDynamicInfo(contentProvider.getDynamicDefinition());
 
 		Map<String, HAPManualDefinitionWrapperBrickRoot> definitions = new LinkedHashMap();

@@ -12,7 +12,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.resource.HAPIdResourceType;
@@ -68,11 +67,6 @@ public class HAPManagerApplicationBrick {
 		HAPPluginDivision divisionPlugin = this.m_divisionPlugin.get(division);
 		HAPBundleForBrick bundle = divisionPlugin.getBundle(brickId, runtimeInfo);
 
-		//default export resource
-		HAPInfoExportBrick defaultExport = new HAPInfoExportBrick(new HAPPath());
-		defaultExport.setName(HAPConstantShared.NAME_DEFAULT);
-		bundle.addExportResourceInfo(defaultExport);
-		
 		//other export resource according to brick definition
 		List<HAPInfoExportBrick> exposes = this.getBrickPlugin(brickId.getBrickTypeId()).getExposeResourceInfo(bundle.getMainBrickWrapper().getBrick());
 		for(HAPInfoExportBrick expose : exposes) {
