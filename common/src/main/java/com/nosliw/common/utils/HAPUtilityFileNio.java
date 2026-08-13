@@ -30,6 +30,10 @@ public class HAPUtilityFileNio {
 	
 	public static List<Path> getChildrenPath(Path path){
 		try {
+			if(!isPathExists(path)) {
+				return new ArrayList<Path>();
+			}
+			
 			return Files.list(path).collect(Collectors.toList());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -63,4 +67,15 @@ public class HAPUtilityFileNio {
 		return path.getFileName().toString();
 	}
 	
+	public static String getFileNameWithoutExtension(Path path) {
+		String fileName = path.getFileName().toString();
+        int dotIndex = fileName.lastIndexOf('.');
+        String baseName = (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
+        return baseName;
+	}
+	
+	public static boolean isPathExists(Path path) {    return Files.exists(path);       }
+	
+	public static boolean isFile(Path path) {    return Files.isRegularFile(path);     }
+	public static boolean isDictory(Path path) {    return !Files.isRegularFile(path);     }
 }

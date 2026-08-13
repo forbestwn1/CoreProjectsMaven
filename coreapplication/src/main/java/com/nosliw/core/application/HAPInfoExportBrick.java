@@ -35,7 +35,7 @@ public class HAPInfoExportBrick extends HAPEntityInfoImp{
 	@Override
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
-		
+		this.buildEntityInfoByJson(jsonObj);
 		this.setPathFromRoot((String)jsonObj.opt(PATHFROMROOT));
 		
 		return true;  

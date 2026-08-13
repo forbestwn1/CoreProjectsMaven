@@ -14,6 +14,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPAdapter;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPBrick;
@@ -30,7 +31,7 @@ import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;
@@ -70,6 +71,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	private HAPServiceParseEntity m_parseService;
 	
+	private HAPManualConfigure m_manualConfigure;
+	
 	public HAPManualManagerBrick() {
 		this.m_brickParserPlugin = new LinkedHashMap<String, HAPManualDefinitionPluginParserBrick>();
 		this.m_brickProcessorPlugin = new LinkedHashMap<String, HAPManualPluginProcessorBrick>();
@@ -104,6 +107,9 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	@Autowired
 	private void setParseService(HAPServiceParseEntity parseService) {   this.m_parseService = parseService;        }
 	
+	@Autowired
+	private void setManualConfigure(HAPManualConfigure manualConfigure) {  this.m_manualConfigure = manualConfigure;  }
+	
 	
 	@Override
 	public String getDivisionName() {   return HAPConstantShared.BRICK_DIVISION_MANUAL;   }
@@ -123,7 +129,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 //			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
 //		}
 
-		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation1.getBrickLocationInfo(HAPUtilityFileNio.buildPath(this.m_manualConfigure.getSourcePath()), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
 		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);

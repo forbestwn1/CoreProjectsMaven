@@ -1,6 +1,6 @@
 package com.nosliw.core.application.division.manual.core.definition;
 
-import java.io.File;
+import java.nio.file.Path;
 
 import com.nosliw.common.location.HAPPathLocationBase;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -16,11 +16,11 @@ public class HAPManualDefinitionInfoBrickLocation {
 	private boolean m_isSingleFile;
 	
 	//core file
-	private File m_file;
+	private Path m_file;
 	
 	private HAPSerializationFormat m_format;
 	
-	public HAPManualDefinitionInfoBrickLocation(HAPIdBrickType brickTypeId, File file, HAPSerializationFormat format, HAPPathLocationBase basePath, boolean isSingleFile) {
+	public HAPManualDefinitionInfoBrickLocation(HAPIdBrickType brickTypeId, Path file, HAPSerializationFormat format, HAPPathLocationBase basePath, boolean isSingleFile) {
 		this.m_brickTypeId = brickTypeId;
 		this.m_file = file;
 		this.m_format = format;
@@ -38,7 +38,7 @@ public class HAPManualDefinitionInfoBrickLocation {
 	
 	public boolean getIsSingleFile() {   return this.m_isSingleFile;   }
 	
-	public File getFiile() {   return this.m_file;    }
+	public Path getFiile() {   return this.m_file;    }
 	
 	public HAPSerializationFormat getFormat() {   return this.m_format;     }
 	
