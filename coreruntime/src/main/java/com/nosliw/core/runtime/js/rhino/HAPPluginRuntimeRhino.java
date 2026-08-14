@@ -17,6 +17,9 @@ import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 @Component
 public class HAPPluginRuntimeRhino implements HAPPluginRuntime{
 
+	@Autowired
+	private HAPRhinoRuntimeConfigure m_rhinoRuntimeConfigure;
+	
 	@Autowired(required=false)
 	private List<HAPFactoryTaskRuntime> m_taskFactory;
 	
@@ -30,7 +33,7 @@ public class HAPPluginRuntimeRhino implements HAPPluginRuntime{
 	public HAPRuntimeInfo getRuntimeInfo() {  return HAPRuntimeManager.RUNTIME_JS_RHION;  }
 
 	@Override
-	public HAPFactoryExecutorRuntime getRuntimeExecutorFactory() {   return new HAPFactoryRuntimeRhino(this.m_taskFactory, this.m_gatewayManager);    }
+	public HAPFactoryExecutorRuntime getRuntimeExecutorFactory() {   return new HAPFactoryRuntimeRhino(this.m_taskFactory, this.m_rhinoRuntimeConfigure, this.m_gatewayManager);    }
 
 	@Override
 	public HAPRuntimeAdapterLoadResource getRuntimeLoadResourceAdapter() {   return new HAPRuntimeAdapterLoadResourceImp(this.m_staticResourceService);   }

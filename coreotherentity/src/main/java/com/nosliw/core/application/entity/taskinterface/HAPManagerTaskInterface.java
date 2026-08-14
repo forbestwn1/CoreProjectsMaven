@@ -14,12 +14,14 @@ import com.nosliw.core.application.entity.datasource.HAPUtilityServiceParse;
 import com.nosliw.core.system.HAPSystemFolderUtility;
 
 @Component
-public class HAPManagerServiceInterface{
+public class HAPManagerTaskInterface{
 	
 	@Autowired
-	HAPServiceParseEntity m_entityParseService;
+	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManagerServiceInterface() {
+	private HAPTaskInterfaceConfigure m_taskInterfaceConfigure;
+	
+	public HAPManagerTaskInterface() {
 	}
 	
 	public HAPBlockServiceInterface getServiceInterface(HAPIdServcieInterface id) {

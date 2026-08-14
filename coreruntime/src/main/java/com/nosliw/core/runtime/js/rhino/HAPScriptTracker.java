@@ -1,6 +1,7 @@
 package com.nosliw.core.runtime.js.rhino;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Map;
 
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 
 public class HAPScriptTracker {
 
@@ -28,7 +30,7 @@ public class HAPScriptTracker {
 		this.m_files.add(file);
 	}
 	
-	public void export(){
+	public void export(Path exportPath){
 		StringBuffer scriptContent = new StringBuffer();
 		
 		for(String file : this.m_files){
@@ -51,6 +53,6 @@ public class HAPScriptTracker {
 		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPScriptTracker.class, "scriptTracker.temp");
 		String out = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);
 		
-		HAPUtilityFile.writeFile(HAPRhinoRuntimeUtility.getScriptTempFolder()+"/1.html", out);
+		HAPUtilityFileNio.writeFile(exportPath, "1.html", out);
 	}
 }

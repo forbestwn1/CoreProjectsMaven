@@ -2,6 +2,7 @@ package com.nosliw.core.runtime.js.rhino;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceInfo;
@@ -85,15 +87,14 @@ public class HAPRhinoRuntimeUtility {
 		return resourceIds;
 	}
 	
-	public static void loadScript(String script, Scriptable scope, String name, boolean exportScript){
+	public static void loadScript(String script, Scriptable scope, String name, boolean exportScript, Path exportPath){
 		Context context = Context.enter();
 		try{
 			if(!HAPExecutorRuntime.isDemo && exportScript) {
 				//ppppp			
-				String folder = getScriptTempFolder();
-				String scriptTempFile = folder + "/" + String.format("%03d", index++) + "_" + name;  //+".js";
+				String scriptTempFile = String.format("%03d", index++) + "_" + name;  //+".js";
 				scriptTempFile = scriptTempFile.replaceAll(";", "_");
-				HAPUtilityFile.writeFile(scriptTempFile, script);
+				HAPUtilityFileNio.writeFile(exportPath, scriptTempFile, script);
 			}
 			context.evaluateString(scope, script, name, 1, null);
 		}
@@ -105,20 +106,12 @@ public class HAPRhinoRuntimeUtility {
 		}
 	}
 	
-	public static String getScriptTempFolder(){
-		File directory = new File(HAPSystemFolderUtility.getCurrentScriptExportFolder());
-	    if (! directory.exists()){
-	    	directory.mkdir();
-	    }
-	    return directory.getAbsolutePath();
-	}
-	
-	public static void exportToHtml() {
-		List<File> files = HAPUtilityFile.sortFiles(HAPUtilityFile.getAllFiles(getScriptTempFolder()));
-		
+	public static void exportToHtml(Path sourcePath) {
+		List<Path> childrenPath = HAPUtilityFileNio.getChildrenSortedByName(sourcePath);
+
 		StringBuffer scriptContent = new StringBuffer();
-		for(File file : files){
-			String fileName = file.getPath();
+		for(Path childPath : childrenPath){
+			String fileName = childPath.getFileName().toString();
 			if(fileName.contains("Library__nosliw.runtimerhinoinit;__init.js.js")) {
 				appendScriptToScript(scriptContent, "nosliw.createNode(\"runtime.name\", \"browser\");");
 			}
@@ -140,8 +133,7 @@ public class HAPRhinoRuntimeUtility {
 		InputStream javaTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPScriptTracker.class, "scriptTracker.temp");
 		String out = HAPStringTemplateUtil.getStringValue(javaTemplateStream, templateParms);
 		
-		HAPUtilityFile.writeFile(HAPRhinoRuntimeUtility.getScriptTempFolder()+"/main.html", out);
-
+		HAPUtilityFileNio.writeFile(sourcePath, "main.html", out);
 	}
 	
 	private static void appendFileToScript(StringBuffer scriptContent, String file) {

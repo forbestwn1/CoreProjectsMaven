@@ -1,5 +1,6 @@
 package com.nosliw.core.runtime.js.rhino;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.entity.js.library.HAPJSLibraryId;
 import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
@@ -37,6 +39,7 @@ import com.nosliw.core.runtime.execute.HAPExecutorRuntimeWithScript;
 import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
+import com.nosliw.core.system.HAPSystem;
 
 @HAPEntityWithAttribute
 public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
@@ -57,7 +60,10 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 	
 	private HAPGatewayManager m_gatewayManager;
 	
-	public HAPExecutorRuntimeImpRhino(List<HAPFactoryTaskRuntime> taskFactory, HAPGatewayManager gatewayManager){
+	private HAPRhinoRuntimeConfigure m_rhinoRuntimeConfigure;
+	
+	public HAPExecutorRuntimeImpRhino(List<HAPFactoryTaskRuntime> taskFactory, HAPRhinoRuntimeConfigure rhinoRuntimeConfigure, HAPGatewayManager gatewayManager){
+		this.m_rhinoRuntimeConfigure = rhinoRuntimeConfigure;
 		this.m_gatewayManager = gatewayManager;
 		this.m_tasks = new LinkedHashMap<String, HAPTaskRuntime>();
 		
@@ -66,6 +72,9 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 			this.m_taskFactory.put(factory.getTaskType(), factory);
 		}
 	}
+	
+	private Path getRootScriptExportPath() {     return HAPUtilityFileNio.buildPath(this.m_rhinoRuntimeConfigure.getScriptExportPath());         }
+	private Path getCurrentScriptExportPath() {     return HAPUtilityFileNio.buildPath(this.getRootScriptExportPath(), HAPSystem.id);         }
 	
 	private synchronized String generateTaskId() {
 		return this.m_idIndex+++"";
@@ -291,7 +300,7 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 			//for file
 			this.m_sciprtTracker.addFile(file);
 		}
-		HAPRhinoRuntimeUtility.loadScript(scriptInfo.getScript(), scope, scriptInfo.getName(), !HAPConstantShared.RUNTIME_RESOURCE_TYPE_JSLIBRARY.equals(scriptInfo.getType()));
+		HAPRhinoRuntimeUtility.loadScript(scriptInfo.getScript(), scope, scriptInfo.getName(), !HAPConstantShared.RUNTIME_RESOURCE_TYPE_JSLIBRARY.equals(scriptInfo.getType()), this.getCurrentScriptExportPath());
 	}
 	
 	public void loadScriptFromFile(String fileName, Class cs, Scriptable scope){
@@ -304,7 +313,7 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 	@Override
 	public void close(){
 //		this.m_sciprtTracker.export();
-		HAPRhinoRuntimeUtility.exportToHtml();
+		HAPRhinoRuntimeUtility.exportToHtml(this.getCurrentScriptExportPath());
 		this.m_gatewayManager.unregisterGateway(HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
 	}
 	
