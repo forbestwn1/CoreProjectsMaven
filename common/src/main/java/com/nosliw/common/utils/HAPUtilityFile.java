@@ -138,7 +138,7 @@ public class HAPUtilityFile {
 	public static String writeFile(String folder, String fileName, String content){		return writeFile(buildFullFileName(folder, fileName), content); 	}
 	public static String writeFile(String fileName, String content){
 		try {
-			fileName = getValidFileName(fileName);
+			fileName = HAPUtilityFileName.getValidFileName(fileName);
 			File file = new File(fileName);
 			//create dir if not exist
 			file.getParentFile().mkdirs();
@@ -162,41 +162,7 @@ public class HAPUtilityFile {
 		File file = new File(path);
 		file.delete();
 	}
-	
-	private static String getValidFileName(String fileFullName){
-		int index = fileFullName.lastIndexOf("/");
-		if(index==-1) {
-			index = fileFullName.lastIndexOf("\\");
-		}
-		
-		String path = null;
-		String fileName = null;
-		if(index==-1) {
-			fileName = fileFullName;
-		} else{
-			fileName = fileFullName.substring(index+1);
-			path = fileFullName.substring(0, index+1);
-		}
-		
-		fileName = encodeName(fileName);
 
-		String out = "";
-		if(path!=null) {
-			out = out + path;
-		}
-		out = out + fileName;
-		return out;
-	}
-
-	private static String encodeName(String name) {
-		String out = name;
-		char[] invalidChars = {'|', ':', '*'};
-		for(char invalidChar : invalidChars){
-			out = out.replace(invalidChar, '_');
-		}
-		return out;
-	}
-	
 	
 	public static String getFileName(File file){
 		String name = file.getName();
@@ -315,11 +281,11 @@ public class HAPUtilityFile {
 		return fileFolder;
 	}
 	
-	public static String buildFullFileName(String location, String fileName, String type){	return normalizeFolderPath(location)+encodeName(fileName)+"."+type;	}
+	public static String buildFullFileName(String location, String fileName, String type){	return HAPUtilityFileName.normalizeFolderPath(location)+HAPUtilityFileName.encodeName(fileName)+"."+type;	}
 
-	public static String buildFullFileName(String location, String fileName){		return normalizeFolderPath(location)+encodeName(fileName);  	}
+	public static String buildFullFileName(String location, String fileName){		return HAPUtilityFileName.normalizeFolderPath(location)+HAPUtilityFileName.encodeName(fileName);  	}
 
-	public static String buildFullFolderPath(String base, String path){		return normalizeFolderPath(base)+encodeName(path)+"/";  	}
+	public static String buildFullFolderPath(String base, String path){		return HAPUtilityFileName.normalizeFolderPath(base)+HAPUtilityFileName.encodeName(path)+"/";  	}
 
 	public static String getValidFolder(String folderPath){
 		File directory = new File(folderPath);
@@ -330,11 +296,4 @@ public class HAPUtilityFile {
 	}
 
 	
-	private static String normalizeFolderPath(String folder) {
-		if(folder.endsWith("/")||folder.endsWith("\\")) {
-			return folder;
-		} else {
-			return folder + "/";
-		}
-	}
 }

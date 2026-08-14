@@ -7,11 +7,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.nosliw.common.serialization.HAPUtilityJson;
+
 public class HAPUtilityFileNio {
 
+	public static Path getOrCreateFolder(Path folderPath) {
+		try {
+			return Files.createDirectories(folderPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	public static String readFile(Path path, String...subPath){
 		try {
 			return Files.readString(buildPath(path, subPath));
@@ -26,7 +40,25 @@ public class HAPUtilityFileNio {
 		return readFile(path);
 	}
 	
+	public static String writeFile(Path folder, String fileName, String content){
+		fileName = HAPUtilityFileName.getValidFileName(fileName);
+		
+		try {
+			Files.writeString(HAPUtilityFileNio.buildPath(folder, fileName), content);
+			return fileName;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
+	public static String writeJsonFile(Path folder, String fileName, String content) {    
+		return writeFile(folder, fileName, HAPUtilityJson.formatJson(content));     
+	}
+	
+	public static List<Path> getChildrenSortedByName(Path folder){
+		return sortFiles(getChildrenPath(folder));
+	}
 	
 	public static List<Path> getChildrenPath(Path path){
 		try {
@@ -78,4 +110,17 @@ public class HAPUtilityFileNio {
 	
 	public static boolean isFile(Path path) {    return Files.isRegularFile(path);     }
 	public static boolean isDictory(Path path) {    return !Files.isRegularFile(path);     }
+	
+	public static List<Path> sortFiles(List<Path> files){
+		List<Path> sortedList = new ArrayList<Path>(files);
+		Collections.sort(sortedList, new Comparator<Path>() {
+
+			@Override
+			public int compare(Path arg0, Path arg1) {
+				return arg0.getFileName().toString().compareTo(arg1.getFileName().toString());
+			}
+		});
+		return sortedList;
+	}
+
 }

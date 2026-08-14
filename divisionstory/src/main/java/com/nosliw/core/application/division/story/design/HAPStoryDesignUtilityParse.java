@@ -1,13 +1,10 @@
 package com.nosliw.core.application.division.story.design;
 
-import java.io.File;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
@@ -15,10 +12,8 @@ import com.nosliw.core.application.division.story.design.change.HAPStoryManagerC
 
 public class HAPStoryDesignUtilityParse {
 
-	public static HAPStoryDesign parseStoryDesign(File file, HAPServiceParseEntity entityParseService, HAPStoryManagerChange changeMan) {
+	public static HAPStoryDesign parseStoryDesign(String content, HAPServiceParseEntity entityParseService, HAPStoryManagerChange changeMan) {
 		HAPStoryDesign out = new HAPStoryDesign(changeMan);
-		
-		String content = HAPUtilityFile.readFile(file);
 		
 		JSONObject designJsonObj = new JSONObject(content);
 		

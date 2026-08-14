@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
@@ -28,6 +29,9 @@ public class HAPStoryManagerDesign {
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
+	
+	@Autowired
+	private HAPStoryConfigure m_storyConfigure;
 	
     private Map<String, HAPStoryBuilder> m_builders;	
 	
@@ -52,7 +56,7 @@ public class HAPStoryManagerDesign {
 			out = byIds.get(brickId.getId());      
 		}
 		if(out==null) {
-			out = HAPStoryDesignUtilityExport.loadDesign(brickId, this.m_entityParseService, this.m_changeMan);
+			out = HAPStoryDesignUtilityExport.loadDesign(HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()), brickId, this.m_entityParseService, this.m_changeMan);
 			if(out!=null) {
 				this.setDesign(out);
 			}
@@ -67,7 +71,7 @@ public class HAPStoryManagerDesign {
 	
 		this.setDesign(design);
 		
-		HAPStoryDesignUtilityExport.saveStoryDesign(design);
+		HAPStoryDesignUtilityExport.saveStoryDesign(design, HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()));
 		return out;
 	}
 	
@@ -78,7 +82,7 @@ public class HAPStoryManagerDesign {
 		
 		this.setDesign(design);
 
-		HAPStoryDesignUtilityExport.saveStoryDesign(design);
+		HAPStoryDesignUtilityExport.saveStoryDesign(design, HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()));
 		return out;
 	}
 

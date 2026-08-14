@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="division.manual")
 public class HAPManualConfigure {
 
-	private String sourcePath;
-
 	private String path;
+
+	private String sourcePath;
 
 	public String getPath() {
 		return this.path;
