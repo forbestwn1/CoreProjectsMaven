@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core;
+package com.nosliw.core.application.division.manual.common.contentprovider;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,6 +8,7 @@ import java.util.Map;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public class HAPManualContentProviderText implements HAPManualContentProvider{

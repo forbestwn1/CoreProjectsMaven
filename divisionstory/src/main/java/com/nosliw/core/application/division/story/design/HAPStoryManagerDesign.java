@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.story.design;
 
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.division.manual.core.HAPManualContentProviderText;
-import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityExporterContentProviderText;
+import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderText;
+import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualUtilityExporterContentProviderText;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtilityConverter;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
@@ -56,7 +57,7 @@ public class HAPStoryManagerDesign {
 			out = byIds.get(brickId.getId());      
 		}
 		if(out==null) {
-			out = HAPStoryDesignUtilityExport.loadDesign(HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()), brickId, this.m_entityParseService, this.m_changeMan);
+			out = HAPStoryDesignUtilityExport.loadDesign(this.getStoryStorageRootPath(), brickId, this.m_entityParseService, this.m_changeMan);
 			if(out!=null) {
 				this.setDesign(out);
 			}
@@ -71,7 +72,7 @@ public class HAPStoryManagerDesign {
 	
 		this.setDesign(design);
 		
-		HAPStoryDesignUtilityExport.saveStoryDesign(design, HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()));
+		HAPStoryDesignUtilityExport.saveStoryDesign(design, this.getStoryStorageRootPath());
 		return out;
 	}
 	
@@ -82,19 +83,23 @@ public class HAPStoryManagerDesign {
 		
 		this.setDesign(design);
 
-		HAPStoryDesignUtilityExport.saveStoryDesign(design, HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath()));
+		HAPStoryDesignUtilityExport.saveStoryDesign(design, this.getStoryStorageRootPath());
 		return out;
 	}
 
-	public String convertDesignToManual(HAPIdBrick brickId) {
+	public Path convertDesignToManual(HAPIdBrick brickId) {
 		HAPStoryDesign design = this.getDesign(brickId);
 		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
-		String exportFolder = HAPStoryUtilityConverter.getDesignConverToManualFolder(brickId);
+		Path exportFolder = HAPStoryUtilityConverter.getDesignConverToManualFolder(this.getStoryStorageRootPath(), brickId);
 		HAPManualUtilityExporterContentProviderText.export(contentProvider, exportFolder);
 		return exportFolder;
 	}
 	
 
+	public Path getStoryStorageRootPath() {
+		return HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath());
+	}
+	
 	private void setDesign(HAPStoryDesign design) {
 		String brickTypeKey = design.getRootBrickType().getKey();
 		Map<String, HAPStoryDesign> byIds = this.m_designs.get(brickTypeKey);

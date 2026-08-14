@@ -13,7 +13,7 @@ import com.nosliw.core.application.common.command.HAPCommandHandlerReference;
 import com.nosliw.core.application.common.command.HAPCommandHandlerReferenceCommand;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
-import com.nosliw.core.application.division.manual.core.HAPManualContentProvider;
+import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;

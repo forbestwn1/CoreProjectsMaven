@@ -1,6 +1,6 @@
 package com.nosliw.core.application.division.manual.core;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,6 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPAdapter;
 import com.nosliw.core.application.HAPAttributeInBrick;
@@ -29,6 +28,8 @@ import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWrapperValue;
 import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
+import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProvider;
+import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
@@ -44,7 +45,6 @@ import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 @Component
 public class HAPManualManagerBrick implements HAPPluginDivision{
@@ -121,18 +121,16 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPBundleForBrick out = null;
 		
-		File bundleFolder = HAPUtilityFile.getOrCreateFolder(getBundleExportFolder(brickId));
-
 //		out = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
 //		if(out==null) {
 //			out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 //			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
 //		}
 
-		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation1.getBrickLocationInfo(HAPUtilityFileNio.buildPath(this.m_manualConfigure.getSourcePath()), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation1.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
-		HAPUtilityExport.exportBundle(out, bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON);
-		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(bundleFolder.getAbsolutePath(), HAPSerializationFormat.JSON, m_parseService);
+		HAPUtilityExport.exportBundle(out, this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON);
+		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON, m_parseService);
 		if(out1!=null) {
 			for(String rootName : out1.getAllRootBrickName()) {
 				HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
@@ -173,7 +171,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 			}
 		}
 		
-		HAPUtilityExport.exportBundle(out1, bundleFolder.getAbsolutePath()+"/out1", HAPSerializationFormat.JSON);
+		HAPUtilityExport.exportBundle(out1, HAPUtilityFileNio.buildPath(this.getBundleExportFolder(brickId), "out1"), HAPSerializationFormat.JSON);
 		
 		return out1;
 	}
@@ -253,8 +251,11 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPManualPluginProcessorAdapter getAdapterProcessPlugin(HAPIdBrickType entityTypeId) {   return this.m_adapterProcessorPlugin.get(entityTypeId.getKey());    }
 
 
-	public static File getBundleExportFolder(HAPIdBrick brickId) {
-		return new File(HAPSystemFolderUtility.getBundleExportFolderManaul() + "/" + brickId.getBrickTypeId().getKey() + "/" + brickId.getId());
+	public Path getSrouceRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getSourcePath());	}
+	public Path getBundleRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getPath());	}
+	
+	public Path getBundleExportFolder(HAPIdBrick brickId) {
+		return HAPUtilityFileNio.buildPath(getBundleRootPath(), brickId.getBrickTypeId().getKey(), brickId.getId());
 	}
 	
 	private void init() {

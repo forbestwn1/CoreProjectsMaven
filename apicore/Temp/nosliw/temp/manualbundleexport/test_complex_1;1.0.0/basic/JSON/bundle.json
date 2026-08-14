@@ -1,0 +1,3766 @@
+{
+  "mainBrick": {
+    "id": "#main",
+    "name": "#main",
+    "displayName": "#main",
+    "info": {},
+    "brick": {
+      "domain": "brick.manual",
+      "brickType": {
+        "brickType": "test_complex_1",
+        "version": "1.0.0",
+        "key": "test_complex_1;1.0.0"
+      },
+      "internalValuePort": {
+        "valuePortGroup": [
+          {
+            "id": "valueContext",
+            "name": "valueContext",
+            "displayName": "valueContext",
+            "info": {},
+            "groupType": "valueContext",
+            "valuePort": [
+              {
+                "id": "0",
+                "name": "0",
+                "displayName": "0",
+                "info": {},
+                "type": "valueContext",
+                "ioDirection": "BOTH",
+                "valueStructure": [
+                  "2"
+                ],
+                "valueStructureInfo": [
+                  {
+                    "valueStructureId": "2",
+                    "priority": 0.5
+                  }
+                ]
+              }
+            ],
+            "idIndex": 1
+          }
+        ],
+        "idIndex": 0
+      },
+      "externalValuePort": {
+        "valuePortGroup": [
+          {
+            "id": "valueContext",
+            "name": "valueContext",
+            "displayName": "valueContext",
+            "info": {},
+            "groupType": "valueContext",
+            "valuePort": [
+              {
+                "id": "0",
+                "name": "0",
+                "displayName": "0",
+                "info": {},
+                "type": "valueContext",
+                "ioDirection": "BOTH",
+                "valueStructure": [
+                  "2"
+                ],
+                "valueStructureInfo": [
+                  {
+                    "valueStructureId": "2",
+                    "priority": 0.5
+                  }
+                ]
+              }
+            ],
+            "idIndex": 1
+          }
+        ],
+        "idIndex": 0
+      },
+      "attribute": [
+        {
+          "id": "local-uipage",
+          "name": "local-uipage",
+          "displayName": "local-uipage",
+          "info": {
+            "name": "local-uipage",
+            "description": "",
+            "status": "disabled1"
+          },
+          "valueWrapper": {
+            "valueType": "brick",
+            "brick": {
+              "domain": "brick.manual",
+              "brickType": {
+                "brickType": "uipage",
+                "version": "1.0.0",
+                "key": "uipage;1.0.0"
+              },
+              "internalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "externalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "attribute": [
+                {
+                  "id": "UIContent",
+                  "name": "UIContent",
+                  "displayName": "UIContent",
+                  "info": {
+                    "nosliw_alias": "tagEventSourceParnt"
+                  },
+                  "valueWrapper": {
+                    "valueType": "brick",
+                    "brick": {
+                      "domain": "brick.manual",
+                      "brickType": {
+                        "brickType": "uicontent",
+                        "version": "1.0.0",
+                        "key": "uicontent;1.0.0"
+                      },
+                      "internalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "4",
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "4",
+                                    "priority": 0.5
+                                  },
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "externalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "4",
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "4",
+                                    "priority": 0.5
+                                  },
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "attribute": [
+                        {
+                          "id": "customerTag",
+                          "name": "customerTag",
+                          "displayName": "customerTag",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "brick",
+                            "brick": {
+                              "domain": "brick.manual",
+                              "brickType": {
+                                "brickType": "containerList",
+                                "version": "1.0.0",
+                                "key": "containerList;1.0.0"
+                              },
+                              "internalValuePort": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "externalValuePort": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "attribute": [
+                                {
+                                  "id": "ContainerElement_1",
+                                  "name": "ContainerElement_1",
+                                  "displayName": "ContainerElement_1",
+                                  "info": {
+                                    "nosliw_alias": "customtagCommandTarget"
+                                  },
+                                  "valueWrapper": {
+                                    "valueType": "brick",
+                                    "brick": {
+                                      "domain": "brick.manual",
+                                      "brickType": {
+                                        "brickType": "uicustomertag",
+                                        "version": "1.0.0",
+                                        "key": "uicustomertag;1.0.0"
+                                      },
+                                      "internalValuePort": {
+                                        "valuePortGroup": [
+                                          {
+                                            "id": "valueContext",
+                                            "name": "valueContext",
+                                            "displayName": "valueContext",
+                                            "info": {},
+                                            "groupType": "valueContext",
+                                            "valuePort": [
+                                              {
+                                                "id": "0",
+                                                "name": "0",
+                                                "displayName": "0",
+                                                "info": {},
+                                                "type": "valueContext",
+                                                "ioDirection": "BOTH",
+                                                "valueStructure": [
+                                                  "6",
+                                                  "4",
+                                                  "2"
+                                                ],
+                                                "valueStructureInfo": [
+                                                  {
+                                                    "valueStructureId": "6",
+                                                    "priority": 0.5
+                                                  },
+                                                  {
+                                                    "valueStructureId": "4",
+                                                    "priority": 0.55
+                                                  },
+                                                  {
+                                                    "valueStructureId": "2",
+                                                    "priority": 0.9954999999999999
+                                                  }
+                                                ]
+                                              }
+                                            ],
+                                            "idIndex": 1
+                                          }
+                                        ],
+                                        "idIndex": 0
+                                      },
+                                      "externalValuePort": {
+                                        "valuePortGroup": [
+                                          {
+                                            "id": "valueContext",
+                                            "name": "valueContext",
+                                            "displayName": "valueContext",
+                                            "info": {},
+                                            "groupType": "valueContext",
+                                            "valuePort": [
+                                              {
+                                                "id": "0",
+                                                "name": "0",
+                                                "displayName": "0",
+                                                "info": {},
+                                                "type": "valueContext",
+                                                "ioDirection": "BOTH",
+                                                "valueStructure": [
+                                                  "4",
+                                                  "2"
+                                                ],
+                                                "valueStructureInfo": [
+                                                  {
+                                                    "valueStructureId": "4",
+                                                    "priority": 0.55
+                                                  },
+                                                  {
+                                                    "valueStructureId": "2",
+                                                    "priority": 0.9954999999999999
+                                                  }
+                                                ]
+                                              }
+                                            ],
+                                            "idIndex": 1
+                                          }
+                                        ],
+                                        "idIndex": 0
+                                      },
+                                      "attribute": [
+                                        {
+                                          "id": "UIContent",
+                                          "name": "UIContent",
+                                          "displayName": "UIContent",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "brick",
+                                            "brick": {
+                                              "domain": "brick.manual",
+                                              "brickType": {
+                                                "brickType": "uicontent",
+                                                "version": "1.0.0",
+                                                "key": "uicontent;1.0.0"
+                                              },
+                                              "internalValuePort": {
+                                                "valuePortGroup": [
+                                                  {
+                                                    "id": "valueContext",
+                                                    "name": "valueContext",
+                                                    "displayName": "valueContext",
+                                                    "info": {},
+                                                    "groupType": "valueContext",
+                                                    "valuePort": [
+                                                      {
+                                                        "id": "0",
+                                                        "name": "0",
+                                                        "displayName": "0",
+                                                        "info": {},
+                                                        "type": "valueContext",
+                                                        "ioDirection": "BOTH",
+                                                        "valueStructure": [
+                                                          "6",
+                                                          "4",
+                                                          "2"
+                                                        ],
+                                                        "valueStructureInfo": [
+                                                          {
+                                                            "valueStructureId": "6",
+                                                            "priority": 0.55
+                                                          },
+                                                          {
+                                                            "valueStructureId": "4",
+                                                            "priority": 0.9550000000000001
+                                                          },
+                                                          {
+                                                            "valueStructureId": "2",
+                                                            "priority": 0.9995499999999999
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "idIndex": 1
+                                                  }
+                                                ],
+                                                "idIndex": 0
+                                              },
+                                              "externalValuePort": {
+                                                "valuePortGroup": [
+                                                  {
+                                                    "id": "valueContext",
+                                                    "name": "valueContext",
+                                                    "displayName": "valueContext",
+                                                    "info": {},
+                                                    "groupType": "valueContext",
+                                                    "valuePort": [
+                                                      {
+                                                        "id": "0",
+                                                        "name": "0",
+                                                        "displayName": "0",
+                                                        "info": {},
+                                                        "type": "valueContext",
+                                                        "ioDirection": "BOTH",
+                                                        "valueStructure": [
+                                                          "4",
+                                                          "2"
+                                                        ],
+                                                        "valueStructureInfo": [
+                                                          {
+                                                            "valueStructureId": "4",
+                                                            "priority": 0.9550000000000001
+                                                          },
+                                                          {
+                                                            "valueStructureId": "2",
+                                                            "priority": 0.9995499999999999
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "idIndex": 1
+                                                  }
+                                                ],
+                                                "idIndex": 0
+                                              },
+                                              "attribute": [
+                                                {
+                                                  "id": "customerTag",
+                                                  "name": "customerTag",
+                                                  "displayName": "customerTag",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "brick",
+                                                    "brick": {
+                                                      "domain": "brick.manual",
+                                                      "brickType": {
+                                                        "brickType": "containerList",
+                                                        "version": "1.0.0",
+                                                        "key": "containerList;1.0.0"
+                                                      },
+                                                      "internalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "externalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "attribute": [
+                                                        {
+                                                          "id": "nosliw_attrIndex",
+                                                          "name": "nosliw_attrIndex",
+                                                          "displayName": "nosliw_attrIndex",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": 0
+                                                          },
+                                                          "adapter": []
+                                                        },
+                                                        {
+                                                          "id": "nosliw_attrSort",
+                                                          "name": "nosliw_attrSort",
+                                                          "displayName": "nosliw_attrSort",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": []
+                                                          },
+                                                          "adapter": []
+                                                        }
+                                                      ],
+                                                      "eventId": [],
+                                                      "otherInternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "otherExternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "valueContext": {
+                                                        "part": [],
+                                                        "valueStructureRuntimeIdByName": {},
+                                                        "valueStructureRuntimeNameById": {}
+                                                      }
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "task",
+                                                  "name": "task",
+                                                  "displayName": "task",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "brick",
+                                                    "brick": {
+                                                      "domain": "brick.manual",
+                                                      "brickType": {
+                                                        "brickType": "container",
+                                                        "version": "1.0.0",
+                                                        "key": "container;1.0.0"
+                                                      },
+                                                      "internalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "externalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "attribute": [
+                                                        {
+                                                          "id": "nosliw_attrIndex",
+                                                          "name": "nosliw_attrIndex",
+                                                          "displayName": "nosliw_attrIndex",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": 0
+                                                          },
+                                                          "adapter": []
+                                                        }
+                                                      ],
+                                                      "eventId": [],
+                                                      "otherInternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "otherExternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "valueContext": {
+                                                        "part": [],
+                                                        "valueStructureRuntimeIdByName": {},
+                                                        "valueStructureRuntimeNameById": {}
+                                                      }
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInContent",
+                                                  "name": "scriptExpressionInContent",
+                                                  "displayName": "scriptExpressionInContent",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInNormalTagAttribute",
+                                                  "name": "scriptExpressionInNormalTagAttribute",
+                                                  "displayName": "scriptExpressionInNormalTagAttribute",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInCustomerTagAttribute",
+                                                  "name": "scriptExpressionInCustomerTagAttribute",
+                                                  "displayName": "scriptExpressionInCustomerTagAttribute",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressions",
+                                                  "name": "scriptExpressions",
+                                                  "displayName": "scriptExpressions",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": {
+                                                      "item": {}
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "tagAliasMapping",
+                                                  "name": "tagAliasMapping",
+                                                  "displayName": "tagAliasMapping",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": {}
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "html",
+                                                  "name": "html",
+                                                  "displayName": "html",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": ""
+                                                  },
+                                                  "adapter": []
+                                                }
+                                              ],
+                                              "eventId": [],
+                                              "otherInternalValuePortsContainer": {
+                                                "valuePortGroup": [],
+                                                "idIndex": 0
+                                              },
+                                              "otherExternalValuePortsContainer": {
+                                                "valuePortGroup": [],
+                                                "idIndex": 0
+                                              },
+                                              "valueContext": {
+                                                "part": [
+                                                  {
+                                                    "info": {},
+                                                    "type": "groupWithEntity",
+                                                    "partInfo": {
+                                                      "name": "fromParent",
+                                                      "priority": 9
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "info": {},
+                                                        "type": "simple",
+                                                        "partInfo": {
+                                                          "name": "default",
+                                                          "priority": 5
+                                                        },
+                                                        "structure": [
+                                                          {
+                                                            "runtimeId": "6",
+                                                            "structureInfo": {
+                                                              "scope": "protected"
+                                                            }
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "info": {},
+                                                        "type": "groupWithEntity",
+                                                        "partInfo": {
+                                                          "name": "fromParent",
+                                                          "priority": 9
+                                                        },
+                                                        "children": [
+                                                          {
+                                                            "info": {},
+                                                            "type": "simple",
+                                                            "partInfo": {
+                                                              "name": "default",
+                                                              "priority": 5
+                                                            },
+                                                            "structure": [
+                                                              {
+                                                                "runtimeId": "4",
+                                                                "structureInfo": {
+                                                                  "scope": "public"
+                                                                }
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "info": {},
+                                                            "type": "groupWithEntity",
+                                                            "partInfo": {
+                                                              "name": "fromParent",
+                                                              "priority": 9
+                                                            },
+                                                            "children": [
+                                                              {
+                                                                "info": {},
+                                                                "type": "groupWithEntity",
+                                                                "partInfo": {
+                                                                  "name": "fromParent",
+                                                                  "priority": 9
+                                                                },
+                                                                "children": [
+                                                                  {
+                                                                    "info": {},
+                                                                    "type": "simple",
+                                                                    "partInfo": {
+                                                                      "name": "default",
+                                                                      "priority": 5
+                                                                    },
+                                                                    "structure": [
+                                                                      {
+                                                                        "runtimeId": "2",
+                                                                        "structureInfo": {
+                                                                          "scope": "public"
+                                                                        }
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ],
+                                                "valueStructureRuntimeIdByName": {},
+                                                "valueStructureRuntimeNameById": {}
+                                              }
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "attribute",
+                                          "name": "attribute",
+                                          "displayName": "attribute",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "data": "page_public_string"
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "attributeDefinition",
+                                          "name": "attributeDefinition",
+                                          "displayName": "attributeDefinition",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "data": {
+                                                "id": "data",
+                                                "name": "data",
+                                                "displayName": "data",
+                                                "info": {},
+                                                "type": "variable",
+                                                "scope": "protected",
+                                                "dataDefinition": {
+                                                  "type": "writable",
+                                                  "criteria": "test.string;1.0.0",
+                                                  "isMultipleAllowed": false,
+                                                  "rule": []
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "metaData",
+                                          "name": "metaData",
+                                          "displayName": "metaData",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "nosliw_alias": "customtagCommandTarget",
+                                              "uiTagName": "debug_test_string",
+                                              "uiTagVersion": "1.0.0"
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "style",
+                                          "name": "style",
+                                          "displayName": "style",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value"
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "tagDefinition",
+                                          "name": "tagDefinition",
+                                          "displayName": "tagDefinition",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "id": "debug_test_string",
+                                              "name": "debug_test_string",
+                                              "displayName": "debug_test_string",
+                                              "info": {},
+                                              "type": "data",
+                                              "base": "base_simple",
+                                              "valueContext": {
+                                                "item": []
+                                              },
+                                              "attribute": {
+                                                "data": {
+                                                  "id": "data",
+                                                  "name": "data",
+                                                  "displayName": "data",
+                                                  "info": {},
+                                                  "type": "variable",
+                                                  "scope": "protected",
+                                                  "dataDefinition": {
+                                                    "type": "writable",
+                                                    "criteria": "test.string;1.0.0",
+                                                    "isMultipleAllowed": false,
+                                                    "rule": []
+                                                  }
+                                                }
+                                              },
+                                              "event": {},
+                                              "attributeForData": [
+                                                "data"
+                                              ],
+                                              "ioMode": [
+                                                "IN"
+                                              ]
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "UIId",
+                                          "name": "UIId",
+                                          "displayName": "UIId",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": "5"
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "base",
+                                          "name": "base",
+                                          "displayName": "base",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": "base_simple"
+                                          },
+                                          "adapter": []
+                                        }
+                                      ],
+                                      "eventId": [],
+                                      "otherInternalValuePortsContainer": {
+                                        "valuePortGroup": [],
+                                        "idIndex": 0
+                                      },
+                                      "otherExternalValuePortsContainer": {
+                                        "valuePortGroup": [],
+                                        "idIndex": 0
+                                      },
+                                      "valueContext": {
+                                        "part": [
+                                          {
+                                            "info": {},
+                                            "type": "simple",
+                                            "partInfo": {
+                                              "name": "default",
+                                              "priority": 5
+                                            },
+                                            "structure": [
+                                              {
+                                                "runtimeId": "6",
+                                                "structureInfo": {
+                                                  "scope": "protected"
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "info": {},
+                                            "type": "groupWithEntity",
+                                            "partInfo": {
+                                              "name": "fromParent",
+                                              "priority": 9
+                                            },
+                                            "children": [
+                                              {
+                                                "info": {},
+                                                "type": "simple",
+                                                "partInfo": {
+                                                  "name": "default",
+                                                  "priority": 5
+                                                },
+                                                "structure": [
+                                                  {
+                                                    "runtimeId": "4",
+                                                    "structureInfo": {
+                                                      "scope": "public"
+                                                    }
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "info": {},
+                                                "type": "groupWithEntity",
+                                                "partInfo": {
+                                                  "name": "fromParent",
+                                                  "priority": 9
+                                                },
+                                                "children": [
+                                                  {
+                                                    "info": {},
+                                                    "type": "groupWithEntity",
+                                                    "partInfo": {
+                                                      "name": "fromParent",
+                                                      "priority": 9
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "info": {},
+                                                        "type": "simple",
+                                                        "partInfo": {
+                                                          "name": "default",
+                                                          "priority": 5
+                                                        },
+                                                        "structure": [
+                                                          {
+                                                            "runtimeId": "2",
+                                                            "structureInfo": {
+                                                              "scope": "public"
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ],
+                                        "valueStructureRuntimeIdByName": {
+                                          "6": "6"
+                                        },
+                                        "valueStructureRuntimeNameById": {
+                                          "6": "6"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "adapter": []
+                                },
+                                {
+                                  "id": "ContainerElement_2",
+                                  "name": "ContainerElement_2",
+                                  "displayName": "ContainerElement_2",
+                                  "info": {
+                                    "nosliw_alias": "customtagEventSource"
+                                  },
+                                  "valueWrapper": {
+                                    "valueType": "brick",
+                                    "brick": {
+                                      "domain": "brick.manual",
+                                      "brickType": {
+                                        "brickType": "uicustomertag",
+                                        "version": "1.0.0",
+                                        "key": "uicustomertag;1.0.0"
+                                      },
+                                      "internalValuePort": {
+                                        "valuePortGroup": [
+                                          {
+                                            "id": "valueContext",
+                                            "name": "valueContext",
+                                            "displayName": "valueContext",
+                                            "info": {},
+                                            "groupType": "valueContext",
+                                            "valuePort": [
+                                              {
+                                                "id": "0",
+                                                "name": "0",
+                                                "displayName": "0",
+                                                "info": {},
+                                                "type": "valueContext",
+                                                "ioDirection": "BOTH",
+                                                "valueStructure": [
+                                                  "8",
+                                                  "4",
+                                                  "2"
+                                                ],
+                                                "valueStructureInfo": [
+                                                  {
+                                                    "valueStructureId": "8",
+                                                    "priority": 0.5
+                                                  },
+                                                  {
+                                                    "valueStructureId": "4",
+                                                    "priority": 0.55
+                                                  },
+                                                  {
+                                                    "valueStructureId": "2",
+                                                    "priority": 0.9954999999999999
+                                                  }
+                                                ]
+                                              }
+                                            ],
+                                            "idIndex": 1
+                                          }
+                                        ],
+                                        "idIndex": 0
+                                      },
+                                      "externalValuePort": {
+                                        "valuePortGroup": [
+                                          {
+                                            "id": "valueContext",
+                                            "name": "valueContext",
+                                            "displayName": "valueContext",
+                                            "info": {},
+                                            "groupType": "valueContext",
+                                            "valuePort": [
+                                              {
+                                                "id": "0",
+                                                "name": "0",
+                                                "displayName": "0",
+                                                "info": {},
+                                                "type": "valueContext",
+                                                "ioDirection": "BOTH",
+                                                "valueStructure": [
+                                                  "4",
+                                                  "2"
+                                                ],
+                                                "valueStructureInfo": [
+                                                  {
+                                                    "valueStructureId": "4",
+                                                    "priority": 0.55
+                                                  },
+                                                  {
+                                                    "valueStructureId": "2",
+                                                    "priority": 0.9954999999999999
+                                                  }
+                                                ]
+                                              }
+                                            ],
+                                            "idIndex": 1
+                                          }
+                                        ],
+                                        "idIndex": 0
+                                      },
+                                      "attribute": [
+                                        {
+                                          "id": "UIContent",
+                                          "name": "UIContent",
+                                          "displayName": "UIContent",
+                                          "info": {
+                                            "nosliw_alias": "tagEventSource1"
+                                          },
+                                          "valueWrapper": {
+                                            "valueType": "brick",
+                                            "brick": {
+                                              "domain": "brick.manual",
+                                              "brickType": {
+                                                "brickType": "uicontent",
+                                                "version": "1.0.0",
+                                                "key": "uicontent;1.0.0"
+                                              },
+                                              "internalValuePort": {
+                                                "valuePortGroup": [
+                                                  {
+                                                    "id": "valueContext",
+                                                    "name": "valueContext",
+                                                    "displayName": "valueContext",
+                                                    "info": {},
+                                                    "groupType": "valueContext",
+                                                    "valuePort": [
+                                                      {
+                                                        "id": "0",
+                                                        "name": "0",
+                                                        "displayName": "0",
+                                                        "info": {},
+                                                        "type": "valueContext",
+                                                        "ioDirection": "BOTH",
+                                                        "valueStructure": [
+                                                          "10",
+                                                          "8",
+                                                          "4",
+                                                          "2"
+                                                        ],
+                                                        "valueStructureInfo": [
+                                                          {
+                                                            "valueStructureId": "10",
+                                                            "priority": 0.5
+                                                          },
+                                                          {
+                                                            "valueStructureId": "8",
+                                                            "priority": 0.55
+                                                          },
+                                                          {
+                                                            "valueStructureId": "4",
+                                                            "priority": 0.9550000000000001
+                                                          },
+                                                          {
+                                                            "valueStructureId": "2",
+                                                            "priority": 0.9995499999999999
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "idIndex": 1
+                                                  }
+                                                ],
+                                                "idIndex": 0
+                                              },
+                                              "externalValuePort": {
+                                                "valuePortGroup": [
+                                                  {
+                                                    "id": "valueContext",
+                                                    "name": "valueContext",
+                                                    "displayName": "valueContext",
+                                                    "info": {},
+                                                    "groupType": "valueContext",
+                                                    "valuePort": [
+                                                      {
+                                                        "id": "0",
+                                                        "name": "0",
+                                                        "displayName": "0",
+                                                        "info": {},
+                                                        "type": "valueContext",
+                                                        "ioDirection": "BOTH",
+                                                        "valueStructure": [
+                                                          "4",
+                                                          "2"
+                                                        ],
+                                                        "valueStructureInfo": [
+                                                          {
+                                                            "valueStructureId": "4",
+                                                            "priority": 0.9550000000000001
+                                                          },
+                                                          {
+                                                            "valueStructureId": "2",
+                                                            "priority": 0.9995499999999999
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "idIndex": 1
+                                                  }
+                                                ],
+                                                "idIndex": 0
+                                              },
+                                              "attribute": [
+                                                {
+                                                  "id": "customerTag",
+                                                  "name": "customerTag",
+                                                  "displayName": "customerTag",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "brick",
+                                                    "brick": {
+                                                      "domain": "brick.manual",
+                                                      "brickType": {
+                                                        "brickType": "containerList",
+                                                        "version": "1.0.0",
+                                                        "key": "containerList;1.0.0"
+                                                      },
+                                                      "internalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "externalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "attribute": [
+                                                        {
+                                                          "id": "nosliw_attrIndex",
+                                                          "name": "nosliw_attrIndex",
+                                                          "displayName": "nosliw_attrIndex",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": 0
+                                                          },
+                                                          "adapter": []
+                                                        },
+                                                        {
+                                                          "id": "nosliw_attrSort",
+                                                          "name": "nosliw_attrSort",
+                                                          "displayName": "nosliw_attrSort",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": []
+                                                          },
+                                                          "adapter": []
+                                                        }
+                                                      ],
+                                                      "eventId": [],
+                                                      "otherInternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "otherExternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "valueContext": {
+                                                        "part": [],
+                                                        "valueStructureRuntimeIdByName": {},
+                                                        "valueStructureRuntimeNameById": {}
+                                                      }
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "task",
+                                                  "name": "task",
+                                                  "displayName": "task",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "brick",
+                                                    "brick": {
+                                                      "domain": "brick.manual",
+                                                      "brickType": {
+                                                        "brickType": "container",
+                                                        "version": "1.0.0",
+                                                        "key": "container;1.0.0"
+                                                      },
+                                                      "internalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "externalValuePort": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "attribute": [
+                                                        {
+                                                          "id": "nosliw_attrIndex",
+                                                          "name": "nosliw_attrIndex",
+                                                          "displayName": "nosliw_attrIndex",
+                                                          "info": {},
+                                                          "valueWrapper": {
+                                                            "valueType": "value",
+                                                            "value": 0
+                                                          },
+                                                          "adapter": []
+                                                        }
+                                                      ],
+                                                      "eventId": [],
+                                                      "otherInternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "otherExternalValuePortsContainer": {
+                                                        "valuePortGroup": [],
+                                                        "idIndex": 0
+                                                      },
+                                                      "valueContext": {
+                                                        "part": [],
+                                                        "valueStructureRuntimeIdByName": {},
+                                                        "valueStructureRuntimeNameById": {}
+                                                      }
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInContent",
+                                                  "name": "scriptExpressionInContent",
+                                                  "displayName": "scriptExpressionInContent",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInNormalTagAttribute",
+                                                  "name": "scriptExpressionInNormalTagAttribute",
+                                                  "displayName": "scriptExpressionInNormalTagAttribute",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressionInCustomerTagAttribute",
+                                                  "name": "scriptExpressionInCustomerTagAttribute",
+                                                  "displayName": "scriptExpressionInCustomerTagAttribute",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": []
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "scriptExpressions",
+                                                  "name": "scriptExpressions",
+                                                  "displayName": "scriptExpressions",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": {
+                                                      "item": {}
+                                                    }
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "tagAliasMapping",
+                                                  "name": "tagAliasMapping",
+                                                  "displayName": "tagAliasMapping",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": {}
+                                                  },
+                                                  "adapter": []
+                                                },
+                                                {
+                                                  "id": "html",
+                                                  "name": "html",
+                                                  "displayName": "html",
+                                                  "info": {},
+                                                  "valueWrapper": {
+                                                    "valueType": "value",
+                                                    "value": ""
+                                                  },
+                                                  "adapter": []
+                                                }
+                                              ],
+                                              "eventId": [],
+                                              "otherInternalValuePortsContainer": {
+                                                "valuePortGroup": [],
+                                                "idIndex": 0
+                                              },
+                                              "otherExternalValuePortsContainer": {
+                                                "valuePortGroup": [],
+                                                "idIndex": 0
+                                              },
+                                              "valueContext": {
+                                                "part": [
+                                                  {
+                                                    "info": {},
+                                                    "type": "simple",
+                                                    "partInfo": {
+                                                      "name": "default",
+                                                      "priority": 5
+                                                    },
+                                                    "structure": [
+                                                      {
+                                                        "runtimeId": "10",
+                                                        "structureInfo": {
+                                                          "scope": "protected"
+                                                        }
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "info": {},
+                                                    "type": "groupWithEntity",
+                                                    "partInfo": {
+                                                      "name": "fromParent",
+                                                      "priority": 9
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "info": {},
+                                                        "type": "simple",
+                                                        "partInfo": {
+                                                          "name": "default",
+                                                          "priority": 5
+                                                        },
+                                                        "structure": [
+                                                          {
+                                                            "runtimeId": "8",
+                                                            "structureInfo": {
+                                                              "scope": "protected"
+                                                            }
+                                                          }
+                                                        ]
+                                                      },
+                                                      {
+                                                        "info": {},
+                                                        "type": "groupWithEntity",
+                                                        "partInfo": {
+                                                          "name": "fromParent",
+                                                          "priority": 9
+                                                        },
+                                                        "children": [
+                                                          {
+                                                            "info": {},
+                                                            "type": "simple",
+                                                            "partInfo": {
+                                                              "name": "default",
+                                                              "priority": 5
+                                                            },
+                                                            "structure": [
+                                                              {
+                                                                "runtimeId": "4",
+                                                                "structureInfo": {
+                                                                  "scope": "public"
+                                                                }
+                                                              }
+                                                            ]
+                                                          },
+                                                          {
+                                                            "info": {},
+                                                            "type": "groupWithEntity",
+                                                            "partInfo": {
+                                                              "name": "fromParent",
+                                                              "priority": 9
+                                                            },
+                                                            "children": [
+                                                              {
+                                                                "info": {},
+                                                                "type": "groupWithEntity",
+                                                                "partInfo": {
+                                                                  "name": "fromParent",
+                                                                  "priority": 9
+                                                                },
+                                                                "children": [
+                                                                  {
+                                                                    "info": {},
+                                                                    "type": "simple",
+                                                                    "partInfo": {
+                                                                      "name": "default",
+                                                                      "priority": 5
+                                                                    },
+                                                                    "structure": [
+                                                                      {
+                                                                        "runtimeId": "2",
+                                                                        "structureInfo": {
+                                                                          "scope": "public"
+                                                                        }
+                                                                      }
+                                                                    ]
+                                                                  }
+                                                                ]
+                                                              }
+                                                            ]
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ],
+                                                "valueStructureRuntimeIdByName": {
+                                                  "embeded_part1": "10"
+                                                },
+                                                "valueStructureRuntimeNameById": {
+                                                  "10": "embeded_part1"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "attribute",
+                                          "name": "attribute",
+                                          "displayName": "attribute",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "attribute1": "myAttr",
+                                              "data_string": "page_public_string"
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "attributeDefinition",
+                                          "name": "attributeDefinition",
+                                          "displayName": "attributeDefinition",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "attribute1": {
+                                                "id": "attribute1",
+                                                "name": "attribute1",
+                                                "displayName": "attribute1",
+                                                "info": {},
+                                                "type": "simple",
+                                                "defaultValue": "default value for attribute1"
+                                              },
+                                              "reference_tag": {
+                                                "id": "reference_tag",
+                                                "name": "reference_tag",
+                                                "displayName": "reference_tag",
+                                                "info": {},
+                                                "type": "simple"
+                                              },
+                                              "data_string": {
+                                                "id": "data_string",
+                                                "name": "data_string",
+                                                "displayName": "data_string",
+                                                "info": {},
+                                                "type": "variable",
+                                                "scope": "protected",
+                                                "dataDefinition": {
+                                                  "type": "writable",
+                                                  "criteria": "test.string;1.0.0",
+                                                  "isMultipleAllowed": false,
+                                                  "rule": []
+                                                }
+                                              },
+                                              "data_float": {
+                                                "id": "data_float",
+                                                "name": "data_float",
+                                                "displayName": "data_float",
+                                                "info": {},
+                                                "type": "variable",
+                                                "scope": "protected",
+                                                "dataDefinition": {
+                                                  "type": "writable",
+                                                  "criteria": "test.float;1.0.0",
+                                                  "isMultipleAllowed": false,
+                                                  "rule": []
+                                                }
+                                              },
+                                              "data_array": {
+                                                "id": "data_array",
+                                                "name": "data_array",
+                                                "displayName": "data_array",
+                                                "info": {},
+                                                "type": "variable",
+                                                "scope": "protected",
+                                                "dataDefinition": {
+                                                  "type": "writable",
+                                                  "criteria": "test.array;1.0.0",
+                                                  "isMultipleAllowed": false,
+                                                  "rule": []
+                                                }
+                                              },
+                                              "arrayelement": {
+                                                "id": "arrayelement",
+                                                "name": "arrayelement",
+                                                "displayName": "arrayelement",
+                                                "info": {},
+                                                "type": "simple",
+                                                "defaultValue": "element"
+                                              },
+                                              "arrayindex": {
+                                                "id": "arrayindex",
+                                                "name": "arrayindex",
+                                                "displayName": "arrayindex",
+                                                "info": {},
+                                                "type": "simple",
+                                                "defaultValue": "index"
+                                              }
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "metaData",
+                                          "name": "metaData",
+                                          "displayName": "metaData",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "nosliw_alias": "customtagEventSource",
+                                              "uiTagName": "debug_test",
+                                              "uiTagVersion": "1.0.0"
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "style",
+                                          "name": "style",
+                                          "displayName": "style",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value"
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "tagDefinition",
+                                          "name": "tagDefinition",
+                                          "displayName": "tagDefinition",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": {
+                                              "id": "debug_test",
+                                              "name": "debug_test",
+                                              "displayName": "debug_test",
+                                              "info": {},
+                                              "type": "data",
+                                              "valueContext": {
+                                                "item": [
+                                                  {
+                                                    "status": "disabled",
+                                                    "info": {},
+                                                    "valueStructure": {
+                                                      "root": {
+                                                        "element": {
+                                                          "id": "element",
+                                                          "name": "element",
+                                                          "displayName": "element",
+                                                          "info": {
+                                                            "instantiate": "manual"
+                                                          },
+                                                          "definition": {
+                                                            "type": "relativeForDefinition",
+                                                            "processed": "false",
+                                                            "reference": {
+                                                              "rootName": "undefined",
+                                                              "leafPath": "element",
+                                                              "elementPath": "undefined.element"
+                                                            }
+                                                          }
+                                                        },
+                                                        "index": {
+                                                          "id": "index",
+                                                          "name": "index",
+                                                          "displayName": "index",
+                                                          "info": {
+                                                            "instantiate": "manual"
+                                                          },
+                                                          "definition": {
+                                                            "type": "data",
+                                                            "processed": "false",
+                                                            "data": {
+                                                              "type": "writable",
+                                                              "criteria": "test.integer;1.0.0",
+                                                              "isMultipleAllowed": false,
+                                                              "rule": []
+                                                            },
+                                                            "status": "close"
+                                                          }
+                                                        }
+                                                      }
+                                                    },
+                                                    "valueStructureInfo": {
+                                                      "scope": "protected"
+                                                    }
+                                                  }
+                                                ]
+                                              },
+                                              "attribute": {
+                                                "attribute1": {
+                                                  "id": "attribute1",
+                                                  "name": "attribute1",
+                                                  "displayName": "attribute1",
+                                                  "info": {},
+                                                  "type": "simple",
+                                                  "defaultValue": "default value for attribute1"
+                                                },
+                                                "reference_tag": {
+                                                  "id": "reference_tag",
+                                                  "name": "reference_tag",
+                                                  "displayName": "reference_tag",
+                                                  "info": {},
+                                                  "type": "simple"
+                                                },
+                                                "data_string": {
+                                                  "id": "data_string",
+                                                  "name": "data_string",
+                                                  "displayName": "data_string",
+                                                  "info": {},
+                                                  "type": "variable",
+                                                  "scope": "protected",
+                                                  "dataDefinition": {
+                                                    "type": "writable",
+                                                    "criteria": "test.string;1.0.0",
+                                                    "isMultipleAllowed": false,
+                                                    "rule": []
+                                                  }
+                                                },
+                                                "data_float": {
+                                                  "id": "data_float",
+                                                  "name": "data_float",
+                                                  "displayName": "data_float",
+                                                  "info": {},
+                                                  "type": "variable",
+                                                  "scope": "protected",
+                                                  "dataDefinition": {
+                                                    "type": "writable",
+                                                    "criteria": "test.float;1.0.0",
+                                                    "isMultipleAllowed": false,
+                                                    "rule": []
+                                                  }
+                                                },
+                                                "data_array": {
+                                                  "id": "data_array",
+                                                  "name": "data_array",
+                                                  "displayName": "data_array",
+                                                  "info": {},
+                                                  "type": "variable",
+                                                  "scope": "protected",
+                                                  "dataDefinition": {
+                                                    "type": "writable",
+                                                    "criteria": "test.array;1.0.0",
+                                                    "isMultipleAllowed": false,
+                                                    "rule": []
+                                                  }
+                                                },
+                                                "arrayelement": {
+                                                  "id": "arrayelement",
+                                                  "name": "arrayelement",
+                                                  "displayName": "arrayelement",
+                                                  "info": {},
+                                                  "type": "simple",
+                                                  "defaultValue": "element"
+                                                },
+                                                "arrayindex": {
+                                                  "id": "arrayindex",
+                                                  "name": "arrayindex",
+                                                  "displayName": "arrayindex",
+                                                  "info": {},
+                                                  "type": "simple",
+                                                  "defaultValue": "index"
+                                                }
+                                              },
+                                              "event": {
+                                                "event_normal": {
+                                                  "id": "event_normal",
+                                                  "name": "event_normal",
+                                                  "displayName": "event_normal",
+                                                  "info": {},
+                                                  "dataDefinition": {
+                                                    "root": {
+                                                      "eventData": {
+                                                        "id": "eventData",
+                                                        "name": "eventData",
+                                                        "displayName": "eventData",
+                                                        "info": {},
+                                                        "definition": {
+                                                          "type": "data",
+                                                          "processed": "false",
+                                                          "data": {
+                                                            "type": "writable",
+                                                            "criteria": "test.string;1.0.0",
+                                                            "isMultipleAllowed": false,
+                                                            "rule": []
+                                                          },
+                                                          "status": "close"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                },
+                                                "eventDataValidation": {
+                                                  "id": "eventDataValidation",
+                                                  "name": "eventDataValidation",
+                                                  "displayName": "eventDataValidation",
+                                                  "info": {},
+                                                  "dataDefinition": {
+                                                    "root": {
+                                                      "result": {
+                                                        "id": "result",
+                                                        "name": "result",
+                                                        "displayName": "result",
+                                                        "info": {},
+                                                        "definition": {
+                                                          "type": "value",
+                                                          "processed": "false"
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "attributeForData": [
+                                                "data_array"
+                                              ],
+                                              "ioMode": [
+                                                "IN",
+                                                "OUT"
+                                              ]
+                                            }
+                                          },
+                                          "adapter": []
+                                        },
+                                        {
+                                          "id": "UIId",
+                                          "name": "UIId",
+                                          "displayName": "UIId",
+                                          "info": {},
+                                          "valueWrapper": {
+                                            "valueType": "value",
+                                            "value": "6"
+                                          },
+                                          "adapter": []
+                                        }
+                                      ],
+                                      "eventId": [
+                                        "1"
+                                      ],
+                                      "otherInternalValuePortsContainer": {
+                                        "valuePortGroup": [],
+                                        "idIndex": 0
+                                      },
+                                      "otherExternalValuePortsContainer": {
+                                        "valuePortGroup": [],
+                                        "idIndex": 0
+                                      },
+                                      "valueContext": {
+                                        "part": [
+                                          {
+                                            "info": {},
+                                            "type": "simple",
+                                            "partInfo": {
+                                              "name": "default",
+                                              "priority": 5
+                                            },
+                                            "structure": [
+                                              {
+                                                "runtimeId": "8",
+                                                "structureInfo": {
+                                                  "scope": "protected"
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "info": {},
+                                            "type": "groupWithEntity",
+                                            "partInfo": {
+                                              "name": "fromParent",
+                                              "priority": 9
+                                            },
+                                            "children": [
+                                              {
+                                                "info": {},
+                                                "type": "simple",
+                                                "partInfo": {
+                                                  "name": "default",
+                                                  "priority": 5
+                                                },
+                                                "structure": [
+                                                  {
+                                                    "runtimeId": "4",
+                                                    "structureInfo": {
+                                                      "scope": "public"
+                                                    }
+                                                  }
+                                                ]
+                                              },
+                                              {
+                                                "info": {},
+                                                "type": "groupWithEntity",
+                                                "partInfo": {
+                                                  "name": "fromParent",
+                                                  "priority": 9
+                                                },
+                                                "children": [
+                                                  {
+                                                    "info": {},
+                                                    "type": "groupWithEntity",
+                                                    "partInfo": {
+                                                      "name": "fromParent",
+                                                      "priority": 9
+                                                    },
+                                                    "children": [
+                                                      {
+                                                        "info": {},
+                                                        "type": "simple",
+                                                        "partInfo": {
+                                                          "name": "default",
+                                                          "priority": 5
+                                                        },
+                                                        "structure": [
+                                                          {
+                                                            "runtimeId": "2",
+                                                            "structureInfo": {
+                                                              "scope": "public"
+                                                            }
+                                                          }
+                                                        ]
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        ],
+                                        "valueStructureRuntimeIdByName": {
+                                          "8": "8"
+                                        },
+                                        "valueStructureRuntimeNameById": {
+                                          "8": "8"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "adapter": []
+                                },
+                                {
+                                  "id": "nosliw_attrIndex",
+                                  "name": "nosliw_attrIndex",
+                                  "displayName": "nosliw_attrIndex",
+                                  "info": {},
+                                  "valueWrapper": {
+                                    "valueType": "value",
+                                    "value": 0
+                                  },
+                                  "adapter": []
+                                },
+                                {
+                                  "id": "nosliw_attrSort",
+                                  "name": "nosliw_attrSort",
+                                  "displayName": "nosliw_attrSort",
+                                  "info": {},
+                                  "valueWrapper": {
+                                    "valueType": "value",
+                                    "value": [
+                                      "ContainerElement_1",
+                                      "ContainerElement_2"
+                                    ]
+                                  },
+                                  "adapter": []
+                                }
+                              ],
+                              "eventId": [],
+                              "otherInternalValuePortsContainer": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "otherExternalValuePortsContainer": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "valueContext": {
+                                "part": [],
+                                "valueStructureRuntimeIdByName": {},
+                                "valueStructureRuntimeNameById": {}
+                              }
+                            }
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "task",
+                          "name": "task",
+                          "displayName": "task",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "brick",
+                            "brick": {
+                              "domain": "brick.manual",
+                              "brickType": {
+                                "brickType": "container",
+                                "version": "1.0.0",
+                                "key": "container;1.0.0"
+                              },
+                              "internalValuePort": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "externalValuePort": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "attribute": [
+                                {
+                                  "id": "nosliw_attrIndex",
+                                  "name": "nosliw_attrIndex",
+                                  "displayName": "nosliw_attrIndex",
+                                  "info": {},
+                                  "valueWrapper": {
+                                    "valueType": "value",
+                                    "value": 0
+                                  },
+                                  "adapter": []
+                                }
+                              ],
+                              "eventId": [],
+                              "otherInternalValuePortsContainer": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "otherExternalValuePortsContainer": {
+                                "valuePortGroup": [],
+                                "idIndex": 0
+                              },
+                              "valueContext": {
+                                "part": [],
+                                "valueStructureRuntimeIdByName": {},
+                                "valueStructureRuntimeNameById": {}
+                              }
+                            }
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptExpressionInContent",
+                          "name": "scriptExpressionInContent",
+                          "displayName": "scriptExpressionInContent",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": [
+                              {
+                                "UIId": "7",
+                                "scriptId": "item0"
+                              }
+                            ]
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptExpressionInNormalTagAttribute",
+                          "name": "scriptExpressionInNormalTagAttribute",
+                          "displayName": "scriptExpressionInNormalTagAttribute",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": []
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptExpressionInCustomerTagAttribute",
+                          "name": "scriptExpressionInCustomerTagAttribute",
+                          "displayName": "scriptExpressionInCustomerTagAttribute",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": []
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptExpressions",
+                          "name": "scriptExpressions",
+                          "displayName": "scriptExpressions",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {
+                              "item": {
+                                "item0": {
+                                  "id": "item0",
+                                  "name": "item0",
+                                  "displayName": "item0",
+                                  "info": {},
+                                  "value": {
+                                    "variableInfos": {
+                                      "0": {
+                                        "variableKey": "0",
+                                        "variableId": {
+                                          "type": "valuePortVarId",
+                                          "rootElementId": {
+                                            "valuePortId": {
+                                              "valuePortSide": "internal",
+                                              "valuePortId": {
+                                                "group": "valueContext",
+                                                "name": "0"
+                                              },
+                                              "key": "_internal_valueContext.0"
+                                            },
+                                            "valueStructureId": "4",
+                                            "rootName": "page_public_string"
+                                          },
+                                          "key": "page_public_string;4"
+                                        }
+                                      }
+                                    },
+                                    "entityType": "scriptExpression",
+                                    "type": "literate",
+                                    "segment": [
+                                      {
+                                        "type": "textSeg",
+                                        "id": "1",
+                                        "content": " StringContent:"
+                                      },
+                                      {
+                                        "type": "scriptComplex",
+                                        "id": "2",
+                                        "segment": [
+                                          {
+                                            "type": "scriptSimple",
+                                            "id": "3",
+                                            "part": [
+                                              {
+                                                "variableName": "page_public_string",
+                                                "variableKey": "0"
+                                              },
+                                              ".value + \u0027 7777 \u0027 "
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "textSeg",
+                                        "id": "4",
+                                        "content": " "
+                                      }
+                                    ],
+                                    "varKeys": [],
+                                    "dataExpressionContainer": {
+                                      "item": {}
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "tagAliasMapping",
+                          "name": "tagAliasMapping",
+                          "displayName": "tagAliasMapping",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {
+                              "4": "tagEventSource"
+                            }
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "html",
+                          "name": "html",
+                          "displayName": "html",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": "\u0026lt;span\u0026gt; Hellooooooo!!!!! \u0026lt;/span\u0026gt;\u0026lt;br nosliwid\u003d\u0026quot;1\u0026quot;\u0026gt; \u0026lt;br nosliwid\u003d\u0026quot;2\u0026quot;\u0026gt;\u0026lt;span nosliwid\u003d\u0026quot;7\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026lt;br nosliwid\u003d\u0026quot;3\u0026quot;\u0026gt; \u0026lt;button nosliwid\u003d\u0026quot;4\u0026quot;\u0026gt;\u0026lt;span\u0026gt;Button to Triggue event\u0026lt;/span\u0026gt;\u0026lt;/button\u0026gt; \u0026lt;!--nosliw-debug_test reference_tag\u003d\u0026quot;uiTagName:debug_test\u0026quot;/--\u0026gt; \u0026lt;nosliw style\u003d\u0026quot;display:none;\u0026quot; nosliwid\u003d\u0026quot;5-tag-start\u0026quot;\u0026gt;\u0026lt;/nosliw\u0026gt;\u0026lt;nosliw style\u003d\u0026quot;display:none;\u0026quot; nosliwid\u003d\u0026quot;5-tag-end\u0026quot;\u0026gt;\u0026lt;/nosliw\u0026gt; \u0026lt;nosliw style\u003d\u0026quot;display:none;\u0026quot; nosliwid\u003d\u0026quot;6-tag-start\u0026quot;\u0026gt;\u0026lt;/nosliw\u0026gt;\u0026lt;nosliw style\u003d\u0026quot;display:none;\u0026quot; nosliwid\u003d\u0026quot;6-tag-end\u0026quot;\u0026gt;\u0026lt;/nosliw\u0026gt; \u0026lt;!--     \t\t\u0026lt;br\u0026gt; \t    \tarrayindex:\u0026lt;%\u003dJSON.stringify(?(index)?)%\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tarrayelement:\u0026lt;%\u003d?(element)?.value%\u0026gt;    \t\t\u0026lt;br\u0026gt; --\u0026gt; \u0026lt;!--     \t\t\u0026lt;br\u0026gt; \t    \tattribute variable:\u0026lt;%\u003d?(data_string)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tembeded_stringVar:\u0026lt;%\u003d?(embeded_stringVar)?.value + \u0027   7777 \u0027 %\u0026gt; --\u0026gt; \u0026lt;!--  \t    \t\u0026lt;nosliw-debug_test data_string\u003d\u0026quot;embeded_stringVar\u0026quot;\u0026gt; --\u0026gt; \u0026lt;!--     \t    \tembeded_stringVar:\u0026lt;%\u003d?(embeded_stringVar)?.value + \u0027   7777 \u0027 %\u0026gt; --\u0026gt; \u0026lt;!--     \t\t\u0026lt;/nosliw-debug_test\u0026gt; --\u0026gt; \u0026lt;!--  \t    \tattribute variable:\u0026lt;%\u003d?(data_string)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tembeded_stringVar:\u0026lt;%\u003d?(input_stringVar)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tinput_stringVar:\u0026lt;%\u003d?(myAttr)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \t\u0026lt;nosliw-debug_test data_string\u003d\u0026quot;input_stringVar\u0026quot;/\u0026gt; \t     --\u0026gt; \u0026lt;!--nosliw-debug_test data_string\u003d\u0026quot;page_public_string\u0026quot;/ --\u0026gt; \u0026lt;!-- \t\t\u0026lt;br\u0026gt;EXPRESSION IN ATTRIBUTE:\u0026lt;span  style\u003d\u0026quot;color:\u0026lt;%\u003d?(page_public_string)?.value\u003d\u003d\u0027red\u0027?\u0027red\u0027:\u0027blue\u0027%\u0026gt;\u0026quot;\u0026gt;Change the input below and color will change according to the value \u0026lt;/span\u0026gt; \t\t\u0026lt;br\u0026gt;\t\t\u0026lt;br\u0026gt; \t\tStringContent:\u0026lt;%\u003d?(page_public_string)?.value + \u0027   7777 \u0027 %\u0026gt;  \t\t\u0026lt;br\u0026gt; \t\tUrlContent:\u0026lt;%\u003d?(page_public_url)?.value + \u0027   7777 \u0027 %\u0026gt;   \t\t\u0026lt;nosliw-debug_test attribute1\u003d\u0026quot;myAttr\u0026quot; data_string\u003d\u0026quot;page_public_string\u0026quot;\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tembeded_stringVar:\u0026lt;%\u003d?(input_stringVar)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \tinput_stringVar:\u0026lt;%\u003d?(myAttr)?.value + \u0027   7777 \u0027 %\u0026gt;    \t\t\u0026lt;br\u0026gt;    \t\t\u0026lt;br\u0026gt; \t    \t \t    \t\u0026lt;nosliw-debug_test data_string\u003d\u0026quot;input_stringVar\u0026quot;/\u0026gt; \t    \t \t    \t  \t\t\u0026lt;/nosliw-debug_test\u0026gt;\t\t\u0026lt;br\u0026gt; \t\tFloatContent:\u0026lt;%\u003d#|?(page_public_float)?.largerThan(data:\u0026amp;(#test##float___5000)\u0026amp;).opposite()|#.value%\u0026gt;  \t \t\t\u0026lt;nosliw-debug_test_data_simple data_string\u003d\u0026quot;page_public_string\u0026quot;\u0026gt;\t\t\t\u0026lt;/nosliw-debug_test_data_simple\u0026gt;\t\t\u0026lt;br\u0026gt; \t\tUrlContent:\u0026lt;%\u003d?(page_public_url)?.value + \u0027   7777 \u0027 %\u0026gt;   --\u0026gt; \u0026lt;!-- \t\t\u0026lt;nosliw-debug_contextvalue/\u0026gt;\t\t\u0026lt;nosliw-debug_viewvariable/\u0026gt; --\u0026gt; \u0026lt;!--  --\u0026gt; \u0026lt;!--  \t\t\u0026lt;nosliw-debug_test_data_collection data_array\u003d\u0026quot;page_public_array\u0026quot;\u0026gt;\t\t\t\u0026lt;br\u0026gt; \t\t\t\u0026lt;%\u003d?(element)?.value%\u0026gt;\t\t\t\u0026lt;br\u0026gt;\t\t\tHello world!!!!!\u0026lt;%\u003dJSON.stringify(?(arrayindex)?)%\u0026gt;\t\t\t\u0026lt;br\u0026gt;\t \t\t\u0026lt;nosliw-debug_test_data_simple data_string\u003d\u0026quot;element\u0026quot;\u0026gt;\t\t\t\u0026lt;/nosliw-debug_test_data_simple\u0026gt;\t\t\u0026lt;/nosliw-debug_test_data_collection\u0026gt; --\u0026gt;"
+                          },
+                          "adapter": []
+                        }
+                      ],
+                      "eventId": [
+                        "0"
+                      ],
+                      "otherInternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "otherExternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "valueContext": {
+                        "part": [
+                          {
+                            "info": {},
+                            "type": "simple",
+                            "partInfo": {
+                              "name": "default",
+                              "priority": 5
+                            },
+                            "structure": [
+                              {
+                                "runtimeId": "4",
+                                "structureInfo": {
+                                  "scope": "public"
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "info": {},
+                            "type": "groupWithEntity",
+                            "partInfo": {
+                              "name": "fromParent",
+                              "priority": 9
+                            },
+                            "children": [
+                              {
+                                "info": {},
+                                "type": "groupWithEntity",
+                                "partInfo": {
+                                  "name": "fromParent",
+                                  "priority": 9
+                                },
+                                "children": [
+                                  {
+                                    "info": {},
+                                    "type": "simple",
+                                    "partInfo": {
+                                      "name": "default",
+                                      "priority": 5
+                                    },
+                                    "structure": [
+                                      {
+                                        "runtimeId": "2",
+                                        "structureInfo": {
+                                          "scope": "public"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "valueStructureRuntimeIdByName": {
+                          "4": "4"
+                        },
+                        "valueStructureRuntimeNameById": {
+                          "4": "4"
+                        }
+                      }
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "style",
+                  "name": "style",
+                  "displayName": "style",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value"
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "styleScript",
+                  "name": "styleScript",
+                  "displayName": "styleScript",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": ""
+                  },
+                  "adapter": []
+                }
+              ],
+              "eventId": [],
+              "otherInternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "otherExternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "valueContext": {
+                "part": [
+                  {
+                    "info": {},
+                    "type": "groupWithEntity",
+                    "partInfo": {
+                      "name": "fromParent",
+                      "priority": 9
+                    },
+                    "children": [
+                      {
+                        "info": {},
+                        "type": "simple",
+                        "partInfo": {
+                          "name": "default",
+                          "priority": 5
+                        },
+                        "structure": [
+                          {
+                            "runtimeId": "2",
+                            "structureInfo": {
+                              "scope": "public"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "valueStructureRuntimeIdByName": {},
+                "valueStructureRuntimeNameById": {}
+              }
+            }
+          },
+          "adapter": []
+        },
+        {
+          "id": "eventhandler_tag_custom-test_complex_task_script",
+          "name": "eventhandler_tag_custom-test_complex_task_script",
+          "displayName": "eventhandler_tag_custom-test_complex_task_script",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "brick",
+            "brick": {
+              "domain": "brick.manual",
+              "brickType": {
+                "brickType": "taskWrapper",
+                "version": "1.0.0",
+                "key": "taskWrapper;1.0.0"
+              },
+              "internalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "externalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "attribute": [
+                {
+                  "id": "_interpret__factory___task__",
+                  "name": "_interpret__factory___task__",
+                  "displayName": "_interpret__factory___task__",
+                  "info": {
+                    "name": "eventhandler_tag_custom-test_complex_task_script",
+                    "description": "",
+                    "status": "disabled1"
+                  },
+                  "valueWrapper": {
+                    "valueType": "brick",
+                    "brick": {
+                      "domain": "brick.manual",
+                      "brickType": {
+                        "brickType": "test_complex_task_script",
+                        "version": "1.0.0",
+                        "key": "test_complex_task_script;1.0.0"
+                      },
+                      "internalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          },
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "OUT",
+                                "valueStructure": [
+                                  "36"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "36",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "externalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          },
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "IN",
+                                "valueStructure": [
+                                  "36"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "36",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "attribute": [
+                        {
+                          "id": "variable",
+                          "name": "variable",
+                          "displayName": "variable",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {}
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptResourceId",
+                          "name": "scriptResourceId",
+                          "displayName": "scriptResourceId",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {
+                              "resourceTypeId": {
+                                "resourceType": "script",
+                                "version": "1.0.0"
+                              },
+                              "id": "*task_debug_eventhandler"
+                            }
+                          },
+                          "adapter": []
+                        }
+                      ],
+                      "eventId": [],
+                      "otherInternalValuePortsContainer": {
+                        "valuePortGroup": [
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "OUT",
+                                "valueStructure": [
+                                  "36"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "36",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 3
+                      },
+                      "otherExternalValuePortsContainer": {
+                        "valuePortGroup": [
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "IN",
+                                "valueStructure": [
+                                  "36"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "36",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 3
+                      },
+                      "valueContext": {
+                        "part": [
+                          {
+                            "info": {},
+                            "type": "groupWithEntity",
+                            "partInfo": {
+                              "name": "fromParent",
+                              "priority": 9
+                            },
+                            "children": [
+                              {
+                                "info": {},
+                                "type": "groupWithEntity",
+                                "partInfo": {
+                                  "name": "fromParent",
+                                  "priority": 9
+                                },
+                                "children": [
+                                  {
+                                    "info": {},
+                                    "type": "simple",
+                                    "partInfo": {
+                                      "name": "default",
+                                      "priority": 5
+                                    },
+                                    "structure": [
+                                      {
+                                        "runtimeId": "2",
+                                        "structureInfo": {
+                                          "scope": "public"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "valueStructureRuntimeIdByName": {},
+                        "valueStructureRuntimeNameById": {}
+                      }
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "taskType",
+                  "name": "taskType",
+                  "displayName": "taskType",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value"
+                  },
+                  "adapter": []
+                }
+              ],
+              "eventId": [],
+              "otherInternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "otherExternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "valueContext": {
+                "part": [
+                  {
+                    "info": {},
+                    "type": "groupWithEntity",
+                    "partInfo": {
+                      "name": "fromParent",
+                      "priority": 9
+                    },
+                    "children": [
+                      {
+                        "info": {},
+                        "type": "simple",
+                        "partInfo": {
+                          "name": "default",
+                          "priority": 5
+                        },
+                        "structure": [
+                          {
+                            "runtimeId": "2",
+                            "structureInfo": {
+                              "scope": "public"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "valueStructureRuntimeIdByName": {},
+                "valueStructureRuntimeNameById": {}
+              }
+            }
+          },
+          "adapter": []
+        },
+        {
+          "id": "eventhandler_tag_normal-test_complex_task_script",
+          "name": "eventhandler_tag_normal-test_complex_task_script",
+          "displayName": "eventhandler_tag_normal-test_complex_task_script",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "brick",
+            "brick": {
+              "domain": "brick.manual",
+              "brickType": {
+                "brickType": "taskWrapper",
+                "version": "1.0.0",
+                "key": "taskWrapper;1.0.0"
+              },
+              "internalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "externalValuePort": {
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.55
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
+                "idIndex": 0
+              },
+              "attribute": [
+                {
+                  "id": "_interpret__factory___task__",
+                  "name": "_interpret__factory___task__",
+                  "displayName": "_interpret__factory___task__",
+                  "info": {
+                    "name": "eventhandler_tag_normal-test_complex_task_script",
+                    "description": "",
+                    "status": "disabled1"
+                  },
+                  "valueWrapper": {
+                    "valueType": "brick",
+                    "brick": {
+                      "domain": "brick.manual",
+                      "brickType": {
+                        "brickType": "test_complex_task_script",
+                        "version": "1.0.0",
+                        "key": "test_complex_task_script;1.0.0"
+                      },
+                      "internalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          },
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "OUT",
+                                "valueStructure": [
+                                  "34"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "34",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "externalValuePort": {
+                        "valuePortGroup": [
+                          {
+                            "id": "valueContext",
+                            "name": "valueContext",
+                            "displayName": "valueContext",
+                            "info": {},
+                            "groupType": "valueContext",
+                            "valuePort": [
+                              {
+                                "id": "0",
+                                "name": "0",
+                                "displayName": "0",
+                                "info": {},
+                                "type": "valueContext",
+                                "ioDirection": "BOTH",
+                                "valueStructure": [
+                                  "2"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "2",
+                                    "priority": 0.9550000000000001
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 1
+                          },
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "IN",
+                                "valueStructure": [
+                                  "34"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "34",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 0
+                      },
+                      "attribute": [
+                        {
+                          "id": "variable",
+                          "name": "variable",
+                          "displayName": "variable",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {
+                              "eventData": {
+                                "variableKey": "eventData",
+                                "variableId": {
+                                  "type": "valuePortVarId",
+                                  "rootElementId": {
+                                    "valuePortId": {
+                                      "valuePortSide": "internal",
+                                      "valuePortId": {
+                                        "group": "group2",
+                                        "name": "event"
+                                      },
+                                      "key": "_internal_group2.event"
+                                    },
+                                    "valueStructureId": "34",
+                                    "rootName": "eventData"
+                                  },
+                                  "key": "eventData;34"
+                                }
+                              }
+                            }
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "scriptResourceId",
+                          "name": "scriptResourceId",
+                          "displayName": "scriptResourceId",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": {
+                              "resourceTypeId": {
+                                "resourceType": "script",
+                                "version": "1.0.0"
+                              },
+                              "id": "*task_debug_eventhandler"
+                            }
+                          },
+                          "adapter": []
+                        }
+                      ],
+                      "eventId": [],
+                      "otherInternalValuePortsContainer": {
+                        "valuePortGroup": [
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "OUT",
+                                "valueStructure": [
+                                  "34"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "34",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 3
+                      },
+                      "otherExternalValuePortsContainer": {
+                        "valuePortGroup": [
+                          {
+                            "id": "group2",
+                            "name": "group2",
+                            "displayName": "group2",
+                            "info": {},
+                            "groupType": "event",
+                            "valuePort": [
+                              {
+                                "id": "event",
+                                "name": "event",
+                                "displayName": "event",
+                                "info": {},
+                                "type": "event",
+                                "ioDirection": "IN",
+                                "valueStructure": [
+                                  "34"
+                                ],
+                                "valueStructureInfo": [
+                                  {
+                                    "valueStructureId": "34",
+                                    "priority": 0.0
+                                  }
+                                ]
+                              }
+                            ],
+                            "idIndex": 0
+                          }
+                        ],
+                        "idIndex": 3
+                      },
+                      "valueContext": {
+                        "part": [
+                          {
+                            "info": {},
+                            "type": "groupWithEntity",
+                            "partInfo": {
+                              "name": "fromParent",
+                              "priority": 9
+                            },
+                            "children": [
+                              {
+                                "info": {},
+                                "type": "groupWithEntity",
+                                "partInfo": {
+                                  "name": "fromParent",
+                                  "priority": 9
+                                },
+                                "children": [
+                                  {
+                                    "info": {},
+                                    "type": "simple",
+                                    "partInfo": {
+                                      "name": "default",
+                                      "priority": 5
+                                    },
+                                    "structure": [
+                                      {
+                                        "runtimeId": "2",
+                                        "structureInfo": {
+                                          "scope": "public"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "valueStructureRuntimeIdByName": {},
+                        "valueStructureRuntimeNameById": {}
+                      }
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "taskType",
+                  "name": "taskType",
+                  "displayName": "taskType",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value"
+                  },
+                  "adapter": []
+                }
+              ],
+              "eventId": [],
+              "otherInternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "otherExternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "valueContext": {
+                "part": [
+                  {
+                    "info": {},
+                    "type": "groupWithEntity",
+                    "partInfo": {
+                      "name": "fromParent",
+                      "priority": 9
+                    },
+                    "children": [
+                      {
+                        "info": {},
+                        "type": "simple",
+                        "partInfo": {
+                          "name": "default",
+                          "priority": 5
+                        },
+                        "structure": [
+                          {
+                            "runtimeId": "2",
+                            "structureInfo": {
+                              "scope": "public"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "valueStructureRuntimeIdByName": {},
+                "valueStructureRuntimeNameById": {}
+              }
+            }
+          },
+          "adapter": []
+        }
+      ],
+      "eventId": [],
+      "otherInternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "otherExternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "valueContext": {
+        "part": [
+          {
+            "info": {},
+            "type": "simple",
+            "partInfo": {
+              "name": "default",
+              "priority": 5
+            },
+            "structure": [
+              {
+                "runtimeId": "2",
+                "structureInfo": {
+                  "scope": "public"
+                }
+              }
+            ]
+          }
+        ],
+        "valueStructureRuntimeIdByName": {
+          "2": "2"
+        },
+        "valueStructureRuntimeNameById": {
+          "2": "2"
+        }
+      }
+    }
+  },
+  "valueStructureDomain": {
+    "valueStructureDefinition": {
+      "33": {
+        "root": {
+          "eventData": {
+            "id": "eventData",
+            "name": "eventData",
+            "displayName": "eventData",
+            "info": {},
+            "definition": {
+              "type": "value",
+              "processed": "false"
+            }
+          }
+        }
+      },
+      "35": {
+        "root": {
+          "eventData": {
+            "id": "eventData",
+            "name": "eventData",
+            "displayName": "eventData",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.string;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          }
+        }
+      },
+      "1": {
+        "root": {
+          "parent_public_url": {
+            "id": "parent_public_url",
+            "name": "parent_public_url",
+            "status": "disabled1",
+            "displayName": "parent_public_url",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.url;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          }
+        }
+      },
+      "3": {
+        "root": {
+          "page_public_float": {
+            "id": "page_public_float",
+            "name": "page_public_float",
+            "displayName": "page_public_float",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.float;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          },
+          "page_public_url": {
+            "id": "page_public_url",
+            "name": "page_public_url",
+            "displayName": "page_public_url",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.url;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          },
+          "page_public_string": {
+            "id": "page_public_string",
+            "name": "page_public_string",
+            "displayName": "page_public_string",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.string;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          },
+          "page_public_array": {
+            "id": "page_public_array",
+            "name": "page_public_array",
+            "displayName": "page_public_array",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.array;1.0.0%||element:test.string;1.0.0||%",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          }
+        }
+      },
+      "5": {
+        "root": {
+          "data": {
+            "id": "data",
+            "name": "data",
+            "displayName": "data",
+            "info": {},
+            "definition": {
+              "type": "relativeForValue",
+              "processed": "false",
+              "resolvedInfo": {
+                "structureId": "4",
+                "path": {
+                  "root": "page_public_string"
+                },
+                "remainPath": "",
+                "solidElement": {
+                  "type": "data",
+                  "processed": "false",
+                  "data": {
+                    "type": "writable",
+                    "criteria": "test.string;1.0.0",
+                    "isMultipleAllowed": false,
+                    "rule": []
+                  },
+                  "status": "close"
+                }
+              },
+              "link": {
+                "valuePortId": {
+                  "brickId": {
+                    "idPath": "#main.local-uipage.UIContent",
+                    "relativePath": "#parent#.#parent#"
+                  },
+                  "valuePortSide": "internal",
+                  "valuePortId": {
+                    "group": "valueContext",
+                    "name": "0"
+                  },
+                  "key": "#main.local-uipage.UIContent_internal_valueContext.0"
+                },
+                "rootName": "page_public_string",
+                "elementPath": "page_public_string"
+              },
+              "definition": {
+                "type": "data",
+                "processed": "false",
+                "data": {
+                  "type": "writable",
+                  "criteria": "test.string;1.0.0",
+                  "isMultipleAllowed": false,
+                  "rule": []
+                },
+                "status": "open"
+              },
+              "inheritDefinition": false
+            }
+          }
+        }
+      },
+      "7": {
+        "root": {
+          "data_string": {
+            "id": "data_string",
+            "name": "data_string",
+            "displayName": "data_string",
+            "info": {},
+            "definition": {
+              "type": "relativeForValue",
+              "processed": "false",
+              "resolvedInfo": {
+                "structureId": "4",
+                "path": {
+                  "root": "page_public_string"
+                },
+                "remainPath": "",
+                "solidElement": {
+                  "type": "data",
+                  "processed": "false",
+                  "data": {
+                    "type": "writable",
+                    "criteria": "test.string;1.0.0",
+                    "isMultipleAllowed": false,
+                    "rule": []
+                  },
+                  "status": "close"
+                }
+              },
+              "link": {
+                "valuePortId": {
+                  "brickId": {
+                    "idPath": "#main.local-uipage.UIContent",
+                    "relativePath": "#parent#.#parent#"
+                  },
+                  "valuePortSide": "internal",
+                  "valuePortId": {
+                    "group": "valueContext",
+                    "name": "0"
+                  },
+                  "key": "#main.local-uipage.UIContent_internal_valueContext.0"
+                },
+                "rootName": "page_public_string",
+                "elementPath": "page_public_string"
+              },
+              "definition": {
+                "type": "data",
+                "processed": "false",
+                "data": {
+                  "type": "writable",
+                  "criteria": "test.string;1.0.0",
+                  "isMultipleAllowed": false,
+                  "rule": []
+                },
+                "status": "open"
+              },
+              "inheritDefinition": false
+            }
+          }
+        }
+      },
+      "9": {
+        "root": {
+          "embeded_stringVar": {
+            "id": "embeded_stringVar",
+            "name": "embeded_stringVar",
+            "displayName": "embeded_stringVar",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.string;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          },
+          "myAttr": {
+            "id": "myAttr",
+            "name": "myAttr",
+            "displayName": "myAttr",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.string;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          }
+        }
+      }
+    },
+    "valueStructureRuntime": {
+      "34": {
+        "id": "34",
+        "name": "click",
+        "displayName": "click",
+        "info": {}
+      },
+      "36": {
+        "id": "36",
+        "name": "event_normal",
+        "displayName": "event_normal",
+        "info": {}
+      },
+      "2": {
+        "id": "2",
+        "name": "2",
+        "displayName": "2",
+        "info": {},
+        "initValue": {
+          "parent_public_url": {
+            "dataTypeId": "test.url;1.0.0",
+            "value": "default value of parent_public_url"
+          },
+          "parent_public_map": {
+            "dataTypeId": "test.map;1.0.0",
+            "value": {
+              "urlAttr": {
+                "dataTypeId": "test.url;1.0.0",
+                "value": "default value of parent_public_map.urlAttr"
+              },
+              "stringAttr": {
+                "dataTypeId": "test.string;1.0.0",
+                "value": "default value of parent_public_map.stringAttr"
+              }
+            }
+          },
+          "parent_public_string": {
+            "dataTypeId": "test.string;1.0.0",
+            "value": "default value of parent_public_string1"
+          },
+          "public_float": {
+            "dataTypeId": "test.float;1.0.0",
+            "value": "100"
+          }
+        }
+      },
+      "4": {
+        "id": "4",
+        "name": "4",
+        "displayName": "4",
+        "info": {},
+        "initValue": {
+          "page_public_string": {
+            "dataTypeId": "test.string;1.0.0",
+            "value": "default value of page_public_string1"
+          },
+          "page_public_url": {
+            "dataTypeId": "test.url;1.0.0",
+            "value": "default value of page_public_url"
+          },
+          "page_public_array": {
+            "dataTypeId": "test.array;1.0.0",
+            "value": [
+              {
+                "dataTypeId": "test.string;1.0.0",
+                "value": "This is my world 1111!"
+              },
+              {
+                "dataTypeId": "test.string;1.0.0",
+                "value": "This is my world 2222!"
+              }
+            ]
+          },
+          "page_public_float": {
+            "dataTypeId": "test.float;1.0.0",
+            "value": "100"
+          }
+        }
+      },
+      "6": {
+        "id": "6",
+        "name": "6",
+        "displayName": "6",
+        "info": {}
+      },
+      "8": {
+        "id": "8",
+        "name": "8",
+        "displayName": "8",
+        "info": {}
+      },
+      "10": {
+        "id": "10",
+        "name": "embeded_part1",
+        "displayName": "embeded_part1",
+        "info": {},
+        "initValue": {
+          "myAttr": {
+            "dataTypeId": "test.string;1.0.0",
+            "value": "default value of attribute1"
+          },
+          "embeded_stringVar": {
+            "dataTypeId": "test.string;1.0.0",
+            "value": "default value of embeded_stringVar"
+          }
+        }
+      }
+    },
+    "definitionByRuntime": {
+      "34": "33",
+      "36": "35",
+      "2": "1",
+      "4": "3",
+      "6": "5",
+      "8": "7",
+      "10": "9"
+    }
+  },
+  "dynamic": {
+    "element": {}
+  },
+  "aliasMapping": {
+    "tagEventSourceParnt": "#main.local-uipage.UIContent",
+    "customtagCommandTarget": "#main.local-uipage.UIContent.customerTag.ContainerElement_1",
+    "customtagEventSource": "#main.local-uipage.UIContent.customerTag.ContainerElement_2",
+    "tagEventSource1": "#main.local-uipage.UIContent.customerTag.ContainerElement_2.UIContent"
+  },
+  "branchBricks": {},
+  "eventProcess": {
+    "0": {
+      "eventEmitter": {
+        "emitterId": {
+          "idPath": "#main.local-uipage.UIContent",
+          "relativePath": ""
+        },
+        "eventDefinition": {
+          "id": "click",
+          "name": "click",
+          "displayName": "click",
+          "info": {},
+          "dataDefinition": {
+            "root": {
+              "eventData": {
+                "id": "eventData",
+                "name": "eventData",
+                "displayName": "eventData",
+                "info": {},
+                "definition": {
+                  "type": "value",
+                  "processed": "false"
+                }
+              }
+            }
+          }
+        },
+        "childId": "4"
+      },
+      "handlerReference": {
+        "type": "task",
+        "taskBrickPackage": {
+          "brickId": {
+            "idPath": "#main.eventhandler_tag_normal-test_complex_task_script._interpret__factory___task__",
+            "relativePath": "#parent#.#parent#.eventhandler_tag_normal-test_complex_task_script._interpret__factory___task__"
+          },
+          "adapters": [],
+          "isAdapterExplicit": false
+        }
+      }
+    },
+    "1": {
+      "eventEmitter": {
+        "emitterId": {
+          "idPath": "#main.local-uipage.UIContent.customerTag.ContainerElement_2",
+          "relativePath": ""
+        },
+        "eventDefinition": {
+          "id": "event_normal",
+          "name": "event_normal",
+          "displayName": "event_normal",
+          "info": {},
+          "dataDefinition": {
+            "root": {
+              "eventData": {
+                "id": "eventData",
+                "name": "eventData",
+                "displayName": "eventData",
+                "info": {},
+                "definition": {
+                  "type": "data",
+                  "processed": "false",
+                  "data": {
+                    "type": "writable",
+                    "criteria": "test.string;1.0.0",
+                    "isMultipleAllowed": false,
+                    "rule": []
+                  },
+                  "status": "close"
+                }
+              }
+            }
+          }
+        }
+      },
+      "handlerReference": {
+        "type": "task",
+        "taskBrickPackage": {
+          "brickId": {
+            "idPath": "#main.eventhandler_tag_custom-test_complex_task_script._interpret__factory___task__",
+            "relativePath": "#parent#.#parent#.#parent#.#parent#.eventhandler_tag_custom-test_complex_task_script._interpret__factory___task__"
+          },
+          "adapters": [],
+          "isAdapterExplicit": false
+        }
+      }
+    }
+  },
+  "eventExport": [
+    {
+      "emitterId": {
+        "idPath": "#main.local-uipage.UIContent.customerTag.ContainerElement_2",
+        "relativePath": "#main.local-uipage.UIContent.customerTag.ContainerElement_2",
+        "alias": "customtagEventSource"
+      },
+      "eventDefinition": {
+        "id": "event_normal",
+        "name": "event_normal",
+        "displayName": "event_normal",
+        "info": {}
+      }
+    },
+    {
+      "emitterId": {
+        "idPath": "#main.local-uipage.UIContent",
+        "relativePath": "#main.local-uipage.UIContent",
+        "alias": "tagEventSourceParnt"
+      },
+      "eventDefinition": {
+        "id": "click",
+        "name": "click",
+        "displayName": "click",
+        "info": {}
+      },
+      "childId": "tagEventSource"
+    }
+  ],
+  "commandExport": {
+    "setData": {
+      "definition": {
+        "id": "setData",
+        "name": "setData",
+        "displayName": "setData",
+        "info": {}
+      },
+      "handler": {
+        "type": "command",
+        "brickId": {
+          "idPath": "#main.local-uipage.UIContent.customerTag.ContainerElement_1",
+          "relativePath": "#main.local-uipage.UIContent.customerTag.ContainerElement_1",
+          "alias": "customtagCommandTarget"
+        },
+        "commandName": "setData"
+      }
+    }
+  },
+  "exportResource": [
+    {
+      "id": "default",
+      "name": "default",
+      "displayName": "default",
+      "info": {},
+      "pathFromRoot": "#main"
+    }
+  ]
+}

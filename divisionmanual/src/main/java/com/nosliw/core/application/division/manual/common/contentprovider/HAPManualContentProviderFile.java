@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core;
+package com.nosliw.core.application.division.manual.common.contentprovider;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;

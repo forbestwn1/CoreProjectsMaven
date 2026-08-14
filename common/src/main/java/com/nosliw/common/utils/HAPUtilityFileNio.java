@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.nosliw.common.serialization.HAPUtilityJson;
 
@@ -25,6 +26,22 @@ public class HAPUtilityFileNio {
 		return null;
 	}
 	
+	public static void deletePath(Path pathToBeDeleted) {
+		if(isPathExists(pathToBeDeleted)) {
+			try (Stream<Path> walk = Files.walk(pathToBeDeleted)) {
+	            walk.sorted(Comparator.reverseOrder())
+	                .forEach(path -> {
+	                    try {
+	                        Files.delete(path);
+	                    } catch (IOException e) {
+	                        System.err.printf("Failed to delete %s: %s%n", path, e.getMessage());
+	                    }
+	                });
+	        } catch (IOException e) {
+	            System.err.println("Failed to walk the path: " + e.getMessage());
+	        }
+		}
+	}
 	
 	public static String readFile(Path path, String...subPath){
 		try {
@@ -44,6 +61,7 @@ public class HAPUtilityFileNio {
 		fileName = HAPUtilityFileName.getValidFileName(fileName);
 		
 		try {
+			Files.createDirectories(folder);
 			Files.writeString(HAPUtilityFileNio.buildPath(folder, fileName), content);
 			return fileName;
 		} catch (IOException e) {

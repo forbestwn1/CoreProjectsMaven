@@ -1,6 +1,7 @@
 package com.nosliw.core.application.division.story.converter.manual;
 
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignUtilityExport;
@@ -22,10 +24,12 @@ public class HAPStoryUtilityConverter {
 		return HAPStringTemplateUtil.getStringValue(brickWrapperTemplateStream, templateParms);
 	}
 
-	public static String getDesignConverToManualFolder(HAPIdBrick brickId) {
-		return HAPStoryDesignUtilityExport.getDesignFolder(brickId).getAbsolutePath()+"/manual";
+	public static Path getDesignConverToManualFolder(Path rootPath, HAPIdBrick brickId) {
+		return HAPUtilityFileNio.buildPath(HAPStoryDesignUtilityExport.getDesignFolder(brickId, rootPath), "manual");
 	}
 	
-	
-	
+	public static Path getDesignConverBundleFolder(Path rootPath, HAPIdBrick brickId) {
+		return HAPUtilityFileNio.buildPath(HAPStoryDesignUtilityExport.getDesignFolder(brickId, rootPath), "bundle");
+	}
+
 }

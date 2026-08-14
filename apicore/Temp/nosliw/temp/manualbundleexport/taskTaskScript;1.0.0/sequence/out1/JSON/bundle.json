@@ -1,0 +1,92 @@
+{
+  "mainBrick": {
+    "id": "#main",
+    "name": "#main",
+    "displayName": "#main",
+    "info": {},
+    "brick": {
+      "domain": "brick.manual",
+      "brickType": {
+        "brickType": "taskTaskScript",
+        "version": "1.0.0",
+        "key": "taskTaskScript;1.0.0"
+      },
+      "internalValuePort": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "externalValuePort": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "attribute": [
+        {
+          "id": "scriptResourceId",
+          "name": "scriptResourceId",
+          "displayName": "scriptResourceId",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "value",
+            "value": {
+              "resourceTypeId": {
+                "resourceType": "script",
+                "version": "1.0.0"
+              },
+              "id": "*task_complex_sequence_test"
+            }
+          },
+          "adapter": []
+        },
+        {
+          "id": "parm",
+          "name": "parm",
+          "displayName": "parm",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "value",
+            "value": {
+              "tasks": "tasks"
+            }
+          },
+          "adapter": []
+        }
+      ],
+      "eventId": [],
+      "otherInternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 1
+      },
+      "otherExternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 1
+      },
+      "valueContext": {
+        "part": [],
+        "valueStructureRuntimeIdByName": {},
+        "valueStructureRuntimeNameById": {}
+      }
+    }
+  },
+  "valueStructureDomain": {
+    "valueStructureDefinition": {},
+    "valueStructureRuntime": {},
+    "definitionByRuntime": {}
+  },
+  "dynamic": {
+    "element": {}
+  },
+  "aliasMapping": {},
+  "branchBricks": {},
+  "eventProcess": {},
+  "eventExport": [],
+  "commandExport": {},
+  "exportResource": [
+    {
+      "id": "default",
+      "name": "default",
+      "displayName": "default",
+      "info": {},
+      "pathFromRoot": "#main"
+    }
+  ]
+}
