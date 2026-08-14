@@ -9,8 +9,11 @@ import com.nosliw.core.resource.HAPProviderResourcePluginImp;
 @Component
 public class HAPProviderResourcePluginScript extends HAPProviderResourcePluginImp{
 
-	public HAPProviderResourcePluginScript() {
-		this.registerPlugin(HAPFactoryResourceTypeId.newInstance(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT), new HAPPluginResourceManagerScript(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT));
+	private HAPScriptConfigure m_scriptConfigure;
+	
+	public HAPProviderResourcePluginScript(HAPScriptConfigure scriptConfigure) {
+		this.m_scriptConfigure = scriptConfigure;
+		this.registerPlugin(HAPFactoryResourceTypeId.newInstance(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT), new HAPPluginResourceManagerScript(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT, this.m_scriptConfigure));
 	}
 	
 }
