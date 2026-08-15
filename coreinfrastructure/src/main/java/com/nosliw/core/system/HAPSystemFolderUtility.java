@@ -8,7 +8,6 @@ public class HAPSystemFolderUtility {
 
 	public static String getBundleExportFolder(){  return HAPSystemFolderUtility.getTempFolder()+"bundleexport/";  }
 	
-	public static String getJSLibraryFolder() {   return HAPSystemFolderUtility.getJSFolder() + "libresources/";   }
 	public static String getApplicationDataFolder(){  return HAPSystemUtility.getApplicationResourceDataFolder();  }
 
 	public static String getJSFolder(){  return HAPSystemUtility.getJSFolder();  }
@@ -20,6 +19,7 @@ public class HAPSystemFolderUtility {
 	
 	
 	
+//	public static String getJSLibraryFolder() {   return HAPSystemFolderUtility.getJSFolder() + "libresources/";   }
 //	public static String getScriptExportFolder(){  return HAPSystemFolderUtility.getTempFolder()+"scriptexport/scripts/";  }
 //	public static String getCurrentScriptExportFolder(){  return HAPSystemFolderUtility.getScriptExportFolder() + HAPSystem.id + "/";  }
 	

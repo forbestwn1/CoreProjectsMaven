@@ -1,16 +1,11 @@
 package com.nosliw.core.application.entity.js.library;
 
-import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.resource.HAPPluginResourceManager;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;
 import com.nosliw.core.resource.HAPResourceHelper;
@@ -21,7 +16,6 @@ import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManager{
 
@@ -55,44 +49,12 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 		HAPServiceData serviceData = m_staticResourceService.getStatic(staticRequest);
 		HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
 		
-//		RestTemplate restTemplate = new RestTemplate();
-//		String responsStr = restTemplate.postForObject("http://localhost:8081/nosliw/static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
-//		HAPServiceData serviceData = new HAPServiceData();
-//		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
-//		
-//		HAPStaticResponse staticResponse = new HAPStaticResponse();
-//		staticResponse.buildObject(serviceData.getData(), HAPSerializationFormat.JSON);
-		
 		List<URI> uris = new ArrayList<URI>();
 		for(HAPStaticResponseInfo responseInfo : staticResponse.getItems()) {
 			uris.add(responseInfo.getURI());
 		}
 		
 		return new HAPResourceDataJSLibrary(uris);
-		
-		
-		
-//		List<File> files = this.getLibraryFileName(libraryId);
-//		if(files==null || files.size()==0) {
-//			return null;
-//		}
-//		
-//		List<URI> uris = new ArrayList<URI>();
-//		for(File file : files){
-//			uris.add(file.toURI());
-//		}
-//		return new HAPResourceDataJSLibrary(uris);
-	}
-
-	
-	private List<File> getLibraryFileName(HAPJSLibraryId libraryId){
-		String path = libraryId.getName().replace(".", "/");
-		String folder = HAPSystemFolderUtility.getJSLibraryFolder() + path + (HAPUtilityBasic.isStringEmpty(libraryId.getVersion()) ? "" : "/" + libraryId.getVersion());
-		Set<File> files = HAPUtilityFile.getAllFiles(folder);
-		List<File> out = new ArrayList<File>(files);
-		//make file sorted by name
-		Collections.sort(out);
-		return out;
 	}
 
 }
