@@ -20,7 +20,7 @@ import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionInfoBrickLocation;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 import com.nosliw.core.application.dynamic.HAPDynamicUtilityParser;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
@@ -86,7 +86,7 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 
 			//if folder based, try to get branch info
 			//branch
-			Map<String, HAPManualDefinitionInfoBrickLocation> branchInfos = HAPManualDefinitionUtilityBrickLocation1.getBranchBrickLocationInfos(this.m_entityLocationInfo.getBasePath().getPath());
+			Map<String, HAPManualDefinitionInfoBrickLocation> branchInfos = HAPManualDefinitionUtilityBrickLocation.getBranchBrickLocationInfos(this.m_entityLocationInfo.getBasePath().getPath());
 			for(String branchName : branchInfos.keySet()) {
 				m_branchContents.put(branchName, buildContentInfo(branchInfos.get(branchName)));
 			}
@@ -127,7 +127,7 @@ public class HAPManualContentProviderFile implements HAPManualContentProvider{
 	
 	@Override
 	public HAPManualInfoContent getLocalBrickContent(HAPIdBrick brickId) {
-		HAPManualDefinitionInfoBrickLocation entityLocationInfo = HAPManualDefinitionUtilityBrickLocation1.getLocalBrickLocationInfo(this.m_entityLocationInfo.getBasePath().getPath(), brickId);
+		HAPManualDefinitionInfoBrickLocation entityLocationInfo = HAPManualDefinitionUtilityBrickLocation.getLocalBrickLocationInfo(this.m_entityLocationInfo.getBasePath().getPath(), brickId);
 		String content = HAPUtilityFileNio.readFile(entityLocationInfo.getFiile());
 		return new HAPManualInfoContent(content, entityLocationInfo.getFormat(), entityLocationInfo.getBrickTypeId());
 	}

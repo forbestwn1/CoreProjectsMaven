@@ -17,7 +17,7 @@ import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtilityConverter;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
@@ -58,7 +58,7 @@ public class HAPStoryManagerStory implements HAPPluginDivision{
 				manualFolder = this.m_storyDesignMan.convertDesignToManual(brickId);
 			}
 			
-			HAPManualContentProviderFile contentProvider = new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation1.buildBrickLocationInfoFromMainFolder(brickId.getBrickTypeId(), manualFolder), m_brickCriteriaMan, this.m_parseService);
+			HAPManualContentProviderFile contentProvider = new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.buildBrickLocationInfoFromMainFolder(brickId.getBrickTypeId(), manualFolder), m_brickCriteriaMan, this.m_parseService);
 			out = this.m_manulBrickManager.buildBundle(contentProvider, runtimeInfo);
 			HAPUtilityExport.exportBundle(out, bundleFolder, HAPSerializationFormat.JSON);
 		}

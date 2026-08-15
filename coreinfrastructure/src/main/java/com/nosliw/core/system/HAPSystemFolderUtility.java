@@ -4,21 +4,21 @@ public class HAPSystemFolderUtility {
 	
 
 	
-	public static String getTempFolder(){		return HAPSystemUtility.getTempFolder();	}
+//	public static String getTempFolder(){		return HAPSystemUtility.getTempFolder();	}
 
-	public static String getBundleExportFolder(){  return HAPSystemFolderUtility.getTempFolder()+"bundleexport/";  }
 	
-	public static String getApplicationDataFolder(){  return HAPSystemUtility.getApplicationResourceDataFolder();  }
+//	public static String getApplicationDataFolder(){  return HAPSystemUtility.getApplicationResourceDataFolder();  }
 
-	public static String getJSFolder(){  return HAPSystemUtility.getJSFolder();  }
-	public static String getNosliwJSFolder(String lib){  return getJSFolder()+"libresources/nosliw/"+lib+"/";  }
-	public static String getServiceInterfaceFolder(){  return getApplicationDataFolder() + "serviceinterface/";  }
+//	public static String getServiceInterfaceFolder(){  return getApplicationDataFolder() + "serviceinterface/";  }
 
-	public static String getManualBrickBaseFolder() {    return getApplicationDataFolder();     }
+//	public static String getManualBrickBaseFolder() {    return getApplicationDataFolder();     }
 
 	
 	
+//	public static String getJSFolder(){  return HAPSystemUtility.getJSFolder();  }
+//	public static String getNosliwJSFolder(String lib){  return getJSFolder()+"libresources/nosliw/"+lib+"/";  }
 	
+//	public static String getBundleExportFolder(){  return HAPSystemFolderUtility.getTempFolder()+"bundleexport/";  }
 //	public static String getJSLibraryFolder() {   return HAPSystemFolderUtility.getJSFolder() + "libresources/";   }
 //	public static String getScriptExportFolder(){  return HAPSystemFolderUtility.getTempFolder()+"scriptexport/scripts/";  }
 //	public static String getCurrentScriptExportFolder(){  return HAPSystemFolderUtility.getScriptExportFolder() + HAPSystem.id + "/";  }

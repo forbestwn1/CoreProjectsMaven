@@ -13,7 +13,6 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
-import com.nosliw.core.application.entity.taskinterface.HAPManagerTaskInterface;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -30,20 +29,14 @@ public class HAPManagerService{
 	//all service runtime
 	private Map<String, HAPInstanceService> m_serviceInstances;
 	
-	private HAPManagerTaskInterface m_serviceInterfaceMan;
-	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
 	
-	public HAPManagerService(HAPManagerTaskInterface serviceInterfaceMan){
-		this.m_serviceInterfaceMan = serviceInterfaceMan;
+	public HAPManagerService(){
 //		this.m_servicesInfo = new LinkedHashMap<String, HAPInfoService>();
 		this.m_serviceInstances = new LinkedHashMap<String, HAPInstanceService>();
 		this.m_serviceFactorys = new LinkedHashMap<String, HAPFactoryService>();
 	}
-	
-
-	public HAPManagerTaskInterface getServiceInterfaceManager() { 	return this.m_serviceInterfaceMan;	}
 	
 	public void registerServiceInfo(HAPInfoService serviceInfo){	this.getAllServicesInfo().put(serviceInfo.getServiceProfileInfo().getId(), serviceInfo);	}
 	

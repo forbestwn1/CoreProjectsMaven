@@ -1,13 +1,14 @@
 package com.nosliw.core.application.entity.script;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
@@ -15,10 +16,12 @@ import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 @Component
 public class HAPPluginDivisionScript implements HAPPluginDivision{
+
+	@Autowired
+	private HAPScriptConfigure m_scriptConfigure;
 
 	public HAPPluginDivisionScript() {
 	}
@@ -30,9 +33,8 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPIdBrickType brickTypeId = brickId.getBrickTypeId();
 		
-		String scriptFileName = HAPSystemFolderUtility.getManualBrickBaseFolder() + brickTypeId.getBrickType() + "/" + brickId.getId() + ".js";
-		File scriptFile = new File(scriptFileName);
-		String script = HAPUtilityFile.readFile(scriptFile);
+		Path scriptFile = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getPath()), brickTypeId.getBrickType(), brickId.getId() + ".js");
+		String script = HAPUtilityFileNio.readFile(scriptFile);
 
 		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId, this.getDivisionName());
 		scriptBrick.setScript(script);

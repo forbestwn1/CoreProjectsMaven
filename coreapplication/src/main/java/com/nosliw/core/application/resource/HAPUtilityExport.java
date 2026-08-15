@@ -1,7 +1,8 @@
 package com.nosliw.core.application.resource;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,42 +13,46 @@ import java.util.Set;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.system.HAPSystem;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 public class HAPUtilityExport {
 
 	private static final String SESSIONID = "sessionId";
 	
-	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle) {
-		exportBundle(resourceId, bundle, HAPSystem.id);
+	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle, Path exportRootPath) {
+		exportBundle(resourceId, bundle, HAPSystem.id, exportRootPath);
 	}
 	
-	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle, String sessionId) {
-		String mainFolderSession = getResourceFolder(getRootFolderSession(sessionId), resourceId);
+	public static void exportBundle(HAPResourceIdSimple resourceId, HAPBundleForBrick bundle, String sessionId, Path exportRootPath) {
+		Path mainFolderSession = getResourceFolder(getRootFolderSession(exportRootPath, sessionId), resourceId);
 		exportBundleToFolder(bundle, mainFolderSession);
 		
-		String rootFolderTmp = getRootFolderTemp(sessionId);
-		String mailFolderTemp = getResourceFolder(rootFolderTmp, resourceId);
+		Path rootFolderTmp = getRootFolderTemp(sessionId, exportRootPath);
+		Path mailFolderTemp = getResourceFolder(rootFolderTmp, resourceId);
 		exportBundleToFolder(bundle, mailFolderTemp);
 	}
 	
-	private static String getResourceFolder(String baseFolder, HAPResourceIdSimple resourceId) {
-		return baseFolder + "/" + resourceId.toStringValue(HAPSerializationFormat.LITERATE).replaceAll("[^a-zA-Z0-9-_\\.]", "_");
+	private static Path getResourceFolder(Path baseFolder, HAPResourceIdSimple resourceId) {
+		return HAPUtilityFileNio.buildPath(baseFolder, resourceId.toStringValue(HAPSerializationFormat.LITERATE).replaceAll("[^a-zA-Z0-9-_\\.]", "_"));
 	}
 
-	private static String getRootFolderTemp(String sessionId){
-		String tempFolder = HAPUtilityFile.buildFullFolderPath(HAPSystemFolderUtility.getBundleExportFolder(), "temp");
-		String infoFilePath = tempFolder+"/info.properties";
+	private static Path getRootFolderSession(Path exportRootPath, String sessionId){  
+		return HAPUtilityFileNio.buildPath(exportRootPath, sessionId);
+	}
+
+	private static Path getRootFolderTemp(String sessionId, Path exportRootPath){
+		
+		Path tempFolder = HAPUtilityFileNio.buildPath(exportRootPath, "temp");
+		Path infoFilePath = HAPUtilityFileNio.buildPath(tempFolder, "info.properties");
 		
 		String si = null; 
 		try {
 			Properties prop = new Properties();
-			FileInputStream inputStream = new FileInputStream(infoFilePath);
+			InputStream inputStream = Files.newInputStream(infoFilePath);
 			prop.load(inputStream);
 			si = prop.getProperty(SESSIONID);
 			inputStream.close();
@@ -56,40 +61,34 @@ public class HAPUtilityExport {
 //			e.printStackTrace();
 		}
 
-		String out = null;
+		Path out = null;
 		if(!sessionId.equals(si)) {
-			HAPUtilityFile.deleteFolder(tempFolder);
-			out = HAPUtilityFile.getValidFolder(tempFolder);
-			
+			HAPUtilityFileNio.deletePath(tempFolder);
+			out = HAPUtilityFileNio.getOrCreateFolder(tempFolder);
 			try {
 				Properties prop = new Properties();
 				prop.setProperty(SESSIONID, sessionId);
-				prop.store(new FileOutputStream(infoFilePath), null);
+				prop.store(Files.newOutputStream(infoFilePath), null);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 		else {
-			out = HAPUtilityFile.getValidFolder(tempFolder);
+			out = tempFolder;
 		}
 		return out;
 	}
 	
-	private static String getRootFolderSession(String sessionId){  
-		return HAPUtilityFile.getValidFolder(HAPUtilityFile.buildFullFolderPath(HAPSystemFolderUtility.getBundleExportFolder(), sessionId+""));  
-	}
-
-	
-	private static void exportBundleToFolder(HAPBundleForBrick bundle, String bundleFolder) {
-		HAPUtilityFile.deleteFolder(bundleFolder);
+	private static void exportBundleToFolder(HAPBundleForBrick bundle, Path bundleFolder) {
+		HAPUtilityFileNio.deletePath(bundleFolder);
 		
 		//write value structure domain
 		HAPDomainValueStructure valueStructureDomain = bundle.getValueStructureDomain();
 		if(valueStructureDomain!=null) {
-			HAPUtilityFile.writeJsonFile(bundleFolder, "valuestructure.json", valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));
+			HAPUtilityFileNio.writeJsonFile(bundleFolder, "valuestructure.json", valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		} else {
-			HAPUtilityFile.writeJsonFile(bundleFolder, "valuestructure.json", "");
+			HAPUtilityFileNio.writeJsonFile(bundleFolder, "valuestructure.json", "");
 		}
 
 		//bundle infor
@@ -98,16 +97,16 @@ public class HAPUtilityExport {
 		bundleJsonMap.put(HAPBundleForBrick.ALIASMAPPING, HAPManagerSerialize.getInstance().toStringValue(bundle.getAliasMappings(), HAPSerializationFormat.JSON));
 		bundleJsonMap.put(HAPBundleForBrick.EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(bundle.getExportEvents(), HAPSerializationFormat.JSON));
 		bundleJsonMap.put(HAPBundleForBrick.EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(bundle.getCommandExorts(), HAPSerializationFormat.JSON));
-		HAPUtilityFile.writeJsonFile(bundleFolder, "bundle.json", HAPUtilityJson.buildMapJson(bundleJsonMap));
+		HAPUtilityFileNio.writeJsonFile(bundleFolder, "bundle.json", HAPUtilityJson.buildMapJson(bundleJsonMap));
 		
 		//write package definition
-		HAPUtilityFile.writeJsonFile(bundleFolder, "extra.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getExtraData(), HAPSerializationFormat.JSON));
+		HAPUtilityFileNio.writeJsonFile(bundleFolder, "extra.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getExtraData(), HAPSerializationFormat.JSON));
 		
 		//write main executable
-		HAPUtilityFile.writeJsonFile(bundleFolder, "executable.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getMainBrickWrapper(), HAPSerializationFormat.JAVASCRIPT));
+		HAPUtilityFileNio.writeJsonFile(bundleFolder, "executable.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getMainBrickWrapper(), HAPSerializationFormat.JAVASCRIPT));
 
 		//write branch executable
-		HAPUtilityFile.writeJsonFile(bundleFolder, "branches.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getBranchBrickWrappers(), HAPSerializationFormat.JAVASCRIPT));
+		HAPUtilityFileNio.writeJsonFile(bundleFolder, "branches.json", HAPManagerSerialize.getInstance().toStringValue(bundle.getBranchBrickWrappers(), HAPSerializationFormat.JAVASCRIPT));
 
 		//external complex entity dependency
 		Set<HAPResourceIdSimple> dependency = bundle.getResourceDependency();
@@ -115,7 +114,7 @@ public class HAPUtilityExport {
 		for(HAPResourceIdSimple dependencyId : dependency) {
 			dependencyArray.add(dependencyId.toStringValue(HAPSerializationFormat.LITERATE));
 		}
-		HAPUtilityFile.writeJsonFile(bundleFolder, "dependency.json", HAPUtilityJson.buildArrayJson(dependencyArray.toArray(new String[0])));
+		HAPUtilityFileNio.writeJsonFile(bundleFolder, "dependency.json", HAPUtilityJson.buildArrayJson(dependencyArray.toArray(new String[0])));
 	}
 
 /*	

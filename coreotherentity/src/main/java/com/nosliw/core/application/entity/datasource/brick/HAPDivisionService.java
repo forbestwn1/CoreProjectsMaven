@@ -15,13 +15,17 @@ import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.brick.spec.service.profile.HAPBlockServiceProfile;
-import com.nosliw.core.application.entity.datasource.HAPIdServcieInterface;
 import com.nosliw.core.application.entity.datasource.HAPManagerService;
 import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
+import com.nosliw.core.application.entity.taskinterface.HAPTaskInterfaceConfigure;
+import com.nosliw.core.application.entity.taskinterface.HAPUtilityTaskInterface;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
 public class HAPDivisionService implements HAPPluginDivision{
+
+	@Autowired
+	private HAPTaskInterfaceConfigure m_taskInterfaceConfigure;
 
 	@Autowired
     private HAPManagerService m_serviceMan;
@@ -47,7 +51,7 @@ public class HAPDivisionService implements HAPPluginDivision{
 		} 
 		else if(brickTypeId.equals(HAPEnumBrickType.SERVICEINTERFACE_100)) {
 			HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
-			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(m_serviceMan.getServiceInterfaceManager().getServiceInterface(new HAPIdServcieInterface(brickId.getId()))));
+			bundle.setMainBrickWrapper(new HAPWrapperBrickRoot(HAPUtilityTaskInterface.buildTaskInterfaceBlock(m_taskInterfaceConfigure, brickId.getId())));
 			return bundle;
 		}
 		return null;
@@ -65,15 +69,4 @@ public class HAPDivisionService implements HAPPluginDivision{
 		return blockServiceProfile;
 	}
 
-//	private HAPServiceProfile fromBlockToObjServiceProfile(HAPBlockServiceProfile blockServiceProfile, HAPRuntimeInfo runtimeInfo) {
-//		HAPServiceProfile profile = new HAPServiceProfile();
-//		blockServiceProfile.cloneToEntityInfo(profile);
-//		profile.setTags(blockServiceProfile.getTags());
-//		profile.setDisplayResource(blockServiceProfile.getDisplayResource());
-//		
-//		HAPBlockInteractiveInterfaceTask taskInterfaceBlock = (HAPBlockInteractiveInterfaceTask)HAPUtilityBrick.getBrick(blockServiceProfile.getTaskInterface(), this.m_brickManager, runtimeInfo);
-//		profile.setInterface(taskInterfaceBlock.getValue());
-//		return profile;
-//	}
-	
 }

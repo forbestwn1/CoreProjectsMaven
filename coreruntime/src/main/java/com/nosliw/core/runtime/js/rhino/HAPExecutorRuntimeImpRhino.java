@@ -313,7 +313,7 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 	@Override
 	public void close(){
 //		this.m_sciprtTracker.export();
-		HAPRhinoRuntimeUtility.exportToHtml(this.getCurrentScriptExportPath());
+//		HAPRhinoRuntimeUtility.exportToHtml(this.getCurrentScriptExportPath());
 		this.m_gatewayManager.unregisterGateway(HAPConstantShared.GATEWAY_RHINOTASKRESPONSE);
 	}
 	

@@ -32,7 +32,7 @@ import com.nosliw.core.application.division.manual.common.contentprovider.HAPMan
 import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation1;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;
@@ -127,7 +127,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 //			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
 //		}
 
-		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation1.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
 		HAPUtilityExport.exportBundle(out, this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON);
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON, m_parseService);

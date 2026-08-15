@@ -62,7 +62,7 @@ public class HAPUtilityFileNio {
 		
 		try {
 			Files.createDirectories(folder);
-			Files.writeString(HAPUtilityFileNio.buildPath(folder, fileName), content);
+			Files.writeString(HAPUtilityFileNio.buildPath(folder, fileName), content==null?"":content);
 			return fileName;
 		} catch (IOException e) {
 			e.printStackTrace();

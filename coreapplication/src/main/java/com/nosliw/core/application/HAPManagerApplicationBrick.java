@@ -24,6 +24,9 @@ import com.nosliw.core.system.HAPSystemUtility;
 @Component
 public class HAPManagerApplicationBrick {
 
+	@Autowired
+	private HAPBundleConfigure m_bundleConfigure;
+	
 	private Map<String, HAPPluginDivision> m_divisionPlugin;
 	
 	//some brick type blong to particular division
@@ -54,6 +57,8 @@ public class HAPManagerApplicationBrick {
 			}
 		}
 	}
+	
+	public HAPBundleConfigure getBundleConfigure() {     return this.m_bundleConfigure;     }
 	
 	public HAPBundleForBrick getBrickBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		String division = brickId.getDivision();

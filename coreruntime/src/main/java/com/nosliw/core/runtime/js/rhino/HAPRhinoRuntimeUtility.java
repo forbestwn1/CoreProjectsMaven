@@ -145,6 +145,8 @@ public class HAPRhinoRuntimeUtility {
 	}
 
 	private static void appendLibraryToScript(StringBuffer scriptContent, String libDir) {
+		//C:/MyWork/CoreProjects/Application/src/main/webapp/"libresources/nosliw/"+lib+"/"
+		
 		List<File> files = HAPUtilityFile.sortFiles(HAPUtilityFile.getAllFiles(HAPSystemFolderUtility.getNosliwJSFolder(libDir)));
 		for(File file : files) {
 			appendFileToScript(scriptContent, file.getAbsolutePath());
