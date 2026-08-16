@@ -1,8 +1,8 @@
 [{
 	"profile": {
-		"id": "TestServiceArray",
+		"id": "TestServiceArraySimple",
 		"status":"disabled1",
-		"name": "TestServiceArray",
+		"name": "TestServiceArraySimple",
 		"description" : "test service implemented by process",
 		"tag" : ["demo", "test", "public"],
 		"taskInterface" : {

@@ -44,12 +44,6 @@
         <version>0.0.1-SNAPSHOT</version>
         <scope>runtime</scope>
   	</dependency>
-  	<dependency>
-  		<groupId>com.nosliw</groupId>
-  		<artifactId>librarydatasource</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <scope>runtime</scope>
-  	</dependency>
   	
   	
   	<dependency>

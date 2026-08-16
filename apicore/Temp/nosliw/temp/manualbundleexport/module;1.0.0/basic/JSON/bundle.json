@@ -2170,6 +2170,14 @@
                                               },
                                               "adapters": [],
                                               "isAdapterExplicit": false
+                                            },
+                                            {
+                                              "brickId": {
+                                                "idPath": "#main.task.dataSource.brick._interpret__factory___task__",
+                                                "relativePath": "#parent#.#parent#.#parent#.dataSource.brick._interpret__factory___task__"
+                                              },
+                                              "adapters": [],
+                                              "isAdapterExplicit": false
                                             }
                                           ]
                                         }
@@ -2449,7 +2457,7 @@
                                           "valueWrapper": {
                                             "valueType": "value",
                                             "value": {
-                                              "id": "TestServiceArray"
+                                              "id": "TestServiceArraySimple"
                                             }
                                           },
                                           "adapter": []

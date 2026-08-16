@@ -11,6 +11,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
+import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
@@ -52,8 +53,6 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
-import com.nosliw.core.application.entity.datasource.HAPManagerService;
-import com.nosliw.core.application.entity.datasource.HAPServiceProfile;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
@@ -71,7 +70,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPServiceParseEntity m_entityParseService;
 	
-	private HAPManagerService m_serviceMan;
+//	private HAPManagerService m_serviceMan;
 	
 	private HAPDataTypeHelper m_dataTypeHelper;
 	
@@ -79,9 +78,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPManagerUITag m_uiTagMan;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPManagerService serviceMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan) {
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan) {
 		this.m_entityParseService = entityParseService;
-		this.m_serviceMan = serviceMan;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
 		this.m_uiTagMan = uiTagMan;

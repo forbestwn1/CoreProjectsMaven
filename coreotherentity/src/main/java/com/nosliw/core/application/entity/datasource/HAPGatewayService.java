@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
@@ -11,6 +12,9 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.datasource.HAPQueryService;
+import com.nosliw.core.application.common.datasource.HAPQueryServiceDefinition;
+import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
@@ -35,11 +39,11 @@ public class HAPGatewayService extends HAPGatewayImp{
 
 	@HAPAttribute
 	final public static String COMMAND_SEARCHDEFINITION_QUERY = "query";
-	
-	private HAPManagerService m_serviceManager;
 
-	public HAPGatewayService(HAPManagerService serviceMan){
-		this.m_serviceManager = serviceMan;
+	@Autowired
+	private HAPServiceDataSource m_dataSourceService;
+
+	public HAPGatewayService(){
 	}
 	
 	@Override
@@ -55,7 +59,8 @@ public class HAPGatewayService extends HAPGatewayImp{
 			serviceQuery.buildObject(parms.optJSONObject(COMMAND_REQUEST_QUERY), HAPSerializationFormat.JSON);
 			JSONObject parmsJson = parms.optJSONObject(COMMAND_REQUEST_PARMS);
 			Map<String, HAPData> dataSourceParms = HAPUtilityData.buildDataWrapperMapFromJson(parmsJson);
-			HAPResultInteractiveTask serviceResult = this.m_serviceManager.execute(serviceQuery, dataSourceParms);
+			
+			HAPResultInteractiveTask serviceResult = this.m_dataSourceService.execute(serviceQuery, dataSourceParms);
 			out = this.createSuccessWithObject(serviceResult);
 			break;
 		}
@@ -63,7 +68,7 @@ public class HAPGatewayService extends HAPGatewayImp{
 		{
 			HAPQueryServiceDefinition defQuery = new HAPQueryServiceDefinition();
 			defQuery.buildObject(parms.optJSONObject(COMMAND_SEARCHDEFINITION_QUERY), HAPSerializationFormat.JSON);
-			List<HAPServiceProfile> serviceDefs = this.m_serviceManager.queryDefinition(defQuery, runtimeInfo);
+			List<HAPServiceProfile> serviceDefs = this.m_dataSourceService.queryDefinition(defQuery);
 			out = this.createSuccessWithObject(serviceDefs);
 			return out;
 		}
