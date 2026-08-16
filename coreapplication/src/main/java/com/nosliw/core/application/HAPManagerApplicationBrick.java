@@ -42,14 +42,14 @@ public class HAPManagerApplicationBrick {
 		this.m_divisionPlugin = new LinkedHashMap<String, HAPPluginDivision>();
 	}
 	
-	@Autowired
+	@Autowired(required=false)
 	private void setDivisionPlugins(List<HAPPluginDivision> divisionPlugins) {
 		for(HAPPluginDivision divisionPlugin : divisionPlugins) {
 			this.registerDivisionInfo(divisionPlugin);
 		}
 	}
 	
-	@Autowired
+	@Autowired(required=false)
 	private void setBrickPluginProviders(List<HAPProviderPluginBrick> brickPluginProviders) {
 		for(HAPProviderPluginBrick pluginProvider : brickPluginProviders) {
 			for(HAPPluginBrick brickPlugin : pluginProvider.getBrickPlugins()) {
