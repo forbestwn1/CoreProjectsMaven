@@ -36,7 +36,7 @@ public class HAPGatewayBrowserLoadLibrary extends HAPGatewayImp{
 	}
 	
 	@Override
-	public String getName() {  return HAPConstantShared.GATEWAY_LOADLIBRARIES;   }
+	public String getName() {  return HAPConstantShared.GATEWAY_LOADLIBRARIES +"xxxxx";   }
 
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {

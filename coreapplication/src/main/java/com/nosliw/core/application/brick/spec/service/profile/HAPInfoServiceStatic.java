@@ -13,7 +13,6 @@ import com.nosliw.common.info.HAPEntityInfoWritableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.brick.spec.service.interfacee.HAPBlockServiceInterface;
-import com.nosliw.core.runtimeenv.HAPRuntimeEnvironment;
 
 //static information for a service. readable, query for service
 //information needed during configuration time
@@ -38,7 +37,7 @@ public class HAPInfoServiceStatic extends HAPEntityInfoWritableImp{
 	
 	public List<String> getTags(){   return this.m_tags;    }
 	
-	public void process(HAPRuntimeEnvironment runtimeEnv) {  
+	public void process() {  
 //		this.m_processedInterface = (HAPBlockServiceInterface)HAPUtilityResource.solidateResource(m_interface, runtimeEnv);
 //		this.m_interface.process(runtimeEnv);	
 	}
