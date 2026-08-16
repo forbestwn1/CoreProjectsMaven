@@ -15,6 +15,7 @@ import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBrickScript;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
@@ -36,7 +37,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 		Path scriptFile = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getPath()), brickTypeId.getBrickType(), brickId.getId() + ".js");
 		String script = HAPUtilityFileNio.readFile(scriptFile);
 
-		HAPBrickScript scriptBrick = new HAPBrickScript(brickTypeId, this.getDivisionName());
+		HAPBasicBrickScript scriptBrick = new HAPBasicBrickScript(brickTypeId, this.getDivisionName());
 		scriptBrick.setScript(script);
 		
 		HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();

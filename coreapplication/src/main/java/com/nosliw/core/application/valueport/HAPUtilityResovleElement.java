@@ -15,7 +15,6 @@ import com.nosliw.core.application.common.structure.reference.HAPConfigureResolv
 import com.nosliw.core.application.common.structure.reference.HAPUtilityResolveReference;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.xxx.application.valueport.HAPInfoElementResolve;
 
 public class HAPUtilityResovleElement {
 	

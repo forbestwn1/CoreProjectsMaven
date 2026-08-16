@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.script;
+package com.nosliw.core.application.brick.imp.basic;
 
 import java.util.List;
 
@@ -7,13 +7,14 @@ import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPWrapperValueOfValue;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
+import com.nosliw.core.application.entity.script.HAPWithScript;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
-public class HAPBrickScript extends HAPBrickImp implements HAPWithScript{
+public class HAPBasicBrickScript extends HAPBrickImp implements HAPWithScript{
 
-	public HAPBrickScript(HAPIdBrickType brickTypeId, String division) {
+	public HAPBasicBrickScript(HAPIdBrickType brickTypeId, String division) {
 		super(brickTypeId, division);
 	}
 	
