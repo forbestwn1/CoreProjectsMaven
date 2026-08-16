@@ -2,12 +2,12 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task.scri
 
 import org.json.JSONObject;
 
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 public class HAPManualPluginParserBlockTestComplexTaskScript extends HAPManualDefinitionPluginParserBrickImpComplex{
 

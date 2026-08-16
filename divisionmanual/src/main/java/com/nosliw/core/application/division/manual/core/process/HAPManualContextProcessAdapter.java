@@ -2,8 +2,8 @@ package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;

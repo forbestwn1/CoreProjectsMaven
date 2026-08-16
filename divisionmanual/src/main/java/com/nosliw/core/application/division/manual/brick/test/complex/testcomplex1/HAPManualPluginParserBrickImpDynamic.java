@@ -8,7 +8,6 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -19,6 +18,8 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserAttachment;
 import com.nosliw.core.application.division.manual.core.definition.HAPWithAttachment;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickId;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPManualPluginParserBrickImpDynamic extends HAPManualDefinitionPluginParserBrickImp{
@@ -80,7 +81,7 @@ public class HAPManualPluginParserBrickImpDynamic extends HAPManualDefinitionPlu
 		{
 			if(HAPUtilityBasic.isStringNotEmpty(str)) {
 				Pair<String, String> pair = this.parseString(str);
-				out.entityType = HAPUtilityBrickId.parseBrickTypeIdAggresive(pair.getLeft(), this.getBrickManager()); 
+				out.entityType = HAPUtilityOtherBrickId.parseBrickTypeIdAggresive(pair.getLeft(), this.getBrickManager()); 
 				str = pair.getRight();
 			}
 		}

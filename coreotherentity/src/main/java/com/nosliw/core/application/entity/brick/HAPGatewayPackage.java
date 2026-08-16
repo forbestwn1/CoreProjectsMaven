@@ -1,4 +1,4 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.entity.brick;
 
 import org.json.JSONObject;
 
@@ -6,6 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPApplicationPackage;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;

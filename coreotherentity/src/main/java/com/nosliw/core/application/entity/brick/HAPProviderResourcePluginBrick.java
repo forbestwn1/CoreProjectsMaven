@@ -1,4 +1,4 @@
-package com.nosliw.core.application.brick;
+package com.nosliw.core.application.entity.brick;
 
 import java.util.Map;
 
@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrickId;
-import com.nosliw.core.application.resource.HAPPluginResourceManagerImpBrick;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.resource.HAPFactoryResourceTypeId;
 import com.nosliw.core.resource.HAPIdResourceType;
 import com.nosliw.core.resource.HAPManagerResource;

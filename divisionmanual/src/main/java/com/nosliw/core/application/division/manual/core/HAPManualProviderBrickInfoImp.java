@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.manual.core;
 
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 public abstract class HAPManualProviderBrickInfoImp implements HAPManualProviderBrickInfo{
 

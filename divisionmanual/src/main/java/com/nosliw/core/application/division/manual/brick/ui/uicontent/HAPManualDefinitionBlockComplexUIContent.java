@@ -7,8 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-//import org.apache.commons.lang.StringEscapeUtils;
-
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;

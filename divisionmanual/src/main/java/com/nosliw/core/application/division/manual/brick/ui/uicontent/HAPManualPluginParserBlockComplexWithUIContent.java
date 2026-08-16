@@ -7,12 +7,12 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 public abstract class HAPManualPluginParserBlockComplexWithUIContent extends HAPManualDefinitionPluginParserBrickImpComplex{
 

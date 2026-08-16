@@ -1,12 +1,19 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.entity.brick;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.HAPAttributeInBrick;
+import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPHandlerBrickWrapper;
+import com.nosliw.core.application.HAPHandlerDownward;
+import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.HAPWithBrick;
 
-public class HAPUtilityBrickTraverse {
+public class HAPUtilityOtherBrickTraverse {
 
 	public static void traverseTreeWithLocalBrick(HAPBundleForBrick bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
 		traverseTree(
@@ -24,7 +31,7 @@ public class HAPUtilityBrickTraverse {
 			brickMan,
 			data);
 	}
-	
+
 	public static void traverseTree(HAPBundleForBrick bundle, String rootName, HAPHandlerDownward processor, HAPManagerApplicationBrick brickMan, Object data) {
 		Set<HAPPath> validPath = new HashSet<HAPPath>();
 		
@@ -66,38 +73,3 @@ public class HAPUtilityBrickTraverse {
 	}
 
 }
-
-
-//public static void trasversExecutableEntityTreeUpward(HAPBrick entity, HAPProcessorEntityExecutableUpward processor, Object object) {
-//HAPPath path = new HAPPath();
-//boolean result =  processor.process(entity, null, object);
-//while(result) {
-//	HAPExecutableEntity parent = entity.getParent();
-//	if(parent==null) {
-//		break;
-//	} else {
-//		result = processor.process(parent, path.appendSegment(HAPConstantShared.NAME_PARENT), processContext, object);
-//	}
-//}
-//}
-
-//traverse only entity leaves that marked as auto process
-//public static void traverseExecutableTreeAutoProcessed(HAPWrapperBrickRoot rootEntityInfo, HAPHandlerDownward processor, HAPManualContextProcess processContext) {
-//traverseExecutableEntity(
-//		rootEntityInfo, 
-//	new HAPHandlerBrickWrapper(processor) {
-//		@Override
-//		protected boolean isValidAttribute(HAPAttributeInBrick attr) {
-//			HAPManualAttribute attrDef = (HAPManualAttribute)HAPUtilityDefinitionBrick.getDefTreeNodeFromExeTreeNode(attr, processContext.getCurrentBundle());
-//			
-//			HAPUtilityDefinitionBrick.isAttributeAutoProcess(attrDef, null)
-//			
-//			if(attr.isAttributeAutoProcess()) {
-//				return true;
-//			}
-//			return false;
-//		}
-//	}, 
-//	processContext);
-//}
-

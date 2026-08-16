@@ -11,7 +11,6 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
@@ -30,6 +29,7 @@ import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefi
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualUtilityValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;

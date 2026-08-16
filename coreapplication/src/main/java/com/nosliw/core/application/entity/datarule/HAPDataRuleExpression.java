@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datarule.expression;
+package com.nosliw.core.application.entity.datarule;
 
 import java.util.Map;
 
@@ -12,8 +12,6 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPParserDataRule;
 import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 

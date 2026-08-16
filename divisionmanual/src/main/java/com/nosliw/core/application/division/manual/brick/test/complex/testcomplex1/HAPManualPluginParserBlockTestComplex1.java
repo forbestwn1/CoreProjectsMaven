@@ -1,8 +1,8 @@
 package com.nosliw.core.application.division.manual.brick.test.complex.testcomplex1;
 
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 public class HAPManualPluginParserBlockTestComplex1 extends HAPManualPluginParserBrickImpDynamic{
 

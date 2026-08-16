@@ -6,7 +6,6 @@ import java.util.Map;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrickReference;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.common.command.HAPCommandHandlerReference;
@@ -20,6 +19,7 @@ import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoo
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperBrickRoot;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.application.entity.datarule.HAPProcessorRuleInBundle;
 import com.nosliw.core.data.HAPDataTypeHelper;

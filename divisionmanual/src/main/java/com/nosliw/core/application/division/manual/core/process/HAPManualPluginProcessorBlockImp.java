@@ -6,8 +6,6 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
@@ -20,6 +18,8 @@ import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityT
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResourceId;
 
@@ -64,7 +64,7 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 			out = taskInterfaceBrick.getValue();
 		}
 		else if(type.equals(HAPConstantShared.RESOURCEID)) {
-			HAPBlockInteractiveInterfaceTask taskInterfaceBlock = (HAPBlockInteractiveInterfaceTask)HAPUtilityBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
+			HAPBlockInteractiveInterfaceTask taskInterfaceBlock = (HAPBlockInteractiveInterfaceTask)HAPUtilityOtherBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
 			out = taskInterfaceBlock.getValue();
 		}
 		return out;
@@ -78,7 +78,7 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 			out = expressionInterfaceBrick.getValue();
 		}
 		else if(type.equals(HAPConstantShared.RESOURCEID)) {
-			HAPBlockInteractiveInterfaceExpression expressionInterfaceBlock = (HAPBlockInteractiveInterfaceExpression)HAPUtilityBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
+			HAPBlockInteractiveInterfaceExpression expressionInterfaceBlock = (HAPBlockInteractiveInterfaceExpression)HAPUtilityOtherBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, processContext.getRuntimeInfo());
 			out = expressionInterfaceBlock.getValue();
 		}
 		return out;

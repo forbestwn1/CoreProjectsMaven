@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datarule.enum1;
+package com.nosliw.core.application.entity.datarule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 

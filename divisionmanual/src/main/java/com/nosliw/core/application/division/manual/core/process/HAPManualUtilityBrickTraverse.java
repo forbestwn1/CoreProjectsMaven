@@ -3,20 +3,20 @@ package com.nosliw.core.application.division.manual.core.process;
 import com.nosliw.core.application.HAPAttributeInBrick;
 import com.nosliw.core.application.HAPHandlerBrickWrapper;
 import com.nosliw.core.application.HAPHandlerDownward;
-import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWithBrick;
 import com.nosliw.core.application.HAPWrapperValue;
 import com.nosliw.core.application.division.manual.core.HAPManualUtilityBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 
 public class HAPManualUtilityBrickTraverse {
 
 	//traverse only leaves that is local complex entity
 	public static void traverseTree(HAPManualContextProcessBrick processContext, HAPHandlerDownward processor, Object data) {
-		HAPUtilityBrickTraverse.traverseTree(processContext.getCurrentBundle(), processContext.getRootBrickName(), processor, processContext.getBrickManager(), data);
+		HAPUtilityOtherBrickTraverse.traverseTree(processContext.getCurrentBundle(), processContext.getRootBrickName(), processor, processContext.getBrickManager(), data);
 	}
 
 	public static void traverseTreeWithLocalBrick(HAPManualContextProcessBrick processContext, HAPHandlerDownward processor, Object data) {
-		HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), processor, processContext.getBrickManager(), data);
+		HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), processor, processContext.getBrickManager(), data);
 	}
 
 	public static void traverseTreeWithLocalBrickComplex(HAPManualContextProcessBrick processContext, HAPHandlerDownward processor, Object data) {

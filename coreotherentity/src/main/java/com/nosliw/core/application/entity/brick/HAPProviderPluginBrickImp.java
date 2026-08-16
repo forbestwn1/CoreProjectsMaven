@@ -1,4 +1,4 @@
-package com.nosliw.core.application.brick;
+package com.nosliw.core.application.entity.brick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPInfoBrickType;
 import com.nosliw.core.application.HAPPluginBrick;
 import com.nosliw.core.application.HAPProviderPluginBrick;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.spec.expression.dataexpression.library.HAPPluginBrickDataExpressionLibrary;
 import com.nosliw.core.application.brick.spec.expression.scriptexpression.library.HAPPluginBrickScriptExpressionLibrary;
 import com.nosliw.core.application.brick.spec.service.interfacee.HAPPluginBrickServiceInterface;

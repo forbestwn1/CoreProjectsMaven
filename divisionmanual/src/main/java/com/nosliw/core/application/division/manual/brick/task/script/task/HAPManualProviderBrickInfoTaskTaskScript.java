@@ -3,13 +3,13 @@ package com.nosliw.core.application.division.manual.brick.task.script.task;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualProviderBrickInfoImp;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 @Component
 public class HAPManualProviderBrickInfoTaskTaskScript extends HAPManualProviderBrickInfoImp{

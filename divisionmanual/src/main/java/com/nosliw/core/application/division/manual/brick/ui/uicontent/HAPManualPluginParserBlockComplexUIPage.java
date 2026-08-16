@@ -7,13 +7,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualParserValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPManualPluginParserBlockComplexUIPage extends HAPManualPluginParserBlockComplexWithUIContent{

@@ -7,6 +7,7 @@ import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 
 public abstract class HAPManualPluginProcessorAdapter extends HAPManualPluginProcessorBrick{
 
@@ -44,7 +45,7 @@ public abstract class HAPManualPluginProcessorAdapter extends HAPManualPluginPro
 		
 		HAPIdBrickType brickTypeId = this.getBaseBrickType(processContext);
 		
-		if(brickTypeId!=null && HAPUtilityBrick.isBrickTask(brickTypeId, processContext.getBrickManager())){
+		if(brickTypeId!=null && HAPUtilityOtherBrick.isBrickTask(brickTypeId, processContext.getBrickManager())){
 			//base is task type, then second is parent's parent's
 			out = baseBlockPath.trimLast().getLeft().trimLast().getLeft();
 		}

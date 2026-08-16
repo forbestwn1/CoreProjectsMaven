@@ -12,11 +12,11 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.HAPValueOfDynamic;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputContainer;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickId;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
@@ -95,7 +95,7 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 
 	public static HAPManualDefinitionBrick parseBrick(JSONObject jsonObj, HAPIdBrickType brickTypeIfNotProvided, HAPManualDefinitionContextParse parseContext) {
 		Object brickTypeObj = jsonObj.opt(HAPManualDefinitionWithBrick.BRICKTYPEID);   //if entity type is defined in entity, then override provided
-		HAPIdBrickType brickTypeId = HAPUtilityBrickId.parseBrickTypeId(brickTypeObj, brickTypeIfNotProvided, parseContext.getBrickManager());
+		HAPIdBrickType brickTypeId = HAPUtilityOtherBrickId.parseBrickTypeId(brickTypeObj, brickTypeIfNotProvided, parseContext.getBrickManager());
 		
 		Object brickObj = jsonObj.opt(HAPManualDefinitionWithBrick.BRICK);
 		if(brickObj==null)
@@ -111,13 +111,13 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 
 		//try with definition
 		Object entityTypeObj = jsonObj.opt(HAPManualDefinitionWithBrick.BRICKTYPEID);   //if entity type is defined in entity, then override provided
-		HAPIdBrickType brickTypeId = HAPUtilityBrickId.parseBrickTypeId(entityTypeObj, brickTypeIfNotProvided, parseContext.getBrickManager());
+		HAPIdBrickType brickTypeId = HAPUtilityOtherBrickId.parseBrickTypeId(entityTypeObj, brickTypeIfNotProvided, parseContext.getBrickManager());
 		
 		//local entity reference
 		if(out==null) {
 			Object entityRefObj = jsonObj.opt(HAPManualDefinitionWrapperValueReferenceBrick.BRICKREFERENCE);
 			if(entityRefObj!=null) {
-				HAPIdBrick entityId = HAPUtilityBrickId.parseBrickIdAgressive(entityRefObj, brickTypeIfNotProvided, parseContext.getBrickDivision(), parseContext.getBrickManager()); 
+				HAPIdBrick entityId = HAPUtilityOtherBrickId.parseBrickIdAgressive(entityRefObj, brickTypeIfNotProvided, parseContext.getBrickDivision(), parseContext.getBrickManager()); 
 				HAPManualDefinitionBrick refBrick = parseLocalValue(entityId, parseContext);
 				out = new HAPManualDefinitionWrapperValueBrick(refBrick);
 			}

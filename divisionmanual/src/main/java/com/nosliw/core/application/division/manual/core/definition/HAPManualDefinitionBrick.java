@@ -12,8 +12,6 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPValueOfDynamic;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapper;
@@ -30,6 +28,8 @@ import com.nosliw.core.application.division.manual.brick.value.HAPManualDefiniti
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
 import com.nosliw.core.application.division.manual.brick.wrappertask.HAPManualDefinitionBlockTaskWrapper;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionUtilityValueContext;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
@@ -128,7 +128,7 @@ public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implem
 		boolean isTaskAttr = false;
 		HAPIdBrickType attrBrickTypeId = HAPManualDefinitionUtilityBrick.getBrickType(attribute.getValueWrapper());
 		if(attrBrickTypeId!=null) {
-			isTaskAttr = HAPUtilityBrick.isBrickTask(attrBrickTypeId, this.getBrickManager());
+			isTaskAttr = HAPUtilityOtherBrick.isBrickTask(attrBrickTypeId, this.getBrickManager());
 		}
 		
 		if(isTaskAttr&&this.getBrickTypeId()!=HAPEnumBrickType.TASKWRAPPER_100) {

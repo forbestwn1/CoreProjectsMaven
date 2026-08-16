@@ -9,7 +9,6 @@ import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPIdBrickType;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWrapperValue;
 import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.HAPWrapperValueOfDynamic;
@@ -29,6 +28,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueReferenceResource;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItem;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
 
 public class HAPManualUtilityProcessorInit {
@@ -121,7 +121,7 @@ public class HAPManualUtilityProcessorInit {
 	}
 	
 	private static void initBricks(HAPManualContextProcessBrick processContext) {
-		HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), new HAPHandlerDownwardImpTreeNode() {
+		HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), new HAPHandlerDownwardImpTreeNode() {
 
 			@Override
 			protected boolean processTreeNode(HAPTreeNodeBrick treeNode, Object data) {

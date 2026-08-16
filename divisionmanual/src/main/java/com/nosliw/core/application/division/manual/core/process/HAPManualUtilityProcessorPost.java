@@ -6,8 +6,8 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 
 public class HAPManualUtilityProcessorPost {
 
@@ -18,7 +18,7 @@ public class HAPManualUtilityProcessorPost {
 	private static void cleanupEmptyValueStructure(HAPManualContextProcessBrick processContext) {
 		Set<String> vsIds = processContext.getCurrentBundle().getValueStructureDomain().cleanupEmptyValueStructure();
 
-		HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), new HAPHandlerDownward() {
+		HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(processContext.getCurrentBundle(), processContext.getRootBrickName(), new HAPHandlerDownward() {
 
 			@Override
 			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {

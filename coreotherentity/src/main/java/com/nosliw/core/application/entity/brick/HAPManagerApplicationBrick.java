@@ -1,4 +1,4 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.entity.brick;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,6 +14,16 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.application.HAPApplicationPackage;
+import com.nosliw.core.application.HAPBundleConfigure;
+import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.HAPInfoBrickType;
+import com.nosliw.core.application.HAPInfoExportBrick;
+import com.nosliw.core.application.HAPPluginBrick;
+import com.nosliw.core.application.HAPProviderPluginBrick;
+import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.resource.HAPIdResourceType;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceIdEmbeded;

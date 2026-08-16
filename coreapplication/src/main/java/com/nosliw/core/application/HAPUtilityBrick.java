@@ -4,17 +4,9 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.resource.HAPInfoResourceIdNormalize;
 import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.resource.HAPUtilityResourceId;
-import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPUtilityBrick {
-
-	public static HAPBrick getBrickByResource(HAPInfoResourceIdNormalize normalizedResourceId, HAPManagerApplicationBrick brickMan, HAPRuntimeInfo runtimeInfo) {
-		HAPBundleForBrick bundle = HAPUtilityBundleForBrick.getBrickBundle(normalizedResourceId.getRootResourceId(), brickMan, runtimeInfo);
-		return getDescdentBrickLocal(bundle, normalizedResourceId.getPath(), HAPConstantShared.NAME_ROOTBRICK_MAIN);
-	}
 
 	public static HAPAttributeInBrick getAttributeInBrick(HAPBrick brick, String attrName) {
 		HAPAttributeInBrick out = null;
@@ -26,7 +18,7 @@ public class HAPUtilityBrick {
 		return out;
 	}
 
-	public static HAPIdBrickType getBrickType(HAPEntityOrReference brickOrRef, HAPManagerApplicationBrick brickManager) {
+	public static HAPIdBrickType getBrickType(HAPEntityOrReference brickOrRef) {
 		HAPIdBrickType out = null;
 		String type = brickOrRef.getEntityOrReferenceType();
 		if(type.equals(HAPConstantShared.BRICK)) {
@@ -34,18 +26,6 @@ public class HAPUtilityBrick {
 		}
 		else if(type.equals(HAPConstantShared.RESOURCEID)) {
 			out = HAPUtilityBrickId.getBrickTypeIdFromResourceTypeId(((HAPResourceId)brickOrRef).getResourceTypeId());
-		}
-		return out;
-	}
-	
-	public static HAPBrick getBrick(HAPEntityOrReference brickOrRef, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
-		HAPBrick out = null;
-		String type = brickOrRef.getEntityOrReferenceType();
-		if(type.equals(HAPConstantShared.BRICK)) {
-			out = (HAPBrick)brickOrRef;
-		}
-		else if(type.equals(HAPConstantShared.RESOURCEID)) {
-			out = HAPUtilityBrick.getBrickByResource(HAPUtilityResourceId.normalizeResourceId((HAPResourceId)brickOrRef), brickManager, runtimeInfo);			
 		}
 		return out;
 	}
@@ -93,24 +73,6 @@ public class HAPUtilityBrick {
 		}
 	}
 
-	public static boolean isBrickTask(HAPIdBrickType brickTypeId, HAPManagerApplicationBrick brickMan) {
-		HAPInfoBrickType brickTypeInfo = brickMan.getBrickTypeInfo(brickTypeId);
-		if(brickTypeInfo!=null) {
-			return brickTypeInfo.isTask();
-		}
-		return false;
-	}
-
-	public static String getBrickTaskType(HAPIdBrickType brickTypeId, HAPManagerApplicationBrick brickMan) {
-		HAPInfoBrickType brickTypeInfo = brickMan.getBrickTypeInfo(brickTypeId);
-		if(brickTypeInfo!=null) {
-			return brickTypeInfo.getTaskType();
-		}
-		return null;
-	}
-
-	
-	
 	private static HAPBrick getDescdentBrickLocal(HAPBrick brick, HAPPath path) {
 		HAPResultBrickDescentValue brickResult = getDescendantResult(brick, path);
 		if(brickResult!=null) {

@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datarule.mandatory;
+package com.nosliw.core.application.entity.datarule;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPParserDataRule;
 
 public class HAPDataRuleMandatory extends HAPDataRule{
 

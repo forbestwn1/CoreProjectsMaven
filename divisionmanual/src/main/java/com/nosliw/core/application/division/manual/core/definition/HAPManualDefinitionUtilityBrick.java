@@ -8,7 +8,6 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.HAPUtilityBundleForBrick;
@@ -19,6 +18,7 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualUtilityBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;
 import com.nosliw.core.application.division.manual.core.HAPTreeNodeBrick;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueReferenceAttachment;
 
 public class HAPManualDefinitionUtilityBrick {

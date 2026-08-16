@@ -7,7 +7,6 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
 import com.nosliw.core.application.HAPUtilityBrick;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskWrapper;
@@ -18,6 +17,8 @@ import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelativeForValue;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -71,7 +72,7 @@ public class HAPProcessorRuleInBundle {
 
     		HAPEntityOrReference ruleTaskBrickOrRef = dataRuleManager.transformDataRule(rule, valueStructureDomain);
     		taskWrapperBrick.setTask(ruleTaskBrickOrRef);
-    		taskWrapperBrick.setTaskType(HAPUtilityBrick.getBrickTaskType(HAPUtilityBrick.getBrickType(ruleTaskBrickOrRef, brickManager), brickManager));
+    		taskWrapperBrick.setTaskType(HAPUtilityOtherBrick.getBrickTaskType(HAPUtilityBrick.getBrickType(ruleTaskBrickOrRef), brickManager));
     	}
 	}
 }

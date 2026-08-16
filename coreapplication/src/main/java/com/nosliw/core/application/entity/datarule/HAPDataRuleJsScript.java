@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datarule.jsscript;
+package com.nosliw.core.application.entity.datarule;
 
 import java.util.Map;
 
@@ -10,8 +10,6 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPParserDataRule;
 
 @HAPEntityWithAttribute
 public class HAPDataRuleJsScript extends HAPDataRule{

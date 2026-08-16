@@ -16,6 +16,7 @@ import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
+import com.nosliw.core.application.entity.datarule.HAPDataRuleExpression;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.data.HAPDataTypeId;

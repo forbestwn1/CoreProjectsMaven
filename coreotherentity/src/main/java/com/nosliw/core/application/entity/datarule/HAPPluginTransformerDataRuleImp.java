@@ -11,6 +11,8 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
+import com.nosliw.core.application.entity.datarule.HAPDataRule;
+import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 
 public abstract class HAPPluginTransformerDataRuleImp implements HAPPluginTransformerDataRule{
 

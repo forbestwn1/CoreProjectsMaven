@@ -12,10 +12,10 @@ import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBrickScript;
+import com.nosliw.core.application.entity.brick.HAPPluginDivision;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

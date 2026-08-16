@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.nosliw.common.interfac.HAPTreeNode;
-import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualAdapter;
 import com.nosliw.core.application.division.manual.core.HAPManualAttributeInBrick;
@@ -16,12 +15,13 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueBrick;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 
 public class HAPManualUtilityProcessorAdapter {
 
 	public static void processAdapterInAttribute(HAPManualContextProcessBrick processContext) {
 		HAPManualManagerBrick manualBrickMan = processContext.getManualBrickManager();
-		HAPUtilityBrickTraverse.traverseTree(
+		HAPUtilityOtherBrickTraverse.traverseTree(
 				processContext.getCurrentBundle(),
 				processContext.getRootBrickName(),
 			new HAPHandlerDownwardImpTreeNode() {

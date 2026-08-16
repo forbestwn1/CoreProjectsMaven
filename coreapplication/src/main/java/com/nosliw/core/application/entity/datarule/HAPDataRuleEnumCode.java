@@ -1,11 +1,10 @@
-package com.nosliw.core.application.entity.datarule.enum1;
+package com.nosliw.core.application.entity.datarule;
 
 import java.util.Map;
 
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
 
 public class HAPDataRuleEnumCode extends HAPDataRuleEnum{
 

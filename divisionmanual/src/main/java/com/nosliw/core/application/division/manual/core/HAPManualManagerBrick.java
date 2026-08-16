@@ -21,10 +21,7 @@ import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPHandlerDownward;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPManagerApplicationBrick;
-import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBrickTraverse;
 import com.nosliw.core.application.HAPWrapperValue;
 import com.nosliw.core.application.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
@@ -38,6 +35,9 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualPluginP
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualProcessBundle;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.brick.HAPPluginDivision;
+import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -133,7 +133,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON, m_parseService);
 		if(out1!=null) {
 			for(String rootName : out1.getAllRootBrickName()) {
-				HAPUtilityBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
+				HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
 
 					@Override
 					public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {

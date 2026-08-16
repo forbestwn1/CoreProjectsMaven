@@ -13,13 +13,13 @@ import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.HAPBundleForBrick;
 import com.nosliw.core.application.HAPIdBrick;
 import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPPluginDivision;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderFile;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickLocation;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtilityConverter;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
+import com.nosliw.core.application.entity.brick.HAPPluginDivision;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

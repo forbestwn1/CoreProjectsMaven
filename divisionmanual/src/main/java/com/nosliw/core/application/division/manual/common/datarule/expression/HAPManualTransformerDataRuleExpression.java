@@ -13,7 +13,7 @@ import com.nosliw.core.application.division.manual.common.datarule.HAPManualTran
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.expression.HAPDataRuleExpression;
+import com.nosliw.core.application.entity.datarule.HAPDataRuleExpression;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 

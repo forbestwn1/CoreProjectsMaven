@@ -1,4 +1,4 @@
-package com.nosliw.core.application;
+package com.nosliw.core.application.entity.brick;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,6 +12,11 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.HAPBundleForExecute;
+import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.HAPUtilityBrickId;
+import com.nosliw.core.application.HAPUtilityBundleForExecute;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
