@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.core.application.brick.spec.test.complex.task.HAPBlockTestComplexTask;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
 

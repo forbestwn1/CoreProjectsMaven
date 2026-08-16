@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.brick.task.wrapper.dataexpre
 import org.springframework.stereotype.Component;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.task.wrapper.dataexpression.HAPBlockTaskWrapperDataExpression;
+import com.nosliw.core.application.brick.spec.task.wrapper.dataexpression.HAPBlockTaskWrapperDataExpression;
 import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBlockDataTaskWrapperDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;

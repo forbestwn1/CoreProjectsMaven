@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.test.complex.script.HAPBlockTestComplexScript;
-import com.nosliw.core.application.brick.test.complex.script.HAPExecutableVariableExpected;
-import com.nosliw.core.application.brick.test.complex.script.HAPInfoAttachmentResolve;
-import com.nosliw.core.application.brick.test.complex.script.HAPTestTaskTrigguer;
+import com.nosliw.core.application.brick.spec.test.complex.script.HAPBlockTestComplexScript;
+import com.nosliw.core.application.brick.spec.test.complex.script.HAPExecutableVariableExpected;
+import com.nosliw.core.application.brick.spec.test.complex.script.HAPInfoAttachmentResolve;
+import com.nosliw.core.application.brick.spec.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
 import com.nosliw.core.application.valueport.HAPResultReferenceResolve;

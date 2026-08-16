@@ -6,7 +6,7 @@ import java.util.Map;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.core.application.brick.spec.test.complex.task.HAPBlockTestComplexTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.valueport.HAPIdElement;
 import com.nosliw.core.application.valueport.HAPResultReferenceResolve;

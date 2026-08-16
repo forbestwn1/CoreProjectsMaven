@@ -6,7 +6,7 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.task.script.task.HAPBlockTaskTaskScript;
+import com.nosliw.core.application.brick.spec.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBlockTaskTaskScript;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;

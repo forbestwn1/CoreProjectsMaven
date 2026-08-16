@@ -3,7 +3,7 @@ package com.nosliw.core.application.common.brick.serialize.valueparser;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.task.script.task.HAPBlockTaskTaskScript;
+import com.nosliw.core.application.brick.spec.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.common.brick.serialize.HAParserPValueInAttribute;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 

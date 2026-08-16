@@ -2,8 +2,8 @@ package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.task.flow.HAPBlockTaskFlowFlow;
-import com.nosliw.core.application.brick.task.flow.HAPTaskFlowNext;
+import com.nosliw.core.application.brick.spec.task.flow.HAPBlockTaskFlowFlow;
+import com.nosliw.core.application.brick.spec.task.flow.HAPTaskFlowNext;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;

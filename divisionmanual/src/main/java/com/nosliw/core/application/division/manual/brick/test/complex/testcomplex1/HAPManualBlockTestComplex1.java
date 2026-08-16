@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.test.complex.testcomplex1.HAPBlockTestComplex1;
+import com.nosliw.core.application.brick.spec.test.complex.testcomplex1.HAPBlockTestComplex1;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
 
