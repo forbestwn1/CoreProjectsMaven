@@ -5,10 +5,10 @@ import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPUtilityBrick;
+import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskWrapper;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBrickContainer;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionDataRule;

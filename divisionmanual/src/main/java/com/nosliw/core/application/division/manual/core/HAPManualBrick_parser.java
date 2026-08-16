@@ -4,9 +4,9 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPAdapter;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPAdapter;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 import com.nosliw.core.application.common.brick.serialize.HAPParserBrick;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualValueContext;

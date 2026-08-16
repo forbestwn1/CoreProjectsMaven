@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.definition;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualDefinitionBrickWithEntityInfo extends HAPManualDefinitionBrick implements HAPEntityInfo{
 

@@ -1,7 +1,7 @@
 package com.nosliw.core.application.brick.spec.test.complex.testcomplex1;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 
 @HAPEntityWithAttribute
 public interface HAPBlockTestComplex1 extends HAPBrick{

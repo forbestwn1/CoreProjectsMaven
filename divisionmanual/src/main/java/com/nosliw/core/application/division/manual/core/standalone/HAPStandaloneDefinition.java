@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 

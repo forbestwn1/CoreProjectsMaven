@@ -2,9 +2,9 @@ package com.nosliw.core.application.division.manual.brick.wrapperbrick;
 
 import org.json.JSONObject;
 
-import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPUtilityBrickId;
 import com.nosliw.core.application.brick.wrapperbrick.HAPBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;

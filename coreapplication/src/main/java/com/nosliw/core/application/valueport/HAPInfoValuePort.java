@@ -1,6 +1,6 @@
 package com.nosliw.core.application.valueport;
 
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 
 public class HAPInfoValuePort {
 

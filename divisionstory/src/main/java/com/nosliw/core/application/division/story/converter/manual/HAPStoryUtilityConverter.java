@@ -10,7 +10,7 @@ import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignUtilityExport;
 

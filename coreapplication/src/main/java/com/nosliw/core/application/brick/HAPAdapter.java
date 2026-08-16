@@ -1,0 +1,32 @@
+package com.nosliw.core.application.brick;
+
+import java.util.Map;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.resource.HAPWithResourceDependency;
+
+@HAPEntityWithAttribute
+public abstract class HAPAdapter extends HAPEntityInfoImp implements HAPWithResourceDependency{
+
+	@HAPAttribute
+	public static final String VALUEWRAPPER = "valueWrapper";
+	
+	public abstract HAPWrapperValue getValueWrapper();
+	public abstract void setValueWrapper(HAPWrapperValue valueWrapper);
+	
+	@Override
+	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJSJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEWRAPPER, this.getValueWrapper().toStringValue(HAPSerializationFormat.JAVASCRIPT));
+	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEWRAPPER, this.getValueWrapper().toStringValue(HAPSerializationFormat.JSON));
+	}
+
+}

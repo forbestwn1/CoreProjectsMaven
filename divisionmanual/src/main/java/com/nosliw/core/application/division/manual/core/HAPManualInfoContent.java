@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.core;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualInfoContent {
 

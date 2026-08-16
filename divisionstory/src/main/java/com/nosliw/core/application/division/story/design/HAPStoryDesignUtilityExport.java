@@ -6,7 +6,7 @@ import java.util.List;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
 
 public class HAPStoryDesignUtilityExport {

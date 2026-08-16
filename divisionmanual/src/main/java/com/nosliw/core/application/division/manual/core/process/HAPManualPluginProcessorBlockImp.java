@@ -5,7 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;

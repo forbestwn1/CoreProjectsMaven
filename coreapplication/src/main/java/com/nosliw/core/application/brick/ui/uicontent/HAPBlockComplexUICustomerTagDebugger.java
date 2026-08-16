@@ -3,7 +3,7 @@ package com.nosliw.core.application.brick.ui.uicontent;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfo;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 
 @HAPEntityWithAttribute
 public interface HAPBlockComplexUICustomerTagDebugger extends HAPBrick, HAPEntityInfo{

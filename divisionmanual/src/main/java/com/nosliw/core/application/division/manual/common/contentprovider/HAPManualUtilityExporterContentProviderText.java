@@ -6,8 +6,8 @@ import java.util.Map;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 
 public class HAPManualUtilityExporterContentProviderText {

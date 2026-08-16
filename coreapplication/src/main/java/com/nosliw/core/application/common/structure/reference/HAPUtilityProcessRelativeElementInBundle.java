@@ -11,7 +11,7 @@ import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstant;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelative;

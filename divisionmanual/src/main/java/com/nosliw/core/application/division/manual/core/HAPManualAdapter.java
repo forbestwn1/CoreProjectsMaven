@@ -2,8 +2,8 @@ package com.nosliw.core.application.division.manual.core;
 
 import java.util.List;
 
-import com.nosliw.core.application.HAPAdapter;
-import com.nosliw.core.application.HAPWrapperValue;
+import com.nosliw.core.application.brick.HAPAdapter;
+import com.nosliw.core.application.brick.HAPWrapperValue;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

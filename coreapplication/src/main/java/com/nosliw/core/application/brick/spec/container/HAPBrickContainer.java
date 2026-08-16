@@ -5,8 +5,8 @@ import java.util.List;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPUtilityNosliw;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 
 //attribute: id or name of item for attribute name, otherwise, create attribute name
 @HAPEntityWithAttribute

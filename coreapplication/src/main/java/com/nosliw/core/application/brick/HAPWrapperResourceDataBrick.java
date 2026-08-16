@@ -1,0 +1,38 @@
+package com.nosliw.core.application.brick;
+
+import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.resource.HAPUtilityBrickResource;
+import com.nosliw.core.resource.HAPManagerResource;
+import com.nosliw.core.resource.HAPResourceData;
+import com.nosliw.core.resource.HAPResourceDataOrWrapper;
+import com.nosliw.core.resource.HAPWrapperResourceDataImp;
+import com.nosliw.core.runtime.HAPRuntimeInfo;
+
+public class HAPWrapperResourceDataBrick extends HAPWrapperResourceDataImp{
+
+	private HAPBundleForBrick m_bundle;
+	
+	private HAPManagerResource m_resourceManager;
+	
+	private HAPRuntimeInfo m_runtimeInfo;
+	
+	public HAPWrapperResourceDataBrick(HAPBundleForBrick bundle, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
+		this.m_bundle = bundle;
+		this.m_runtimeInfo = runtimeInfo;
+		this.m_resourceManager = resourceManager;
+	}
+	
+	@Override
+	public HAPResourceDataOrWrapper getDescendant(HAPPath path) {
+		if(path.getLength()>=2) {
+			throw new RuntimeException();
+		}
+		return HAPUtilityBrickResource.buildResourceDataBrick(this.m_bundle, path.toString(), this.m_resourceManager, this.m_runtimeInfo);
+	}
+
+	@Override
+	public HAPResourceData getResourceData() {
+		return HAPUtilityBrickResource.buildResourceDataBrick(this.m_bundle, null, this.m_resourceManager, this.m_runtimeInfo);
+	}
+
+}

@@ -1,9 +1,9 @@
 package com.nosliw.core.application.resource;
 
 import com.google.common.collect.Lists;
-import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPUtilityBundleForExecute;
+import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPUtilityBundleForExecute;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.runtime.HAPRuntimeInfo;

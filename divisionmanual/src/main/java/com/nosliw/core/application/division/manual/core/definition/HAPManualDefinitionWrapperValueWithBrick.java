@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.definition;
 import java.util.Map;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualDefinitionWrapperValueWithBrick extends HAPManualDefinitionWrapperValue implements HAPManualDefinitionWithBrick{
 

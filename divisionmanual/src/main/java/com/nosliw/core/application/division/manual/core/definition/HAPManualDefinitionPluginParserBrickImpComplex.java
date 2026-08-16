@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.manual.core.definition;
 
 import org.json.JSONObject;
 
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;

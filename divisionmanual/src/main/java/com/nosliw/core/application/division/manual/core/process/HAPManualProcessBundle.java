@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPUtilityBrickReference;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPUtilityBrickReference;
+import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
 import com.nosliw.core.application.common.command.HAPCommandHandlerReference;
 import com.nosliw.core.application.common.command.HAPCommandHandlerReferenceCommand;
 import com.nosliw.core.application.common.command.HAPCommandProcess;

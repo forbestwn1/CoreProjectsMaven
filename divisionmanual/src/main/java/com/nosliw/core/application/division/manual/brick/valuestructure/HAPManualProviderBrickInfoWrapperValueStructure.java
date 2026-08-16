@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.manual.brick.valuestructure;
 
 import org.springframework.stereotype.Component;
 
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualProviderBrickInfoImp;

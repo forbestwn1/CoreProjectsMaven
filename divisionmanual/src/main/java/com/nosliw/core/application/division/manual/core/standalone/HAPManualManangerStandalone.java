@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.core.standalone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderText;

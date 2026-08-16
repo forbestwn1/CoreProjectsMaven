@@ -1,7 +1,7 @@
 package com.nosliw.core.application.entity.brick;
 
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPWrapperResourceDataBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPWrapperResourceDataBrick;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPPluginResourceManager;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;

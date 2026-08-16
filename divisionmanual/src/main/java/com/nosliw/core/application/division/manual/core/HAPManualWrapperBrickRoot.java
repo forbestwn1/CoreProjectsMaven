@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.core;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperBrickRoot;
 
 public class HAPManualWrapperBrickRoot extends HAPWrapperBrickRoot implements HAPTreeNodeBrick{

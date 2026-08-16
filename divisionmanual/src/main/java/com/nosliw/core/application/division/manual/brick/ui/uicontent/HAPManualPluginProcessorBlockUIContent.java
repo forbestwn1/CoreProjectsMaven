@@ -5,8 +5,8 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.scriptexpressio.HAPItemInContainerScriptExpression;
 import com.nosliw.core.application.common.scriptexpressio.HAPUtilityScriptExpression;

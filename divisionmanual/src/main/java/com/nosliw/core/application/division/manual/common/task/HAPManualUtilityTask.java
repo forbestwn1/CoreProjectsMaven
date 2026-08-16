@@ -4,9 +4,9 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPDomainValueStructure;
-import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPUtilityBrick;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;

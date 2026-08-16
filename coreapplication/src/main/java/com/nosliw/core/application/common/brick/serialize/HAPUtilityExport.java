@@ -8,9 +8,9 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPWithDomain;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPUtilityExport{
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualInfoPartInValueContext;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualPartInValueContext;

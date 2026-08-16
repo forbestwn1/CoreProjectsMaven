@@ -5,9 +5,9 @@ import java.util.List;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPWrapperValue;
-import com.nosliw.core.application.HAPWrapperValueOfBrick;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPWrapperValue;
+import com.nosliw.core.application.brick.HAPWrapperValueOfBrick;
 import com.nosliw.core.resource.HAPWithResourceDependency;
 
 @HAPEntityWithAttribute

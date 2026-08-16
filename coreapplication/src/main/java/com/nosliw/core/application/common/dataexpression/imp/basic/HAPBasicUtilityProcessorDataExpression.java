@@ -3,8 +3,8 @@ package com.nosliw.core.application.common.dataexpression.imp.basic;
 import java.util.Map;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundleForExecute;
+import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPBundleForExecute;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;

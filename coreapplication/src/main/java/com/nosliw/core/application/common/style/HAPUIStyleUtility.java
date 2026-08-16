@@ -13,7 +13,7 @@ import org.w3c.dom.css.CSSStyleSheet;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;

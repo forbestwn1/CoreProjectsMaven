@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 
 public class HAPManualPartInValueContextSimple extends HAPManualPartInValueContext{
 

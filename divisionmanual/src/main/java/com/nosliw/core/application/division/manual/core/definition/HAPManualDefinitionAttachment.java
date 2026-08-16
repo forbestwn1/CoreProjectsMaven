@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.utils.HAPConstant;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualDefinitionAttachment extends HAPSerializableImp{
 

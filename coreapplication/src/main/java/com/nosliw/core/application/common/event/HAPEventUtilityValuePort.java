@@ -5,7 +5,7 @@ import java.util.HashSet;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.application.valueport.HAPUtilityValuePort;
 import com.nosliw.core.application.valueport.HAPValuePort;

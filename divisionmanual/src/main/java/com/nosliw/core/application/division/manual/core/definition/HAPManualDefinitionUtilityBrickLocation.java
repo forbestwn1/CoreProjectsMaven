@@ -13,9 +13,9 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.location.HAPPathLocationBase;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPUtilityBrickId;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPUtilityBrickId;
 
 public class HAPManualDefinitionUtilityBrickLocation {
 

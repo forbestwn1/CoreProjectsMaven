@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskWrapperDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;

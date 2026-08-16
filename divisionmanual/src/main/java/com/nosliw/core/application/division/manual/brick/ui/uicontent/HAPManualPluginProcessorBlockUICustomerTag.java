@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;

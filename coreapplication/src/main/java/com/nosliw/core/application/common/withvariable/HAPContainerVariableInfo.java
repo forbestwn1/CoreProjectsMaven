@@ -7,7 +7,7 @@ import java.util.Set;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.valueport.HAPIdElement;
 import com.nosliw.core.application.valueport.HAPUtilityResovleElement;

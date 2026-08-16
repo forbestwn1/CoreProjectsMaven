@@ -9,7 +9,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
 
 @HAPEntityWithAttribute
 public class HAPStoryBuilderResponseNew extends HAPSerializableImp{

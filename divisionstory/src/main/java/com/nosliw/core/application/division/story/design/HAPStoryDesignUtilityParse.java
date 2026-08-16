@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStoryParse;
 import com.nosliw.core.application.division.story.design.change.HAPStoryChangeItem;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;

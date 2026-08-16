@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.nosliw.common.interfac.HAPTreeNode;
-import com.nosliw.core.application.HAPWrapperValueOfBrick;
+import com.nosliw.core.application.brick.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualAdapter;
 import com.nosliw.core.application.division.manual.core.HAPManualAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;

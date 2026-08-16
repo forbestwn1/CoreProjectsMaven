@@ -1,9 +1,9 @@
 package com.nosliw.core.application.brick.imp.basic;
 
-import com.nosliw.core.application.HAPAdapter;
-import com.nosliw.core.application.HAPAdapterImp;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPAdapter;
+import com.nosliw.core.application.brick.HAPAdapterImp;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 import com.nosliw.core.application.common.brick.serialize.HAPParserBrick;
 

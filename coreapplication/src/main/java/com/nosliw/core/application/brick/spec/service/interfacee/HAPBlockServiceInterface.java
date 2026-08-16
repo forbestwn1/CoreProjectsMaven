@@ -6,7 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.displayresource.HAPDisplayResourceNode;
 import com.nosliw.common.info.HAPEntityInfo;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 
 //static information for a service. readable, query for service

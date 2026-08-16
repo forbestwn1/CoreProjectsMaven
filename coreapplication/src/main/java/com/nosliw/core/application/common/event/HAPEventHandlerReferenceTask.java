@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPPackageBrickInBundle;
+import com.nosliw.core.application.brick.HAPPackageBrickInBundle;
 
 public class HAPEventHandlerReferenceTask extends HAPEventHandlerReference{
 

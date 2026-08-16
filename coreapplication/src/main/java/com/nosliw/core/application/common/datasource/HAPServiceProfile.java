@@ -15,7 +15,7 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPWrapperValueOfReferenceResource;
+import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPFactoryResourceTypeId;

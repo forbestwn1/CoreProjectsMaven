@@ -10,7 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.structure.HAPElementStructure;

@@ -4,8 +4,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.interfac.HAPTreeNode;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPHandlerDownward;
-import com.nosliw.core.application.HAPWrapperBrickRoot;
+import com.nosliw.core.application.brick.HAPHandlerDownward;
+import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
 
 public abstract class HAPHandlerDownwardImpTreeNodeChild extends HAPHandlerDownward{
 

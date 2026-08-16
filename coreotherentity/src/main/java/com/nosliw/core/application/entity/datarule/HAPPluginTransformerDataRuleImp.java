@@ -2,8 +2,8 @@ package com.nosliw.core.application.entity.datarule;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;

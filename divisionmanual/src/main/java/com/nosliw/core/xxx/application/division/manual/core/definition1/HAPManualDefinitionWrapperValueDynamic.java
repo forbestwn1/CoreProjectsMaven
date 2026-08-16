@@ -6,7 +6,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPValueOfDynamic;
+import com.nosliw.core.application.brick.HAPValueOfDynamic;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValue;
 
 public class HAPManualDefinitionWrapperValueDynamic extends HAPManualDefinitionWrapperValue{

@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 
 public abstract class HAPManualPartInValueContext extends HAPEntityInfoImp{
 	

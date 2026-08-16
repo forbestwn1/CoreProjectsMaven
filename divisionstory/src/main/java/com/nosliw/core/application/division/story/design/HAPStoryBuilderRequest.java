@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
 
 @HAPEntityWithAttribute
 public class HAPStoryBuilderRequest extends HAPSerializableImp implements HAPEntityParsable{

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociation;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.resource.HAPManagerResource;

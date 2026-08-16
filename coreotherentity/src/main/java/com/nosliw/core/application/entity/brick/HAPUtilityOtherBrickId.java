@@ -3,9 +3,9 @@ package com.nosliw.core.application.entity.brick;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPUtilityBrickId;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPUtilityBrickId;
 
 public class HAPUtilityOtherBrickId {
 

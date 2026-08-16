@@ -1,6 +1,6 @@
 package com.nosliw.core.xxx.application.division.manual.core.b;
 
-import com.nosliw.core.application.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 
 public class HAPReferenceBrickGlobal {
 

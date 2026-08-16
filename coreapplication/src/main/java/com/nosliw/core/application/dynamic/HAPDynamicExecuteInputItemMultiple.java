@@ -12,7 +12,7 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPPackageBrickInBundle;
+import com.nosliw.core.application.brick.HAPPackageBrickInBundle;
 
 public class HAPDynamicExecuteInputItemMultiple extends HAPDynamicExecuteInputItem{
 

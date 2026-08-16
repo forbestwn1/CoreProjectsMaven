@@ -1,7 +1,6 @@
 package com.nosliw.core.application.brick;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPIdBrickType;
 
 public class HAPEnumBrickType {
 

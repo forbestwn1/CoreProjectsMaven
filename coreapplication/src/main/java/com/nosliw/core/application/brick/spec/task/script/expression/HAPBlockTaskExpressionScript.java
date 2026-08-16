@@ -1,7 +1,7 @@
 package com.nosliw.core.application.brick.spec.task.script.expression;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.entity.script.HAPWithScriptReference;
 

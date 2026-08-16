@@ -2,11 +2,11 @@ package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPHandlerDownward;
-import com.nosliw.core.application.HAPUtilityBrick;
-import com.nosliw.core.application.HAPUtilityBundleForBrick;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPHandlerDownward;
+import com.nosliw.core.application.brick.HAPUtilityBrick;
+import com.nosliw.core.application.brick.HAPUtilityBundleForBrick;
 
 public class HAPManualUtilityProcessAlias {
 

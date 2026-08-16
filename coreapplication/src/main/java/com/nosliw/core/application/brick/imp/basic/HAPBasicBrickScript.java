@@ -3,9 +3,9 @@ package com.nosliw.core.application.brick.imp.basic;
 import java.util.List;
 
 import com.nosliw.common.serialization.HAPJsonTypeScript;
-import com.nosliw.core.application.HAPAttributeInBrick;
-import com.nosliw.core.application.HAPIdBrickType;
-import com.nosliw.core.application.HAPWrapperValueOfValue;
+import com.nosliw.core.application.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPWrapperValueOfValue;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 import com.nosliw.core.application.entity.script.HAPWithScript;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;

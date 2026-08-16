@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.core.process;
 
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 

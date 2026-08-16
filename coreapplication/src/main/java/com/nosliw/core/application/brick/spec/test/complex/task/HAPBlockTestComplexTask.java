@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.valueport.HAPIdElement;

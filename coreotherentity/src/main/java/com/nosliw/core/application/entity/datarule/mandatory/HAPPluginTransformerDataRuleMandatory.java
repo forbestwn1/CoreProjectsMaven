@@ -2,7 +2,7 @@ package com.nosliw.core.application.entity.datarule.mandatory;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskTaskScript;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;

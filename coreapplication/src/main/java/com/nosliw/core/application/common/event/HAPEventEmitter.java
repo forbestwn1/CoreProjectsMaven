@@ -12,7 +12,7 @@ import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.HAPIdBrickInBundle;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 
 @HAPEntityWithAttribute
 public class HAPEventEmitter extends HAPSerializableImp implements HAPEntityParsable{

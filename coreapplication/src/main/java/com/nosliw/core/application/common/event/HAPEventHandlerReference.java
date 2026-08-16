@@ -13,7 +13,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.HAPPackageBrickInBundle;
+import com.nosliw.core.application.brick.HAPPackageBrickInBundle;
 
 @HAPEntityWithAttribute
 public abstract class HAPEventHandlerReference extends HAPSerializableImp implements HAPEntityParsable{

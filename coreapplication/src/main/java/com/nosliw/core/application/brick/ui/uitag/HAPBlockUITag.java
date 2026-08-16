@@ -1,6 +1,6 @@
 package com.nosliw.core.application.brick.ui.uitag;
 
-import com.nosliw.core.application.HAPBrick;
+import com.nosliw.core.application.brick.HAPBrick;
 
 public interface HAPBlockUITag extends HAPBrick{
 

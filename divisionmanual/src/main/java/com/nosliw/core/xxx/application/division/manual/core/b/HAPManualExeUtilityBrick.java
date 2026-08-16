@@ -1,9 +1,9 @@
 package com.nosliw.core.xxx.application.division.manual.core.b;
 
 import com.nosliw.common.path.HAPComplexPath;
-import com.nosliw.core.application.HAPBrick;
-import com.nosliw.core.application.HAPBundleForBrick;
-import com.nosliw.core.application.HAPUtilityBrick;
+import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPUtilityBrick;
 import com.nosliw.core.application.division.manual.core.HAPInfoTreeNode;
 import com.nosliw.core.application.division.manual.core.HAPManualUtilityBrick;
 

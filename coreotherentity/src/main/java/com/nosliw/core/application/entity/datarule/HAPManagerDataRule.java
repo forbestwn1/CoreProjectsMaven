@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.application.entity.datarule.HAPProviderDataRule;
 

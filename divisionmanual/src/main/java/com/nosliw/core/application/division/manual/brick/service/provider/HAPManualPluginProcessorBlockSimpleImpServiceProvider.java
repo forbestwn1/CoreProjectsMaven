@@ -3,9 +3,9 @@ package com.nosliw.core.application.division.manual.brick.service.provider;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.HAPIdBrick;
-import com.nosliw.core.application.HAPUtilityBrickId;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.brick.HAPUtilityBrickId;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.brick.spec.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.brick.spec.service.provider.HAPKeyService;
