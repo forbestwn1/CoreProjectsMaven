@@ -1,8 +1,9 @@
-package com.nosliw.core.application.entity.js.library;
+package com.nosliw.core.application.entity.jslibrary;
 
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.jslibrary.HAPJSLibraryId;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 
 public class HAPResourceIdJSLibrary extends HAPResourceIdSimple{

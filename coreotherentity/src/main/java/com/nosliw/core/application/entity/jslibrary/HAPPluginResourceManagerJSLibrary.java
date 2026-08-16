@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.js.library;
+package com.nosliw.core.application.entity.jslibrary;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.jslibrary.HAPJSLibraryId;
+import com.nosliw.core.application.common.jslibrary.HAPResourceDataJSLibrary;
 import com.nosliw.core.resource.HAPPluginResourceManager;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;
 import com.nosliw.core.resource.HAPResourceHelper;

@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.codetable;
+package com.nosliw.core.application.entity.jslibrary;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;

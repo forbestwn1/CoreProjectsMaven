@@ -25,7 +25,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.entity.js.library.HAPJSLibraryId;
+import com.nosliw.core.application.common.jslibrary.HAPJSLibraryId;
 import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResourceHelper;

@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.js.library;
+package com.nosliw.core.application.entity.jslibrary;
 
 public class HAPUtilityJSLibrary {
 

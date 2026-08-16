@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.codetable;
+package com.nosliw.core.application.entity.jslibrary;
 
 import java.util.List;
 

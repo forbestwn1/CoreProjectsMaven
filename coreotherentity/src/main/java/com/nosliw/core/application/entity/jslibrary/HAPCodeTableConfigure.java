@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.codetable;
+package com.nosliw.core.application.entity.jslibrary;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -15,7 +15,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.entity.js.library.HAPResourceDataJSLibrary;
+import com.nosliw.core.application.common.jslibrary.HAPResourceDataJSLibrary;
 import com.nosliw.core.resource.HAPConfigureResource;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceDataJSValue;
