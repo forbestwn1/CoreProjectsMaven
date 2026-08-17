@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.datasource;
+package com.nosliw.core.application.common.datasource;
 
 import java.util.ArrayList;
 import java.util.List;

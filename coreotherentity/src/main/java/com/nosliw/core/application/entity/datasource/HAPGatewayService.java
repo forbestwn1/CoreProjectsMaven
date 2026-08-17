@@ -14,6 +14,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datasource.HAPQueryService;
 import com.nosliw.core.application.common.datasource.HAPQueryServiceDefinition;
+import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.data.HAPData;

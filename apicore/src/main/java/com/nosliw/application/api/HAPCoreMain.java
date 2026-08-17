@@ -8,11 +8,11 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.nosliw")
 @ConfigurationPropertiesScan
-public class HAPApiMain {
+public class HAPCoreMain {
 
 	public static void main(String[] args) {
 		
-		new SpringApplicationBuilder(HAPApiMain.class)
+		new SpringApplicationBuilder(HAPCoreMain.class)
 	    .headless(false)
 	    .run(args);
 

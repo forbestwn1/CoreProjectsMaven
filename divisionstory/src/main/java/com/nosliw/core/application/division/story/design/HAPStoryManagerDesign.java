@@ -12,10 +12,6 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderText;
-import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualUtilityExporterContentProviderText;
-import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
-import com.nosliw.core.application.division.story.converter.manual.HAPStoryUtilityConverter;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
@@ -86,15 +82,6 @@ public class HAPStoryManagerDesign {
 		HAPStoryDesignUtilityExport.saveStoryDesign(design, this.getStoryStorageRootPath());
 		return out;
 	}
-
-	public Path convertDesignToManual(HAPIdBrick brickId) {
-		HAPStoryDesign design = this.getDesign(brickId);
-		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
-		Path exportFolder = HAPStoryUtilityConverter.getDesignConverToManualFolder(this.getStoryStorageRootPath(), brickId);
-		HAPManualUtilityExporterContentProviderText.export(contentProvider, exportFolder);
-		return exportFolder;
-	}
-	
 
 	public Path getStoryStorageRootPath() {
 		return HAPUtilityFileNio.buildPath(this.m_storyConfigure.getPath());

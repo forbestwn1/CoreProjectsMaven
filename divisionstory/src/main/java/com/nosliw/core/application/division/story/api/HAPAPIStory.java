@@ -19,14 +19,11 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
-import com.nosliw.core.application.division.story.HAPStoryManagerStory;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
-import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @RestController
@@ -35,7 +32,7 @@ import com.nosliw.core.runtime.HAPRuntimeManager;
 public class HAPAPIStory {
 
 	@Autowired
-	private HAPStoryManagerStory m_storyManager;
+	private HAPStoryService m_storyService;
 	
 	@Autowired
 	private HAPStoryManagerDesign m_designManager;
@@ -43,23 +40,17 @@ public class HAPAPIStory {
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
 	
-	@Autowired
-	private HAPManagerUITag m_uiTagMan;
-	
-	@Autowired
-	private HAPManualManangerStandalone m_standaloneMan;
-	
 	@PostMapping("/new")
     public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
 		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(new HAPIdBrickType(brickType, brickVersion), builderId, null);
 		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
 		
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
@@ -88,15 +79,22 @@ public class HAPAPIStory {
 	}	
 
 	@PostMapping("/convert/{brickType}/{brickVersion}/{id}")
-    public String convertDesign(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
-		m_designManager.convertDesignToManual(buildBrickId(brickType, brickVersion, id));
+    public String convertDesignToManual(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		this.m_storyService.convertDesignToManual(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
 		HAPServiceData out = HAPServiceData.createSuccessData();
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
 	@PostMapping("/bundle/{brickType}/{brickVersion}/{id}")
-    public String buildBundle(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
-		HAPBundleForBrick bundle = this.m_storyManager.getBundle(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
+    public String compileToBundle(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		HAPBundleForBrick bundle =  this.m_storyService.compileToBundle(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
+		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
+	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}	
+
+	@GetMapping("/bundle/{brickType}/{brickVersion}/{id}")
+    public String getBundle(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
+		HAPBundleForBrick bundle = this.m_storyService.getBundle(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
 		HAPServiceData out = HAPServiceData.createSuccessData(bundle);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	

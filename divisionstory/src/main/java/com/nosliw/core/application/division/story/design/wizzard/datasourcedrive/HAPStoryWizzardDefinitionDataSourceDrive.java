@@ -11,6 +11,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
+import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
@@ -70,7 +71,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPServiceParseEntity m_entityParseService;
 	
-//	private HAPManagerService m_serviceMan;
+	private HAPServiceDataSource m_dataSourceService;
 	
 	private HAPDataTypeHelper m_dataTypeHelper;
 	
@@ -78,11 +79,12 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPManagerUITag m_uiTagMan;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan) {
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan, HAPServiceDataSource dataSourceService) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
 		this.m_uiTagMan = uiTagMan;
+		this.m_dataSourceService = dataSourceService;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
 		
@@ -139,7 +141,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			String dataSourceId = choosServiceQuestion.getDataSourceName();
 			HAPServiceProfile dataSrouceProfile = null;
 			if(dataSourceId!=null) {
-				dataSrouceProfile = this.m_serviceMan.getServiceProfile(dataSourceId, null);
+				dataSrouceProfile = this.m_dataSourceService.getServiceProfile(dataSourceId);
 				this.applyDataSourceSelection(changeSession, dataSourceId, dataSrouceProfile);
 			}
 			

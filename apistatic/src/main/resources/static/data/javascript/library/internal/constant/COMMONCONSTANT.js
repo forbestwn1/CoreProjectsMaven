@@ -467,6 +467,7 @@ var COMMONCONSTANT=
   "GATEWAY_ERRORLOG": "errorLog",
   "GATEWAY_CODETABLE": "codetable",
   "GATEWAY_UITAG_STANDALONE": "uiTagStandalone",
+  "GATEWAY_MANUAL": "manual",
   "GATEWAY_RHINOTASKRESPONSE": "taskResponseGateway",
   "NOSLIW_RESERVE_ATTRIBUTE": "nosliwattribute_",
   "NOSLIW_RESERVE_ATTRIBUTE_PLACEHOLDER": "nosliwattribute_placeholder",

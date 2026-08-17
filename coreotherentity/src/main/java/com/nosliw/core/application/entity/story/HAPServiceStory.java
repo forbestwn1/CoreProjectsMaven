@@ -1,0 +1,33 @@
+package com.nosliw.core.application.entity.story;
+
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.nosliw.common.exception.HAPServiceData;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.runtime.HAPRuntimeInfo;
+
+@Component
+public class HAPServiceStory {
+
+	@Autowired
+	private HAPStoryServiceConfigure m_storyConfigure;
+	
+	@Autowired
+	private HAPServiceParseEntity m_entityParseService;
+
+	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+		RestTemplate restTemplate = new RestTemplate();
+		String responsStr = restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
+		
+		HAPServiceData serviceData = new HAPServiceData();
+		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
+		
+		return (HAPBundleForBrick)this.m_entityParseService.parseEntityJSONExplicit((JSONObject)serviceData.getData(), HAPBundleForBrick.class.getName());
+	}	
+}

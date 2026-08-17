@@ -774,6 +774,7 @@
 			<definition name="GATEWAY_ERRORLOG" value="errorLog"/>
 			<definition name="GATEWAY_CODETABLE" value="codetable"/>
 			<definition name="GATEWAY_UITAG_STANDALONE" value="uiTagStandalone"/>
+			<definition name="GATEWAY_MANUAL" value="manual"/>
 			
 			<definition name="GATEWAY_RHINOTASKRESPONSE" value="taskResponseGateway"/>
 

@@ -8,7 +8,6 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrickId;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttachment;
@@ -89,7 +88,7 @@ public class HAPManualPluginParserBrickImpDynamic extends HAPManualDefinitionPlu
 		{
 			if(HAPUtilityBasic.isStringNotEmpty(str)) {
 				Pair<String, String> pair = this.parseString(str);
-				out.adapterType = HAPUtilityBrickId.parseBrickTypeIdAggresive(pair.getLeft(), this.getBrickManager());
+				out.adapterType = HAPUtilityOtherBrickId.parseBrickTypeIdAggresive(pair.getLeft(), this.getBrickManager());
 				str = pair.getRight();
 			}
 		}

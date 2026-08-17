@@ -69,6 +69,17 @@ public class HAPUtilityFileNio {
 			return null;
 		}
 	}
+
+	public static String writeFile(Path file, String content){
+        // Extract the file name ("report.pdf")
+        String fileName = file.getFileName().toString();
+        
+        // Extract the directory path ("Users/username/documents")
+        // Note: returns null if there is no parent directory
+        Path folder = file.getParent();
+        return writeFile(folder, fileName, content);
+	}
+
 	
 	public static String writeJsonFile(Path folder, String fileName, String content) {    
 		return writeFile(folder, fileName, HAPUtilityJson.formatJson(content));     
