@@ -1,0 +1,133 @@
+package com.nosliw.core.application.common.manual;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.command.HAPCommandWithExport;
+import com.nosliw.core.application.common.event.HAPEventEmitter;
+import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
+import com.nosliw.core.application.dynamic.HAPDynamicUtilityParser;
+import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
+
+public class HAPManualContentProviderFile extends HAPSerializableImp implements HAPManualContentProvider{
+
+	private HAPManagerBrickCriteria m_brickCriteriaMan;
+	
+	private HAPServiceParseEntity m_parseService;
+	
+	private HAPIdBrick m_brickId;
+	
+	private HAPManualDefinitionInfoBrickLocation m_entityLocationInfo;
+	
+	private HAPDynamicDefinitionContainer m_dynamicDefContainer = new HAPDynamicDefinitionContainer();
+	
+	private Map<String, HAPManualInfoContent> m_branchContents = new LinkedHashMap<String, HAPManualInfoContent>();
+	
+	private HAPManualInfoContent m_mainContent;
+
+	private List<HAPEventEmitter> m_eventExpose;
+	
+	private List<HAPCommandProcess> m_commandExpose;
+	
+	public HAPManualContentProviderFile(HAPIdBrick brickId, HAPManualDefinitionInfoBrickLocation entityLocationInfo, HAPManagerBrickCriteria brickCriteriaMan, HAPServiceParseEntity parseService) {
+		this.m_brickCriteriaMan = brickCriteriaMan;
+		this.m_parseService = parseService;
+		this.m_brickId = brickId;
+		this.m_entityLocationInfo = entityLocationInfo;
+		this.m_eventExpose = new ArrayList<HAPEventEmitter>();
+		this.m_commandExpose = new ArrayList<HAPCommandProcess>();
+		this.init();
+	}
+	
+	private void init() {
+		
+		//bundle info
+		if(!this.m_entityLocationInfo.getIsSingleFile()) {
+			//if folder based, try to get bundle info
+			File bundleInfoFile = new File(this.m_entityLocationInfo.getBasePath().getPath()+"/bundle.json");
+			if(bundleInfoFile.exists()) {
+				//if bundle file exists, parse bundle file
+				JSONObject bundleInfoObj = new JSONObject(HAPUtilityFile.readFile(bundleInfoFile));
+				Object dynamicTaskObj = bundleInfoObj.opt(HAPBundleForBrick.DYNAMIC);
+				if(dynamicTaskObj!=null) {
+					HAPDynamicUtilityParser.parseDynamicDefinitionContainer(dynamicTaskObj, m_dynamicDefContainer, this.m_brickCriteriaMan);
+				}
+				
+				JSONArray exportEventArrayJson = bundleInfoObj.optJSONArray(HAPBundleForBrick.EXPORTEVENT);
+				if(exportEventArrayJson!=null) {
+					for(int i=0; i<exportEventArrayJson.length(); i++) {
+						this.m_eventExpose.add(HAPEventEmitter.parseEventEmitter(exportEventArrayJson.getJSONObject(i), this.m_parseService));
+					}
+				}
+
+				JSONArray exportCommandArrayJson = bundleInfoObj.optJSONArray(HAPCommandWithExport.EXPORTCOMMAND);
+				if(exportCommandArrayJson!=null) {
+					for(int i=0; i<exportCommandArrayJson.length(); i++) {
+						this.m_commandExpose.add(HAPCommandProcess.parseCommandProcess(exportCommandArrayJson.getJSONObject(i), this.m_parseService));
+					}
+				}
+			}
+
+			//if folder based, try to get branch info
+			//branch
+			Map<String, HAPManualDefinitionInfoBrickLocation> branchInfos = HAPManualDefinitionUtilityBrickLocation.getBranchBrickLocationInfos(this.m_entityLocationInfo.getBasePath().getPath());
+			for(String branchName : branchInfos.keySet()) {
+				m_branchContents.put(branchName, buildContentInfo(branchInfos.get(branchName)));
+			}
+		}
+		
+		this.m_mainContent = this.buildContentInfo(m_entityLocationInfo);
+		
+	}
+
+	@Override
+	public List<HAPEventEmitter> getExposedEvent() {   return this.m_eventExpose;   }
+
+	@Override
+	public List<HAPCommandProcess> getExposedCommand(){     return this.m_commandExpose;      }
+	
+
+	
+	private HAPManualInfoContent buildContentInfo(HAPManualDefinitionInfoBrickLocation locationInfo) {
+		HAPSerializationFormat format = locationInfo.getFormat();
+		String content = HAPUtilityFileNio.readFile(locationInfo.getFiile());
+		return new HAPManualInfoContent(content, format, locationInfo.getBrickTypeId());
+	}
+	
+	@Override
+	public HAPDynamicDefinitionContainer getDynamicDefinition() {
+		return this.m_dynamicDefContainer;
+	}
+	
+	@Override
+	public HAPManualInfoContent getMainContent() {
+		return this.m_mainContent;
+	}
+	
+	@Override
+	public Map<String, HAPManualInfoContent> getBranchContents(){
+		return this.m_branchContents;
+	}
+	
+	@Override
+	public HAPManualInfoContent getLocalBrickContent(HAPIdBrick brickId) {
+		HAPManualDefinitionInfoBrickLocation entityLocationInfo = HAPManualDefinitionUtilityBrickLocation.getLocalBrickLocationInfo(this.m_entityLocationInfo.getBasePath().getPath(), brickId);
+		String content = HAPUtilityFileNio.readFile(entityLocationInfo.getFiile());
+		return new HAPManualInfoContent(content, entityLocationInfo.getFormat(), entityLocationInfo.getBrickTypeId());
+	}
+
+}

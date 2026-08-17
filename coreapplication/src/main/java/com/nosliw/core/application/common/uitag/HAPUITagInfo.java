@@ -1,7 +1,9 @@
-package com.nosliw.core.application.entity.uitag;
+package com.nosliw.core.application.common.uitag;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -58,16 +60,31 @@ public class HAPUITagInfo extends HAPEntityInfoImp{
 		jsonMap.put(ATTRIBUTEFORDATA, this.m_attributeForData);
 	}
 	
-//	@Override
-//	protected boolean buildObjectByJson(Object json){
-//		JSONObject jsonObj = (JSONObject)json;
-//		this.m_tag = jsonObj.getString(TAG);
-//		JSONObject attrsObj = jsonObj.optJSONObject(ATTRIBUTES);
-//		if(attrsObj!=null) {
-//			for(Object key : attrsObj.keySet()) {
-//				this.m_attributes.put((String)key, attrsObj.getString((String)key));
-//			}
-//		}
-//		return true;  
-//	}	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		super.buildEntityInfoByJson(jsonObj);
+		
+		this.m_attributeForData = (String)jsonObj.opt(ATTRIBUTEFORDATA);
+		
+		JSONObject attrsObj = jsonObj.optJSONObject(ATTRIBUTES);
+		if(attrsObj!=null) {
+			for(Object key : attrsObj.keySet()) {
+				this.m_attributes.put((String)key, attrsObj.getString((String)key));
+			}
+		}
+		
+		JSONObject matchersJsonObj = jsonObj.optJSONObject(MATCHERS);
+		if(matchersJsonObj!=null) {
+			for(Object key : matchersJsonObj.keySet()) {
+				String name = (String)key;
+				
+				HAPMatchersCombo matchers = new HAPMatchersCombo();
+				matchers.buildObject(matchersJsonObj.getJSONObject(name), HAPSerializationFormat.JSON);
+				this.m_matchers.put(name, matchers);
+			}
+		}
+		
+		return true;  
+	}	
 }

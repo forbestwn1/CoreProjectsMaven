@@ -9,7 +9,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.event.manual.HAPManualContentProviderText;
+import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -31,7 +31,7 @@ public class HAPManualGatewayManual extends HAPGatewayImp{
 	}
 	
 	@Override
-	public String getName() {   return HAPConstantShared.GATEWAY_MANUAL;  }
+	public String getName() {   return HAPConstantShared.GATEWAY_MANUAL_COMPILE;  }
 
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {

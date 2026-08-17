@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.uitag;
+package com.nosliw.core.application.common.uitag;
 
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class HAPUITageQueryData extends HAPSerializableImp{
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
-		jsonMap.put(DATADEFINITION, this.m_dataDefinition.toStringValue(HAPSerializationFormat.LITERATE));
+		jsonMap.put(DATADEFINITION, this.m_dataDefinition.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(IOMODE, this.m_ioMode);
 		jsonMap.put(DATAMODE, this.m_dataMode);
 	}

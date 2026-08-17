@@ -14,10 +14,10 @@ import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerT
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIId;
 import com.nosliw.core.application.common.style.HAPUIStyle;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implements HAPBlockComplexUICustomerTag{

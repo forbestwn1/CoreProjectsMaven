@@ -1,43 +1,31 @@
 package com.nosliw.core.application.entity.uitag;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagInfo;
+import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
 @Component
-public class HAPGatewayUITag extends HAPGatewayImp{
-
-	@HAPAttribute
-	final public static String COMMAND_GETTAG = "getTag";
-	@HAPAttribute
-	final public static String COMMAND_GETTAG_NAME = "name";
-	@HAPAttribute
-	final public static String COMMAND_GETTAG_VERSION = "version";
-
-	@HAPAttribute
-	final public static String COMMAND_GETDEFAULTTAG = "getDefaultTag";
-	@HAPAttribute
-	final public static String COMMAND_GETDEFAULTTAG_CRITERIA = "criteria";
-
-	@HAPAttribute
-	final public static String COMMAND_QUERYTAG = "queryTag";
-	@HAPAttribute
-	final public static String COMMAND_QUERYTAG_CRITERIA = "criteria";
-
-	@HAPAttribute
-	final public static String COMMAND_CLEARCHACHE = "clearCache";
+public class HAPGatewayUITagImp extends HAPGatewayImp implements HAPGatewayUITag{
 
 	private HAPManagerUITag m_uiTagMan;
 	
-	public HAPGatewayUITag(HAPManagerUITag uiTagMan) {
+	@Autowired
+	private HAPServiceParseEntity m_entityParseService;
+	
+	public HAPGatewayUITagImp(HAPManagerUITag uiTagMan) {
 		this.m_uiTagMan = uiTagMan;
 	}
 	
@@ -62,7 +50,17 @@ public class HAPGatewayUITag extends HAPGatewayImp{
 			}
 			case COMMAND_GETDEFAULTTAG:
 			{
-				HAPUITageQueryData query = new HAPUITageQueryData(HAPUtilityCriteria.parseCriteria(parms.getString(COMMAND_GETDEFAULTTAG_CRITERIA)));
+				HAPUITageQueryData query = null;
+				Object queryDataObj = parms.opt(COMMAND_GETDEFAULTTAG_CRITERIA);
+				if(queryDataObj!=null) {
+					if(queryDataObj instanceof String) {
+						query = new HAPUITageQueryData(HAPUtilityCriteria.parseCriteria((String)queryDataObj));
+					}
+					else if(queryDataObj instanceof JSONObject) {
+						query = HAPUITageQueryData.parseUITagQueryData((JSONObject)queryDataObj, m_entityParseService);
+					}
+				}
+				
 				HAPUITagInfo result = this.m_uiTagMan.getDefaultUITagData(query);
 				out = this.createSuccessWithObject(result);
 				break;

@@ -1,5 +1,9 @@
 package com.nosliw.core.application.division.story.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +23,13 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
+import com.nosliw.core.application.division.story.design.standalone.HAPStoryManagerStandalone;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @RestController
@@ -39,6 +45,9 @@ public class HAPAPIStory {
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
+	
+	@Autowired
+	private HAPStoryManagerStandalone m_standaloneMan;
 	
 	@PostMapping("/new")
     public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
@@ -99,6 +108,17 @@ public class HAPAPIStory {
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
+	@PostMapping("/standalone")
+    public String buildStandAlone(@RequestBody String requestBody) {
+		List<HAPManualStandaloneResponse> out = new ArrayList<HAPManualStandaloneResponse>();
+		JSONArray requestJsonArray = new JSONArray(requestBody);
+		for(int i=0; i<requestJsonArray.length(); i++) {
+			out.add(this.m_standaloneMan.buildStandalone(requestJsonArray.getJSONObject(i)));
+		}
+		HAPServiceData serviceData = HAPServiceData.createSuccessData(out);
+	    return HAPUtilityJson.formatJson(serviceData.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}	
+	
 	private HAPIdBrick buildBrickId(String brickType, String brickVersion, String brickId) {
 		return new HAPIdBrick(new HAPIdBrickType(brickType, brickVersion), HAPConstantShared.BRICK_DIVISION_STORY, brickId);
 	}

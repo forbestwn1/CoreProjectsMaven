@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
-import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderText;
-import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
+import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
+import com.nosliw.core.application.common.manual.HAPManualInfoContent;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -36,3 +36,4 @@ public class HAPManualManangerStandalone {
 	}
 	
 }
+

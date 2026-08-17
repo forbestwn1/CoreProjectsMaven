@@ -26,14 +26,14 @@ import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPValueStructure;
 import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttributeVariable;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualUtilityValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttributeVariable;
 import com.nosliw.core.application.valueport.HAPReferenceElement;
 
 public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPluginParserBlockComplexWithUIContent{

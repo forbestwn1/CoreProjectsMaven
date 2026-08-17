@@ -689,8 +689,13 @@ public class HAPConstantShared {
 		public static final String GATEWAY_ERRORLOG = "errorLog";
 		public static final String GATEWAY_CODETABLE = "codetable";
 		public static final String GATEWAY_UITAG_STANDALONE = "uiTagStandalone";
-		public static final String GATEWAY_MANUAL = "manual";
+		public static final String GATEWAY_MANUAL_COMPILE = "manualCompile";
+		public static final String GATEWAY_MANUAL_STANDALONE = "manualStandalone";
 		public static final String GATEWAY_RHINOTASKRESPONSE = "taskResponseGateway";
+
+
+
+		public static final String STANDALONE_PROVIDER_STORY = "story";
 
 
 

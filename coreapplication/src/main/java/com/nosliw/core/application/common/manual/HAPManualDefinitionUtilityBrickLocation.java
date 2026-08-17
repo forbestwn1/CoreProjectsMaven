@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core.definition;
+package com.nosliw.core.application.common.manual;
 
 import java.nio.file.Path;
 import java.util.LinkedHashMap;

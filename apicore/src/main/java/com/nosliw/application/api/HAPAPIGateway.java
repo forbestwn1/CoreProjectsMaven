@@ -27,6 +27,7 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.entity.jslibrary.HAPUtilityJSLibrary;
 import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
+import com.nosliw.core.gateway.HAPServiceInfo;
 import com.nosliw.core.resource.HAPUtilityResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
@@ -79,7 +80,14 @@ public class HAPAPIGateway {
 		}
 		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}
-	
+
+	@PostMapping("/gatewaysingle")
+    public String gatewaySingle(@RequestBody String requestInfoStr) {
+		HAPServiceInfo serviceInfo = new HAPServiceInfo(new JSONObject(requestInfoStr));
+		HAPServiceData out = this.processRequest(serviceInfo);
+		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}
+
 	// process one request object
 	private HAPServiceData processRequest(JSONObject req){
 		HAPServiceData out = null;

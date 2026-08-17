@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.uitag;
+package com.nosliw.core.application.common.uitag;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -11,13 +11,13 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRespon
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
+import com.nosliw.core.application.common.uitag.HAPUITagInfo;
+import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionair;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairGroup;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemStatic;
-import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
-import com.nosliw.core.application.entity.uitag.HAPUITagInfo;
-import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
+import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -28,7 +28,7 @@ import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 
 public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 
-	public static HAPStoryWizzardQuestionair prepareChooseUIQuestionair(HAPServiceProfile dataSrouceProfile, HAPManagerUITag uiTagMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	public static HAPStoryWizzardQuestionair prepareChooseUIQuestionair(HAPServiceProfile dataSrouceProfile, HAPUITagService uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 
 		//root group
@@ -66,7 +66,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			//dynamic of uitag
 			HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
 			uiTagQuery.setIOMode(HAPConstantShared.IO_DIRECTION_IN);
-			HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(uiTagQuery);
+			HAPUITagInfo uiTagInfo = uiTagService.getDefaultUITagData(uiTagQuery);
 			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
 			wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), requestParm.getName());
 			
@@ -97,7 +97,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			parmGroupQ.addItem(parmDynamicGroupQ);
 
 			//group for response data
-			HAPStoryWizzardQuestionairGroup parmDataGroupQ = prepareQuestionairForResponseData(outputs.size()>1, dataTypeCriteria, responseParm, responseParm.getName(), uiTagMan, dataTypeHelper, dataTypeMan);
+			HAPStoryWizzardQuestionairGroup parmDataGroupQ = prepareQuestionairForResponseData(outputs.size()>1, dataTypeCriteria, responseParm, responseParm.getName(), uiTagService, dataTypeHelper, dataTypeMan);
 			parmGroupQ.addItem(parmDataGroupQ);
 			
 			serviceResponseGroupQ.addItem(parmGroupQ);
@@ -108,7 +108,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 		return out;
 	}
 	
-	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(boolean hiddenable, HAPDataTypeCriteria dataTypeCriteria, HAPEntityInfo dataEntityInfo, String dataVariableName, HAPManagerUITag uiTagMan, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(boolean hiddenable, HAPDataTypeCriteria dataTypeCriteria, HAPEntityInfo dataEntityInfo, String dataVariableName, HAPUITagService uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		//data type criter group
 		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA);
 
@@ -129,7 +129,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 		//dynamic of uitag
 		HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
 		uiTagQuery.setIOMode(HAPConstantShared.IO_DIRECTION_OUT);
-		HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(uiTagQuery);
+		HAPUITagInfo uiTagInfo = uiTagService.getDefaultUITagData(uiTagQuery);
 		HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
 		wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), dataVariableName);
 		
@@ -156,7 +156,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 //				HAPStoryWizzardQuestionairItemStatic childEntityInfoStaticQ = new HAPStoryWizzardQuestionairItemStatic(new HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(entityInfo), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO);
 				
 				//child data criteria
-				childrenGroupQ.addItem(prepareQuestionairForResponseData(false, HAPUtilityCriteria.getElementCriteria(dataTypeCriteria), entityInfo, "element", uiTagMan, dataTypeHelper, dataTypeMan));
+				childrenGroupQ.addItem(prepareQuestionairForResponseData(false, HAPUtilityCriteria.getElementCriteria(dataTypeCriteria), entityInfo, "element", uiTagService, dataTypeHelper, dataTypeMan));
 			}
 			else if(dataTypeId.getFullName().contains("map")){
 				//map
@@ -169,7 +169,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 					entityInfo.setName(name);
 
 					//child data criteria
-					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, dataVariableName+"."+name, uiTagMan, dataTypeHelper, dataTypeMan));
+					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, dataVariableName+"."+name, uiTagService, dataTypeHelper, dataTypeMan));
 				}
 			}
 		}

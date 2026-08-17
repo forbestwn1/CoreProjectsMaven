@@ -16,6 +16,9 @@ import com.nosliw.core.application.common.event.HAPEventWithDefinition;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.structure.HAPUtilityParserStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionData;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 

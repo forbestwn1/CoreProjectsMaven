@@ -25,13 +25,13 @@ import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritab
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
+import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
+import com.nosliw.core.application.common.manual.HAPManualInfoContent;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinitionImp;
 import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
-import com.nosliw.core.application.division.manual.common.contentprovider.HAPManualContentProviderText;
-import com.nosliw.core.application.division.manual.core.HAPManualInfoContent;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsCollection;

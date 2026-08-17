@@ -9,9 +9,9 @@ import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
+import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinition;
-import com.nosliw.core.application.entity.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 

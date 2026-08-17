@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.uitag;
+package com.nosliw.core.application.common.uitag;
 
 import com.nosliw.common.utils.HAPConstantShared;
 

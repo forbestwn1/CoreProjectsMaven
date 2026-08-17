@@ -54,7 +54,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
-import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
+import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 
@@ -77,13 +77,13 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPDataTypeManager m_dataTypeMan;
 	
-	private HAPManagerUITag m_uiTagMan;
+	private HAPUITagService m_uiTagService;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPManagerUITag uiTagMan, HAPServiceDataSource dataSourceService) {
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
-		this.m_uiTagMan = uiTagMan;
+		this.m_uiTagService = uiTagService;
 		this.m_dataSourceService = dataSourceService;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
@@ -162,7 +162,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				
 		        //prepare next step + questionair
 				HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_CUSTOMIZEUI));
-				stepMetaData.setQuestionair(HAPStoryWizzardDataSourceUtilityPrepareQuestionair.prepareChooseUIQuestionair(dataSrouceProfile, this.m_uiTagMan, this.m_dataTypeHelper, this.m_dataTypeMan));
+				stepMetaData.setQuestionair(HAPStoryWizzardDataSourceUtilityPrepareQuestionair.prepareChooseUIQuestionair(dataSrouceProfile, this.m_uiTagService, this.m_dataTypeHelper, this.m_dataTypeMan));
 				this.newStep(design, stepMetaData);
 			}
 			

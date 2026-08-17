@@ -1,23 +1,6 @@
 package com.nosliw.core.application.division.manual.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import com.nosliw.common.info.HAPUtilityEntityInfo;
-import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrickId;
-import com.nosliw.core.application.brick.HAPWrapperValue;
-import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
-import com.nosliw.core.application.brick.HAPWrapperValueOfValue;
-import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.resource.HAPFactoryResourceId;
-import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.xxx.application.division.manual.core.b.HAPUtilitySerializeJson;
 
 public class HAPManualBrickImp extends HAPManualBrick{
 
@@ -29,6 +12,8 @@ public class HAPManualBrickImp extends HAPManualBrick{
 	public void init() {
 		super.init();
 	}
+
+/*	
 	
 	@Override
 	public boolean buildBrick(Object value, HAPSerializationFormat format, HAPManagerApplicationBrick brickMan) {
@@ -183,5 +168,5 @@ public class HAPManualBrickImp extends HAPManualBrick{
     protected Object buildAttributeValueFormatJson(String attrName, Object obj) {return true;}
     
     protected HAPIdBrickType getAttributeBrickType(String attrName) {   return null;     }
-
+*/
 }

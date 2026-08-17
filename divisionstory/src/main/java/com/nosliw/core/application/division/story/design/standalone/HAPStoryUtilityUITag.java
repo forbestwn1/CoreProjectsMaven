@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.story.design.uitag;
+package com.nosliw.core.application.division.story.design.standalone;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -8,7 +8,6 @@ import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.command.HAPCommandDefinition;
@@ -21,18 +20,18 @@ import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinitio
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
-import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
-import com.nosliw.core.application.division.manual.core.standalone.HAPStandaloneDefinition;
-import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
-import com.nosliw.core.application.entity.uitag.HAPUITagInfo;
-import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
+import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
+import com.nosliw.core.application.common.manual.HAPManualInfoContent;
+import com.nosliw.core.application.common.uitag.HAPUITagInfo;
+import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
+import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPStoryUtilityUITag {
 
-	public static HAPBundleForBrick buildStandaloneBundleForUITag(HAPUITageQueryData dataUITagQuery, HAPManagerUITag uiTagMan, HAPManualManangerStandalone standaloneMan, HAPRuntimeInfo runtimeInfo) {
-		HAPUITagInfo uiTagInfo = uiTagMan.getDefaultUITagData(dataUITagQuery);
+	public static HAPManualContentProviderText buildStandaloneBundleForUITag(HAPUITageQueryData dataUITagQuery, HAPUITagService uiTagService, HAPRuntimeInfo runtimeInfo) {
+		HAPUITagInfo uiTagInfo = uiTagService.getDefaultUITagData(dataUITagQuery);
 
 		HAPDataDefinition dataDefinition = dataUITagQuery.getDataDefinition();
 
@@ -62,8 +61,11 @@ public class HAPStoryUtilityUITag {
 		     .getContent();
 		
 		
-		HAPStandaloneDefinition standAloneDef = new HAPStandaloneDefinition(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100);
-
+		HAPManualContentProviderText contentProvider = new HAPManualContentProviderText();
+		
+		HAPManualInfoContent maintContentInfo = new HAPManualInfoContent(content, HAPSerializationFormat.HTML, HAPEnumBrickType.UIPAGE_100);
+		contentProvider.setMainContent(maintContentInfo);
+		
 		//events
 		{
 			HAPEventEmitter eventEmitter = new HAPEventEmitter();
@@ -74,7 +76,7 @@ public class HAPStoryUtilityUITag {
 			HAPEventDefinition eventDef = new HAPEventDefinition();
 			eventDef.setName(HAPConstantShared.EVENT_UI_VALUE_CHANGE);
 			eventEmitter.setEventDefinition(eventDef);
-			standAloneDef.addExposeEvent(eventEmitter);
+			contentProvider.addExposedEvent(eventEmitter);
 		}
 		
 		{
@@ -86,7 +88,7 @@ public class HAPStoryUtilityUITag {
 			HAPEventDefinition eventDef = new HAPEventDefinition();
 			eventDef.setName(HAPConstantShared.ERROR_VALIDATION_VALUE);
 			eventEmitter.setEventDefinition(eventDef);
-			standAloneDef.addExposeEvent(eventEmitter);
+			contentProvider.addExposedEvent(eventEmitter);
 		}
 		
 		//command
@@ -113,10 +115,10 @@ public class HAPStoryUtilityUITag {
 			commandDef.setTaskInterface(taskInteractive);
 			
 			commandProcess.setCommandDefinition(commandDef);
-			standAloneDef.addExposeCommand(commandProcess);
+			contentProvider.addExposedCommand(commandProcess);
 		}
 
-		return standaloneMan.buildStandalone(standAloneDef, runtimeInfo);
+		return contentProvider;
 	}
 	
 }

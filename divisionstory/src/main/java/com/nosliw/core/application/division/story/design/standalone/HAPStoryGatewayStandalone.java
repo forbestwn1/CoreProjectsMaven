@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.story.design.uitag;
+package com.nosliw.core.application.division.story.design.standalone;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,7 +8,6 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -19,9 +18,7 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPBundleForExecute;
 import com.nosliw.core.application.brick.HAPUtilityBundleForExecute;
-import com.nosliw.core.application.division.manual.core.standalone.HAPManualManangerStandalone;
-import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
-import com.nosliw.core.application.entity.uitag.HAPUITageQueryData;
+import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
@@ -35,7 +32,7 @@ import com.nosliw.core.runtime.HAPRuntimeManager;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
 @HAPEntityWithAttribute
-@Component
+//@Component
 public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 
 	@HAPAttribute
@@ -59,12 +56,6 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
-	
-	@Autowired
-	private HAPManagerUITag m_uiTagMan;
-	
-	@Autowired
-	private HAPManualManangerStandalone m_standaloneMan;
 	
 	@Autowired
 	HAPRuntimeManager m_runtimeManager;
@@ -110,7 +101,7 @@ public class HAPStoryGatewayStandalone extends HAPGatewayImp{
 			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, resources);
 			out = HAPServiceData.createSuccessData(gatewayOutput);
 			
-			Thread.sleep(5000);
+//			Thread.sleep(5000);
 			
 			break;
 		}
