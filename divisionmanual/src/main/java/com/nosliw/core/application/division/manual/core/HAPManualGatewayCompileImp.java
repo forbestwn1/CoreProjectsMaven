@@ -4,22 +4,17 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
+import com.nosliw.core.application.common.manual.gateway.compile.HAPManualGatewayCompile;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
-public class HAPManualGatewayManual extends HAPGatewayImp{
-	
-	@HAPAttribute
-	static public final String COMMAND_COMPILE = "compile";
-	@HAPAttribute
-	static public final String PARMS_CONTENT = "content";
+public class HAPManualGatewayCompileImp extends HAPGatewayImp implements HAPManualGatewayCompile{
 	
 	@Autowired
 	private HAPManualManagerBrick m_manualManager;
@@ -27,7 +22,7 @@ public class HAPManualGatewayManual extends HAPGatewayImp{
 	@Autowired
 	private HAPServiceParseEntity m_parseService;
 	
-	public HAPManualGatewayManual() {
+	public HAPManualGatewayCompileImp() {
 	}
 	
 	@Override

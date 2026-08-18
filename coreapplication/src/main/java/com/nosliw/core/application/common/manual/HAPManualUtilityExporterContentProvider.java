@@ -14,16 +14,16 @@ import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualUtilityExporterContentProvider {
 
-	public static Path getPathDirForContentText(Path exportFolder) {
-		return HAPUtilityFileNio.buildPath(exportFolder, "text");
+	public static Path getPathFileForContentText(Path exportFolder) {
+		return HAPUtilityFileNio.buildPath(exportFolder, "text.json");
 	}
 	
-	public static Path getPathFileForContentFile(Path exportFolder) {
-		return HAPUtilityFileNio.buildPath(exportFolder, "file", "file.json");
+	public static Path getPathDirForContentFile(Path exportFolder) {
+		return HAPUtilityFileNio.buildPath(exportFolder, "file");
 	}
 
 	public static HAPManualContentProviderText importContentText(Path rootFolder, HAPServiceParseEntity parseService) {
-		Path contentPathText = getPathDirForContentText(rootFolder);
+		Path contentPathText = getPathFileForContentText(rootFolder);
 		String content = HAPUtilityFileNio.readFile(contentPathText);
 		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderText.class.getName());
 		return out;
@@ -46,8 +46,8 @@ public class HAPManualUtilityExporterContentProvider {
 		
 		HAPUtilityFileNio.deletePath(rootFolder);
 		
-		Path contentPathFile = getPathFileForContentFile(rootFolder);
-		Path contentPathText = getPathDirForContentText(rootFolder);
+		Path contentPathFile = getPathDirForContentFile(rootFolder);
+		Path contentPathText = getPathFileForContentText(rootFolder);
 		
 		HAPUtilityFileNio.writeFile(contentPathText, cotentProvider.toStringValue(HAPSerializationFormat.JSON));
 		

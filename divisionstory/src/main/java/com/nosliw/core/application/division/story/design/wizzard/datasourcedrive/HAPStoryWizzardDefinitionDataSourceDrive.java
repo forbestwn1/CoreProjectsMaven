@@ -13,6 +13,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
+import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
@@ -79,12 +80,15 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPUITagService m_uiTagService;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService) {
+	private HAPStoryService m_storyService;
+	
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
 		this.m_uiTagService = uiTagService;
 		this.m_dataSourceService = dataSourceService;
+		this.m_storyService = storyService;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
 		
@@ -335,6 +339,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.commit();
 			
 			//end step
+			//conver to manual
+			this.m_storyService.convertDesignToManual(design, null);
+			
 			HAPStoryDesignMetadataStepEndDataSourceDrive stepMetaData = new HAPStoryDesignMetadataStepEndDataSourceDrive();
 			stepMetaData.setUrl("http://www.google.ca");
 			design.newEndStep(stepMetaData);

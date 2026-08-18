@@ -30,7 +30,7 @@ public class HAPServiceStory {
 
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
+		String responsStr = restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);

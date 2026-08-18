@@ -1,0 +1,310 @@
+{
+  "mainBrick": {
+    "id": "#main",
+    "name": "#main",
+    "displayName": "#main",
+    "info": {},
+    "brick": {
+      "domain": "brick.manual",
+      "brickType": {
+        "brickType": "uipage",
+        "version": "1.0.0",
+        "key": "uipage;1.0.0"
+      },
+      "internalValuePort": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "externalValuePort": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "attribute": [
+        {
+          "id": "UIContent",
+          "name": "UIContent",
+          "displayName": "UIContent",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "brick",
+            "brick": {
+              "domain": "brick.manual",
+              "brickType": {
+                "brickType": "uicontent",
+                "version": "1.0.0",
+                "key": "uicontent;1.0.0"
+              },
+              "internalValuePort": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "externalValuePort": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "attribute": [
+                {
+                  "id": "customerTag",
+                  "name": "customerTag",
+                  "displayName": "customerTag",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "brick",
+                    "brick": {
+                      "domain": "brick.manual",
+                      "brickType": {
+                        "brickType": "containerList",
+                        "version": "1.0.0",
+                        "key": "containerList;1.0.0"
+                      },
+                      "internalValuePort": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "externalValuePort": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "attribute": [
+                        {
+                          "id": "nosliw_attrIndex",
+                          "name": "nosliw_attrIndex",
+                          "displayName": "nosliw_attrIndex",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": 0
+                          },
+                          "adapter": []
+                        },
+                        {
+                          "id": "nosliw_attrSort",
+                          "name": "nosliw_attrSort",
+                          "displayName": "nosliw_attrSort",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": []
+                          },
+                          "adapter": []
+                        }
+                      ],
+                      "eventId": [],
+                      "otherInternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "otherExternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "valueContext": {
+                        "part": [],
+                        "valueStructureRuntimeIdByName": {},
+                        "valueStructureRuntimeNameById": {}
+                      }
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "task",
+                  "name": "task",
+                  "displayName": "task",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "brick",
+                    "brick": {
+                      "domain": "brick.manual",
+                      "brickType": {
+                        "brickType": "container",
+                        "version": "1.0.0",
+                        "key": "container;1.0.0"
+                      },
+                      "internalValuePort": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "externalValuePort": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "attribute": [
+                        {
+                          "id": "nosliw_attrIndex",
+                          "name": "nosliw_attrIndex",
+                          "displayName": "nosliw_attrIndex",
+                          "info": {},
+                          "valueWrapper": {
+                            "valueType": "value",
+                            "value": 0
+                          },
+                          "adapter": []
+                        }
+                      ],
+                      "eventId": [],
+                      "otherInternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "otherExternalValuePortsContainer": {
+                        "valuePortGroup": [],
+                        "idIndex": 0
+                      },
+                      "valueContext": {
+                        "part": [],
+                        "valueStructureRuntimeIdByName": {},
+                        "valueStructureRuntimeNameById": {}
+                      }
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "scriptExpressionInContent",
+                  "name": "scriptExpressionInContent",
+                  "displayName": "scriptExpressionInContent",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": []
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "scriptExpressionInNormalTagAttribute",
+                  "name": "scriptExpressionInNormalTagAttribute",
+                  "displayName": "scriptExpressionInNormalTagAttribute",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": []
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "scriptExpressionInCustomerTagAttribute",
+                  "name": "scriptExpressionInCustomerTagAttribute",
+                  "displayName": "scriptExpressionInCustomerTagAttribute",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": []
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "scriptExpressions",
+                  "name": "scriptExpressions",
+                  "displayName": "scriptExpressions",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": {
+                      "item": {}
+                    }
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "tagAliasMapping",
+                  "name": "tagAliasMapping",
+                  "displayName": "tagAliasMapping",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": {}
+                  },
+                  "adapter": []
+                },
+                {
+                  "id": "html",
+                  "name": "html",
+                  "displayName": "html",
+                  "info": {},
+                  "valueWrapper": {
+                    "valueType": "value",
+                    "value": "\u0026lt;style nosliwid\u003d\u0026quot;1\u0026quot;\u0026gt;\t\t\t.red1 {\t\t\t  color: red;\t\t\t}\t\t\t\t\t\u0026lt;/style\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span class\u003d\u0026quot;red1\u0026quot; nosliwid\u003d\u0026quot;2\u0026quot;\u0026gt;\u0026lt;span\u0026gt;HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\u0026lt;/span\u0026gt;\u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;page nosliwid\u003d\u0026quot;3\u0026quot;\u0026gt;  \u0026lt;/page\u0026gt;"
+                  },
+                  "adapter": []
+                }
+              ],
+              "eventId": [],
+              "otherInternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "otherExternalValuePortsContainer": {
+                "valuePortGroup": [],
+                "idIndex": 0
+              },
+              "valueContext": {
+                "part": [],
+                "valueStructureRuntimeIdByName": {},
+                "valueStructureRuntimeNameById": {}
+              }
+            }
+          },
+          "adapter": []
+        },
+        {
+          "id": "style",
+          "name": "style",
+          "displayName": "style",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "value"
+          },
+          "adapter": []
+        },
+        {
+          "id": "styleScript",
+          "name": "styleScript",
+          "displayName": "styleScript",
+          "info": {},
+          "valueWrapper": {
+            "valueType": "value",
+            "value": ""
+          },
+          "adapter": []
+        }
+      ],
+      "eventId": [],
+      "otherInternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "otherExternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 0
+      },
+      "valueContext": {
+        "part": [],
+        "valueStructureRuntimeIdByName": {},
+        "valueStructureRuntimeNameById": {}
+      }
+    }
+  },
+  "valueStructureDomain": {
+    "valueStructureDefinition": {},
+    "valueStructureRuntime": {},
+    "definitionByRuntime": {}
+  },
+  "dynamic": {
+    "element": {}
+  },
+  "aliasMapping": {},
+  "branchBricks": {},
+  "eventProcess": {},
+  "eventExport": [],
+  "commandExport": {},
+  "exportResource": [
+    {
+      "id": "default",
+      "name": "default",
+      "displayName": "default",
+      "info": {},
+      "pathFromRoot": "#main"
+    }
+  ]
+}
