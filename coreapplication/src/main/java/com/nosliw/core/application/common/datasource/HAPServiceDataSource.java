@@ -19,15 +19,17 @@ public class HAPServiceDataSource {
 	private HAPServiceParseEntity m_entityParseService;
 	
 	private String m_url;
+	
+	private RestTemplate m_restTemplate;
 
-	public HAPServiceDataSource(String url, HAPServiceParseEntity entityParseService) {
+	public HAPServiceDataSource(String url, HAPServiceParseEntity entityParseService, RestTemplate restTemplate) {
 		this.m_entityParseService = entityParseService;
+		this.m_restTemplate = restTemplate;
 		this.m_url = url;
 	} 
 	
 	public HAPServiceProfile getServiceProfile(String id){
-		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.getForObject(this.m_url+"instance/profile/"+id, String.class);
+		String responsStr = this.m_restTemplate.getForObject(this.m_url+"instance/profile/"+id, String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
@@ -36,11 +38,8 @@ public class HAPServiceDataSource {
 		return out;
 	}
 
-	
-	
 	public List<HAPServiceProfile> queryDefinition(HAPQueryServiceDefinition query){
-		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.postForObject(this.m_url+"instance/profile/search", query.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = this.m_restTemplate.postForObject(this.m_url+"instance/profile/search", query.toStringValue(HAPSerializationFormat.JSON), String.class);
 
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
@@ -59,10 +58,8 @@ public class HAPServiceDataSource {
 	}
 
 	public HAPResultInteractiveTask execute(HAPQueryService serviceQuery, Map<String, HAPData> parms) {
-		RestTemplate restTemplate = new RestTemplate();
-		
 		HAPAIPRequestExectueDataSource request = new HAPAIPRequestExectueDataSource(serviceQuery, parms);
-		String responsStr = restTemplate.postForObject(this.m_url+"instance/exectue", request.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = this.m_restTemplate.postForObject(this.m_url+"instance/exectue", request.toStringValue(HAPSerializationFormat.JSON), String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);

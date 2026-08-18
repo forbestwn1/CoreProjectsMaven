@@ -10,19 +10,19 @@ public class HAPServiceStaticResource {
 
 	private String m_staticServerUrl;
 	
-	public HAPServiceStaticResource(String staticServerUrl) {
+	private RestTemplate m_restTemplate;
+	
+	public HAPServiceStaticResource(String staticServerUrl, RestTemplate restTemplate) {
+		this.m_restTemplate = restTemplate;
 		this.m_staticServerUrl = staticServerUrl;
 	}
 	
 	public HAPServiceData getStatic(HAPStaticRequest staticRequest) {
-		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.postForObject(m_staticServerUrl+"static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = this.m_restTemplate.postForObject(m_staticServerUrl+"static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
         return this.processResponse(responsStr);
 	}
 	
 	public HAPServiceData upload(String content, String domain, String name) {
-		
-		RestTemplate restTemplate = new RestTemplate();
 		
 		StringBuffer url = new StringBuffer(this.m_staticServerUrl+"upload");
 		StringBuffer parms = new StringBuffer();
@@ -43,7 +43,7 @@ public class HAPServiceStaticResource {
 			url.append(parms);
 		}
 		
-		String responsStr = restTemplate.postForObject(url.toString(), content, String.class);
+		String responsStr = this.m_restTemplate.postForObject(url.toString(), content, String.class);
         return this.processResponse(responsStr);
 	}
 

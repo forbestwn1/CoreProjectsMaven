@@ -28,9 +28,11 @@ public class HAPServiceStory {
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
 
+	@Autowired
+	private RestTemplate m_restTemplate;
+	
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
+		String responsStr = this.m_restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
@@ -39,8 +41,7 @@ public class HAPServiceStory {
 	}	
 
 	public HAPServiceData buildStandAlone(List<HAPManualStandaloneProviderRequest> requests) {
-		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.postForObject(m_storyConfigure.geturl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
+		String responsStr = this.m_restTemplate.postForObject(m_storyConfigure.geturl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
