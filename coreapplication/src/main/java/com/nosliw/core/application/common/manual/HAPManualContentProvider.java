@@ -11,6 +11,10 @@ import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public interface HAPManualContentProvider extends HAPSerializable{
 
+	public static final String TYPE = "type";
+	
+	String getType();
+	
 	HAPDynamicDefinitionContainer getDynamicDefinition();
 
 	List<HAPEventEmitter> getExposedEvent();

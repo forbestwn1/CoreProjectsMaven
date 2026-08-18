@@ -48,7 +48,7 @@ public class HAPServiceStory {
 		List<HAPManualStandaloneResponse> out = new ArrayList<HAPManualStandaloneResponse>();
 		JSONArray responseJsonArray = (JSONArray)serviceData.getData();
 		for(int i=0; i<responseJsonArray.length(); i++) {
-			
+			out.add((HAPManualStandaloneResponse)m_entityParseService.parseEntityJSONExplicit(responseJsonArray.getJSONObject(i), HAPManualStandaloneResponse.class.getName()));
 		}
 		
 		return HAPServiceData.createSuccessData(out);

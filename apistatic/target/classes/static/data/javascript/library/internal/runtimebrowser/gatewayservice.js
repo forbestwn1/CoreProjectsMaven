@@ -105,7 +105,11 @@ var node_createGatewayService = function(){
 						    	var script = scriptInfo[node_COMMONATRIBUTECONSTANT.JSSCRIPTINFO_SCRIPT];
 							    if(file!=undefined)		requests.push(loc_getLoadFileRequest(file));
 								if(url!=undefined)		requests.push(loc_getLoadURLRequest(url));
-    							if(script!=undefined)		requests.push(loc_getLoadScriptRequest(script));
+    							if(script!=undefined){
+									var scriptStr = unescape(script).replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'");
+//									var scriptStr = decodeURI(script).replace(/\\n/g, '\n').replace(/\\t/g, '\t').replace(/\\"/g, '"').replace(/\\'/g, "'");
+									requests.push(loc_getLoadScriptRequest(scriptStr));
+								}
 	    					});
 						
     						requests.push( node_createServiceRequestInfoSimple({}, function(request){  return out.getData("gatewayOutputData")})  );

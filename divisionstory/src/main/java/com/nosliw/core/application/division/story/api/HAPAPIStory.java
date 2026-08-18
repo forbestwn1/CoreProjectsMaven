@@ -23,6 +23,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
@@ -113,7 +114,10 @@ public class HAPAPIStory {
 		List<HAPManualStandaloneResponse> out = new ArrayList<HAPManualStandaloneResponse>();
 		JSONArray requestJsonArray = new JSONArray(requestBody);
 		for(int i=0; i<requestJsonArray.length(); i++) {
-			out.add(this.m_standaloneMan.buildStandalone(requestJsonArray.getJSONObject(i)));
+			HAPManualStandaloneProviderRequest request = new HAPManualStandaloneProviderRequest();
+			request.buildObject(requestJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
+			
+			out.add(this.m_standaloneMan.buildStandalone((JSONObject)request.getParms()));
 		}
 		HAPServiceData serviceData = HAPServiceData.createSuccessData(out);
 	    return HAPUtilityJson.formatJson(serviceData.toStringValue(HAPSerializationFormat.JSON_FULL));

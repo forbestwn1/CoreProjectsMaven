@@ -1114,6 +1114,11 @@ public class HAPConstantShared {
 
 
 
+		public static final String MANUAL_CONTENTPROVIDER_TYPE_TEXT = "text";
+		public static final String MANUAL_CONTENTPROVIDER_TYPE_FILE = "file";
+
+
+
 		public static final String TUNNELENDPOINT_TYPE_CONSTANT = "constant";
 		public static final String TUNNELENDPOINT_TYPE_VALUEPORT = "valuePort";
 		public static final String TUNNELENDPOINT_TYPE_RUNTIME = "runtime";

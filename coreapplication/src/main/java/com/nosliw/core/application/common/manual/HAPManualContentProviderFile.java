@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
@@ -53,6 +54,9 @@ public class HAPManualContentProviderFile extends HAPSerializableImp implements 
 		this.init();
 	}
 	
+	@Override
+	public String getType() {   return HAPConstantShared.MANUAL_CONTENTPROVIDER_TYPE_FILE;   }
+
 	private void init() {
 		
 		//bundle info

@@ -1169,6 +1169,10 @@ I
 			<definition name="MANUAL_RELATION_TYPE_AUTOPROCESS" value="autoProcess"/>
 
 			<definition type="space"/>
+			<definition name="MANUAL_CONTENTPROVIDER_TYPE_TEXT" value="text"/>
+			<definition name="MANUAL_CONTENTPROVIDER_TYPE_FILE" value="file"/>
+
+			<definition type="space"/>
 			<definition name="TUNNELENDPOINT_TYPE_CONSTANT" value="constant"/>
 			<definition name="TUNNELENDPOINT_TYPE_VALUEPORT" value="valuePort"/>
 			<definition name="TUNNELENDPOINT_TYPE_RUNTIME" value="runtime"/>

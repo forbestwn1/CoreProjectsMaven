@@ -9,6 +9,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.gateway.HAPServiceInfo;
 
 public class HAPUtilityGateway {
@@ -19,7 +20,12 @@ public class HAPUtilityGateway {
 		String responsStr = restTemplate.postForObject(url, serviceInfo.toStringValue(HAPSerializationFormat.JSON), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
-		return serviceData;
+		
+		JSONObject gatewayOutputJsonObj = (JSONObject)serviceData.getData();
+		HAPGatewayOutput gatewayOutput = new HAPGatewayOutput();
+		gatewayOutput.buildObject(gatewayOutputJsonObj, HAPSerializationFormat.JSON);
+		
+		return HAPServiceData.createSuccessData(gatewayOutput);
 	}
 	
 }

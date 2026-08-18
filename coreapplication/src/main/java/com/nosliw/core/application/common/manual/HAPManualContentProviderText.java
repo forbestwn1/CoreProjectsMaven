@@ -15,6 +15,7 @@ import com.nosliw.common.serialization.HAPParserEntity;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
@@ -53,6 +54,10 @@ public class HAPManualContentProviderText extends HAPSerializableImp implements 
 	}
 	
 	@Override
+	public String getType() {   return HAPConstantShared.MANUAL_CONTENTPROVIDER_TYPE_TEXT;   }
+
+
+	@Override
 	public HAPDynamicDefinitionContainer getDynamicDefinition() {		return this.m_dynamicDef; 	}
 	public void setDyanmicDefinition(HAPDynamicDefinitionContainer dynamicDef) {     this.m_dynamicDef = dynamicDef;      }
 
@@ -84,6 +89,7 @@ public class HAPManualContentProviderText extends HAPSerializableImp implements 
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		jsonMap.put(TYPE, this.getType());
 		jsonMap.put(MAINCONENTINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_contentInfo, HAPSerializationFormat.JSON));
 		jsonMap.put(BRANCHCONTENTINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_branchContentInfos, HAPSerializationFormat.JSON));
 		jsonMap.put(LOCALCONTENTINFO, HAPManagerSerialize.getInstance().toStringValue(this.m_localContentInfos, HAPSerializationFormat.JSON));

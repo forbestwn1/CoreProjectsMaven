@@ -15,6 +15,7 @@ import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.application.division.story.service.HAPGatewayServiceConfigure;
+import com.nosliw.core.gateway.HAPGatewayOutput;
 
 @Component
 public class HAPUITagService {
@@ -38,7 +39,8 @@ public class HAPUITagService {
 				m_resteTemplate);
 		
 		HAPUITagInfo out = new HAPUITagInfo();
-		out.buildObject(serviceData.getData(), HAPSerializationFormat.JSON);
+		HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)serviceData.getData();
+		out.buildObject(gatewayOutput.getData(), HAPSerializationFormat.JSON);
 		return out;
 	}
 	

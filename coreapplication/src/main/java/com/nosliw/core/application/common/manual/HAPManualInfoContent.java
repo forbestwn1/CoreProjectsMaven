@@ -2,6 +2,7 @@ package com.nosliw.core.application.common.manual;
 
 import java.util.Map;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
@@ -56,7 +57,7 @@ public class HAPManualInfoContent extends HAPSerializableImp{
 			jsonMap.put(FORMAT, this.m_format.toString());
 		}
 		if(this.m_content!=null) {
-			jsonMap.put(CONTENT, this.m_content);
+			jsonMap.put(CONTENT, StringEscapeUtils.escapeJson(this.m_content));
 		}
 		if(this.m_brickTypeId!=null) {
 			jsonMap.put(BRICKTYPEID, this.m_brickTypeId.toStringValue(HAPSerializationFormat.JSON));
@@ -67,7 +68,7 @@ public class HAPManualInfoContent extends HAPSerializableImp{
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
 		
-		this.m_content = (String)jsonObj.opt(CONTENT);
+		this.m_content = StringEscapeUtils.unescapeJson((String)jsonObj.opt(CONTENT));
 		
 		String formatJsonStr = (String)jsonObj.opt(FORMAT);
 		if(formatJsonStr!=null) {

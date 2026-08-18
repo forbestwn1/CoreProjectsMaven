@@ -1,7 +1,11 @@
 package com.nosliw.common.script;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
+
+import org.apache.commons.text.StringEscapeUtils;
+import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
@@ -95,7 +99,42 @@ public class HAPJSScriptInfo extends HAPSerializableImp{
 	}
 
 	@Override
+	protected boolean buildObjectByJson(Object json){  
+		JSONObject jsonObj = (JSONObject)json;
+		Object scriptJson = jsonObj.opt(SCRIPT);
+		if(scriptJson!=null) {
+			this.m_script = new StringBuffer(StringEscapeUtils.unescapeJson((String)scriptJson));
+		}
+		
+		this.m_file = (String)jsonObj.opt(FILE);
+		
+		Object urlObj = jsonObj.opt(URL);
+		if(urlObj!=null) {
+			try {
+				this.m_uri = new URI((String)urlObj);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return true;
+	}
+	
+	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		jsonMap.put(NAME, this.m_name);
+		
+		if(this.m_script!=null) {
+			jsonMap.put(SCRIPT, StringEscapeUtils.escapeJson(this.m_script.toString()));
+		}
+		jsonMap.put(FILE, this.m_file);
+		if(this.m_uri!=null) {
+			jsonMap.put(URL, this.m_uri.toString());
+		}
+	}
+
+	@Override
+	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		jsonMap.put(NAME, this.m_name);
 		
 		if(this.m_script!=null) {

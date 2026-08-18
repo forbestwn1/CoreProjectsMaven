@@ -64,55 +64,58 @@ public class HAPManualGatewayStandaloneImp extends HAPGatewayImp implements HAPM
 
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {
-		JSONObject qurestJsonObj = parms.optJSONObject(PARMS_REQUEST);
-		HAPManualStandalonesBuildRequest request = new HAPManualStandalonesBuildRequest();
-		request.buildObject(qurestJsonObj, HAPSerializationFormat.JSON);
-		
-		Map<String, List<HAPManualStandaloneProviderRequest>> sortedReqeust = new LinkedHashMap<>();
-		List<HAPManualStandaloneRequest> items = request.getItems();
-		for(HAPManualStandaloneRequest item : items) {
-			String providerName = item.getProviderName();
-			List<HAPManualStandaloneProviderRequest> byProvider = sortedReqeust.get(providerName);
-			if(byProvider==null) {
-				byProvider = new ArrayList<>();
-				sortedReqeust.put(providerName, byProvider);
-			}
-			byProvider.add(item.getProviderRequest());
-		}
-		
-		List<HAPManualStandaloneResponse> allContent = new ArrayList<HAPManualStandaloneResponse>();
-		for(String providerName : sortedReqeust.keySet()) {
-			HAPServiceData serviceData = this.m_providers.get(providerName).buildContent(sortedReqeust.get(providerName));
-			List<HAPManualStandaloneResponse> providerResponse = (List<HAPManualStandaloneResponse>)serviceData.getData();
-
-			//if response not provide id, generate id
-			for(int i=0; i<providerResponse.size(); i++) {
-				HAPManualStandaloneResponse response = providerResponse.get(i);
-				String id = response.getId();
-				if(id==null) {
-					id = sortedReqeust.get(providerName).get(i).getIdPrefix() + this.m_idGeneratorService.generateIdStr();
-					response.setId(id);
+		if(command.equals(HAPManualGatewayStandalone.COMMAND_BUILD)) {
+			JSONObject qurestJsonObj = parms.optJSONObject(PARMS_REQUEST);
+			HAPManualStandalonesBuildRequest request = new HAPManualStandalonesBuildRequest();
+			request.buildObject(qurestJsonObj, HAPSerializationFormat.JSON);
+			
+			Map<String, List<HAPManualStandaloneProviderRequest>> sortedReqeust = new LinkedHashMap<>();
+			List<HAPManualStandaloneRequest> items = request.getItems();
+			for(HAPManualStandaloneRequest item : items) {
+				String providerName = item.getProviderName();
+				List<HAPManualStandaloneProviderRequest> byProvider = sortedReqeust.get(providerName);
+				if(byProvider==null) {
+					byProvider = new ArrayList<>();
+					sortedReqeust.put(providerName, byProvider);
 				}
+				byProvider.add(item.getProviderRequest());
 			}
 			
-			allContent.addAll(providerResponse);
-		}
-		
-		Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
-		List<HAPResource> resources = new ArrayList<HAPResource>();
-		for(HAPManualStandaloneResponse response : allContent) {
-			HAPBundleForBrick bundleForBrick = m_manualBrickMan.buildBundle(response.getContentProvider(), runtimeInfo);
-			HAPBundleForExecute bundleForExecutable = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
-		
-			HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", response.getId());
-			HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
-			HAPResource resource = new HAPResource(resourceId, resourceData, null);
+			List<HAPManualStandaloneResponse> allContent = new ArrayList<HAPManualStandaloneResponse>();
+			for(String providerName : sortedReqeust.keySet()) {
+				HAPServiceData serviceData = this.m_providers.get(providerName).buildContent(sortedReqeust.get(providerName));
+				List<HAPManualStandaloneResponse> providerResponse = (List<HAPManualStandaloneResponse>)serviceData.getData();
+
+				//if response not provide id, generate id
+				for(int i=0; i<providerResponse.size(); i++) {
+					HAPManualStandaloneResponse response = providerResponse.get(i);
+					String id = response.getId();
+					if(id==null) {
+						id = sortedReqeust.get(providerName).get(i).getIdPrefix() + this.m_idGeneratorService.generateIdStr();
+						response.setId(id);
+					}
+				}
+				
+				allContent.addAll(providerResponse);
+			}
 			
-			resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
-			resources.add(resource);
+			Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
+			List<HAPResource> resources = new ArrayList<HAPResource>();
+			for(HAPManualStandaloneResponse response : allContent) {
+				HAPBundleForBrick bundleForBrick = m_manualBrickMan.buildBundle(response.getContentProvider(), runtimeInfo);
+				HAPBundleForExecute bundleForExecutable = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
+			
+				HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", response.getId());
+				HAPResourceData resourceData = new HAPResourceDataImpTransient(bundleForExecutable);
+				HAPResource resource = new HAPResource(resourceId, resourceData, null);
+				
+				resourcesInfo.put(resourceId, new HAPResourceInfo(resourceId));
+				resources.add(resource);
+			}
+			
+			HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, resources);
+			return HAPServiceData.createSuccessData(gatewayOutput);
 		}
-		
-		HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)this.m_runtimeManager.getLoadResourceAdapter(runtimeInfo).buildLoadResourceData(resourcesInfo, resources);
-		return HAPServiceData.createSuccessData(gatewayOutput);
+		return null;
 	}
 }
