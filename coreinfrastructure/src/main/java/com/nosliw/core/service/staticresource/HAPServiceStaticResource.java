@@ -1,18 +1,22 @@
 package com.nosliw.core.service.staticresource;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
-@Service
 public class HAPServiceStaticResource {
 
+	private String m_staticServerUrl;
+	
+	public HAPServiceStaticResource(String staticServerUrl) {
+		this.m_staticServerUrl = staticServerUrl;
+	}
+	
 	public HAPServiceData getStatic(HAPStaticRequest staticRequest) {
 		RestTemplate restTemplate = new RestTemplate();
-		String responsStr = restTemplate.postForObject("http://localhost:8081/nosliw/static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = restTemplate.postForObject(m_staticServerUrl+"static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
         return this.processResponse(responsStr);
 	}
 	
@@ -20,7 +24,7 @@ public class HAPServiceStaticResource {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		StringBuffer url = new StringBuffer("http://localhost:8081/nosliw/upload");
+		StringBuffer url = new StringBuffer(this.m_staticServerUrl+"upload");
 		StringBuffer parms = new StringBuffer();
 		int num = 0;
 		if(domain!=null) {

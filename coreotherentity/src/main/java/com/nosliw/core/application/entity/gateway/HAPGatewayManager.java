@@ -1,4 +1,4 @@
-package com.nosliw.core.gateway;
+package com.nosliw.core.application.entity.gateway;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.exception.HAPServiceData;
+import com.nosliw.core.gateway.HAPGateway;
+import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

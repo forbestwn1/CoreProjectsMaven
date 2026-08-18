@@ -11,10 +11,10 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
+import com.nosliw.core.application.entity.gateway.HAPGatewayManager;
+import com.nosliw.core.application.entity.resource.HAPGatewayResource;
 import com.nosliw.core.gateway.HAPGatewayImp;
-import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
-import com.nosliw.core.resource.infrastructure.HAPGatewayResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute

@@ -13,6 +13,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
+import com.nosliw.core.application.division.story.api.HAPMiniAppConfigure;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
@@ -82,13 +83,16 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPStoryService m_storyService;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService) {
+	private HAPMiniAppConfigure m_miniAppConfigure;
+	
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
 		this.m_uiTagService = uiTagService;
 		this.m_dataSourceService = dataSourceService;
 		this.m_storyService = storyService;
+		this.m_miniAppConfigure = miniAppConfigure;
 		
 		this.m_stepDefinitions = new ArrayList<HAPStoryWizzardStepDefinition>();
 		
@@ -343,9 +347,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			this.m_storyService.convertDesignToManual(design, null);
 			
 			HAPStoryDesignMetadataStepEndDataSourceDrive stepMetaData = new HAPStoryDesignMetadataStepEndDataSourceDrive();
-			stepMetaData.setUrl("http://www.google.ca");
+			String url = this.m_miniAppConfigure.getUrl()+"?"+"resourceType="+design.getBrickId().getBrickTypeId().getBrickType()+"&resourceId="+design.getBrickId().getId()+";"+design.getBrickId().getDivision();
+			stepMetaData.setUrl(url);
 			design.newEndStep(stepMetaData);
-			
 		}
 		
 	}

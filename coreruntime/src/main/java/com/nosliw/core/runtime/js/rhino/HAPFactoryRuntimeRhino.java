@@ -2,7 +2,7 @@ package com.nosliw.core.runtime.js.rhino;
 
 import java.util.List;
 
-import com.nosliw.core.gateway.HAPGatewayManager;
+import com.nosliw.core.application.entity.gateway.HAPGatewayManager;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
 import com.nosliw.core.runtime.execute.HAPFactoryExecutorRuntime;
 

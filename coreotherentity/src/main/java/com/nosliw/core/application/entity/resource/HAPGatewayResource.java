@@ -1,4 +1,4 @@
-package com.nosliw.core.resource.infrastructure;
+package com.nosliw.core.application.entity.resource;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

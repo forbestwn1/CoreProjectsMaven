@@ -16,11 +16,11 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.common.jslibrary.HAPResourceDataJSLibrary;
+import com.nosliw.core.application.entity.resource.HAPGatewayResource;
 import com.nosliw.core.resource.HAPConfigureResource;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceDataJSValue;
 import com.nosliw.core.resource.HAPResourceInfo;
-import com.nosliw.core.resource.infrastructure.HAPGatewayResource;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 
