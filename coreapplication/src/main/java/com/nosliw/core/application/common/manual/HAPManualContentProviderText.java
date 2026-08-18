@@ -127,6 +127,16 @@ class HAPManualContentProviderText_Parser implements HAPParserEntity{
 			}
 		}
 		
+		JSONObject localContentInfosJsonObj =  jsonObj.optJSONObject(HAPManualContentProviderText.LOCALCONTENTINFO);
+		if(localContentInfosJsonObj!=null) {
+			for(Object key : localContentInfosJsonObj.keySet()) {
+				String name = (String)key;
+				HAPManualInfoContent content = new HAPManualInfoContent();
+				content.buildObject(localContentInfosJsonObj.getJSONObject(name), HAPSerializationFormat.JSON);
+				out.getLocalBrickContents().put(name, content);
+			}
+		}
+		
 		JSONArray eventExposeJsonArray = jsonObj.optJSONArray(HAPManualContentProviderText.EVENTEXPOSE);
 		for(int i=0; i<eventExposeJsonArray.length(); i++) {
 			out.addExposedEvent((HAPEventEmitter)parseService.parseEntityJSONExplicit(eventExposeJsonArray.getJSONObject(i), HAPEventEmitter.class.getName()));
