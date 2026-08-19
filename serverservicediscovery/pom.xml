@@ -4,7 +4,19 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
   </parent>
-  <artifactId>apiserver</artifactId>
-  <name>apiserver</name>
+  <artifactId>serverservicediscovery</artifactId>
+  <name>serverservicediscovery</name>
+
+  <dependencies>
+
+    <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+    </dependency>
+
+  </dependencies>
+
+
 </project>
