@@ -10,7 +10,6 @@ import java.util.Collections;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +29,6 @@ import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 
-
 @RestController
 @RequestMapping("/nosliw")
 public class HAPStaticAPI {
@@ -40,13 +38,12 @@ public class HAPStaticAPI {
 	@Autowired
 	private HAPServiceParseEntity m_paserEntity;
 	
-	@Value("${application.directory.temp}")
-	private String m_tempDir;
+	@Autowired
+	private HAPStaticConfigure m_configure;
+	
 	
 	@PostMapping("/static")
     public String gateway(@RequestBody String requestJson) throws IOException, URISyntaxException {
-		HAPServiceData out = null;
-
 		HAPStaticResponse response = new HAPStaticResponse();
  
 		HAPStaticRequest request = parseStaticRequest(new JSONObject(URLDecoder.decode(requestJson)));
@@ -68,7 +65,7 @@ public class HAPStaticAPI {
 				
 				for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
 					String folderPath = childFile.getAbsolutePath();
-					String relativePath = folderPath.substring(m_tempDir.length());
+					String relativePath = folderPath.substring(m_configure.getDirectoryTemporary().length());
 					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForTemp(relativePath))));
 				}
 			}
@@ -77,11 +74,23 @@ public class HAPStaticAPI {
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
 
+	private String getUriPathForTemp(String path) {
+		return this.normaliizePath(m_configure.getTemporaryStaticRootUrl()+ path);
+	}
+
+	private String getFilePathForStatic(String domain, String name, String version) {
+		return this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
+	}
+	
+	private String getUriPathForStatic(String domain, String name, String version) {
+		return m_configure.getStaticRootUrl() + this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
+	}
+
 	@PostMapping("/upload")
     public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
 		HAPStaticResponse response = new HAPStaticResponse();
 
-		String path = m_tempDir + "/" + getFilePathForTemp(domain, name);
+		String path = m_configure.getDirectoryTemporary() + "/" + getFilePathForTemp(domain, name);
         HAPUtilityFile.writeFile(path, content);
 		
         HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfo(new URI(getUriPathForTemp(domain, name)));
@@ -89,10 +98,6 @@ public class HAPStaticAPI {
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
 	
-
-	private String getUriPathForTemp(String path) {
-		return this.normaliizePath("http://localhost:8081/temp/"+ path);
-	}
 
 	private HAPStaticRequest parseStaticRequest(JSONObject requestJsonObj) {
 		HAPStaticRequest out = new HAPStaticRequest();
@@ -104,16 +109,6 @@ public class HAPStaticAPI {
         return out;		
 	}
 	
-	
-	private String getFilePathForStatic(String domain, String name, String version) {
-		return this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
-	}
-	
-	private String getUriPathForStatic(String domain, String name, String version) {
-		return "http://localhost:8081/static/"+this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
-	}
-
-	
 	private String getFilePathForTemp(String domain, String name) {
 		String path = this.domainToPath(domain);
 		return path==null?"":(path+"/") + name;
@@ -121,7 +116,7 @@ public class HAPStaticAPI {
 	
 	private String getUriPathForTemp(String domain, String name) {
 		String path = this.domainToPath(domain);
-		return "http://localhost:8081/temp/"+ (path==null?"":(path+"/")) + name;
+		return m_configure.getTemporaryStaticRootUrl() + (path==null?"":(path+"/")) + name;
 	}
 
 	private String domainToPath(String domain) {

@@ -79,7 +79,6 @@ public class HAPStoryService{
 		
 		if(out==null) {
 			out = this.compileToBundle(brickId, runtimeInfo);
-			HAPUtilityExport.exportBundle(out, bundleFolder, HAPSerializationFormat.JSON);
 		}
 		return out;
 	}
@@ -99,7 +98,13 @@ public class HAPStoryService{
 				m_resteTemplate);
 		
 		HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)serviceData.getData();
-		return (HAPBundleForBrick)m_parseService.parseEntityJSONExplicit((JSONObject)gatewayOutput.getData(), HAPBundleForBrick.class.getName());
+		HAPBundleForBrick out = (HAPBundleForBrick)m_parseService.parseEntityJSONExplicit((JSONObject)gatewayOutput.getData(), HAPBundleForBrick.class.getName());
+
+		Path rootPath = this.m_storyDesignMan.getStoryStorageRootPath();
+		Path bundleFolder = HAPUtilityLocation.getBundleFolder(rootPath, brickId);
+		HAPUtilityExport.exportBundle(out, bundleFolder, HAPSerializationFormat.JSON);
+		
+		return out;
 	}
 	
 	

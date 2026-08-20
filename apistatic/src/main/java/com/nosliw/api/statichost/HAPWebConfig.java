@@ -1,6 +1,6 @@
 package com.nosliw.api.statichost;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -8,13 +8,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class HAPWebConfig implements WebMvcConfigurer {
 	
-	@Value("${application.directory.temp}")
-	private String m_tempDir;
-	
+	@Autowired
+	private HAPStaticConfigure m_configure;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/temp/**")
-                .addResourceLocations("file:///"+m_tempDir)
+                .addResourceLocations("file:///"+m_configure.getDirectoryTemporary())
                 .setCachePeriod(0);
         
         registry.addResourceHandler("/static/**")
