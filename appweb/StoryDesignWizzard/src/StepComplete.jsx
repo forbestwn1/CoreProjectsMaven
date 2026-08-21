@@ -7,9 +7,11 @@ export default function StepComplete({step}) {
 
         <div>
 
-          Design Finished 
+          Congratulations! A App has been created for you. You can view it at the following URL:
           <br/>
-          {step.url}
+          <a href={step.url} target="_blank" rel="noopener noreferrer">
+            My App
+          </a>
 
         </div>
         

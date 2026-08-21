@@ -1,92 +1,92 @@
 {
+  "eventProcess": {},
+  "valueStructureDomain": {
+    "definitionByRuntime": {},
+    "valueStructureDefinition": {},
+    "valueStructureRuntime": {}
+  },
   "mainBrick": {
-    "id": "#main",
-    "name": "#main",
     "displayName": "#main",
-    "info": {},
+    "name": "#main",
+    "id": "#main",
     "brick": {
-      "domain": "brick.manual",
-      "brickType": {
-        "brickType": "taskTaskScript",
-        "version": "1.0.0",
-        "key": "taskTaskScript;1.0.0"
+      "otherInternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 1
       },
       "internalValuePort": {
         "valuePortGroup": [],
         "idIndex": 0
       },
+      "eventId": [],
+      "domain": "brick.manual",
       "externalValuePort": {
         "valuePortGroup": [],
         "idIndex": 0
       },
+      "brickType": {
+        "brickType": "taskTaskScript",
+        "version": "1.0.0",
+        "key": "taskTaskScript;1.0.0"
+      },
+      "otherExternalValuePortsContainer": {
+        "valuePortGroup": [],
+        "idIndex": 1
+      },
       "attribute": [
         {
-          "id": "scriptResourceId",
-          "name": "scriptResourceId",
+          "adapter": [],
           "displayName": "scriptResourceId",
-          "info": {},
           "valueWrapper": {
             "valueType": "value",
             "value": {
               "resourceTypeId": {
-                "resourceType": "script",
-                "version": "1.0.0"
+                "version": "1.0.0",
+                "resourceType": "script"
               },
               "id": "*task_complex_sequence_test"
             }
           },
-          "adapter": []
+          "name": "scriptResourceId",
+          "id": "scriptResourceId",
+          "info": {}
         },
         {
-          "id": "parm",
-          "name": "parm",
+          "adapter": [],
           "displayName": "parm",
-          "info": {},
           "valueWrapper": {
             "valueType": "value",
             "value": {
               "tasks": "tasks"
             }
           },
-          "adapter": []
+          "name": "parm",
+          "id": "parm",
+          "info": {}
         }
       ],
-      "eventId": [],
-      "otherInternalValuePortsContainer": {
-        "valuePortGroup": [],
-        "idIndex": 1
-      },
-      "otherExternalValuePortsContainer": {
-        "valuePortGroup": [],
-        "idIndex": 1
-      },
       "valueContext": {
         "part": [],
         "valueStructureRuntimeIdByName": {},
         "valueStructureRuntimeNameById": {}
       }
+    },
+    "info": {}
+  },
+  "eventExport": [],
+  "exportResource": [
+    {
+      "displayName": "default",
+      "name": "default",
+      "id": "default",
+      "pathFromRoot": "#main",
+      "info": {}
     }
-  },
-  "valueStructureDomain": {
-    "valueStructureDefinition": {},
-    "valueStructureRuntime": {},
-    "definitionByRuntime": {}
-  },
+  ],
   "dynamic": {
     "element": {}
   },
   "aliasMapping": {},
   "branchBricks": {},
-  "eventProcess": {},
-  "eventExport": [],
-  "commandExport": {},
-  "exportResource": [
-    {
-      "id": "default",
-      "name": "default",
-      "displayName": "default",
-      "info": {},
-      "pathFromRoot": "#main"
-    }
-  ]
+  "commandExport": {}
 }

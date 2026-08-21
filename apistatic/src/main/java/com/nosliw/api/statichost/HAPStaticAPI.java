@@ -90,7 +90,7 @@ public class HAPStaticAPI {
     public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
 		HAPStaticResponse response = new HAPStaticResponse();
 
-		String path = m_configure.getDirectoryTemporary() + "/" + getFilePathForTemp(domain, name);
+		String path = m_configure.getDirectoryTemporary() + getFilePathForTemp(domain, name);
         HAPUtilityFile.writeFile(path, content);
 		
         HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfo(new URI(getUriPathForTemp(domain, name)));

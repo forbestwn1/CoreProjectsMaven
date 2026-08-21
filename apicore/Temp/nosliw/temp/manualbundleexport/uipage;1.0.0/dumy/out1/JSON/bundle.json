@@ -35,11 +35,67 @@
                 "key": "uicontent;1.0.0"
               },
               "internalValuePort": {
-                "valuePortGroup": [],
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.5
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
                 "idIndex": 0
               },
               "externalValuePort": {
-                "valuePortGroup": [],
+                "valuePortGroup": [
+                  {
+                    "id": "valueContext",
+                    "name": "valueContext",
+                    "displayName": "valueContext",
+                    "info": {},
+                    "groupType": "valueContext",
+                    "valuePort": [
+                      {
+                        "id": "0",
+                        "name": "0",
+                        "displayName": "0",
+                        "info": {},
+                        "type": "valueContext",
+                        "ioDirection": "BOTH",
+                        "valueStructure": [
+                          "2"
+                        ],
+                        "valueStructureInfo": [
+                          {
+                            "valueStructureId": "2",
+                            "priority": 0.5
+                          }
+                        ]
+                      }
+                    ],
+                    "idIndex": 1
+                  }
+                ],
                 "idIndex": 0
               },
               "attribute": [
@@ -167,7 +223,12 @@
                   "info": {},
                   "valueWrapper": {
                     "valueType": "value",
-                    "value": []
+                    "value": [
+                      {
+                        "UIId": "4",
+                        "scriptId": "item0"
+                      }
+                    ]
                   },
                   "adapter": []
                 },
@@ -201,7 +262,89 @@
                   "valueWrapper": {
                     "valueType": "value",
                     "value": {
-                      "item": {}
+                      "item": {
+                        "item0": {
+                          "id": "item0",
+                          "name": "item0",
+                          "displayName": "item0",
+                          "info": {},
+                          "value": {
+                            "variableInfos": {
+                              "0": {
+                                "variableKey": "0",
+                                "variableId": {
+                                  "type": "valuePortVarId",
+                                  "rootElementId": {
+                                    "valuePortId": {
+                                      "valuePortSide": "internal",
+                                      "valuePortId": {
+                                        "group": "valueContext",
+                                        "name": "0"
+                                      },
+                                      "key": "_internal_valueContext.0"
+                                    },
+                                    "valueStructureId": "2",
+                                    "rootName": "page1_public_string"
+                                  },
+                                  "key": "page1_public_string;2"
+                                }
+                              }
+                            },
+                            "entityType": "scriptExpression",
+                            "type": "literate",
+                            "segment": [
+                              {
+                                "type": "textSeg",
+                                "id": "1",
+                                "content": " value : "
+                              },
+                              {
+                                "type": "scriptComplex",
+                                "id": "2",
+                                "segment": [
+                                  {
+                                    "type": "dataExpression",
+                                    "id": "3",
+                                    "dataExpressionId": "item0"
+                                  },
+                                  {
+                                    "type": "scriptSimple",
+                                    "id": "4",
+                                    "part": [
+                                      ".value"
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "textSeg",
+                                "id": "5",
+                                "content": " "
+                              }
+                            ],
+                            "varKeys": [],
+                            "dataExpressionContainer": {
+                              "item": {
+                                "item0": {
+                                  "id": "item0",
+                                  "name": "item0",
+                                  "displayName": "item0",
+                                  "info": {},
+                                  "value": {
+                                    "operand": {
+                                      "type": "variable",
+                                      "outputCriteria": "test.string;1.0.0",
+                                      "variableName": "page1_public_string",
+                                      "variableKey": "0"
+                                    },
+                                    "variableInfos": {}
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "adapter": []
@@ -224,7 +367,7 @@
                   "info": {},
                   "valueWrapper": {
                     "valueType": "value",
-                    "value": "\u0026lt;style nosliwid\u003d\u0026quot;1\u0026quot;\u0026gt;\t\t\t.red1 {\t\t\t  color: red;\t\t\t}\t\t\t\t\t\u0026lt;/style\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span class\u003d\u0026quot;red1\u0026quot; nosliwid\u003d\u0026quot;2\u0026quot;\u0026gt;\u0026lt;span\u0026gt;HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\u0026lt;/span\u0026gt;\u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;page nosliwid\u003d\u0026quot;3\u0026quot;\u0026gt;  \u0026lt;/page\u0026gt;"
+                    "value": "\u0026lt;style nosliwid\u003d\u0026quot;1\u0026quot;\u0026gt;\t\t\t.red1 {\t\t\t  color: red;\t\t\t}\t\t\t\t\t\u0026lt;/style\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span class\u003d\u0026quot;red1\u0026quot; nosliwid\u003d\u0026quot;2\u0026quot;\u0026gt;\u0026lt;span\u0026gt;HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH\u0026lt;/span\u0026gt;\u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;br nosliwid\u003d\u0026quot;3\u0026quot;\u0026gt;\u0026lt;span nosliwid\u003d\u0026quot;4\u0026quot;\u0026gt;\u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;\u0026lt;span\u0026gt; \u0026lt;/span\u0026gt;"
                   },
                   "adapter": []
                 }
@@ -239,9 +382,30 @@
                 "idIndex": 0
               },
               "valueContext": {
-                "part": [],
-                "valueStructureRuntimeIdByName": {},
-                "valueStructureRuntimeNameById": {}
+                "part": [
+                  {
+                    "info": {},
+                    "type": "simple",
+                    "partInfo": {
+                      "name": "default",
+                      "priority": 5
+                    },
+                    "structure": [
+                      {
+                        "runtimeId": "2",
+                        "structureInfo": {
+                          "scope": "public"
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "valueStructureRuntimeIdByName": {
+                  "2": "2"
+                },
+                "valueStructureRuntimeNameById": {
+                  "2": "2"
+                }
               }
             }
           },
@@ -286,9 +450,46 @@
     }
   },
   "valueStructureDomain": {
-    "valueStructureDefinition": {},
-    "valueStructureRuntime": {},
-    "definitionByRuntime": {}
+    "valueStructureDefinition": {
+      "1": {
+        "root": {
+          "page1_public_string": {
+            "id": "page1_public_string",
+            "name": "page1_public_string",
+            "displayName": "page1_public_string",
+            "info": {},
+            "definition": {
+              "type": "data",
+              "processed": "false",
+              "data": {
+                "type": "writable",
+                "criteria": "test.string;1.0.0",
+                "isMultipleAllowed": false,
+                "rule": []
+              },
+              "status": "close"
+            }
+          }
+        }
+      }
+    },
+    "valueStructureRuntime": {
+      "2": {
+        "id": "2",
+        "name": "2",
+        "displayName": "2",
+        "info": {},
+        "initValue": {
+          "page1_public_string": {
+            "dataTypeId": "test.string;1.0.0",
+            "value": "default value of page_public_string2"
+          }
+        }
+      }
+    },
+    "definitionByRuntime": {
+      "2": "1"
+    }
   },
   "dynamic": {
     "element": {}

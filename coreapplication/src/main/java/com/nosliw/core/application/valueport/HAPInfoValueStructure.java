@@ -41,7 +41,7 @@ public class HAPInfoValueStructure extends HAPSerializableImp{
 	protected boolean buildObjectByJson(Object obj){
 		JSONObject jsonObj = (JSONObject)obj;
 		this.m_valueStructureId = (String)jsonObj.opt(VALUESTRUCTUREID);
-		this.m_priority = (double)jsonObj.opt(PRIORITY);
+		this.m_priority = jsonObj.optDouble(PRIORITY, 0);
 		return true;  
 	}
 

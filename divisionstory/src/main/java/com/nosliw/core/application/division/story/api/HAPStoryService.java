@@ -10,11 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.exception.HAPServiceData;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.common.gateway.HAPUtilityGateway;
@@ -69,13 +67,13 @@ public class HAPStoryService{
 		return contentProvider;
 	}
 
-	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		HAPBundleForBrick out = null;
+	public JSONObject getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+		JSONObject out = null;
 		
 		Path rootPath = this.m_storyDesignMan.getStoryStorageRootPath();
 		Path bundleFolder = HAPUtilityLocation.getBundleFolder(rootPath, brickId);
 		
-		out = HAPUtilityExport.importBundle(bundleFolder, HAPSerializationFormat.JSON, m_parseService);
+		out = HAPUtilityExport.importBundleToJsonObj(bundleFolder);
 		
 		if(out==null) {
 			out = this.compileToBundle(brickId, runtimeInfo);
@@ -83,7 +81,7 @@ public class HAPStoryService{
 		return out;
 	}
 
-	public HAPBundleForBrick compileToBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
+	public JSONObject compileToBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		Path manualFolder = HAPUtilityLocation.getManualFolder(this.getStoryStorageRootPath(), brickId);
 		HAPManualContentProviderText contentProviderText = HAPManualUtilityExporterContentProvider.importContentText(manualFolder, m_parseService);
 		
@@ -98,11 +96,11 @@ public class HAPStoryService{
 				m_resteTemplate);
 		
 		HAPGatewayOutput gatewayOutput = (HAPGatewayOutput)serviceData.getData();
-		HAPBundleForBrick out = (HAPBundleForBrick)m_parseService.parseEntityJSONExplicit((JSONObject)gatewayOutput.getData(), HAPBundleForBrick.class.getName());
+		JSONObject out = (JSONObject)gatewayOutput.getData();
 
 		Path rootPath = this.m_storyDesignMan.getStoryStorageRootPath();
 		Path bundleFolder = HAPUtilityLocation.getBundleFolder(rootPath, brickId);
-		HAPUtilityExport.exportBundle(out, bundleFolder, HAPSerializationFormat.JSON);
+		HAPUtilityExport.exportBundle(out, bundleFolder);
 		
 		return out;
 	}

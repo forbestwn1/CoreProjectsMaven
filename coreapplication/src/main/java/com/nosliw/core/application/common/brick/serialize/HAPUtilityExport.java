@@ -14,19 +14,27 @@ import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPUtilityExport{
 
-	public static void exportBundle(HAPBundleForBrick bundle, Path exportFolder, HAPSerializationFormat format) {
-		Path exportForderFormat = HAPUtilityFileNio.buildPath(exportFolder, format.toString());
+	public static void exportBundle(HAPBundleForBrick bundle, Path exportFolder) {
+		exportBundle(bundle.toStringValue(HAPSerializationFormat.JSON), exportFolder);
+	}
+	
+	public static void exportBundle(String bundleJsonStr, Path exportFolder) {
+		exportBundle(new JSONObject(bundleJsonStr), exportFolder);
+	}
+	
+	public static void exportBundle(JSONObject bundle, Path exportFolder) {
+		Path exportForderFormat = HAPUtilityFileNio.buildPath(exportFolder, HAPSerializationFormat.JSON.toString());
 		HAPUtilityFileNio.deletePath(exportForderFormat);
-		HAPUtilityFileNio.writeJsonFile(exportForderFormat, "bundle.json", bundle.toStringValue(format));
+		HAPUtilityFileNio.writeJsonFile(exportForderFormat, "bundle.json", bundle.toString());
 	} 
 		
-	public static HAPBundleForBrick importBundle(Path importFolder, HAPSerializationFormat format, HAPServiceParseEntity parseService) {
-		HAPBundleForBrick out = null;
+	public static String importBundle(Path importFolder) {
+		String out = null;
 		try {
-			Path importFile = HAPUtilityFileNio.buildPath(importFolder, format.toString(), "bundle.json");
+			Path importFile = HAPUtilityFileNio.buildPath(importFolder, HAPSerializationFormat.JSON.toString(), "bundle.json");
 			if(HAPUtilityFileNio.isPathExists(importFile)) {
 				String content = HAPUtilityFileNio.readFile(importFile);
-				out = (HAPBundleForBrick)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPBundleForBrick.class.getName());
+				out = content;
 			}
 		}
 		catch(Exception e) {
@@ -34,6 +42,14 @@ public class HAPUtilityExport{
 		}
 		
 		return out;
+	}
+
+	public static JSONObject importBundleToJsonObj(Path importFolder) {
+		String content = importBundle(importFolder);
+		if(content!=null) {
+			return new JSONObject(content);
+		}
+		return null;
 	}
 
 	public static HAPBrick parseBrickJson(JSONObject jsonObj, HAPServiceParseEntity parseService) {

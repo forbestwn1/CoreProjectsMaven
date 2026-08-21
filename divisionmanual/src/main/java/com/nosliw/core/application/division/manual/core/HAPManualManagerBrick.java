@@ -9,25 +9,17 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.HAPAdapter;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
-import com.nosliw.core.application.brick.HAPWrapperValue;
-import com.nosliw.core.application.brick.HAPWrapperValueOfBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.common.manual.HAPManualContentProvider;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderFile;
 import com.nosliw.core.application.common.manual.HAPManualDefinitionUtilityBrickLocation;
+import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
@@ -37,7 +29,6 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualPluginP
 import com.nosliw.core.application.division.manual.core.process.HAPManualProcessBundle;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPPluginDivision;
-import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -129,49 +120,11 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 
 		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
-		HAPUtilityExport.exportBundle(out, this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON);
-		HAPBundleForBrick out1 = HAPUtilityExport.importBundle(this.getBundleExportFolder(brickId), HAPSerializationFormat.JSON, m_parseService);
-		if(out1!=null) {
-			for(String rootName : out1.getAllRootBrickName()) {
-				HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(out1, rootName, new HAPHandlerDownward() {
-
-					@Override
-					public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-						
-						HAPBrick brick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
-						if(brick instanceof HAPManualBrick) {
-							HAPManualBrick manualBrick = (HAPManualBrick)brick;
-							manualBrick.setBundle(out1);
-							manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
-						}
-						
-						HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
-						if(attr!=null) {
-							for(HAPAdapter adapter : attr.getAdapters()) {
-								HAPWrapperValue valueWrapper = adapter.getValueWrapper();
-								if(HAPConstantShared.ENTITYATTRIBUTE_VALUETYPE_BRICK.equals(valueWrapper.getValueType())) {
-									HAPBrick brickInAdapter = ((HAPWrapperValueOfBrick)	valueWrapper).getBrick();
-									if(brickInAdapter instanceof HAPManualBrick) {
-										HAPManualBrick manualBrick = (HAPManualBrick)brickInAdapter;
-										manualBrick.setBundle(out1);
-										manualBrick.setManualBrickManager((HAPManualManagerBrick)data);
-									}
-								}
-							}
-						}
-						
-						return true;
-					}
-
-					@Override
-					public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-					}
-					
-				}, m_brickManager, this);
-			}
-		}
+		HAPUtilityExport.exportBundle(out, this.getBundleExportFolder(brickId));
 		
-		HAPUtilityExport.exportBundle(out1, HAPUtilityFileNio.buildPath(this.getBundleExportFolder(brickId), "out1"), HAPSerializationFormat.JSON);
+		HAPBundleForBrick out1 = HAPManualUtilityExport.importBundle(this.getBundleExportFolder(brickId), m_parseService, m_brickManager, this);
+		
+		HAPUtilityExport.exportBundle(out1, HAPUtilityFileNio.buildPath(this.getBundleExportFolder(brickId), "out1"));
 		
 		return out1;
 	}

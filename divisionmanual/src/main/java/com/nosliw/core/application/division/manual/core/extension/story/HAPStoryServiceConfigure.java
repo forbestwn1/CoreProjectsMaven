@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.story;
+package com.nosliw.core.application.division.manual.core.extension.story;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

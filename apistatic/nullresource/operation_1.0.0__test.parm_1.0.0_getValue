@@ -1,0 +1,39 @@
+
+if(typeof nosliw!='undefined' && nosliw.runtime!=undefined && nosliw.runtime.getResourceService()!=undefined) nosliw.runtime.getResourceService().importResource({"id":{"resourceTypeId":{"resourceType":"operation",
+"version":"1.0.0"
+},
+"id":"*test.parm;1.0.0;getValue"
+},
+"children":[],
+"dependency":{},
+"info":{}
+}, {"id":"1718297470514",
+"value":
+function (parms, context) {
+    return this.value.data;
+}
+,
+"operationId":"1718297443296",
+"operationName":"getValue",
+"dataTypeName":"test.parm;1.0.0",
+"operationInfo":{"name":"getValue",
+"type":"normal",
+"output":{"isBase":"false",
+"id":"1718297443298",
+"type":"out",
+"dataTypeId":"test.parm;1.0.0",
+"operationId":"1718297443296"
+},
+"parms":{"base":{"isBase":"true",
+"id":"1718297443297",
+"type":"parm",
+"dataTypeId":"test.parm;1.0.0",
+"operationId":"1718297443296",
+"name":"base"
+}
+},
+"baseParm":"base"
+}
+}, {"loadPattern":"file"
+});
+

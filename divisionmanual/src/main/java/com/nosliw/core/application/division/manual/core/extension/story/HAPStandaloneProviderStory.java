@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.story;
+package com.nosliw.core.application.division.manual.core.extension.story;
 
 import java.util.List;
 
