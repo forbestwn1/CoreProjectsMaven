@@ -1,0 +1,74 @@
+[{
+	"profile": {
+		"id": "toronto_program_dropin",
+		"status":"disabled",
+		"name": "Toronto Dropin Program",
+		"description" : "Toronto Dropin Program",
+		"tag" : ["public"],
+		"taskInterface" : {
+			"request" : [
+				{
+					"name" : "locationId",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "locationName",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "program",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "daterange",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "age",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "distance",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "fee",
+					"dataDefinition" : {
+					}
+				},
+				{
+					"name" : "indoor",
+					"dataDefinition" : {
+					}
+				},
+			],
+			"result" : {
+				"success": {
+					"output": [
+						{
+							"name" : "outputStringInService1",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
+						},
+						{
+							"name" : "outputMapInService1",
+  							"dataDefinition" : {
+    							"criteria" : "test.map;1.0.0%%||stringAttr1:test.string;1.0.0,stringAttr2:test.string;1.0.0||%%"
+    						}
+						}
+					]
+				}
+			},
+		}
+	},
+	"runtime": {
+	    "implementation" : "com.nosliw.service.test.map.HAPServiceImp",
+	}
+}]

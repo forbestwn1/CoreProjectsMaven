@@ -13,11 +13,11 @@ public class HAPModuleRuntimeJS {
 	
 	private HAPDataAccessRuntimeJS m_runtimeJSDataAccess;
 	
-	public HAPModuleRuntimeJS() {
+	public HAPModuleRuntimeJS(HAPModuleDataType moduleDataType) {
 		HAPValueInfoManager valueInfoManager = HAPValueInfoManager.getInstance(); 
 		
 		//init data type module
-		m_dataTypeModule = new HAPModuleDataType();
+		m_dataTypeModule = moduleDataType;
 		m_dataTypeModule.init(valueInfoManager);
 
 		//value info

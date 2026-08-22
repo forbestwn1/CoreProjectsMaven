@@ -37,13 +37,11 @@
   </properties>
   
   <dependencies>
-
     <dependency>
-       <groupId>net.sourceforge.cssparser</groupId>
-       <artifactId>cssparser</artifactId>
-       <version>0.9.29</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-
+    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -54,6 +52,18 @@
         <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
   	
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>9.0.0</version> <!-- Replace with the latest version number -->
+    </dependency>
+
+    <dependency>
+       <groupId>net.sourceforge.cssparser</groupId>
+       <artifactId>cssparser</artifactId>
+       <version>0.9.29</version>
+    </dependency>
+
     <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
