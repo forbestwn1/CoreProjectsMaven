@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.nosliw</groupId>
-  <artifactId>serverservicediscovery</artifactId>
+  <artifactId>serverconfigure</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>serverservicediscovery</name>
+  <name>serverconfigure</name>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -17,11 +17,12 @@
     <spring-cloud.version>2025.0.0</spring-cloud.version>
   </properties>
 
+
   <dependencies>
 
     <dependency>
         <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        <artifactId>spring-cloud-config-server</artifactId>
     </dependency>
 
   </dependencies>
