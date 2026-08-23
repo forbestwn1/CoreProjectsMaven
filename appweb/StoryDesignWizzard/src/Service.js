@@ -9,14 +9,19 @@ export const nextStepDesignService = function(designId, step){
 			"step" : step
 		}
 	};
-	const url = "http://localhost:8083/nosliw/story/design/build";
+	const url = getStoryBaseUrl() + "nosliw/story/design/build"; //"http://localhost:8083/nosliw/story/design/build";
 	return axios.post(url, payload, {});
 };
 
 export const newDesignService = function(payload = {}, config = {}){
-	const url = "http://localhost:8083/nosliw/story/design/new?builderId=dataSourceDrive&brickType=module&brickVersion=1.0.0";
+	const url = getStoryBaseUrl() + "nosliw/story/design/new?builderId=dataSourceDrive&brickType=module&brickVersion=1.0.0";
 	return axios.post(url, payload, config);
 };
+
+const getStoryBaseUrl = function(){
+	return nosliw.getConfigureValue("storyUrl");
+}
+
 /**
  * 
  */

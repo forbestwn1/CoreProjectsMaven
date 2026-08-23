@@ -98,7 +98,14 @@ public class HAPStaticAPI {
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
 			else if(configureName.equals("story")) {
-				
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null)));
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null)));
+
+				Map<String, String> urlData = new LinkedHashMap<String, String>();
+				urlData.put("gatewayUrl", "http://localhost:8080/");
+				urlData.put("staticUrl", "http://localhost:8081/");
+				urlData.put("storyUrl", "http://localhost:8083/");
+				out.add(new HAPStaticResponseInfoData(urlData));
 			}
 		}
 		return out;
