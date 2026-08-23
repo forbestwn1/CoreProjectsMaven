@@ -33,6 +33,9 @@ public class HAPStaticResponseInfo extends HAPSerializableImp implements HAPEnti
 		jsonMap.put(TYPE, this.m_type);
 	}
 
+	public static HAPStaticResponseInfo parse(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		return (HAPStaticResponseInfo)parseService.parseEntityJSONImplicitAttribute(jsonObj, TYPE, DOMAIN_PARSE);
+	}
 	
 }
 

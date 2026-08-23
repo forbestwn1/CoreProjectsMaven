@@ -5,6 +5,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 public class HAPServiceStaticResource {
 
@@ -12,14 +13,17 @@ public class HAPServiceStaticResource {
 	
 	private RestTemplate m_restTemplate;
 	
-	public HAPServiceStaticResource(String staticServerUrl, RestTemplate restTemplate) {
+	private HAPServiceParseEntity m_parseServices;
+	
+	public HAPServiceStaticResource(String staticServerUrl, RestTemplate restTemplate, HAPServiceParseEntity parseServices) {
 		this.m_restTemplate = restTemplate;
 		this.m_staticServerUrl = staticServerUrl;
+		this.m_parseServices = parseServices;
 	}
 	
 	public HAPServiceData getStatic(HAPStaticRequest staticRequest) {
 		String responsStr = this.m_restTemplate.postForObject(m_staticServerUrl+"fetch", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
-        return this.processResponse(responsStr);
+        return this.processResponse(responsStr, this.m_parseServices);
 	}
 	
 	public HAPServiceData upload(String content, String domain, String name) {
@@ -44,15 +48,13 @@ public class HAPServiceStaticResource {
 		}
 		
 		String responsStr = this.m_restTemplate.postForObject(url.toString(), content, String.class);
-        return this.processResponse(responsStr);
+        return this.processResponse(responsStr, this.m_parseServices);
 	}
 
-	private HAPServiceData processResponse(String responsStr) {
+	private HAPServiceData processResponse(String responsStr, HAPServiceParseEntity parseServices) {
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
-		
-		HAPStaticResponse staticResponse = new HAPStaticResponse();
-		staticResponse.buildObject(serviceData.getData(), HAPSerializationFormat.JSON);
+		HAPStaticResponse staticResponse = HAPStaticResponse.parse((JSONObject)serviceData.getData(), parseServices);
 		return HAPServiceData.createSuccessData(staticResponse);
 	}
 	
