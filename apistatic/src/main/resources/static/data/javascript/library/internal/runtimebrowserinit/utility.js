@@ -2,7 +2,8 @@ nosliw.utility = function(){
 	
 	var loc_requestLoadFileResources = function(staticInfos, processResult, callBackFunction){
 		$.ajax({
-			url : "http://localhost:8081/nosliw/static/fetch",      //loc_out.getServerBase()+"nosliw/static",
+			url : nosliw.getConfigureValue("staticUrl", "/")+"nosliw/static/fetch",
+//			url : "http://localhost:8081/nosliw/static/fetch",      //loc_out.getServerBase()+"nosliw/static",
 			type : "POST",
 			dataType: "json",
 			data : JSON.stringify(staticInfos),
@@ -78,7 +79,8 @@ nosliw.utility = function(){
 		
 		
 		getServerBase : function(){
-			return nosliw.getConfigureValue("serverBase", "");
+			return nosliw.getConfigureValue("gatewayUrl", "");
+//			return nosliw.getConfigureValue("serverBase", "");
 		},	
 			
 		buildNosliwUrl : function(url){

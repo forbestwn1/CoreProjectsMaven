@@ -9,6 +9,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 
 @HAPEntityWithAttribute
 public class HAPStaticRequestInfoLibrary extends HAPStaticRequestInfo{
@@ -29,10 +30,10 @@ public class HAPStaticRequestInfoLibrary extends HAPStaticRequestInfo{
 	private String m_version;
 
 	public HAPStaticRequestInfoLibrary() {
-		super(HAPStaticRequestInfo.STATIC_TYPE_LIBRARY);
+		super(HAPConstantShared.STATIC_REQUEST_TYPE_LIBRARY);
 	}
 	
-	public HAPStaticRequestInfoLibrary(String type, String domain, String name, String version) {
+	public HAPStaticRequestInfoLibrary(String domain, String name, String version) {
 		this();
 		this.m_domain = domain;
 		this.m_name = name;
@@ -59,10 +60,10 @@ public class HAPStaticRequestInfoLibrary extends HAPStaticRequestInfo{
 }
 
 @Component
-class HAPStaticRequestInfoLibrary__HAPEntityParsable extends HAPDataDefinition__HAPEntityParsable{
+class HAPStaticRequestInfoLibrary__HAPEntityParsable extends HAPStaticRequestInfo__HAPEntityParsable{
 
 	@Override
-	public String getSubName() {     return HAPStaticRequestInfo.STATIC_TYPE_LIBRARY;    }
+	public String getSubName() {     return HAPConstantShared.STATIC_REQUEST_TYPE_LIBRARY;    }
 	
 	protected void parseToEntity(JSONObject jsonObj, HAPStaticRequestInfoLibrary staticRequestInfoLib, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, staticRequestInfoLib, parseService);

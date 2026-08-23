@@ -10,6 +10,7 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 
 @HAPEntityWithAttribute
 public class HAPStaticRequestInfoFolder extends HAPStaticRequestInfo{
@@ -20,7 +21,7 @@ public class HAPStaticRequestInfoFolder extends HAPStaticRequestInfo{
 	private File m_folder;
 
 	public HAPStaticRequestInfoFolder() {
-		super(HAPStaticRequestInfo.STATIC_TYPE_FOLDER);
+		super(HAPConstantShared.STATIC_REQUEST_TYPE_FOLDER);
 	}
 	
 	public HAPStaticRequestInfoFolder(File folder) {
@@ -40,10 +41,10 @@ public class HAPStaticRequestInfoFolder extends HAPStaticRequestInfo{
 }
 
 @Component
-class HAPStaticRequestInfoFolder__HAPEntityParsable extends HAPDataDefinition__HAPEntityParsable{
+class HAPStaticRequestInfoFolder__HAPEntityParsable extends HAPStaticRequestInfo__HAPEntityParsable{
 
 	@Override
-	public String getSubName() {     return HAPStaticRequestInfo.STATIC_TYPE_FOLDER;    }
+	public String getSubName() {     return HAPConstantShared.STATIC_REQUEST_TYPE_FOLDER;    }
 	
 	protected void parseToEntity(JSONObject jsonObj, HAPStaticRequestInfoFolder staticRequestInfoFolder, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, staticRequestInfoFolder, parseService);

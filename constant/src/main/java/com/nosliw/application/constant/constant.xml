@@ -1259,7 +1259,20 @@ I
 			<definition name="COMMAND_HANDLER_TYPE_COMMAND" value="command"/>
 			<definition name="COMMAND_HANDLER_TYPE_TASK" value="task"/>
 
+			<definition type="space"/>
+			<definition name="STATIC_REQUEST_TYPE_LIBRARY" value="library"/>
+			<definition name="STATIC_REQUEST_TYPE_FILE" value="file"/>
+			<definition name="STATIC_REQUEST_TYPE_FOLDER" value="folder"/>
+			<definition name="STATIC_REQUEST_TYPE_CONFIGURE" value="configure"/>
 
+			<definition type="space"/>
+			<definition name="STATIC_RESPONSE_TYPE_FILE" value="file"/>
+			<definition name="STATIC_RESPONSE_TYPE_DATA" value="data"/>
+
+			<definition type="space"/>
+			<definition name="STATIC_LIBRARY_DOMAIN_INTERNAL" value="data.javascript.library.internal"/>
+			<definition name="STATIC_LIBRARY_DOMAIN_EXTERNAL" value="data.javascript.library.external"/>
+			
 		</definitions>
 	</constants>
 </root>

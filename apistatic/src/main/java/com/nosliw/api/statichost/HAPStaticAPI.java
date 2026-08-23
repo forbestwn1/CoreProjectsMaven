@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,13 +24,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.service.staticresource.HAPStaticRequestInfoConfigure;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoFolder;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoData;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
 
 @RestController
 @RequestMapping("/nosliw/static")
@@ -43,37 +50,60 @@ public class HAPStaticAPI {
 	
 	
 	@PostMapping("/fetch")
-    public String fetch(@RequestBody String requestJson) throws IOException, URISyntaxException {
+    public String fetch(@RequestBody String requestJson)  throws IOException, URISyntaxException{
 		HAPStaticResponse response = new HAPStaticResponse();
  
 		HAPStaticRequest request = parseStaticRequest(new JSONObject(URLDecoder.decode(requestJson)));
 		
 		for(HAPStaticRequestInfo staticInfo : request.getStaticInfos()) {
-			if(HAPStaticRequestInfoLibrary.STATIC_TYPE_LIBRARY.equals(staticInfo.getType())) {
-				HAPStaticRequestInfoLibrary staticInfoLib = (HAPStaticRequestInfoLibrary)staticInfo;
-				PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-				String domain = staticInfoLib.getDomain();
-				String path = "static/" + getFilePathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion());
-				Resource[] resources = resolver.getResources("classpath:"+path+"/*"); 
-				for(Resource resource : resources) {
-					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
-				}
-				Collections.sort(response.getItems(), (item1, item2)->item1.getURI().toString().compareTo(item2.getURI().toString()));
-			}
-			else if(HAPStaticRequestInfoLibrary.STATIC_TYPE_FOLDER.equals(staticInfo.getType())) {
-				HAPStaticRequestInfoFolder staticInfoFolder = (HAPStaticRequestInfoFolder)staticInfo;
-				
-				for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
-					String folderPath = childFile.getAbsolutePath();
-					String relativePath = folderPath.substring(m_configure.getDirectoryTemporary().length());
-					response.addItem(new HAPStaticResponseInfo(new URI(getUriPathForTemp(relativePath))));
-				}
-			}
+			response.addItems(this.fetch(staticInfo));
 		}
 		
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
 
+	private List<HAPStaticResponseInfo> fetch(HAPStaticRequestInfo staticInfo)  throws IOException, URISyntaxException{
+		List<HAPStaticResponseInfo> out = new ArrayList<HAPStaticResponseInfo>();
+		
+		if(HAPConstantShared.STATIC_REQUEST_TYPE_LIBRARY.equals(staticInfo.getType())) {
+			HAPStaticRequestInfoLibrary staticInfoLib = (HAPStaticRequestInfoLibrary)staticInfo;
+			PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+			String domain = staticInfoLib.getDomain();
+			String path = "static/" + getFilePathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion());
+			Resource[] resources = resolver.getResources("classpath:"+path+"/*"); 
+			for(Resource resource : resources) {
+				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
+			}
+//			Collections.sort(response.getItems(), (item1, item2)->item1.getURI().toString().compareTo(item2.getURI().toString()));
+		}
+		else if(HAPConstantShared.STATIC_REQUEST_TYPE_FOLDER.equals(staticInfo.getType())) {
+			HAPStaticRequestInfoFolder staticInfoFolder = (HAPStaticRequestInfoFolder)staticInfo;
+			
+			for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
+				String folderPath = childFile.getAbsolutePath();
+				String relativePath = folderPath.substring(m_configure.getDirectoryTemporary().length());
+				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(relativePath))));
+			}
+		}
+		else if(HAPConstantShared.STATIC_REQUEST_TYPE_CONFIGURE.equals(staticInfo.getType())) {
+			HAPStaticRequestInfoConfigure staticInfoConfigure = (HAPStaticRequestInfoConfigure)staticInfo;
+			String configureName = staticInfoConfigure.getName();
+			if(configureName.equals("core")) {
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null)));
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null)));
+
+				Map<String, String> urlData = new LinkedHashMap<String, String>();
+				urlData.put("gatewayUrl", "http://localhost:8080/");
+				urlData.put("staticUrl", "http://localhost:8081/");
+				out.add(new HAPStaticResponseInfoData(urlData));
+			}
+			else if(configureName.equals("story")) {
+				
+			}
+		}
+		return out;
+	}
+	
 	private String getUriPathForTemp(String path) {
 		return this.normaliizePath(m_configure.getTemporaryStaticRootUrl()+ path);
 	}
@@ -93,7 +123,7 @@ public class HAPStaticAPI {
 		String path = m_configure.getDirectoryTemporary() + getFilePathForTemp(domain, name);
         HAPUtilityFile.writeFile(path, content);
 		
-        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfo(new URI(getUriPathForTemp(domain, name)));
+        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(domain, name)));
         response.addItem(responsInfo);
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}

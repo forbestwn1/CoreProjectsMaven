@@ -32,6 +32,7 @@ import com.nosliw.core.resource.HAPUtilityResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
 import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
@@ -188,7 +189,7 @@ public class HAPAPIGateway {
 							
 							HAPServiceData serviceData = m_staticResourceService.upload(scriptInfo.getScript(), "resource", name);
 							HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
-							scriptInfo.setURL(staticResponse.getItems().get(0).getURI());
+							scriptInfo.setURL(((HAPStaticResponseInfoFile)staticResponse.getItems().get(0)).getURI());
 							
 							
 //							String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";

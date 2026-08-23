@@ -1226,4 +1226,21 @@ public class HAPConstantShared {
 		public static final String COMMAND_HANDLER_TYPE_TASK = "task";
 
 
+
+		public static final String STATIC_REQUEST_TYPE_LIBRARY = "library";
+		public static final String STATIC_REQUEST_TYPE_FILE = "file";
+		public static final String STATIC_REQUEST_TYPE_FOLDER = "folder";
+		public static final String STATIC_REQUEST_TYPE_CONFIGURE = "configure";
+
+
+
+		public static final String STATIC_RESPONSE_TYPE_FILE = "file";
+		public static final String STATIC_RESPONSE_TYPE_DATA = "data";
+
+
+
+		public static final String STATIC_LIBRARY_DOMAIN_INTERNAL = "data.javascript.library.internal";
+		public static final String STATIC_LIBRARY_DOMAIN_EXTERNAL = "data.javascript.library.external";
+
+
 }

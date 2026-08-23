@@ -14,10 +14,6 @@ public class HAPStaticRequestInfo extends HAPSerializableImp implements HAPEntit
 
 	public static final String DOMAIN_PARSE = "api.request.static";
 	
-	public static final String STATIC_TYPE_LIBRARY = "library";
-	public static final String STATIC_TYPE_FOLDER = "folder";
-	public static final String STATIC_TYPE_FILE = "file";
-	
 	@HAPAttribute
 	public static final String TYPE = "type";
 
@@ -37,7 +33,7 @@ public class HAPStaticRequestInfo extends HAPSerializableImp implements HAPEntit
 
 }
 
-abstract class HAPDataDefinition__HAPEntityParsable extends HAPParserEntityImpWithDomain{
+abstract class HAPStaticRequestInfo__HAPEntityParsable extends HAPParserEntityImpWithDomain{
 
 	@Override
 	public String getDomain() {   return HAPStaticRequestInfo.DOMAIN_PARSE;   }

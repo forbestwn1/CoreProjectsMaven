@@ -749,7 +749,15 @@ var COMMONCONSTANT=
   "EVENT_UI_VALUE_CHANGE": "ui_value_change",
   "ERROR_VALIDATION_VALUE": "ERROR_VALIDATION_VALUE",
   "COMMAND_HANDLER_TYPE_COMMAND": "command",
-  "COMMAND_HANDLER_TYPE_TASK": "task"
+  "COMMAND_HANDLER_TYPE_TASK": "task",
+  "STATIC_REQUEST_TYPE_LIBRARY": "library",
+  "STATIC_REQUEST_TYPE_FILE": "file",
+  "STATIC_REQUEST_TYPE_FOLDER": "folder",
+  "STATIC_REQUEST_TYPE_CONFIGURE": "configure",
+  "STATIC_RESPONSE_TYPE_FILE": "file",
+  "STATIC_RESPONSE_TYPE_DATA": "data",
+  "STATIC_LIBRARY_DOMAIN_INTERNAL": "data.javascript.library.internal",
+  "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external"
 };
 
 //*******************************************   End Node Definition  ************************************** 	
