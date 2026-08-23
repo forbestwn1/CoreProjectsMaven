@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.manual.core.extension.story;
+package com.nosliw.application.core.external.story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 public class HAPServiceStory {
 
 	@Autowired
-	private HAPStoryServiceConfigure m_storyConfigure;
+	private HAPConfigureStoryService m_storyConfigure;
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
@@ -41,14 +41,14 @@ public class HAPServiceStory {
 	private HAPManualManagerBrick m_manualBrickManager;
 	
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		String responsStr = this.m_restTemplate.getForObject(m_storyConfigure.geturl()+"/bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
+		String responsStr = this.m_restTemplate.getForObject(m_storyConfigure.getBaseurl()+"bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
 		return HAPManualUtilityExport.deserializeBundle((JSONObject)serviceData.getData(), m_entityParseService, m_brickMan, m_manualBrickManager);
 	}	
 
 	public HAPServiceData buildStandAlone(List<HAPManualStandaloneProviderRequest> requests) {
-		String responsStr = this.m_restTemplate.postForObject(m_storyConfigure.geturl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
+		String responsStr = this.m_restTemplate.postForObject(m_storyConfigure.getBaseurl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);

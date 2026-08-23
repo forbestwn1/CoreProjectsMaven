@@ -17,7 +17,7 @@ public class HAPUtilityGateway {
 	public static HAPServiceData executeGatewaySingle(String url, String gatewayName, String command, Map<String, Object> parmsValue, RestTemplate restTemplate) {
 		JSONObject parmJson = new JSONObject(HAPManagerSerialize.getInstance().toStringValue(parmsValue, HAPSerializationFormat.JSON));
 		HAPServiceInfo serviceInfo = new HAPServiceInfo(HAPUtilityNamingConversion.cascadeLevel1(gatewayName, command), parmJson) ;
-		String responsStr = restTemplate.postForObject(url, serviceInfo.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = restTemplate.postForObject(url+"gatewaysingle", serviceInfo.toStringValue(HAPSerializationFormat.JSON), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
 		

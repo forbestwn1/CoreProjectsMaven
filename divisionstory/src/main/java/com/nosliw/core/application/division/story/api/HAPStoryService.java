@@ -23,7 +23,7 @@ import com.nosliw.core.application.division.story.converter.manual.HAPStoryConve
 import com.nosliw.core.application.division.story.design.HAPStoryConfigure;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
-import com.nosliw.core.application.division.story.service.HAPGatewayServiceConfigure;
+import com.nosliw.core.application.division.story.service.HAPConfigureCoreService;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -43,7 +43,7 @@ public class HAPStoryService{
 	private HAPStoryConfigure m_storyConfigure;
 	
 	@Autowired
-	private HAPGatewayServiceConfigure gatewayServiceConfigure;
+	private HAPConfigureCoreService gatewayServiceConfigure;
 	
 	@Autowired
 	private RestTemplate m_resteTemplate;
@@ -89,7 +89,7 @@ public class HAPStoryService{
 		parmValue.put(HAPManualGatewayCompile.PARMS_CONTENT, contentProviderText);
 		
 		HAPServiceData serviceData = HAPUtilityGateway.executeGatewaySingle(
-				gatewayServiceConfigure.getUrlSingle(), 
+				gatewayServiceConfigure.getBaseurl(),
 				HAPConstantShared.GATEWAY_MANUAL_COMPILE, 
 				HAPManualGatewayCompile.COMMAND_COMPILE,
 				parmValue, 

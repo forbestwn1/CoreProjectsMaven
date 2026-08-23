@@ -18,7 +18,7 @@ public class HAPServiceStaticResource {
 	}
 	
 	public HAPServiceData getStatic(HAPStaticRequest staticRequest) {
-		String responsStr = this.m_restTemplate.postForObject(m_staticServerUrl+"static", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
+		String responsStr = this.m_restTemplate.postForObject(m_staticServerUrl+"fetch", staticRequest.toStringValue(HAPSerializationFormat.JSON), String.class);
         return this.processResponse(responsStr);
 	}
 	

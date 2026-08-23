@@ -33,7 +33,7 @@ import com.nosliw.core.application.division.story.design.standalone.HAPStoryMana
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @RestController
-@RequestMapping("/nosliw/design")
+@RequestMapping("/nosliw/story")
 @HAPEntityWithAttribute
 public class HAPAPIStory {
 
@@ -49,7 +49,7 @@ public class HAPAPIStory {
 	@Autowired
 	private HAPStoryManagerStandalone m_standaloneMan;
 	
-	@PostMapping("/new")
+	@PostMapping("/design/new")
     public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
 		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(new HAPIdBrickType(brickType, brickVersion), builderId, null);
 		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
@@ -64,7 +64,7 @@ public class HAPAPIStory {
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@PostMapping("/build")
+	@PostMapping("/design/build")
     public String buildDesignNext(@RequestBody String requestBody) {
 		HAPStoryBuilderRequest request = (HAPStoryBuilderRequest)this.m_entityParseService.parseEntityJSONExplicit(new JSONObject(requestBody), HAPStoryBuilderRequest.PARSABLEENTITYTYPE);
 		HAPStoryBuilderResponseBuild buildResponse = m_designManager.designStory(request);
@@ -80,14 +80,14 @@ public class HAPAPIStory {
 		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@GetMapping("/{brickType}/{brickVersion}/{id}")
+	@GetMapping("/design/{brickType}/{brickVersion}/{id}")
     public String getDesign(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
 		HAPStoryDesign design = m_designManager.getDesign(buildBrickId(brickType, brickVersion, id));
 		HAPServiceData out = HAPServiceData.createSuccessData(design);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
-	@PostMapping("/convert/{brickType}/{brickVersion}/{id}")
+	@PostMapping("/bundle/convert/{brickType}/{brickVersion}/{id}")
     public String convertDesignToManual(@PathVariable String brickType, @PathVariable String brickVersion, @PathVariable String id) {
 		this.m_storyService.convertDesignToManual(buildBrickId(brickType, brickVersion, id), HAPRuntimeManager.RUNTIME_JS_BROWSER);
 		HAPServiceData out = HAPServiceData.createSuccessData();

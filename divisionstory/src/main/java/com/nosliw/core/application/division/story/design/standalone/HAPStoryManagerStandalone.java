@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
+import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @HAPEntityWithAttribute
@@ -30,7 +30,7 @@ public class HAPStoryManagerStandalone {
 	private HAPServiceParseEntity m_entityParseService;
 	
 	@Autowired
-	private HAPUITagService m_uiTagService;
+	private HAPServiceUITag m_uiTagService;
 
 	public HAPManualStandaloneResponse buildStandalone(JSONObject requestJson) {
 		JSONObject uiTagQueryJsonObj = requestJson.getJSONObject(CEATESTANDALONE_PARM_UITAGQUERY);

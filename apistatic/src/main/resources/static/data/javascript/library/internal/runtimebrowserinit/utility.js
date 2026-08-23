@@ -2,7 +2,7 @@ nosliw.utility = function(){
 	
 	var loc_requestLoadFileResources = function(staticInfos, processResult, callBackFunction){
 		$.ajax({
-			url : "http://localhost:8081/nosliw/static",      //loc_out.getServerBase()+"nosliw/static",
+			url : "http://localhost:8081/nosliw/static/fetch",      //loc_out.getServerBase()+"nosliw/static",
 			type : "POST",
 			dataType: "json",
 			data : JSON.stringify(staticInfos),

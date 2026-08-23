@@ -35,7 +35,7 @@ import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
-@RequestMapping("/nosliw")
+@RequestMapping("/nosliw/core")
 @HAPEntityWithAttribute
 public class HAPAPIGateway {
 

@@ -8,14 +8,14 @@ import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.division.story.api.HAPMiniAppConfigure;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryBuilderDesignWizard;
-import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
+import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 
 @Component
 public class HAPStoryBuilderDesignWizardDataSourceDrive extends HAPStoryBuilderDesignWizard{
 
-	public HAPStoryBuilderDesignWizardDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
+	public HAPStoryBuilderDesignWizardDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPServiceUITag uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
 		super(HAPConstantShared.STORY_BUILDER_DATASOURCEDRIVE, new HAPStoryWizzardDefinitionDataSourceDrive(entityParseService, dataTypeHelper, dataTypeMan, uiTagService, dataSourceService, storyService, miniAppConfigure), entityParseService);
 	}
 

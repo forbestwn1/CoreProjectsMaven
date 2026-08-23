@@ -24,13 +24,13 @@ import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualInfoContent;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
+import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPStoryUtilityUITag {
 
-	public static HAPManualContentProviderText buildStandaloneBundleForUITag(HAPUITageQueryData dataUITagQuery, HAPUITagService uiTagService, HAPRuntimeInfo runtimeInfo) {
+	public static HAPManualContentProviderText buildStandaloneBundleForUITag(HAPUITageQueryData dataUITagQuery, HAPServiceUITag uiTagService, HAPRuntimeInfo runtimeInfo) {
 		HAPUITagInfo uiTagInfo = uiTagService.getDefaultUITagData(dataUITagQuery);
 
 		HAPDataDefinition dataDefinition = dataUITagQuery.getDataDefinition();

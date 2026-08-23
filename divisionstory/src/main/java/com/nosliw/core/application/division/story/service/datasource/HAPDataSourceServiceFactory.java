@@ -12,7 +12,7 @@ import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 public class HAPDataSourceServiceFactory {
 
 	@Autowired
-	private HAPDataSourceServiceConfigure m_dataSourceConfigure;
+	private HAPConfigureDataSourceService m_dataSourceConfigure;
 
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
@@ -22,7 +22,7 @@ public class HAPDataSourceServiceFactory {
 	
 	@Bean
 	HAPServiceDataSource getDataSourceService() {
-		return new HAPServiceDataSource(this.m_dataSourceConfigure.getDataSourceUrl(), this.m_entityParseService, this.m_restTemplate);
+		return new HAPServiceDataSource(this.m_dataSourceConfigure.getBaseurl(), this.m_entityParseService, this.m_restTemplate);
 	}
 	
 }

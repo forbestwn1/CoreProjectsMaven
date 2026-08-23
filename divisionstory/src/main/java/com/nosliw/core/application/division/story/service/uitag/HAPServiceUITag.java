@@ -14,14 +14,14 @@ import com.nosliw.core.application.common.gateway.HAPUtilityGateway;
 import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.service.HAPGatewayServiceConfigure;
+import com.nosliw.core.application.division.story.service.HAPConfigureCoreService;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 
 @Component
-public class HAPUITagService {
+public class HAPServiceUITag {
 
 	@Autowired
-	private HAPGatewayServiceConfigure gatewayServiceConfigure;
+	private HAPConfigureCoreService coreServiceConfigure;
 	
 	@Autowired
 	private RestTemplate m_resteTemplate;
@@ -32,7 +32,7 @@ public class HAPUITagService {
 		parmValue.put(HAPGatewayUITag.COMMAND_GETDEFAULTTAG_CRITERIA, uiTagQuery);
 		
 		HAPServiceData serviceData = HAPUtilityGateway.executeGatewaySingle(
-				gatewayServiceConfigure.getUrlSingle(), 
+				coreServiceConfigure.getBaseurl(), 
 				HAPConstantShared.GATEWAY_UITAG, 
 				HAPGatewayUITag.COMMAND_GETDEFAULTTAG, 
 				parmValue, 

@@ -56,7 +56,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardRequestDataNext;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
-import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
+import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 
@@ -79,13 +79,13 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPDataTypeManager m_dataTypeMan;
 	
-	private HAPUITagService m_uiTagService;
+	private HAPServiceUITag m_uiTagService;
 	
 	private HAPStoryService m_storyService;
 	
 	private HAPMiniAppConfigure m_miniAppConfigure;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPUITagService uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPServiceUITag uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;

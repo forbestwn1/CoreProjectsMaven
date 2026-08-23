@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.static1;
+package com.nosliw.application.core.external.static1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,14 +11,14 @@ import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 public class HAPStaticServiceFactory {
 
 	@Autowired
-	private HAPStaticServiceConfigure m_staticConfigure;
+	private HAPConfigureStaticService m_staticConfigure;
 
 	@Autowired
 	private RestTemplate m_restTemplate;
 	
 	@Bean
 	HAPServiceStaticResource getStaticService() {
-		return new HAPServiceStaticResource(this.m_staticConfigure.getUrl(), this.m_restTemplate);
+		return new HAPServiceStaticResource(this.m_staticConfigure.getBaseurl(), this.m_restTemplate);
 	}
 	
 }

@@ -30,7 +30,7 @@ import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 
 @RestController
-@RequestMapping("/nosliw")
+@RequestMapping("/nosliw/static")
 public class HAPStaticAPI {
 
 	private static final String DOMAIN_JAVASCRIPT_INTERNAL = "data.javascript.library.internal";
@@ -42,8 +42,8 @@ public class HAPStaticAPI {
 	private HAPStaticConfigure m_configure;
 	
 	
-	@PostMapping("/static")
-    public String gateway(@RequestBody String requestJson) throws IOException, URISyntaxException {
+	@PostMapping("/fetch")
+    public String fetch(@RequestBody String requestJson) throws IOException, URISyntaxException {
 		HAPStaticResponse response = new HAPStaticResponse();
  
 		HAPStaticRequest request = parseStaticRequest(new JSONObject(URLDecoder.decode(requestJson)));

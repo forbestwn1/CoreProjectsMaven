@@ -17,7 +17,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairGroup;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemStatic;
-import com.nosliw.core.application.division.story.service.uitag.HAPUITagService;
+import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -28,7 +28,7 @@ import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 
 public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 
-	public static HAPStoryWizzardQuestionair prepareChooseUIQuestionair(HAPServiceProfile dataSrouceProfile, HAPUITagService uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	public static HAPStoryWizzardQuestionair prepareChooseUIQuestionair(HAPServiceProfile dataSrouceProfile, HAPServiceUITag uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 
 		//root group
@@ -108,7 +108,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 		return out;
 	}
 	
-	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(boolean hiddenable, HAPDataTypeCriteria dataTypeCriteria, HAPEntityInfo dataEntityInfo, String dataVariableName, HAPUITagService uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
+	private static HAPStoryWizzardQuestionairGroup prepareQuestionairForResponseData(boolean hiddenable, HAPDataTypeCriteria dataTypeCriteria, HAPEntityInfo dataEntityInfo, String dataVariableName, HAPServiceUITag uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		//data type criter group
 		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATA);
 
