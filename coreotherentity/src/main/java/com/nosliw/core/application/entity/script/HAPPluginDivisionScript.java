@@ -22,7 +22,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 public class HAPPluginDivisionScript implements HAPPluginDivision{
 
 	@Autowired
-	private HAPConfigureScript m_scriptConfigure;
+	private HAPConfigureDivisionScript m_scriptConfigure;
 
 	public HAPPluginDivisionScript() {
 	}

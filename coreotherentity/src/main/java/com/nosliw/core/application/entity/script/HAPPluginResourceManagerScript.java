@@ -22,7 +22,7 @@ public class HAPPluginResourceManagerScript implements HAPPluginResourceManager{
 	@Override
 	public HAPResourceDataOrWrapper getResourceData(HAPResourceIdSimple simpleResourceId, HAPRuntimeInfo runtimeInfo) {
 		String scriptId = simpleResourceId.getId();
-		Path scriptPath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getDefinitionPath()), simpleResourceId.getResourceTypeId().getResourceType(), scriptId + ".js");
+		Path scriptPath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getDefinitionPath()), scriptId + ".js");
 		String script = HAPUtilityFileNio.readFile(scriptPath);
 		
 		HAPResourceDataScript scriptBrick = new HAPResourceDataScript();
