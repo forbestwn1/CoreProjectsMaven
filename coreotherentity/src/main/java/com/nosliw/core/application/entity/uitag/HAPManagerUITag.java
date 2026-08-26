@@ -38,9 +38,9 @@ public class HAPManagerUITag{
 	private HAPServiceParseEntity m_entityParseService;
 	
 	@Autowired
-	private HAPUITagConfigure m_uiTagConfigure;
+	private HAPConfigureUITag m_uiTagConfigure;
 	
-	public HAPManagerUITag(HAPUITagConfigure uiTagConfigure) {
+	public HAPManagerUITag(HAPConfigureUITag uiTagConfigure) {
 		this.m_uiTagConfigure = uiTagConfigure;
 		this.readAllTags();
 	}
@@ -78,7 +78,7 @@ public class HAPManagerUITag{
 		return HAPUtilityFileNio.buildPath(getRootPath(), version, tagId);
 	}
 	
-	private Path getRootPath() {		return HAPUtilityFileNio.buildPath(m_uiTagConfigure.getPath()); 	}
+	private Path getRootPath() {		return HAPUtilityFileNio.buildPath(m_uiTagConfigure.getDefinitionPath()); 	}
 
 	private void readAllTags() {
 		this.m_dataTagDefs = new LinkedHashMap<String, HAPUITagDefinitionData>();

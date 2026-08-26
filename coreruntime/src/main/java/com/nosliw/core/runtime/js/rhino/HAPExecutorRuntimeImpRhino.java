@@ -60,9 +60,9 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 	
 	private HAPGatewayManager m_gatewayManager;
 	
-	private HAPRhinoRuntimeConfigure m_rhinoRuntimeConfigure;
+	private HAPConfigureRhinoRuntime m_rhinoRuntimeConfigure;
 	
-	public HAPExecutorRuntimeImpRhino(List<HAPFactoryTaskRuntime> taskFactory, HAPRhinoRuntimeConfigure rhinoRuntimeConfigure, HAPGatewayManager gatewayManager){
+	public HAPExecutorRuntimeImpRhino(List<HAPFactoryTaskRuntime> taskFactory, HAPConfigureRhinoRuntime rhinoRuntimeConfigure, HAPGatewayManager gatewayManager){
 		this.m_rhinoRuntimeConfigure = rhinoRuntimeConfigure;
 		this.m_gatewayManager = gatewayManager;
 		this.m_tasks = new LinkedHashMap<String, HAPTaskRuntime>();
@@ -73,8 +73,20 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 		}
 	}
 	
-	private Path getRootScriptExportPath() {     return HAPUtilityFileNio.buildPath(this.m_rhinoRuntimeConfigure.getScriptExportPath());         }
-	private Path getCurrentScriptExportPath() {     return HAPUtilityFileNio.buildPath(this.getRootScriptExportPath(), HAPSystem.id);         }
+	private Path getRootScriptExportPath() {     
+		String exportPath = this.m_rhinoRuntimeConfigure.getScriptExportPath();
+		if(exportPath!=null) {
+			return HAPUtilityFileNio.buildPath(exportPath);
+		}
+		return null;
+	}
+	private Path getCurrentScriptExportPath() {     
+		Path rootPath = this.getRootScriptExportPath();
+		if(rootPath!=null) {
+			return HAPUtilityFileNio.buildPath(rootPath, HAPSystem.id);         
+		}
+		return null;
+	}
 	
 	private synchronized String generateTaskId() {
 		return this.m_idIndex+++"";

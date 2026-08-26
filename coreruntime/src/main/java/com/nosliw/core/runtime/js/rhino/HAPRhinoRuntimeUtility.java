@@ -90,7 +90,7 @@ public class HAPRhinoRuntimeUtility {
 	public static void loadScript(String script, Scriptable scope, String name, boolean exportScript, Path exportPath){
 		Context context = Context.enter();
 		try{
-			if(!HAPExecutorRuntime.isDemo && exportScript) {
+			if(!HAPExecutorRuntime.isDemo && exportScript&&exportPath!=null) {
 				//ppppp			
 				String scriptTempFile = String.format("%03d", index++) + "_" + name;  //+".js";
 				scriptTempFile = scriptTempFile.replaceAll(";", "_");

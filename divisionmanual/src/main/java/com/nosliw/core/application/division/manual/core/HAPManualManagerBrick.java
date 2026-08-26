@@ -204,8 +204,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	public HAPManualPluginProcessorAdapter getAdapterProcessPlugin(HAPIdBrickType entityTypeId) {   return this.m_adapterProcessorPlugin.get(entityTypeId.getKey());    }
 
 
-	public Path getSrouceRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getSourcePath());	}
-	public Path getBundleRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getPath());	}
+	public Path getSrouceRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getDefinitionPath());	}
+	public Path getBundleRootPath() {		return HAPUtilityFileNio.buildPath(this.m_manualConfigure.getExecutePath());	}
 	
 	public Path getBundleExportFolder(HAPIdBrick brickId) {
 		return HAPUtilityFileNio.buildPath(getBundleRootPath(), brickId.getBrickTypeId().getKey(), brickId.getId());

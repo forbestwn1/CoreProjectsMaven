@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.jslibrary;
+package com.nosliw.core.application.entity.codetable;
 
 import com.nosliw.common.serialization.HAPSerializableImp;
 

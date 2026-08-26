@@ -9,12 +9,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class HAPWebConfig implements WebMvcConfigurer {
 	
 	@Autowired
-	private HAPStaticConfigure m_configure;
+	private HAPConfigureStatic m_configure;
 
+	@Autowired
+	private HAPConfigureTemporary m_temporaryConfigure;
+	
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/temp/**")
-                .addResourceLocations("file:///"+m_configure.getDirectoryTemporary())
+                .addResourceLocations("file:///"+m_temporaryConfigure.getPath())
                 .setCachePeriod(0);
         
         registry.addResourceHandler("/static/**")

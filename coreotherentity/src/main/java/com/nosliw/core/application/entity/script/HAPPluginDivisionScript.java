@@ -34,7 +34,7 @@ public class HAPPluginDivisionScript implements HAPPluginDivision{
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPIdBrickType brickTypeId = brickId.getBrickTypeId();
 		
-		Path scriptFile = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getPath()), brickTypeId.getBrickType(), brickId.getId() + ".js");
+		Path scriptFile = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_scriptConfigure.getDefinitionPath()), brickTypeId.getBrickType(), brickId.getId() + ".js");
 		String script = HAPUtilityFileNio.readFile(scriptFile);
 
 		HAPBasicBrickScript scriptBrick = new HAPBasicBrickScript(brickTypeId, this.getDivisionName());

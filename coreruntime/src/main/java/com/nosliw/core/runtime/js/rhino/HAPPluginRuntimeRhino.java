@@ -18,7 +18,7 @@ import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 public class HAPPluginRuntimeRhino implements HAPPluginRuntime{
 
 	@Autowired
-	private HAPRhinoRuntimeConfigure m_rhinoRuntimeConfigure;
+	private HAPConfigureRhinoRuntime m_rhinoRuntimeConfigure;
 	
 	@Autowired(required=false)
 	private List<HAPFactoryTaskRuntime> m_taskFactory;

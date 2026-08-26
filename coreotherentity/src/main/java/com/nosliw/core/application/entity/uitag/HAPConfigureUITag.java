@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix="uitag")
-public class HAPUITagConfigure {
+public class HAPConfigureUITag {
 
-	private String path;
+	private String definitionPath;
 
-	public String getPath() {
-		return this.path;
+	public String getDefinitionPath() {
+		return this.definitionPath;
 	}
 	
-	public void setPath(String path) {
-		this.path= path;
+	public void setDefinitionPath(String path) {
+		this.definitionPath= path;
 	}
 	
 }

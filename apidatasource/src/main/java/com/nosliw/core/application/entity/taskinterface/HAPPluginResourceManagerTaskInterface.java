@@ -2,7 +2,7 @@ package com.nosliw.core.application.entity.taskinterface;
 
 import org.json.JSONObject;
 
-import com.nosliw.application.datasource.api.HAPDataSourceConfigure;
+import com.nosliw.application.datasource.api.HAPConfigureDataSource;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -18,9 +18,9 @@ public class HAPPluginResourceManagerTaskInterface implements HAPPluginResourceM
 
 	private HAPServiceParseEntity m_entityParseService;
 	
-	private HAPDataSourceConfigure m_taskInterfaceConfigure;
+	private HAPConfigureDataSource m_taskInterfaceConfigure;
 	
-	public HAPPluginResourceManagerTaskInterface(HAPServiceParseEntity entityParseService, HAPDataSourceConfigure taskInterfaceConfigure) {
+	public HAPPluginResourceManagerTaskInterface(HAPServiceParseEntity entityParseService, HAPConfigureDataSource taskInterfaceConfigure) {
 		this.m_entityParseService = entityParseService;
 		this.m_taskInterfaceConfigure = taskInterfaceConfigure;	}
 	

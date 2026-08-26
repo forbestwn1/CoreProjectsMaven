@@ -20,7 +20,6 @@ import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualUtilityExporterContentProvider;
 import com.nosliw.core.application.common.manual.gateway.compile.HAPManualGatewayCompile;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
-import com.nosliw.core.application.division.story.design.HAPStoryConfigure;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.division.story.service.HAPConfigureCoreService;
@@ -40,7 +39,7 @@ public class HAPStoryService{
 	private HAPStoryManagerDesign m_designManager;
 
 	@Autowired
-	private HAPStoryConfigure m_storyConfigure;
+	private HAPConfigureStory m_storyConfigure;
 	
 	@Autowired
 	private HAPConfigureCoreService gatewayServiceConfigure;

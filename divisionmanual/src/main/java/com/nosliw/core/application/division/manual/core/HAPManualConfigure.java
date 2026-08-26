@@ -7,24 +7,24 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="division.manual")
 public class HAPManualConfigure {
 
-	private String path;
+	private String executePath;
 
-	private String sourcePath;
+	private String definitionPath;
 
-	public String getPath() {
-		return this.path;
+	public String getExecutePath() {
+		return this.executePath;
 	}
 	
-	public void setPath(String path) {
-		this.path= path;
+	public void setExecutePath(String path) {
+		this.executePath= path;
 	}
 	
-	public String getSourcePath() {
-		return this.sourcePath;
+	public String getDefinitionPath() {
+		return this.definitionPath;
 	}
 	
-	public void setSourcePath(String path) {
-		this.sourcePath= path;
+	public void setDefinitionPath(String path) {
+		this.definitionPath= path;
 	}
 	
 }

@@ -22,7 +22,7 @@ public class HAPPluginResourceManagerConfigure implements HAPPluginResourceManag
 	public HAPResourceDataOrWrapper getResourceData(HAPResourceIdSimple simpleResourceId, HAPRuntimeInfo runtimeInfo) {
 		String configureId = simpleResourceId.getId();
 		
-		Path configureFile = HAPUtilityFileNio.buildPath(m_configureConfigure.getPath(), configureId + ".json");
+		Path configureFile = HAPUtilityFileNio.buildPath(m_configureConfigure.getDataPath(), configureId + ".json");
 		String configureStr = HAPUtilityFileNio.readFile(configureFile);
 		
 		HAPResourceDataConfigure configureResourceData = new HAPResourceDataConfigure(new JSONObject(configureStr));

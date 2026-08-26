@@ -12,6 +12,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.division.story.api.HAPConfigureStory;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
@@ -28,7 +29,7 @@ public class HAPStoryManagerDesign {
 	private HAPServiceParseEntity m_entityParseService;
 	
 	@Autowired
-	private HAPStoryConfigure m_storyConfigure;
+	private HAPConfigureStory m_storyConfigure;
 	
     private Map<String, HAPStoryBuilder> m_builders;	
 	

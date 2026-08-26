@@ -1,11 +1,11 @@
-package com.nosliw.core.application.division.story.design;
+package com.nosliw.core.application.division.story.api;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="division.story")
-public class HAPStoryConfigure {
+@ConfigurationProperties(prefix="application.nosliw-story.persistence")
+public class HAPConfigureStory {
 
 	private String path;
 	

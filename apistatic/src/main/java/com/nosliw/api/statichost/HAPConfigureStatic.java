@@ -1,11 +1,11 @@
-package com.nosliw.core.application.division.story.api;
+package com.nosliw.api.statichost;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="miniapp")
-public class HAPMiniAppConfigure {
+@ConfigurationProperties(prefix="application.nosliw-static.static")
+public class HAPConfigureStatic {
 
 	private String url;
 

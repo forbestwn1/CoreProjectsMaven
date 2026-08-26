@@ -40,14 +40,14 @@ import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
 @RequestMapping("/nosliw/static")
 public class HAPStaticAPI {
 
-	private static final String DOMAIN_JAVASCRIPT_INTERNAL = "data.javascript.library.internal";
-	
 	@Autowired
 	private HAPServiceParseEntity m_paserEntity;
 	
 	@Autowired
-	private HAPStaticConfigure m_configure;
+	private HAPConfigureStatic m_configure;
 	
+	@Autowired
+	private HAPConfigureTemporary m_temporaryConfigure;
 	
 	@PostMapping("/fetch")
     public String fetch(@RequestBody String requestJson)  throws IOException, URISyntaxException{
@@ -81,7 +81,7 @@ public class HAPStaticAPI {
 			
 			for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
 				String folderPath = childFile.getAbsolutePath();
-				String relativePath = folderPath.substring(m_configure.getDirectoryTemporary().length());
+				String relativePath = folderPath.substring(this.m_temporaryConfigure.getPath().length());
 				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(relativePath))));
 			}
 		}
@@ -112,7 +112,7 @@ public class HAPStaticAPI {
 	}
 	
 	private String getUriPathForTemp(String path) {
-		return this.normaliizePath(m_configure.getTemporaryStaticRootUrl()+ path);
+		return this.normaliizePath(m_temporaryConfigure.getUrl()+ path);
 	}
 
 	private String getFilePathForStatic(String domain, String name, String version) {
@@ -120,21 +120,20 @@ public class HAPStaticAPI {
 	}
 	
 	private String getUriPathForStatic(String domain, String name, String version) {
-		return m_configure.getStaticRootUrl() + this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
+		return m_configure.getUrl() + this.domainToPath(domain)+"/" + name + (version==null?"":"/"+version);
 	}
 
 	@PostMapping("/upload")
     public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
 		HAPStaticResponse response = new HAPStaticResponse();
 
-		String path = m_configure.getDirectoryTemporary() + getFilePathForTemp(domain, name);
+		String path = this.m_temporaryConfigure.getPath() + getFilePathForTemp(domain, name);
         HAPUtilityFile.writeFile(path, content);
 		
         HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(domain, name)));
         response.addItem(responsInfo);
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
-	
 
 	private HAPStaticRequest parseStaticRequest(JSONObject requestJsonObj) {
 		HAPStaticRequest out = new HAPStaticRequest();
@@ -153,7 +152,7 @@ public class HAPStaticAPI {
 	
 	private String getUriPathForTemp(String domain, String name) {
 		String path = this.domainToPath(domain);
-		return m_configure.getTemporaryStaticRootUrl() + (path==null?"":(path+"/")) + name;
+		return m_temporaryConfigure.getUrl() + (path==null?"":(path+"/")) + name;
 	}
 
 	private String domainToPath(String domain) {

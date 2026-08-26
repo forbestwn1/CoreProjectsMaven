@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="bundle")
+@ConfigurationProperties(prefix="core.bundle")
 public class HAPBundleConfigure {
 
 	private String exportPath;

@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.jslibrary;
+package com.nosliw.core.application.entity.codetable;
 
 import java.nio.file.Path;
 
@@ -13,12 +13,12 @@ import com.nosliw.common.utils.HAPUtilityFileNio;
 public class HAPManagerCodeTable {
 
 	@Autowired
-	private HAPCodeTableConfigure m_codeTableConfigure;
+	private HAPConfigureCodeTable m_codeTableConfigure;
 	
 	public HAPCodeTable getCodeTable(HAPCodeTableId codeId){
 		//read content
 		//parse content
-		Path codeTablePath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_codeTableConfigure.getPath()), codeId.getId()+".res");
+		Path codeTablePath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_codeTableConfigure.getDataPath()), codeId.getId()+".res");
 		return parseCodeTable(new JSONObject(HAPUtilityFileNio.readFile(codeTablePath)));
 	}
 	

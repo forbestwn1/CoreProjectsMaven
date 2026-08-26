@@ -13,7 +13,7 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
-import com.nosliw.core.application.division.story.api.HAPMiniAppConfigure;
+import com.nosliw.core.application.division.story.api.HAPConfigureMiniApp;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
@@ -83,9 +83,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	
 	private HAPStoryService m_storyService;
 	
-	private HAPMiniAppConfigure m_miniAppConfigure;
+	private HAPConfigureMiniApp m_miniAppConfigure;
 	
-	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPServiceUITag uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPMiniAppConfigure miniAppConfigure) {
+	public HAPStoryWizzardDefinitionDataSourceDrive(HAPServiceParseEntity entityParseService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan, HAPServiceUITag uiTagService, HAPServiceDataSource dataSourceService, HAPStoryService storyService, HAPConfigureMiniApp miniAppConfigure) {
 		this.m_entityParseService = entityParseService;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_dataTypeMan = dataTypeMan;
