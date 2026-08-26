@@ -29,7 +29,6 @@ import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceIdEmbeded;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.system.HAPSystemUtility;
 
 @Component
 public class HAPManagerApplicationBrick {
@@ -76,7 +75,7 @@ public class HAPManagerApplicationBrick {
 			division = this.m_divisionByBrickType.get(brickId.getBrickTypeId());
 		}
 		if(division==null) {
-			division = HAPSystemUtility.getDefaultDivision();
+			division = HAPConstantShared.BRICK_DIVISION_MANUAL;
 		}
 		
 		HAPPluginDivision divisionPlugin = this.m_divisionPlugin.get(division);

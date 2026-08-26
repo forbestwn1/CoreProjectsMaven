@@ -20,8 +20,16 @@ public class HAPResourceDataScript extends HAPResourceDataImp implements HAPWith
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
 		HAPJsonTypeScript script = this.m_script;
 		if(script!=null){
-			jsonMap.put(SCRIPT, script.toStringValue(HAPSerializationFormat.JSON_FULL));
+			jsonMap.put(SCRIPT, script.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 			typeJsonMap.put(SCRIPT, script.getClass());
+		}
+	}
+
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
+		HAPJsonTypeScript script = this.m_script;
+		if(script!=null){
+			jsonMap.put(SCRIPT, script.toStringValue(HAPSerializationFormat.JSON));
 		}
 	}
 }

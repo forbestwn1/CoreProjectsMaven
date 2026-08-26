@@ -106,7 +106,7 @@ public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExp
 		jsonMap.put(SUPPORTFUNCTION, functionParmValue);
 		typeJsonMap.put(SUPPORTFUNCTION, HAPJsonTypeScript.class);
 
-		jsonMap.put(SCRIPTFUNCTION, new HAPJsonTypeScript(scriptFunctionInfo.getMainScript().getScript()).toStringValue(HAPSerializationFormat.JSON_FULL));
+		jsonMap.put(SCRIPTFUNCTION, new HAPJsonTypeScript(scriptFunctionInfo.getMainScript().getScript()).toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		typeJsonMap.put(SCRIPTFUNCTION, HAPJsonTypeScript.class);
 		
 		jsonMap.put(DATAEXPRESSION, this.m_dataExpressionContainer.toStringValue(HAPSerializationFormat.JAVASCRIPT));

@@ -2,11 +2,9 @@ package com.nosliw.core.resource;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.system.HAPSystemUtility;
 
 public class HAPUtilityResource {
 
@@ -14,34 +12,28 @@ public class HAPUtilityResource {
 		return resourceMan.getResources(Lists.asList(resourceId, new HAPResourceId[0]), runtimeInfo).getLoadedResource(resourceId);
 	}
 
-	public static Map<String, Object> buildResourceLoadPattern(HAPResourceId resourceId, Map<String, Object> info) {
+	public static Map<String, Object> buildResourceLoadPattern(HAPResourceId resourceId, Map<String, Object> info, HAPConfigureResource resourceConfigure) {
 		if(info==null) {
 			info = new LinkedHashMap<String, Object>();
 		}
-		if(isLoadResoureByFile(resourceId.getResourceTypeId().getResourceType())) {
+		if(isLoadResoureByFile(resourceId.getResourceTypeId().getResourceType(), resourceConfigure)) {
 			info.put(HAPConfigureResource.RESOURCE_LOADPATTERN, HAPConfigureResource.RESOURCE_LOADPATTERN_FILE);
 		}
 		return info;
 	}
 
-	public final static String LOADRESOURCEBYFILE_MODE_NEVER = "never";
-	public final static String LOADRESOURCEBYFILE_MODE_ALWAYS = "always";
-	public final static String LOADRESOURCEBYFILE_MODE_DEPENDS = "depends";
-	
-
-	private final static Set<String> loadResourceByFile = HAPSystemUtility.getLoadResoureByFile();
-	public static boolean isLoadResoureByFile(String resourceType) {
-		String mode = HAPSystemUtility.getLoadResourceByFileMode();
+	public static boolean isLoadResoureByFile(String resourceType, HAPConfigureResource resourceConfigure) {
+		String mode = resourceConfigure.getFileLoadMode();
 		if(mode==null) {
-			mode = LOADRESOURCEBYFILE_MODE_DEPENDS;
+			mode = HAPConfigureResource.LOADRESOURCEBYFILE_MODE_DEPENDS;
 		}
-		if(LOADRESOURCEBYFILE_MODE_NEVER.equals(resourceType)) {
+		if(HAPConfigureResource.LOADRESOURCEBYFILE_MODE_NEVER.equals(mode)) {
 			return false;
 		}
-		if(LOADRESOURCEBYFILE_MODE_ALWAYS.equals(resourceType)) {
+		if(HAPConfigureResource.LOADRESOURCEBYFILE_MODE_ALWAYS.equals(mode)) {
 			return true;
 		}
-		return loadResourceByFile.contains(resourceType);
+		return resourceConfigure.getFileLoadResources().contains(resourceType);
 	}
 	
 }

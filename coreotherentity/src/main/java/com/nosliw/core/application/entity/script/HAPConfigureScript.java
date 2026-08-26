@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix="script")
-public class HAPScriptConfigure {
+public class HAPConfigureScript {
 
 	private String path;
 

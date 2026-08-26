@@ -9,7 +9,7 @@ export const nextStepDesignService = function(designId, step){
 			"step" : step
 		}
 	};
-	const url = getStoryBaseUrl() + "nosliw/story/design/build"; //"http://localhost:8083/nosliw/story/design/build";
+	const url = getStoryBaseUrl() + "nosliw/story/design/build";
 	return axios.post(url, payload, {});
 };
 

@@ -28,12 +28,8 @@ import com.nosliw.core.application.entity.gateway.HAPGatewayManager;
 import com.nosliw.core.application.entity.jslibrary.HAPUtilityJSLibrary;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.gateway.HAPServiceInfo;
-import com.nosliw.core.resource.HAPUtilityResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
-import com.nosliw.core.service.staticresource.HAPStaticResponse;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
-import com.nosliw.core.system.HAPSystemUtility;
 
 @RestController
 @RequestMapping("/nosliw/core")
@@ -74,7 +70,7 @@ public class HAPAPIGateway {
 			for(int i=0; i<jsonGroupReqs.length(); i++){
 				JSONObject req = jsonGroupReqs.getJSONObject(i);
 				HAPServiceData serviceData = processRequest(req);
-				String requestResult = serviceData.toStringValue(HAPSerializationFormat.JSON_FULL);
+				String requestResult = serviceData.toStringValue(HAPSerializationFormat.JAVASCRIPT);
 				requestsResult.add(requestResult);
 			}
 			out = HAPServiceData.createSuccessData(requestsResult);
@@ -151,7 +147,7 @@ public class HAPAPIGateway {
 			LOGGER.severe(HAPUtilityBasic.toString(e));
 		}
 		
-		String content = serviceData.toStringValue(HAPSerializationFormat.JSON_FULL);
+		String content = serviceData.toStringValue(HAPSerializationFormat.JAVASCRIPT);
 		content = HAPUtilityJson.formatJson(content);
 		
 		logContent.append("return: \n" + content);
@@ -184,25 +180,22 @@ public class HAPAPIGateway {
 						
 					}
 					else{
-						if(HAPUtilityResource.LOADRESOURCEBYFILE_MODE_ALWAYS.equals(HAPSystemUtility.getLoadResourceByFileMode())){
-							String name = "gatewayCommand_"+gatewayId+"_"+command+""+index++;
-							
-							HAPServiceData serviceData = m_staticResourceService.upload(scriptInfo.getScript(), "resource", name);
-							HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
-							scriptInfo.setURL(((HAPStaticResponseInfoFile)staticResponse.getItems().get(0)).getURI());
-							
-							
-//							String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
-//							resourceFile = HAPUtilityFile.writeFile(resourceFile, scriptInfo.getScript());
-//							scriptInfo.setFile(HAPUtilityJSLibrary.getBrowserScriptPath(resourceFile));
-							
-							
-							scriptInfo.setScript(null);
-						}
-						else {
-							String escaptedScript = StringEscapeUtils.escapeEcmaScript(scriptInfo.getScript());
-							scriptInfo.setScript(escaptedScript);
-						}
+						String escaptedScript = StringEscapeUtils.escapeEcmaScript(scriptInfo.getScript());
+						scriptInfo.setScript(escaptedScript);
+
+//						if(HAPUtilityResource.LOADRESOURCEBYFILE_MODE_ALWAYS.equals(HAPSystemUtility.getLoadResourceByFileMode())){
+//							String name = "gatewayCommand_"+gatewayId+"_"+command+""+index++;
+//							
+//							HAPServiceData serviceData = m_staticResourceService.upload(scriptInfo.getScript(), "resource", name);
+//							HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
+//							scriptInfo.setURL(((HAPStaticResponseInfoFile)staticResponse.getItems().get(0)).getURI());
+//							
+//							scriptInfo.setScript(null);
+//						}
+//						else {
+//							String escaptedScript = StringEscapeUtils.escapeEcmaScript(scriptInfo.getScript());
+//							scriptInfo.setScript(escaptedScript);
+//						}
 					}
 				}
 			}

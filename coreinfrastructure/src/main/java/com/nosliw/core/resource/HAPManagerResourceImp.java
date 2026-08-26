@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
-import com.nosliw.core.system.HAPSystemUtility;
 
 @Component
 public class HAPManagerResourceImp implements HAPManagerResource{
@@ -25,12 +24,15 @@ public class HAPManagerResourceImp implements HAPManagerResource{
 	private Map<HAPResourceId, HAPResource> m_cachedResource = new LinkedHashMap<HAPResourceId, HAPResource>();
 	private Map<HAPResourceId, List<HAPResourceInfo>> m_cachedDependency = new LinkedHashMap<HAPResourceId, List<HAPResourceInfo>>();
 	
-	public HAPManagerResourceImp() {
-	}
+	@Autowired
+	private HAPConfigureResource m_resourceConfigure;
 	
 	@Autowired(required=false)
 	private void setResourceManagerPluginProviders(List<HAPProviderResourcePlugin> pluginProviders) {
 		this.m_pluginProviders = pluginProviders;
+	}
+	
+	public HAPManagerResourceImp() {
 	}
 	
 	private HAPPluginResourceManager getResourceManagerPlugin(HAPIdResourceType resourceType){
@@ -73,7 +75,7 @@ public class HAPManagerResourceImp implements HAPManagerResource{
 	}
 
 	private HAPResource getResource(HAPResourceId resourceId, HAPRuntimeInfo runtimeInfo) {
-		return new HAPResource(resourceId, getResourceData(resourceId, runtimeInfo), HAPUtilityResource.buildResourceLoadPattern(resourceId, null));
+		return new HAPResource(resourceId, getResourceData(resourceId, runtimeInfo), HAPUtilityResource.buildResourceLoadPattern(resourceId, null, this.m_resourceConfigure));
 	}
 	
 	private HAPResourceData getResourceData(HAPResourceId resourceId, HAPRuntimeInfo runtimeInfo) {
@@ -113,7 +115,7 @@ public class HAPManagerResourceImp implements HAPManagerResource{
 				Set<HAPResourceId> processedResources = new HashSet<HAPResourceId>();
 				this.discoverResource(resourceId, resourceDis, processedResources, runtimeInfo);
 				out.addAll(resourceDis);
-				if(HAPSystemUtility.getResourceCached()) {
+				if(this.m_resourceConfigure.isCached()) {
 					this.m_cachedDependency.put(resourceId, resourceDis);
 				}
 			}

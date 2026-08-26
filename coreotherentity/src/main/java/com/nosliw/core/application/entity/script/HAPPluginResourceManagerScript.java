@@ -12,9 +12,9 @@ public class HAPPluginResourceManagerScript implements HAPPluginResourceManager{
 
 	private String m_resourceType;
 	
-	private HAPScriptConfigure m_scriptConfigure;
+	private HAPConfigureScript m_scriptConfigure;
 	
-	public HAPPluginResourceManagerScript(String resourceType, HAPScriptConfigure scriptConfigure) {
+	public HAPPluginResourceManagerScript(String resourceType, HAPConfigureScript scriptConfigure) {
 		this.m_resourceType = resourceType;
 		this.m_scriptConfigure = scriptConfigure;
 	}

@@ -1,5 +1,7 @@
 package com.nosliw.common.serialization;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 public class HAPJsonTypeScript extends HAPSerializableImp implements HAPJsonTypeAsItIs{
 
 	private String m_script;
@@ -11,9 +13,9 @@ public class HAPJsonTypeScript extends HAPSerializableImp implements HAPJsonType
 	public String getScript(){		return this.m_script;	}
 	
 	@Override
-	protected String buildFullJson(){ return this.m_script; }
+	protected String buildFullJson(){ return StringEscapeUtils.escapeJson(this.m_script); }
 	@Override
-	protected String buildJson(){ return this.m_script; }
+	protected String buildJson(){ return StringEscapeUtils.escapeJson(this.m_script); }
 	
 	@Override
 	protected String buildJavascript(){ return this.m_script; }
