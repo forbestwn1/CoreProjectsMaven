@@ -15,14 +15,14 @@ import java.util.Map;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.literate.HAPLiterateManager;
 import com.nosliw.common.literate.HAPLiterateType;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.strvalue.HAPStringableValue;
 import com.nosliw.common.strvalue.HAPStringableValueEntity;
 import com.nosliw.common.strvalue.HAPStringableValueEntityWithID;
 import com.nosliw.common.strvalue.HAPStringableValueUtility;
-import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
 
 public class HAPDBAccess {
@@ -52,7 +52,7 @@ public class HAPDBAccess {
 		try {
 			HAPDBTableInfo dbTableInfo = this.m_valueInfoMan.getDBTableInfo(valueInfoName);
 
-			String sql = this.buildEntityQuerySql(dbTableInfo.getTableName(), query);
+			String sql = this.buildEntityQuerySql(dbTableInfo.getTableName().toLowerCase(), query);
 			PreparedStatement statement = connection.prepareStatement(sql);
 			if(parms!=null){
 				for(int i=0; i<parms.length; i++){
@@ -69,7 +69,9 @@ public class HAPDBAccess {
 	protected Object queryEntityFromDB(String valueInfoName, String query, Object[] parms, Connection connection){
 		Object out = null;
 		List entitys = this.queryEntitysFromDB(valueInfoName, query, parms, connection);
-		if(entitys.size()>0)  out = entitys.get(0);
+		if(entitys.size()>0) {
+			out = entitys.get(0);
+		}
 		return out;
 	}
 
