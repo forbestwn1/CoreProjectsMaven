@@ -111,6 +111,11 @@
         <version>1.7.9</version>
     </dependency>    
 
+    <dependency>
+        <groupId>software.amazon.nio.s3</groupId>
+        <artifactId>aws-java-nio-spi-for-s3</artifactId>
+        <version>2.5.0</version>
+     </dependency>
   </dependencies> 
 
   <dependencyManagement>
