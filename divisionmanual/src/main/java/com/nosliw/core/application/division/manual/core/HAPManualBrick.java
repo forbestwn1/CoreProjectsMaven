@@ -62,7 +62,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	}
 	
 	public void init() {
-		this.m_varInfoContainer = new HAPContainerVariableInfo(this, this.m_bundle.getValueStructureDomain()); 
+		this.m_varInfoContainer = new HAPContainerVariableInfo(this, this.m_bundle); 
 	}
 
 	public void setBundle(HAPBundleForBrick bundle) {    this.m_bundle = bundle;      }

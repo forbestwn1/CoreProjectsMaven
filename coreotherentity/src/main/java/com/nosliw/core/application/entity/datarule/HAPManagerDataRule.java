@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.brick.HAPDomainValueStructure;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPProviderDataRule;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 
 @Component
 public class HAPManagerDataRule {
@@ -27,7 +25,7 @@ public class HAPManagerDataRule {
 		}
 	}
 	
-	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
-		return this.m_transformer.get(dataRule.getRuleType()).transformDataRule(dataRule, valueStructureDomian);
+	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPBundleForBrick bundle) {
+		return this.m_transformer.get(dataRule.getRuleType()).transformDataRule(dataRule, bundle);
 	}
 }

@@ -16,6 +16,19 @@ import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPUtilityElement {
 
+	public static HAPRootInStructure buildRootInStructure(String criteria, String name) {
+		HAPRootInStructure root = new HAPRootInStructure();
+		root.setDefinition(HAPUtilityElement.buildElementByCriteria(criteria));
+		root.setName(name);
+		return root;
+	}
+	
+	public static HAPElementStructureLeafData buildElementByCriteria(String criteria) {
+		HAPElementStructureLeafData out = new HAPElementStructureLeafData();
+		out.setCriteria(HAPUtilityCriteria.parseCriteria("test.date;1.0.0"));
+		return out;
+	}
+	
 	public static HAPElementStructure getDescendant(HAPElementStructure element, String path) {
 		HAPElementStructure out = element;
 		HAPPath pathObj = new HAPPath(path);

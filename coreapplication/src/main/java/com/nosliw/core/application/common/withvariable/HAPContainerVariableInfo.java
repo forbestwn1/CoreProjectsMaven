@@ -7,6 +7,8 @@ import java.util.Set;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.utils.HAPUtilityNosliw;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.valueport.HAPIdElement;
@@ -34,13 +36,16 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 	
 	private HAPDomainValueStructure m_valueStructureDomain;
 	
+	private HAPBundleForBrick m_bundle;
+	
 	private int m_nextId = 0;
 	
 	private HAPWithInternalValuePort m_withInternalValuePort;
 	
-	public HAPContainerVariableInfo(HAPWithInternalValuePort withInternalValuePort, HAPDomainValueStructure valueStructureDomain) {
+	public HAPContainerVariableInfo(HAPWithInternalValuePort withInternalValuePort, HAPBundleForBrick bundle) {
+		this.m_bundle = bundle;
 		this.m_withInternalValuePort = withInternalValuePort;
-		this.m_valueStructureDomain = valueStructureDomain;
+		this.m_valueStructureDomain = this.m_bundle.getValueStructureDomain();
 		this.m_criteriaInfosByKey = new LinkedHashMap<String, HAPInfoCriteria>();
 		this.m_variableIdByName = new LinkedHashMap<String, Map<String, HAPIdElement>>();
 		this.m_variableIdByKey = new LinkedHashMap<String, HAPIdElement>();
@@ -50,7 +55,15 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 	public String addVariable(String variableName, String varIODirection, HAPConfigureResolveElementReference resolveConfigure) {
 		HAPIdElement eleId = this.getVariableId(variableName, varIODirection);
 		if(eleId==null) {
-			eleId = HAPUtilityResovleElement.resolveNameFromInternal(variableName, varIODirection, this.m_withInternalValuePort, resolveConfigure, this.m_valueStructureDomain).getElementId();
+			if(HAPUtilityNosliw.getNosliwCoreName(variableName)==null) {
+				//normal variable
+				eleId = HAPUtilityResovleElement.resolveNameFromInternal(variableName, varIODirection, this.m_withInternalValuePort, resolveConfigure, this.m_valueStructureDomain).getElementId();
+			}
+			else {
+				//global variable
+				eleId = HAPUtilityResovleElement.resolveNameFromGlobal(variableName, varIODirection, this.m_bundle.getValuePortContainer(), resolveConfigure, this.m_valueStructureDomain).getElementId();
+			}
+			
 			Map<String, HAPIdElement> varIdByIoDirection = this.m_variableIdByName.get(variableName);
 			if(varIdByIoDirection==null) {
 				varIdByIoDirection = new LinkedHashMap<String, HAPIdElement>();
@@ -89,7 +102,7 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 	
 	@Override
 	public HAPContainerVariableInfo clone() {
-		HAPContainerVariableInfo out = new HAPContainerVariableInfo(this.m_withInternalValuePort, this.m_valueStructureDomain);
+		HAPContainerVariableInfo out = new HAPContainerVariableInfo(this.m_withInternalValuePort, this.m_bundle);
 		out.m_criteriaInfosByKey.putAll(this.m_criteriaInfosByKey);
 		out.m_variableIdByName.putAll(this.m_variableIdByName);
 		return out;

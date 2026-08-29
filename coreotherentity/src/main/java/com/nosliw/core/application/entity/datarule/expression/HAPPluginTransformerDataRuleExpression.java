@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.brick.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskWrapperDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
@@ -36,12 +36,12 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 	}
 	
 	@Override
-	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
+	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPBundleForBrick bundle) {
 		HAPDataRuleExpression expressionDataRule = (HAPDataRuleExpression)dataRule;
 
 		HAPBasicBlockTaskWrapperDataExpression brick = new HAPBasicBlockTaskWrapperDataExpression();
 
-		HAPInteractiveTask interactive = this.buildValuePortGroupForRuleTaskBrickTask(expressionDataRule, brick, valueStructureDomian); 
+		HAPInteractiveTask interactive = this.buildValuePortGroupForRuleTaskBrickTask(expressionDataRule, brick, bundle.getValueStructureDomain()); 
 		
 		HAPDefinitionDataExpressionStandAlone dataExpressionStandAloneDef = new HAPDefinitionDataExpressionStandAlone(); 
 		dataExpressionStandAloneDef.setExpression(expressionDataRule.getExpressionDefinition());		
@@ -52,7 +52,7 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 		//interactive request
 //		dataExpressionStandAloneExe.setExpressionInteractive(new HAPInteractiveExpression(dataExpressionStandAloneDef.getRequestParms(), dataExpressionStandAloneDef.getResult()));
 
-		HAPContainerVariableInfo varInfoContainer = new HAPContainerVariableInfo(brick, valueStructureDomian);
+		HAPContainerVariableInfo varInfoContainer = new HAPContainerVariableInfo(brick, bundle);
 
 		//resolve variable name, build var info container
 		HAPUtilityWithVarible.resolveVariable(dataExpressionStandAloneExe.getExpression(), varInfoContainer, null, this.m_withVariableMan, null);
@@ -61,7 +61,7 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 		HAPUtilityWithVarible.buildVariableInfoInEntity(dataExpressionStandAloneExe.getExpression(), varInfoContainer, this.m_withVariableMan);
 		
 		//build var criteria infor in var info container according to value port def
-		HAPUtilityValuePortVariable.buildVariableInfo(varInfoContainer, valueStructureDomian);
+		HAPUtilityValuePortVariable.buildVariableInfo(varInfoContainer, bundle.getValueStructureDomain());
 		
 		HAPBasicExpressionData dataExpression = (HAPBasicExpressionData)dataExpressionStandAloneExe.getExpression();
 		HAPBasicWrapperOperand operandWrapper = dataExpression.getOperandWrapper();
@@ -73,7 +73,7 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 		varInfoContainer = discoverResult.getLeft();
 		
 		//update value port element according to var info container after discovery
-		HAPUtilityValuePortVariable.updateValuePortElements(varInfoContainer, valueStructureDomian);
+		HAPUtilityValuePortVariable.updateValuePortElements(varInfoContainer, bundle.getValueStructureDomain());
 		
 		//result
 		dataExpressionStandAloneExe.setResultMatchers(discoverResult.getRight().get(HAPBasicPluginProcessorEntityWithVariableDataExpression.RESULT));

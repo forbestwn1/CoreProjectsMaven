@@ -24,6 +24,7 @@ public class HAPUtilityBundleForExecute {
 
 		HAPInfoExportBrick exportInfo = HAPUtilityBundleForExecute.getBrickExportInfo(bundleForBrick, exportName);
 		HAPResultBrickDescentValue brickResult = HAPUtilityBrick.getDescdentBrickResult(bundleForBrick, exportInfo.getPathFromRoot(), HAPConstantShared.NAME_ROOTBRICK_MAIN);
+		out.setValuePortContainer(bundleForBrick.getValuePortContainer());
 		out.setBrick(brickResult.getBrick());
 		out.setExportBrickInfo(exportInfo);
 		out.addAliasMappings(bundleForBrick.getAliasMappings());

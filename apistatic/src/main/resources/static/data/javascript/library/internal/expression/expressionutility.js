@@ -72,7 +72,7 @@ var node_utility = function()
 					var varId = varInfo[node_COMMONATRIBUTECONSTANT.VARIABLEINFO_VARIABLEID];
 					var eleInfo = node_createValuePortElementInfo(varId);
 					var valuePortId = varId[node_COMMONATRIBUTECONSTANT.IDELEMENT_ROOTELEMENTID][node_COMMONATRIBUTECONSTANT.IDROOTELEMENT_VALUEPORTID][node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBUNDLE_VALUEPORTID];
-					var valuePort = valuePortEnv.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_NAME]);
+					var valuePort = valuePortEnv.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_NAME]);
 					
 					calVarsRequest.addRequest(varKey, valuePort.getValueRequest(eleInfo, {
 						success : function(request, data){
@@ -354,7 +354,7 @@ var node_utility = function()
 							valuePortId = varsId[name][node_COMMONATRIBUTECONSTANT.IDELEMENT_ROOTELEMENTID][node_COMMONATRIBUTECONSTANT.IDROOTELEMENT_VALUEPORTID][node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBUNDLE_VALUEPORTID];
 							toValuesInfo.push(new node_ElementIdValuePair(node_createValuePortElementInfo(varsId[name]), value));
 						});
-						var valuePort = valuePortEnv.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_NAME]);
+						var valuePort = valuePortEnv.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_NAME]);
 						
 						var onInitTaskRequest = function(handlers, request){
 							var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);

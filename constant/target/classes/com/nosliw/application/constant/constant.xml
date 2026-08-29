@@ -1109,6 +1109,7 @@ I
 			<definition name="VALUEPORTGROUP_SIDE_EXTERNAL" value="external"/>
 
 			<definition type="space"/>
+			<definition name="VALUEPORTGROUP_TYPE_GLOBAL" value="global"/>
 			<definition name="VALUEPORTGROUP_TYPE_VALUECONTEXT" value="valueContext"/>
 			<definition name="VALUEPORTGROUP_TYPE_INTERACTIVEEXPRESSION" value="expressionInteractive"/>
 			<definition name="VALUEPORTGROUP_TYPE_INTERACTIVETASK" value="taskInteractive"/>
@@ -1116,6 +1117,7 @@ I
 			<definition name="VALUEPORTGROUP_TYPE_VALIDATIONDATA" value="validationData"/>
 
 			<definition type="space"/>
+			<definition name="VALUEPORT_TYPE_GLOBAL" value="global"/>
 			<definition name="VALUEPORT_TYPE_VALUECONTEXT" value="valueContext"/>
 			<definition name="VALUEPORT_TYPE_EVENT" value="event"/>
 			<definition name="VALUEPORT_TYPE_VALIDATIONDATA" value="validationData"/>
@@ -1130,6 +1132,7 @@ I
 
 
 			<definition type="space"/>
+			<definition name="VALUEPORT_NAME_GLOBAL" value="global"/>
 			<definition name="VALUEPORT_NAME_SELF" value="self"/>
 			<definition name="VALUEPORT_NAME_EVENT" value="event"/>
 			<definition name="VALUEPORT_NAME_VALIDATIONDATA" value="validationData"/>
@@ -1273,6 +1276,9 @@ I
 			<definition name="STATIC_LIBRARY_DOMAIN_INTERNAL" value="data.javascript.library.internal"/>
 			<definition name="STATIC_LIBRARY_DOMAIN_EXTERNAL" value="data.javascript.library.external"/>
 			
+			<definition type="space"/>
+			<definition name="VARIABLE_GLOBAL_NAME_TODAY" value="today"/>
+
 		</definitions>
 	</constants>
 </root>

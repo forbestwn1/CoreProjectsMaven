@@ -44,6 +44,9 @@ public class HAPManualProcessBundle {
 		HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 		bundle.setDynamicInfo(contentProvider.getDynamicDefinition());
 
+		//build global value port
+		HAPManualUtilityProcessorValuePort.buildGlobalValuePort(bundle);
+		
 		Map<String, HAPManualDefinitionWrapperBrickRoot> definitions = new LinkedHashMap();
 		
 		//branches

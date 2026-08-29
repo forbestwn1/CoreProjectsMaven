@@ -16,10 +16,14 @@ import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventProcess;
+import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.application.valueport.HAPIdElement;
 
 @HAPEntityWithAttribute
 public class HAPBundleForExecute extends HAPSerializableImp implements HAPCommandWithExport{
+
+	@HAPAttribute
+	public final static String VALUEPORTCONTAINER = "valuePortContainer"; 
 
 	@HAPAttribute
 	public final static String BRICK = "brick"; 
@@ -44,6 +48,8 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 	
 	@HAPAttribute
 	public final static String EXPORTVARIABLEINFO = "exportVariableInfo"; 
+	
+	private HAPContainerValuePorts m_valuePortContainer;
 	
 	private HAPBrick m_brick;
 	
@@ -74,6 +80,9 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 		this.m_exportEvents = new ArrayList<HAPEventEmitter>();
 		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
 	}
+
+	public HAPContainerValuePorts getValuePortContainer() {    return this.m_valuePortContainer;      }
+	public void setValuePortContainer(HAPContainerValuePorts valuePortContainer) {       this.m_valuePortContainer = valuePortContainer;       }
 
 	public HAPBrick getBrick() {    return this.m_brick;     }
 	public void setBrick(HAPBrick brick) {      this.m_brick = brick;      }
@@ -106,6 +115,7 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEPORTCONTAINER, this.m_valuePortContainer.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JSON));
 		if(this.m_valueStructureDomain!=null) {
 			jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JSON));
@@ -135,6 +145,7 @@ public class HAPBundleForExecute extends HAPSerializableImp implements HAPComman
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEPORTCONTAINER, this.m_valuePortContainer.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(BRICK, this.m_brick.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		if(this.m_valueStructureDomain!=null) {
 			jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));

@@ -1047,6 +1047,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String VALUEPORTGROUP_TYPE_GLOBAL = "global";
 		public static final String VALUEPORTGROUP_TYPE_VALUECONTEXT = "valueContext";
 		public static final String VALUEPORTGROUP_TYPE_INTERACTIVEEXPRESSION = "expressionInteractive";
 		public static final String VALUEPORTGROUP_TYPE_INTERACTIVETASK = "taskInteractive";
@@ -1055,6 +1056,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String VALUEPORT_TYPE_GLOBAL = "global";
 		public static final String VALUEPORT_TYPE_VALUECONTEXT = "valueContext";
 		public static final String VALUEPORT_TYPE_EVENT = "event";
 		public static final String VALUEPORT_TYPE_VALIDATIONDATA = "validationData";
@@ -1070,6 +1072,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String VALUEPORT_NAME_GLOBAL = "global";
 		public static final String VALUEPORT_NAME_SELF = "self";
 		public static final String VALUEPORT_NAME_EVENT = "event";
 		public static final String VALUEPORT_NAME_VALIDATIONDATA = "validationData";
@@ -1241,6 +1244,10 @@ public class HAPConstantShared {
 
 		public static final String STATIC_LIBRARY_DOMAIN_INTERNAL = "data.javascript.library.internal";
 		public static final String STATIC_LIBRARY_DOMAIN_EXTERNAL = "data.javascript.library.external";
+
+
+
+		public static final String VARIABLE_GLOBAL_NAME_TODAY = "today";
 
 
 }

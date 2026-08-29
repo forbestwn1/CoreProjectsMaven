@@ -97,6 +97,7 @@ public class HAPUtilityExport {
 		bundleJsonMap.put(HAPBundleForBrick.ALIASMAPPING, HAPManagerSerialize.getInstance().toStringValue(bundle.getAliasMappings(), HAPSerializationFormat.JSON));
 		bundleJsonMap.put(HAPBundleForBrick.EXPORTEVENT, HAPManagerSerialize.getInstance().toStringValue(bundle.getExportEvents(), HAPSerializationFormat.JSON));
 		bundleJsonMap.put(HAPBundleForBrick.EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(bundle.getCommandExorts(), HAPSerializationFormat.JSON));
+		bundleJsonMap.put(HAPBundleForBrick.VALUEPORTCONTAINER, HAPManagerSerialize.getInstance().toStringValue(bundle.getValuePortContainer(), HAPSerializationFormat.JSON));
 		HAPUtilityFileNio.writeJsonFile(bundleFolder, "bundle.json", HAPUtilityJson.buildMapJson(bundleJsonMap));
 		
 		//write package definition

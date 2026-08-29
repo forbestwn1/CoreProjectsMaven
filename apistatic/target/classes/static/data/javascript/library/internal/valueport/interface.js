@@ -48,25 +48,54 @@ var node_makeObjectWithValuePortInterface = function(rawEntity){
 		}
 	};
 	
+	var loc_getValuePortFromBundle = function(valuePortGroup, valuePortName){   
+		var loc_valuePort;
+		
+		var complexEntityInterface = node_getEntityObjectInterface(loc_rawEntity);
+		if(complexEntityInterface!=undefined){
+			loc_valuePort = complexEntityInterface.getBundle().getValuePortContainer().createValuePort(valuePortGroup, valuePortName);
+		}
+		
+		if(loc_valuePort!=undefined){
+			return node_buildValuePort(loc_valuePort);
+		}
+	};
+
 	//external value port interface
 	var loc_withValuePortInterfaceExternal = node_buildWithValuePort({
 		getValuePort : function(valuePortGroup, valuePortName){   
-			return loc_getExternalValuePort(valuePortGroup, valuePortName);
+			if(valuePortGroup!=node_COMMONCONSTANT.VALUEPORTGROUP_TYPE_GLOBAL){
+				return loc_getExternalValuePort(valuePortGroup, valuePortName);
+			}
+			else{
+				return loc_getValuePortFromBundle(valuePortGroup, valuePortName);
+			}
 		},
 	});
 
 	//internal value port interface
 	var loc_withValuePortInterfaceInternal = node_buildWithValuePort({
 		getValuePort : function(valuePortGroup, valuePortName){   
-			return loc_getInternalValuePort(valuePortGroup, valuePortName);
-		},
-		createVariableByName : function(varName){
-			if(loc_rawEntity.createVariableByName!=undefined){
-				return loc_rawEntity.createVariableByName(varName);
+			if(valuePortGroup!=node_COMMONCONSTANT.VALUEPORTGROUP_TYPE_GLOBAL){
+				return loc_getInternalValuePort(valuePortGroup, valuePortName);
 			}
 			else{
-        		var complexEntityInterface = node_getEntityObjectInterface(loc_rawEntity);
-				return complexEntityInterface.getInternalValuePortContainer().createVariableByName(varName);
+				return loc_getValuePortFromBundle(valuePortGroup, valuePortName);
+			}
+		},
+		createVariableByName : function(varName){
+			if(varName.startsWith(node_COMMONCONSTANT.NOSLIW_NAME_PREFIX)){
+				var complexEntityInterface = node_getEntityObjectInterface(loc_rawEntity);
+				return complexEntityInterface.getBundle().getValuePortContainer().createVariableByName(varName);
+			}
+			else{
+				if(loc_rawEntity.createVariableByName!=undefined){
+					return loc_rawEntity.createVariableByName(varName);
+				}
+				else{
+					var complexEntityInterface = node_getEntityObjectInterface(loc_rawEntity);
+					return complexEntityInterface.getInternalValuePortContainer().createVariableByName(varName);
+				}
 			}
 		}	
 	});

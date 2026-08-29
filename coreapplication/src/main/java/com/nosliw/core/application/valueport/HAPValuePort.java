@@ -40,6 +40,7 @@ public class HAPValuePort extends HAPEntityInfoImp{
 	private String m_ioDirection; 
 
 	public HAPValuePort() {
+		this.m_ioDirection = HAPConstantShared.IO_DIRECTION_BOTH;
 		this.m_valueStructures = new ArrayList<HAPInfoValueStructure>();
 	}
 	

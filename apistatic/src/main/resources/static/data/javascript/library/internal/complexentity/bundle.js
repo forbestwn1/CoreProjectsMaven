@@ -51,6 +51,7 @@ var node_createBundleCore = function(parm, configure){
 	var loc_parentView;
 	
 	var loc_dynamicInputContainer;
+	var loc_globalValuePortContainerId;
 	
 	var loc_eventProcess = {};
 	var loc_eventExport = {};
@@ -80,6 +81,9 @@ var node_createBundleCore = function(parm, configure){
 		
 		//build variable domain in bundle
 		loc_valueportDomain = nod_createValuePortDomain(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUESTRUCTUREDOMAIN]);
+		
+		//build global value port1
+		loc_globalValuePortContainerId = loc_valueportDomain.creatValuePortContainer(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_VALUEPORTCONTAINER]);
 
 		//event process
 		_.each(loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EVENTPROCESS], function(eventProcess, i){
@@ -274,6 +278,8 @@ var node_createBundleCore = function(parm, configure){
 	
 	var loc_out = {
 
+		getValuePortContainer : function(){     return  loc_valueportDomain.getValuePortContainer(loc_globalValuePortContainerId);     },
+		
 		getVariable : function(name){    
 			var varInfo = loc_bundleDef[node_COMMONATRIBUTECONSTANT.BUNDLEFOREXECUTE_EXPORTVARIABLEINFO][name];
 			var mainCore = loc_out.getMainEntityCore();

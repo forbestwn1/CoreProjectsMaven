@@ -666,11 +666,13 @@ var COMMONCONSTANT=
   "IODATASET_PROVIDE": "PROVIDE",
   "VALUEPORTGROUP_SIDE_INTERNAL": "internal",
   "VALUEPORTGROUP_SIDE_EXTERNAL": "external",
+  "VALUEPORTGROUP_TYPE_GLOBAL": "global",
   "VALUEPORTGROUP_TYPE_VALUECONTEXT": "valueContext",
   "VALUEPORTGROUP_TYPE_INTERACTIVEEXPRESSION": "expressionInteractive",
   "VALUEPORTGROUP_TYPE_INTERACTIVETASK": "taskInteractive",
   "VALUEPORTGROUP_TYPE_EVENT": "event",
   "VALUEPORTGROUP_TYPE_VALIDATIONDATA": "validationData",
+  "VALUEPORT_TYPE_GLOBAL": "global",
   "VALUEPORT_TYPE_VALUECONTEXT": "valueContext",
   "VALUEPORT_TYPE_EVENT": "event",
   "VALUEPORT_TYPE_VALIDATIONDATA": "validationData",
@@ -680,6 +682,7 @@ var COMMONCONSTANT=
   "IO_DIRECTION_IN": "IN",
   "IO_DIRECTION_OUT": "OUT",
   "IO_DIRECTION_BOTH": "BOTH",
+  "VALUEPORT_NAME_GLOBAL": "global",
   "VALUEPORT_NAME_SELF": "self",
   "VALUEPORT_NAME_EVENT": "event",
   "VALUEPORT_NAME_VALIDATIONDATA": "validationData",
@@ -757,7 +760,8 @@ var COMMONCONSTANT=
   "STATIC_RESPONSE_TYPE_FILE": "file",
   "STATIC_RESPONSE_TYPE_DATA": "data",
   "STATIC_LIBRARY_DOMAIN_INTERNAL": "data.javascript.library.internal",
-  "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external"
+  "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external",
+  "VARIABLE_GLOBAL_NAME_TODAY": "today"
 };
 
 //*******************************************   End Node Definition  ************************************** 	

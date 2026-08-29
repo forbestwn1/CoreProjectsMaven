@@ -27,6 +27,7 @@ import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventProcess;
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
+import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.resource.HAPWithResourceDependency;
@@ -43,6 +44,12 @@ class HAPBundleForBrick_parser implements HAPParserEntity{
 		HAPBundleForBrick out = new HAPBundleForBrick(); 
 
 		JSONObject jsonObj = (JSONObject)obj;
+		
+		//value port container belong to bundle
+		JSONObject valuePortContainerJsonObj = jsonObj.optJSONObject(HAPBundleForBrick.VALUEPORTCONTAINER);
+		if(valuePortContainerJsonObj!=null) {
+			out.getValuePortContainer().buildObject(valuePortContainerJsonObj, HAPSerializationFormat.JSON);
+		}
 		
 		//main brick
 		out.setMainBrickWrapper((HAPWrapperBrickRoot)parseService.parseEntityJSONExplicit(jsonObj.getJSONObject(HAPBundleForBrick.MAINBRICK), HAPWrapperBrickRoot.class.getName()));
@@ -108,6 +115,9 @@ class HAPBundleForBrick_parser implements HAPParserEntity{
 public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{
 
 	@HAPAttribute
+	public final static String VALUEPORTCONTAINER = "valuePortContainer"; 
+
+	@HAPAttribute
 	public final static String MAINBRICK = "mainBrick"; 
 
 	@HAPAttribute
@@ -134,6 +144,8 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	@HAPAttribute
 	public final static String EXPORTRESOURCE = "exportResource"; 
 
+	private HAPContainerValuePorts m_valuePortContainer;
+	
 	private HAPWrapperBrickRoot m_mainBrickWrapper;
 
 	//other brick that support main brick, for instance, global task
@@ -159,6 +171,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	private List<HAPInfoExportBrick> m_exportResourceInfos;
 	
 	protected HAPBundleForBrick() {
+		this.m_valuePortContainer = new HAPContainerValuePorts();
 		this.m_valueStructureDomain = new HAPDomainValueStructure();
 		this.m_exportResourceInfos = new ArrayList<HAPInfoExportBrick>();
 		this.m_branchBricks = new LinkedHashMap<String, HAPWrapperBrickRoot>();
@@ -178,6 +191,8 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 		out.addExportResourceInfo(defaultExport);
 		return out;
 	}
+	
+	public HAPContainerValuePorts getValuePortContainer() {    return this.m_valuePortContainer;      }
 	
 	public void addEventProcess(String id, HAPEventProcess eventProcess) {     this.m_eventProcesses.put(id, eventProcess);       }
 	public HAPEventProcess getEventProcess(String id) {       return this.m_eventProcesses.get(id);       }
@@ -256,6 +271,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEPORTCONTAINER, this.m_valuePortContainer.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(MAINBRICK, this.m_mainBrickWrapper.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JSON));
@@ -280,6 +296,7 @@ public class HAPBundleForBrick extends HAPSerializableImp implements HAPWithReso
 	@Override
 	protected void buildJSJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJSJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(VALUEPORTCONTAINER, this.m_valuePortContainer.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(MAINBRICK, this.m_mainBrickWrapper.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(VALUESTRUCTUREDOMAIN, this.m_valueStructureDomain.toStringValue(HAPSerializationFormat.JAVASCRIPT));
 		jsonMap.put(DYNAMIC, this.m_dynamicInfo.toStringValue(HAPSerializationFormat.JAVASCRIPT));

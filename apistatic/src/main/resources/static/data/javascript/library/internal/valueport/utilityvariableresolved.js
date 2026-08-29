@@ -13,7 +13,7 @@ var node_utilityResolvedVariable = function(){
 	
 	var loc_getValuePort = function(withValuePort, varId){
 		var valuePortId = varId[node_COMMONATRIBUTECONSTANT.IDELEMENT_ROOTELEMENTID][node_COMMONATRIBUTECONSTANT.IDROOTELEMENT_VALUEPORTID][node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBUNDLE_VALUEPORTID];
-		return withValuePort.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_NAME]);
+		return withValuePort.getValuePort(valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_GROUP], valuePortId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_NAME]);
 	};
 	
 	var loc_out = {
@@ -35,15 +35,15 @@ var node_utilityResolvedVariable = function(){
 			
 			_.each(varValues, function(varValue, i){
 				var varId = varValue.variableId;
-				var byGroup = varValueByValuePort[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_GROUP]];
+				var byGroup = varValueByValuePort[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_GROUP]];
 				if(byGroup==undefined){
 					byGroup = {};
-					varValueByValuePort[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_GROUP]] = byGroup;
+					varValueByValuePort[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_GROUP]] = byGroup;
 				}
-				var byName = byGroup[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_NAME]];
+				var byName = byGroup[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_NAME]];
 				if(byName==undefined){
 					byName = [];
-					byGroup[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORTINBRICK_NAME]] = byName;
+					byGroup[varId[node_COMMONATRIBUTECONSTANT.IDVALUEPORT_NAME]] = byName;
 				}
 				byName.push(varValue);
 			});

@@ -2,7 +2,7 @@ package com.nosliw.core.application.entity.datarule.mandatory;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPDomainValueStructure;
+import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskTaskScript;
 import com.nosliw.core.application.entity.datarule.HAPDataRule;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;
@@ -15,10 +15,10 @@ public class HAPPluginTransformerDataRuleMandatory extends HAPPluginTransformerD
 	}
 	
 	@Override
-	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPDomainValueStructure valueStructureDomian) {
+	public HAPEntityOrReference transformDataRule(HAPDataRule dataRule, HAPBundleForBrick bundle) {
 		HAPBasicBlockTaskTaskScript out = new HAPBasicBlockTaskTaskScript();
 
-		this.buildInterfaceTask(dataRule, out, valueStructureDomian);
+		this.buildInterfaceTask(dataRule, out, bundle.getValueStructureDomain());
 		
 		out.setScriptResourceId(HAPFactoryResourceId.newInstance(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT, "1.0.0", "task_datavalidation_mandatory"));
 		

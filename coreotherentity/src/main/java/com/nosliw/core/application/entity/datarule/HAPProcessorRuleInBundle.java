@@ -42,12 +42,12 @@ public class HAPProcessorRuleInBundle {
 				String eleType = ele.getType();
                 if(eleType.equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_DATA)) {
                 	HAPElementStructureLeafData dataEle = (HAPElementStructureLeafData)ele;
-                	buildRuildForDataElement(dataEle, containerBrick, validationTaskBranchName, valueStructureDomain, dataRuleManager, brickManager, runtimeInfo);
+                	buildRuildForDataElement(dataEle, containerBrick, validationTaskBranchName, bundle, dataRuleManager, brickManager, runtimeInfo);
                 }
                 if(eleType.equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_RELATIVE_FOR_VALUE)) {
                 	HAPElementStructureLeafRelativeForValue forValueElement = (HAPElementStructureLeafRelativeForValue)ele;
                 	HAPElementStructureLeafData dataEle = forValueElement.getDefinition();
-                	buildRuildForDataElement(dataEle, containerBrick, validationTaskBranchName, valueStructureDomain, dataRuleManager, brickManager, runtimeInfo);
+                	buildRuildForDataElement(dataEle, containerBrick, validationTaskBranchName, bundle, dataRuleManager, brickManager, runtimeInfo);
                 }
 			}
 		}
@@ -59,7 +59,7 @@ public class HAPProcessorRuleInBundle {
 		}
 	}
 	
-	private static void buildRuildForDataElement(HAPElementStructureLeafData dataEle, HAPBasicBrickContainer containerBrick, String validationTaskBranchName, HAPDomainValueStructure valueStructureDomain, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
+	private static void buildRuildForDataElement(HAPElementStructureLeafData dataEle, HAPBasicBrickContainer containerBrick, String validationTaskBranchName, HAPBundleForBrick bundle, HAPManagerDataRule dataRuleManager, HAPManagerApplicationBrick brickManager, HAPRuntimeInfo runtimeInfo) {
     	for(HAPDefinitionDataRule ruleDef : dataEle.getDataDefinition().getRules()) {
     		HAPDataRule rule = ruleDef.getDataRule();
     		HAPDataTypeCriteria ruleCriteria = HAPUtilityCriteria.getChildCriteriaByPath(dataEle.getCriteria(), ruleDef.getPath());
@@ -70,7 +70,7 @@ public class HAPProcessorRuleInBundle {
     		HAPDataRuleImplementationLocal dataRuleImp = new HAPDataRuleImplementationLocal(validationTaskBranchName + "."+attrName);
     		rule.setImplementation(dataRuleImp);
 
-    		HAPEntityOrReference ruleTaskBrickOrRef = dataRuleManager.transformDataRule(rule, valueStructureDomain);
+    		HAPEntityOrReference ruleTaskBrickOrRef = dataRuleManager.transformDataRule(rule, bundle);
     		taskWrapperBrick.setTask(ruleTaskBrickOrRef);
     		taskWrapperBrick.setTaskType(HAPUtilityOtherBrick.getBrickTaskType(HAPUtilityBrick.getBrickType(ruleTaskBrickOrRef), brickManager));
     	}

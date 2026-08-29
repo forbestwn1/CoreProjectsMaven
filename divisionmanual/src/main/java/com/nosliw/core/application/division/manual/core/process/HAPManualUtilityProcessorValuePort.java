@@ -13,6 +13,7 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.path.HAPUtilityPath;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPDomainValueStructure;
@@ -26,6 +27,7 @@ import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBric
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelationValueContext;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelative;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
+import com.nosliw.core.application.common.structure.HAPUtilityElement;
 import com.nosliw.core.application.common.structure.HAPUtilityScope;
 import com.nosliw.core.application.common.structure.reference.HAPUtilityProcessRelativeElementInBundle;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
@@ -47,11 +49,29 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.dynamic.HAPDynamicDefinitionItemLeaf;
 import com.nosliw.core.application.dynamic.HAPDynamicUtilityDefinition;
 import com.nosliw.core.application.entity.brickcriteria.facade.task.HAPRestrainBrickTypeFacadeTaskInterface;
+import com.nosliw.core.application.valueport.HAPGroupValuePorts;
 import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
 import com.nosliw.core.application.valueport.HAPUtilityValuePort;
+import com.nosliw.core.application.valueport.HAPValuePort;
 
 public class HAPManualUtilityProcessorValuePort {
 
+	public static void buildGlobalValuePort(HAPBundleForBrick bundle) {
+		Set<HAPRootInStructure> roots = new HashSet<HAPRootInStructure>();
+		roots.add(HAPUtilityElement.buildRootInStructure("test.date;1.0.0", HAPUtilityNosliw.buildNosliwFullName(HAPConstantShared.VARIABLE_GLOBAL_NAME_TODAY)));
+
+		String valueStructureId = bundle.getValueStructureDomain().newValueStructure(roots, null, null, null);
+
+		HAPValuePort valuePort = new HAPValuePort();
+		valuePort.addValueStructureId(valueStructureId);
+		
+		HAPGroupValuePorts valuePortGroup = new HAPGroupValuePorts(HAPConstantShared.VALUEPORTGROUP_TYPE_GLOBAL);
+		valuePortGroup.setName(HAPConstantShared.VALUEPORTGROUP_TYPE_GLOBAL);
+		valuePortGroup.addValuePort(valuePort);
+
+		bundle.getValuePortContainer().addValuePortGroup(valuePortGroup);
+	}
+	
 	public static void process(HAPManualContextProcessBrick processContext) {
 
 		//build value context in complex block
