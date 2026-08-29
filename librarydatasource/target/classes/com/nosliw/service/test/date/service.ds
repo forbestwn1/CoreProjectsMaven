@@ -11,8 +11,14 @@
 					"name" : "serviceParmDate",
 					"dataDefinition" : {
 						"criteria" : "test.date;1.0.0",
-					    "rule" : [
-					    ]
+						"initData" : {
+							"dataTypeId": "test.date;1.0.0",
+							"value": {
+							    "year" : 2020,
+							    "month" : 3,
+							    "date" : 5
+							}
+						}
 					}
 				}
 			],

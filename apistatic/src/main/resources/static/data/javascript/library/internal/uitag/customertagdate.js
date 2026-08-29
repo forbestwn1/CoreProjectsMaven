@@ -46,7 +46,7 @@ var node_createUICustomerTagTestDate = function(envObj){
 			loc_dataView.bind('change', function(){
 				var date = new Date(loc_dataView.val());
 				var currentData = {
-					dataTypeId: "test.integer;1.0.0",
+					dataTypeId: "test.date;1.0.0",
 					value: {
 						year : date.getFullYear(),
 						month : date.getMonth(),
