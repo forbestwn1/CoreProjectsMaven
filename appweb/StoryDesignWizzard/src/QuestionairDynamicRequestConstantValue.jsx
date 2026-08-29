@@ -43,28 +43,12 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			var request = node_createServiceRequestInfoSequence(new node_ServiceInfo("constantValueUITag"));
 			var gatewayParm = {};
 
-			var uitages = [];
-
-			var uiTagParmForChange = {};
-			var uiTagParmForDisplay = {};
-
 			var uiTagQueryForChange = {};
 			var uiTagQueryForDisplay = {};
 			uiTagQueryForChange[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_DATADEFINITION] = datadefinition;
 			uiTagQueryForDisplay[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_DATADEFINITION] = datadefinition;
 			uiTagQueryForChange[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_IOMODE] = node_COMMONCONSTANT.IO_DIRECTION_IN;
 			uiTagQueryForDisplay[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_IOMODE] = node_COMMONCONSTANT.IO_DIRECTION_OUT;
-
-			uiTagParmForChange[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForChange;
-			uiTagParmForDisplay[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForDisplay;
-
-			uiTagParmForChange[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_DOMAIN] = loc_nameForChange;
-			uiTagParmForDisplay[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM_DOMAIN] = loc_nameForDisplay;
-
-			uitages.push(uiTagParmForChange);
-			uitages.push(uiTagParmForDisplay);
-
-			// gatewayParm[node_COMMONATRIBUTECONSTANT.STORYGATEWAYSTANDALONE_COMMAND_CEATESTANDALONE_PARM] = uitages;
 
             var parm1 = {};
 			parm1[node_COMMONATRIBUTECONSTANT.STORYMANAGERSTANDALONE_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForChange;

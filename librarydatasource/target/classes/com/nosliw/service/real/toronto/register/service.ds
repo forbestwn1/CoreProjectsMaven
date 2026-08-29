@@ -8,28 +8,63 @@
 		"taskInterface" : {
 			"request" : [
 				{
-					"name" : "locationId",
+					"name" : "location",
 					"dataDefinition" : {
+					    "isMultipleAllowed" : true,
+						"criteria" : "test.entityinfo;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "enum",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "conmmunitycentre_toronto"
+					        }
+					    ]
 					}
 				},
-				{
-					"name" : "locationName",
-					"dataDefinition" : {
-					}
-				},
-				{
+                {    
 					"name" : "program",
 					"dataDefinition" : {
+					    "isMultipleAllowed" : true,
+						"criteria" : "test.string;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "enum",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "program_dropin"
+					        }
+					    ]
 					}
 				},
 				{
-					"name" : "daterange",
+					"name" : "fromdate",
 					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+					}
+				},
+				{
+					"name" : "fromtime",
+					"dataDefinition" : {
+						"criteria" : "test.time;1.0.0",
+					}
+				},
+				{
+					"name" : "todate",
+					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+					}
+				},
+				{
+					"name" : "totime",
+					"dataDefinition" : {
+						"criteria" : "test.time;1.0.0",
 					}
 				},
 				{
 					"name" : "age",
 					"dataDefinition" : {
+						"criteria" : "test.int;1.0.0",
 					}
 				},
 				{
