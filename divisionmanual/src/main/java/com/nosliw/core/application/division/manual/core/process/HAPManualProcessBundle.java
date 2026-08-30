@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPUtilityBrickReference;
@@ -39,7 +40,8 @@ public class HAPManualProcessBundle {
 			HAPDataTypeHelper dataTypeHelper,
 			HAPManagerResource resourceMan,
 			HAPManagerDataRule dataRuleManager,
-			HAPParserDataExpression dataExpressionParser
+			HAPParserDataExpression dataExpressionParser,
+			HAPServiceParseEntity entityParseService
 			) {
 		HAPBundleForBrick bundle = HAPBundleForBrick.newBundleForBrick();
 		bundle.setDynamicInfo(contentProvider.getDynamicDefinition());
@@ -52,13 +54,13 @@ public class HAPManualProcessBundle {
 		//branches
 		Map<String, HAPManualInfoContent> branchsContent = contentProvider.getBranchContents();
 		for(String branchName : branchsContent.keySet()) {
-			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(branchsContent.get(branchName), contentProvider, new HAPManualContextProcessBrick(bundle, branchName, manualBrickMan, brickManager, dataTypeHelper, resourceMan, runtimeInfo), manualBrickMan, runtimeMan, dataExpressionParser);
+			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(branchsContent.get(branchName), contentProvider, new HAPManualContextProcessBrick(bundle, branchName, manualBrickMan, brickManager, dataTypeHelper, resourceMan, runtimeInfo), manualBrickMan, runtimeMan, dataExpressionParser, entityParseService);
 			definitions.put(rootBrick.getName(), rootBrick.getDefinition());
 		}
 	
 		//main 
 		{
-			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(contentProvider.getMainContent(), contentProvider, new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, manualBrickMan, brickManager, dataTypeHelper, resourceMan, runtimeInfo), manualBrickMan, runtimeMan, dataExpressionParser);
+			HAPManualWrapperBrickRoot rootBrick = (HAPManualWrapperBrickRoot)createRootBrick(contentProvider.getMainContent(), contentProvider, new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, manualBrickMan, brickManager, dataTypeHelper, resourceMan, runtimeInfo), manualBrickMan, runtimeMan, dataExpressionParser, entityParseService);
 			definitions.put(rootBrick.getName(), rootBrick.getDefinition());
 		}
 
@@ -103,8 +105,8 @@ public class HAPManualProcessBundle {
 		return bundle;
 	}
 	
-	private static HAPWrapperBrickRoot createRootBrick(HAPManualInfoContent contentInfo, HAPManualContentProvider contentProvider, HAPManualContextProcessBrick processContext, HAPManualManagerBrick manualBrickMan, HAPRuntimeManager runtimeMan, HAPParserDataExpression dataExpressionParser) {
-		HAPManualDefinitionContextParse parseContext = new HAPManualDefinitionContextParse(contentProvider, HAPConstantShared.BRICK_DIVISION_MANUAL, manualBrickMan, processContext.getBrickManager());
+	private static HAPWrapperBrickRoot createRootBrick(HAPManualInfoContent contentInfo, HAPManualContentProvider contentProvider, HAPManualContextProcessBrick processContext, HAPManualManagerBrick manualBrickMan, HAPRuntimeManager runtimeMan, HAPParserDataExpression dataExpressionParser, HAPServiceParseEntity entityParseService) {
+		HAPManualDefinitionContextParse parseContext = new HAPManualDefinitionContextParse(contentProvider, HAPConstantShared.BRICK_DIVISION_MANUAL, manualBrickMan, processContext.getBrickManager(), entityParseService);
 		//get definition
 		HAPManualDefinitionWrapperBrickRoot brickDefWrapper = HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(contentInfo.getContent(), contentInfo.getBrickTypeId(), contentInfo.getFormat(), parseContext);
 		HAPWrapperBrickRoot out = HAPManualProcessBrick.processRootBrickInit(brickDefWrapper, runtimeMan, dataExpressionParser, processContext);

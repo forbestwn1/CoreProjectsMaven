@@ -17,6 +17,7 @@ public class HAPManualPluginProcessorBlockContainer extends HAPManualPluginProce
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBrickContainer containerDef = (HAPManualDefinitionBrickContainer)blockPair.getLeft();
 		HAPManualBrickContainer containerExe = (HAPManualBrickContainer)blockPair.getRight();

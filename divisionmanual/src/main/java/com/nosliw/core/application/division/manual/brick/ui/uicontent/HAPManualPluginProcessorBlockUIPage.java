@@ -19,6 +19,7 @@ public class HAPManualPluginProcessorBlockUIPage extends HAPManualPluginProcesso
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUIPage uiPageDef = (HAPManualDefinitionBlockComplexUIPage)blockPair.getLeft();
 		HAPManualBlockComplexUIPage uiPageExe = (HAPManualBlockComplexUIPage)blockPair.getRight();
@@ -28,7 +29,7 @@ public class HAPManualPluginProcessorBlockUIPage extends HAPManualPluginProcesso
 
 	@Override
 	public void postProcessBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
-		
+		super.postProcessBrick(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUIPage uiPageDef = (HAPManualDefinitionBlockComplexUIPage)blockPair.getLeft();
 		HAPManualBlockComplexUIPage uiPageExe = (HAPManualBlockComplexUIPage)blockPair.getRight();

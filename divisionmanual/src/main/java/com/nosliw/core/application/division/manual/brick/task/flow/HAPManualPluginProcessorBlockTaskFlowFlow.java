@@ -3,12 +3,12 @@ package com.nosliw.core.application.division.manual.brick.task.flow;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
-import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
 import com.nosliw.data.core.runtime.HAPRuntimeEnvironment;
 
 public class HAPManualPluginProcessorBlockTaskFlowFlow extends HAPManualPluginProcessorBlockImp{
@@ -19,6 +19,7 @@ public class HAPManualPluginProcessorBlockTaskFlowFlow extends HAPManualPluginPr
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTaskFlowFlow definitionBlock = (HAPManualDefinitionBlockTaskFlowFlow)blockPair.getLeft();
 		HAPManualBlockTaskFlowFlow executableBlock = (HAPManualBlockTaskFlowFlow)blockPair.getRight();
@@ -33,7 +34,7 @@ public class HAPManualPluginProcessorBlockTaskFlowFlow extends HAPManualPluginPr
 
 	@Override
 	public void processBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
-		
+		super.processBrick(pathFromRoot, processContext);
 	}
 
 }

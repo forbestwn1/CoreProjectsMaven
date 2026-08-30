@@ -17,6 +17,7 @@ public class HAPManualPluginProcessorBlockSimpleInteractiveInterfaceExpression e
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfoPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockInteractiveInterfaceExpression expressionInteractExe = (HAPManualBlockInteractiveInterfaceExpression)brickInfoPair.getRight();
 		HAPManualDefinitionBlockInteractiveInterfaceExpression expressionInteractDef = (HAPManualDefinitionBlockInteractiveInterfaceExpression)brickInfoPair.getLeft();

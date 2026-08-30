@@ -5,10 +5,12 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.spec.expression.scriptexpression.group.HAPBlockScriptExpressionGroup;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
+import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScriptImp;
 import com.nosliw.core.application.common.scriptexpressio.HAPItemInContainerScriptExpression;
 import com.nosliw.core.application.common.scriptexpressio.HAPUtilityScriptExpression;
-import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScriptImp;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
@@ -19,8 +21,6 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualContext
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.data.matcher.HAPMatchers;
-import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
-import com.nosliw.core.xxx.application1.brick.scriptexpression.group.HAPBlockScriptExpressionGroup;
 import com.nosliw.data.core.runtime.HAPRuntimeEnvironment;
 
 public class HAPManualPluginProcessorBlockScriptExpressionGroup extends HAPManualPluginProcessorBlockImp{
@@ -31,6 +31,7 @@ public class HAPManualPluginProcessorBlockScriptExpressionGroup extends HAPManua
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPDefinitionContainerScriptExpression groupDef = ((HAPManualDefinitionBlockScriptExpressionGroup)blockPair.getLeft()).getValue();
 		HAPContainerScriptExpression groupExe = ((HAPBlockScriptExpressionGroup)blockPair.getRight()).getValue();
@@ -39,6 +40,7 @@ public class HAPManualPluginProcessorBlockScriptExpressionGroup extends HAPManua
 	
 	@Override
 	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processVariableResolve(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockScriptExpressionGroup groupBlock = (HAPManualBlockScriptExpressionGroup)blockPair.getRight();
 		HAPContainerScriptExpression groupExe = ((HAPManualBlockScriptExpressionGroup)blockPair.getRight()).getValue();
@@ -61,6 +63,7 @@ public class HAPManualPluginProcessorBlockScriptExpressionGroup extends HAPManua
 	
 	@Override
 	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processValueContextDiscovery(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockScriptExpressionGroup groupBlock = (HAPManualBlockScriptExpressionGroup)blockPair.getRight();
 		HAPContainerScriptExpression groupExe = ((HAPManualBlockScriptExpressionGroup)blockPair.getRight()).getValue();

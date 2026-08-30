@@ -18,6 +18,8 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionItemInContainerDataExpression;
+import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionWithDataExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugDefinition;
@@ -165,6 +167,10 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 	        if(brickDefinition instanceof HAPWithBlockInteractiveExpression) {
 	        	this.parseExpressionInterfaceAttribute(brickDefinition, jsonObj, parseContext);
 	        }
+	        
+	        //data expression
+	        this.parseDataExpressions(brickDefinition, jsonObj, parseContext);
+	        
 
 	        //variable for debug attirbute
 	        if(brickDefinition instanceof HAPWithVariableDebugDefinition) {
@@ -278,6 +284,15 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 		if(parmJsonObj!=null) {
 			HAPParms parms = HAPManagerParm.getInstance().parseParms(parmJsonObj);
 			parentBrick.setParms(parms);
+		}
+	}
+	
+	protected void parseDataExpressions(HAPManualDefinitionBrick brick, JSONObject jsonObj, HAPManualDefinitionContextParse parseContext) {
+		JSONArray dataExpressionJsonArray = jsonObj.optJSONArray(HAPDefinitionWithDataExpression.DATAEXPRESSION);
+		if(dataExpressionJsonArray!=null) {
+			for(int i=0; i<dataExpressionJsonArray.length(); i++) {
+				brick.getDataExpressions().addItem((HAPDefinitionItemInContainerDataExpression)parseContext.getParseService().parseEntityJSONExplicit(dataExpressionJsonArray.getJSONObject(i), HAPDefinitionItemInContainerDataExpression.class.getName()));
+			}
 		}
 	}
 	

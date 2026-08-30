@@ -22,6 +22,7 @@ import com.nosliw.core.application.brick.HAPWrapperValueOfDynamic;
 import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.brick.HAPWrapperValueOfValue;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.resource.HAPResourceDependency;
 import com.nosliw.core.resource.HAPResourceId;
@@ -44,6 +45,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 	
 	private Map<String, HAPCommandProcess> m_commandExports;
 	
+	private HAPContainerDataExpression m_dataExpressionContainer;
+	
 	public HAPBrickImp(HAPIdBrickType brickTypeId, String domain) {
 		this();
 		this.m_brickTypeId = brickTypeId;
@@ -56,6 +59,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 		this.m_externalValuePortsContainer = new HAPContainerValuePorts();
 		this.m_eventIds = new ArrayList<String>();
 		this.m_commandExports = new LinkedHashMap<String, HAPCommandProcess>();
+		this.m_dataExpressionContainer = new HAPContainerDataExpression();
 	}
 
 	@Override
@@ -79,6 +83,9 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 	@Override
 	public HAPCommandProcess getCommandExport(String name) {   return this.m_commandExports.get(name);   }
 	public void addCommandExport(HAPCommandProcess command) {      this.m_commandExports.put(command.getCommandDefinition().getName(), command);          }
+
+	@Override
+	public HAPContainerDataExpression getDataExpressions() {      return this.m_dataExpressionContainer;         }
 
 	@Override
 	public List<HAPAttributeInBrick> getAttributes(){     return this.m_attributes;	}

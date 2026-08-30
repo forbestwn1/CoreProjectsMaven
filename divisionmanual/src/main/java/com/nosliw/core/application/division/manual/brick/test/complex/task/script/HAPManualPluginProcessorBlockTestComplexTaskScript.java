@@ -20,6 +20,7 @@ public class HAPManualPluginProcessorBlockTestComplexTaskScript extends HAPManua
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexTaskScript definitionBlock = (HAPManualDefinitionBlockTestComplexTaskScript)blockPair.getLeft();
 		HAPManualBlockTestComplexTaskScript executableBlock = (HAPManualBlockTestComplexTaskScript)blockPair.getRight();
@@ -33,6 +34,7 @@ public class HAPManualPluginProcessorBlockTestComplexTaskScript extends HAPManua
 
 	@Override
 	public void processBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processBrick(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexTaskScript definitionBlock = (HAPManualDefinitionBlockTestComplexTaskScript)blockPair.getLeft();
 		HAPManualBlockTestComplexTaskScript executableBlock = (HAPManualBlockTestComplexTaskScript)blockPair.getRight();
@@ -48,6 +50,7 @@ public class HAPManualPluginProcessorBlockTestComplexTaskScript extends HAPManua
 
 	@Override
 	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processVariableResolve(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexTaskScript definitionBlock = (HAPManualDefinitionBlockTestComplexTaskScript)blockPair.getLeft();
 		HAPManualBlockTestComplexTaskScript executableBlock = (HAPManualBlockTestComplexTaskScript)blockPair.getRight();

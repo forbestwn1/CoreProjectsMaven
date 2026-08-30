@@ -35,6 +35,7 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUIContent uiContentDef = (HAPManualDefinitionBlockComplexUIContent)blockPair.getLeft();
 		HAPManualBlockComplexUIContent uiContentExe = (HAPManualBlockComplexUIContent)blockPair.getRight();
@@ -56,6 +57,7 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 	
 	@Override
 	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.normalizeBrickPath(pathFromRoot, processContext);
 		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockComplexUIContent executableBlock = (HAPManualBlockComplexUIContent)blockPair.getRight();
@@ -64,6 +66,7 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 
 	@Override
 	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processVariableResolve(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUIContent uiContentDef = (HAPManualDefinitionBlockComplexUIContent)blockPair.getLeft();
 		HAPManualBlockComplexUIContent uiContentExe = (HAPManualBlockComplexUIContent)blockPair.getRight();
@@ -81,6 +84,7 @@ public class HAPManualPluginProcessorBlockUIContent extends HAPManualPluginProce
 	
 	@Override
 	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processValueContextDiscovery(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUIContent uiContentDef = (HAPManualDefinitionBlockComplexUIContent)blockPair.getLeft();
 		HAPManualBlockComplexUIContent uiContentExe = (HAPManualBlockComplexUIContent)blockPair.getRight();

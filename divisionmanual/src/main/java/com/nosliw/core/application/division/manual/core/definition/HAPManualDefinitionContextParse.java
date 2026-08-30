@@ -1,5 +1,6 @@
 package com.nosliw.core.application.division.manual.core.definition;
 
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.manual.HAPManualContentProvider;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
@@ -14,11 +15,14 @@ public class HAPManualDefinitionContextParse {
 	
 	private HAPManagerApplicationBrick m_brickManager;
 	
-	public HAPManualDefinitionContextParse(HAPManualContentProvider contentProvider, String brickDivision, HAPManualManagerBrick manualBrickMan, HAPManagerApplicationBrick brickMan) {
+	private HAPServiceParseEntity m_parseService;
+	
+	public HAPManualDefinitionContextParse(HAPManualContentProvider contentProvider, String brickDivision, HAPManualManagerBrick manualBrickMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity parseService) {
 		this.m_contentProvider = contentProvider;
 		this.m_brickDivision = brickDivision;
 		this.m_manualBrickMan = manualBrickMan;
 		this.m_brickManager = brickMan;
+		this.m_parseService = parseService;
 	}
 	
 	public HAPManualContentProvider getContentProvider() {    return this.m_contentProvider;    }
@@ -29,4 +33,6 @@ public class HAPManualDefinitionContextParse {
 	
 	public HAPManagerApplicationBrick getBrickManager() {   return this.m_brickManager;     }
 
+	public HAPServiceParseEntity getParseService() {      return this.m_parseService;       }
+	
 }

@@ -36,6 +36,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 
 	@Override
 	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.normalizeBrickPath(pathFromRoot, processContext);
 		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
@@ -50,6 +51,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 	
 	@Override
 	public void postProcessOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.postProcessOtherValuePortBuild(pathFromRoot, processContext);
 		HAPBundleForBrick bundle = processContext.getCurrentBundle();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
@@ -74,6 +76,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 
 	@Override
 	public void processOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processOtherValuePortBuild(pathFromRoot, processContext);
 //		HAPBundle bundle = processContext.getCurrentBundle();
 //		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 //		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
@@ -100,6 +103,7 @@ public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPMa
 
 	@Override
 	public void processBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processBrick(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockTestComplexScript definitionBlock = (HAPManualDefinitionBlockTestComplexScript)blockPair.getLeft();
 		HAPManualBlockTestComplexScript executableBlock = (HAPManualBlockTestComplexScript)blockPair.getRight();

@@ -39,6 +39,7 @@ public class HAPManualPluginProcessorBlockDataExpressionElementInLibrary extends
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfo = this.getBrickPair(pathFromRoot, processContext);
 		HAPDataExpressionStandAlone exe = ((HAPBlockDataExpressionElementInLibrary)brickInfo.getRight()).getValue();;
 		HAPDefinitionDataExpressionStandAlone def = ((HAPManualDefinitionBlockDataExpressionElementInLibrary)brickInfo.getLeft()).getValue();
@@ -55,6 +56,7 @@ public class HAPManualPluginProcessorBlockDataExpressionElementInLibrary extends
 	
 	@Override
 	public void processOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processOtherValuePortBuild(pathFromRoot, processContext);
 		HAPDomainValueStructure valueStructureDomain = processContext.getCurrentBundle().getValueStructureDomain();
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfo = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockDataExpressionElementInLibrary brick = (HAPManualBlockDataExpressionElementInLibrary)brickInfo.getRight(); 
@@ -63,6 +65,7 @@ public class HAPManualPluginProcessorBlockDataExpressionElementInLibrary extends
 
 	@Override
 	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processVariableResolve(pathFromRoot, processContext);
 		HAPDomainValueStructure valueStructureDomain = processContext.getCurrentBundle().getValueStructureDomain();
 
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfo = this.getBrickPair(pathFromRoot, processContext);
@@ -86,6 +89,7 @@ public class HAPManualPluginProcessorBlockDataExpressionElementInLibrary extends
 
 	@Override
 	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processValueContextDiscovery(pathFromRoot, processContext);
 		HAPDomainValueStructure valueStructureDomain = processContext.getCurrentBundle().getValueStructureDomain();
 
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfo = this.getBrickPair(pathFromRoot, processContext);

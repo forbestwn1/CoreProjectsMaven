@@ -17,6 +17,7 @@ public class HAPManualPluginProcessorBlockSimpleInteractiveInterfaceTask extends
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfoPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockInteractiveInterfaceTask taskInteractTask = (HAPManualBlockInteractiveInterfaceTask)brickInfoPair.getRight();
 		HAPManualDefinitionBlockInteractiveInterfaceTask taskInteractTaskDef = (HAPManualDefinitionBlockInteractiveInterfaceTask)brickInfoPair.getLeft();

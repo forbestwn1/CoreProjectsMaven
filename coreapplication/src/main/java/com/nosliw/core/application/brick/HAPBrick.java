@@ -8,11 +8,12 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializable;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
+import com.nosliw.core.application.common.dataexpression.HAPWithDataExpression;
 import com.nosliw.core.application.valueport.HAPWithBothsideValuePort;
 import com.nosliw.core.resource.HAPWithResourceDependency;
 
 @HAPEntityWithAttribute
-public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency, HAPCommandWithExport, HAPEntityParsable{
+public interface HAPBrick extends HAPSerializable, HAPEntityOrReference, HAPWithBothsideValuePort, HAPWithResourceDependency, HAPCommandWithExport, HAPWithDataExpression, HAPEntityParsable{
 
 	@HAPAttribute
 	public final static String BRICKTYPE = "brickType"; 

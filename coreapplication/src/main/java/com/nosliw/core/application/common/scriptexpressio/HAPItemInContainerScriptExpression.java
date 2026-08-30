@@ -44,6 +44,7 @@ class HAPItemInContainerScriptExpression_parser implements HAPParserEntity{
 		HAPItemInContainerScriptExpression out = new HAPItemInContainerScriptExpression();
 		
 		JSONObject jsonObj = (JSONObject)obj;
+		out.buildEntityInfoByJson(jsonObj);
 		out.setScriptExpression((HAPExpressionScript)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPExpressionScriptImp.class.getName()));
 		
 		return out;

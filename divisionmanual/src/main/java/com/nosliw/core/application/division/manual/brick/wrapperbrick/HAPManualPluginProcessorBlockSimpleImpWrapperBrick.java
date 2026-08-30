@@ -17,6 +17,7 @@ public class HAPManualPluginProcessorBlockSimpleImpWrapperBrick extends HAPManua
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> brickInfoPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBrickWrapperBrick def = (HAPManualDefinitionBrickWrapperBrick)brickInfoPair.getLeft();
 		HAPManualBrickWrapperBrick exe = (HAPManualBrickWrapperBrick)brickInfoPair.getRight();

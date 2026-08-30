@@ -31,6 +31,7 @@ public class HAPManualPluginProcessorBlockDataExpressionGroup extends HAPManualP
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionContainerDataExpression groupDef = ((HAPManualDefinitionBlockDataExpressionGroup)blockPair.getLeft()).getValue();
 		HAPContainerDataExpression groupExe = ((HAPBlockDataExpressionGroup)blockPair.getRight()).getValue();
@@ -45,6 +46,7 @@ public class HAPManualPluginProcessorBlockDataExpressionGroup extends HAPManualP
 
 	@Override
 	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processVariableResolve(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockDataExpressionGroup groupBlock = (HAPManualBlockDataExpressionGroup)blockPair.getRight();
 		HAPContainerDataExpression groupExe = ((HAPManualBlockDataExpressionGroup)blockPair.getRight()).getValue();
@@ -67,6 +69,7 @@ public class HAPManualPluginProcessorBlockDataExpressionGroup extends HAPManualP
 
 	@Override
 	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processValueContextDiscovery(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualBlockDataExpressionGroup groupBlock = (HAPManualBlockDataExpressionGroup)blockPair.getRight();
 		HAPContainerDataExpression groupExe = ((HAPManualBlockDataExpressionGroup)blockPair.getRight()).getValue();

@@ -19,6 +19,7 @@ public class HAPManualPluginProcessorBlockUICustomerTagDebugger extends HAPManua
 
 	@Override
 	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.processInit(pathFromRoot, processContext);
 		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
 		HAPManualDefinitionBlockComplexUICustomerTagDebugger uiCustomerTagDef = (HAPManualDefinitionBlockComplexUICustomerTagDebugger)blockPair.getLeft();
 		HAPManualBlockComplexUICustomerTagDebugger uiCustomerTagExe = (HAPManualBlockComplexUICustomerTagDebugger)blockPair.getRight();

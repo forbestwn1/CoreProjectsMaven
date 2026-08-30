@@ -44,8 +44,8 @@ class HAPItemInContainerDataExpression_parser implements HAPParserEntity{
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
 		HAPItemInContainerDataExpression out = new HAPItemInContainerDataExpression();
-		
 		JSONObject jsonObj = (JSONObject)obj;
+		out.buildEntityInfoByJson(jsonObj);
 		out.setDataExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPBasicExpressionData.class.getName()));
 		
 		return out;
