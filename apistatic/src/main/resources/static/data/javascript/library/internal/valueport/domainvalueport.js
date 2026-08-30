@@ -22,6 +22,7 @@ var packageObj = library;
 	var node_valueInVarOperationServiceUtility;
 	var node_createValueStructureElementDefinition;
 	var node_getLifecycleInterface;
+	var node_basicUtility;
 
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -181,6 +182,11 @@ var loc_createValuePortContainer = function(id, valuePortContainerDef, variableD
 			               _.each(valueStructureDefinitionInfo[node_COMMONATRIBUTECONSTANT.STRUCTURE_ROOT], function(valueStructureDefRootObj, rootName){
 				                var valueStructureDefRootEle = valueStructureDefRootObj[node_COMMONATRIBUTECONSTANT.ROOTINSTRUCTURE_DEFINITION];
         						var initValue = valueStructureRuntimeInitValue!=undefined?valueStructureRuntimeInitValue[rootName]:undefined;
+								
+								if(node_basicUtility.isStringValue(initValue)){
+									initValue = nosliw.context[initValue];
+								}
+								
         						elementInfosArray.push(new node_createValueStructureElementCreateInfo(rootName, node_createValueStructureElementDefinition(valueStructureDefRootEle, initValue)));  
 				           });
                         	node_getLifecycleInterface(valueStructure).init(elementInfosArray);
@@ -537,6 +543,7 @@ nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_Se
 nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.valueInVarOperationServiceUtility", function(){node_valueInVarOperationServiceUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("valueport.valuestructure.createValueStructureElementDefinition", function(){node_createValueStructureElementDefinition = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createValuePortDomain", nod_createValuePortDomain); 

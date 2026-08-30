@@ -1,6 +1,17 @@
 if(typeof nosliw=="undefined") 
 {
 	var nosliw = {};
+	var date = new Date();
+	nosliw.context = {
+		nosliw_today : {
+			dataTypeId : "test.date;1.0.0",
+			value : {
+				year : date.getFullYear(),
+				month : date.getMonth(),
+				date : date.getDate()
+			}
+		}
+	};
 	
 	_.extend(nosliw, function(){
 		

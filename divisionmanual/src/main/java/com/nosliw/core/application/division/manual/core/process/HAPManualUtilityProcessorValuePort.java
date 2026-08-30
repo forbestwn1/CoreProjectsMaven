@@ -3,7 +3,9 @@ package com.nosliw.core.application.division.manual.core.process;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -12,6 +14,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.path.HAPUtilityPath;
+import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.brick.HAPBrick;
@@ -58,9 +61,13 @@ public class HAPManualUtilityProcessorValuePort {
 
 	public static void buildGlobalValuePort(HAPBundleForBrick bundle) {
 		Set<HAPRootInStructure> roots = new HashSet<HAPRootInStructure>();
-		roots.add(HAPUtilityElement.buildRootInStructure("test.date;1.0.0", HAPUtilityNosliw.buildNosliwFullName(HAPConstantShared.VARIABLE_GLOBAL_NAME_TODAY)));
+		String todayRootName = HAPUtilityNosliw.buildNosliwFullName(HAPConstantShared.VARIABLE_GLOBAL_NAME_TODAY);
+		roots.add(HAPUtilityElement.buildRootInStructure("test.date;1.0.0", todayRootName));
 
-		String valueStructureId = bundle.getValueStructureDomain().newValueStructure(roots, null, null, null);
+		Map<String, String> initValue = new LinkedHashMap<String, String>();
+		initValue.put(todayRootName, todayRootName);
+		
+		String valueStructureId = bundle.getValueStructureDomain().newValueStructure(roots, HAPUtilityJson.buildMapJson(initValue), null, null);
 
 		HAPValuePort valuePort = new HAPValuePort();
 		valuePort.addValueStructureId(valueStructureId);
