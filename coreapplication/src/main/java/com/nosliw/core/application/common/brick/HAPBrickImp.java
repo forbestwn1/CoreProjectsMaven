@@ -86,6 +86,7 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 
 	@Override
 	public HAPContainerDataExpression getDataExpressions() {      return this.m_dataExpressionContainer;         }
+	public void setDataExpressionsContainer(HAPContainerDataExpression container) {     this.m_dataExpressionContainer = container;        }
 
 	@Override
 	public List<HAPAttributeInBrick> getAttributes(){     return this.m_attributes;	}
@@ -208,6 +209,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 		if(this.m_commandExports.size()>0) {
 			jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JSON));
 		}
+		
+		jsonMap.put(DATAEXPRESSIONS, HAPManagerSerialize.getInstance().toStringValue(this.m_dataExpressionContainer, HAPSerializationFormat.JSON));
 	}
 	
 	@Override
@@ -234,6 +237,8 @@ public class HAPBrickImp extends HAPSerializableImp implements HAPBrick, HAPWith
 		if(this.m_commandExports.size()>0) {
 			jsonMap.put(EXPORTCOMMAND, HAPManagerSerialize.getInstance().toStringValue(this.m_commandExports, HAPSerializationFormat.JAVASCRIPT));
 		}
+		
+		jsonMap.put(DATAEXPRESSIONS, HAPManagerSerialize.getInstance().toStringValue(this.m_dataExpressionContainer, HAPSerializationFormat.JAVASCRIPT));
 	}
 	
 	@Override

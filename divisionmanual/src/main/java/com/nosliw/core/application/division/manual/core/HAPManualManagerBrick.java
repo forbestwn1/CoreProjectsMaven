@@ -19,6 +19,7 @@ import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.common.manual.HAPManualContentProvider;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderFile;
 import com.nosliw.core.application.common.manual.HAPManualDefinitionUtilityBrickLocation;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
@@ -64,6 +65,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	private HAPManualConfigure m_manualConfigure;
 	
+	private HAPManagerWithVariablePlugin m_withVariableMan;
+	
 	public HAPManualManagerBrick() {
 		this.m_brickParserPlugin = new LinkedHashMap<String, HAPManualDefinitionPluginParserBrick>();
 		this.m_brickProcessorPlugin = new LinkedHashMap<String, HAPManualPluginProcessorBrick>();
@@ -101,6 +104,9 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	@Autowired
 	private void setManualConfigure(HAPManualConfigure manualConfigure) {  this.m_manualConfigure = manualConfigure;  }
 	
+	@Autowired
+	private void setWithVariablePluginManager(HAPManagerWithVariablePlugin withVariableMan) {  this.m_withVariableMan = withVariableMan;  }
+	
 	
 	@Override
 	public String getDivisionName() {   return HAPConstantShared.BRICK_DIVISION_MANUAL;   }
@@ -130,7 +136,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
-		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService);
+		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService, this.m_withVariableMan);
 	}
 	
 	@Autowired

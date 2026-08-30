@@ -76,7 +76,7 @@ public class HAPElementInLibraryScriptExpression extends HAPExecutableImpEntityI
 		jsonMap.put(HAPWithVariable.VARIABLEINFOS, HAPManagerSerialize.getInstance().toStringValue(this.getVariablesInfo(), HAPSerializationFormat.JSON));
 		jsonMap.put(EXPRESSION, HAPManagerSerialize.getInstance().toStringValue(this.getExpression(), HAPSerializationFormat.JSON));
 		jsonMap.put(RESULTMATCHERS, HAPUtilityJson.buildJson(this.getResultMatchers(), HAPSerializationFormat.JSON));
-		jsonMap.put(DATAEXPRESSION, this.m_dataExpressionGroup.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(DATAEXPRESSIONS, this.m_dataExpressionGroup.toStringValue(HAPSerializationFormat.JSON));
 	}
 	
 	@Override

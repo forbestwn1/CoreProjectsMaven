@@ -7,7 +7,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 public interface HAPWithDataExpression {
 
 	@HAPAttribute
-	public static String DATAEXPRESSION = "dataExpression";
+	public static String DATAEXPRESSIONS = "dataExpressions";
 
 	HAPContainerDataExpression getDataExpressions();
 	

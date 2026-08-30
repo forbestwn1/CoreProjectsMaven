@@ -1,6 +1,7 @@
 package com.nosliw.core.application.common.dataexpression.definition;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.container.HAPItemWrapper;
@@ -27,6 +28,7 @@ public class HAPDefinitionItemInContainerDataExpression  extends HAPItemWrapper 
 @Component
 class HAPDefinitionItemInContainerDataExpression_parser implements HAPParserEntity{
 
+	@Autowired
 	private HAPParserDataExpression m_dataExpressionParser;
 	
 	@Override

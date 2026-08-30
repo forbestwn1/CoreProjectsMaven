@@ -1,6 +1,7 @@
 package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -23,6 +24,8 @@ public class HAPManualContextProcess {
 	
 	private HAPRuntimeInfo m_runtimeInfo;
 	
+	private HAPManagerWithVariablePlugin m_withVariableMan;
+	
 	public HAPManualContextProcess(
 			HAPBundleForBrick bundle, 
 			String rootBrickName, 
@@ -30,6 +33,7 @@ public class HAPManualContextProcess {
 			HAPManagerApplicationBrick brickMan, 
 			HAPDataTypeHelper dataTypeHelper, 
 			HAPManagerResource resourceMan,
+			HAPManagerWithVariablePlugin withVariableMan,
 			HAPRuntimeInfo runtimeInfo) {
 		this.m_bundle = bundle;
 		this.m_rootBrickName = rootBrickName;
@@ -37,6 +41,7 @@ public class HAPManualContextProcess {
 		this.m_brickManager = brickMan;
 		this.m_dataTypeHelper = dataTypeHelper;
 		this.m_resourceMan = resourceMan;
+		this.m_withVariableMan = withVariableMan;
 		this.m_runtimeInfo = runtimeInfo;
 	}
 	
@@ -54,4 +59,5 @@ public class HAPManualContextProcess {
 	
 	public HAPRuntimeInfo getRuntimeInfo() {    return this.m_runtimeInfo;      }
 
+	public HAPManagerWithVariablePlugin getWithVariablePluginManager() {      return this.m_withVariableMan;        }
 }

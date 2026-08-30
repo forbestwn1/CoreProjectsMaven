@@ -8,10 +8,16 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrickType;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
+import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
+import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionContainerDataExpression;
+import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionItemInContainerDataExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
+import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
+import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.application.division.manual.brick.interactive.interfacee.expression.HAPManualDefinitionBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.division.manual.brick.interactive.interfacee.task.HAPManualDefinitionBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
@@ -20,6 +26,9 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
+import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
+import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityExpressionData;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResourceId;
 
@@ -30,7 +39,21 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 	}
 
 	//process definition before value context
-	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void processInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
+		HAPManualDefinitionBrick brickDef = blockPair.getLeft();
+		HAPManualBrick brickExe = blockPair.getRight();
+		
+		//data expression
+		HAPDefinitionContainerDataExpression dataExpressContainerDef = brickDef.getDataExpressions();
+		for(HAPDefinitionItemInContainerDataExpression dataExpresionDef : dataExpressContainerDef.getItems()) {
+			HAPItemInContainerDataExpression itemExe = new HAPItemInContainerDataExpression();
+			dataExpresionDef.cloneToEntityInfo(itemExe);
+			itemExe.setDataExpression(HAPBasicUtilityExpressionData.buildBasicDataExpression(dataExpresionDef.getDataExpressionDefinition()));
+			brickExe.getDataExpressions().addItem(itemExe);
+		}
+		
+	}
 	public void postProcessInit(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
 
 	//build other value port
@@ -87,7 +110,28 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 	public void postProcessOtherValuePortBuild(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
 	
 	//value context extension, variable resolve
-	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void processVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
+		HAPManualDefinitionBrick brickDef = blockPair.getLeft();
+		HAPManualBrick brickExe = blockPair.getRight();
+
+		HAPContainerVariableInfo varInfoContainer = brickExe.getVariableInfoContainer();
+
+		//data process
+		HAPContainerDataExpression dataExpressContainer = brickExe.getDataExpressions();
+		for(HAPItemInContainerDataExpression dataExpresionItem : dataExpressContainer.getItems()) {
+			HAPBasicExpressionData dataExpression = (HAPBasicExpressionData)dataExpresionItem.getDataExpression();
+
+			//resolve variable name, build var info container
+			HAPUtilityWithVarible.resolveVariable(dataExpression, varInfoContainer, null, processContext.getWithVariablePluginManager(), processContext.getRuntimeInfo());
+			
+			//build variable info in data expression
+			HAPUtilityWithVarible.buildVariableInfoInEntity(dataExpression, varInfoContainer, processContext.getWithVariablePluginManager());
+			
+			//build var criteria infor in var info container according to value port def
+			HAPUtilityValuePortVariable.buildVariableInfo(varInfoContainer, processContext.getCurrentBundle().getValueStructureDomain());
+		}
+	}
 	public void postProcessVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
 	
 	//matcher

@@ -24,6 +24,7 @@ import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
 import com.nosliw.core.application.brick.HAPWrapperValueOfValue;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputContainer;
 import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 import com.nosliw.core.application.valueport.HAPWithExternalValuePort;
@@ -96,6 +97,13 @@ abstract public class HAPParserBrick extends HAPParserEntityImpWithDomain{
 			for(int i=0; i<eventIds.length(); i++) {
 				brick.addEventId(eventIds.getString(i));
 			}
+		}
+		
+		//data expression
+		JSONObject dataExpressionsJsonObj = jsonObj.optJSONObject(HAPBrick.DATAEXPRESSIONS);
+		if(dataExpressionsJsonObj!=null) {
+			HAPContainerDataExpression dataExpressionContainer = (HAPContainerDataExpression)parseService.parseEntityJSONExplicit(dataExpressionsJsonObj, HAPContainerDataExpression.class.getName());
+			brick.setDataExpressionsContainer(dataExpressionContainer);
 		}
 
 	}
