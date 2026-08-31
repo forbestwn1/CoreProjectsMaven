@@ -32,11 +32,12 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 	
 	private Set<String> m_ioModes;
 	
-	private String m_dataMode;
+	private Set<String> m_dataModes;
 	
 	public HAPUITagDefinitionData() {
 		this.m_attributeForData = new ArrayList<String>();
 		this.m_ioModes = new HashSet<String>();
+		this.m_dataModes = new HashSet<String>();
 	}
 
 	@Override
@@ -48,15 +49,15 @@ public class HAPUITagDefinitionData extends HAPUITagDefinition{
 	public void addIOMode(String ioMode) {    this.m_ioModes.add(ioMode);       }
 	public Set<String> getIOModes() {     return this.m_ioModes;       }
 	
-	public String getDataMode() {    return this.m_dataMode;      }
-	public void setDataMode(String dataMode) {     this.m_dataMode = dataMode;        }
+	public Set<String> getDataModes() {    return this.m_dataModes;      }
+	public void addDataMode(String dataMode) {     this.m_dataModes.add(dataMode);        }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		
 		jsonMap.put(ATTRIBUTEFORDATA, HAPManagerSerialize.getInstance().toStringValue(this.m_attributeForData, HAPSerializationFormat.JSON));
-		jsonMap.put(DATAMODE, this.m_dataMode);
+		jsonMap.put(DATAMODE, HAPManagerSerialize.getInstance().toStringValue(this.m_dataModes, HAPSerializationFormat.JSON));
 		jsonMap.put(IOMODE, HAPManagerSerialize.getInstance().toStringValue(this.m_ioModes, HAPSerializationFormat.JSON));
 	}
 }
@@ -73,7 +74,13 @@ class HAPUITagDefinitionData_parser extends HAPUITagDefinition_parser{
 		JSONObject jsonObj = (JSONObject)obj;
 		this.parseToUITagDefinitionJson(out, jsonObj, parseService);
 		
-		out.setDataMode((String)jsonObj.opt(HAPUITagDefinitionData.DATAMODE));
+		JSONArray dataModeArray = jsonObj.optJSONArray(HAPUITagDefinitionData.DATAMODE);
+		for(int i=0; i<dataModeArray.length(); i++) {
+			out.addDataMode(dataModeArray.getString(i));
+		}
+		if(out.getDataModes().size()==0) {
+			out.addDataMode(HAPConstantShared.UITAG_DATAMODE_SINGLE);
+		}
 		
 		JSONArray ioModeArray = jsonObj.optJSONArray(HAPUITagDefinitionData.IOMODE);
 		for(int i=0; i<ioModeArray.length(); i++) {

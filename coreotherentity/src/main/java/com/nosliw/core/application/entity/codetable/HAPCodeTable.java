@@ -10,10 +10,11 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.HAPUtilityData;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 
 @HAPEntityWithAttribute
 public class HAPCodeTable extends HAPEntityInfoImp{
@@ -21,13 +22,20 @@ public class HAPCodeTable extends HAPEntityInfoImp{
 	@HAPAttribute
 	public static String DATASET = "dataSet";
 
+	@HAPAttribute
+	public static String DATATYPE = "dataType";
+	
 	private List<HAPData> m_dataSet;
+	
+	private HAPDataTypeId m_dataType;
 	
 	public HAPCodeTable() {
 		this.m_dataSet = new ArrayList<HAPData>();
 	}
 	
 	public List<HAPData> getDataSet(){    return this.m_dataSet;    }
+	
+	public HAPDataTypeId getDataType() {      return this.m_dataType;       }
 	
 	public void addData(HAPData data) {    this.m_dataSet.add(data);     }
 	public void setDataSet(List<HAPData> dataSet) {     
@@ -38,6 +46,9 @@ public class HAPCodeTable extends HAPEntityInfoImp{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
+		if(this.m_dataType!=null) {
+			jsonMap.put(DATATYPE, this.m_dataType.toStringValue(HAPSerializationFormat.LITERATE));
+		}
 		jsonMap.put(DATASET, HAPUtilityJson.buildJson(this.m_dataSet, HAPSerializationFormat.JSON));
 	}
 	
@@ -45,6 +56,13 @@ public class HAPCodeTable extends HAPEntityInfoImp{
 	public boolean buildObjectByJson(Object value) {
 		JSONObject valueObj = (JSONObject)value;
 		super.buildObjectByJson(valueObj);
+		
+		String dataType = (String)valueObj.opt(DATATYPE);
+		if(dataType!=null) {
+			this.m_dataType = new HAPDataTypeId();
+			this.m_dataType.buildObject(dataType, HAPSerializationFormat.LITERATE);
+		}
+		
 		JSONArray dataSetArray = valueObj.optJSONArray(DATASET);
 		if(dataSetArray!=null) {
 			for(int i=0; i<dataSetArray.length(); i++) {

@@ -61,7 +61,9 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 			HAPDataDefinition dataInfo = (HAPDataDefinition)obj;
 			if(HAPUtilityBasic.isEquals(this.getCriteria(), dataInfo.getCriteria())) 
 			{
-				out = true;
+				if(HAPUtilityBasic.isEquals(this.getIsMultipleAllowed(), dataInfo.getIsMultipleAllowed())) {
+					out = true;
+				}
 			}
 		}
 		return out;
@@ -92,6 +94,7 @@ public abstract class HAPDataDefinition extends HAPSerializableImp implements HA
 	
 	protected void cloneToDataDefinition(HAPDataDefinition dataDef) {
 		dataDef.m_criteria = HAPUtilityCriteria.cloneDataTypeCriteria(this.m_criteria);
+		dataDef.m_isMultipleAllowed = this.m_isMultipleAllowed;
 	}
 	
 	@Override

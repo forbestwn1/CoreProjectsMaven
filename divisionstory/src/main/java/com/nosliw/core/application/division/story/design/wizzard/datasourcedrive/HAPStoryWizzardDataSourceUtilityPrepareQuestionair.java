@@ -64,7 +64,8 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag
-			HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(dataTypeCriteria);
+			HAPUITageQueryData uiTagQuery = new HAPUITageQueryData();
+			uiTagQuery.setDataDefinition(requestParm.getDataDefinition());
 			uiTagQuery.setIOMode(HAPConstantShared.IO_DIRECTION_IN);
 			HAPUITagInfo uiTagInfo = uiTagService.getDefaultUITagData(uiTagQuery);
 			HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());

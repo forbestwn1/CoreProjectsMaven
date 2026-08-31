@@ -129,6 +129,18 @@ public class HAPManagerUITag{
 			}
 			return c.getUITagDef().getIOModes().contains(ioMode);
 		})
+		.filter(c->{
+			String dataMode = query.getDataMode();
+			if(dataMode==null) {
+				if(query.getDataDefinition().getIsMultipleAllowed()) {
+					dataMode = HAPConstantShared.UITAG_DATAMODE_MULTIPLE;
+				}
+				else {
+					dataMode = HAPConstantShared.UITAG_DATAMODE_SINGLE;
+				}
+			}
+			return c.getUITagDef().getDataModes().contains(dataMode);
+		})
 		.sorted(new Comparator<HAPUITagCandidate>() {
 			@Override
 			public int compare(HAPUITagCandidate arg0, HAPUITagCandidate arg1) {

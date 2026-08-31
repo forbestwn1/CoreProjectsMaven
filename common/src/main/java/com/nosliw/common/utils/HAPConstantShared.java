@@ -951,6 +951,11 @@ public class HAPConstantShared {
 
 
 
+		public static final String UITAG_DATAMODE_SINGLE = "single";
+		public static final String UITAG_DATAMODE_MULTIPLE = "multiple";
+
+
+
 		public static final String UIRESOURCE_CONTEXTELEMENT_NAME_UIVALIDATIONERROR = "nosliw_validationError";
 
 

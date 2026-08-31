@@ -1025,6 +1025,10 @@ I
 			<definition name="UITAG_TYPE_OTHER" value="other"/>
 
 			<definition type="space"/>
+			<definition name="UITAG_DATAMODE_SINGLE" value="single"/>
+			<definition name="UITAG_DATAMODE_MULTIPLE" value="multiple"/>
+
+			<definition type="space"/>
 			<definition name="UIRESOURCE_CONTEXTELEMENT_NAME_UIVALIDATIONERROR" value="nosliw_validationError"/>
 			
 			<definition type="space"/>
