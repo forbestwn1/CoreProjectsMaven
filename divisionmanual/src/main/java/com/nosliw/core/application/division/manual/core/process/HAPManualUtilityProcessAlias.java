@@ -1,12 +1,15 @@
 package com.nosliw.core.application.division.manual.core.process;
 
+import com.nosliw.common.info.HAPInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
+import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPHandlerDownward;
 import com.nosliw.core.application.brick.HAPUtilityBrick;
 import com.nosliw.core.application.brick.HAPUtilityBundleForBrick;
+import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
 
 public class HAPManualUtilityProcessAlias {
 
@@ -20,12 +23,19 @@ public class HAPManualUtilityProcessAlias {
 					return true;
 				}
 				
-				if(HAPUtilityBundleForBrick.getBrickFullPathInfo(path).getPath().isEmpty()) {
-					return true;
+				HAPComplexPath complexPath = HAPUtilityBundleForBrick.getBrickFullPathInfo(path);
+				HAPInfo info = null;
+				if(complexPath.getPath().isEmpty()) {
+					//root brick
+					HAPWrapperBrickRoot brickRootWrapper = bundle.getRootBrickWrapper(complexPath.getRoot());
+					info = brickRootWrapper.getInfo();
+				}
+				else {
+					HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
+					info = attr.getInfo();
 				}
 				
-				HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
-				String alias = HAPUtilityEntityInfo.getAlias(attr.getInfo());
+				String alias = HAPUtilityEntityInfo.getAlias(info);
 				if(alias!=null) {
 					if(processContext.getCurrentBundle().getBrickPathByAlias(alias)!=null) {
 						throw new RuntimeException();

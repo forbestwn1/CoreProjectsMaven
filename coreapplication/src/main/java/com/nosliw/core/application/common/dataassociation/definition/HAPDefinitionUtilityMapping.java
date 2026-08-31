@@ -10,10 +10,12 @@ import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
 import com.nosliw.core.application.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.dataassociation.HAPEndPointInTunnelConstant;
+import com.nosliw.core.application.common.dataassociation.HAPEndPointInTunnelDataExpression;
 import com.nosliw.core.application.common.dataassociation.HAPEndPointInTunnelValuePort;
 import com.nosliw.core.application.common.dataassociation.HAPTunnel;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafConstant;
+import com.nosliw.core.application.common.structure.HAPElementStructureLeafDataExpression;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelative;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.common.structure.HAPUtilityElement;
@@ -95,6 +97,11 @@ public class HAPDefinitionUtilityMapping {
 				HAPEndPointInTunnelConstant fromEndPoint = new HAPEndPointInTunnelConstant(mappingPath1.getFromConstant());
 				out.add(new HAPTunnel(fromEndPoint, toEndPoint, matchers));
 			}
+		}
+		else if(structureEle.getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_DATAEXPRESSION)) {
+			HAPElementStructureLeafDataExpression dataExpressionEle = (HAPElementStructureLeafDataExpression)structureEle;
+			HAPEndPointInTunnelDataExpression fromEndPoint = new HAPEndPointInTunnelDataExpression(dataExpressionEle.getExpressionId(), dataExpressionEle.getBrickId());
+			out.add(new HAPTunnel(fromEndPoint, toEndPoint, null));
 		}
 
 		return out;

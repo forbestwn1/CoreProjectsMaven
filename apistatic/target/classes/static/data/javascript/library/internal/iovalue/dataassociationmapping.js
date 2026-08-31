@@ -20,6 +20,9 @@ var packageObj = library;
 	var node_ElementIdValuePair;
 	var node_complexEntityUtility;
 	var node_getEntityObjectInterface;
+	var node_getBasicEntityObjectInterface;
+	var node_getEmbededEntityInterface;
+	var node_expressionUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -88,6 +91,25 @@ var loc_getAllFromValueRequest = function(tunnels, baseEntityCore, handlers, req
 			executeFromEndPointsRequest.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
 				fromValues.push(fromEndPoint[node_COMMONATRIBUTECONSTANT.ENDPOINTINTUNNELCONSTANT_VALUE]);			
 			}));
+		}
+		else if(fromEndPointType==node_COMMONCONSTANT.TUNNELENDPOINT_TYPE_DATAEXPRESSION){
+			var expressionOwnerBrickRef = fromEndPoint[node_COMMONATRIBUTECONSTANT.ENDPOINTINTUNNELDATAEXPRESSION_BRICKID];
+			var expressionId = fromEndPoint[node_COMMONATRIBUTECONSTANT.ENDPOINTINTUNNELDATAEXPRESSION_EXPRESSIONID];
+			var hostEntityCore = node_complexEntityUtility.getCoreEntityByRelativePath(baseEntityCore, expressionOwnerBrickRef[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_RELATIVEPATH]);
+
+			var basicEntityInterface = node_getBasicEntityObjectInterface(hostEntityCore);
+			var hostEntityDefinition = basicEntityInterface.getEntityDefinition();
+			
+			var dataExpression = hostEntityDefinition.original[node_COMMONATRIBUTECONSTANT.WITHDATAEXPRESSION_DATAEXPRESSIONS][node_COMMONATRIBUTECONSTANT.CONTAINER_ITEM][expressionId][node_COMMONATRIBUTECONSTANT.ITEMWRAPPER_VALUE];
+			
+			var envInterface = node_getEmbededEntityInterface(hostEntityCore).getEnvironmentInterface();
+
+			executeFromEndPointsRequest.addRequest(node_expressionUtility.getExecuteDataExpressionRequest(dataExpression, envInterface[node_CONSTANT.INTERFACE_WITHVALUEPORT], undefined, {
+				success : function(request, result){
+					fromValues.push(result);
+				}
+			}));
+			
 		}
 	});
 	out.addRequest(executeFromEndPointsRequest);
@@ -237,6 +259,9 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){
 nosliw.registerSetNodeDataEvent("valueport.ElementIdValuePair", function(){node_ElementIdValuePair = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getBasicEntityObjectInterface", function(){node_getBasicEntityObjectInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getEmbededEntityInterface", function(){node_getEmbededEntityInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();	});
 
 //Register Node by Name
 packageObj.createChildNode("getExecuteMappingDataAssociationRequest", node_getExecuteMappingDataAssociationRequest); 

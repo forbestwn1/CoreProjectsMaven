@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.common.structure.reference.HAPInfoRelativeResolve;
@@ -26,6 +27,7 @@ public class HAPUtilityParserElement {
 		Object valueJsonObj = eleDefJson.opt(HAPElementStructureLeafConstant.VALUE);
 		String constantName = (String)eleDefJson.opt(HAPElementStructureLeafConstantReference.CONSTANT);
 //		Object runtimeObj = eleDefJson.opt(HAPElementStructureLeafRuntime.RUNTIME);
+		String expressionId = (String)eleDefJson.opt(HAPElementStructureLeafDataExpression.EXPRESSIONID);
 		
 		if(defRefObj!=null) {
 			//relative for definition
@@ -82,6 +84,12 @@ public class HAPUtilityParserElement {
 		else if(constantName!=null) {
 			//constant reference
 			out = new HAPElementStructureLeafConstantReference(constantName);
+		}
+		else if(expressionId!=null) {
+			//data expression
+			HAPIdBrickInBundle brickId = new HAPIdBrickInBundle();
+			brickId.buildObject(eleDefJson.getJSONObject(HAPElementStructureLeafDataExpression.BRICKID), HAPSerializationFormat.JSON);
+			out = new HAPElementStructureLeafDataExpression(expressionId, brickId);
 		}
 //		else if(runtimeObj!=null) {
 //			out = new HAPElementStructureLeafRuntime();

@@ -10,9 +10,11 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstant;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.brick.HAPUtilityBrickReference;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociationMapping;
 import com.nosliw.core.application.common.dataassociation.HAPTunnel;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
+import com.nosliw.core.application.common.structure.HAPElementStructureLeafDataExpression;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelative;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafRelativeForMapping;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureProcessorRelative;
@@ -130,6 +132,10 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 		if(mappingItem.getDefinition().getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_RELATIVE_FOR_MAPPING)) {
 			HAPElementStructureLeafRelativeForMapping mappingEle = (HAPElementStructureLeafRelativeForMapping)mappingItem.getDefinition();
 			normalizeRootReference(mappingEle.getReference(), HAPConstantShared.IO_DIRECTION_OUT, sourcePath, baseBlockPath, brickRootNameIfNotProvided, aliasMapping, currentBundle, resourceMan, runtimeInfo);
+		}
+		else if(mappingItem.getDefinition().getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_DATAEXPRESSION)) {
+			HAPElementStructureLeafDataExpression mappingEle = (HAPElementStructureLeafDataExpression)mappingItem.getDefinition();
+			HAPUtilityBrickReference.normalizeBrickReferenceInBundle(mappingEle.getBrickId(), baseBlockPath.toString(), true, brickRootNameIfNotProvided, aliasMapping , currentBundle);
 		}
 	}
 	

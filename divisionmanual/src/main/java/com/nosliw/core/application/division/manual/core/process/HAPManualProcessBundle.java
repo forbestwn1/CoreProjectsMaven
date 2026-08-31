@@ -66,7 +66,7 @@ public class HAPManualProcessBundle {
 			definitions.put(rootBrick.getName(), rootBrick.getDefinition());
 		}
 
-		//process alias
+		//gather all alias
 		Map<String, HAPPath> aliasMapping = new LinkedHashMap<String, HAPPath>();
 		HAPManualUtilityProcessAlias.processBrickAlias(new HAPManualContextProcessBrick(bundle, HAPConstantShared.NAME_ROOTBRICK_MAIN, manualBrickMan, brickManager, dataTypeHelper, resourceMan, withVariablePluginMan, runtimeInfo));
 		for(String branchName : bundle.getBranchNames()) {

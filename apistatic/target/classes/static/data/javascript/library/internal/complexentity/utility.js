@@ -204,10 +204,18 @@ var node_complexEntityUtility = function(){
 			return loc_getCoreEntityReferenceByPath(baseEntityCore, path);
 		},
 		
+		getCoreEntityByPath : function(baseEntityCore, path){
+			return loc_getCoreEntityReferenceByPath(baseEntityCore, path).getBaseCoreEntity();
+		},
+
 		getCoreEntityReferenceByRelativePath : function(baseEntityCore, relativePath){
 			return loc_getCoreEntityReferenceByRelativePath(baseEntityCore, relativePath);
 		},
 		
+		getCoreEntityByRelativePath : function(baseEntityCore, relativePath){
+			return loc_getCoreEntityReferenceByRelativePath(baseEntityCore, relativePath).getBaseCoreEntity();
+		},
+
 		getBrickPackageByRelativePath : function(baseEntityCore, brickInBundlePackageDef){
 			var brickIdInBundle = brickInBundlePackageDef[node_COMMONATRIBUTECONSTANT.PACKAGEBRICKINBUNDLE_BRICKID];
 			var coreEntityRef = loc_getCoreEntityReferenceByRelativePath(baseEntityCore, brickIdInBundle[node_COMMONATRIBUTECONSTANT.IDBRICKINBUNDLE_RELATIVEPATH]);

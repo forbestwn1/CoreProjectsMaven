@@ -37,6 +37,7 @@ public class HAPManualUtilityProcessorInit {
 		HAPManualDefinitionBrick brickDef = rootBrickDefWrapper.getBrick();
 		//build executable tree
 		HAPManualWrapperBrickRoot out = new HAPManualWrapperBrickRoot(HAPManualUtilityProcessorInit.buildExecutableTree(brickDef, processContext));
+		rootBrickDefWrapper.cloneToEntityInfo(out);
 		out.setName(processContext.getRootBrickName());
 		out.setDefinition(rootBrickDefWrapper);
 		processContext.getCurrentBundle().addRootBrickWrapper(out);

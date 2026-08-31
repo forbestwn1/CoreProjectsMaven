@@ -193,6 +193,7 @@ public class HAPConstantShared {
 		public static final String CONTEXT_ELEMENTTYPE_UNKNOW = "unknow";
 		public static final String CONTEXT_ELEMENTTYPE_PROVIDE = "provide";
 		public static final String CONTEXT_ELEMENTTYPE_RUNTIME = "runtime";
+		public static final String CONTEXT_ELEMENTTYPE_DATAEXPRESSION = "dataExpression";
 
 
 
@@ -1125,6 +1126,7 @@ public class HAPConstantShared {
 		public static final String TUNNELENDPOINT_TYPE_CONSTANT = "constant";
 		public static final String TUNNELENDPOINT_TYPE_VALUEPORT = "valuePort";
 		public static final String TUNNELENDPOINT_TYPE_RUNTIME = "runtime";
+		public static final String TUNNELENDPOINT_TYPE_DATAEXPRESSION = "dataExpression";
 
 
 
