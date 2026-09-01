@@ -105,7 +105,11 @@ var node_newVariable = function(data1, data2, adapterInfo, info, requestInfo){
 				//store wrapper type
 				loc_out.prv_wrapperType = loc_out.prv_wrapper.getDataType();
 			}
-			else	loc_out.prv_wrapperType = data2;		//not create wrapper, just store the value type
+			else{
+				//create wrapper  kkkkkkkkk?
+				loc_setWrapper(node_wrapperFactory.createWrapper(data1, data2, requestInfo), requestInfo);
+				loc_out.prv_wrapperType = data2;		//not create wrapper, just store the value type
+			}
 		}
 		
 		nosliw.logging.info("************************  variable created   ************************");
