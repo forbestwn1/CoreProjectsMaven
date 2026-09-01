@@ -27,10 +27,8 @@ var node_createUICustomerTagTestStringMultipleReadOnly = function(envObj){
 	var loc_out = {
 		
 		updateView : function(currentData){
-/*			
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.html(value);
-*/			
+			loc_dataView.html(JSON.stringify(value));
 		},
 
 		initViews : function(handlers, request){

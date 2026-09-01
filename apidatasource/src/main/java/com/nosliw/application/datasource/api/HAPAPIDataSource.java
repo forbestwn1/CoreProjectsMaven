@@ -44,4 +44,10 @@ public class HAPAPIDataSource {
 		return HAPServiceData.createSuccessData(this.m_serviceManager.execute(request.getServiceQuery(), request.getParms())).toStringValue(HAPSerializationFormat.JSON);
 	}	
 
+	@GetMapping("clearcache")
+    public String clearCache() {
+		this.m_serviceManager.clearCache();
+		return HAPServiceData.createSuccessData().toStringValue(HAPSerializationFormat.JSON);
+	}	
+
 }

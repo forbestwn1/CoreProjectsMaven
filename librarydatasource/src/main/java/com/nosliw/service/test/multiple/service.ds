@@ -12,9 +12,17 @@
 					"dataDefinition" : {
 					    "isMultipleAllowed" : true,
 						"criteria" : "test.string;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "enum",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "test_string"
+					        }
+					    ],
 						"initData" : {
 							"dataTypeId": "test.string;1.0.0",
-							"value": "default value of request parm string1"
+							"value": "Canada"
 						}
 					}
 				},

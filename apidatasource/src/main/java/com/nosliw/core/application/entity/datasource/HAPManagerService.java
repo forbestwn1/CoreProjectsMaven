@@ -51,6 +51,11 @@ public class HAPManagerService{
 		return out;
 	}
 	
+	public void clearCache() {
+		this.m_serviceInstances = new LinkedHashMap<String, HAPInstanceService>();
+		this.m_serviceFactorys = new LinkedHashMap<String, HAPFactoryService>();
+	}
+	
 	public HAPServiceProfile getServiceProfile(String id) {
 		return this.getAllServicesInfo().get(id).getServiceProfileInfo();
 	}

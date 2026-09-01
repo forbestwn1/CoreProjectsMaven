@@ -27,6 +27,7 @@ var node_getEntityObjectInterface;
 var node_utilityNamedVariable;
 var node_ruleUtility;
 var node_namingConvensionUtility;
+var node_dataUtility;
 
 //*******************************************   Start Node Definition  **************************************
 
@@ -39,6 +40,19 @@ var node_createRuleValidationItem = function(ruleDef, data){
  	
 var node_ruleExecuteUtility = function(){
 
+	var loc_flatternRuleValidationItem = function(ruleValidationItems){
+		var out = [];
+		
+		_.each(ruleValidationItems, function(ruleValidationItem, i){
+			var flatternData = node_dataUtility.flattenData(ruleValidationItem.data);
+			_.each(flatternData, function(data){
+				out.push(new node_createRuleValidationItem(ruleValidationItem.ruleDef, data));
+			});
+		});
+		
+		return out;
+	};
+	
 	var loc_getCollectRuleInfoRequest = function(variable, operationService, allRuleInfo, handlers, request){
 
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
@@ -290,8 +304,9 @@ var node_ruleExecuteUtility = function(){
 					return loc_getCollectRuleInfoRequest(baseOpInfo.rootVariable, baseOpInfo.operationService, allRuleInfo, {
 						success : function(request){
 //							console.log(JSON.stringify(allRuleInfo));
-							
-							return loc_executeRuleValidationsRequest(allRuleInfo, bundleCore, {
+
+                            var flatternRuleInfo = loc_flatternRuleValidationItem(allRuleInfo);
+							return loc_executeRuleValidationsRequest(flatternRuleInfo, bundleCore, {
 								success : function(request, ruleValidationResults){
 									var errorInfos = [];
 									var ifSuccess = true;
@@ -361,6 +376,7 @@ nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", functi
 nosliw.registerSetNodeDataEvent("valueport.utilityNamedVariable", function(){node_utilityNamedVariable = this.getData();});
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("data.utility.dataUtility", function(){node_dataUtility = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("ruleExecuteUtility", node_ruleExecuteUtility); 

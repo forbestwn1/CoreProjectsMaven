@@ -44,29 +44,23 @@ var node_createUICustomerTagTestStringMultiple = function(envObj){
 		},
 				
 		updateView : function(currentData){
-/*			
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			if(loc_dataView!=undefined){
-				loc_dataView.val(value);
-			}
-			else if(loc_dataViewForEnum!=undefined){
+			if(loc_dataViewForEnum!=undefined){
 				loc_dataViewForEnum.val(value);
 			}
-*/			
 		},
 
 		initViews : function(handlers, request){
-			return $("<div>Multiple string view!!!!!!!!</div>");
 			
-/*			
 			if(envObj.isDataEnum()!=null){
-				loc_dataViewForEnum = $('<select name="data"/>');
+				loc_dataViewForEnum = $('<select name="data" multiple/>');
 				for(var k in loc_enumDatas){
 					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
 				}
 				loc_dataViewForEnum.bind('change', function(){
 					var currentData = {
+						isMultipleValue : true,
 						dataTypeId: "test.string;1.0.0",
 						value: loc_dataViewForEnum.val()
 					};
@@ -75,18 +69,9 @@ var node_createUICustomerTagTestStringMultiple = function(envObj){
 				return loc_dataViewForEnum;
 			}
 			else{
-				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
-
-				loc_dataView.bind('change', function(){
-					var currentData = {
-						dataTypeId: "test.string;1.0.0",
-						value: loc_dataView.val()
-					};
-					loc_envObj.onDataChange(currentData);
-				});
-    			return loc_dataView;
+				return $("<div>Multiple string view without enum!!!!!!!!</div>");
 			}
-*/			
+			
 		}
 	};
 	
