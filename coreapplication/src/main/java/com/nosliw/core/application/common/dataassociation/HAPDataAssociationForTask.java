@@ -18,6 +18,8 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 @HAPEntityWithAttribute
 public class HAPDataAssociationForTask extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPDataAssociationForTask";
+
 	@HAPAttribute
 	public static String OUT = "out";
 
@@ -61,7 +63,7 @@ public class HAPDataAssociationForTask extends HAPSerializableImp implements HAP
 class HAPDataAssociationForTask_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPDataAssociationForTask.class.getName();   }
+	public String getEntityType() {    return HAPDataAssociationForTask.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

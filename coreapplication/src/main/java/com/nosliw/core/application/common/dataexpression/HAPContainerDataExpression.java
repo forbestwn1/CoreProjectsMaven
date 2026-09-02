@@ -13,6 +13,8 @@ import com.nosliw.core.data.expression.HAPExpressionData;
 @HAPEntityWithAttribute
 public class HAPContainerDataExpression extends HAPContainer<HAPItemInContainerDataExpression>{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPContainerDataExpression";
+
 	public HAPContainerDataExpression() {
 	}
 
@@ -27,7 +29,7 @@ public class HAPContainerDataExpression extends HAPContainer<HAPItemInContainerD
 class HAPContainerDataExpression_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPContainerDataExpression.class.getName();   }
+	public String getEntityType() {    return HAPContainerDataExpression.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -38,7 +40,7 @@ class HAPContainerDataExpression_parser implements HAPParserEntity{
 		JSONObject itemsJsonObj = jsonObj.optJSONObject(HAPContainer.ITEM);
 		for(Object key : itemsJsonObj.keySet()) {
 			String name = (String)key;
-			out.addItem((HAPItemInContainerDataExpression)parseService.parseEntityJSONExplicit(itemsJsonObj.getJSONObject(name), HAPItemInContainerDataExpression.class.getName()));
+			out.addItem((HAPItemInContainerDataExpression)parseService.parseEntityJSONExplicit(itemsJsonObj.getJSONObject(name), HAPItemInContainerDataExpression.ENTITYNAMEFORSERIALIZE));
 		}
 		
 		return out;

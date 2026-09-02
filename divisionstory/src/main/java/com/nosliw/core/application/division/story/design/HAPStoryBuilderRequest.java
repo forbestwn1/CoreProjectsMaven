@@ -16,7 +16,7 @@ import com.nosliw.core.application.brick.HAPIdBrick;
 public class HAPStoryBuilderRequest extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
-	public static final String PARSABLEENTITYTYPE = "story.builder.request";
+	public static final String ENTITYNAMEFORSERIALIZE = "story.builder.request";
 	
 	@HAPAttribute
 	public static final String BRICKID = "brickId";
@@ -48,7 +48,7 @@ public class HAPStoryBuilderRequest extends HAPSerializableImp implements HAPEnt
 class HAPStoryBuilderRequest_HAPEntityParsable implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPStoryBuilderRequest.PARSABLEENTITYTYPE;  }
+	public String getEntityType() {   return HAPStoryBuilderRequest.ENTITYNAMEFORSERIALIZE;  }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

@@ -18,6 +18,8 @@ import com.nosliw.core.data.matcher.HAPMatchers;
 @HAPEntityWithAttribute
 public class HAPTunnel extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPTunnel";
+
 	@HAPAttribute
 	public static String FROMENDPOINT = "fromEndPoint";
 
@@ -62,7 +64,7 @@ public class HAPTunnel extends HAPSerializableImp implements HAPEntityParsable{
 class HAPTunnel_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPTunnel.class.getName();     }
+	public String getEntityType() {    return HAPTunnel.ENTITYNAMEFORSERIALIZE;     }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

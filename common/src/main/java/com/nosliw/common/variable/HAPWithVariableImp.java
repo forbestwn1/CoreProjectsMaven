@@ -35,7 +35,7 @@ public abstract class HAPWithVariableImp extends HAPSerializableImp implements H
 		if(varInfosJsonObj!=null) {
 			for(Object key : varInfosJsonObj.keySet()) {
 				String name = (String)key;
-			    withVarImp.addVariableInfo((HAPVariableInfo)parseService.parseEntityJSONExplicit(varInfosJsonObj.getJSONObject(name), HAPVariableInfo.class.getName()));
+			    withVarImp.addVariableInfo((HAPVariableInfo)parseService.parseEntityJSONExplicit(varInfosJsonObj.getJSONObject(name), HAPVariableInfo.ENTITYNAMEFORSERIALIZE));
 			}
 		}
 	}

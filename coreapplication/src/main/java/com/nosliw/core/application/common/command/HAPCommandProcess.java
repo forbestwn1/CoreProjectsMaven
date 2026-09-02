@@ -16,6 +16,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPCommandProcess extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPCommandProcess";
+
 	@HAPAttribute
 	public final static String DEFINITION = "definition"; 
 
@@ -44,7 +46,7 @@ public class HAPCommandProcess extends HAPSerializableImp implements HAPEntityPa
 	}
 	
 	public static HAPCommandProcess parseCommandProcess(JSONObject jsonObj, HAPServiceParseEntity entityParseService) {
-		return (HAPCommandProcess)entityParseService.parseEntityJSONExplicit(jsonObj, HAPCommandProcess.class.getName());
+		return (HAPCommandProcess)entityParseService.parseEntityJSONExplicit(jsonObj, HAPCommandProcess.ENTITYNAMEFORSERIALIZE);
 	}
 }
 
@@ -52,7 +54,7 @@ public class HAPCommandProcess extends HAPSerializableImp implements HAPEntityPa
 class HAPCommandProcess_Parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPCommandProcess.class.getName();   }
+	public String getEntityType() {   return HAPCommandProcess.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

@@ -14,6 +14,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 public class HAPWrapperValueStructureDefinitionImp extends HAPEntityInfoImp implements HAPWrapperValueStructureDefinition, HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPWrapperValueStructureDefinitionImp";
+
 	private HAPValueStructure m_valueStructure;
 	
 	private HAPInfoStructureInWrapper m_valueStructureInfo;
@@ -52,7 +54,7 @@ public class HAPWrapperValueStructureDefinitionImp extends HAPEntityInfoImp impl
 class HAPWrapperValueStructureDefinitionImp_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {     return HAPWrapperValueStructureDefinitionImp.class.getName();   }
+	public String getEntityType() {     return HAPWrapperValueStructureDefinitionImp.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

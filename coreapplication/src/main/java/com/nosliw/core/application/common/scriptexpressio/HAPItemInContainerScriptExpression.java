@@ -15,6 +15,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPItemInContainerScriptExpression extends HAPItemWrapper implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPItemInContainerScriptExpressions";
+
 	@HAPAttribute
 	public static String SCRIPTEXPRESSION = "scriptExpression";
 
@@ -37,7 +39,7 @@ public class HAPItemInContainerScriptExpression extends HAPItemWrapper implement
 class HAPItemInContainerScriptExpression_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPItemInContainerScriptExpression.class.getName();   }
+	public String getEntityType() {    return HAPItemInContainerScriptExpression.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -45,7 +47,7 @@ class HAPItemInContainerScriptExpression_parser implements HAPParserEntity{
 		
 		JSONObject jsonObj = (JSONObject)obj;
 		out.buildEntityInfoByJson(jsonObj);
-		out.setScriptExpression((HAPExpressionScript)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPExpressionScriptImp.class.getName()));
+		out.setScriptExpression((HAPExpressionScript)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPItemWrapper.VALUE), HAPExpressionScriptImp.ENTITYNAMEFORSERIALIZE));
 		
 		return out;
 	}

@@ -90,7 +90,7 @@ class HAPManualBlockComplexUIContent_parser extends HAPManualBrick_parser{
 		}
 		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONS:
 		{
-			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPContainerScriptExpression.class.getName());
+			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPContainerScriptExpression.ENTITYNAMEFORSERIALIZE);
 		}
 		case HAPBlockComplexUIContent.SCRIPTEXPRESSIONINCONTENT:
 		{

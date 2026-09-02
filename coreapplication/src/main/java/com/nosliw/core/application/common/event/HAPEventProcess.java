@@ -16,6 +16,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPEventProcess extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPEventProcess";
+
 	@HAPAttribute
 	public static String EVENTEMITTER = "eventEmitter";
 	
@@ -56,7 +58,7 @@ public class HAPEventProcess extends HAPSerializableImp implements HAPEntityPars
 class HAPEventProcess_Parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPEventProcess.class.getName();   }
+	public String getEntityType() {   return HAPEventProcess.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -64,7 +66,7 @@ class HAPEventProcess_Parser implements HAPParserEntity{
 		
 		JSONObject jsonObj = (JSONObject)obj;
 		
-		out.setEventEmitter((HAPEventEmitter)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPEventProcess.EVENTEMITTER), HAPEventEmitter.class.getName()));
+		out.setEventEmitter((HAPEventEmitter)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPEventProcess.EVENTEMITTER), HAPEventEmitter.ENTITYNAMEFORSERIALIZE));
 		
 		out.setEventHandlerReference(HAPEventHandlerReference.parseHandlerInfo(jsonObj.optJSONObject(HAPEventProcess.HANDLERREFERENCE), parseService));
 		

@@ -16,6 +16,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPVariableInfo extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPVariableInfo";
+	
 	@HAPAttribute
 	public static String VARIABLEKEY = "variableKey";
 
@@ -50,7 +52,7 @@ public class HAPVariableInfo extends HAPSerializableImp implements HAPEntityPars
 class HAPVariableInfo_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPVariableInfo.class.getName();   }
+	public String getEntityType() {   return HAPVariableInfo.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

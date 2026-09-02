@@ -291,7 +291,7 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 		JSONArray dataExpressionJsonArray = jsonObj.optJSONArray(HAPDefinitionWithDataExpression.DATAEXPRESSION);
 		if(dataExpressionJsonArray!=null) {
 			for(int i=0; i<dataExpressionJsonArray.length(); i++) {
-				brick.getDataExpressions().addItem((HAPDefinitionItemInContainerDataExpression)parseContext.getParseService().parseEntityJSONExplicit(dataExpressionJsonArray.getJSONObject(i), HAPDefinitionItemInContainerDataExpression.class.getName()));
+				brick.getDataExpressions().addItem((HAPDefinitionItemInContainerDataExpression)parseContext.getParseService().parseEntityJSONExplicit(dataExpressionJsonArray.getJSONObject(i), HAPDefinitionItemInContainerDataExpression.ENTITYNAMEFORSERIALIZE));
 			}
 		}
 	}

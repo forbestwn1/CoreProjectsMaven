@@ -65,7 +65,7 @@ class HAPDataAssociationMapping_parser extends HAPDataAssociation_parser{
 		
 		JSONArray tunnelJsonArray = jsonObj.optJSONArray(HAPDataAssociationMapping.TUNNEL);
 		for(int i=0; i<tunnelJsonArray.length(); i++) {
-			out.addTunnel((HAPTunnel)parseService.parseEntityJSONExplicit(tunnelJsonArray.getJSONObject(i), HAPTunnel.class.getName()));
+			out.addTunnel((HAPTunnel)parseService.parseEntityJSONExplicit(tunnelJsonArray.getJSONObject(i), HAPTunnel.ENTITYNAMEFORSERIALIZE));
 		}
 		
 		return out;

@@ -19,6 +19,8 @@ import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 @HAPEntityWithAttribute
 public class HAPManualStandaloneResponse extends HAPSerializableImp implements HAPEntityParsable{
 	
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPManualStandaloneResponse";
+	
 	@HAPAttribute
 	public static final String ID = "id";
 
@@ -54,7 +56,7 @@ public class HAPManualStandaloneResponse extends HAPSerializableImp implements H
 class HAPManualStandaloneResponse_parse implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPManualStandaloneResponse.class.getName();   }
+	public String getEntityType() {   return HAPManualStandaloneResponse.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -68,7 +70,7 @@ class HAPManualStandaloneResponse_parse implements HAPParserEntity{
 		if(contentProviderJsonObj!=null) {
 			String type = contentProviderJsonObj.getString(HAPManualContentProvider.TYPE);
 			if(type.equals(HAPConstantShared.MANUAL_CONTENTPROVIDER_TYPE_TEXT)) {
-				out.setContentProvider((HAPManualContentProvider)parseService.parseEntityJSONExplicit(contentProviderJsonObj, HAPManualContentProviderText.class.getName()));
+				out.setContentProvider((HAPManualContentProvider)parseService.parseEntityJSONExplicit(contentProviderJsonObj, HAPManualContentProviderText.ENTITYNAMEFORSERIALIZE));
 			}
 		}
 		

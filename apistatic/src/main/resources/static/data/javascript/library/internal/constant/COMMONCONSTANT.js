@@ -459,6 +459,7 @@ var COMMONCONSTANT=
   "MINIAPP_DATAOWNER_GROUP": "group",
   "GATEWAY_OPTIONS": "options",
   "GATEWAY_CRITERIA": "criteria",
+  "GATEWAY_DATATYPE": "dataType",
   "GATEWAY_RESOURCE": "resource",
   "GATEWAY_BUNDLEEXECUTABLE": "bundleExecutable",
   "GATEWAY_PACKAGE": "package",

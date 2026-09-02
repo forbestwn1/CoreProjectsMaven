@@ -17,6 +17,8 @@ import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 @HAPEntityWithAttribute
 public class HAPEventEmitter extends HAPSerializableImp implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPEventEmitter";
+
 	@HAPAttribute
 	public static final String EMITTERID = "emitterId";
 
@@ -50,7 +52,7 @@ public class HAPEventEmitter extends HAPSerializableImp implements HAPEntityPars
     public void setEventDefinition(HAPEventDefinition eventDef) {     this.m_eventDefinition = eventDef;       }
 
     public static HAPEventEmitter parseEventEmitter(Object obj, HAPServiceParseEntity entityParseService) {
-    	return (HAPEventEmitter)entityParseService.parseEntityJSONExplicit((JSONObject)obj, HAPEventEmitter.class.getName());
+    	return (HAPEventEmitter)entityParseService.parseEntityJSONExplicit((JSONObject)obj, HAPEventEmitter.ENTITYNAMEFORSERIALIZE);
     }
     
 	@Override
@@ -70,7 +72,7 @@ public class HAPEventEmitter extends HAPSerializableImp implements HAPEntityPars
 class HAPEventEmitter_Parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPEventEmitter.class.getName();   }
+	public String getEntityType() {   return HAPEventEmitter.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

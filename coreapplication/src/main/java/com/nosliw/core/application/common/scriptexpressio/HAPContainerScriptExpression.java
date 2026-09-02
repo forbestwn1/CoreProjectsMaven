@@ -10,6 +10,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 
 public class HAPContainerScriptExpression extends HAPContainer<HAPItemInContainerScriptExpression>{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPContainerScriptExpression";
+
 	public String addScriptExpression(HAPExpressionScript scriptExpression) {
 		HAPItemInContainerScriptExpression item = new HAPItemInContainerScriptExpression(scriptExpression);
 		return this.addItem(item);
@@ -20,7 +22,7 @@ public class HAPContainerScriptExpression extends HAPContainer<HAPItemInContaine
 class HAPContainerScriptExpression_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPContainerScriptExpression.class.getName();   }
+	public String getEntityType() {    return HAPContainerScriptExpression.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -31,7 +33,7 @@ class HAPContainerScriptExpression_parser implements HAPParserEntity{
 		JSONObject itemsJsonObj = jsonObj.optJSONObject(HAPContainer.ITEM);
 		for(Object key : itemsJsonObj.keySet()) {
 			String name = (String)key;
-			out.addItem((HAPItemInContainerScriptExpression)parseService.parseEntityJSONExplicit(itemsJsonObj.getJSONObject(name), HAPItemInContainerScriptExpression.class.getName()));
+			out.addItem((HAPItemInContainerScriptExpression)parseService.parseEntityJSONExplicit(itemsJsonObj.getJSONObject(name), HAPItemInContainerScriptExpression.ENTITYNAMEFORSERIALIZE));
 		}
 		
 		return out;

@@ -25,7 +25,7 @@ public class HAPManualUtilityExport {
 
 	public static HAPBundleForBrick deserializeBundle(JSONObject bundleJsonObj, HAPServiceParseEntity parseService, HAPManagerApplicationBrick brickMan, HAPManualManagerBrick manualBrickManager) {
 		if(bundleJsonObj!=null) {
-			HAPBundleForBrick out = (HAPBundleForBrick)parseService.parseEntityJSONExplicit(bundleJsonObj, HAPBundleForBrick.class.getName());
+			HAPBundleForBrick out = (HAPBundleForBrick)parseService.parseEntityJSONExplicit(bundleJsonObj, HAPBundleForBrick.ENTITYNAMEFORSERIALIZE);
 			for(String rootName : out.getAllRootBrickName()) {
 				HAPUtilityOtherBrickTraverse.traverseTreeWithLocalBrick(out, rootName, new HAPHandlerDownward() {
 

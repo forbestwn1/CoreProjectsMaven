@@ -27,6 +27,8 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 @HAPEntityWithAttribute
 public class HAPDataExpressionStandAlone extends HAPExecutableImp implements HAPWithInteractiveExpression, HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPDataExpressionStandAlone";
+
 	@HAPAttribute
 	public static String EXPRESSION = "expression";
 	
@@ -84,7 +86,7 @@ public class HAPDataExpressionStandAlone extends HAPExecutableImp implements HAP
 class HAPDataExpressionStandAlone_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPDataExpressionStandAlone.class.getName();   }
+	public String getEntityType() {   return HAPDataExpressionStandAlone.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -101,7 +103,7 @@ class HAPDataExpressionStandAlone_parser implements HAPParserEntity{
 			out.setResultMatchers(matchers);
 		}
 		
-		out.setExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPDataExpressionStandAlone.EXPRESSION), HAPBasicExpressionData.class.getName()));
+		out.setExpression((HAPExpressionData)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPDataExpressionStandAlone.EXPRESSION), HAPBasicExpressionData.ENTITYNAMEFORSERIALIZE));
 		
 		return out;
 	}

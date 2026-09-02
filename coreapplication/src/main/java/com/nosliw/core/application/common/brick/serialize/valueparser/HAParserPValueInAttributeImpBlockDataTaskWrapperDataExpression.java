@@ -13,7 +13,7 @@ public class HAParserPValueInAttributeImpBlockDataTaskWrapperDataExpression impl
 	public Object parseValueInAttribute(String attrName, Object obj, HAPServiceParseEntity parseService) {
 		switch(attrName) {
 		case HAPBlockTaskWrapperDataExpression.DATAEXPRESSION:
-			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPDataExpressionStandAlone.class.getName());
+			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPDataExpressionStandAlone.ENTITYNAMEFORSERIALIZE);
 		}
 		return null;
 	}

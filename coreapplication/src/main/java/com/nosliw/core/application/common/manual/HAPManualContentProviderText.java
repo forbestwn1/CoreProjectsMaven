@@ -23,6 +23,9 @@ import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public class HAPManualContentProviderText extends HAPSerializableImp implements HAPManualContentProvider, HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPManualContentProviderText";
+
+	
 	public static final String MAINCONENTINFO = "mainContentInfo";
 	
 	public static final String BRANCHCONTENTINFO = "branchContentInfo";
@@ -103,7 +106,7 @@ public class HAPManualContentProviderText extends HAPSerializableImp implements 
 class HAPManualContentProviderText_Parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPManualContentProviderText.class.getName();   }
+	public String getEntityType() {   return HAPManualContentProviderText.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -139,12 +142,12 @@ class HAPManualContentProviderText_Parser implements HAPParserEntity{
 		
 		JSONArray eventExposeJsonArray = jsonObj.optJSONArray(HAPManualContentProviderText.EVENTEXPOSE);
 		for(int i=0; i<eventExposeJsonArray.length(); i++) {
-			out.addExposedEvent((HAPEventEmitter)parseService.parseEntityJSONExplicit(eventExposeJsonArray.getJSONObject(i), HAPEventEmitter.class.getName()));
+			out.addExposedEvent((HAPEventEmitter)parseService.parseEntityJSONExplicit(eventExposeJsonArray.getJSONObject(i), HAPEventEmitter.ENTITYNAMEFORSERIALIZE));
 		}
 
 		JSONArray commandExposeJsonArray = jsonObj.optJSONArray(HAPManualContentProviderText.COMMANDEXPOSE);
 		for(int i=0; i<commandExposeJsonArray.length(); i++) {
-			out.addExposedCommand((HAPCommandProcess)parseService.parseEntityJSONExplicit(commandExposeJsonArray.getJSONObject(i), HAPCommandProcess.class.getName()));
+			out.addExposedCommand((HAPCommandProcess)parseService.parseEntityJSONExplicit(commandExposeJsonArray.getJSONObject(i), HAPCommandProcess.ENTITYNAMEFORSERIALIZE));
 		}
 		
 		return out;

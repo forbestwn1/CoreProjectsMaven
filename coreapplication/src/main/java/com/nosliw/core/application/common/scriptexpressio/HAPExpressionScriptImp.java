@@ -30,6 +30,8 @@ import com.nosliw.core.application.common.scriptexpression.serialize.HAPUtilityS
 @HAPEntityWithAttribute
 public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExpressionScript{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPExpressionScriptImp";
+
 	public static final String TYPE = "type";
 	
 	public static final String SEGMENT = "segment";
@@ -160,7 +162,7 @@ public class HAPExpressionScriptImp extends HAPWithVariableImp implements HAPExp
 class HAPExpressionScriptImp_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPExpressionScriptImp.class.getName();   }
+	public String getEntityType() {    return HAPExpressionScriptImp.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -186,7 +188,7 @@ class HAPExpressionScriptImp_parser implements HAPParserEntity{
 			}
 		}
 
-		out.setDataExpressionContainer((HAPContainerDataExpression)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPExpressionScriptImp.DATAEXPRESSIONCONTAINER), HAPContainerDataExpression.class.getName()));
+		out.setDataExpressionContainer((HAPContainerDataExpression)parseService.parseEntityJSONExplicit(jsonObj.optJSONObject(HAPExpressionScriptImp.DATAEXPRESSIONCONTAINER), HAPContainerDataExpression.ENTITYNAMEFORSERIALIZE));
 		
 		return out;
 	}

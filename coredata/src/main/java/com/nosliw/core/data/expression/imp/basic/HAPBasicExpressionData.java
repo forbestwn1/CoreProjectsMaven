@@ -21,6 +21,8 @@ import com.nosliw.core.data.expression.HAPOperand;
 
 public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExpressionData{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPBasicExpressionData";
+
 	private HAPBasicWrapperOperand m_operand;
 	
 	private Map<String, HAPVariableInfo> m_variablesInfo;
@@ -69,7 +71,7 @@ public class HAPBasicExpressionData extends HAPSerializableImp implements HAPExp
 class HAPBasicExpressionData_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPBasicExpressionData.class.getName();   }
+	public String getEntityType() {    return HAPBasicExpressionData.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -86,7 +88,7 @@ class HAPBasicExpressionData_parser implements HAPParserEntity{
 		if(varInfosJsonObj!=null) {
 			for(Object key : varInfosJsonObj.keySet()) {
 				String name = (String)key;
-				out.addVariableInfo((HAPVariableInfo)parseService.parseEntityJSONExplicit(varInfosJsonObj.getJSONObject(name), HAPVariableInfo.class.getName()));
+				out.addVariableInfo((HAPVariableInfo)parseService.parseEntityJSONExplicit(varInfosJsonObj.getJSONObject(name), HAPVariableInfo.ENTITYNAMEFORSERIALIZE));
 			}
 		}
 		

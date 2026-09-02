@@ -102,7 +102,7 @@ abstract public class HAPParserBrick extends HAPParserEntityImpWithDomain{
 		//data expression
 		JSONObject dataExpressionsJsonObj = jsonObj.optJSONObject(HAPBrick.DATAEXPRESSIONS);
 		if(dataExpressionsJsonObj!=null) {
-			HAPContainerDataExpression dataExpressionContainer = (HAPContainerDataExpression)parseService.parseEntityJSONExplicit(dataExpressionsJsonObj, HAPContainerDataExpression.class.getName());
+			HAPContainerDataExpression dataExpressionContainer = (HAPContainerDataExpression)parseService.parseEntityJSONExplicit(dataExpressionsJsonObj, HAPContainerDataExpression.ENTITYNAMEFORSERIALIZE);
 			brick.setDataExpressionsContainer(dataExpressionContainer);
 		}
 

@@ -31,7 +31,7 @@ public class HAPManualGatewayCompileImp extends HAPGatewayImp implements HAPManu
 	@Override
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {
 		if(COMMAND_COMPILE.equals(command)) {
-			HAPManualContentProviderText contentProvider = (HAPManualContentProviderText)m_parseService.parseEntityJSONExplicit(parms.getJSONObject(PARMS_CONTENT), HAPManualContentProviderText.class.getName());
+			HAPManualContentProviderText contentProvider = (HAPManualContentProviderText)m_parseService.parseEntityJSONExplicit(parms.getJSONObject(PARMS_CONTENT), HAPManualContentProviderText.ENTITYNAMEFORSERIALIZE);
 			HAPBundleForBrick bundle = this.m_manualManager.buildBundle(contentProvider, runtimeInfo);
 			return this.createSuccessWithObject(bundle);
 		}

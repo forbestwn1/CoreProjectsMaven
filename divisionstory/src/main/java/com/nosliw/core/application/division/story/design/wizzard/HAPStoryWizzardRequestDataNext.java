@@ -13,7 +13,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryDesignMetadataS
 public class HAPStoryWizzardRequestDataNext extends HAPSerializableImp implements HAPEntityParsable{
 
 	@HAPAttribute
-	public static final String PARSABLEENTITYTYPE = "story.wizzard.requestdata.next";
+	public static final String ENTITYNAMEFORSERIALIZE = "story.wizzard.requestdata.next";
 	
 	@HAPAttribute
 	public static final String STEP = "step";
@@ -29,7 +29,7 @@ public class HAPStoryWizzardRequestDataNext extends HAPSerializableImp implement
 class HAPStoryWizzardRequestDataNext_HAPEntityParsable implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPStoryWizzardRequestDataNext.PARSABLEENTITYTYPE;  }
+	public String getEntityType() {   return HAPStoryWizzardRequestDataNext.ENTITYNAMEFORSERIALIZE;  }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

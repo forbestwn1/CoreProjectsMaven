@@ -13,6 +13,8 @@ import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 public class HAPDefinitionItemInContainerDataExpression  extends HAPItemWrapper implements HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPDefinitionItemInContainerDataExpression";
+
 	public HAPDefinitionItemInContainerDataExpression() {}
 	
 	public HAPDefinitionItemInContainerDataExpression(HAPDefinitionDataExpression dataExpressionDef) {
@@ -32,7 +34,7 @@ class HAPDefinitionItemInContainerDataExpression_parser implements HAPParserEnti
 	private HAPParserDataExpression m_dataExpressionParser;
 	
 	@Override
-	public String getEntityType() {    return HAPDefinitionItemInContainerDataExpression.class.getName();   }
+	public String getEntityType() {    return HAPDefinitionItemInContainerDataExpression.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

@@ -41,7 +41,7 @@ class HAPManualAdapterDataAssociationForTask_parser extends HAPManualBrick_parse
 		switch(attrName){
 		case HAPAdapterDataAssociationForTask.DATAASSOCIATION:
 		{
-			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPDataAssociationForTask.class.getName());
+			return parseService.parseEntityJSONExplicit((JSONObject)obj, HAPDataAssociationForTask.ENTITYNAMEFORSERIALIZE);
 		}
 		}
 		return null;     

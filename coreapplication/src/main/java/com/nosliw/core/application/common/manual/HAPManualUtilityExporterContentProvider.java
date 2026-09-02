@@ -25,7 +25,7 @@ public class HAPManualUtilityExporterContentProvider {
 	public static HAPManualContentProviderText importContentText(Path rootFolder, HAPServiceParseEntity parseService) {
 		Path contentPathText = getPathFileForContentText(rootFolder);
 		String content = HAPUtilityFileNio.readFile(contentPathText);
-		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderText.class.getName());
+		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderText.ENTITYNAMEFORSERIALIZE);
 		return out;
 	}
 
@@ -36,7 +36,7 @@ public class HAPManualUtilityExporterContentProvider {
 //		
 //		
 //		String content = HAPUtilityFileNio.readFile(contentPathText);
-//		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderText.class.getName());
+//		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderTextENTITYTYPE);
 //		return out;
 	}
 	

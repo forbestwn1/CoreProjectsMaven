@@ -20,6 +20,8 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 @HAPEntityWithAttribute
 public class HAPWrapperBrickRoot extends HAPEntityInfoImp implements HAPWithBrick, HAPWithResourceDependency, HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPWrapperBrickRoot";
+
 	private HAPBrick m_brick;
 
 	public HAPWrapperBrickRoot() {}
@@ -59,7 +61,7 @@ public class HAPWrapperBrickRoot extends HAPEntityInfoImp implements HAPWithBric
 class HAPWrapperBrickRoot_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {    return HAPWrapperBrickRoot.class.getName();   }
+	public String getEntityType() {    return HAPWrapperBrickRoot.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

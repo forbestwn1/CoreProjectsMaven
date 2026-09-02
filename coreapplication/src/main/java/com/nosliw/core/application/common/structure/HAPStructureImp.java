@@ -19,6 +19,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 @HAPEntityWithAttribute
 public class HAPStructureImp extends HAPSerializableImp implements HAPStructure, HAPEntityParsable{
 
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPStructureImp";
+	
 	private Map<String, HAPRootInStructure> m_roots;
 	
 	public HAPStructureImp() {
@@ -64,7 +66,7 @@ public class HAPStructureImp extends HAPSerializableImp implements HAPStructure,
 class HAPStructureImp_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPStructureImp.class.getName();   }
+	public String getEntityType() {   return HAPStructureImp.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {

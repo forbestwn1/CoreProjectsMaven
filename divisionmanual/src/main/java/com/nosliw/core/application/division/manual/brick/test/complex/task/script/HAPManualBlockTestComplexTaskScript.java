@@ -91,7 +91,7 @@ class HAPManualBlockTestComplexTaskScript_parser extends HAPManualBrick_parser{
 			JSONObject varsJsonObj = (JSONObject)obj;
 			for(Object key : varsJsonObj.keySet()) {
 				String name = (String)key;
-				out.put(name, (HAPVariableInfo)parseService.parseEntityJSONExplicit(varsJsonObj.getJSONObject(name), HAPVariableInfo.class.getName()));
+				out.put(name, (HAPVariableInfo)parseService.parseEntityJSONExplicit(varsJsonObj.getJSONObject(name), HAPVariableInfo.ENTITYNAMEFORSERIALIZE));
 			}
 			return out;
     	}

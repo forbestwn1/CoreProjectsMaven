@@ -28,7 +28,7 @@ import com.nosliw.core.application.common.structure.HAPUtilityElement;
 class HAPDomainValueStructure_parser implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPDomainValueStructure.class.getName();   }
+	public String getEntityType() {   return HAPDomainValueStructure.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
@@ -39,7 +39,7 @@ class HAPDomainValueStructure_parser implements HAPParserEntity{
 		JSONObject vsDefsJsonObj =  jsonObj.getJSONObject(HAPDomainValueStructure.VALUESTRUCTUREDEFINITION);
 		for(Object key : vsDefsJsonObj.keySet()) {
 			String id = (String)key;
-			out.addValueStructureDefinition(id, (HAPStructure)parseService.parseEntityJSONExplicit(vsDefsJsonObj.getJSONObject(id), HAPStructureImp.class.getName()));
+			out.addValueStructureDefinition(id, (HAPStructure)parseService.parseEntityJSONExplicit(vsDefsJsonObj.getJSONObject(id), HAPStructureImp.ENTITYNAMEFORSERIALIZE));
 		}
 
 		JSONObject byRuntimeIdsJsonObj =  jsonObj.getJSONObject(HAPDomainValueStructure.DEFINITIONBYRUNTIME);
@@ -67,6 +67,8 @@ class HAPDomainValueStructure_parser implements HAPParserEntity{
 //  all value structure runtime
 @HAPEntityWithAttribute
 public class HAPDomainValueStructure extends HAPSerializableImp implements HAPEntityParsable{
+
+	public static final String ENTITYNAMEFORSERIALIZE = "HAPDomainValueStructure";
 
 	@HAPAttribute
 	public static final String VALUESTRUCTUREDEFINITION = "valueStructureDefinition";

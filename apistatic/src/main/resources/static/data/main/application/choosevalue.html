@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>Application !!</title>
+
+    	<link rel="stylesheet" href="/data/javascript/library/external/framework7/css/framework7.bundle.min.css">
+        <script src="/data/javascript/library/external/framework7/4.3.1/framework7.bundle.js"></script>
+
+        <script src="http://localhost:8081/static/data/javascript/library/external/jQuery/3.4.1/jquery.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Underscore/1.9.1/underscore.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Backbone/1.3.3/backbone.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
+
+ 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+</head>
+
+<body>
+	
+	<div>
+	
+	<div id="chooseMode" style="display: none;">
+ <input type="radio" id="variableMode" name="choiceMode" value="variableMode" checked>
+  <label for="variableMode">variableMode</label><br>
+
+  <input type="radio" id="constantMode" name="choiceMode" value="constantMode">
+  <label for="constantMode">constantMode</label>	
+	</div>
+	
+	
+<div id="variableModeArea">
+variableMode<br>
+<span id=""></span>
+</div>
+
+<div id="constantModeArea">
+constantMode<br>
+</div>
+	
+	   
+   </div>
+</body>
+
+<script>
+
+var node_CONSTANT;
+var node_COMMONCONSTANT;
+var node_COMMONATRIBUTECONSTANT;
+
+var node_basicUtility;
+var node_namingConvensionUtility;
+var node_createServiceRequestInfoSequence;
+var node_requestServiceProcessor;
+var node_ResourceId;
+var node_createStateBackupService;
+var node_createRuntimeEnvironment;
+var node_BrickId;
+var node_createRuntimeEnv;
+
+
+var currentMode;
+
+var constantModeApp;
+var variableModeApp;
+var dataType;
+
+//when nosliw active
+$(document).on("nosliwActive", function(){
+	node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
+	node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+	node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	
+	node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
+	node_namingConvensionUtility = nosliw.getNodeData("common.namingconvension.namingConvensionUtility");
+	node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
+	node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
+	node_ResourceId = nosliw.getNodeData("resource.entity.ResourceId");
+	node_createStateBackupService = nosliw.getNodeData("component.createStateBackupService");
+	node_createRuntimeEnvironment = nosliw.getNodeData("complexentity.entity.createRuntimeEnvironment");
+	node_BrickId = nosliw.getNodeData("complexentity.entity.BrickId");
+	node_createRuntimeEnv = nosliw.getNodeData("framework7.createRuntimeEnv");
+
+	var parms = node_basicUtility.getParmsInUrl();
+	dataType = parms.dataType==undefined?"string":parms.dataType;
+
+	if(dataType=="date"){
+		$("#chooseMode").show();    
+		updateModeSelection("constantMode");
+	}
+	else{
+		$("#variableMode").hide();    
+		updateModeSelection("constantMode");
+	}
+
+	$('input[name="choiceMode"]').change(function() {
+	    if ($('#variableMode').is(':checked')) {
+	    	updateModeSelection("variableMode");
+	    } else {
+	    	updateModeSelection("constantMode");
+	    }
+	});
+	
+});
+
+var createConstantOperand = function(){
+};
+var createVariableOperand = function(){
+};
+var createOperationOperand = function(){
+};
+
+
+var updateModeSelection = function(mode){
+	currentMode = mode;
+
+    if (currentMode=="variableMode") {
+          $('#variableModeArea').show(); // jQuery shorthand to display the block
+          $('#constantModeArea').hide(); // jQuery shorthand to hide the block completely
+    } else {
+	      $('#variableModeArea').hide(); // jQuery shorthand to display the block
+	      $('#constantModeArea').show(); // jQuery shorthand to hide the block completely
+	      if(constantModeApp==undefined){
+	    	  createDataConstantChooseStandAlone(dataType, function(application){
+	    		  constantModeApp = application;
+				  $("#constantModeArea").append(application.getView());
+	    	  });
+	      }
+    }
+};
+
+var createDataConstantChooseStandAlone = function(dataType, callBackFun){
+	var request = node_createServiceRequestInfoSequence();
+	var gatewayParm = {};
+
+	var datadefinition = {
+            "type" : "writable",   
+			"criteria" : "test." + dataType + ";1.0.0"
+    };
+	var uiTagQueryForChange = {};
+	uiTagQueryForChange[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_DATADEFINITION] = datadefinition;
+	uiTagQueryForChange[node_COMMONATRIBUTECONSTANT.UITAGEQUERYDATA_IOMODE] = node_COMMONCONSTANT.IO_DIRECTION_IN;
+
+    var parm1 = {};
+	parm1[node_COMMONATRIBUTECONSTANT.STORYMANAGERSTANDALONE_CEATESTANDALONE_PARM_UITAGQUERY] = uiTagQueryForChange;
+	var providerRequest1 = {};
+	providerRequest1[node_COMMONATRIBUTECONSTANT.MANUALSTANDALONEPROVIDERREQUEST_PARMS] = parm1;
+	var item1 = {};
+	item1[node_COMMONATRIBUTECONSTANT.MANUALSTANDALONEREQUEST_PROVIDERNAME] = node_COMMONCONSTANT.STANDALONE_PROVIDER_STORY;
+    item1[node_COMMONATRIBUTECONSTANT.MANUALSTANDALONEREQUEST_PROVIDERREQUEST] = providerRequest1;
+
+	var items = [];
+	items.push(item1);
+
+	var requestObj = {};
+	requestObj[node_COMMONATRIBUTECONSTANT.MANUALSTANDALONESBUILDREQUEST_ITEM] = items;
+
+	gatewayParm[node_COMMONATRIBUTECONSTANT.MANUALGATEWAYSTANDALONE_PARMS_REQUEST] = requestObj;
+
+
+		request.addRequest(nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(
+			node_COMMONCONSTANT.GATEWAY_MANUAL_STANDALONE,
+			node_COMMONATRIBUTECONSTANT.MANUALGATEWAYSTANDALONE_COMMAND_BUILD,
+			gatewayParm,
+			{
+				success: function (requestInfo, resourceIds) {
+					var bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(resourceIds[0])).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
+
+					var out = node_createServiceRequestInfoSequence({});
+					out.addRequest(nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({ bundleDef: bundleDef }, undefined, {}, undefined, {
+						success: function (requestInfo, application) {
+							callBackFun(application);
+							return application;
+						}
+					}));
+					return out;
+				}
+			}
+		));
+		node_requestServiceProcessor.processRequest(request);			
+};
+
+
+
+var requestStaticInfos = [];
+requestStaticInfos.push({
+	"type" : "configure",
+	"name" : "core"
+});
+
+var staticInfos = {"staticInfo" : requestStaticInfos};
+
+var configureData = {};
+
+$.ajax({
+	url : "http://localhost:8081/nosliw/static/fetch",
+	type : "POST",
+	dataType: "json",
+	data : JSON.stringify(staticInfos),
+	async : true,
+	success : function(serviceData, status){
+		var result = serviceData.data.item;
+		
+		var fileNumber = result.length;
+		var count = 0;
+		
+		var processItemInOrder = function(){
+			var item = result[count];
+			
+			if(item.type=="file"){
+               //for file
+				var scriptEle = document.createElement('script');
+				scriptEle.setAttribute('src', item.uri);
+				scriptEle.setAttribute('defer', "defer");
+				scriptEle.setAttribute('type', 'text/javascript');
+
+				scriptEle.onload = callBack;
+				document.getElementsByTagName("head")[0].appendChild(scriptEle);
+			}
+			else if(item.type=="data"){
+				configureData = _.extend(configureData, item.data);
+				count++;
+				if(count>=fileNumber){
+					finishProcessItems();
+				}
+				else{
+    				processItemInOrder();
+                }
+			}
+			
+		};
+		
+		var finishProcessItems = function(){
+			configureData = _.extend(configureData, {
+				logging : {
+					module : ["process", "requestInfo", "requestManager"]
+				}
+			});
+			nosliw.init(configureData);
+        };
+		
+		var callBack = function(){
+			count++;
+			if(count>=fileNumber){
+				finishProcessItems();
+			}
+			else{
+				processItemInOrder();
+			}
+		};
+		
+		processItemInOrder();
+	},
+	error: function(obj, textStatus, errorThrown){
+	},
+});
+
+</script>
+
+</html>
