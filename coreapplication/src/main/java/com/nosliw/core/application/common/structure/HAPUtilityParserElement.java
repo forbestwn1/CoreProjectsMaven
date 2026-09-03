@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
@@ -28,6 +29,7 @@ public class HAPUtilityParserElement {
 		String constantName = (String)eleDefJson.opt(HAPElementStructureLeafConstantReference.CONSTANT);
 //		Object runtimeObj = eleDefJson.opt(HAPElementStructureLeafRuntime.RUNTIME);
 		String expressionId = (String)eleDefJson.opt(HAPElementStructureLeafDataExpression.EXPRESSIONID);
+		String type = (String)eleDefJson.opt(HAPElementStructure.TYPE);
 		
 		if(defRefObj!=null) {
 			//relative for definition
@@ -94,6 +96,9 @@ public class HAPUtilityParserElement {
 //		else if(runtimeObj!=null) {
 //			out = new HAPElementStructureLeafRuntime();
 //		}
+		else if(HAPConstantShared.CONTEXT_ELEMENTTYPE_NONE.equals(type)) {
+			out = new HAPElementStructureLeafNone();
+		}
 		else {
 			//value
 			out = new HAPElementStructureLeafValue();

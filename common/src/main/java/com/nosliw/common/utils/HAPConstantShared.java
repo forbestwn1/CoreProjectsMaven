@@ -194,6 +194,7 @@ public class HAPConstantShared {
 		public static final String CONTEXT_ELEMENTTYPE_PROVIDE = "provide";
 		public static final String CONTEXT_ELEMENTTYPE_RUNTIME = "runtime";
 		public static final String CONTEXT_ELEMENTTYPE_DATAEXPRESSION = "dataExpression";
+		public static final String CONTEXT_ELEMENTTYPE_NONE = "none";
 
 
 

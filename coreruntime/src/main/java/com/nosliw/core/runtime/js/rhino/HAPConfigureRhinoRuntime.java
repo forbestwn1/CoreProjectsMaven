@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="rhino")
+@ConfigurationProperties(prefix="runtime.rhino")
 public class HAPConfigureRhinoRuntime {
 
 	private String scriptExportPath;

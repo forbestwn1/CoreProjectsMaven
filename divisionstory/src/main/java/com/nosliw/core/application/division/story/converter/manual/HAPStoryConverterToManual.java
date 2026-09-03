@@ -221,9 +221,16 @@ public class HAPStoryConverterToManual {
 		HAPStoryElement sourceEndpointEle = HAPStoryUtilityStory.getDescendantElement(new HAPStoryPath(endPointWrapperEleIdSource, new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)), story);
 		if(sourceEndpointEle.getElementType().equals(HAPStoryElementEndPointIOConstant.TYPE)) {
 			HAPStoryElementEndPointIOConstant constantEndPointElement = (HAPStoryElementEndPointIOConstant)sourceEndpointEle;
-			source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_constant.temp")).
-	    			setParm("constantData", constantEndPointElement.getData().toStringValue(HAPSerializationFormat.JSON)).
-		    		getContent();			
+			if(constantEndPointElement.getData()!=null) {
+				source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_constant.temp"))
+				.setParm("constantData", constantEndPointElement.getData().toStringValue(HAPSerializationFormat.JSON))
+				.getContent();
+			}
+			else {
+				source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_none.temp"))
+				.getContent();
+			}
+			
 		}
 		else if(sourceEndpointEle.getElementType().equals(HAPStoryElementEndPointIOVariable.TYPE)) {
 			HAPStoryElementEndPointIOVariable variableEndPointElement = (HAPStoryElementEndPointIOVariable)sourceEndpointEle;

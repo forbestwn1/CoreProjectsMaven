@@ -55,7 +55,6 @@ public class HAPElementStructureLeafConstant extends HAPElementStructure{
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		jsonMap.put(TYPE, this.getType());
 		jsonMap.put(VALUE, this.m_value.toString());
 		typeJsonMap.put(VALUE, this.m_value.getClass());
 	}

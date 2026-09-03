@@ -98,6 +98,10 @@ public class HAPDefinitionUtilityMapping {
 				out.add(new HAPTunnel(fromEndPoint, toEndPoint, matchers));
 			}
 		}
+		else if(structureEle.getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_NONE)) {
+			HAPEndPointInTunnelConstant fromEndPoint = new HAPEndPointInTunnelConstant();
+			out.add(new HAPTunnel(fromEndPoint, toEndPoint, null));
+		}
 		else if(structureEle.getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_DATAEXPRESSION)) {
 			HAPElementStructureLeafDataExpression dataExpressionEle = (HAPElementStructureLeafDataExpression)structureEle;
 			HAPEndPointInTunnelDataExpression fromEndPoint = new HAPEndPointInTunnelDataExpression(dataExpressionEle.getExpressionId(), dataExpressionEle.getBrickId());

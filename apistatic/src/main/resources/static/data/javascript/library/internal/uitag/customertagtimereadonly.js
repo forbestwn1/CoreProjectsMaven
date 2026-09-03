@@ -19,7 +19,7 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestTimeReadOnly = function(envObj){
+var node_createUICustomerTagTestDateReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
@@ -29,7 +29,8 @@ var node_createUICustomerTagTestTimeReadOnly = function(envObj){
 		updateView : function(currentData){
 			if(currentData!=undefined){
 				var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				loc_dataView.html(value.hour+":"+value.minute+":"+value.second);
+				var date = new Date(value.year, value.month, value.date);
+				loc_dataView.html(date.toLocaleDateString('en-CA'));
 			}
 			else{
 				loc_dataView.html("");
@@ -64,6 +65,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_time_readonly", node_createUICustomerTagTestTimeReadOnly); 
+packageObj.createChildNode("debug_test_date_readonly", node_createUICustomerTagTestDateReadOnly); 
 
 })(packageObj);

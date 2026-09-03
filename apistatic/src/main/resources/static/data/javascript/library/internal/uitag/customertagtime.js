@@ -19,25 +19,44 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestTimeReadOnly = function(envObj){
+var node_createUICustomerTagTestTime = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
 	var loc_out = {
-		
+
+		preInit : function(handlers, request){
+		},
+				
 		updateView : function(currentData){
 			if(currentData!=undefined){
-				var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				loc_dataView.html(value.hour+":"+value.minute+":"+value.second);
+				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+				loc_dataView.val(value.hour+":"+value.minute+":"+value.second);
 			}
 			else{
-				loc_dataView.html("");
+				loc_dataView.val();
 			}
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<div></div>');
+			loc_dataView = $('<input type="time"></input>');
+
+			loc_dataView.bind('change', function(){
+				var date = new Date(loc_dataView.val());
+
+				var segs = date.split(":");
+				
+				var currentData = {
+					dataTypeId: "test.time;1.0.0",
+					value: {
+						hour : segs[0],
+						minute : segs[1],
+						second : segs[2]
+					}
+				};
+				loc_envObj.onDataChange(currentData);
+			});
 			return loc_dataView;
 		}
 	};
@@ -64,6 +83,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_time_readonly", node_createUICustomerTagTestTimeReadOnly); 
+packageObj.createChildNode("debug_test_time", node_createUICustomerTagTestTime); 
 
 })(packageObj);

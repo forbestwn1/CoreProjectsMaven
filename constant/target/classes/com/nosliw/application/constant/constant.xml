@@ -324,6 +324,7 @@
 			<definition name="CONTEXT_ELEMENTTYPE_PROVIDE" value="provide"/>
 			<definition name="CONTEXT_ELEMENTTYPE_RUNTIME" value="runtime"/>
 			<definition name="CONTEXT_ELEMENTTYPE_DATAEXPRESSION" value="dataExpression"/>
+			<definition name="CONTEXT_ELEMENTTYPE_NONE" value="none"/>
 			<definition type="space"/>
 			<definition name="ENTITY_CRITICALVALUE_OTHER" value="other"/>
 			<definition type="space"/>
