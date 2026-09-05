@@ -1,0 +1,42 @@
+<definition name="test.integer;1.0.0">
+	
+	<info description="Data type for integer."/>
+
+	<operations>
+	
+		<operation name="add" >
+			<parms>
+				<parm name="data1" criteria="test.integer" isBase="true"/>
+				<parm name="data2" criteria="test.integer"/>
+			</parms>
+			<output criteria="test.integer"/>
+		</operation>
+
+		<operation name="largerThan" >
+			<parms>
+				<parm name="base" criteria="test.integer" isBase="true"/>
+				<parm name="data" criteria="test.integer"/>
+			</parms>
+			<output criteria="test.boolean"/>
+		</operation>
+	
+		<operation name="noLessThan" >
+			<parms>
+				<parm name="base" criteria="test.integer" isBase="true"/>
+				<parm name="data" criteria="test.integer"/>
+			</parms>
+			<output criteria="test.boolean"/>
+		</operation>
+	
+		<operation name="equals" >
+			<parms>
+				<parm name="base" criteria="test.integer" isBase="true"/>
+				<parm name="data" criteria="test.integer"/>
+			</parms>
+			<output criteria="test.boolean"/>
+		</operation>
+
+	</operations>
+
+
+</definition>

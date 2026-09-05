@@ -1,10 +1,10 @@
 package com.nosliw.api.statichost;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -26,6 +26,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
+import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoConfigure;
@@ -79,11 +80,18 @@ public class HAPStaticAPI {
 		else if(HAPConstantShared.STATIC_REQUEST_TYPE_FOLDER.equals(staticInfo.getType())) {
 			HAPStaticRequestInfoFolder staticInfoFolder = (HAPStaticRequestInfoFolder)staticInfo;
 			
-			for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
-				String folderPath = childFile.getAbsolutePath();
-				String relativePath = folderPath.substring(this.m_temporaryConfigure.getPath().length());
-				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(relativePath))));
+			Path folderPath = HAPUtilityFileNio.buildPath(this.m_temporaryConfigure.getPath(), staticInfoFolder.getFolder());
+			
+			for(Path childPath : HAPUtilityFileNio.getChildrenPath(folderPath)) {
+				String fileName = HAPUtilityFileNio.getLastNameOfPath(childPath);
+				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(staticInfoFolder.getFolder()+"/"+fileName))));
 			}
+			
+//			for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
+//				String folderPath = childFile.getAbsolutePath();
+//				String relativePath = folderPath.substring(this.m_temporaryConfigure.getPath().length());
+//				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(relativePath))));
+//			}
 		}
 		else if(HAPConstantShared.STATIC_REQUEST_TYPE_CONFIGURE.equals(staticInfo.getType())) {
 			HAPStaticRequestInfoConfigure staticInfoConfigure = (HAPStaticRequestInfoConfigure)staticInfo;
@@ -97,6 +105,15 @@ public class HAPStaticAPI {
 				urlData.put("staticUrl", "http://localhost:8081/");
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
+			if(configureName.equals("scriptreproduce")) {
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null)));
+				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null)));
+
+				Map<String, String> urlData = new LinkedHashMap<String, String>();
+				urlData.put("gatewayUrl", "http://localhost:8080/");
+				urlData.put("staticUrl", "http://localhost:8081/");
+				out.add(new HAPStaticResponseInfoData(urlData));
+            }
 			else if(configureName.equals("story")) {
 				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null)));
 				out.addAll(this.fetch(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null)));

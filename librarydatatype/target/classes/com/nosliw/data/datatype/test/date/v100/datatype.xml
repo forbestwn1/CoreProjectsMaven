@@ -1,0 +1,34 @@
+<definition name="test.date;1.0.0">
+	
+	<info description="Data type for date."/>
+
+	<operations>
+		<operation name="todayDate" >
+			<parms>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
+		<operation name="nextDate" >
+			<parms>
+				<parm name="base" criteria="test.date" isBase="true"/>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
+		<operation name="lastDate" >
+			<parms>
+				<parm name="base" criteria="test.date" isBase="true"/>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
+		<operation name="NDatesLater" >
+			<parms>
+				<parm name="base" criteria="test.date" isBase="true"/>
+				<parm name="n" criteria="test.integer"/>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
+	
+	</operations>
+
+
+</definition>

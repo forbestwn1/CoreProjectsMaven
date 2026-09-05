@@ -1,0 +1,25 @@
+<definition name="base.string;1.0.0">
+	
+	<info description="Data type for string."/>
+
+	<operations>
+	
+		<operation name="subString" >
+			<parms>
+				<parm criteria="base.string" isBase="true"/>
+				<parm name="from" criteria="base.integer"/>
+				<parm name="to" criteria="base.integer"/>
+			</parms>
+			<output criteria="base.string"/>
+		</operation>
+
+		<operation name="length" >
+			<parms>
+				<parm isBase="true"/>
+			</parms>
+			<output criteria="base.integer"/>
+		</operation>
+
+	</operations>
+
+</definition>

@@ -201,8 +201,10 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 
 	public void finishTask(String taskId, HAPServiceData taskServiceData){
 		HAPTaskRuntime task = this.m_tasks.get(taskId);
-		task.finish(taskServiceData);
-		this.m_tasks.remove(taskId);
+		if(task!=null) {
+			task.finish(taskServiceData);
+			this.m_tasks.remove(taskId);
+		}
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.nosliw.application.api;
 
 import java.net.URI;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -60,7 +61,10 @@ public class HAPAPIGateway {
 
 	@PostMapping("/gateway")
     public String gateway(@RequestBody String requestInfoStr) {
-		HAPRequestInfo requestInfo = new HAPRequestInfo(URLDecoder.decode(requestInfoStr));
+		
+		requestInfoStr = requestInfoStr.replace("%3D", "111111");     //=
+		requestInfoStr = requestInfoStr.replace("%2B", "222222");    //+
+		HAPRequestInfo requestInfo = new HAPRequestInfo(URLDecoder.decode(requestInfoStr, StandardCharsets.UTF_8));
 		
 		HAPServiceData out = null;
 		if(HAPConstantShared.SERVICECOMMAND_GROUPREQUEST.equals(requestInfo.getCommand())){

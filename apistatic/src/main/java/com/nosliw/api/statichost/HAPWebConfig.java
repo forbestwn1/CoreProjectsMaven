@@ -17,7 +17,7 @@ public class HAPWebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/temp/**")
-                .addResourceLocations("file:///"+m_temporaryConfigure.getPath())
+                .addResourceLocations(m_temporaryConfigure.getPath())
                 .setCachePeriod(0);
         
         registry.addResourceHandler("/static/**")

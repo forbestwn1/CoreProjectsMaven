@@ -1,0 +1,34 @@
+<definition name="test.expression;1.0.0">
+	
+	<info description="container for expression"/>
+
+	<operations>
+	
+		<operation name="outputCriteria" >
+			<parms>
+				<parm name="expression" criteria="test.expression" isBase="true"/>
+				<parm name="parms" criteria="test.map"/>
+			</parms>
+			<output criteria="test.dataTypeCriteria"/>
+		</operation>
+
+		<operation name="outputCriteriaFromParmData" >
+			<parms>
+				<parm name="expression" criteria="test.expression" isBase="true"/>
+				<parm name="parms" criteria="test.map"/>
+			</parms>
+			<output criteria="test.dataTypeCriteria"/>
+		</operation>
+
+		<operation name="execute" >
+			<parms>
+				<parm name="expression" criteria="test.expression" isBase="true"/>
+				<parm name="parms" criteria="test.map"/>
+			</parms>
+ 			<output criteria="@||!(test.expression)!.outputCriteria(expression;;;!(test.parm)!.getValue(?(expression)?);;parms;;;!(test.datatypecriteria)!.getChildren(base;;;!(test.parm)!.getCriteria(?(parms)?)))||@"/>   
+<!--			<output criteria="@||!(test.parm)!.getValue(?(expression)?)||@"/> -->
+		</operation>
+
+	</operations>
+
+</definition>

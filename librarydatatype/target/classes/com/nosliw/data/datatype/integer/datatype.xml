@@ -1,0 +1,18 @@
+<definition name="base.integer;1.0.0">
+	
+	<info description="Data type for integer."/>
+
+	<operations>
+	
+		<operation name="add" >
+			<parms>
+				<parm name="parm1" criteria="base.integer"/>
+				<parm name="parm2" criteria="base.integer"/>
+			</parms>
+			<output criteria="base.integer"/>
+		</operation>
+
+	</operations>
+
+
+</definition>

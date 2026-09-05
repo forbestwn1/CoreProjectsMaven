@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>Nosliw Go Go !!</title>
+
+        <script src="http://localhost:8081/static/data/javascript/library/external/jQuery/3.4.1/jquery.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Underscore/1.9.1/underscore.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Backbone/1.3.3/backbone.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
+
+        <script src="script/utilityfectch.js"></script>
+<!-- 
+		<script src="http://localhost:8081/static/data/javascript/library/internal/core/nosliw.js"></script>
+ -->
+</head>
+
+<body>
+
+</body>
+
+<script>
+$(document).on("nosliwActive", function(){
+	
+	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
+	var parms = node_basicUtility.getParmsInUrl();
+
+	var requestStaticInfos = [];
+	requestStaticInfos.push({
+		"type" : "folder",
+		"folder" : "scriptexport/scripts/"+parms.name
+	});
+
+	fectchUtility({"staticInfo" : requestStaticInfos}, 
+			function(data){
+	        }, 
+			function(uri){
+
+	        }, 
+			function(){
+			});
+
+});
+
+var parms = {};
+var searchParams = new URLSearchParams(window.location.search).entries();
+var next = searchParams.next();
+while(!next.done){
+	var p = next.value;
+	parms[p[0]] = p[1];
+	next = searchParams.next();
+}
+
+
+var requestStaticInfos = [];
+requestStaticInfos.push({
+	"type" : "configure",
+	"name" : "scriptreproduce"
+});
+
+var staticInfos = {"staticInfo" : requestStaticInfos};
+
+var configureData = {};
+
+fectchUtility(staticInfos, 
+		function(data){
+        	configureData = _.extend(configureData, data);
+        }, 
+		function(uri){
+
+        }, 
+		function(){
+			configureData = _.extend(configureData, {
+				logging : {
+					module : ["process", "requestInfo", "requestManager"]
+				}
+			});
+			nosliw.init(configureData);
+        });
+
+
+</script>
+<!-- 
+<script src="http://localhost:8081/static/data/javascript/library/internal/runtimebrowserinit/utility.js"></script>
+<script src="http://localhost:8081/static/data/javascript/library/internal/runtimebrowserinit/init.js"></script>
+<script src="init_runtime.js"></script>
+ -->
+</html>

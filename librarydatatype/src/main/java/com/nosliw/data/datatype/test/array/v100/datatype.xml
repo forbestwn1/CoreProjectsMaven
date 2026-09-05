@@ -1,0 +1,92 @@
+<definition name="test.array;1.0.0"  isComplex="true">
+	
+	<info description="container for list of data" isComplex="true"/>
+
+	<operations>
+	
+		<operation name="process" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="elementVariableName" criteria="test.string"/>
+				<parm name="expression" criteria="test.expression"/>
+			</parms>
+			<output criteria="test.array%||element:@||!(test.expression)!.outputCriteria(expression;;;?(expression)?.getValue();;parms;;;!(test.map)!.new().put(name;;;?(elementVariableName)?.getValue();;value;;;?(base)?.getCriteria().getChild(childName;;;#test.string;element)))||@||%"/>
+		</operation>
+
+		<operation name="getChildrenNames" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+			</parms>
+			<output criteria="test.array;1.0.0%||element:test.string;1.0.0||%"/>
+		</operation>
+
+		<operation name="isAccessChildById" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+			</parms>
+			<output criteria="test.boolean;1.0.0"/>
+		</operation>
+
+		<operation name="addChild" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="index" criteria="test.integer"/>
+				<parm name="child" criteria="*"/>
+			</parms>
+			<output criteria="test.array"/>
+		</operation>
+
+		<operation name="add" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="child" criteria="*"/>
+			</parms>
+			<output criteria="test.array"/>
+		</operation>
+
+		<operation name="removeChild" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="index" criteria="test.integer"/>
+			</parms>
+			<output criteria="*"/>
+		</operation>
+
+		<operation name="length" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+			</parms>
+			<output criteria="test.integer;1.0.0"/>
+		</operation>
+
+		<operation name="getChildData" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="name" criteria="test.string"/>
+			</parms>
+			<output criteria="*"/>
+		</operation>
+
+		<operation name="getChildDataByIndex" >
+			<parms>
+				<parm name="base" criteria="test.array" isBase="true"/>
+				<parm name="index" criteria="test.integer"/>
+			</parms>
+			<output criteria="*"/>
+		</operation>
+
+		<operation name="emptyArray" >
+			<parms>
+			</parms>
+			<output criteria="test.array"/>
+		</operation>
+
+		<operation name="new" >
+			<parms>
+			</parms>
+			<output criteria="test.array"/>
+		</operation>
+
+	</operations>
+
+</definition>

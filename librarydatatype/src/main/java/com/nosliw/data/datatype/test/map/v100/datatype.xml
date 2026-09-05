@@ -1,0 +1,62 @@
+<definition name="test.map;1.0.0" isComplex="true">
+	
+	<info description="" isComplex="true"/>
+
+	<operations>
+	
+		<operation name="put" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+				<parm name="name" criteria="test.string"/>
+				<parm name="value" criteria="*"/>
+			</parms>
+			<output criteria="@||!(test.dataTypeCriteria)!.addChild(base;;;!(test.parm)!.getCriteria(&amp;(base)&amp;);;childName;;;!(test.parm)!.getValue(&amp;(name)&amp;);;child;;;!(test.parm)!.getCriteria(&amp;(value)&amp;))||@"/>
+		</operation>
+
+		<operation name="new" >
+			<parms>
+			</parms>
+			<output criteria="test.map"/>
+		</operation>
+
+		<operation name="getChildrenNames" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+			</parms>
+			<output criteria="test.array;1.0.0%||element:test.string;1.0.0||%"/>
+		</operation>
+
+		<operation name="isAccessChildById" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+			</parms>
+			<output criteria="test.boolean;1.0.0"/>
+		</operation>
+
+		<operation name="length" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+			</parms>
+			<output criteria="test.integer;1.0.0"/>
+		</operation>
+
+		<operation name="getChildData" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+				<parm name="name" criteria="test.string"/>
+			</parms>
+			<output criteria="@||!(test.dataTypeCriteria)!.getChild(base;;;!(test.parm)!.getCriteria(base;;;?(base)?);;childName;;;!(test.parm)!.getValue(base;;;?(name)?))||@"/>
+		</operation>
+
+		<operation name="setChildData" >
+			<parms>
+				<parm name="base" criteria="test.map" isBase="true"/>
+				<parm name="name" criteria="test.string"/>
+				<parm name="value" criteria="*"/>
+			</parms>
+			<output criteria="test.map"/>
+		</operation>
+
+	</operations>
+
+</definition>

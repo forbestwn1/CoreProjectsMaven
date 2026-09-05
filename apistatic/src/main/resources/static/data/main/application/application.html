@@ -12,6 +12,8 @@
         <script src="http://localhost:8081/static/data/javascript/library/external/Backbone/1.3.3/backbone.js"></script>
         <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
 
+        <script src="script/utilityfectch.js"></script>
+
  		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
 </head>
@@ -109,68 +111,21 @@ var staticInfos = {"staticInfo" : requestStaticInfos};
 
 var configureData = {};
 
-$.ajax({
-	url : "http://localhost:8081/nosliw/static/fetch",
-	type : "POST",
-	dataType: "json",
-	data : JSON.stringify(staticInfos),
-	async : true,
-	success : function(serviceData, status){
-		var result = serviceData.data.item;
-		
-		var fileNumber = result.length;
-		var count = 0;
-		
-		var processItemInOrder = function(){
-			var item = result[count];
-			
-			if(item.type=="file"){
-               //for file
-				var scriptEle = document.createElement('script');
-				scriptEle.setAttribute('src', item.uri);
-				scriptEle.setAttribute('defer', "defer");
-				scriptEle.setAttribute('type', 'text/javascript');
+fectchUtility(staticInfos, 
+		function(data){
+        	configureData = _.extend(configureData, data);
+        }, 
+		function(uri){
 
-				scriptEle.onload = callBack;
-				document.getElementsByTagName("head")[0].appendChild(scriptEle);
-			}
-			else if(item.type=="data"){
-				configureData = _.extend(configureData, item.data);
-				count++;
-				if(count>=fileNumber){
-					finishProcessItems();
-				}
-				else{
-    				processItemInOrder();
-                }
-			}
-			
-		};
-		
-		var finishProcessItems = function(){
+        }, 
+		function(){
 			configureData = _.extend(configureData, {
 				logging : {
 					module : ["process", "requestInfo", "requestManager"]
 				}
 			});
 			nosliw.init(configureData);
-        };
-		
-		var callBack = function(){
-			count++;
-			if(count>=fileNumber){
-				finishProcessItems();
-			}
-			else{
-				processItemInOrder();
-			}
-		};
-		
-		processItemInOrder();
-	},
-	error: function(obj, textStatus, errorThrown){
-	},
-});
+		});
 
 </script>
 

@@ -15,6 +15,10 @@ public class HAPModuleDataType {
 	
 	private HAPDataAccessDataType m_dataAccess;
 	
+	public HAPModuleDataType(HAPDBSource dbSource) {
+		this.m_dbSource = dbSource;
+	}
+	
 	public HAPModuleDataType init(HAPValueInfoManager valueInfoManager){
 		//value info
 		valueInfoManager.importFromClassFolder(this.getClass());
