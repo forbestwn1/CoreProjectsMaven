@@ -32,7 +32,7 @@ var node_createUICustomerTagTestTime = function(envObj){
 		updateView : function(currentData){
 			if(currentData!=undefined){
 				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				loc_dataView.val(value.hour+":"+value.minute+":"+value.second);
+				loc_dataView.val(value.hour.toString().padStart(2, "0")+":"+value.minute.toString().padStart(2, "0")+":"+value.second.toString().padStart(2, "0"));
 			}
 			else{
 				loc_dataView.val();
@@ -43,16 +43,15 @@ var node_createUICustomerTagTestTime = function(envObj){
 			loc_dataView = $('<input type="time"></input>');
 
 			loc_dataView.bind('change', function(){
-				var date = new Date(loc_dataView.val());
-
+				var date = loc_dataView.val();
 				var segs = date.split(":");
 				
 				var currentData = {
 					dataTypeId: "test.time;1.0.0",
 					value: {
-						hour : segs[0],
-						minute : segs[1],
-						second : segs[2]
+						hour : parseInt(segs[0]),
+						minute : parseInt(segs[1]),
+						second : parseInt(segs[2])
 					}
 				};
 				loc_envObj.onDataChange(currentData);
