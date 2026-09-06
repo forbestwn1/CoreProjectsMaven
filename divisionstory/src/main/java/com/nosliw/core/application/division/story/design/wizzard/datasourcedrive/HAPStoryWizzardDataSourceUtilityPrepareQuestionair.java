@@ -31,7 +31,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 	public static HAPStoryWizzardQuestionair prepareExtraInforQuestionair() {
 		
 		//root group
-		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup();
+		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup(HAPConstantShared.STORYDESIGN_QUESTION_TAG_EXTRAINFOGROUP);
 
 		HAPStoryWizzardQuestionairItemDynamic appNameQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceString(), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DESIGNNAME);
 		out.addItem(appNameQ);
