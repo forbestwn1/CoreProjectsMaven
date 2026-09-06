@@ -11,7 +11,9 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 public class HAPGatewayDataType extends HAPGatewayImp{
 
 	@HAPAttribute
-	final public static String COMMAND_GETRELATEDOPERATIONS = "getRelatedOperations";
+	final public static String COMMAND_GETRELATEDOPERATION = "getRelatedOperations";
+	@HAPAttribute
+	final public static String COMMAND_GETRELATEDOPERATION_DATATYPE = "dataType";
 	
 	
 	@Override

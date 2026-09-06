@@ -1,85 +1,16 @@
-package com.nosliw.core.data;
+package com.nosliw.core.data.criteria;
 
 import java.util.Map;
 import java.util.Set;
 
-import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
-import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
+import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.HAPDataTypeId;
+import com.nosliw.core.data.HAPRelationship;
 import com.nosliw.core.data.matcher.HAPMatcher;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
-/**
- * This is helper class that provide methods that related with data type and operation information
- */
-public interface HAPDataTypeHelper {
+public interface HAPCriteriaHelper {
 
-	/**
-	 * Figure out data type criteria id (data type, sub data type) according to data
-	 */
-	HAPDataTypeCriteriaId getDataTypeCriteriaByData(HAPData data);
-	
-	/**
-	 * 
-	 * @param dataTypeInfo
-	 * @param name
-	 * @return
-	 */
-	HAPDataTypeOperation getOperationInfoByName(HAPDataTypeId dataTypeInfo, String name);
-
-	
-	/**
-	 * List all data types between from and to
-	 * This means that each data type should be able to convert to "From" and also can be converted from "To"
-	 * @param from
-	 * @param to
-	 * @return
-	 */
-	Set<HAPDataTypeId> getAllDataTypeInRange(HAPDataTypeId from, HAPDataTypeId to);
-	
-	/**
-	 * Build data type criteria based on a set of data type ids
-	 * @param dataTypeIds
-	 * @return
-	 */
-	HAPDataTypeCriteria buildDataTypeCriteria(Set<HAPDataTypeCriteriaId> dataTypeIds);
-
-
-	/**
-	 * Find the root data type (all the parent data type which don't have parent data type)
-	 * @param dataTypeId
-	 * @return
-	 */
-	Set<HAPDataTypeId> getRootDataTypeId(HAPDataTypeId dataTypeId);
-
-	/**
-	 * Find the root data type relationship (all the parent data type which don't have parent data type)
-	 * @param dataTypeId
-	 * @return
-	 */
-	Set<HAPRelationship> getRootDataTypeRelationship(HAPDataTypeId dataTypeId);
-
-	/**
-	 * Find the trunk data type for criteria. Trunk data type is the highest parent data type that is shared by all data type under criteria
-	 * @param criteria
-	 * @return
-	 */
-	HAPDataTypeId getTrunkDataType(HAPDataTypeCriteria criteria);
-	
-	/**
-	 * Remove all the child data type so that the return data type can not convert to each other
-	 * @param dataTypeIds
-	 * @return
-	 */
-	Set<HAPDataTypeId> normalize(Set<HAPDataTypeId> dataTypeIds);
-
-	
-	
-	
-	
-
-	
-	
-	
 	
 	Set<HAPDataTypeCriteriaId> normalizeCriteria(Set<HAPDataTypeCriteriaId> dataTypeCriteriaIds);
 	
@@ -148,6 +79,5 @@ public interface HAPDataTypeHelper {
 	 * @return
 	 */
 	HAPMatcher convertableIdCriteria(HAPDataTypeCriteriaId sourceCriteria, HAPDataTypeCriteriaId targetCriteria);
-	
 	
 }

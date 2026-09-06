@@ -8,59 +8,87 @@
 		"taskInterface" : {
 			"request" : [
 				{
-					"name" : "locationId",
+					"name" : "location",
 					"dataDefinition" : {
-					}
-				},
-				{
-					"name" : "locationName",
-					"dataDefinition" : {
+						"criteria" : "test.entity;1.0.0",
+					    "rule" : [
+					        {
+                   				"name" : "Community Location",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "toronto.community"
+					        }
+					    ],
 					}
 				},
 				{
 					"name" : "program",
 					"dataDefinition" : {
+						"criteria" : "test.entity;1.0.0",
+					},
+				    "rule" : [
+				        {
+               				"name" : "Community Location",
+                            "status": "disabled1",
+				            "ruleType" : "enum",
+				            "enumCode" : "toronto.community"
+				        }
+				    ],
+				},
+				{
+					"name" : "fromDate",
+					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+						"initData" : {
+							"dataTypeId": "test.date;1.0.0",
+							"value": "{today}"
+						}
 					}
 				},
 				{
-					"name" : "daterange",
+					"name" : "fromTime",
 					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+						"initData" : {
+							"dataTypeId": "test.time;1.0.0",
+							"value": {
+							    hour: 6,
+							    minute : 0
+							}
+						}
 					}
 				},
 				{
-					"name" : "age",
+					"name" : "toDate",
 					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+						"initData" : {
+							"dataTypeId": "test.date;1.0.0",
+							"value": "{today}.after(7)"
+						}
 					}
 				},
 				{
-					"name" : "distance",
+					"name" : "toTime",
 					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+						"initData" : {
+							"dataTypeId": "test.time;1.0.0",
+							"value": {
+							    hour: 22,
+							    minute : 0
+							}
+						}
 					}
-				},
-				{
-					"name" : "fee",
-					"dataDefinition" : {
-					}
-				},
-				{
-					"name" : "indoor",
-					"dataDefinition" : {
-					}
-				},
+				}
 			],
 			"result" : {
 				"success": {
 					"output": [
 						{
-							"name" : "outputStringInService1",
+							"name" : "Drop=in Programs",
   							"dataDefinition" : {
-	    						"criteria" : "test.string;1.0.0"
-	    					}
-						},
-						{
-							"name" : "outputMapInService1",
-  							"dataDefinition" : {
-    							"criteria" : "test.map;1.0.0%%||stringAttr1:test.string;1.0.0,stringAttr2:test.string;1.0.0||%%"
+    							"criteria" : "test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,Time:test.entity;1.0.0,Url:test.url;1.0.0||%%"
     						}
 						}
 					]
