@@ -4,6 +4,7 @@ import QuestionairStatic from './QuestionairStatic'
 import QuestionairGroupRequestParm from './QuestionairGroupRequestParm'
 import QuestionairGroupResponseParm from './QuestionairGroupResponseParm'
 import QuestionairGroupDataSourceUICustomize from './QuestionairGroupDataSourceUICustomize'
+import QuestionairDynamicExtraInfo from './QuestionairDynamicExtraInfo'
 
 export default function Questionair ({questionair, onChange}){
 
@@ -19,7 +20,9 @@ export default function Questionair ({questionair, onChange}){
             if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_UICUSTOMGROUP){
                 return <QuestionairGroupDataSourceUICustomize questionair={questionair} onChange={onChange} />;
             }
-            return <QuestionairGroup questionair={questionair} onChange={onChange} />;
+            else if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_EXTRAINFOGROUP){
+                return <QuestionairDynamicExtraInfo questionair={questionair} onChange={onChange} />;
+            }
         }
         else if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_ITEM_STATIC){
             return <QuestionairStatic questionair={questionair} onChange={onChange} />;
