@@ -16,7 +16,7 @@ export default function Questionair ({questionair, onChange}){
 
     var getQuestionairComponent = function(questionair, onChange){
         if(questionairType==node_COMMONCONSTANT.STORYDESIGN_QUESTIONTYPE_GROUP){
-            if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP){
+            if(questionairTag==node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_UICUSTOMGROUP){
                 return <QuestionairGroupDataSourceUICustomize questionair={questionair} onChange={onChange} />;
             }
             return <QuestionairGroup questionair={questionair} onChange={onChange} />;

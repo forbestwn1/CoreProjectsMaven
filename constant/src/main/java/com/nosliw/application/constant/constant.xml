@@ -977,7 +977,7 @@
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEPARMUITAG" value="dataSourceResponseParmUITag"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCERESPONSEDATACRITERIAINFO" value="dataSourceResponseDataCriteriaInfo"/>
 
-			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEGROUP" value="dataSourceGroupTag"/>
+			<definition name="STORYDESIGN_QUESTION_TAG_UICUSTOMGROUP" value="uiCustomGroupTag"/>
 
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTGROUP" value="dataSourceRequestGroupTag"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP" value="dataSourceRequestParmGroupTag"/>
