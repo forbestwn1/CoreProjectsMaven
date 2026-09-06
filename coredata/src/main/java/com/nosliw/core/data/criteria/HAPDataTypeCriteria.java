@@ -46,7 +46,7 @@ public interface HAPDataTypeCriteria extends HAPSerializable{
 	 */
 	Set<HAPDataTypeId> getValidDataTypeId(HAPDataTypeHelper dataTypeHelper);
 
-	Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper);
+	Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper);
 
 	/**
 	 * Get all children criteria

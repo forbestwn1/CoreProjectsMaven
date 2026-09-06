@@ -22,6 +22,7 @@ import com.nosliw.core.application.common.uitag.HAPUITagDefinitionData;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
@@ -33,6 +34,9 @@ public class HAPManagerUITag{
 
 	@Autowired
 	private HAPDataTypeHelper m_dataTypeHelper;
+	
+	@Autowired
+	private HAPCriteriaHelper m_criteriaHelper;
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
@@ -112,7 +116,7 @@ public class HAPManagerUITag{
 			HAPUITagDefinitionData uiTagDef = this.m_dataTagDefs.get(name);
 			List<Pair<String, HAPDataTypeCriteria>> tagsDataTypeCriteria = this.getDataTypeCriteriaForUITagData(uiTagDef);
 			for(Pair<String, HAPDataTypeCriteria> tagDataTypeCriteria : tagsDataTypeCriteria) {
-				HAPMatchers matchers = this.m_dataTypeHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria.getRight());
+				HAPMatchers matchers = this.m_criteriaHelper.convertable(queryDataTypeCriteria, tagDataTypeCriteria.getRight());
 				if(matchers!=null) {
 					double score = matchers.getScore();
 					if(score>0) {

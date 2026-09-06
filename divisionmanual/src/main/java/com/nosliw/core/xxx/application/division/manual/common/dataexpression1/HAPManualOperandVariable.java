@@ -6,6 +6,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPInfoCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
@@ -36,11 +37,12 @@ public class HAPManualOperandVariable extends HAPManualOperand implements HAPOpe
 			HAPContainerVariableInfo variablesInfo,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker processTracker,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		
 		HAPInfoCriteria variableInfo = variablesInfo.getVaraibleCriteriaInfo(this.getVariableKey());
 		
-		HAPMatchers matchers = HAPUtilityCriteria.mergeVariableInfo(variableInfo, expectCriteria, dataTypeHelper);
+		HAPMatchers matchers = HAPUtilityCriteria.mergeVariableInfo(variableInfo, expectCriteria, criteriaHelper);
 		
 		//set output criteria
 		this.setOutputCriteria(variableInfo.getCriteria());

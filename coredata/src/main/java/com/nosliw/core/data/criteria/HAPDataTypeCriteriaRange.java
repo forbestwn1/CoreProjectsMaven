@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
-import com.nosliw.common.utils.HAPConstantShared;
 
 public class HAPDataTypeCriteriaRange extends HAPDataTypeCriteriaImp implements HAPDataTypeCriteriaWithSubCriteria{
 
@@ -51,7 +51,7 @@ public class HAPDataTypeCriteriaRange extends HAPDataTypeCriteriaImp implements 
 	}
 
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper) {
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper) {
 		Set<HAPDataTypeId> dataTypeIds = this.getValidDataTypeId(dataTypeHelper);
 		Set<HAPDataTypeCriteriaId> out = new HashSet<HAPDataTypeCriteriaId>();
 		for(HAPDataTypeId dataTypeId : dataTypeIds){
@@ -82,9 +82,13 @@ public class HAPDataTypeCriteriaRange extends HAPDataTypeCriteriaImp implements 
 	protected String buildLiterate(){
 		StringBuffer out = new StringBuffer();
 		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_RANGE));
-		if(this.m_from!=null)		out.append(HAPManagerSerialize.getInstance().toStringValue(this.m_from, HAPSerializationFormat.LITERATE));
+		if(this.m_from!=null) {
+			out.append(HAPManagerSerialize.getInstance().toStringValue(this.m_from, HAPSerializationFormat.LITERATE));
+		}
 		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.RANGE));
-		if(this.m_to!=null)		out.append(HAPManagerSerialize.getInstance().toStringValue(this.m_to, HAPSerializationFormat.LITERATE));
+		if(this.m_to!=null) {
+			out.append(HAPManagerSerialize.getInstance().toStringValue(this.m_to, HAPSerializationFormat.LITERATE));
+		}
 		if(this.m_subCriteriaGroup!=null){
 			out.append(HAPManagerSerialize.getInstance().toStringValue(m_subCriteriaGroup, HAPSerializationFormat.LITERATE));
 		}

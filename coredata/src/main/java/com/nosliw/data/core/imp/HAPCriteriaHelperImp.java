@@ -9,12 +9,16 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Sets;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.HAPDataTypeFamily;
+import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.HAPOperationParm;
 import com.nosliw.core.data.HAPRelationship;
@@ -32,12 +36,37 @@ import com.nosliw.core.data.criteria.HAPParserCriteriaImp;
 import com.nosliw.core.data.expression.HAPExpressionData;
 import com.nosliw.core.data.expression.HAPInfoRuntimeTaskExecuteDataExpresion;
 import com.nosliw.core.data.expression.HAPUtilityExpressionData;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.data.matcher.HAPMatcher;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.runtime.HAPRuntimeManager;
+import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
+import com.nosliw.data.core.imp.runtime.js.HAPModuleRuntimeJS;
 
+@Component
 public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 
+	private HAPRuntimeManager m_runtimeMan;
+	private HAPDataAccessDataType m_dataAccess = null;
+	private HAPExecutorRuntime m_runtimeExecutor;
+
+	@Autowired
+	private HAPDataTypeHelper m_dataTypeHelper;
+	
+	@Autowired
+	private HAPParserDataExpression m_dataExpressionParser;
+	
+	@Autowired
+	private void setRuntimeManager(HAPRuntimeManager runtimeMan) {
+		this.m_runtimeMan = runtimeMan;
+	}
+	
+	@Autowired
+	private void setRuntimeJSModule(HAPModuleRuntimeJS jsRuntimeModule) {
+		this.m_dataAccess = jsRuntimeModule.getDataTypeDataAccess();
+	}
+
+	
 	@Override
 	public Set<HAPDataTypeCriteriaId> normalizeCriteria(Set<HAPDataTypeCriteriaId> dataTypeCriteriaIds1){
 		List<HAPDataTypeCriteriaId> dataTypeCriteriaIds = new ArrayList<HAPDataTypeCriteriaId>(dataTypeCriteriaIds1);
@@ -83,8 +112,8 @@ public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 		}
 		else{
 			HAPMatchers out = new HAPMatchers();
-			Set<HAPDataTypeCriteriaId> sourceIdCriteriaSet = sourceCriteria.getValidDataTypeCriteriaId(this);
-			Set<HAPDataTypeCriteriaId> targetIdCriteriaSet = this.normalizeCriteria(targetCriteria.getValidDataTypeCriteriaId(this));
+			Set<HAPDataTypeCriteriaId> sourceIdCriteriaSet = sourceCriteria.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper);
+			Set<HAPDataTypeCriteriaId> targetIdCriteriaSet = this.normalizeCriteria(targetCriteria.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper));
 			
 			for(HAPDataTypeCriteriaId sourceIdCriteria : sourceIdCriteriaSet){
 				boolean match = false;
@@ -121,8 +150,8 @@ public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 			return criteria1;
 		}
 		else{
-			Set<HAPDataTypeCriteriaId> dataTypesIdCriteria1 = criteria1.getValidDataTypeCriteriaId(this);
-			Set<HAPDataTypeCriteriaId> dataTypesIdCriteria2 = criteria2.getValidDataTypeCriteriaId(this);
+			Set<HAPDataTypeCriteriaId> dataTypesIdCriteria1 = criteria1.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper);
+			Set<HAPDataTypeCriteriaId> dataTypesIdCriteria2 = criteria2.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper);
 			Set<HAPDataTypeCriteriaId> andDataTypeIdCriterias = Sets.intersection(dataTypesIdCriteria1, dataTypesIdCriteria2);
 			return this.buildDataTypeCriteria(andDataTypeIdCriterias);
 		}
@@ -150,10 +179,10 @@ public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 			return criteria1;
 		}
 		
-		List<HAPDataTypeCriteriaId> criterias1 = new ArrayList(criteria1.getValidDataTypeCriteriaId(this));
+		List<HAPDataTypeCriteriaId> criterias1 = new ArrayList(criteria1.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper));
 		List<HAPDataTypeCriteriaId> leaves1 = this.getLeafCriteriaIds(criterias1);
 		
-		List<HAPDataTypeCriteriaId> criterias2 = new ArrayList(criteria2.getValidDataTypeCriteriaId(this));
+		List<HAPDataTypeCriteriaId> criterias2 = new ArrayList(criteria2.getValidDataTypeCriteriaId(this, this.m_dataTypeHelper));
 		List<HAPDataTypeCriteriaId> leaves2 = this.getLeafCriteriaIds(criterias2);
 
 		Set<HAPDataTypeCriteriaId> out = new HashSet<HAPDataTypeCriteriaId>();
@@ -347,6 +376,103 @@ public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 		}
 	}
 
+	@Override
+	public HAPRelationship convertable(HAPDataTypeId sourceDataTypeId, HAPDataTypeId targetDataTypeId){
+		return this.m_dataAccess.getRelationship(sourceDataTypeId, targetDataTypeId);
+	}
+	
+	@Override
+	public HAPDataTypeCriteria looseCriteria(HAPDataTypeCriteria criteria) {
+		HAPDataTypeCriteria out = null;
+		
+//		Set<HAPDataTypeId> dataTypeIds = criteria.getValidDataTypeId(this);
+//		Set<HAPDataTypeId> normalizedDataTypeIds = this.normalize(dataTypeIds);
+//		
+//		if(normalizedDataTypeIds.size()==1){
+//			//one element, use range
+//			out = new HAPDataTypeCriteriaRange(normalizedDataTypeIds.iterator().next(), null);
+//		}
+//		else{
+//			//multiple, use or
+//			List<HAPDataTypeCriteria> criterias = new ArrayList<HAPDataTypeCriteria>();
+//			for(HAPDataTypeId normalizedDataTypeId : normalizedDataTypeIds){
+//				criterias.add(new HAPDataTypeCriteriaRange(normalizedDataTypeId, null));
+//			}
+//			out = new HAPDataTypeCriteriaOr(criterias);
+//		}
+		return out;
+	}
+
+	@Override
+	public HAPDataTypeId getTrunkDataType(HAPDataTypeCriteria criteria) {
+		List<HAPDataTypeId> dataTypeIds = new ArrayList<HAPDataTypeId>(criteria.getValidDataTypeId(this.m_dataTypeHelper));
+		HAPDataTypeId firstDataTypeId = dataTypeIds.get(0);
+		HAPDataTypeFamily firstDataTypeFamily = this.m_dataAccess.getDataTypeFamily(firstDataTypeId);
+		
+		List<HAPRelationship> candidates = new ArrayList<HAPRelationship>();
+		
+		Set<HAPRelationship> fistRelationships = (Set<HAPRelationship>)firstDataTypeFamily.getRelationships();
+		for(HAPRelationship firstRelationship : fistRelationships){
+			boolean isCandidate = true;
+			for(int i=1; i<dataTypeIds.size(); i++){
+				HAPDataTypeId otherDataTypeId = dataTypeIds.get(i);
+				if(this.convertable(otherDataTypeId, firstRelationship.getTarget())==null){
+					isCandidate = false;
+					break;
+				}
+			}
+			if(isCandidate) {
+				candidates.add(firstRelationship);
+			}
+		}
+		
+		if(candidates.size()==0) {
+			return null;
+		} else if(candidates.size()==1) {
+			return candidates.get(0).getTarget();
+		} else{
+			HAPDataTypeId out = candidates.get(0).getTarget();
+			for(int i=1; i<candidates.size(); i++){
+				HAPDataTypeId candidateTarget = candidates.get(i).getTarget();
+				if(this.convertable(out, candidateTarget)!=null){
+					
+				}
+				else if(this.convertable(candidateTarget, out)!=null){
+					out = candidateTarget;
+				}
+				else{
+					return null;
+				}
+			}
+			return out;
+		}
+	}
+
+	@Override
+	public Set<HAPDataTypeId> normalize(Set<HAPDataTypeId> dataTypeIds1) {
+		List<HAPDataTypeId> dataTypeIds = new ArrayList<HAPDataTypeId>(dataTypeIds1);
+		Set<HAPDataTypeId> out = new HashSet<HAPDataTypeId>();
+		if(dataTypeIds.size()==0){}
+		else if(dataTypeIds.size()==1) {
+			out.add(dataTypeIds.get(0));
+		} else{
+			out.addAll(dataTypeIds1);
+			Set<HAPDataTypeId> removes = new HashSet<HAPDataTypeId>();
+			for(int i=0; i< dataTypeIds.size()-1; i++){
+				for(int j=i+1; j<dataTypeIds.size(); j++){
+					if(this.convertable(dataTypeIds.get(i), dataTypeIds.get(j))!=null){
+						removes.add(dataTypeIds.get(i));
+					}
+					else if(this.convertable(dataTypeIds.get(j), dataTypeIds.get(i))!=null){
+						removes.add(dataTypeIds.get(j));
+					}
+				}
+			}
+			out.removeAll(removes);
+		}
+		return out;
+	}	
+
 	private void discoverExpressionCriteria(HAPDataTypeCriteria criteria, Set<HAPDataTypeCriteriaExpression> expCriterias){
 		if(criteria.getType().equals(HAPConstantShared.DATATYPECRITERIA_TYPE_EXPRESSION)){
 			expCriterias.add((HAPDataTypeCriteriaExpression)criteria);
@@ -359,5 +485,11 @@ public class HAPCriteriaHelperImp implements HAPCriteriaHelper{
 		}
 	}
 	
+	private HAPExecutorRuntime getRuntimeExecutor() {
+		if(this.m_runtimeExecutor==null) {
+			this.m_runtimeExecutor = this.m_runtimeMan.getDefaultRuntimeExecutor();
+		}
+		return this.m_runtimeExecutor;
+	}
 
 }

@@ -14,6 +14,7 @@ import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPUtilityData;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.data.expression.HAPOperandConstant;
@@ -60,13 +61,14 @@ public class HAPBasicOperandConstant extends HAPBasicOperand implements HAPOpera
 			HAPBasicContainerVariable variablesContainer,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker processTracker,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		//set output criteria
 		if(this.getOutputCriteria()==null){
-			HAPDataTypeCriteria criteria = dataTypeHelper.getDataTypeCriteriaByData(m_data);
+			HAPDataTypeCriteria criteria = criteriaHelper.getDataTypeCriteriaByData(m_data);
 			this.setOutputCriteria(criteria);
 		}
-		return HAPUtilityCriteria.isMatchable(this.getOutputCriteria(), expectCriteria, dataTypeHelper);
+		return HAPUtilityCriteria.isMatchable(this.getOutputCriteria(), expectCriteria, criteriaHelper);
 	}
 
 	@Override

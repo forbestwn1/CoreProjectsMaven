@@ -33,7 +33,7 @@ public class HAPDataTypeCriteriaAny extends HAPDataTypeCriteriaImp{
 		throw new IllegalStateException();	
 	}
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper) {
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper) {
 		throw new IllegalStateException();	
 	}
 

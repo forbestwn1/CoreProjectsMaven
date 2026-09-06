@@ -8,14 +8,13 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.matcher.HAPMatchers;
 
 public class HAPUtilityCriteria {
 
 	public static final String CHILD_ELEMENT = "element";
 
-	public static HAPMatchers mergeVariableInfo(HAPInfoCriteria criteriaInfo, HAPDataTypeCriteria expectCriteria, HAPDataTypeHelper dataTypeHelper) {
+	public static HAPMatchers mergeVariableInfo(HAPInfoCriteria criteriaInfo, HAPDataTypeCriteria expectCriteria, HAPCriteriaHelper criteriaeHelper) {
 		if(HAPConstantShared.EXPRESSION_VARIABLE_STATUS_OPEN.equals(criteriaInfo.getStatus())){
 			//if variable info is open, calculate new criteria for this variable
 			if(expectCriteria!=null){
@@ -23,7 +22,7 @@ public class HAPUtilityCriteria {
 					criteriaInfo.setCriteria(expectCriteria);
 				}
 				else{
-					HAPDataTypeCriteria adjustedCriteria = dataTypeHelper.merge(criteriaInfo.getCriteria(), expectCriteria);
+					HAPDataTypeCriteria adjustedCriteria = criteriaeHelper.merge(criteriaInfo.getCriteria(), expectCriteria);
 					if(adjustedCriteria==null){
 						HAPErrorUtility.invalid("cannot merge!!!");
 						return null;
@@ -34,7 +33,7 @@ public class HAPUtilityCriteria {
 				}
 			}
 		}
-		return isMatchable(criteriaInfo.getCriteria(), expectCriteria, dataTypeHelper);
+		return isMatchable(criteriaInfo.getCriteria(), expectCriteria, criteriaeHelper);
 	}
 	
 	/**
@@ -44,7 +43,7 @@ public class HAPUtilityCriteria {
 	 * @param context
 	 * @return
 	 */
-	public static HAPMatchers isMatchable(HAPDataTypeCriteria criteria, HAPDataTypeCriteria expectCriteria, HAPDataTypeHelper dataTypeHelper){
+	public static HAPMatchers isMatchable(HAPDataTypeCriteria criteria, HAPDataTypeCriteria expectCriteria, HAPCriteriaHelper criteriaHelper){
 		if(expectCriteria==null) {
 			return null;
 		}
@@ -53,7 +52,7 @@ public class HAPUtilityCriteria {
 			expectCriteria = criteria;
 		}
 		
-		HAPMatchers out = dataTypeHelper.buildMatchers(criteria, expectCriteria);
+		HAPMatchers out = criteriaHelper.buildMatchers(criteria, expectCriteria);
 		if(out==null){
 			//not able to match, then error
 			HAPErrorUtility.invalid("error!!!");

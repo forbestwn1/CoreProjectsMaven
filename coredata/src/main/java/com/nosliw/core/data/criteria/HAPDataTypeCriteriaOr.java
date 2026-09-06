@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -41,7 +41,9 @@ public class HAPDataTypeCriteriaOr extends HAPDataTypeCriteriaComplex{
 		out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.START_OR));
 		int i = 0;
 		for(HAPDataTypeCriteria childCriteria : this.getChildren()){
-			if(i!=0)   out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.COMMAR));
+			if(i!=0) {
+				out.append(HAPParserCriteriaImp.getInstance().getToken(HAPParserCriteriaImp.COMMAR));
+			}
 			out.append(HAPManagerSerialize.getInstance().toStringValue(childCriteria, HAPSerializationFormat.LITERATE));
 			i++;
 		}
@@ -50,11 +52,11 @@ public class HAPDataTypeCriteriaOr extends HAPDataTypeCriteriaComplex{
 	}
 
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper) {
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper) {
 		List<HAPDataTypeCriteria> elements = this.getChildren();
 		Set<HAPDataTypeCriteriaId> out = new HashSet<HAPDataTypeCriteriaId>();
 		for(int i=0; i<elements.size(); i++){
-			out.addAll(elements.get(i).getValidDataTypeCriteriaId(dataTypeHelper));
+			out.addAll(elements.get(i).getValidDataTypeCriteriaId(criteriaHelper));
 		}
 		return out;
 	}

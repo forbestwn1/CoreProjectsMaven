@@ -22,6 +22,7 @@ import com.nosliw.core.data.HAPDataTypeOperation;
 import com.nosliw.core.data.HAPDataWrapper;
 import com.nosliw.core.data.HAPOperationOutInfo;
 import com.nosliw.core.data.HAPOperationParmInfo;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
@@ -107,7 +108,8 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 			HAPBasicContainerVariable variablesContainer,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker context,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		//clear old matchers
 		this.resetMatchers();
 		
@@ -117,7 +119,7 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 			if(this.m_dataTypeId!=null) {
 				baseCriteria = new HAPDataTypeCriteriaId(this.m_dataTypeId, null);
 			}
-			this.m_base.getOperand().discover(variablesContainer, baseCriteria, context, dataTypeHelper);
+			this.m_base.getOperand().discover(variablesContainer, baseCriteria, context, dataTypeHelper, criteriaHelper);
 		}
 		
 		//define seperate one, do not work on original one
@@ -128,7 +130,7 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 			//if data type is not determined, then use trunk data type of base data type if it has any
 			HAPDataTypeCriteria baseDataTypeCriteria = this.m_base.getOperand().getOutputCriteria();
 			if(baseDataTypeCriteria!=null) {
-				dataTypeId = dataTypeHelper.getTrunkDataType(baseDataTypeCriteria);
+				dataTypeId = criteriaHelper.getTrunkDataType(baseDataTypeCriteria);
 			}
 		}
 
@@ -147,7 +149,7 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 					this.setBase(null);
 				}
 				
-				HAPMatchers matchers = parmOperandWrapper.getOperand().discover(variablesContainer, parmInfo.getCriteria(), context, dataTypeHelper);
+				HAPMatchers matchers = parmOperandWrapper.getOperand().discover(variablesContainer, parmInfo.getCriteria(), context, dataTypeHelper, criteriaHelper);
 				if(matchers!=null){
 					this.m_parmsMatchers.put(parmInfo.getName(), matchers);
 				}
@@ -164,20 +166,20 @@ public class HAPBasicOperandOperation extends HAPBasicOperand implements HAPOper
 					expressionParms.put(parmName, expressionParmData);
 				}
 				
-				dataTypeHelper.processExpressionCriteria(outputInfo.getCriteria(), expressionParms);
+				criteriaHelper.processExpressionCriteria(outputInfo.getCriteria(), expressionParms);
 				this.setOutputCriteria(outputInfo.getCriteria());
 			}
 			//check if output compatible with expect
-			if(dataTypeHelper.convertable(this.getOutputCriteria(), expectCriteria)==null){
+			if(criteriaHelper.convertable(this.getOutputCriteria(), expectCriteria)==null){
 				context.addMessage("Error");
 			}
-			return HAPUtilityCriteria.isMatchable(outputInfo.getCriteria(), expectCriteria, dataTypeHelper);
+			return HAPUtilityCriteria.isMatchable(outputInfo.getCriteria(), expectCriteria, criteriaHelper);
 		}
 		else{
 			//if we don't have operation data type 
 			for(String parm: this.m_parms.keySet()){
 				HAPBasicOperand parmDataType = this.m_parms.get(parm).getOperand();
-				parmDataType.discover(variablesContainer, null, context, dataTypeHelper);
+				parmDataType.discover(variablesContainer, null, context, dataTypeHelper, criteriaHelper);
 			}
 			this.setOutputCriteria(null);
 			return null;

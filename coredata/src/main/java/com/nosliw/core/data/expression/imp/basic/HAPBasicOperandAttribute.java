@@ -13,6 +13,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.expression.HAPOperand;
 import com.nosliw.core.data.expression.HAPOperandAttribute;
@@ -53,7 +54,8 @@ public class HAPBasicOperandAttribute extends HAPBasicOperand implements HAPOper
 			HAPBasicContainerVariable variablesContainer,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker processTracker,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		return null;
 	}
 	

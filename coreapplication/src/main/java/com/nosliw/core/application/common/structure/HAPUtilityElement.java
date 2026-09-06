@@ -8,7 +8,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.structure.reference.HAPPathElementMapping;
 import com.nosliw.core.application.common.structure.reference.HAPPathElementMappingConstantToVariable;
 import com.nosliw.core.application.common.structure.reference.HAPPathElementMappingVariableToVariable;
-import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 import com.nosliw.core.data.criteria.HAPInfoCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
@@ -60,7 +60,7 @@ public class HAPUtilityElement {
 	
 	//merge origin context def with child context def to expect context out
 	//also generate matchers from origin to expect
-	public static void mergeElement(HAPElementStructure fromDef1, HAPElementStructure toDef1, boolean modifyStructure, List<HAPPathElementMapping> mappingPaths, String path, HAPDataTypeHelper dataTypeHelper){
+	public static void mergeElement(HAPElementStructure fromDef1, HAPElementStructure toDef1, boolean modifyStructure, List<HAPPathElementMapping> mappingPaths, String path, HAPCriteriaHelper criteriaHelper){
 		if(path==null) {
 			path = "";
 		}
@@ -76,7 +76,7 @@ public class HAPUtilityElement {
 				HAPElementStructureLeafConstant dataFrom = (HAPElementStructureLeafConstant)fromDef.getSolidStructureElement();
 				HAPElementStructureLeafData dataTo = (HAPElementStructureLeafData)toDef;
 				//cal matchers
-				HAPMatchers matcher = HAPUtilityCriteria.mergeVariableInfo(HAPInfoCriteria.buildCriteriaInfo(new HAPDataTypeCriteriaId(dataFrom.getDataValue().getDataTypeId(), null)), dataTo.getCriteria(), dataTypeHelper); 
+				HAPMatchers matcher = HAPUtilityCriteria.mergeVariableInfo(HAPInfoCriteria.buildCriteriaInfo(new HAPDataTypeCriteriaId(dataFrom.getDataValue().getDataTypeId(), null)), dataTo.getCriteria(), criteriaHelper); 
 				mappingPaths.add(new HAPPathElementMappingConstantToVariable(dataFrom.getValue(), path, matcher));
 				break;
 			}
@@ -117,7 +117,7 @@ public class HAPUtilityElement {
 				HAPElementStructureLeafData dataFrom = (HAPElementStructureLeafData)fromDef.getSolidStructureElement();
 				HAPElementStructureLeafData dataTo = (HAPElementStructureLeafData)toDef;
 				//cal matchers
-				HAPMatchers matcher = HAPUtilityCriteria.mergeVariableInfo(HAPInfoCriteria.buildCriteriaInfo(dataFrom.getCriteria()), dataTo.getCriteria(), dataTypeHelper); 
+				HAPMatchers matcher = HAPUtilityCriteria.mergeVariableInfo(HAPInfoCriteria.buildCriteriaInfo(dataFrom.getCriteria()), dataTo.getCriteria(), criteriaHelper); 
 				mappingPaths.add(new HAPPathElementMappingVariableToVariable(path, matcher==null?new HAPMatchers():matcher));
 				break;
 			}

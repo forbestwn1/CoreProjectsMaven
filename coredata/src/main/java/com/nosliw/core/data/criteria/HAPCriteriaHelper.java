@@ -11,6 +11,19 @@ import com.nosliw.core.data.matcher.HAPMatchers;
 
 public interface HAPCriteriaHelper {
 
+	/**
+	 * Figure out data type criteria id (data type, sub data type) according to data
+	 */
+	HAPDataTypeCriteriaId getDataTypeCriteriaByData(HAPData data);
+	
+	/**
+	 * Build data type criteria based on a set of data type ids
+	 * @param dataTypeIds
+	 * @return
+	 */
+	HAPDataTypeCriteria buildDataTypeCriteria(Set<HAPDataTypeCriteriaId> dataTypeIds);
+
+	
 	
 	Set<HAPDataTypeCriteriaId> normalizeCriteria(Set<HAPDataTypeCriteriaId> dataTypeCriteriaIds);
 	
@@ -79,5 +92,21 @@ public interface HAPCriteriaHelper {
 	 * @return
 	 */
 	HAPMatcher convertableIdCriteria(HAPDataTypeCriteriaId sourceCriteria, HAPDataTypeCriteriaId targetCriteria);
+
+	/**
+	 * Find the trunk data type for criteria. Trunk data type is the highest parent data type that is shared by all data type under criteria
+	 * @param criteria
+	 * @return
+	 */
+	HAPDataTypeId getTrunkDataType(HAPDataTypeCriteria criteria);
 	
+	/**
+	 * Remove all the child data type so that the return data type can not convert to each other
+	 * @param dataTypeIds
+	 * @return
+	 */
+	Set<HAPDataTypeId> normalize(Set<HAPDataTypeId> dataTypeIds);
+
+	
+
 }

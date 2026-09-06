@@ -19,6 +19,7 @@ import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.common.withvariable.HAPPluginProcessorEntityWithVariable;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaAny;
 import com.nosliw.core.data.criteria.HAPInfoCriteria;
@@ -40,6 +41,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 
 	private HAPManagerResource m_resourceMan;
 	private HAPDataTypeHelper m_dataTypeHelper;
+	private HAPCriteriaHelper m_criteriaHelper;
 	
 	public HAPBasicPluginProcessorEntityWithVariableDataExpression() {
 	}
@@ -47,6 +49,12 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 	@Autowired
 	private void setDataTypeHelper(HAPDataTypeHelper dataTypeHelper) {
 		this.m_dataTypeHelper = dataTypeHelper;
+	}
+
+	
+	@Autowired
+	private void setCirteriaHelper(HAPCriteriaHelper criteriaHelper) {
+		this.m_criteriaHelper = criteriaHelper;
 	}
 
 	@Autowired
@@ -112,7 +120,6 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 				expectOutputs,
 				varInfoContainer,
 				matchers,
-				this.m_dataTypeHelper,
 				new HAPProcessTracker());
 		
 		Map<String, HAPMatchers> outMatchers = new LinkedHashMap<String, HAPMatchers>();
@@ -125,7 +132,6 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 			List<HAPDataTypeCriteria> expectOutputs,
 			HAPContainerVariableInfo inVariablesInfo, 
 			List<HAPMatchers> matchers,
-			HAPDataTypeHelper dataTypeHelper,
 			HAPProcessTracker processTracker) {
 		//do discovery on operand
 		HAPContainerVariableInfo varsInfo = inVariablesInfo.clone();
@@ -143,7 +149,7 @@ public class HAPBasicPluginProcessorEntityWithVariableDataExpression implements 
 					expectOutput = HAPDataTypeCriteriaAny.getCriteria(); 
 				}
 				
-				matchers.add(operands.get(i).discover(new HAPInnContainerVariable(varsInfo), expectOutput, processTracker, dataTypeHelper));
+				matchers.add(operands.get(i).discover(new HAPInnContainerVariable(varsInfo), expectOutput, processTracker, this.m_dataTypeHelper, this.m_criteriaHelper));
 			}
 		}while(!HAPUtilityBasic.isEqualMaps(varsInfo.getVariableCriteriaInfos(), oldVarsInfo.getVariableCriteriaInfos()) && processTracker.isSuccess());
 		return varsInfo;

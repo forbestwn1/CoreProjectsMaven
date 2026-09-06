@@ -16,6 +16,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.common.variable.HAPIdVariable;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.data.expression.HAPOperand;
@@ -86,17 +87,18 @@ public class HAPBasicOperandReference extends HAPBasicOperand implements HAPOper
 			HAPBasicContainerVariable variablesContainer,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker processTracker,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		this.m_matchers = new LinkedHashMap<String, HAPMatchers>();
 		
 		for(String name : this.m_variableMapping.keySet()) {
-			HAPMatchers matchers = this.m_variableMapping.get(name).getOperand().discover(variablesContainer, this.m_resolvedVariableCriteria.get(name), processTracker, dataTypeHelper);
+			HAPMatchers matchers = this.m_variableMapping.get(name).getOperand().discover(variablesContainer, this.m_resolvedVariableCriteria.get(name), processTracker, dataTypeHelper, criteriaHelper);
 			if(matchers!=null) {
 				this.m_matchers.put(name, matchers);
 			}
 		}
 		
-		return HAPUtilityCriteria.isMatchable(this.getOutputCriteria(), expectCriteria, dataTypeHelper);
+		return HAPUtilityCriteria.isMatchable(this.getOutputCriteria(), expectCriteria, criteriaHelper);
 	}
 
 	@Override

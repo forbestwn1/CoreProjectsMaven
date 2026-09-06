@@ -52,7 +52,7 @@ public class HAPDataTypeCriteriaId  extends HAPDataTypeCriteriaImp implements HA
 	}
 
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper){
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper){
 		Set<HAPDataTypeCriteriaId> out = new HashSet<HAPDataTypeCriteriaId>();
 		out.add(this);
 		return out;

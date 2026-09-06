@@ -8,6 +8,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.expression.HAPOperand;
 import com.nosliw.core.data.expression.definition.HAPDefinitionOperand;
@@ -49,7 +50,8 @@ public abstract class HAPManualOperand extends HAPSerializableImp implements HAP
 	public abstract HAPMatchers discover(HAPContainerVariableInfo variablesInfo,
 			HAPDataTypeCriteria expectCriteria,
 			HAPProcessTracker processTracker, 
-			HAPDataTypeHelper dataTypeHelper);
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper);
 
 
 	protected HAPManualWrapperOperand createOperandWrapper(HAPManualOperand operand){

@@ -10,6 +10,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.expression.HAPOperand;
 import com.nosliw.core.data.expression.HAPOperandAttribute;
@@ -46,7 +47,8 @@ public class HAPManualOperandAttribute extends HAPManualOperand implements HAPOp
 			HAPContainerVariableInfo variablesInfo,
 			HAPDataTypeCriteria expectCriteria, 
 			HAPProcessTracker processTracker,
-			HAPDataTypeHelper dataTypeHelper) {
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper) {
 		return null;
 	}
 	

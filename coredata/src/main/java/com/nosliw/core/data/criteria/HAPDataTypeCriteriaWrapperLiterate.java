@@ -3,9 +3,9 @@ package com.nosliw.core.data.criteria;
 import java.util.List;
 import java.util.Set;
 
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -71,8 +71,8 @@ public class HAPDataTypeCriteriaWrapperLiterate extends HAPSerializableImp imple
 	}
 
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPDataTypeHelper dataTypeHelper) {
-		return this.getSolidCriteria().getValidDataTypeCriteriaId(dataTypeHelper);
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper) {
+		return this.getSolidCriteria().getValidDataTypeCriteriaId(criteriaHelper, dataTypeHelper);
 	}
 
 	@Override
