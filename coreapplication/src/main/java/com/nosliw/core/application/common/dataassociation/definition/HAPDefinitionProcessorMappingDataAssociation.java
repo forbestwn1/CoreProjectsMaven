@@ -27,7 +27,7 @@ import com.nosliw.core.application.valueport.HAPReferenceRootElement;
 import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
 import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
 import com.nosliw.core.application.valueport.HAPUtilityValuePort;
-import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -40,7 +40,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 			Map<String, HAPPath> aliasMapping,
 			HAPBundleForBrick currentBundle, 
 			String rootBrickName,
-			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper,
 			HAPManagerResource resourceMan,
 			HAPRuntimeInfo runtimeInfo) 
 	{
@@ -59,7 +59,7 @@ public class HAPDefinitionProcessorMappingDataAssociation {
 			//process in reference (relative elements)
 			HAPElementStructure processedItem = processElementStructure(mappingItem.getDefinition(), new HAPConfigureProcessorRelative(), baseBlockPath, null, null, currentBundle, resourceMan, runtimeInfo);
 			
-			List<HAPTunnel> tunnels = HAPDefinitionUtilityMapping.buildRelativePathMapping(targetRootEleId, processedItem, currentBundle, rootBrickName, resourceMan, dataTypeHelper, runtimeInfo);
+			List<HAPTunnel> tunnels = HAPDefinitionUtilityMapping.buildRelativePathMapping(targetRootEleId, processedItem, currentBundle, rootBrickName, resourceMan, criteriaHelper, runtimeInfo);
 			for(HAPTunnel tunnel : tunnels) {
 				out.addTunnel(tunnel);
 			}

@@ -64,6 +64,22 @@ public class HAPDataAccessDataType extends HAPDataAccess{
 		this.saveToDB(dataType, this.getConnection());
 	}
 	
+	public List<HAPDataTypeOperationImp> getDataTypeOperations(HAPDataTypeId baseDataTypeId, HAPDataTypeId resultDataTypeId){
+		List<HAPDataTypeOperationImp> out = this.queryEntitysFromDB(HAPDataTypeOperationImp._VALUEINFO_NAME, "source=? AND target=?", new Object[]{baseDataTypeId.getFullName(), resultDataTypeId.getFullName()}, getConnection());
+		for(HAPDataTypeOperationImp dataTypeOp : out) {
+			List<HAPOperationVarInfoImp> parms = this.queryEntitysFromDB(HAPOperationVarInfoImp._VALUEINFO_NAME, "operationId=?", new Object[]{dataTypeOp.getOperationId()}, this.getConnection());
+			for(HAPOperationVarInfoImp parm : parms){
+				if(HAPConstantShared.DATAOPERATION_VAR_TYPE_IN.equals(parm.getType())){
+					dataTypeOp.addParmsInfo(parm);
+				}
+				else if(HAPConstantShared.DATAOPERATION_VAR_TYPE_OUT.equals(parm.getType())){
+					dataTypeOp.setOutputInfo(parm);
+				}
+			}
+		}
+		return out;
+	}
+	
 	public HAPDataTypeOperationImp getDataTypeOperation(HAPDataTypeId dataTypeId, String operationName){
 		HAPDataTypeOperationImp out = (HAPDataTypeOperationImp)this.queryEntityFromDB(HAPDataTypeOperationImp._VALUEINFO_NAME, "source=? AND name=?", new Object[]{dataTypeId.getFullName(), operationName}, this.getConnection());
 		if(out!=null) {

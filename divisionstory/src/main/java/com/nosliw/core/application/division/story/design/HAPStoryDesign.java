@@ -26,6 +26,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public static final String IDINDEX = "idIndex";
 
 	@HAPAttribute
+	public static final String OWNER = "owner";
+	
+	@HAPAttribute
 	public static final String BUILDERID = "builderId";
 	
 	@HAPAttribute
@@ -43,6 +46,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	private HAPStoryManagerChange m_changeMan;
 
 	private int m_index = 0;
+	
+	private String m_owner;
 	
 	private String m_builderId;
 	
@@ -70,6 +75,9 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	public HAPIdBrickType getRootBrickType() {    return this.m_rootBrickType;      }
 	public void setRootBrickType(HAPIdBrickType brickType) {      this.m_rootBrickType = brickType;       }
 	public HAPIdBrick getBrickId() {    return new HAPIdBrick(this.m_rootBrickType, HAPConstantShared.BRICK_DIVISION_STORY, this.getId());      }
+
+	public String getOwner() {      return this.m_owner;      }
+	public void setOwner(String owner) {      this.m_owner = owner;      }
 	
 	public String getBuilderId() {  return this.m_builderId;     }
 	public void setBuilderId(String builderId) {     this.m_builderId = builderId;     }
@@ -154,6 +162,7 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(ROOTBRICKTYPE, this.m_rootBrickType.toStringValue(HAPSerializationFormat.JSON));
+		jsonMap.put(OWNER, this.m_owner);
 		jsonMap.put(BUILDERID, this.m_builderId);
 		jsonMap.put(STORY, this.m_story.toStringValue(HAPSerializationFormat.JSON));
 		jsonMap.put(INITSTEP, this.m_initStep.toStringValue(HAPSerializationFormat.JSON));

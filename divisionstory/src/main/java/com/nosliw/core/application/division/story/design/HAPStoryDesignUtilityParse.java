@@ -26,6 +26,8 @@ public class HAPStoryDesignUtilityParse {
 			out.setRootBrickType(rootBrickType);
 		}
 
+		out.setOwner((String)designJsonObj.opt(HAPStoryDesign.OWNER));
+
 		out.setBuilderId(designJsonObj.getString(HAPStoryDesign.BUILDERID));
 
 		out.setStory(HAPStoryUtilityStoryParse.parseStory(designJsonObj.getJSONObject(HAPStoryDesign.STORY), entityParseService));

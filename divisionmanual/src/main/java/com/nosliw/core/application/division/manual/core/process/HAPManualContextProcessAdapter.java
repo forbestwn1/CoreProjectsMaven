@@ -6,6 +6,7 @@ import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlu
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -18,11 +19,12 @@ public class HAPManualContextProcessAdapter extends HAPManualContextProcess{
 			HAPPath baseBrickPath, 
 			HAPManualManagerBrick manualBrickMan, 
 			HAPManagerApplicationBrick brickMan,
-			HAPDataTypeHelper dataTypeHelper, 
+			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper,
 			HAPManagerResource resourceMan,
 			HAPManagerWithVariablePlugin withVariableMan,
 			HAPRuntimeInfo runtimeInfo) {
-		super(bundle, rootBrickName, manualBrickMan, brickMan, dataTypeHelper, resourceMan, withVariableMan, runtimeInfo);
+		super(bundle, rootBrickName, manualBrickMan, brickMan, dataTypeHelper, criteriaHelper, resourceMan, withVariableMan, runtimeInfo);
 		this.m_baseBrickPath = baseBrickPath;
 	}
 	

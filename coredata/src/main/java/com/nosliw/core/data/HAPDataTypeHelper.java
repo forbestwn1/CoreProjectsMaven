@@ -1,5 +1,6 @@
 package com.nosliw.core.data;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,6 +16,15 @@ public interface HAPDataTypeHelper {
 	 */
 	HAPDataTypeOperation getOperationInfoByName(HAPDataTypeId dataTypeInfo, String name);
 
+	
+	/**
+	 * 
+	 * @param baseDataTypeId
+	 * @param resultDataTypeId
+	 * @return
+	 */
+	List<HAPDataTypeOperation> getDataTypeOperations(HAPDataTypeId baseDataTypeId, HAPDataTypeId resultDataTypeId);
+	
 	
 	/**
 	 * List all data types between from and to

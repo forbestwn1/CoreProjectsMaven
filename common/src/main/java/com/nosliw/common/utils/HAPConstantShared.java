@@ -887,6 +887,7 @@ public class HAPConstantShared {
 
 
 
+		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_STRING = "string";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_ENTITYINFO = "entityInfo";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID = "dataSourceId";
 		public static final String STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO = "dataSourceInfo";
@@ -915,6 +916,8 @@ public class HAPConstantShared {
 		public static final String STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDINFO = "dataSourceResponseDataChildInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_ENTITYINFO = "entityInfo";
 		public static final String STORYDESIGN_QUESTION_TAG_DATAINFO = "dataInfo";
+		public static final String STORYDESIGN_QUESTION_TAG_DESIGNNAME = "designName";
+		public static final String STORYDESIGN_QUESTION_TAG_OWNER = "owner";
 
 
 

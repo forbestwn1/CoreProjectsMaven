@@ -99,6 +99,12 @@ public class HAPDataTypeHelperImp implements HAPDataTypeHelper{
 		return out;
 	}
 
+	@Override
+	public List<HAPDataTypeOperation> getDataTypeOperations(HAPDataTypeId baseDataTypeId, HAPDataTypeId resultDataTypeId){
+		return (List)this.m_dataAccess.getDataTypeOperations(baseDataTypeId, resultDataTypeId);
+	}
+
+	
 	private void discoverExpressionCriteria(HAPDataTypeCriteria criteria, Set<HAPDataTypeCriteriaExpression> expCriterias){
 		if(criteria.getType().equals(HAPConstantShared.DATATYPECRITERIA_TYPE_EXPRESSION)){
 			expCriterias.add((HAPDataTypeCriteriaExpression)criteria);

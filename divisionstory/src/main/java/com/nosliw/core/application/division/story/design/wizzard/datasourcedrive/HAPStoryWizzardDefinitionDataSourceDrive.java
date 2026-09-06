@@ -64,6 +64,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 	public static final String STEP_SELECTDATASOURCE = "selectDataSource"; 
 	public static final String STEP_CUSTOMIZEUI = "customizeUI"; 
+	public static final String STEP_EXTRAINFO = "extraInfo"; 
 	
 	private final static HAPStoryAlias ALIAS_ELEMENT_MODULE = new HAPStoryAlias(HAPStoryStory.ALIAS_ROOT, false);
 	private final static HAPStoryAlias ALIAS_ELEMENT_DATASOURCE = new HAPStoryAlias("dataSource", false);
@@ -104,8 +105,13 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		step2.setId(STEP_CUSTOMIZEUI);
 		step2.setDescription(STEP_CUSTOMIZEUI);
 
+		HAPStoryWizzardStepDefinition step3 = new HAPStoryWizzardStepDefinition();
+		step3.setId(STEP_EXTRAINFO);
+		step3.setDescription(STEP_EXTRAINFO);
+
 		this.m_stepDefinitions.add(step1);
 		this.m_stepDefinitions.add(step2);
+		this.m_stepDefinitions.add(step3);
 	}
 	
 	@Override
@@ -314,8 +320,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			moculeInitRunnable.addRunnable(presentPageRunableChangeNew.getRunnable().getId());
 			HAPStoryChangeItemRunnableNew moduleInitRunableChangeNew = changeSession.addChangeItemNew(moculeInitRunnable);
 
-			
-			
 			//build data source execute task
 			HAPStoryRunnableCommand dataSourceCommandRunnable = new HAPStoryRunnableCommand();
 			dataSourceCommandRunnable.setPathToCommandHost(new HAPStoryPath(dataSourceElementId, null));
@@ -339,8 +343,25 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataSourceCommandRunChangeNew.getRunnable().getId());
 			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), submitTaskContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("submitTask")));
 			
-			
 			changeSession.commit();
+			
+			
+	        //prepare next step + extra info
+			HAPStoryDesignMetadataStepWizard stepMetaData = new HAPStoryDesignMetadataStepWizard(this.getStepDefinition(STEP_EXTRAINFO));
+			stepMetaData.setQuestionair(HAPStoryWizzardDataSourceUtilityPrepareQuestionair.prepareExtraInforQuestionair());
+			this.newStep(design, stepMetaData);
+		}
+		else if(STEP_EXTRAINFO.equals(stepName)) {
+			HAPStoryWizzardQuestionairGroup questionair = (HAPStoryWizzardQuestionairGroup)stepData.getQuestionair();
+			
+			HAPStoryWizzardQuestionairItemDynamic designNameQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DESIGNNAME);
+			HAPStoryWizzardQuestionairItemDynamic ownerQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_OWNER);
+			
+			HAPStoryWizzardQuestionValueDataSourceString designNameStringValue = (HAPStoryWizzardQuestionValueDataSourceString)designNameQ.getValue();
+			HAPStoryWizzardQuestionValueDataSourceString ownerStringValue = (HAPStoryWizzardQuestionValueDataSourceString)ownerQ.getValue();
+			
+			design.setName(designNameStringValue.getStringValue());
+			design.setOwner(ownerStringValue.getStringValue());
 			
 			//end step
 			//conver to manual

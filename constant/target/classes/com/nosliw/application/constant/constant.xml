@@ -963,6 +963,7 @@
 
 
 			<definition type="space"/>
+			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_STRING" value="string"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_ENTITYINFO" value="entityInfo"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEID" value="dataSourceId"/>
 			<definition name="STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEINFO" value="dataSourceInfo"/>
@@ -996,7 +997,10 @@
 
 			<definition name="STORYDESIGN_QUESTION_TAG_ENTITYINFO" value="entityInfo"/>
 			<definition name="STORYDESIGN_QUESTION_TAG_DATAINFO" value="dataInfo"/>
-I
+
+			<definition name="STORYDESIGN_QUESTION_TAG_DESIGNNAME" value="designName"/>
+			<definition name="STORYDESIGN_QUESTION_TAG_OWNER" value="owner"/>
+
 			<definition type="space"/>
 			<definition name="BRICK" value="brick"/>
 			<definition name="REFERENCE" value="reference"/>

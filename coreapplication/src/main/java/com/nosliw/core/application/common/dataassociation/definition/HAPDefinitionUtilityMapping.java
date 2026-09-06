@@ -25,14 +25,14 @@ import com.nosliw.core.application.common.structure.reference.HAPPathElementMapp
 import com.nosliw.core.application.valueport.HAPIdRootElement;
 import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
 import com.nosliw.core.application.valueport.HAPUtilityBrickValuePort;
-import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPDefinitionUtilityMapping {
 
-	public static List<HAPTunnel> buildRelativePathMapping(HAPIdRootElement rootEleId, HAPElementStructure structureEle, HAPBundleForBrick bundle, String rootBrickName, HAPManagerResource resourceMan, HAPDataTypeHelper dataTypeHelper, HAPRuntimeInfo runtimeInfo){
+	public static List<HAPTunnel> buildRelativePathMapping(HAPIdRootElement rootEleId, HAPElementStructure structureEle, HAPBundleForBrick bundle, String rootBrickName, HAPManagerResource resourceMan, HAPCriteriaHelper criteriaHelper, HAPRuntimeInfo runtimeInfo){
 		
 		HAPIdValuePortInBundle toValuePortRef = rootEleId.getValuePortId();
 
@@ -56,7 +56,7 @@ public class HAPDefinitionUtilityMapping {
 			String fromItemPath = relativeEle.getResolveInfo().getResolvedElementPath().getFullName();
 			
 			List<HAPPathElementMapping> mappingPaths = new ArrayList<HAPPathElementMapping>();
-			HAPUtilityElement.mergeElement(relativeEle.getResolveInfo().getSolidElement(),  toElement, false, mappingPaths, null, dataTypeHelper);
+			HAPUtilityElement.mergeElement(relativeEle.getResolveInfo().getSolidElement(),  toElement, false, mappingPaths, null, criteriaHelper);
 			
 			for(HAPPathElementMapping mappingPath : mappingPaths) {
 				String fromItemFullPath = HAPUtilityNamingConversion.cascadePath(fromItemPath, mappingPath.getPath());
@@ -86,7 +86,7 @@ public class HAPDefinitionUtilityMapping {
 		else if(structureEle.getType().equals(HAPConstantShared.CONTEXT_ELEMENTTYPE_CONSTANT)) {
 			HAPElementStructureLeafConstant constantEle = (HAPElementStructureLeafConstant)structureEle;
 			List<HAPPathElementMapping> mappingPaths = new ArrayList<HAPPathElementMapping>();
-			HAPUtilityElement.mergeElement(structureEle,  toElement, false, mappingPaths, null, dataTypeHelper);
+			HAPUtilityElement.mergeElement(structureEle,  toElement, false, mappingPaths, null, criteriaHelper);
 			for(HAPPathElementMapping mappingPath : mappingPaths) {
 				//from constant
 				HAPPathElementMappingConstantToVariable mappingPath1 = (HAPPathElementMappingConstantToVariable)mappingPath;

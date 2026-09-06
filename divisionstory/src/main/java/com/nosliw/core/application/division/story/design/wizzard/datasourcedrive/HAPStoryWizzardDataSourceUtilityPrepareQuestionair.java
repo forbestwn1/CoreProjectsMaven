@@ -28,6 +28,20 @@ import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 
 public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 
+	public static HAPStoryWizzardQuestionair prepareExtraInforQuestionair() {
+		
+		//root group
+		HAPStoryWizzardQuestionairGroup out = new HAPStoryWizzardQuestionairGroup();
+
+		HAPStoryWizzardQuestionairItemDynamic appNameQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceString(), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DESIGNNAME);
+		out.addItem(appNameQ);
+
+		HAPStoryWizzardQuestionairItemDynamic ownerQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceString(), HAPConstantShared.STORYDESIGN_QUESTION_TAG_OWNER);
+		out.addItem(ownerQ);
+
+		return out;
+	}
+	
 	public static HAPStoryWizzardQuestionair prepareChooseUIQuestionair(HAPServiceProfile dataSrouceProfile, HAPServiceUITag uiTagService, HAPDataTypeHelper dataTypeHelper, HAPDataTypeManager dataTypeMan) {
 		HAPInteractiveTask dataSourceInterface = dataSrouceProfile.getInterface();
 

@@ -5,6 +5,7 @@ import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlu
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -20,6 +21,8 @@ public class HAPManualContextProcess {
 	
 	private HAPDataTypeHelper m_dataTypeHelper;
 	
+	private HAPCriteriaHelper m_criteriaHelper;
+	
 	private HAPManagerResource m_resourceMan;
 	
 	private HAPRuntimeInfo m_runtimeInfo;
@@ -32,6 +35,7 @@ public class HAPManualContextProcess {
 			HAPManualManagerBrick manualBrickMan, 
 			HAPManagerApplicationBrick brickMan, 
 			HAPDataTypeHelper dataTypeHelper, 
+			HAPCriteriaHelper criteriaHelper,
 			HAPManagerResource resourceMan,
 			HAPManagerWithVariablePlugin withVariableMan,
 			HAPRuntimeInfo runtimeInfo) {
@@ -40,6 +44,7 @@ public class HAPManualContextProcess {
 		this.m_manualBrickMan = manualBrickMan;
 		this.m_brickManager = brickMan;
 		this.m_dataTypeHelper = dataTypeHelper;
+		this.m_criteriaHelper = criteriaHelper;
 		this.m_resourceMan = resourceMan;
 		this.m_withVariableMan = withVariableMan;
 		this.m_runtimeInfo = runtimeInfo;
@@ -54,6 +59,8 @@ public class HAPManualContextProcess {
 	public HAPManagerApplicationBrick getBrickManager() {   return this.m_brickManager;     }
 	
 	public HAPDataTypeHelper getDataTypeHelper() {    return this.m_dataTypeHelper;      }
+	
+	public HAPCriteriaHelper getCriteraiHelper() {    return this.m_criteriaHelper;      }
 	
 	public HAPManagerResource getResourceManager() {    return this.m_resourceMan;    }
 	

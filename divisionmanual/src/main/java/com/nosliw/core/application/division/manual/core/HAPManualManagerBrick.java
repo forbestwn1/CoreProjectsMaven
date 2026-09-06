@@ -33,6 +33,7 @@ import com.nosliw.core.application.entity.brick.HAPPluginDivision;
 import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -50,6 +51,8 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	private HAPManagerApplicationBrick m_brickManager;
 	
 	private HAPDataTypeHelper m_dataTypeHelper;
+	
+	private HAPCriteriaHelper m_criteriaHelper;
 	
 	private HAPManagerResource m_resourceMan;
 	
@@ -82,6 +85,9 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	@Autowired
 	private void setDataTypeHelper(HAPDataTypeHelper dataTypeHelper) {   this.m_dataTypeHelper = dataTypeHelper;    }
+	
+	@Autowired
+	private void setCriteriaHelper(HAPCriteriaHelper criteriaHelper) {   this.m_criteriaHelper = criteriaHelper;    }
 	
 	@Autowired
 	private void setResourceManager(HAPManagerResource resourceMan) {    this.m_resourceMan = resourceMan;      }
@@ -136,7 +142,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	}
 	
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
-		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService, this.m_withVariableMan);
+		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, this.m_criteriaHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService, this.m_withVariableMan);
 	}
 	
 	@Autowired

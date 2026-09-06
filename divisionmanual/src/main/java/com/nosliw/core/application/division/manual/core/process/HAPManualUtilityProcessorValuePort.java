@@ -291,7 +291,7 @@ public class HAPManualUtilityProcessorValuePort {
 				for(String valueStructureId : valueContextExe.getValueStructureIds()) {
 					List<HAPServiceData> errors = new ArrayList<HAPServiceData>();
 					Set<HAPIdValuePortInBundle> dependency = new HashSet<HAPIdValuePortInBundle>();
-					HAPUtilityProcessRelativeElementInBundle.processRelativeInStructure(valueStructureDomain.getStructureDefinitionByRuntimeId(valueStructureId), null, dependency, errors, bundle, processContext.getResourceManager(), processContext.getDataTypeHelper(), processContext.getRuntimeInfo());
+					HAPUtilityProcessRelativeElementInBundle.processRelativeInStructure(valueStructureDomain.getStructureDefinitionByRuntimeId(valueStructureId), null, dependency, errors, bundle, processContext.getResourceManager(), processContext.getCriteraiHelper(), processContext.getRuntimeInfo());
 				}
 				
 				return true;
