@@ -1,0 +1,28 @@
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"CommunityCenter": {
+					"dataTypeId": "test.enter;1.0.0",
+					"value": {
+						"dataTypeId": "test.entity;1.0.0",
+						"value": { "id" : "002", "name" : "Maple Ridge" }
+					}
+				},
+				"Program": {
+					"dataTypeId": "test.entity;1.0.0",
+					"value": {	"id" : "002",	"name" : "Leisure Swim"	}
+				},
+    			"Date": {
+	    			"dataTypeId": "test.date;1.0.0",
+		    		"value": {"year" : 2025, "month" : 9, "date" : 15 }
+			    },
+    			"FromTime": {
+	    			"dataTypeId": "test.date;1.0.0",
+		    		"value": {	"hour" : 10, "minute" : 0 }
+			    },
+     			"ToTime": {
+ 	    			"dataTypeId": "test.date;1.0.0",
+		    		"value": {	"hour" : 11,  	"minute" : 30  }
+			     }
+			}
+		}

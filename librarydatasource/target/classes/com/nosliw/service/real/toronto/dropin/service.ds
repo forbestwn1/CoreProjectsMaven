@@ -16,7 +16,7 @@
                    				"name" : "Community Location",
 	                            "status": "disabled1",
 					            "ruleType" : "enum",
-					            "enumCode" : "toronto.community"
+					            "enumCode" : "toronto_community"
 					        }
 					    ],
 					}
@@ -31,18 +31,14 @@
                				"name" : "Community Location",
                             "status": "disabled1",
 				            "ruleType" : "enum",
-				            "enumCode" : "toronto.community"
+				            "enumCode" : "toronto.dropinprogram"
 				        }
 				    ],
 				},
 				{
 					"name" : "fromDate",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0",
-						"initData" : {
-							"dataTypeId": "test.date;1.0.0",
-							"value": "{today}"
-						}
+						"criteria" : "test.date;1.0.0"
 					}
 				},
 				{
@@ -52,8 +48,7 @@
 						"initData" : {
 							"dataTypeId": "test.time;1.0.0",
 							"value": {
-							    hour: 6,
-							    minute : 0
+							    hour: 6
 							}
 						}
 					}
@@ -61,11 +56,7 @@
 				{
 					"name" : "toDate",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0",
-						"initData" : {
-							"dataTypeId": "test.date;1.0.0",
-							"value": "{today}.after(7)"
-						}
+						"criteria" : "test.date;1.0.0"
 					}
 				},
 				{
@@ -86,9 +77,9 @@
 				"success": {
 					"output": [
 						{
-							"name" : "Drop=in Programs",
+							"name" : "output",
   							"dataDefinition" : {
-    							"criteria" : "test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,Time:test.entity;1.0.0,Url:test.url;1.0.0||%%"
+    							"criteria" : "test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,fromTime:test.time;1.0.0,toTime:test.time;1.0.0,Url:test.url;1.0.0||%%"
     						}
 						}
 					]
@@ -97,6 +88,6 @@
 		}
 	},
 	"runtime": {
-	    "implementation" : "com.nosliw.service.test.map.HAPServiceImp",
+	    "implementation" : "com.nosliw.service.real.toronto.dropin.HAPServiceImp",
 	}
 }]

@@ -18,7 +18,7 @@ public class HAPManagerCodeTable {
 	public HAPCodeTable getCodeTable(HAPCodeTableId codeId){
 		//read content
 		//parse content
-		Path codeTablePath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_codeTableConfigure.getDataPath()), codeId.getId()+".res");
+		Path codeTablePath = HAPUtilityFileNio.buildPath(HAPUtilityFileNio.buildPath(this.m_codeTableConfigure.getDataPath()), codeId.getId()+".json");
 		return parseCodeTable(new JSONObject(HAPUtilityFileNio.readFile(codeTablePath)));
 	}
 	
