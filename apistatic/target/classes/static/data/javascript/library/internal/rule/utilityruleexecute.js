@@ -39,6 +39,27 @@ var node_createRuleValidationItem = function(ruleDef, data){
  	
 var node_ruleExecuteUtility = function(){
 
+	var loc_expandRuleValiationsForMultiple = function(ruleValidationItems){
+		var out = [];
+		
+		_.each(ruleValidationItems, function(ruleValidationItem){
+			if(ruleValidationItem.data.isMultipleValue==true){
+				var dataWithMultipleValue = ruleValidationItem.data;
+				_.each(dataWithMultipleValue.value, function(value){
+					out.push(new node_createRuleValidationItem(ruleValidationItem.ruleDef, {
+						"dataTypeId" : dataWithMultipleValue.dataTypeId,
+						"value" : value
+					}));
+				});
+			}
+			else{
+				out.push(ruleValidationItem);
+			}
+		});
+		
+		return out;
+	};
+	
 	var loc_getCollectRuleInfoRequest = function(variable, operationService, allRuleInfo, handlers, request){
 
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
@@ -211,6 +232,7 @@ var node_ruleExecuteUtility = function(){
 	var loc_executeRuleValidationsRequest = function(ruleValidationItems, bundle, handlers, request){
    		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		var ruleValidationResults = [];
+		ruleValidationItems = loc_expandRuleValiationsForMultiple(ruleValidationItems);
 		_.each(ruleValidationItems, function(ruleValidationItem, i){
 			out.addRequest(loc_executeRuleValidationRequest(ruleValidationItem, bundle, {
 				success : function(request, ruleValidationResult){
