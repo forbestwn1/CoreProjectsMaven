@@ -10,12 +10,23 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import com.google.common.collect.Sets;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
+import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImp;
+import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPUtilityUIResourceParser {
 
+	public static final Set<String> RESERVEDTAG = Sets.newHashSet(
+			HAPManualDefinitionPluginParserBrickImp.METAINFO, 
+			HAPManualDefinitionAttributeInBrick.ADAPTER, 
+			HAPWithValueContext.VALUECONTEXT,
+			HAPManualDefinitionWithBrickTasks.TASK);
+	
 	public static final String CUSTOMTAG_PREFIX = "nosliw-";
 	
 	/*
@@ -102,14 +113,16 @@ public class HAPUtilityUIResourceParser {
 	 * collect all text nodes under element
 	 */
 	public static void collectTextNodes(Element ele, List<TextNode> outputTextNodes){
-		List<TextNode> textNodes = ele.textNodes();
-		for(TextNode textNode : textNodes){
-			outputTextNodes.add(textNode);
-		}
+		if(!RESERVEDTAG.contains(ele.tagName())) {
+			List<TextNode> textNodes = ele.textNodes();
+			for(TextNode textNode : textNodes){
+				outputTextNodes.add(textNode);
+			}
 
-		Elements eles = ele.children();
-		for(Element e : eles){
-			collectTextNodes(e, outputTextNodes);
+			Elements eles = ele.children();
+			for(Element e : eles){
+				collectTextNodes(e, outputTextNodes);
+			}
 		}
 	}
 	
