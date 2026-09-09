@@ -122,6 +122,28 @@ public class HAPUtilityUIResourceParser {
 			getAllChildTags(tag, tags);
 		}
 	}
+
+	public static List<Element> getDescentElementsByTag(Element parent, String tagName){
+		List<Element> out = new ArrayList<Element>();
+		tagName = tagName.toLowerCase();
+		getDescentElementsByTag(parent, tagName, out);
+		return out;
+	}
+
+	private static void getDescentElementsByTag(Element parent, String tagName, List<Element> output){
+		Elements childEles = parent.children(); 
+		for(int i=0; i<childEles.size(); i++){
+			Element childEle = childEles.get(i);
+			String childTagName = childEle.tag().getName();
+			if(tagName.equals(childTagName)){
+				output.add(childEle);
+			}
+			else {
+				getDescentElementsByTag(childEle, tagName, output);
+			}
+		}
+	}
+
 	
 	public static List<Element> getChildElementsByTag(Element parent, String tagName){
 		tagName = tagName.toLowerCase();

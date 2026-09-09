@@ -46,7 +46,7 @@ import com.nosliw.core.xxx.application1.HAPWithValueContext;
 public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinitionPluginParserBrickImp{
 
     private HAPServiceParseEntity m_entityParseService;
-	
+    
 	public HAPManualPluginParserBlockComplexUIContent(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPServiceParseEntity entityParseService) {
 		super(HAPEnumBrickType.UICONTENT_100, HAPManualDefinitionBlockComplexUIContent.class, manualDivisionEntityMan, brickMan);
 		this.m_entityParseService = entityParseService;
@@ -57,14 +57,20 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		HAPManualDefinitionBlockComplexUIContent uiContent = (HAPManualDefinitionBlockComplexUIContent)brickManualDef;
 		
 		Element element = (Element)obj;
+
+		buildUIId(element, uiContent, parseContext);
+		
+		parseCustomTag(element, uiContent, parseContext);
+		
+		parseNormalTag(element, uiContent, parseContext);
+		
+//		parseDescendantTags(element, uiContent, parseContext);
 		
 		//parse value context
 		parseValueContext(element, uiContent, parseContext, this.m_entityParseService);
 
 		//parse tasks
 		parseTasks(element, uiContent, parseContext, this.m_entityParseService);
-		
-		parseDescendantTags(element, uiContent, parseContext);
 		
 		//parse script expression in content
 		parseChildScriptExpressionInContent(element, uiContent, parseContext);
@@ -73,6 +79,58 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		HAPUtilityUIResourceParser.addSpanToText(element);
 		uiContent.setHtml(element.html());
 	}
+
+	private void buildUIId(Element parent, HAPManualDefinitionBlockComplexUIContent uiContent, HAPManualDefinitionContextParse parserContext){
+		Elements eles = parent.children();
+		for(Element ele : eles){
+			if(HAPUtilityBasic.isStringEmpty(HAPUtilityUIResourceParser.getUIIdInElement(ele))){
+				//if tag have no ui id, then create ui id for it
+				String id = uiContent.generateId();
+				ele.attr(HAPConstantShared.UIRESOURCE_ATTRIBUTE_UIID, id);
+			}
+			
+			if(HAPUtilityUIResourceParser.isCustomTag(ele)==null) {
+				buildUIId(ele, uiContent, parserContext);
+			}
+		}
+	}
+
+	private void parseCustomTag(Element parent, HAPManualDefinitionBlockComplexUIContent uiContent, HAPManualDefinitionContextParse parserContext){
+		List<Element> removes = new ArrayList<Element>();
+		Elements eles = parent.children();
+		for(Element ele : eles){
+			String uiId = HAPUtilityUIResourceParser.getUIIdInElement(ele);
+			if(HAPUtilityUIResourceParser.isCustomTag(ele)!=null) {
+//				parseKeyAttributeOnTag(ele, uiContentId, true, parserContext);
+				parseScriptExpressionInTagAttribute(ele, uiContent, true, parserContext);
+				
+				HAPManualDefinitionBlockComplexUICustomerTag uiCustomerTag = (HAPManualDefinitionBlockComplexUICustomerTag)HAPManualDefinitionUtilityParserBrick.parseBrickDefinition(ele, HAPEnumBrickType.UICUSTOMERTAG_100, HAPSerializationFormat.HTML, parserContext);
+				uiCustomerTag.setUIId(uiId);
+				uiContent.addCustomerTag(uiCustomerTag);
+				removes.add(ele);
+			}
+			else {
+				parseCustomTag(ele, uiContent, parserContext);
+			}
+		}
+	}
+
+	private void parseNormalTag(Element parent, HAPManualDefinitionBlockComplexUIContent uiContent, HAPManualDefinitionContextParse parserContext){
+		Elements eles = parent.children();
+		for(Element ele : eles){
+			if(HAPUtilityUIResourceParser.isCustomTag(ele)==null) {
+				//process regular tag
+				parseChildScriptExpressionInContent(ele, uiContent, parserContext);
+				//process key attribute
+				parseKeyAttributeOnTag(ele, uiContent, false, parserContext);
+				//process elements's attribute that have expression value 
+				parseScriptExpressionInTagAttribute(ele, uiContent, false, parserContext);
+				//process all descendant tags under this elment
+				parseNormalTag(ele, uiContent, parserContext);
+			}
+		}
+	}
+	
 	
 	/*
 	 * process all the descendant tags under element
@@ -257,7 +315,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 	}
 	
 	private void parseValueContext(Element ele, HAPManualDefinitionBrick brickManualDef, HAPManualDefinitionContextParse parseContext, HAPServiceParseEntity entityParseService) {
-		List<Element> valueContextEles = HAPUtilityUIResourceParser.getChildElementsByTag(ele, HAPWithValueContext.VALUECONTEXT);
+		List<Element> valueContextEles = HAPUtilityUIResourceParser.getDescentElementsByTag(ele, HAPWithValueContext.VALUECONTEXT);
 		for(Element valueContextEle : valueContextEles){
 			HAPManualParserValueContext.parseValueContextContentJson(brickManualDef.getValueContextBrick(), new JSONObject(Parser.unescapeEntities(valueContextEle.html(), false)), parseContext, entityParseService);
 			break;
@@ -271,7 +329,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		HAPManualDefinitionBrickContainer taskContainer = (HAPManualDefinitionBrickContainer)parseContext.getManualBrickManager().newBrickDefinition(HAPEnumBrickType.CONTAINER_100);
 		brickManualDef.setAttributeValueWithBrick(HAPManualDefinitionWithBrickTasks.TASK, taskContainer);
 		
-		List<Element> tasksEles = HAPUtilityUIResourceParser.getChildElementsByTag(ele, HAPManualDefinitionWithBrickTasks.TASK);
+		List<Element> tasksEles = HAPUtilityUIResourceParser.getDescentElementsByTag(ele, HAPManualDefinitionWithBrickTasks.TASK);
 		for(Element valueContextEle : tasksEles){
 			JSONArray taskArrayJson = new JSONArray(Parser.unescapeEntities(valueContextEle.html(), false));
 			for(int i=0; i<taskArrayJson.length(); i++) {
