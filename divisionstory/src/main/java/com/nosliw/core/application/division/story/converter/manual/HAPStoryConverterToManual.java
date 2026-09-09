@@ -62,15 +62,17 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRu
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
+import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.valueport.HAPIdValuePort;
 import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
 import com.nosliw.core.data.HAPData;
 
 public class HAPStoryConverterToManual {
 
-	public static HAPManualContentProviderText convert(HAPStoryStory story) {
+	public static HAPManualContentProviderText convert(HAPStoryDesign design) {
 		HAPManualContentProviderText out = new HAPManualContentProviderText();
 		
+		HAPStoryStory story = design.getStory();
 		//get module element (root)
 		HAPStoryElementEntityModule moduleElement = (HAPStoryElementEntityModule)story.getElement(new HAPStoryAlias(HAPStoryStory.ALIAS_ROOT));
 		
@@ -82,8 +84,8 @@ public class HAPStoryConverterToManual {
 		List<HAPStoryContainerChildrenElementsWrapper> pagesChildren = moduleElement.getChildCollection(HAPStoryElementEntityModule.CHILD_PAGE);
 		for(HAPStoryContainerChildrenElementsWrapper pageChild : pagesChildren) {
 			HAPStoryElementUIPage pageElement = (HAPStoryElementUIPage)story.getElement(pageChild.getChildElement().getElementId());
-			HAPIdBrick pageBrickId = new HAPIdBrick( HAPEnumBrickType.UIPAGE_100, HAPConstantShared.BRICK_DIVISION_MANUAL, pageElement.getEntityInfo().getName());
-			out.addLocalBrickContent(pageBrickId, new HAPManualInfoContent(convertPage(pageElement, story) , HAPSerializationFormat.HTML));
+			HAPIdBrick pageBrickId = new HAPIdBrick(HAPEnumBrickType.UIPAGE_100, HAPConstantShared.BRICK_DIVISION_MANUAL, pageElement.getEntityInfo().getName());
+			out.addLocalBrickContent(pageBrickId, new HAPManualInfoContent(convertPage(pageElement, design) , HAPSerializationFormat.HTML));
 			
 			pageElementList.add(HAPStoryUtilityConverter.convertToBrickWrapper(pageElement.getElementId(), pageElement.getEntityInfo(), pageBrickId));
 		}
@@ -255,11 +257,13 @@ public class HAPStoryConverterToManual {
 	
 	
 	
-	private static String convertPage(HAPStoryElementUIPage pageElement, HAPStoryStory story) {
+	private static String convertPage(HAPStoryElementUIPage pageElement, HAPStoryDesign design) {
+		HAPStoryStory story = design.getStory();
 		HAPStoryElementUIWrapperContent pageContentWrapperElement = (HAPStoryElementUIWrapperContent)story.getElement(pageElement.getChildElement(HAPStoryElementUIPage.CHILD_CONTENTWRAPPER).getElementId());
 		
 		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_page.temp"))
 				.setParm("html", convertUIContentWrapper(pageContentWrapperElement, story))
+				.setParm("AppName", design.getName())
 	    		.getContent();
 	}
 	

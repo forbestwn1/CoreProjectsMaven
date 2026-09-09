@@ -50,7 +50,7 @@ public class HAPStoryService{
 	public HAPManualContentProviderText convertDesignToManual(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPStoryDesign design = m_designManager.getDesign(brickId);
 		//convert
-		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
+		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design);
 		//save bundle content
 		Path manualFolder = HAPUtilityLocation.getManualFolder(this.m_storyDesignMan.getStoryStorageRootPath(), brickId);
 		HAPManualUtilityExporterContentProvider.export(contentProvider, manualFolder);
@@ -59,7 +59,7 @@ public class HAPStoryService{
 
 	public HAPManualContentProviderText convertDesignToManual(HAPStoryDesign design, HAPRuntimeInfo runtimeInfo) {
 		//convert
-		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design.getStory());
+		HAPManualContentProviderText contentProvider = HAPStoryConverterToManual.convert(design);
 		//save bundle content
 		Path manualFolder = HAPUtilityLocation.getManualFolder(this.m_storyDesignMan.getStoryStorageRootPath(), design.getBrickId());
 		HAPManualUtilityExporterContentProvider.export(contentProvider, manualFolder);

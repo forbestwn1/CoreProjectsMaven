@@ -44,7 +44,7 @@ var node_createUICustomerTagTestDate = function(envObj){
 			loc_dataView = $('<input type="date"></input>');
 
 			loc_dataView.bind('change', function(){
-				var date = new Date(loc_dataView.val());
+				var date = new Date(loc_dataView.val()+"T00:00:00");
 				var currentData = {
 					dataTypeId: "test.date;1.0.0",
 					value: {
