@@ -60,7 +60,7 @@ var node_ruleExecuteUtility = function(){
 		return out;
 	};
 	
-	var loc_getCollectRuleInfoRequest = function(variable, operationService, allRuleInfo, handlers, request){
+	var loc_getCollectRuleInfoRequest = function(variable, operationService, allRuleInfo, excludeRuleTypes, handlers, request){
 
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 
@@ -73,7 +73,12 @@ var node_ruleExecuteUtility = function(){
    			_.each(dataRuleDefs, function(dataRuleDef, i){
         		var opService = operationService.clone();
 				var rulePath = dataRuleDef[node_COMMONATRIBUTECONSTANT.DEFINITIONDATARULE_PATH];
-					
+				var ruleType = dataRuleDef[node_COMMONATRIBUTECONSTANT.DEFINITIONDATARULE_DATARULE][node_COMMONATRIBUTECONSTANT.DATARULE_RULETYPE];
+				
+				if(excludeRuleTypes!=undefined&&excludeRuleTypes.includes(ruleType)){
+					return;
+				}
+				
 				var opPath = opService.parms.path;
 				var opValue = opService.parms.value;
 					
@@ -135,13 +140,13 @@ var node_ruleExecuteUtility = function(){
                     							return childVarInfo.variable.prv_valueAdapter.getInValueRequest(childVariableData, {
 	    			                				success: function(request, value){
 														opService.parms.value = value;
-		    											return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo);
+		    											return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo, excludeRuleTypes);
                 								    }
 			            				        });
 											}
 											else{
 												opService.parms.value = childVariableData;
-    											return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo);
+    											return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo, excludeRuleTypes);
 											}
 										}
 									});
@@ -155,7 +160,7 @@ var node_ruleExecuteUtility = function(){
     					out.addRequest(childVarInfo.variable.prv_valueAdapter.getInValueRequest(opService.parms.value, {
 	           				success: function(request, value){
 								opService.parms.value = value;
-								return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo);
+								return loc_getCollectRuleInfoRequest(childVarInfo.variable, opService, allRuleInfo, excludeRuleTypes);
     					    }
 				        }));
 					}
@@ -296,7 +301,7 @@ var node_ruleExecuteUtility = function(){
 	var loc_out = {
 
 		getExecuteRuleValidationForVariableOperationRequest : function(varOperation, bundleCore, handlers, request){
-	        return loc_out.getExecuteRuleValidationRequest(varOperation.target, varOperation.operationService, bundleCore, handlers, request);		
+	        return loc_out.getExecuteRuleValidationRequest(varOperation.target, varOperation.operationService, bundleCore, varOperation.configure, handlers, request);		
 		},
 
 		executeExecuteRuleValidationForVariableOperationRequest : function(varOperation, bundleCore, handlers, request){
@@ -304,12 +309,12 @@ var node_ruleExecuteUtility = function(){
 			node_requestServiceProcessor.processRequest(requestInfo);
 		},
 
-		getExecuteRuleValidationRequest : function(variable, operationService, bundleCore, handlers, request){
+		getExecuteRuleValidationRequest : function(variable, operationService, bundleCore, configure, handlers, request){
     		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
     		out.addRequest(loc_convertBaseOperationServiceRequest(node_variableUtility.getVariable(variable), operationService, {
 				success : function(request, baseOpInfo){
 					var allRuleInfo = [];
-					return loc_getCollectRuleInfoRequest(baseOpInfo.rootVariable, baseOpInfo.operationService, allRuleInfo, {
+					return loc_getCollectRuleInfoRequest(baseOpInfo.rootVariable, baseOpInfo.operationService, allRuleInfo, configure==undefined?undefined:configure.excludeRuleTypes, {
 						success : function(request){
 //							console.log(JSON.stringify(allRuleInfo));
 							
@@ -348,8 +353,8 @@ var node_ruleExecuteUtility = function(){
     		return out;
 		},
 		
-		executeExecuteRuleValidationRequest : function(variable, operationService, bundleCore, handlers, request){
-			var requestInfo = this.getExecuteRuleValidationRequest(variable, operationService, bundleCore, handlers, request);
+		executeExecuteRuleValidationRequest : function(variable, operationService, bundleCore, configure, handlers, request){
+			var requestInfo = this.getExecuteRuleValidationRequest(variable, operationService, bundleCore, configure, handlers, request);
 			node_requestServiceProcessor.processRequest(requestInfo);
 		},
 	};

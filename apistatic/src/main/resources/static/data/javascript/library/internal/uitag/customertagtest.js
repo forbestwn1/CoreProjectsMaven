@@ -197,7 +197,7 @@ var node_createUICustomerTagTest = function(envObj){
     			
 				loc_envObj.executeBatchDataOperationRequest([
 					loc_envObj.getDataOperationSet(loc_inputVariableInfos[varName].variable, "", currentData)
-				], {
+				], undefined, {
 					success : function(requet){
 						loc_envObj.trigueEvent(node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE);
 					},

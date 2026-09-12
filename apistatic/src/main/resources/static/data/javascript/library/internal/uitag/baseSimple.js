@@ -72,7 +72,6 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		getDataEnumRequest : function(handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			if(loc_enumDatas==null){
-				
 				out.addRequest(node_enumUtility.getEnumDataSetFromEnumRuleRequest(loc_isDataEnum, {
 					success : function(request, dataSet){
 						loc_enumDatas = dataSet;
@@ -89,8 +88,16 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		},
 		
 		onDataChange : function(data, reqeust){
+			var configure;
+			if(loc_enumDatas!=undefined){
+				configure = {
+					excludeRuleTypes : []
+				};
+				configure.excludeRuleTypes.push(node_COMMONCONSTANT.DATARULE_TYPE_ENUM);
+			}
+			
 			loc_envObj.executeBatchDataOperationRequest([
-				loc_envObj.getDataOperationSet(loc_dataVariable, "", data)
+				loc_envObj.getDataOperationSet(loc_dataVariable, "", data, configure)
 			], {
 				success : function(requet){
 					loc_currentData = data;

@@ -22,6 +22,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
         }
     }, []);
 
+
     var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
     var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 

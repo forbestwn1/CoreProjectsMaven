@@ -84,9 +84,10 @@ var node_createBatchValueInVarOperationRequest = function(valueContext, handlers
 //operate on targe
 //   target : variable, wrapper, context variable
 //   operationService : service for operation
-var node_ValueInVarOperation = function(targetInfo, operationService){
+var node_ValueInVarOperation = function(targetInfo, operationService, configure){
 	this.target = targetInfo;
 	this.operationService = operationService;
+	this.configure = configure;
 };
 
 

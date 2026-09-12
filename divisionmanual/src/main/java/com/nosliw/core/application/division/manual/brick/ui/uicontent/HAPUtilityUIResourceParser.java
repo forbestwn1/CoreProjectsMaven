@@ -147,12 +147,14 @@ public class HAPUtilityUIResourceParser {
 		Elements childEles = parent.children(); 
 		for(int i=0; i<childEles.size(); i++){
 			Element childEle = childEles.get(i);
-			String childTagName = childEle.tag().getName();
-			if(tagName.equals(childTagName)){
-				output.add(childEle);
-			}
-			else {
-				getDescentElementsByTag(childEle, tagName, output);
+			if(isCustomTag(childEle)==null) {
+				String childTagName = childEle.tag().getName();
+				if(tagName.equals(childTagName)){
+					output.add(childEle);
+				}
+				else {
+					getDescentElementsByTag(childEle, tagName, output);
+				}
 			}
 		}
 	}

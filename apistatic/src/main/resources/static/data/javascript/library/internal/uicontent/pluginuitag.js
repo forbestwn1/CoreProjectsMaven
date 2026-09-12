@@ -187,10 +187,10 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 			out.addRequest(validationsRequest);
 			return out;
 		},
-		executeBatchDataOperationRequest : function(operations, handlers, request){		this.processRequest(this.getBatchDataOperationRequest(operations, handlers, request));		},
+		executeBatchDataOperationRequest : function(operations, configure, handlers, request){		this.processRequest(this.getBatchDataOperationRequest(operations, configure, handlers, request));		},
 		
-		getDataOperationSet : function(target, path, value){  
-			return new node_ValueInVarOperation(target, node_valueInVarOperationServiceUtility.createSetOperationService(path, value)); 
+		getDataOperationSet : function(target, path, value, configure){  
+			return new node_ValueInVarOperation(target, node_valueInVarOperationServiceUtility.createSetOperationService(path, value), configure); 
 		},
 
 		getDataOperationGet : function(target, path){  

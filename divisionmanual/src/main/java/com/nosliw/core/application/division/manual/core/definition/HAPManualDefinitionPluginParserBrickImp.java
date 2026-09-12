@@ -218,10 +218,6 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 	protected void parseBrickAttributeHtml(HAPManualDefinitionBrick parentBrick, Element htmlEle, String attributeName, HAPIdBrickType entityTypeIfNotProvided, HAPIdBrickType adapterTypeId, HAPManualDefinitionContextParse parseContext) {
 		HAPManualDefinitionAttributeInBrick attribute = new HAPManualDefinitionAttributeInBrick();
 		
-		//parse brick
-		HAPManualDefinitionBrick brickDef = HAPManualDefinitionUtilityParserBrick.parseBrickDefinition(htmlEle, entityTypeIfNotProvided, HAPSerializationFormat.HTML, parseContext);
-		attribute.setValueWrapper(new HAPManualDefinitionWrapperValueBrick(brickDef));
-
 		//parse meta info
 		List<Element> metaInfoEles = HAPUtilityUIResourceParser.getDescentElementsByTag(htmlEle, HAPManualDefinitionPluginParserBrickImp.METAINFO);
 		for(Element metaInfoEle : metaInfoEles){
@@ -245,8 +241,16 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 			adapterEle.remove();
 		}
 
+		//parse brick
+		HAPManualDefinitionBrick brickDef = HAPManualDefinitionUtilityParserBrick.parseBrickDefinition(htmlEle, entityTypeIfNotProvided, HAPSerializationFormat.HTML, parseContext);
+		attribute.setValueWrapper(new HAPManualDefinitionWrapperValueBrick(brickDef));
+
 		attribute.setName(attributeName);
 		parentBrick.setAttribute(attribute);
+	}
+	
+	protected void parseMetaInfoHtml() {
+		
 	}
 	
 	protected void parseBrickAttributeJson(HAPManualDefinitionBrick parentBrick, JSONObject jsonObj, String attributeName, HAPIdBrickType entityTypeIfNotProvided, HAPIdBrickType adapterTypeId, HAPManualDefinitionContextParse parseContext) {

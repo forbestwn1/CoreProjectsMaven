@@ -19,7 +19,7 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestReadTimeOnly = function(envObj){
+var node_createUICustomerTagTestTimeReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
