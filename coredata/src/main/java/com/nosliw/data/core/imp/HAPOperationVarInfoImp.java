@@ -1,5 +1,7 @@
 package com.nosliw.data.core.imp;
 
+import java.util.Map;
+
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.strvalue.HAPStringableValueEntityWithID;
 import com.nosliw.core.data.HAPOperationOutInfo;
@@ -59,4 +61,11 @@ public class HAPOperationVarInfoImp extends HAPStringableValueEntityWithID imple
 	
 	@Override
 	public boolean getIsBase() { return this.getAtomicAncestorValueBoolean(ISBASE); }
+	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(CRITERIA, this.getCriteria().toString());
+	}
+
 }
