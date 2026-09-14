@@ -184,7 +184,8 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 					entityInfo.setName(name);
 
 					//child data criteria
-					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, dataVariableName+"."+name, uiTagService, dataTypeHelper, dataTypeMan));
+//					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, dataVariableName+"."+name, uiTagService, dataTypeHelper, dataTypeMan));
+					childrenGroupQ.addItem(prepareQuestionairForResponseData(names.size()>1, HAPUtilityCriteria.getChildCriteria(dataTypeCriteria, name), entityInfo, "mapvalue", uiTagService, dataTypeHelper, dataTypeMan));
 				}
 			}
 		}

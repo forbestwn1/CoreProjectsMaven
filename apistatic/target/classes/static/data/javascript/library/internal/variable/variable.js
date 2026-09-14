@@ -217,7 +217,8 @@ var node_newVariable = function(data1, data2, adapterInfo, info, requestInfo){
 		childVarInfo.variable.registerLifecycleEventListener(loc_out.prv_lifecycleEventObject, function(event, eventData, request){
 			if(event==node_CONSTANT.WRAPPER_EVENT_CLEARUP_BEFORE){
 				childVarInfo.variable.unregisterLifecycleEventListener(loc_out.prv_lifecycleEventObject);
-				delete container[childVarInfo.id];
+				delete loc_out.prv_childrenVariable[childVarInfo.id];
+//				delete container[childVarInfo.id];
 			}
 		});
 		

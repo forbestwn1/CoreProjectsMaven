@@ -65,6 +65,8 @@ var node_createDataTypeHelperObject = function(){
 			
 			//loop through elements under value
 			getGetElementsRequest : function(value, handlers, request){
+				if(value==undefined)  return;
+				
 				return node_createServiceRequestInfoSimple(new node_ServiceInfo("GetElements", {"value":value}), function(requestInfo){
 					var elements = [];
 					if(_.isArray(value)){

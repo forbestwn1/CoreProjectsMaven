@@ -139,6 +139,7 @@ var node_createDataTypeHelperData = function(){
 			},
 
 			getGetElementsRequest : function(value, handlers, request){
+				if(value==null)   return;
 				return node_dataOperationUtility.getGetElementsRequest(value, handlers, request);
 			}, 
 			

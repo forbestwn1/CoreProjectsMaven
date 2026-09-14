@@ -162,7 +162,7 @@ var node_createHandleEachElementProcessor = function(baseVariable, path){
 				//get container value first
 				out.addRequest(containerVariable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createGetOperationService(loc_path), {
 					success : function(request, data){
-						if(data==undefined)  return;
+						if(data==undefined||data.value==undefined)  return [];
 						
 						//loop through element
 						return node_wrapperFactory.getDataTypeHelper(data.dataTypeInfo).getGetElementsRequest(data.value, {
