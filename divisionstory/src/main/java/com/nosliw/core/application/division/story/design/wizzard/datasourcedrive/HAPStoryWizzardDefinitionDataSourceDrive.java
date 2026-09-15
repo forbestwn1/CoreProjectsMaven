@@ -388,11 +388,6 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	private HAPStoryChangeItemElementNew buildResponseUIByData(HAPStoryDesignSessionChange changeSession, HAPStoryWizzardQuestionairGroup dataGroupQ) {
 		HAPStoryChangeItemElementNew out = null;
 		if(this.isDataShown(dataGroupQ)) {
-			//get ui tag info
-			HAPStoryWizzardQuestionairItemDynamic dataUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);
-			HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic)dataUITagChooseQ.getValue();
-			HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
-			
 			//get static info
 			HAPStoryWizzardQuestionairItemStatic dataStaticInfoQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATAINFO);
 			HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic dataInfoValue = (HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic)dataStaticInfoQ.getValue();
@@ -412,10 +407,15 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataInfoValue.getDataName());
 			changeSession.addChangeConnectionNew(out.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
 			
+			//get ui tag info
+			HAPStoryWizzardQuestionairItemDynamic dataUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);
+			HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic)dataUITagChooseQ.getValue();
+			HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
+			
 			//inject uiTag
 			HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
 			changeSession.addChangeConnectionNew(out.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
-			
+
 			//inject content wrapper into uitag
 			HAPStoryChangeItemElementNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
 			changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));

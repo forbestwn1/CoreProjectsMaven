@@ -19,86 +19,44 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestArrayReadOnly = function(envObj){
+var node_createUICustomerTagTestDate = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
-	var loc_elementWrapperView;
-	
-	var loc_elements = [];
-	
-	var loc_dataVariable;
-	
-	var loc_updateView = function(){
-		loc_removeElements();
-		
-		var request = loc_presentArrayRequest(loc_dataVariable, loc_elementWrapperView);
-		node_requestServiceProcessor.processRequest(request);
-	};
-	
-	var loc_removeElements = function(){
-		_.each(loc_elements, function(element, i){
-			element.destroy();
-		});
-		loc_elements = [];
-	};
-	
-	    var loc_presentArrayRequest = function(arrayVariable, wrapperView, handlers, requestInfo){
-			var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
-
-			loc_handleEachElementProcessor = node_createHandleEachElementProcessor(arrayVariable, ""); 
-			
-			out.addRequest(loc_handleEachElementProcessor.getLoopRequest({
-				success : function(requestInfo, eles){
-					var addEleRequest = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
-					_.each(eles, function(ele, index){
-						var variationPoints = {
-							afterValueContext: function(complexEntityDef, valuePortContainerId, bundleCore, coreConfigure){
-								var valuePortContainer = bundleCore.getValuePortDomain().getValuePortContainer(valuePortContainerId);
-								var valueStructureRuntimeId = valuePortContainer.getValueStructureRuntimeIdByName("embeded_part1");
-								var valueStructure = valuePortContainer.getValueStructure(valueStructureRuntimeId);
-								valueStructure.addVariable(ele.elementVar, loc_envObj.getAttributeValue("arrayelement"));
-								valueStructure.addVariable(ele.indexVar, loc_envObj.getAttributeValue("arrayindex"));
-							}
-						}
-						addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(variationPoints, wrapperView, {
-							success: function(request, uiConentNode){
-    							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
-							}
-						}));
-					});
-					addEleRequest.setParmData("processMode", "promiseBased");
-					return addEleRequest;
-				}
-			}));
-			
-			return out;
-		};
-	
 	
 	var loc_out = {
 
-		created : function(){},
-		
-		preInit : function(request){
-			loc_dataVariable = loc_envObj.createVariableByName(envObj.getAttributForData()[0]);
+		preInit : function(handlers, request){
 		},
-		
+				
+		updateView : function(currentData){
+			if(currentData!=undefined){
+				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+				var date = new Date(value.year, value.month, value.date);
+    			loc_dataView.val(date.toLocaleDateString('en-CA'));
+			}
+			else{
+				loc_dataView.val();
+			}
+		},
+
 		initViews : function(handlers, request){
-			loc_dataView = $("<div/>");
-			loc_elementWrapperView = $("<div/>");
-			loc_dataView.append(loc_elementWrapperView);
+			loc_dataView = $('<input type="date"></input>');
+
+			loc_dataView.bind('change', function(){
+				var date = new Date(loc_dataView.val()+"T00:00:00");
+				var currentData = {
+					dataTypeId: "test.date;1.0.0",
+					value: {
+						year : date.getFullYear(),
+						month : date.getMonth(),
+						date : date.getDate()
+					}
+				};
+				loc_envObj.onDataChange(currentData);
+			});
 			return loc_dataView;
-		},
-		
-		postInit : function(request){
-			loc_updateView(request);
-			
-			loc_dataVariable.registerDataChangeEventListener(undefined, function(event, eventData, request){
-				loc_updateView(request);
-			}, this);
-		},
-		
+		}
 	};
 	
 	return loc_out;
@@ -123,6 +81,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_array_readonly", node_createUICustomerTagTestArrayReadOnly); 
+packageObj.createChildNode("debug_test_data_date", node_createUICustomerTagTestDate); 
 
 })(packageObj);

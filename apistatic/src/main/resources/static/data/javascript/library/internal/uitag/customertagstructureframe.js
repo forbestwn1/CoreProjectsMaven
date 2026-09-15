@@ -19,28 +19,38 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestDateReadOnly = function(envObj){
+var node_createUICustomerTagStructureFrame = function(envObj){
 	var loc_envObj = envObj;
 
-    var loc_dataView;
+    var loc_containerView = $("<div></div>");
+
+	var loc_removeElements = function(){
+		_.each(loc_elements, function(element, i){
+			element.destroy();
+		});
+		loc_elements = [];
+	};
 	
 	var loc_out = {
-		
-		updateView : function(currentData){
-			if(currentData!=undefined){
-				var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				var date = new Date(value.year, value.month, value.date);
-				loc_dataView.html(date.toLocaleDateString('en-CA'));
-			}
-			else{
-				loc_dataView.html("");
-			}
-		},
 
+		created : function(){},
+		
+		preInit : function(request){
+			var out = node_createServiceRequestInfoSequence(undefined, undefined, request);
+			out.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(undefined, loc_containerView, {
+				success: function(request, uiConentNode){
+				}
+			}));
+			return out;
+		},
+		
 		initViews : function(handlers, request){
-			loc_dataView = $('<div></div>');
-			return loc_dataView;
-		}
+			return loc_containerView;
+		},
+		
+		postInit : function(request){
+		},
+		
 	};
 	
 	return loc_out;
@@ -65,6 +75,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_date_readonly", node_createUICustomerTagTestDateReadOnly); 
+packageObj.createChildNode("debug_test_structure_frame", node_createUICustomerTagStructureFrame); 
 
 })(packageObj);

@@ -19,45 +19,27 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestDate = function(envObj){
+var node_createUICustomerTagTestStringMultipleReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
 	var loc_out = {
-
-		preInit : function(handlers, request){
-		},
-				
+		
 		updateView : function(currentData){
-			if(currentData!=undefined){
-				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				var date = new Date(value.year, value.month, value.date);
-    			loc_dataView.val(date.toLocaleDateString('en-CA'));
-			}
-			else{
-				loc_dataView.val();
-			}
+			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+			loc_dataView.html(JSON.stringify(value));
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<input type="date"></input>');
-
-			loc_dataView.bind('change', function(){
-				var date = new Date(loc_dataView.val()+"T00:00:00");
-				var currentData = {
-					dataTypeId: "test.date;1.0.0",
-					value: {
-						year : date.getFullYear(),
-						month : date.getMonth(),
-						date : date.getDate()
-					}
-				};
-				loc_envObj.onDataChange(currentData);
-			});
+			loc_dataView = $('<div>Multiple Readonly View !!!!!!</div>');
 			return loc_dataView;
 		}
 	};
+	
+	
+	
+	
 	
 	return loc_out;
 };
@@ -81,6 +63,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_date", node_createUICustomerTagTestDate); 
+packageObj.createChildNode("debug_test_data_string_multiple_readonly", node_createUICustomerTagTestStringMultipleReadOnly); 
 
 })(packageObj);

@@ -8,11 +8,19 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityBasic;
 
 public class HAPUtilityData {
 
+	public static boolean isMap(HAPDataTypeId dataTypeId) {
+		return dataTypeId.getFullName().contains("map");
+	}
+	
+	public static boolean isArray(HAPDataTypeId dataTypeId) {
+		return dataTypeId.getFullName().contains("array");
+	}
+	
 	public static JSONObject createJSONData(String dataTypeId, Object value) throws JSONException{
 		JSONObject out = new JSONObject();
 		out.put(HAPData.VALUE, value);
@@ -28,15 +36,21 @@ public class HAPUtilityData {
 		HAPRelationshipPath out = new HAPRelationshipPath();
 		
 		List<HAPRelationshipPathSegment> segs1 = p1.getSegments();
-		for(int i=0; i<segs1.size()-1; i++) 	out.addSegment(segs1.get(i));
+		for(int i=0; i<segs1.size()-1; i++) {
+			out.addSegment(segs1.get(i));
+		}
 		
-		for(HAPRelationshipPathSegment seg2 : p2.getSegments())  out.addSegment(seg2);
+		for(HAPRelationshipPathSegment seg2 : p2.getSegments()) {
+			out.addSegment(seg2);
+		}
 		
 		return out;
 	}
 
 	public static HAPDataWrapper buildDataWrapperFromObject(Object obj){
-		if(obj==null)   return null;
+		if(obj==null) {
+			return null;
+		}
 		HAPDataWrapper out = null;
 		if(obj instanceof String){
 			out = buildDataWrapper((String)obj);
@@ -53,16 +67,23 @@ public class HAPUtilityData {
 	
 	public static HAPDataWrapper buildDataWrapper(String strValue){
 		HAPDataWrapper wrapper = new HAPDataWrapper();
-		if(wrapper.buildObjectByLiterate(strValue))  return wrapper;
+		if(wrapper.buildObjectByLiterate(strValue)) {
+			return wrapper;
+		}
 		return null;
 	}
 
 	public static HAPDataWrapper buildDataWrapperFromJson(JSONObject jsonObj){
-		if(jsonObj==null)   return null;
+		if(jsonObj==null) {
+			return null;
+		}
 		HAPDataWrapper wrapper = new HAPDataWrapper();
 		boolean result = wrapper.buildObjectByJson(jsonObj);
-		if(result)   return wrapper;
-		else return null;
+		if(result) {
+			return wrapper;
+		} else {
+			return null;
+		}
 	}
 
 	public static Map<String, HAPData> buildDataWrapperMap(Object obj){

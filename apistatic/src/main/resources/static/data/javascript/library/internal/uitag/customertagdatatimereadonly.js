@@ -19,33 +19,28 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestFloat = function(envObj){
+var node_createUICustomerTagTestTimeReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
 	var loc_out = {
+		
 
-		preInit : function(handlers, request){
-		},
-				
-		updateView : function(currentData){
+	updateView : function(currentData){
+		if(currentData!=undefined){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.val(value+"");
-		},
-
-		initViews : function(handlers, request){
-			loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="float type value"></input>');
-
-			loc_dataView.bind('change', function(){
-				var currentData = {
-					dataTypeId: "test.float;1.0.0",
-					value: parseFloat(loc_dataView.val())
-				};
-				loc_envObj.onDataChange(currentData);
-			});
-			return loc_dataView;
+			loc_dataView.html(value.hour+":"+value.minute+":"+value.second);
 		}
+		else{
+			loc_dataView.html("");
+		}
+	},
+
+	initViews : function(handlers, request){
+		loc_dataView = $('<div></div>');
+		return loc_dataView;
+	}
 	};
 	
 	return loc_out;
@@ -70,6 +65,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_float", node_createUICustomerTagTestFloat); 
+packageObj.createChildNode("debug_test_data_time_readonly", node_createUICustomerTagTestTimeReadOnly); 
 
 })(packageObj);

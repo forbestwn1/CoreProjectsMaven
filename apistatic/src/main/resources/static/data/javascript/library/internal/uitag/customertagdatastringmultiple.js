@@ -19,21 +19,59 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestStringReadOnly = function(envObj){
+var node_createUICustomerTagTestStringMultiple = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
+	var loc_dataViewForEnum;
+	
+	var loc_enumDatas;
+	
 	var loc_out = {
-		
+
+		preInit : function(handlers, request){
+			if(loc_envObj.isDataEnum()!=null){
+				var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+				out.addRequest(envObj.getDataEnumRequest({
+					success : function(request, enumDatas){
+						loc_enumDatas = enumDatas;
+					}
+				}));
+				return out;
+			}
+			
+		},
+				
 		updateView : function(currentData){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.html(value);
+			if(loc_dataViewForEnum!=undefined){
+				loc_dataViewForEnum.val(value);
+			}
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<div></div>');
-			return loc_dataView;
+			
+			if(envObj.isDataEnum()!=null){
+				loc_dataViewForEnum = $('<select name="data" multiple/>');
+				for(var k in loc_enumDatas){
+					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
+				}
+				loc_dataViewForEnum.bind('change', function(){
+					var currentData = {
+						isMultipleValue : true,
+						dataTypeId: "test.string;1.0.0",
+						value: loc_dataViewForEnum.val()
+					};
+					loc_envObj.onDataChange(currentData);
+				});
+				return loc_dataViewForEnum;
+			}
+			else{
+				return $("<div>Multiple string view without enum!!!!!!!!</div>");
+			}
+			
 		}
 	};
 	
@@ -59,6 +97,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_string_readonly", node_createUICustomerTagTestStringReadOnly); 
+packageObj.createChildNode("debug_test_data_string_multiple", node_createUICustomerTagTestStringMultiple); 
 
 })(packageObj);

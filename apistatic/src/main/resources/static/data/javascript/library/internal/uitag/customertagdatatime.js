@@ -19,27 +19,46 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestStringMultipleReadOnly = function(envObj){
+var node_createUICustomerTagTestTime = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
 	var loc_out = {
-		
+
+		preInit : function(handlers, request){
+		},
+				
 		updateView : function(currentData){
-			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.html(JSON.stringify(value));
+			if(currentData!=undefined){
+				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+				loc_dataView.val(value.hour.toString().padStart(2, "0")+":"+value.minute.toString().padStart(2, "0")+":"+value.second.toString().padStart(2, "0"));
+			}
+			else{
+				loc_dataView.val();
+			}
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<div>Multiple Readonly View !!!!!!</div>');
+			loc_dataView = $('<input type="time"></input>');
+
+			loc_dataView.bind('change', function(){
+				var date = loc_dataView.val();
+				var segs = date.split(":");
+				
+				var currentData = {
+					dataTypeId: "test.time;1.0.0",
+					value: {
+						hour : parseInt(segs[0]),
+						minute : parseInt(segs[1]),
+						second : parseInt(segs[2])
+					}
+				};
+				loc_envObj.onDataChange(currentData);
+			});
 			return loc_dataView;
 		}
 	};
-	
-	
-	
-	
 	
 	return loc_out;
 };
@@ -63,6 +82,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_string_multiple_readonly", node_createUICustomerTagTestStringMultipleReadOnly); 
+packageObj.createChildNode("debug_test_data_time", node_createUICustomerTagTestTime); 
 
 })(packageObj);

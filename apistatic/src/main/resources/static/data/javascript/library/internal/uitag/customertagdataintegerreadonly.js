@@ -19,68 +19,21 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestString = function(envObj){
+var node_createUICustomerTagTestIntegerReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
-	var loc_dataViewForEnum;
-	
-	var loc_enumDatas;
-	
 	var loc_out = {
-
-		preInit : function(handlers, request){
-			if(loc_envObj.isDataEnum()!=null){
-				var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-				out.addRequest(envObj.getDataEnumRequest({
-					success : function(request, enumDatas){
-						loc_enumDatas = enumDatas;
-					}
-				}));
-				return out;
-			}
-			
-		},
-				
+		
 		updateView : function(currentData){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			if(loc_dataView!=undefined){
-				loc_dataView.val(value);
-			}
-			else if(loc_dataViewForEnum!=undefined){
-				loc_dataViewForEnum.val(value);
-			}
+			loc_dataView.html(value+"");
 		},
 
 		initViews : function(handlers, request){
-			if(envObj.isDataEnum()!=null){
-				loc_dataViewForEnum = $('<select name="data"/>');
-				for(var k in loc_enumDatas){
-					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
-				}
-				loc_dataViewForEnum.bind('change', function(){
-					var currentData = {
-						dataTypeId: "test.string;1.0.0",
-						value: loc_dataViewForEnum.val()
-					};
-					loc_envObj.onDataChange(currentData);
-				});
-				return loc_dataViewForEnum;
-			}
-			else{
-				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
-
-				loc_dataView.bind('change', function(){
-					var currentData = {
-						dataTypeId: "test.string;1.0.0",
-						value: loc_dataView.val()
-					};
-					loc_envObj.onDataChange(currentData);
-				});
-    			return loc_dataView;
-			}
+			loc_dataView = $('<div></div>');
+			return loc_dataView;
 		}
 	};
 	
@@ -106,6 +59,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_string", node_createUICustomerTagTestString); 
+packageObj.createChildNode("debug_test_data_integer_readonly", node_createUICustomerTagTestIntegerReadOnly); 
 
 })(packageObj);

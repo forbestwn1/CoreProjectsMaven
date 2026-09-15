@@ -19,7 +19,7 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestFloatReadOnly = function(envObj){
+var node_createUICustomerTagTestStringReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
@@ -28,7 +28,7 @@ var node_createUICustomerTagTestFloatReadOnly = function(envObj){
 		
 		updateView : function(currentData){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.html(value+"");
+			loc_dataView.html(value);
 		},
 
 		initViews : function(handlers, request){
@@ -59,6 +59,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_float_readonly", node_createUICustomerTagTestFloatReadOnly); 
+packageObj.createChildNode("debug_test_data_string_readonly", node_createUICustomerTagTestStringReadOnly); 
 
 })(packageObj);

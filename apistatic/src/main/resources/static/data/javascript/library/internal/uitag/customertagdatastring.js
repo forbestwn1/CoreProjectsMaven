@@ -19,69 +19,69 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestArray2 = function(envObj){
+var node_createUICustomerTagTestString = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
-	var loc_wrapperView;
 	
-	var loc_elements = [];
+	var loc_dataViewForEnum;
 	
-	var loc_dataVariable;
-	
-	    var loc_presentArrayRequest = function(arrayVariable, wrapperView, handlers, requestInfo){
-			var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
-
-			loc_handleEachElementProcessor = node_createHandleEachElementProcessor(arrayVariable, ""); 
-			
-			out.addRequest(loc_handleEachElementProcessor.getLoopRequest({
-				success : function(requestInfo, eles){
-					var addEleRequest = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
-					_.each(eles, function(ele, index){
-						var variationPoints = {
-							afterValueContext: function(complexEntityDef, valuePortContainerId, bundleCore, coreConfigure){
-								var valuePortContainer = bundleCore.getValuePortDomain().getValuePortContainer(valuePortContainerId);
-								var valueStructureRuntimeId = valuePortContainer.getValueStructureRuntimeIdByName("embeded_part1");
-								var valueStructure = valuePortContainer.getValueStructure(valueStructureRuntimeId);
-								valueStructure.addVariable(ele.elementVar, loc_envObj.getAttributeValue("arrayelement"));
-								valueStructure.addVariable(ele.indexVar, loc_envObj.getAttributeValue("arrayindex"));
-							}
-						}
-						addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(variationPoints, wrapperView, {
-							success: function(request, uiConentNode){
-	//							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
-							}
-						}));
-					});
-					addEleRequest.setParmData("processMode", "promiseBased");
-					return addEleRequest;
-				}
-			}));
-			
-			return out;
-		};
-	
+	var loc_enumDatas;
 	
 	var loc_out = {
 
-		created : function(){
-		},
 		preInit : function(handlers, request){
-			loc_dataVariable = loc_envObj.createVariableByName(loc_envObj.getAttributForData()[0]);
+			if(loc_envObj.isDataEnum()!=null){
+				var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+				out.addRequest(envObj.getDataEnumRequest({
+					success : function(request, enumDatas){
+						loc_enumDatas = enumDatas;
+					}
+				}));
+				return out;
+			}
 			
 		},
+				
+		updateView : function(currentData){
+			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+			if(loc_dataView!=undefined){
+				loc_dataView.val(value);
+			}
+			else if(loc_dataViewForEnum!=undefined){
+				loc_dataViewForEnum.val(value);
+			}
+		},
+
 		initViews : function(handlers, request){
-			loc_dataView = $("<div/>");
-			loc_wrapperView = $("<div/>");
-			loc_dataView.append(loc_wrapperView);
-			return loc_dataView;
-		},
-		postInit : function(request){
-			return loc_presentArrayRequest(loc_dataVariable, loc_wrapperView);
-		},
-		destroy : function(request){
-		},
-		
+			if(envObj.isDataEnum()!=null){
+				loc_dataViewForEnum = $('<select name="data"/>');
+				for(var k in loc_enumDatas){
+					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
+				}
+				loc_dataViewForEnum.bind('change', function(){
+					var currentData = {
+						dataTypeId: "test.string;1.0.0",
+						value: loc_dataViewForEnum.val()
+					};
+					loc_envObj.onDataChange(currentData);
+				});
+				return loc_dataViewForEnum;
+			}
+			else{
+				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
+
+				loc_dataView.bind('change', function(){
+					var currentData = {
+						dataTypeId: "test.string;1.0.0",
+						value: loc_dataView.val()
+					};
+					loc_envObj.onDataChange(currentData);
+				});
+    			return loc_dataView;
+			}
+		}
 	};
 	
 	return loc_out;
@@ -106,6 +106,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_array2", node_createUICustomerTagTestArray2); 
+packageObj.createChildNode("debug_test_data_string", node_createUICustomerTagTestString); 
 
 })(packageObj);

@@ -19,31 +19,20 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestInteger = function(envObj){
+var node_createUICustomerTagTestFloatReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
 	
 	var loc_out = {
-
-		preInit : function(handlers, request){
-		},
-				
+		
 		updateView : function(currentData){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.val(value+"");
+			loc_dataView.html(value+"");
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<input type="number" style="border:solid 1px;" data-role="none" placeholder="integer type value"></input>');
-
-			loc_dataView.bind('change', function(){
-				var currentData = {
-					dataTypeId: "test.integer;1.0.0",
-					value: parseInt(loc_dataView.val())
-				};
-				loc_envObj.onDataChange(currentData);
-			});
+			loc_dataView = $('<div></div>');
 			return loc_dataView;
 		}
 	};
@@ -70,6 +59,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_integer", node_createUICustomerTagTestInteger); 
+packageObj.createChildNode("debug_test_data_float_readonly", node_createUICustomerTagTestFloatReadOnly); 
 
 })(packageObj);
