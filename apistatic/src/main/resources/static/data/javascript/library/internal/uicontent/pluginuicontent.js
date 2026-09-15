@@ -82,6 +82,8 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 	
 	//view container
 	var loc_viewContainer;
+	
+	var loc_parentView;
 
 	//name space for this ui resource view
 	//every element/customer tag have unique ui id within a web page
@@ -305,7 +307,8 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 		},
 		
 		updateView : function(view){
-			loc_viewContainer.appendTo(view);
+			loc_parentView = view;
+			loc_viewContainer.appendTo(loc_parentView);
 
 			//customer tag views
 			_.each(loc_customerTagByUIId, function(uiCustomTag, id){
@@ -336,6 +339,10 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 		//remove all elements from outsiders parents and put them back under parentView
 		detachViews : function(){	 loc_viewContainer.detachViews();		},
 
+		destroy : function(){
+			loc_viewContainer.detachViews();
+		},
+		
 	};
 	
 	return loc_out;	

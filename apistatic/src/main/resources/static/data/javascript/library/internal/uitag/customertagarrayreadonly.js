@@ -19,15 +19,29 @@ var packageObj = library.getChildPackage();
 	var node_ruleUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
-var node_createUICustomerTagTestArray = function(envObj){
+var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
     var loc_dataView;
-	var loc_wrapperView;
+	var loc_elementWrapperView;
 	
 	var loc_elements = [];
 	
 	var loc_dataVariable;
+	
+	var loc_updateView = function(){
+		loc_removeElements();
+		
+		var request = loc_presentArrayRequest(loc_dataVariable, loc_elementWrapperView);
+		node_requestServiceProcessor.processRequest(request);
+	};
+	
+	var loc_removeElements = function(){
+		_.each(loc_elements, function(element, i){
+			element.destroy();
+		});
+		loc_elements = [];
+	};
 	
 	    var loc_presentArrayRequest = function(arrayVariable, wrapperView, handlers, requestInfo){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
@@ -49,7 +63,7 @@ var node_createUICustomerTagTestArray = function(envObj){
 						}
 						addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(variationPoints, wrapperView, {
 							success: function(request, uiConentNode){
-	//							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
+    							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
 							}
 						}));
 					});
@@ -64,22 +78,25 @@ var node_createUICustomerTagTestArray = function(envObj){
 	
 	var loc_out = {
 
-		created : function(){
+		created : function(){},
+		
+		preInit : function(request){
+			loc_dataVariable = loc_envObj.createVariableByName(envObj.getAttributForData()[0]);
 		},
-		preInit : function(handlers, request){
-			loc_dataVariable = loc_envObj.createVariableByName(loc_envObj.getAttributForData()[0]);
-			
-		},
+		
 		initViews : function(handlers, request){
 			loc_dataView = $("<div/>");
-			loc_wrapperView = $("<div/>");
-			loc_dataView.append(loc_wrapperView);
+			loc_elementWrapperView = $("<div/>");
+			loc_dataView.append(loc_elementWrapperView);
 			return loc_dataView;
 		},
+		
 		postInit : function(request){
-			return loc_presentArrayRequest(loc_dataVariable, loc_wrapperView);
-		},
-		destroy : function(request){
+			loc_updateView(request);
+			
+			loc_dataVariable.registerDataChangeEventListener(undefined, function(event, eventData, request){
+				loc_updateView(request);
+			}, this);
 		},
 		
 	};
@@ -106,6 +123,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_test_array", node_createUICustomerTagTestArray); 
+packageObj.createChildNode("debug_test_array_readonly", node_createUICustomerTagTestArrayReadOnly); 
 
 })(packageObj);

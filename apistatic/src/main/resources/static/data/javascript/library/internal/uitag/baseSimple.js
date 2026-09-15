@@ -47,7 +47,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 				else{
 					loc_currentData = data.value;
 				}
-				loc_coreObj.updateView(loc_currentData);
+				return loc_coreObj.updateView(loc_currentData);
 			}
 		}, request);
 	};
