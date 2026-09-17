@@ -1284,6 +1284,7 @@
 			<definition type="space"/>
 			<definition name="STATIC_RESPONSE_TYPE_FILE" value="file"/>
 			<definition name="STATIC_RESPONSE_TYPE_DATA" value="data"/>
+			<definition name="STATIC_RESPONSE_TYPE_CONTENT" value="content"/>
 
 			<definition type="space"/>
 			<definition name="STATIC_LIBRARY_DOMAIN_INTERNAL" value="data.javascript.library.internal"/>

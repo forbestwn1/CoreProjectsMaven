@@ -22,7 +22,6 @@ COPY utilityparserexpression /build/utilityparserexpression
 COPY apicore /build/apicore
 COPY apidatasource /build/apidatasource
 COPY apistatic /build/apistatic
-COPY apiserver /build/apiserver
 
 # Build all modules
 RUN cd /build/root && mvn clean package -DskipTests -q

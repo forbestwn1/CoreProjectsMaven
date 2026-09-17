@@ -769,6 +769,7 @@ var COMMONCONSTANT=
   "STATIC_REQUEST_TYPE_CONFIGURE": "configure",
   "STATIC_RESPONSE_TYPE_FILE": "file",
   "STATIC_RESPONSE_TYPE_DATA": "data",
+  "STATIC_RESPONSE_TYPE_CONTENT": "content",
   "STATIC_LIBRARY_DOMAIN_INTERNAL": "data.javascript.library.internal",
   "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external",
   "VARIABLE_GLOBAL_NAME_TODAY": "today"

@@ -19,17 +19,26 @@ var node_dataOperationUtility = function()
 {
 
 	var loc_getDirectChildValueRequest = function(parentValue, path, handlers, request){
-		var operationParms = [];
-		operationParms.push(new node_OperationParm(parentValue, "base"));
-		operationParms.push(new node_OperationParm({
-			dataTypeId: "test.string;1.0.0",
-			value : path
-		}, "name"));
+		
+		if(parentValue==undefined){
+			var out = node_createServiceRequestInfoSequence({}, handlers, request);
+			out.addRequest(node_createServiceRequestInfoSimple({}, function(request){
+				return undefined;
+			}));
+		}
+		else{
+			var operationParms = [];
+			operationParms.push(new node_OperationParm(parentValue, "base"));
+			operationParms.push(new node_OperationParm({
+				dataTypeId: "test.string;1.0.0",
+				value : path
+			}, "name"));
 
-		return nosliw.runtime.getExpressionService().getExecuteOperationRequest(
-				parentValue.dataTypeId, 
-				node_COMMONCONSTANT.DATAOPERATION_COMPLEX_GETCHILDDATA, 
-				operationParms, handlers, request);
+			return nosliw.runtime.getExpressionService().getExecuteOperationRequest(
+					parentValue.dataTypeId, 
+					node_COMMONCONSTANT.DATAOPERATION_COMPLEX_GETCHILDDATA, 
+					operationParms, handlers, request);
+		}
 	}; 
 
 	var loc_getCurrentSegmentChildValueRequest = function(parentValue, segs, handlers, request){
@@ -41,7 +50,9 @@ var node_dataOperationUtility = function()
 		if(segs.hasNext()){
 			out.addRequest(loc_getCurrentSegmentChildValueRequest(parentValue, segs, {
 				success : function(request, segChildValue){
-					return loc_getSegmentsChildValueRequest(segChildValue, segs);
+					if(segChildValue!=undefined){
+						return loc_getSegmentsChildValueRequest(segChildValue, segs);
+					}
 				}
 			}));
 		}

@@ -1252,6 +1252,7 @@ public class HAPConstantShared {
 
 		public static final String STATIC_RESPONSE_TYPE_FILE = "file";
 		public static final String STATIC_RESPONSE_TYPE_DATA = "data";
+		public static final String STATIC_RESPONSE_TYPE_CONTENT = "content";
 
 
 
