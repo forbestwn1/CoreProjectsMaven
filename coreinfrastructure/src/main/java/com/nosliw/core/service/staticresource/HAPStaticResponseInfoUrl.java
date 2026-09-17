@@ -13,18 +13,18 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 
 @HAPEntityWithAttribute
-public class HAPStaticResponseInfoFile extends HAPStaticResponseInfo{
+public class HAPStaticResponseInfoUrl extends HAPStaticResponseInfo{
 
 	@HAPAttribute
 	public static final String URI = "uri";
 
 	private URI m_staticURI;
 	
-	public HAPStaticResponseInfoFile() {	
-		super(HAPConstantShared.STATIC_RESPONSE_TYPE_FILE);
+	public HAPStaticResponseInfoUrl() {	
+		super(HAPConstantShared.STATIC_RESPONSE_TYPE_URL);
 	}
 	
-	public HAPStaticResponseInfoFile(URI uri) {
+	public HAPStaticResponseInfoUrl(URI uri) {
 		this();
 		this.m_staticURI = uri; 
 	}
@@ -43,12 +43,12 @@ public class HAPStaticResponseInfoFile extends HAPStaticResponseInfo{
 class HAPStaticResponseInfoFile__HAPEntityParsable extends HAPStaticResponseInfo__HAPEntityParsable{
 
 	@Override
-	public String getSubName() {     return HAPConstantShared.STATIC_RESPONSE_TYPE_FILE;    }
+	public String getSubName() {     return HAPConstantShared.STATIC_RESPONSE_TYPE_URL;    }
 	
-	protected void parseToEntity(JSONObject jsonObj, HAPStaticResponseInfoFile staticResponseInfoFolder, HAPServiceParseEntity parseService) {
+	protected void parseToEntity(JSONObject jsonObj, HAPStaticResponseInfoUrl staticResponseInfoFolder, HAPServiceParseEntity parseService) {
 		super.parseToEntity(jsonObj, staticResponseInfoFolder, parseService);
 		try {
-			staticResponseInfoFolder.setURI(new URI(jsonObj.getString(HAPStaticResponseInfoFile.URI)));
+			staticResponseInfoFolder.setURI(new URI(jsonObj.getString(HAPStaticResponseInfoUrl.URI)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ class HAPStaticResponseInfoFile__HAPEntityParsable extends HAPStaticResponseInfo
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStaticResponseInfoFile out = new HAPStaticResponseInfoFile();
+		HAPStaticResponseInfoUrl out = new HAPStaticResponseInfoUrl();
 		this.parseToEntity((JSONObject)obj, out, parseService);
 		return out;
 	}

@@ -339,6 +339,6 @@ nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("debug_data_test", node_createUICustomerTagTest); 
+packageObj.createChildNode("debug_test_data", node_createUICustomerTagTest); 
 
 })(packageObj);

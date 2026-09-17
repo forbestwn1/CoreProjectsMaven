@@ -17,13 +17,21 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 public class HAPStaticRequest extends HAPSerializableImp{
 
 	@HAPAttribute
+	public static final String REQUESTID = "requestId";
+
+	@HAPAttribute
 	public static final String STATICINFO = "staticInfo";
+
+	private String m_requestId;
 	
 	private List<HAPStaticRequestInfo> m_staticInfo;
 	
 	public HAPStaticRequest() {
 		this.m_staticInfo = new ArrayList<HAPStaticRequestInfo>();
 	}
+	
+	public String getRequestId() {     return this.m_requestId;       }
+	public void setRequestId(String id) {     this.m_requestId = id;        }
 	
 	public List<HAPStaticRequestInfo> getStaticInfos(){	return this.m_staticInfo;	}
 	public void addStaticInfo(HAPStaticRequestInfo staticInfo) {    this.m_staticInfo.add(staticInfo);      }
@@ -39,11 +47,14 @@ public class HAPStaticRequest extends HAPSerializableImp{
         	this.m_staticInfo.add(info);
         }
 		
+        this.setRequestId((String)jsonObj.opt(REQUESTID));
+        
 		return true;  
 	}
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		jsonMap.put(REQUESTID, m_requestId);
 		jsonMap.put(STATICINFO, HAPUtilityJson.buildJson(this.m_staticInfo, HAPSerializationFormat.JSON));
 	}
 

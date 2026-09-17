@@ -42,7 +42,7 @@ $.ajax({
 		var processItemInOrder = function(){
 			var item = result[count];
 			
-			if(item.type=="file"){
+			if(item.type=="url"){
                //for file
 				var scriptEle = document.createElement('script');
 				scriptEle.setAttribute('src', item.uri);

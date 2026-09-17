@@ -35,7 +35,7 @@ import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfoData;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoUrl;
 
 @RestController
 @RequestMapping("/nosliw/static")
@@ -73,7 +73,7 @@ public class HAPStaticAPI {
 			String path = "static/" + getFilePathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion());
 			Resource[] resources = resolver.getResources("classpath:"+path+"/*"); 
 			for(Resource resource : resources) {
-				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
+				out.add(new HAPStaticResponseInfoUrl(new URI(getUriPathForStatic(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
 			}
 //			Collections.sort(response.getItems(), (item1, item2)->item1.getURI().toString().compareTo(item2.getURI().toString()));
 		}
@@ -84,7 +84,7 @@ public class HAPStaticAPI {
 			
 			for(Path childPath : HAPUtilityFileNio.getChildrenPath(folderPath)) {
 				String fileName = HAPUtilityFileNio.getLastNameOfPath(childPath);
-				out.add(new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(staticInfoFolder.getFolder()+"/"+fileName))));
+				out.add(new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(staticInfoFolder.getFolder()+"/"+fileName))));
 			}
 			
 //			for(File childFile : HAPUtilityFile.getChildren(staticInfoFolder.getFolder())) {
@@ -147,7 +147,7 @@ public class HAPStaticAPI {
 		String path = this.m_temporaryConfigure.getPath() + getFilePathForTemp(domain, name);
         HAPUtilityFile.writeFile(path, content);
 		
-        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfoFile(new URI(getUriPathForTemp(domain, name)));
+        HAPStaticResponseInfo responsInfo = new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name)));
         response.addItem(responsInfo);
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}

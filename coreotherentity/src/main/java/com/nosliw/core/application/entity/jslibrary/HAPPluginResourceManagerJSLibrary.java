@@ -18,7 +18,7 @@ import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
 import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoUrl;
 
 public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManager{
 
@@ -54,7 +54,7 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 		
 		List<URI> uris = new ArrayList<URI>();
 		for(HAPStaticResponseInfo responseInfo : staticResponse.getItems()) {
-			uris.add(((HAPStaticResponseInfoFile)responseInfo).getURI());
+			uris.add(((HAPStaticResponseInfoUrl)responseInfo).getURI());
 		}
 		
 		return new HAPResourceDataJSLibrary(uris);

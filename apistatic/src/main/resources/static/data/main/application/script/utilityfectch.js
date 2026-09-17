@@ -17,7 +17,7 @@ $.ajax({
 		var processItemInOrder = function(){
 			var item = result[count];
 			
-			if(item.type=="file"){
+			if(item.type=="url"){
                //for file
 			    if(processFile!=undefined){
                      processFile(item.uri);			    

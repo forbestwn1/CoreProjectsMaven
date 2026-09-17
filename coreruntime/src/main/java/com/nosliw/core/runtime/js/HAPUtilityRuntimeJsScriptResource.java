@@ -23,7 +23,7 @@ import com.nosliw.core.resource.HAPResourceDataJSValue;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.service.staticresource.HAPStaticResponse;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoFile;
+import com.nosliw.core.service.staticresource.HAPStaticResponseInfoUrl;
 
 public class HAPUtilityRuntimeJsScriptResource {
 
@@ -66,7 +66,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 			
 			HAPServiceData serviceData = staticResourceService.upload(script, "resource", name);
 			HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
-			out = HAPJSScriptInfo.buildByURI(((HAPStaticResponseInfoFile)staticResponse.getItems().get(0)).getURI(), name);
+			out = HAPJSScriptInfo.buildByURI(((HAPStaticResponseInfoUrl)staticResponse.getItems().get(0)).getURI(), name);
 			
 //			String resourceFile = HAPSystemFolderUtility.getResourceTempFileFolder() + name + ".js";
 //			resourceFile = HAPUtilityFile.writeFile(resourceFile, script);
