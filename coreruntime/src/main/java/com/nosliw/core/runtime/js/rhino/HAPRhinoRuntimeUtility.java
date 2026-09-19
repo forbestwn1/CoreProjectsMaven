@@ -24,7 +24,6 @@ import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
-import com.nosliw.core.system.HAPSystemFolderUtility;
 
 public class HAPRhinoRuntimeUtility {
 

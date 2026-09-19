@@ -48,6 +48,7 @@ public class HAPPluginResourceManagerJSLibrary implements HAPPluginResourceManag
 		}
 		
 		staticRequest.addStaticInfo(new HAPStaticRequestInfoLibrary(domain, name, libraryId.getVersion()));
+		staticRequest.isScriptFileConsolidated(false);
 		
 		HAPServiceData serviceData = m_staticResourceService.getStatic(staticRequest);
 		HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();

@@ -1,6 +1,7 @@
 package com.nosliw.common.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -56,7 +57,11 @@ public class HAPUtilityFileNio {
 		Path path = buildPath(filePath); 
 		return readFile(path);
 	}
-	
+
+	public static String readFile(InputStream stream){
+		return HAPUtilityFile.readFile(stream);
+	}
+
 	public static String writeFile(Path folder, String fileName, String content){
 		fileName = HAPUtilityFileName.getValidFileName(fileName);
 		

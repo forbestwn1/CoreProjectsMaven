@@ -65,7 +65,7 @@ nosliw.init = function(configure){
 		});
 	});
 	
-	nosliw.utility.requestLoadLibraryResources({"staticInfo" : requestStaticInfos}, configure.version, function(){
+	nosliw.utility.requestLoadLibraryResources({"staticInfo" : requestStaticInfos, "requestId": "core"}, configure.version, function(){
 		  nosliw.registerNodeEvent("runtime", "active",
 					function(eventName, nodeName) {
 				  		$(document).trigger("nosliwActive");

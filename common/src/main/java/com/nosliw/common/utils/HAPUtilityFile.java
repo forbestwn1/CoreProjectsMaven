@@ -295,5 +295,9 @@ public class HAPUtilityFile {
 	    return directory.getAbsolutePath();
 	}
 
+	public static boolean isFileExist(String path) {
+		File file = new File(path);
+		return file.exists()&&file.isFile();
+	}
 	
 }
