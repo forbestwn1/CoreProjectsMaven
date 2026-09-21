@@ -4,8 +4,8 @@ var loc_createOperandChooseWrapper = function(dataDefinition, env){
 	var loc_dataDefinition = dataDefinition;
 	var loc_env = env;
 		
-	var loc_operandChooses = {};
 	var loc_currentType;
+	var loc_operandChooses = {};
 
 	var loc_containerView = $("<div>Main container of wrapper</div>");
 
@@ -387,6 +387,7 @@ var loc_createOperandChooseVariable = function(varNames){
 var createOperandBuildApp = function(dataDefinition){
 	
 	var loc_env = {
+		
 		getOptions : function(dataDefinition){
 			var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
 			var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");

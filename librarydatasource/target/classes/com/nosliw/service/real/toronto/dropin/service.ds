@@ -1,7 +1,7 @@
 [{
 	"profile": {
 		"id": "toronto_program_dropin",
-		"status":"disabled",
+		"status":"disabled1",
 		"name": "Toronto Dropin Program",
 		"description" : "Toronto Dropin Program",
 		"tag" : ["public"],
@@ -31,7 +31,7 @@
                				"name" : "Community Location",
                             "status": "disabled1",
 				            "ruleType" : "enum",
-				            "enumCode" : "toronto.dropinprogram"
+				            "enumCode" : "toronto_program_dropin"
 				        }
 				    ],
 				},

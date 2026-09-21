@@ -17,7 +17,7 @@
                    				"name" : "enum",
 	                            "status": "disabled1",
 					            "ruleType" : "enum",
-					            "enumCode" : "conmmunitycentre_toronto"
+					            "enumCode" : "toronto_community"
 					        }
 					    ]
 					}
@@ -32,7 +32,7 @@
                    				"name" : "enum",
 	                            "status": "disabled1",
 					            "ruleType" : "enum",
-					            "enumCode" : "program_dropin"
+					            "enumCode" : "toronto_program_register"
 					        }
 					    ]
 					}
@@ -64,7 +64,7 @@
 				{
 					"name" : "age",
 					"dataDefinition" : {
-						"criteria" : "test.int;1.0.0",
+						"criteria" : "test.integer;1.0.0",
 					}
 				},
 				{
@@ -73,34 +73,18 @@
 					}
 				},
 				{
-					"name" : "distance",
-					"dataDefinition" : {
-					}
-				},
-				{
 					"name" : "fee",
 					"dataDefinition" : {
 					}
-				},
-				{
-					"name" : "indoor",
-					"dataDefinition" : {
-					}
-				},
+				}
 			],
 			"result" : {
 				"success": {
 					"output": [
 						{
-							"name" : "outputStringInService1",
+							"name" : "output",
   							"dataDefinition" : {
-	    						"criteria" : "test.string;1.0.0"
-	    					}
-						},
-						{
-							"name" : "outputMapInService1",
-  							"dataDefinition" : {
-    							"criteria" : "test.map;1.0.0%%||stringAttr1:test.string;1.0.0,stringAttr2:test.string;1.0.0||%%"
+    							"criteria" : "test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,FromDate:test.date;1.0.0,fromTime:test.time;1.0.0,ToDate:test.date;1.0.0,toTime:test.time;1.0.0,Url:test.url;1.0.0||%%"
     						}
 						}
 					]

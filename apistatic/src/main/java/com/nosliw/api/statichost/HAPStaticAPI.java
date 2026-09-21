@@ -160,8 +160,12 @@ public class HAPStaticAPI {
 			HAPStaticRequestInfoConfigure staticInfoConfigure = (HAPStaticRequestInfoConfigure)staticInfo;
 			String configureName = staticInfoConfigure.getName();
 			if(configureName.equals("core")) {
-				out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));
-				out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null), consolidate));
+				for(String lib : m_nosliwLibs) {
+					out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, lib, null), consolidate));
+				}
+				
+//				out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));
+//				out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null), consolidate));
 			}
 			if(configureName.equals("scriptreproduce")) {
 			    out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));
@@ -237,5 +241,58 @@ public class HAPStaticAPI {
 	private String normaliizePath(String path) {
 		return path.replace("\\", "/");
 	}
+	
+private String[] m_nosliwLibs = {
+//"external.Underscore;1.9.1",
+//"external.Backbone;1.3.3",
+"core",
+"constant",
+"logging",
+"common",
+"data",
+"expression",
+"activity",
+"process",
+"sequence",
+"task",
+"taskscript",
+"taskflow",
+"scripttaskgroup",
+"request",
+"id",
+"resource",
+"variable",
+"rule",
+"remoteservice",
+"error",
+"runtime",
+"runtimebrowser",
+//"uiexpression",
+"uicommon",
+"uitag",
+"uinode",
+//"uipage",
+"uicontent",
+"dataservice",
+"debug",
+"configure",
+"component",
+"complexentity",
+"testcomponent",
+"entitycontainer",
+"brick_wrapperbrick",
+"module",
+"uimodule",
+"uiapp",
+"iovalue",
+"valueport",
+"enum",
+"scriptbased",
+"statemachine",
+"runtimebrowsertest",
+"security",
+"framework7",
+};
+	
 	
 }
