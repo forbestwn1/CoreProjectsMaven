@@ -92,78 +92,10 @@ $(document).on("nosliwActive", function(){
 
 });
 
-var requestStaticInfos = [];
-requestStaticInfos.push({
-	"type" : "configure",
-	"name" : "core"
-});
-
-var staticInfos = {
-	      "staticInfo" : requestStaticInfos,
-	      "requestId" : "mainAPP"
-};
-
-var configureData = {};
-
-var fetchTask = createFetchTask(staticInfos, function(data){
-	configureData = _.extend(configureData, data);
-});
-
 var fetchTasks = [];
-fetchTasks.push(fetchTask);
+fetchTasks.push(createCoreStaticTask());
+staticFetchTaskManager.fetch(fetchTasks);
 
-staticFetchTaskManager.fetch(fetchTasks, function(){
-	nosliw.createNode("runtime.name", "browser");
-    
-	configureData = _.extend(configureData, {
-		logging : {
-			module : ["process", "requestInfo", "requestManager"]
-		}
-	});
-	nosliw.setConfigure(configureData);
-
-	  nosliw.registerNodeEvent("runtime", "active",
-				function(eventName, nodeName) {
-			  		$(document).trigger("nosliwActive");
-		  		}
-	  );
-	  var runtime = nosliw.getNodeData("runtime.createRuntime")(nosliw.runtimeName);
-	  runtime.interfaceObjectLifecycle.init();
-	
-});
-
-
-/*
-
-var requestStaticInfos = [];
-requestStaticInfos.push({
-	"type" : "configure",
-	"name" : "core"
-});
-
-var staticInfos = {
-      "staticInfo" : requestStaticInfos,
-      "requestId" : "mainAPP"
-};
-
-var configureData = {};
-
-fectchUtility(staticInfos, 
-		function(data){
-        	configureData = _.extend(configureData, data);
-        }, 
-		function(uri){
-
-        }, 
-		function(){
-			configureData = _.extend(configureData, {
-				logging : {
-					module : ["process", "requestInfo", "requestManager"]
-				}
-			});
-			nosliw.init(configureData);
-		});
-*/
 </script>
 
 </html>

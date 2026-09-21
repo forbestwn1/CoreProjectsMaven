@@ -1,13 +1,15 @@
 
-var createFetchTask = function(staticInfos, processData, processFile){
+var createFetchTask = function(staticInfos, processData, processFile, callBackFun){
 	var loc_staticInfos = staticInfos;
 	var loc_processData = processData;
 	var loc_processFile = processFile;
+	var loc_callBackFun = callBackFun;
 	
 	var loc_out = {
 		staticInfos : loc_staticInfos,
 		processData : loc_processData,
-		processFile : loc_processFile
+		processFile : loc_processFile,
+		callBackFun : loc_callBackFun
 	};
 	return loc_out;
 };
@@ -83,6 +85,7 @@ var staticFetchTaskManager = function(){
 		var fetchTask = fetchTasks[i];
 		if(loc_processedTasks[fetchTask.staticInfos.requestId]==null){
 			loc_processFetchTask(fetchTask, function(){
+				fetchTask.callBackFun();
 				loc_processedTasks[fetchTask.staticInfos.requestId] = fetchTask;
 				loc_nextTask(fetchTasks, i, callBackFun);
 			});
@@ -94,7 +97,9 @@ var staticFetchTaskManager = function(){
 	
 	var loc_nextTask = function(fetchTasks, i, callBackFun){
 		if(i>=fetchTasks.length-1){
-			callBackFun();
+			if(callBackFun!=undefined){
+				callBackFun();
+			}
 		}
 		else{
 			loc_processFetchTasks(fetchTasks, i+1, callBackFun);
@@ -105,12 +110,63 @@ var staticFetchTaskManager = function(){
 		
 		fetch : function(fetchTasks, callBackFun){
 			loc_processFetchTasks(fetchTasks, 0, callBackFun);
-		}
+		},
+		
 		
 	};
 	
 	return loc_out;
 }();
+
+
+var createCoreStaticTask = function(){
+	
+	var requestStaticInfos = [];
+	requestStaticInfos.push({
+		"type" : "configure",
+		"name" : "core"
+	});
+
+	var staticInfos = {
+		      "staticInfo" : requestStaticInfos,
+		      "requestId" : "mainAPP"
+	};
+
+	var configureData = {};
+
+	var fetchTask = createFetchTask(staticInfos, 
+			function(data){
+	        	configureData = _.extend(configureData, data);
+	        },
+	        function(url){
+
+
+	        	
+	        },
+	        function(){
+	        	nosliw.createNode("runtime.name", "browser");
+	            
+	        	configureData = _.extend(configureData, {
+	        		logging : {
+	        			module : ["process", "requestInfo", "requestManager"]
+	        		}
+	        	});
+	        	nosliw.setConfigure(configureData);
+
+	        	  nosliw.registerNodeEvent("runtime", "active",
+	        				function(eventName, nodeName) {
+	        			  		$(document).trigger("nosliwActive");
+	        		  		}
+	        	  );
+	        	  var runtime = nosliw.getNodeData("runtime.createRuntime")(nosliw.runtimeName);
+	        	  runtime.interfaceObjectLifecycle.init();
+
+	        }
+	);
+
+    return fetchTask;	
+};
+
 
 
 var fectchUtility = function(staticInfos, processData, processFile, callBackFun){
