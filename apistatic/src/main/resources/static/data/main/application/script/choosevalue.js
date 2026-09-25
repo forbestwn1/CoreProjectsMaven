@@ -1,4 +1,9 @@
 var loc_createExpression = function(dataDefinition, env){
+	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
+	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
+	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
+
+	var loc_eventObject = node_createEventObject();
 
 	var loc_dataDefinition = dataDefinition;
 	var loc_env = env;
@@ -6,24 +11,14 @@ var loc_createExpression = function(dataDefinition, env){
 	var loc_currentType;
 	var loc_operandChooses = {};
 
-	var loc_containerView = $("<div>Container of expression</div>");
+	var loc_containerView = $("<div>Container of expression build</div>");
 
 	var loc_selectChooseTypeView = $("<select></select>");
 	var loc_selectChooseTypeContainerView = $("<div>Please select value type: </div>");
 	loc_selectChooseTypeContainerView.append(loc_selectChooseTypeView);
 
-	var loc_chooseTypeContainerView = $("<div>Wrapper Container for choose root operand</div>");
+	var loc_chooseTypeContainerView = $("<div>Container for operand chain</div>");
 
-	
-	
-	
-	var loc_containerVnextView = $("<div></div>");
-	var loc_containerOperationView = $("<div></div>");
-	
-	loc_containerVnextView.append(loc_containerOperationView);
-	
-	var loc_nextOperation;
-	var loc_dataOperations;
 	
 	var loc_options;
 	var loc_optionsByName = {};
@@ -44,7 +39,7 @@ var loc_createExpression = function(dataDefinition, env){
 			currentChoose.enable();
 		}
 		else{
-			currentChoose = loc_createOperandChain(loc_chooseTypeContainerView, loc_env);
+			currentChoose = loc_createOperandChain(loc_currentType, loc_chooseTypeContainerView, loc_env);
 			loc_operandChooses[loc_currentType] = currentChoose;
 			
 			var operand;
@@ -61,14 +56,20 @@ var loc_createExpression = function(dataDefinition, env){
 					operandWrapper.enable();
 				}
 			}));
+			
+			currentChoose.registerListener(function(eventName, eventData){
+				if(currentChoose.getRootType()==loc_currentType){
+					if(eventName=="change"){
+						loc_eventObject.triggerEvent(eventName);
+					}
+				}
+			});
 		}
 		
 		return out;
 	};
 	
 	var loc_getInitRequest = function(handlers, request){
-		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-		var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 		
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		
@@ -106,6 +107,93 @@ var loc_createExpression = function(dataDefinition, env){
 		
 		updateView : function(parentView){
 			parentView.append(loc_containerView);
+		},
+		
+		isReady : function(){
+			if(loc_currentType==undefined)   return false;
+			return loc_operandChooses[loc_currentType].isReady();
+		},
+		
+    	registerListener : function(handler){
+	    	return loc_eventObject.registerListener(undefined, undefined, handler, this);
+	    },
+			
+	};
+	
+	return loc_out;
+};
+
+
+var loc_createOperandChain = function(rootType, parentView, env){
+	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
+	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
+	
+	var loc_eventObject = node_createEventObject();
+	
+	var loc_rootType = rootType;
+	var loc_parentView = parentView;
+	var loc_env = env;
+	
+	var loc_containerview = $("<div></div>");
+	
+	var loc_operandChain = [];
+	
+	var loc_addOperandRequest = function(operand, handlers, request){
+		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
+
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		var wrapper = loc_crateOperandWrapper(operand, loc_env);
+
+		out.addRequest(wrapper.getInitRequest(loc_containerview, {
+			success : function(request){
+				loc_operandChain.push(wrapper);
+				
+				wrapper.registerListener(function(eventName, eventData){
+					if(eventName=="change"){
+						loc_eventObject.triggerEvent("change");
+					}
+					else if(eventName=="newOperation"){
+						var out = node_createServiceRequestInfoSequence(undefined, handlers);
+						out.addRequest(loc_addOperandRequest(eventData));
+						node_requestServiceProcessor.processRequest(out);
+					}
+					
+				});
+				
+				return wrapper;
+			}
+		}));
+
+		return out;			
+	};
+	
+	var loc_out = {
+		
+		getRootType : function(){   return loc_rootType;      },
+		
+		addOperandRequest : function(operand, handlers, request){
+			return loc_addOperandRequest(operand, handlers, request)
+		},
+		
+		enable : function(){
+			loc_parentView.append(loc_containerview);
+		},
+
+		disable : function(){
+			loc_containerview.remove();
+		},
+		
+		registerListener : function(handler){
+			return loc_eventObject.registerListener(undefined, undefined, handler, this);
+		},
+				
+		isReady : function(){
+			for(var i in loc_operandChain){
+				if(!loc_operandChain[i].isReady()){
+					return false;
+				}
+			}
+		    return true;
 		}
 		
 	};
@@ -123,7 +211,7 @@ var loc_crateOperandWrapper = function(operand, env){
 
 	var loc_parentView;
 	
-	var loc_containerView = $("<div></div>");
+	var loc_containerView = $("<div>Container for operand wrapper</div>");
 	var loc_operandContainerView = $("<div></div>");
 	loc_containerView.append(loc_operandContainerView);
 	
@@ -156,24 +244,32 @@ var loc_crateOperandWrapper = function(operand, env){
 		
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
-			if(loc_operand.getType()=="variable"){
-				loc_nextButton = loc_createNextButton(loc_containerView);
-				loc_nextButton.registerListener(function(eventName, eventData){
-					if(eventName=="next"){
-						loc_varNextRequest();
-					}
-    				else if(eventName=="back"){
-					
-	    			}
-				});
-				
+			var operandType = loc_operand.getType();
+			if(operandType=="variable"||operandType=="operation"){
 				loc_operand.registerListener(function(eventName, eventData){
-					
+					if(eventName=="change"){
+						loc_eventObject.triggerEvent("change");
+						if(loc_operand.isReady()){
+							if(loc_nextButton==undefined){
+								loc_nextButton = loc_createNextButton(loc_containerView);
+								loc_nextButton.registerListener(function(eventName, eventData){
+									if(eventName=="next"){
+										loc_varNextRequest();
+									}
+									else if(eventName=="back"){
+									
+									}
+								});
+							}
+						}
+					}
 				});
 			}
-			else if(loc_operand.getType()=="constant"){
+			else if(operandType=="constant"){
 				loc_operand.registerListener(function(eventName, eventData){
-					
+					if(eventName=="change"){
+						loc_eventObject.triggerEvent("change");
+					}
 				});
 			}
 			
@@ -194,6 +290,9 @@ var loc_crateOperandWrapper = function(operand, env){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 				
+    	isReady : function(){
+			return loc_operand.isReady();
+	    }
 	};
 	return loc_out;
 };
@@ -259,9 +358,9 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 			return out;
 		},
 		
-		enable : function(){    loc_parentView.append(loc_selectOperationView);         },
+		enable : function(){    loc_parentView.append(loc_containerView);         },
 		
-		disable : function(){     loc_selectOperationView.remove();        },
+		disable : function(){     loc_containerView.remove();        },
 		
     	registerListener : function(handler){
 	    	return loc_eventObject.registerListener(undefined, undefined, handler, this);
@@ -291,9 +390,9 @@ var loc_createNextButton = function(parentView){
 	loc_updateStatus();
 	
 	loc_nextButtonView.on("click", function(){
+		loc_eventObject.triggerEvent(loc_statusInfo[loc_status].event, "nextData");
 		loc_status = 1 - loc_status;
 		loc_updateStatus();
-		loc_eventObject.triggerEvent(loc_statusInfo[loc_status].event, "nextData");
 	});
 	
 	var loc_out = {
@@ -303,60 +402,6 @@ var loc_createNextButton = function(parentView){
 		},
 		
 	};
-	return loc_out;
-};
-
-var loc_createOperandChain = function(parentView, env){
-	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	
-	var loc_parentView = parentView;
-	var loc_env = env;
-	
-	var loc_containerview = $("<div></div>");
-	
-	var loc_operandChain = [];
-	
-	var loc_addOperandRequest = function(operand, handlers, request){
-		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-
-		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		var wrapper = loc_crateOperandWrapper(operand, loc_env);
-
-		out.addRequest(wrapper.getInitRequest(loc_containerview, {
-			success : function(request){
-				loc_operandChain.push(wrapper);
-				
-				wrapper.registerListener(function(eventName, eventData){
-					if(eventName=="newOperation"){
-						var out = node_createServiceRequestInfoSequence(undefined, handlers);
-						out.addRequest(loc_addOperandRequest(eventData));
-						node_requestServiceProcessor.processRequest(out);
-					}
-				});
-				
-				return wrapper;
-			}
-		}));
-
-		return out;			
-	};
-	
-	var loc_out = {
-		
-		addOperandRequest : function(operand, handlers, request){
-			return loc_addOperandRequest(operand, handlers, request)
-		},
-		
-		enable : function(){
-			loc_parentView.append(loc_containerview);
-		},
-
-		disable : function(){
-			loc_containerview.remove();
-		},
-		
-	};
-	
 	return loc_out;
 };
 
@@ -373,7 +418,7 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 	var loc_eventObject = node_createEventObject();
 
 	var loc_parentView;
-	var loc_containerView = $("<div>Container for operation</div>");
+	var loc_containerView = $("<div>Container for operand operation</div>");
 	
 	var loc_parms = [];
 	
@@ -394,8 +439,8 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 					
 					var parmInfo = {
 						"definition" : parm,
-						"choose" : loc_createExpression(datadefinition, loc_env),
-    					"view" : $("<div></div>")
+						"expression" : loc_createExpression(datadefinition, loc_env),
+    					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
 					};
 					
 					loc_containerView.append(parmInfo.view);
@@ -406,9 +451,14 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 			
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			_.each(loc_parms, function(parmInfo){
-				out.addRequest(parmInfo.choose.getInitRequest({
+				parmInfo.expression.registerListener(function(eventName, eventData){
+					if(eventName=="change"){
+						loc_eventObject.triggerEvent("change");
+					}
+				});
+				out.addRequest(parmInfo.expression.getInitRequest({
 					success : function(request){
-						parmInfo.choose.updateView(parmInfo.view);
+						parmInfo.expression.updateView(parmInfo.view);
 					}
 				}));
 			});
@@ -428,6 +478,14 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 		
+    	isReady : function(){
+			for(var i in loc_parms){
+				if(!loc_parms[i].expression.isReady()){
+					return false;
+				}
+			}
+			return true;
+	    }
     };
 
     return loc_out;
@@ -440,16 +498,20 @@ var loc_createOperandConstant = function(dataDefinition){
 
 	var loc_parentView;
 
-	var loc_containerView = $("<div>Container for constant choose</div>");
+	var loc_containerView = $("<div>Container for operand constant</div>");
 
 	var loc_contantValueWrapperView = $("<div>Please choose constant value : </div>");
 	loc_containerView.append(loc_contantValueWrapperView);
 
-	
 	var loc_standaloneApp;
+	var loc_constantValue;
 
 	var loc_eventObject = node_createEventObject();
 
+	var loc_setConstantValue = function(constantValue){
+		loc_constantValue = constantValue;
+	};
+	
 	var loc_out = {
 		
 		getType : function(){   return "constant";    },
@@ -499,6 +561,17 @@ var loc_createOperandConstant = function(dataDefinition){
 		    				success: function (requestInfo, application) {
 								loc_standaloneApp = application;
      							loc_contantValueWrapperView.append(loc_standaloneApp.getView());
+								
+								loc_standaloneApp.registerExposeEventListener(undefined, function(eventName, eventValue){
+									if(eventName==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
+										loc_setConstantValue(eventValue);
+										loc_eventObject.triggerEvent("change");
+									}
+									else if(eventName==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
+										loc_setConstantValue();
+    									loc_eventObject.triggerEvent("change");
+									}
+								});
 				    		}
 					    }));
 					    return out1;
@@ -509,6 +582,8 @@ var loc_createOperandConstant = function(dataDefinition){
 			return out;
 		},
 		
+		isReady : function(){    return loc_constantValue!=undefined;       },
+
 		enable : function(){
 			loc_parentView.append(loc_containerView);
 		},
@@ -533,7 +608,7 @@ var loc_createOperandVariable = function(varNames){
 	var loc_varName;
 
 	var loc_parentView;
-	var loc_containerView = $("<div>Container for variable choose</div>");
+	var loc_containerView = $("<div>Container for operand variable</div>");
 	
 	var loc_variableChooseViewContainer = $("<div>Please select variable name : </div>");
 	var loc_variableChooseView = $("<select></select>");
@@ -553,11 +628,17 @@ var loc_createOperandVariable = function(varNames){
 			_.each(loc_varNames, function(varName){
 				loc_variableChooseView.append($('<option>', { value: varName, text: varName }));
 			});
+			loc_varName = loc_varNames[0];
 			loc_variableChooseView.on("change", function(event){
 				loc_varName = loc_variableChooseView.val();
+    			loc_eventObject.triggerEvent("change");
 			});
+			
+			loc_eventObject.triggerEvent("change");
 			return node_createServiceRequestInfoSequence(undefined, handlers, request);
 		},
+		
+		isReady : function(){    return loc_varName!=undefined;       },
 		
 		enable : function(){
 			loc_parentView.append(loc_containerView);
