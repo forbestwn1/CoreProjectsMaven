@@ -27,8 +27,10 @@
 
 <script>
 
-//when nosliw active
-$(document).on("nosliwActive", function(){
+var fetchTasks = [];
+fetchTasks.push(createCoreStaticTask());
+staticFetchTaskManager.fetch(fetchTasks, function(){
+
 	var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
@@ -89,12 +91,7 @@ $(document).on("nosliwActive", function(){
 		}
 	}));
 	node_requestServiceProcessor.processRequest(out);
-
 });
-
-var fetchTasks = [];
-fetchTasks.push(createCoreStaticTask());
-staticFetchTaskManager.fetch(fetchTasks);
 
 </script>
 

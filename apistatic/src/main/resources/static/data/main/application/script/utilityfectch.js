@@ -85,9 +85,12 @@ var staticFetchTaskManager = function(){
 		var fetchTask = fetchTasks[i];
 		if(loc_processedTasks[fetchTask.staticInfos.requestId]==null){
 			loc_processFetchTask(fetchTask, function(){
-				fetchTask.callBackFun();
-				loc_processedTasks[fetchTask.staticInfos.requestId] = fetchTask;
-				loc_nextTask(fetchTasks, i, callBackFun);
+				fetchTask.callBackFun({
+					doFinish : function(){
+						loc_processedTasks[fetchTask.staticInfos.requestId] = fetchTask;
+						loc_nextTask(fetchTasks, i, callBackFun);
+					}
+				});
 			});
 		}
 		else{
@@ -143,7 +146,7 @@ var createCoreStaticTask = function(){
 
 	        	
 	        },
-	        function(){
+	        function(env){
 	        	nosliw.createNode("runtime.name", "browser");
 	            
 	        	configureData = _.extend(configureData, {
@@ -156,6 +159,7 @@ var createCoreStaticTask = function(){
 	        	  nosliw.registerNodeEvent("runtime", "active",
 	        				function(eventName, nodeName) {
 	        			  		$(document).trigger("nosliwActive");
+								env.doFinish();
 	        		  		}
 	        	  );
 	        	  var runtime = nosliw.getNodeData("runtime.createRuntime")(nosliw.runtimeName);
