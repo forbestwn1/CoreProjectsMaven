@@ -37,6 +37,14 @@ public class HAPGatewayDataType extends HAPGatewayImp{
 			String baseDataType = (String)parms.opt(COMMAND_GETRELATEDOPERATION_DATATYPE_BASE);
 			String resultDataType = (String)parms.opt(COMMAND_GETRELATEDOPERATION_DATATYPE_RESULT);
 			List<HAPDataTypeOperation> out = this.m_dataTypeHelper.getDataTypeOperations(baseDataType==null?null:new HAPDataTypeId(baseDataType), resultDataType==null?null:new HAPDataTypeId(resultDataType));
+			out = out.stream().filter(d->{
+				for(HAPOperationParmInfo parm : d.getOperationInfo().getParmsInfo()) {
+					if(parm.getIsBase()) {
+						return true;
+					}
+				}
+				return false;
+			}).toList();
 			return this.createSuccessWithObject(out);
 		}
 		return null;

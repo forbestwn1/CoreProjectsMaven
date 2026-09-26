@@ -256,11 +256,16 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 			else if(eventName=="newOperation"){
 				loc_truncate(wrapper);
 				var out = node_createServiceRequestInfoSequence(undefined, handlers);
-				out.addRequest(loc_addOperandRequest(eventData));
+				out.addRequest(loc_addOperandRequest(eventData, {
+					success : function(request){
+						loc_eventObject.triggerEvent("change");
+					}
+				}));
 				node_requestServiceProcessor.processRequest(out);
 			}
 			else if(eventName=="truncate"){
 				loc_truncate(wrapper);
+     			loc_eventObject.triggerEvent("change");
 			}
 		});
 
@@ -598,9 +603,10 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 			loc_parentView = parentView;
 			
 			loc_operationName = loc_dataOperation.name;
+			loc_baseDataType = loc_dataOperation.source;
+
 			_.each(loc_dataOperation.parms, function(parm){
 				if(parm.isBase!="true"){
-					
 					var datadefinition = {
 					    "type" : "writable",   
 						"criteria" : parm.criteria,
@@ -615,9 +621,6 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 					loc_containerView.append(parmInfo.view);
 					
 					loc_parms.push(parmInfo);
-				}
-				else{
-					loc_baseDataType = parm.criteria;
 				}
 			});
 			
@@ -829,7 +832,6 @@ var loc_createOperandVariable = function(varNames){
     			loc_eventObject.triggerEvent("change");
 			});
 			
-			loc_eventObject.triggerEvent("change");
 			return node_createServiceRequestInfoSequence(undefined, handlers, request);
 		},
 		
