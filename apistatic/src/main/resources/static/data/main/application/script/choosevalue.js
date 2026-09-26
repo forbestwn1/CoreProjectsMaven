@@ -1,8 +1,78 @@
-var loc_createExpression = function(dataDefinition, env){
+var createOperandBuildApp = function(dataDefinition){
 	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 
+	var loc_eventObject = node_createEventObject();
+		
+	var loc_env = {
+		
+		getOptions : function(dataDefinition){
+			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+
+			var constantOption = {
+				"type" : "constant"
+			};
+			var variableOption = {
+				"type" : "variable",
+				"variables" : ["today"]
+			};
+			
+			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
+			var out = [];
+			if(criteria=="test.date;1.0.0"){
+				out.push(constantOption);
+    			out.push(variableOption);
+			}
+			else{
+				out.push(constantOption);
+			}
+			return out;
+		}
+	};
+
+	var loc_expression = loc_createExpression("expression", dataDefinition, loc_env);
+	
+	var loc_contentWrapperView = $("<div>AppContainer</div>");
+	
+	var loc_buildExpression = function(){
+		var out = {
+			constants : {}
+		};
+		out.expression = loc_expression.buildExpression(out.constants);
+        return out;		
+	};
+	
+	var loc_out = {
+		
+		getInitRequest : function(handlers, request){
+			loc_expression.registerListener(function(eventName, eventData){
+				if(eventName=="change"){
+					console.log(JSON.stringify(loc_buildExpression()));
+				}
+			});
+			
+			return loc_expression.getInitRequest(handlers, request);
+		},
+		
+		updateView : function(parentView){
+			loc_expression.updateView(loc_contentWrapperView);
+			parentView.append(loc_contentWrapperView);
+		}
+		
+	};
+	
+	return loc_out;
+
+};
+
+var loc_createExpression = function(id, dataDefinition, env){
+	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
+	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
+	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
+
+	var loc_id = id;
+	
 	var loc_eventObject = node_createEventObject();
 
 	var loc_dataDefinition = dataDefinition;
@@ -23,6 +93,9 @@ var loc_createExpression = function(dataDefinition, env){
 	var loc_options;
 	var loc_optionsByName = {};
 	
+	var loc_getCurrentChain = function(){
+		return loc_operandChooses[loc_currentType];
+	};
 	
 	var loc_getUpdateTypeSelectionRequest = function(type, handlers, request){
 		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
@@ -30,16 +103,16 @@ var loc_createExpression = function(dataDefinition, env){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		
 		if(loc_currentType!=null){
-			loc_operandChooses[loc_currentType].disable();
+			loc_getCurrentChain().disable();
 		}
 		
 		loc_currentType = type;
-		var currentChoose = loc_operandChooses[loc_currentType];
+		var currentChoose = loc_getCurrentChain();
 		if(currentChoose!=null){
 			currentChoose.enable();
 		}
 		else{
-			currentChoose = loc_createOperandChain(loc_currentType, loc_chooseTypeContainerView, loc_env);
+			currentChoose = loc_createOperandChain(loc_id+"_"+loc_currentType, loc_currentType, loc_chooseTypeContainerView, loc_env);
 			loc_operandChooses[loc_currentType] = currentChoose;
 			
 			var operand;
@@ -84,9 +157,14 @@ var loc_createExpression = function(dataDefinition, env){
 			out.addRequest(loc_getUpdateTypeSelectionRequest(loc_options[0].type));
 			
 			loc_selectChooseTypeView.on("change", function(event){
+				var out = node_createServiceRequestInfoSequence(undefined);
 				var value = loc_selectChooseTypeView.val();
-				var request = loc_getUpdateTypeSelectionRequest(value);
-    			node_requestServiceProcessor.processRequest(request);			
+				out.addRequest(loc_getUpdateTypeSelectionRequest(value, {
+					success : function(request){
+						loc_eventObject.triggerEvent("change");
+					}
+				}));
+    			node_requestServiceProcessor.processRequest(out);
 			});
 		}
 		else{
@@ -100,6 +178,10 @@ var loc_createExpression = function(dataDefinition, env){
 	
 	var loc_out ={
 		
+		buildExpression : function(constants){
+			return loc_getCurrentChain().buildExpression(constants);
+		},
+		
 		getInitRequest : function(handlers, request){
 			return loc_getInitRequest(handlers, request);
 		},
@@ -110,7 +192,7 @@ var loc_createExpression = function(dataDefinition, env){
 		
 		isReady : function(){
 			if(loc_currentType==undefined)   return false;
-			return loc_operandChooses[loc_currentType].isReady();
+			return loc_getCurrentChain().isReady();
 		},
 		
     	registerListener : function(handler){
@@ -130,11 +212,13 @@ var loc_createExpression = function(dataDefinition, env){
 };
 
 
-var loc_createOperandChain = function(rootType, parentView, env){
+var loc_createOperandChain = function(id, rootType, parentView, env){
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 	
 	var loc_eventObject = node_createEventObject();
+	
+	var loc_id = id;
 	
 	var loc_rootType = rootType;
 	var loc_parentView = parentView;
@@ -160,6 +244,9 @@ var loc_createOperandChain = function(rootType, parentView, env){
 		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		
+		operand.setId(loc_id+"_"+operand.getType()+"_"+loc_operandChain.length);
+		
 		var wrapper = loc_crateOperandWrapper(operand, loc_env);
 
 		wrapper.registerListener(function(eventName, eventData){
@@ -192,6 +279,14 @@ var loc_createOperandChain = function(rootType, parentView, env){
 		
 		getRootType : function(){   return loc_rootType;      },
 		
+		buildExpression : function(constants){
+			var out;
+			for(var i in loc_operandChain){
+				out = loc_operandChain[i].getOperand().buildExpression(out, constants);
+			}
+			return out;
+		},
+
 		addOperandRequest : function(operand, handlers, request){
 			return loc_addOperandRequest(operand, handlers, request)
 		},
@@ -285,6 +380,8 @@ var loc_crateOperandWrapper = function(operand, env){
 	};
 	
 	var loc_out = {
+		
+		getOperand : function(){   return loc_operand;    },
 		
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
@@ -460,12 +557,16 @@ var loc_createNextButton = function(parentView){
 
 
 var loc_createOperandOperation = function(dataOperation, env, resultDataType, baseDataType){
-
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-	
+
+	var loc_id;
+
 	var loc_dataOperation = dataOperation;
 
+	var loc_baseDataType;
+	var loc_operationName;
+	
 	var loc_env = env;
 		
 	var loc_eventObject = node_createEventObject();
@@ -478,27 +579,45 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
     var loc_out = {
 	
 		getType : function(){    return "operation";      },
-		
+
+		getId : function(){     return loc_id;    },
+		setId : function(id){    loc_id = id;        },
+
+		buildExpression : function(previous, constants){
+			var out = "!("+loc_baseDataType+")!."+loc_operationName+"(";
+			out = out + previous
+			for(var i in loc_parms){
+				var parmInfo = loc_parms[i];
+				out = out + ", " + parmInfo.definition.name + ":" + parmInfo.expression.buildExpression(constants);
+			}
+			out = out + ")";
+			return out;
+		},
+
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
 			
+			loc_operationName = loc_dataOperation.name;
 			_.each(loc_dataOperation.parms, function(parm){
 				if(parm.isBase!="true"){
 					
 					var datadefinition = {
-					        "type" : "writable",   
-							"criteria" : parm.criteria,
+					    "type" : "writable",   
+						"criteria" : parm.criteria,
 					};
 					
 					var parmInfo = {
 						"definition" : parm,
-						"expression" : loc_createExpression(datadefinition, loc_env),
+						"expression" : loc_createExpression(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
     					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
 					};
 					
 					loc_containerView.append(parmInfo.view);
 					
 					loc_parms.push(parmInfo);
+				}
+				else{
+					loc_baseDataType = parm.criteria;
 				}
 			});
 			
@@ -551,6 +670,8 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 var loc_createOperandConstant = function(dataDefinition){
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 
+	var loc_id;
+	
 	var loc_dataDefinition = dataDefinition;
 
 	var loc_parentView;
@@ -572,6 +693,14 @@ var loc_createOperandConstant = function(dataDefinition){
 	var loc_out = {
 		
 		getType : function(){   return "constant";    },
+
+		getId : function(){     return loc_id;    },
+		setId : function(id){    loc_id = id;        },
+
+		buildExpression : function(previous, constants){
+			constants[loc_id] = loc_constantValue;
+			return "&(" + loc_id + ")&";
+		},
 		
 		getInitRequest : function(parentView, handlers, request){
 			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
@@ -661,6 +790,8 @@ var loc_createOperandConstant = function(dataDefinition){
 var loc_createOperandVariable = function(varNames){
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 
+	var loc_id;
+
 	var loc_varNames = varNames;
 	var loc_varName;
 
@@ -677,6 +808,13 @@ var loc_createOperandVariable = function(varNames){
 		
 		getType : function(){   return "variable";    },
 
+		getId : function(){     return loc_id;    },
+		setId : function(id){    loc_id = id;        },
+		
+		buildExpression : function(previous, constants){
+			return "?(" + loc_varName + ")?";
+		},
+		
 		getInitRequest : function(parentView, handlers, request){
 			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 			loc_parentView = parentView;
@@ -713,51 +851,3 @@ var loc_createOperandVariable = function(varNames){
 	return loc_out;
 };
 
-var createOperandBuildApp = function(dataDefinition){
-	
-	var loc_env = {
-		
-		getOptions : function(dataDefinition){
-			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-
-			var constantOption = {
-				"type" : "constant"
-			};
-			var variableOption = {
-				"type" : "variable",
-				"variables" : ["today"]
-			};
-			
-			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
-			var out = [];
-			if(criteria=="test.date;1.0.0"){
-				out.push(constantOption);
-    			out.push(variableOption);
-			}
-			else{
-				out.push(constantOption);
-			}
-			return out;
-		}
-	};
-
-	var loc_rootWrapper = loc_createExpression(dataDefinition, loc_env);
-	
-	var loc_contentWrapperView = $("<div>AppContainer</div>");
-	
-	var loc_out = {
-		
-		getInitRequest : function(handlers, request){
-			return loc_rootWrapper.getInitRequest(handlers, request);
-		},
-		
-		updateView : function(parentView){
-			loc_rootWrapper.updateView(loc_contentWrapperView);
-			parentView.append(loc_contentWrapperView);
-		}
-		
-	};
-	
-	return loc_out;
-
-};
