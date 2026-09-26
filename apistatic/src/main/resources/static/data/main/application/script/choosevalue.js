@@ -116,6 +116,13 @@ var loc_createExpression = function(dataDefinition, env){
     	registerListener : function(handler){
 	    	return loc_eventObject.registerListener(undefined, undefined, handler, this);
 	    },
+		
+		destroy : function(){
+			loc_containerView.remove();
+			_.each(loc_operandChooses, function(choose){
+				choose.destroy();
+			});
+        }
 			
 	};
 	
@@ -137,6 +144,18 @@ var loc_createOperandChain = function(rootType, parentView, env){
 	
 	var loc_operandChain = [];
 	
+	var loc_truncate = function(wrapper){
+		for(var i=loc_operandChain.length-1; i>=0; i--){
+			if(loc_operandChain[i]==wrapper){
+				break;
+			}
+			else{
+				loc_operandChain[i].destroy();
+				loc_operandChain.pop();
+			}
+		}
+	};
+	
 	var loc_addOperandRequest = function(operand, handlers, request){
 		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 
@@ -148,11 +167,14 @@ var loc_createOperandChain = function(rootType, parentView, env){
 				loc_eventObject.triggerEvent("change");
 			}
 			else if(eventName=="newOperation"){
+				loc_truncate(wrapper);
 				var out = node_createServiceRequestInfoSequence(undefined, handlers);
 				out.addRequest(loc_addOperandRequest(eventData));
 				node_requestServiceProcessor.processRequest(out);
 			}
-			
+			else if(eventName=="truncate"){
+				loc_truncate(wrapper);
+			}
 		});
 
 		out.addRequest(wrapper.getInitRequest(loc_containerview, {
@@ -174,12 +196,16 @@ var loc_createOperandChain = function(rootType, parentView, env){
 			return loc_addOperandRequest(operand, handlers, request)
 		},
 		
-		enable : function(){
-			loc_parentView.append(loc_containerview);
-		},
+		enable : function(){		loc_parentView.append(loc_containerview);		},
 
-		disable : function(){
-			loc_containerview.remove();
+		disable : function(){		loc_containerview.remove();		},
+
+		destroy : function(){
+			this.disable();
+			_.each(loc_operandChain, function(wrapper, i){
+				wrapper.destroy();
+			});
+			loc_operandChain = [];
 		},
 		
 		registerListener : function(handler){
@@ -247,7 +273,10 @@ var loc_crateOperandWrapper = function(operand, env){
 						loc_varNextRequest();
 					}
 					else if(eventName=="back"){
-					
+					    if(loc_operationSelection!=undefined){
+							loc_operationSelection.destroy();
+						}
+    					loc_eventObject.triggerEvent("truncate");
 					}
 				});
 			}
@@ -261,7 +290,6 @@ var loc_crateOperandWrapper = function(operand, env){
 			loc_parentView = parentView;
 			var operandType = loc_operand.getType();
 			if(operandType=="variable"||operandType=="operation"){
-				loc_checkWhetherNextButton();
 				loc_operand.registerListener(function(eventName, eventData){
 					if(eventName=="change"){
 						loc_eventObject.triggerEvent("change");
@@ -280,6 +308,7 @@ var loc_crateOperandWrapper = function(operand, env){
 			out.addRequest(loc_operand.getInitRequest(loc_operandContainerView, {
 				success : function(request){
 					loc_operand.enable();
+    				loc_checkWhetherNextButton();
 				}
 			}));
 			return out;
@@ -293,6 +322,13 @@ var loc_crateOperandWrapper = function(operand, env){
 			loc_containerView.remove();
 		},
 		
+		destroy : function(){
+			this.disable();
+			loc_operand.destroy();
+			if(loc_nextButton!=undefined)    loc_nextButton.destroy();
+			if(loc_operationSelection!=undefined)   loc_operationSelection.destroy();
+		},
+
 		registerListener : function(handler){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
@@ -371,6 +407,10 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 		
 		disable : function(){     loc_containerView.remove();        },
 		
+		destroy : function(){
+			this.disable();
+		},
+		
     	registerListener : function(handler){
 	    	return loc_eventObject.registerListener(undefined, undefined, handler, this);
 	    },
@@ -410,6 +450,10 @@ var loc_createNextButton = function(parentView){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 		
+		
+    	destroy : function(){
+	    },
+
 	};
 	return loc_out;
 };
@@ -479,14 +523,18 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 			loc_parentView.append(loc_containerView);
 		},
 
-		disable : function(){
-			loc_containerView.remove();
+		disable : function(){		loc_containerView.remove();		},
+
+		registerListener : function(handler){		return loc_eventObject.registerListener(undefined, undefined, handler, this);		},
+		
+		destroy : function(){
+			_.each(loc_parms, function(parm, i){
+				parm.expression.destroy();
+			});
+			
+			this.disable();
 		},
 
-		registerListener : function(handler){
-			return loc_eventObject.registerListener(undefined, undefined, handler, this);
-		},
-		
     	isReady : function(){
 			for(var i in loc_parms){
 				if(!loc_parms[i].expression.isReady()){
@@ -593,12 +641,12 @@ var loc_createOperandConstant = function(dataDefinition){
 		
 		isReady : function(){    return loc_constantValue!=undefined;       },
 
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
+		enable : function(){		loc_parentView.append(loc_containerView);		},
 
-		disable : function(){
-			loc_containerView.remove();
+		disable : function(){		loc_containerView.remove();		},
+
+		destroy : function(){
+			this.disable();
 		},
 
 		registerListener : function(handler){
@@ -649,12 +697,12 @@ var loc_createOperandVariable = function(varNames){
 		
 		isReady : function(){    return loc_varName!=undefined;       },
 		
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
+		enable : function(){		loc_parentView.append(loc_containerView);		},
 		
-		disable : function(){
-			loc_containerView.remove();
+		disable : function(){		loc_containerView.remove();		},
+		
+		destroy : function(){
+			this.disable();
 		},
 
 		registerListener : function(handler){
