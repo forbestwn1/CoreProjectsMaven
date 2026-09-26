@@ -53,7 +53,6 @@ var loc_createExpression = function(dataDefinition, env){
 			out.addRequest(currentChoose.addOperandRequest(operand, {
 				success : function(request, operandWrapper){
 					currentChoose.enable();
-					operandWrapper.enable();
 				}
 			}));
 			
@@ -144,22 +143,22 @@ var loc_createOperandChain = function(rootType, parentView, env){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		var wrapper = loc_crateOperandWrapper(operand, loc_env);
 
+		wrapper.registerListener(function(eventName, eventData){
+			if(eventName=="change"){
+				loc_eventObject.triggerEvent("change");
+			}
+			else if(eventName=="newOperation"){
+				var out = node_createServiceRequestInfoSequence(undefined, handlers);
+				out.addRequest(loc_addOperandRequest(eventData));
+				node_requestServiceProcessor.processRequest(out);
+			}
+			
+		});
+
 		out.addRequest(wrapper.getInitRequest(loc_containerview, {
 			success : function(request){
+				wrapper.enable();
 				loc_operandChain.push(wrapper);
-				
-				wrapper.registerListener(function(eventName, eventData){
-					if(eventName=="change"){
-						loc_eventObject.triggerEvent("change");
-					}
-					else if(eventName=="newOperation"){
-						var out = node_createServiceRequestInfoSequence(undefined, handlers);
-						out.addRequest(loc_addOperandRequest(eventData));
-						node_requestServiceProcessor.processRequest(out);
-					}
-					
-				});
-				
 				return wrapper;
 			}
 		}));
@@ -223,21 +222,37 @@ var loc_crateOperandWrapper = function(operand, env){
 	var loc_varNextRequest = function(){
 		var dataType = "test.date;1.0.0";
 		loc_operationSelection = loc_createOperationSelection(loc_containerView, dataType);
+
+		loc_operationSelection.registerListener(function(eventName, eventData){
+			if(eventName=="selectOperation"){
+				loc_eventObject.triggerEvent("newOperation", loc_createOperandOperation(eventData, loc_env, dataType, dataType));
+			}
+		});
 		
 		var out = node_createServiceRequestInfoSequence();
 		out.addRequest(loc_operationSelection.getInitRequest({
 			success : function(request){
-				
-				loc_operationSelection.registerListener(function(eventName, eventData){
-					if(eventName=="selectOperation"){
-						loc_eventObject.triggerEvent("newOperation", loc_createOperandOperation(eventData, loc_env, dataType, dataType));
-					}
-				});
-				
 				loc_operationSelection.enable();
 			}
 		}));
 		node_requestServiceProcessor.processRequest(out);			
+	};
+	
+	var loc_checkWhetherNextButton = function(){
+		if(loc_operand.isReady()){
+			if(loc_nextButton==undefined){
+				loc_nextButton = loc_createNextButton(loc_containerView);
+				loc_nextButton.registerListener(function(eventName, eventData){
+					if(eventName=="next"){
+						loc_varNextRequest();
+					}
+					else if(eventName=="back"){
+					
+					}
+				});
+			}
+		}
+		
 	};
 	
 	var loc_out = {
@@ -246,22 +261,11 @@ var loc_crateOperandWrapper = function(operand, env){
 			loc_parentView = parentView;
 			var operandType = loc_operand.getType();
 			if(operandType=="variable"||operandType=="operation"){
+				loc_checkWhetherNextButton();
 				loc_operand.registerListener(function(eventName, eventData){
 					if(eventName=="change"){
 						loc_eventObject.triggerEvent("change");
-						if(loc_operand.isReady()){
-							if(loc_nextButton==undefined){
-								loc_nextButton = loc_createNextButton(loc_containerView);
-								loc_nextButton.registerListener(function(eventName, eventData){
-									if(eventName=="next"){
-										loc_varNextRequest();
-									}
-									else if(eventName=="back"){
-									
-									}
-								});
-							}
-						}
+						loc_checkWhetherNextButton();
 					}
 				});
 			}
@@ -272,18 +276,21 @@ var loc_crateOperandWrapper = function(operand, env){
 					}
 				});
 			}
-			
-			return loc_operand.getInitRequest(loc_operandContainerView, handlers, request);
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+			out.addRequest(loc_operand.getInitRequest(loc_operandContainerView, {
+				success : function(request){
+					loc_operand.enable();
+				}
+			}));
+			return out;
 		},
 		
 		enable : function(){
 			loc_parentView.append(loc_containerView);
-			loc_operand.enable();
 		},
 
 		disable : function(){
 			loc_containerView.remove();
-			loc_operand.disable();
 		},
 		
 		registerListener : function(handler){
@@ -348,6 +355,8 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 						loc_selectOperationView.append($('<option>', { value: dataOperation.name, text: dataOperation.name }));
 						loc_dataOperations[dataOperation.name] = dataOperation;
 					});
+					
+					loc_eventObject.triggerEvent("selectOperation", dataOperations[0]);
 					
 					loc_selectOperationView.on("change", function(event){
 						var value = loc_selectOperationView.val();
