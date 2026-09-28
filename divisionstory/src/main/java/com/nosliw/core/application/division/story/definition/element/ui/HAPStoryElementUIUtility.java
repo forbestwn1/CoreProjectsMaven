@@ -24,10 +24,6 @@ public class HAPStoryElementUIUtility {
 	}
 
 	
-	public static HAPStoryChangeItemElementNew newUIContentHtml(HAPStoryDesignSessionChange changeSession, String content) {
-		
-	}
-	
 	
 	
 }

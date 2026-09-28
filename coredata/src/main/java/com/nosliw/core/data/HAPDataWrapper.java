@@ -8,10 +8,10 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.info.HAPInfo;
 import com.nosliw.common.info.HAPInfoImpSimple;
-import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
@@ -36,6 +36,8 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 	//any object that can represent data value (json, literate)
 	protected Object m_value;
 
+	protected boolean m_isMultipleValue = false;
+	
 	protected HAPInfo m_info;
 	
 	private HAPSerializationFormat m_valueFormat;
@@ -63,6 +65,9 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 	public Object getValue() {		return this.m_value;	}
 	
 	@Override
+	public boolean isMultipleValue() {  return this.m_isMultipleValue;   }
+	
+	@Override
 	public HAPInfo getInfo() {  return this.m_info;  }
 
 	public String getValueFormat(){
@@ -86,7 +91,9 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 	@Override
 	public boolean buildObjectByLiterate(String text){
 		try {
-			if(text==null)  return false;
+			if(text==null) {
+				return false;
+			}
 			
 			String token = text.substring(0, 1);
 			if(token.equals(TOKEN_JSON)){
@@ -102,7 +109,9 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 				this.setValueFormat(HAPSerializationFormat.LITERATE);
 				//parse literate to get data type and value parts
 				String[] parts = HAPUtilityNamingConversion.splitTextByComponents(text.substring(TOKEN_LITERATE.length()), SEPERATOR_DATATYPE);
-				if(parts.length<2)   return false;
+				if(parts.length<2) {
+					return false;
+				}
 				this.m_dataTypeId = (HAPDataTypeId)HAPManagerSerialize.getInstance().buildObject(HAPDataTypeId.class.getName(), parts[0], HAPSerializationFormat.LITERATE);
 				this.m_value = parts[1];
 				return true;
@@ -121,16 +130,26 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 		JSONObject jsonObj = (JSONObject)json;
 		//data type id
 		String dataTypeIdLiterate = jsonObj.optString(DATATYPEID);
-		if(HAPUtilityBasic.isStringEmpty(dataTypeIdLiterate))  return false;
+		if(HAPUtilityBasic.isStringEmpty(dataTypeIdLiterate)) {
+			return false;
+		}
 		this.m_dataTypeId = (HAPDataTypeId)HAPManagerSerialize.getInstance().buildObject(HAPDataTypeId.class.getName(), dataTypeIdLiterate, HAPSerializationFormat.LITERATE);
 
 		//value format
 		Object valueFormat = jsonObj.opt(VALUEFORMAT);
-		if(valueFormat==null)   this.m_valueFormat = HAPSerializationFormat.JSON;
-		else  this.m_valueFormat = HAPSerializationFormat.valueOf((String)valueFormat);
+		if(valueFormat==null) {
+			this.m_valueFormat = HAPSerializationFormat.JSON;
+		} else {
+			this.m_valueFormat = HAPSerializationFormat.valueOf((String)valueFormat);
+		}
 
 		//value
 		this.m_value = jsonObj.opt(VALUE);
+		
+		Object isMultipleValueObj = jsonObj.opt(ISMULTIPLEVALUE);
+		if(isMultipleValueObj!=null) {
+			this.m_isMultipleValue = (Boolean)isMultipleValueObj;
+		}
 		
 		//info
 		JSONObject infoObj = jsonObj.optJSONObject(INFO);
@@ -152,14 +171,8 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 		jsonMap.put(VALUEFORMAT, this.getValueFormat());
 		
 		HAPUtilityJson.buildJsonMap(VALUE, this.m_value, jsonMap, typeJsonMap, HAPSerializationFormat.JSON);
-		
-//		if(this.m_value instanceof String || this.m_value instanceof Boolean || this.m_value instanceof Integer || this.m_value instanceof Double){
-//			jsonMap.put(VALUE, this.m_value+"");
-//			typeJsonMap.put(VALUE, this.m_value.getClass());
-//		}
-//		else{
-//			jsonMap.put(VALUE, this.m_value+"");
-//		}
+		jsonMap.put(ISMULTIPLEVALUE, this.m_isMultipleValue + "");
+		typeJsonMap.put(ISMULTIPLEVALUE, Boolean.class);
 
 		jsonMap.put(INFO, HAPUtilityJson.buildJson(this.m_info, HAPSerializationFormat.JSON));
 	}
@@ -176,8 +189,10 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 		if(o instanceof HAPData){
 			HAPData data = (HAPData)o;
 			if(this.getDataTypeId().equals(data.getDataTypeId())){
-				if(this.getValue().equals(data.getValue())){
-					out = true;
+				if(this.isMultipleValue()==data.isMultipleValue()) {
+					if(this.getValue().equals(data.getValue())){
+						out = true;
+					}
 				}
 			}
 		}
@@ -191,6 +206,7 @@ public class HAPDataWrapper  extends HAPSerializableImp implements HAPData{
 		out.m_value = this.m_value;
 		out.m_valueFormat = this.m_valueFormat;
 		out.m_info = this.m_info.cloneInfo();
+		out.m_isMultipleValue = this.m_isMultipleValue;
 		return out;
 	}
 

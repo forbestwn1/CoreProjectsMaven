@@ -21,6 +21,9 @@ public interface HAPData extends HAPSerializable{
 	@HAPAttribute
 	public static String INFO = "info";
 	
+	@HAPAttribute
+	public static String ISMULTIPLEVALUE = "isMultipleValue";
+	
 	/**
 	 * get data type object
 	 */
@@ -30,6 +33,8 @@ public interface HAPData extends HAPSerializable{
 	 * get value within data
 	 */
 	Object getValue();
+	
+	boolean isMultipleValue();
 	
 	// extra info related with data
 	HAPInfo getInfo();

@@ -13,7 +13,7 @@
         <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
 
         <script src="script/utilityfectch.js"></script>
-        <script src="script/choosevalue.js"></script>
+        <!-- script src="script/choosevalue.js"></script-->
 
  		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
@@ -30,23 +30,29 @@
 
 <script>
 
-var fetchTasks = [];
-fetchTasks.push(createCoreStaticTask());
+var fetchTasks = [
+	createCoreStaticTask(),
+	createFetchTask(
+	    {
+		    "staticInfo" : [
+			    {
+				    "type" : "configure",
+				    "name" : "choosevalue"
+	            }
+		    ],
+		    "requestId" : "ChooseValue"
+	    }
+	),
+];
+
+
 staticFetchTaskManager.fetch(fetchTasks, function(){
 
-	var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
-	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
-	var node_namingConvensionUtility = nosliw.getNodeData("common.namingconvension.namingConvensionUtility");
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 	var node_ResourceId = nosliw.getNodeData("resource.entity.ResourceId");
-	var node_createStateBackupService = nosliw.getNodeData("component.createStateBackupService");
-	var node_createRuntimeEnvironment = nosliw.getNodeData("complexentity.entity.createRuntimeEnvironment");
-	var node_BrickId = nosliw.getNodeData("complexentity.entity.BrickId");
-	var node_createRuntimeEnv = nosliw.getNodeData("framework7.createRuntimeEnv");
 
 	var parms = node_basicUtility.getParmsInUrl();
 	var dataType = parms.dataType==undefined?"string":parms.dataType;

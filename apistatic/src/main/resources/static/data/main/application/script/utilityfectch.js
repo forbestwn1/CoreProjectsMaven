@@ -85,12 +85,21 @@ var staticFetchTaskManager = function(){
 		var fetchTask = fetchTasks[i];
 		if(loc_processedTasks[fetchTask.staticInfos.requestId]==null){
 			loc_processFetchTask(fetchTask, function(){
-				fetchTask.callBackFun({
-					doFinish : function(){
-						loc_processedTasks[fetchTask.staticInfos.requestId] = fetchTask;
-						loc_nextTask(fetchTasks, i, callBackFun);
-					}
-				});
+				var loc_doFinish = function(){
+					loc_processedTasks[fetchTask.staticInfos.requestId] = fetchTask;
+					loc_nextTask(fetchTasks, i, callBackFun);
+				};
+				
+				if(fetchTask.callBackFun==undefined){
+					loc_doFinish();
+				}
+				else{
+					fetchTask.callBackFun({
+						doFinish : function(){
+							loc_doFinish();
+						}
+					});
+				}
 			});
 		}
 		else{
@@ -124,15 +133,14 @@ var staticFetchTaskManager = function(){
 
 var createCoreStaticTask = function(){
 	
-	var requestStaticInfos = [];
-	requestStaticInfos.push({
-		"type" : "configure",
-		"name" : "core"
-	});
-
 	var staticInfos = {
-		      "staticInfo" : requestStaticInfos,
-		      "requestId" : "mainAPP"
+		"staticInfo" : [
+			{
+				"type" : "configure",
+				"name" : "core"
+			}			
+		],
+		"requestId" : "Core"
 	};
 
 	var configureData = {};

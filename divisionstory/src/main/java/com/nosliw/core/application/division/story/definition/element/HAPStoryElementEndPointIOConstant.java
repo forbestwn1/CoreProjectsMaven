@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPEntityParsable;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -26,11 +27,11 @@ public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO
 	private HAPData m_data;
 	
 	public HAPStoryElementEndPointIOConstant() {
-		this(null);
+		super(TYPE, HAPConstantShared.IO_DIRECTION_OUT);
 	}
 	
 	public HAPStoryElementEndPointIOConstant(HAPData data) {
-		super(TYPE, HAPConstantShared.IO_DIRECTION_OUT);
+		this();
 		this.m_data = data;
 	}
 
@@ -53,7 +54,7 @@ public class HAPStoryElementEndPointIOConstant extends HAPStoryElementEndPointIO
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		if(this.m_data!=null) {
-			jsonMap.put(DATA, this.m_data.toStringValue(HAPSerializationFormat.JSON));
+			jsonMap.put(DATA, HAPManagerSerialize.getInstance().toStringValue(m_data, HAPSerializationFormat.JSON));
 		}
 	}
 }

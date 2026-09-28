@@ -1,7 +1,6 @@
 package com.nosliw.core.application.division.story.definition.element;
 
 import com.nosliw.common.info.HAPEntityInfo;
-import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementAccessory;
@@ -14,9 +13,6 @@ public class HAPStoryElementAccessoryEvent extends HAPStoryElementAccessory{
 	}
 
 
-	
-	public static HAPPath buildPathForRequestEndPoint(String parName) {}
-	
 	
 	
 	@Override
