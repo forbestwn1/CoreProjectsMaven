@@ -81,13 +81,17 @@ var loc_createExpression = function(id, dataDefinition, env){
 	var loc_currentType;
 	var loc_operandChooses = {};
 
-	var loc_containerView = $("<div>Container of expression build</div>");
+	var loc_containerView = $("<div></div>");
 
-	var loc_selectChooseTypeView = $("<select></select>");
-	var loc_selectChooseTypeContainerView = $("<div>Please select value type: </div>");
-	loc_selectChooseTypeContainerView.append(loc_selectChooseTypeView);
+	var loc_selectChooseTypeView = $("<select id=\""+loc_id+"\"></select>");
+	var loc_selectChooseTypeLabelView = $("<label for=\""+loc_id+"\">Please select value type:</label>");
+	var loc_selectChooseTypeContainerView = $("<span></span>");
+	loc_selectChooseTypeContainerView.append(loc_selectChooseTypeLabelView).append(" ").append(loc_selectChooseTypeView);
+	loc_selectChooseTypeContainerView.css(loc_css_selectContainer);
+	loc_selectChooseTypeLabelView.css(loc_css_label);
+	loc_selectChooseTypeView.css(loc_css_select);
 
-	var loc_chooseTypeContainerView = $("<div>Container for operand chain</div>");
+	var loc_chooseTypeContainerView = $("<div></div>");
 
 	
 	var loc_options;
@@ -224,7 +228,7 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 	var loc_parentView = parentView;
 	var loc_env = env;
 	
-	var loc_containerview = $("<div></div>");
+	var loc_containerview = $("<ul></ul>");
 	
 	var loc_operandChain = [];
 	
@@ -336,10 +340,16 @@ var loc_crateOperandWrapper = function(operand, env){
 
 	var loc_parentView;
 	
-	var loc_containerView = $("<div>Container for operand wrapper</div>");
+	var loc_containerView = $("<li></li>");
 	var loc_operandContainerView = $("<div></div>");
 	loc_containerView.append(loc_operandContainerView);
-	
+
+	var loc_buttonContainerView = $("<div></div>");
+	loc_containerView.append(loc_buttonContainerView);
+
+	var loc_operationSelectionContainerView = $("<div></div>");
+	loc_containerView.append(loc_operationSelectionContainerView);
+
 	var loc_nextButton;
 	var loc_operationSelection;
 	
@@ -347,7 +357,7 @@ var loc_crateOperandWrapper = function(operand, env){
 	
 	var loc_varNextRequest = function(){
 		var dataType = "test.date;1.0.0";
-		loc_operationSelection = loc_createOperationSelection(loc_containerView, dataType);
+		loc_operationSelection = loc_createOperationSelection(loc_operationSelectionContainerView, dataType);
 
 		loc_operationSelection.registerListener(function(eventName, eventData){
 			if(eventName=="selectOperation"){
@@ -367,7 +377,7 @@ var loc_crateOperandWrapper = function(operand, env){
 	var loc_checkWhetherNextButton = function(){
 		if(loc_operand.isReady()){
 			if(loc_nextButton==undefined){
-				loc_nextButton = loc_createNextButton(loc_containerView);
+				loc_nextButton = loc_createNextButton(loc_buttonContainerView);
 				loc_nextButton.registerListener(function(eventName, eventData){
 					if(eventName=="next"){
 						loc_varNextRequest();
@@ -452,10 +462,14 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 	var loc_eventObject = node_createEventObject();
 	
 	var loc_parentView = parentView;
-	
-	var loc_containerView = $("<div>Please select operation: </div>");
+
+	var loc_containerView = $("<span></span>");
+	var loc_selectOperationLabelView = $("<label>Please select operation : </label>");
 	var loc_selectOperationView = $("<select></select>");
-	loc_containerView.append(loc_selectOperationView);
+	loc_containerView.append(loc_selectOperationLabelView).append(" ").append(loc_selectOperationView);
+	loc_containerView.css(loc_css_selectContainer);
+	loc_selectOperationLabelView.css(loc_css_label);
+	loc_selectOperationView.css(loc_css_select);
 
 	var loc_baseDataType = baseDataType;
 	var loc_dataOperations;
@@ -525,17 +539,26 @@ var loc_createNextButton = function(parentView){
 	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
 	
 	var loc_parentView = parentView;
-	var loc_nextButtonView = $("<button></button>");
-	loc_parentView.append(loc_nextButtonView);
+	
+//	var loc_nextButtonView = $("<button></button>");
+//	loc_parentView.append(loc_nextButtonView);
 
+	var loc_containerView = $("<span></span>");
+	var loc_nextabelView = $("<label></label>");
+	var loc_nextButtonView = $("<button></button>");
+	loc_containerView.append(loc_nextabelView).append(" ").append(loc_nextButtonView);
+	loc_parentView.append(loc_containerView);
+	loc_containerView.css(loc_css_selectContainer);
+	loc_nextabelView.css(loc_css_label);
 	
 	var loc_status = 0;
-	var loc_statusInfo = [{"title":"-->", "event":"next"},{"title":"<--", "event":"back"} ];
+	var loc_statusInfo = [{"label":"Need operation?", "title":"-->", "event":"next"},{"label":"Revers operation?", "title":"<--", "event":"back"} ];
 	
 	var loc_eventObject = node_createEventObject();
 
 	var loc_updateStatus = function(){
 		loc_nextButtonView.text(loc_statusInfo[loc_status].title);
+		loc_nextabelView.text(loc_statusInfo[loc_status].label);
 	};
 
 	loc_updateStatus();
@@ -577,7 +600,7 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 	var loc_eventObject = node_createEventObject();
 
 	var loc_parentView;
-	var loc_containerView = $("<div>Container for operand operation</div>");
+	var loc_containerView = $("<div></div>");
 	
 	var loc_parms = [];
 	
@@ -679,7 +702,7 @@ var loc_createOperandConstant = function(dataDefinition){
 
 	var loc_parentView;
 
-	var loc_containerView = $("<div>Container for operand constant</div>");
+	var loc_containerView = $("<div></div>");
 
 	var loc_contantValueWrapperView = $("<div>Please choose constant value : </div>");
 	loc_containerView.append(loc_contantValueWrapperView);
@@ -799,11 +822,15 @@ var loc_createOperandVariable = function(varNames){
 	var loc_varName;
 
 	var loc_parentView;
-	var loc_containerView = $("<div>Container for operand variable</div>");
+	var loc_containerView = $("<div></div>");
 	
-	var loc_variableChooseViewContainer = $("<div>Please select variable name : </div>");
+	var loc_variableChooseViewContainer = $("<span></span>");
+	var loc_variableChooseLabelView = $("<label>Please select variable name : </label>");
 	var loc_variableChooseView = $("<select></select>");
-	loc_variableChooseViewContainer.append(loc_variableChooseView);
+	loc_variableChooseViewContainer.append(loc_variableChooseLabelView).append(" ").append(loc_variableChooseView);
+	loc_variableChooseViewContainer.css(loc_css_selectContainer);
+	loc_variableChooseLabelView.css(loc_css_label);
+	loc_variableChooseView.css(loc_css_select);
 	
 	var loc_eventObject = node_createEventObject();
 	
@@ -851,5 +878,29 @@ var loc_createOperandVariable = function(varNames){
 	};
 
 	return loc_out;
+};
+
+var loc_css_selectContainer = {
+	"white-space":"nowrap", "display":"inline-block"
+};
+
+var loc_css_label = {
+	"font-weight":"bold", "margin-right":"6px"
+};
+
+var loc_css_select = {
+		"display":"inline-block",
+		"vertical-align":"middle",
+		"margin-left":"4px",
+		"padding":"2px 24px 2px 8px",
+		"border":"1px solid #7a7a7a",
+		"border-radius":"0",
+		"background-color":"#fff",
+		"font-size":"14px",
+		"font-family":"inherit",
+		"cursor":"pointer",
+		"-webkit-appearance":"menulist",
+		"-moz-appearance":"menulist",
+		"appearance":"menulist"
 };
 
