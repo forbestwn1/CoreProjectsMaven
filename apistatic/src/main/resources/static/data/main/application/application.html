@@ -29,7 +29,7 @@
 
 var fetchTasks = [];
 fetchTasks.push(createCoreStaticTask());
-staticFetchTaskManager.fetch(fetchTasks, function(){
+createStaticFetchTaskManager().fetch(fetchTasks, function(){
 
 	var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");

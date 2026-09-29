@@ -14,7 +14,7 @@ var createFetchTask = function(staticInfos, processData, processFile, callBackFu
 	return loc_out;
 };
 
-var staticFetchTaskManager = function(){
+var createStaticFetchTaskManager = function(domainName){
 	
 	var loc_processedTasks = {};
 	
@@ -24,7 +24,8 @@ var staticFetchTaskManager = function(){
 		var processFile = fetchTask.processFile;
 
 		$.ajax({
-			url : "../../../nosliw/static/fetch",
+//			url : "../../../nosliw/static/fetch",
+			url : (domainName==undefined?"../../..":domainName) + "/nosliw/static/fetch",
 			type : "POST",
 			dataType: "json",
 			data : JSON.stringify(staticInfos),
@@ -128,7 +129,7 @@ var staticFetchTaskManager = function(){
 	};
 	
 	return loc_out;
-}();
+};
 
 
 var createCoreStaticTask = function(){
@@ -177,69 +178,5 @@ var createCoreStaticTask = function(){
 	);
 
     return fetchTask;	
-};
-
-
-
-var fectchUtility = function(staticInfos, processData, processFile, callBackFun){
-
-
-$.ajax({
-	url : "../../../nosliw/static/fetch",
-	type : "POST",
-	dataType: "json",
-	data : JSON.stringify(staticInfos),
-	async : true,
-	success : function(serviceData, status){
-		var result = serviceData.data.item;
-		
-		var fileNumber = result.length;
-		var count = 0;
-		
-		var processItem = function(){
-			var item = result[count];
-			
-			if(item.type=="url"){
-               //for file
-			    if(processFile!=undefined){
-                     processFile(item.uri);			    
-			    }
-				var scriptEle = document.createElement('script');
-				scriptEle.setAttribute('src', item.uri);
-				scriptEle.setAttribute('defer', "defer");
-				scriptEle.setAttribute('type', 'text/javascript');
-
-				scriptEle.onload = processNext;
-				document.getElementsByTagName("head")[0].appendChild(scriptEle);
-			}
-			else if(item.type=="data"){
-			    if(processData!=undefined){
-                     processData(item.data);			    
-			    }
-				processNext();
-			}
-			
-		};
-		
-		var processNext = function(){
-			count++;
-			if(count>=fileNumber){
-				if(callBackFun!=undefined){
-				     callBackFun();
-				}
-			}
-			else{
-				processItem();
-			}
-		};
-		
-		processItem();
-	},
-	error: function(obj, textStatus, errorThrown){
-	},
-});
-
-
-
 };
 
