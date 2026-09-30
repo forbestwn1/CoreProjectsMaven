@@ -3,23 +3,18 @@ package com.nosliw.core.application.division.story.design.wizzard.datasourcedriv
 import java.util.Map;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardParserValueInQuestion;
-import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionairImp;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.expression.definition.HAPDefinitionRawDataExpression;
 
 @HAPEntityWithAttribute
-public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic extends HAPStoryWizzardValueInQuestionairImp{
+public class HAPStoryValueChosen extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static final String CONSTANTDATA = "constantData";
@@ -30,18 +25,8 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	private HAPData m_constantData;
 	
 	private HAPDefinitionRawDataExpression m_expression;
-	
-	private HAPStoryValueChosen m_valueChosen;
-	
-	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic() {
-		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
-	}
-	
-	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(HAPData constantData) {
-		this();
-		this.setConstantData(constantData);
-	}
-		
+
+
 	public HAPData getConstantData() {    return this.m_constantData;     }
 	public void setConstantData(HAPData data) {    this.m_constantData = data;       }
 	
@@ -59,33 +44,22 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 			jsonMap.put(EXPRESSION, this.m_expression.toStringValue(HAPSerializationFormat.JSON));
 		}
 	}
-}
-
-@Component
-class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic_HAPEntityParsable extends HAPStoryWizzardParserValueInQuestion{
 
 	@Override
-	public String getSubName() {   return HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE;  }
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic out = new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic();
-		
+	protected boolean buildObjectByJson(Object obj){  
 		JSONObject jsonObj = (JSONObject)obj;
 		
 		Object dataConstantObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.CONSTANTDATA);
 		if(dataConstantObj!=null) {
-			out.setConstantData(HAPUtilityData.buildDataWrapperFromObject(dataConstantObj));
+			this.setConstantData(HAPUtilityData.buildDataWrapperFromObject(dataConstantObj));
 		}
 		
 		Object expressionObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.EXPRESSION);
 		if(expressionObj!=null) {
 			HAPDefinitionRawDataExpression expression = new HAPDefinitionRawDataExpression();
 			expression.buildObject(expressionObj, HAPSerializationFormat.JSON);
-			out.setExpression(expression);
+			this.setExpression(expression);
 		}
-		
-		return out;
+		return true;
 	}
-
 }

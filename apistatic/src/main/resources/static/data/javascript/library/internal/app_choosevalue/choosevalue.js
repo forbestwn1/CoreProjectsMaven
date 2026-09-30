@@ -1,76 +1,20 @@
-var createOperandBuildApp = function(dataDefinition){
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
+var packageObj = library;    
 
-	var loc_eventObject = node_createEventObject();
-		
-	var loc_env = {
-		
-		getOptions : function(dataDefinition){
-			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-
-			var constantOption = {
-				"type" : "constant"
-			};
-			var variableOption = {
-				"type" : "variable",
-				"variables" : ["today"]
-			};
-			
-			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
-			var out = [];
-			if(criteria=="test.date;1.0.0"){
-				out.push(constantOption);
-    			out.push(variableOption);
-			}
-			else{
-				out.push(constantOption);
-			}
-			return out;
-		}
-	};
-
-	var loc_expression = loc_createExpression("expression", dataDefinition, loc_env);
+(function(packageObj){
+	//get used node
+	var node_CONSTANT;
+	var node_COMMONATRIBUTECONSTANT;
+	var node_COMMONCONSTANT;
+	var node_createServiceRequestInfoSimple;
+	var node_createServiceRequestInfoSequence;
+	var node_basicUtility;
+	var node_createEventObject;
+	var node_requestServiceProcessor;
+	var node_ResourceId;
 	
-	var loc_contentWrapperView = $("<div>AppContainer</div>");
-	
-	var loc_buildExpression = function(){
-		var out = {
-			constants : {}
-		};
-		out.expression = loc_expression.buildExpression(out.constants);
-        return out;		
-	};
-	
-	var loc_out = {
-		
-		getInitRequest : function(handlers, request){
-			loc_expression.registerListener(function(eventName, eventData){
-				if(eventName=="change"){
-					console.log(JSON.stringify(loc_buildExpression()));
-				}
-			});
-			
-			return loc_expression.getInitRequest(handlers, request);
-		},
-		
-		updateView : function(parentView){
-			loc_expression.updateView(loc_contentWrapperView);
-			parentView.append(loc_contentWrapperView);
-		}
-		
-	};
-	
-	return loc_out;
-
-};
+//*******************************************   Start Node Definition  ************************************** 	
 
 var loc_createExpression = function(id, dataDefinition, env){
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-
 	var loc_id = id;
 	
 	var loc_eventObject = node_createEventObject();
@@ -102,8 +46,6 @@ var loc_createExpression = function(id, dataDefinition, env){
 	};
 	
 	var loc_getUpdateTypeSelectionRequest = function(type, handlers, request){
-		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		
 		if(loc_currentType!=null){
@@ -146,9 +88,7 @@ var loc_createExpression = function(id, dataDefinition, env){
 	};
 	
 	var loc_getInitRequest = function(handlers, request){
-		
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		
 		loc_options = loc_env.getOptions(loc_dataDefinition);
 		
 		if(loc_options.length>1){
@@ -217,9 +157,6 @@ var loc_createExpression = function(id, dataDefinition, env){
 
 
 var loc_createOperandChain = function(id, rootType, parentView, env){
-	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-	
 	var loc_eventObject = node_createEventObject();
 	
 	var loc_id = id;
@@ -245,10 +182,7 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 	};
 	
 	var loc_addOperandRequest = function(operand, handlers, request){
-		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		
 		operand.setId(loc_id+"_"+operand.getType()+"_"+loc_operandChain.length);
 		
 		var wrapper = loc_crateOperandWrapper(operand, loc_env);
@@ -331,10 +265,6 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 };
 
 var loc_crateOperandWrapper = function(operand, env){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-
 	var loc_operand = operand;
 	var loc_env = env;
 
@@ -453,12 +383,6 @@ var loc_crateOperandWrapper = function(operand, env){
 };
 
 var loc_createOperationSelection = function(parentView, baseDataType){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-	var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
-	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
-	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-
 	var loc_eventObject = node_createEventObject();
 	
 	var loc_parentView = parentView;
@@ -475,8 +399,6 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 	var loc_dataOperations;
 	
 	var loc_getRelatedOperationsRequest = function(baseDatatType, resultDataType, handlers, request){
-		var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		var gatewayParm = {};
 		gatewayParm[node_COMMONATRIBUTECONSTANT.GATEWAYDATATYPE_COMMAND_GETRELATEDOPERATION_DATATYPE_BASE] = baseDatatType;
@@ -536,8 +458,6 @@ var loc_createOperationSelection = function(parentView, baseDataType){
 };
 
 var loc_createNextButton = function(parentView){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-	
 	var loc_parentView = parentView;
 	
 //	var loc_nextButtonView = $("<button></button>");
@@ -585,9 +505,6 @@ var loc_createNextButton = function(parentView){
 
 
 var loc_createOperandOperation = function(dataOperation, env, resultDataType, baseDataType){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-
 	var loc_id;
 
 	var loc_dataOperation = dataOperation;
@@ -694,8 +611,6 @@ var loc_createOperandOperation = function(dataOperation, env, resultDataType, ba
 };
 
 var loc_createOperandConstant = function(dataDefinition){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-
 	var loc_id;
 	
 	var loc_dataDefinition = dataDefinition;
@@ -729,12 +644,6 @@ var loc_createOperandConstant = function(dataDefinition){
 		},
 		
 		getInitRequest : function(parentView, handlers, request){
-			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
-			var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
-			var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
-			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-			var node_ResourceId = nosliw.getNodeData("resource.entity.ResourceId");
-			
 			loc_parentView = parentView;
 			
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
@@ -814,8 +723,6 @@ var loc_createOperandConstant = function(dataDefinition){
 };
 
 var loc_createOperandVariable = function(varNames){
-	var node_createEventObject = nosliw.getNodeData("common.event.createEventObject");
-
 	var loc_id;
 
 	var loc_varNames = varNames;
@@ -846,7 +753,6 @@ var loc_createOperandVariable = function(varNames){
 		},
 		
 		getInitRequest : function(parentView, handlers, request){
-			var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
 			loc_parentView = parentView;
 			
 			loc_containerView.append(loc_variableChooseViewContainer);
@@ -903,4 +809,87 @@ var loc_css_select = {
 		"-moz-appearance":"menulist",
 		"appearance":"menulist"
 };
+
+var node_createValueApp = function(dataDefinition){
+	var loc_eventObject = node_createEventObject();
+		
+	var loc_env = {
+		
+		getOptions : function(dataDefinition){
+			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+
+			var constantOption = {
+				"type" : "constant"
+			};
+			var variableOption = {
+				"type" : "variable",
+				"variables" : ["today"]
+			};
+			
+			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
+			var out = [];
+			if(criteria=="test.date;1.0.0"){
+				out.push(constantOption);
+    			out.push(variableOption);
+			}
+			else{
+				out.push(constantOption);
+			}
+			return out;
+		}
+	};
+
+	var loc_expression = loc_createExpression("expression", dataDefinition, loc_env);
+	
+	var loc_contentWrapperView = $("<div>AppContainer</div>");
+	
+	var loc_buildExpression = function(){
+		var out = {
+			constants : {}
+		};
+		out.expression = loc_expression.buildExpression(out.constants);
+        return out;		
+	};
+	
+	var loc_out = {
+		
+		getInitRequest : function(handlers, request){
+			loc_expression.registerListener(function(eventName, eventData){
+				if(eventName=="change"){
+					console.log(JSON.stringify(loc_buildExpression()));
+				}
+			});
+			
+			return loc_expression.getInitRequest(handlers, request);
+		},
+		
+		updateView : function(parentView){
+			loc_expression.updateView(loc_contentWrapperView);
+			parentView.append(loc_contentWrapperView);
+		}
+		
+	};
+	
+	return loc_out;
+
+};
+
+//*******************************************   End Node Definition  ************************************** 	
+
+//populate dependency node data
+nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
+nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
+nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
+nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
+nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
+nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
+
+//Register Node by Name
+packageObj.createChildNode("createValueApp", node_createValueApp); 
+
+})(packageObj);
+
 
