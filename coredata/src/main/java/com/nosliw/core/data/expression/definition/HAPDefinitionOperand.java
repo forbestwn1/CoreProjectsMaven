@@ -6,15 +6,19 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public abstract class HAPDefinitionOperand extends HAPSerializableImp implements HAPEntityParsable{
 
 	public static final String PARSABLEENTITYDOMAIN = "core.dataexpression.definition";
 	
+	@HAPAttribute
 	public static String TYPE = "type";
 	
 	private String m_type;

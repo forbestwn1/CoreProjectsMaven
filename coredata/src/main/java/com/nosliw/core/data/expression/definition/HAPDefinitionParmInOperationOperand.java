@@ -2,13 +2,18 @@ package com.nosliw.core.data.expression.definition;
 
 import java.util.Map;
 
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
+@HAPEntityWithAttribute
 public class HAPDefinitionParmInOperationOperand extends HAPSerializableImp{
 
+	@HAPAttribute
 	public static String NAME = "name";
 	
+	@HAPAttribute
 	public static String OPERAND = "operand";
 	
 	private String m_name;

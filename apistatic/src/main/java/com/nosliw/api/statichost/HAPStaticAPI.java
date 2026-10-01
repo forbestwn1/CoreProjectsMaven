@@ -165,8 +165,8 @@ public class HAPStaticAPI {
 			if(configureName.equals("core")) {
 				out.addAll(this.fetchCoreLibrary(consolidate));
 			}
-			else if(configureName.equals("choosevalue")) {
-			    out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "app_choosevalue", null), consolidate));
+			else if(configureName.equals("storybuild")) {
+			    out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "app_storybuild", null), consolidate));
 			}
 			else if(configureName.equals("scriptreproduce")) {
 			    out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));

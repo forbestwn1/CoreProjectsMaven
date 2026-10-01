@@ -37,10 +37,10 @@ var fetchTasks = [
 		    "staticInfo" : [
 			    {
 				    "type" : "configure",
-				    "name" : "choosevalue"
+				    "name" : "storybuild"
 	            }
 		    ],
-		    "requestId" : "ChooseValue"
+		    "requestId" : "StoryBuild"
 	    }
 	),
 ];
@@ -51,7 +51,7 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	var node_createValueApp = nosliw.getNodeData("app_choosevalue.createValueApp");
+	var node_createValueApp = nosliw.getNodeData("app_storybuild.createValueApp");
 
 	var parms = node_basicUtility.getParmsInUrl();
 	var dataType = parms.dataType==undefined?"string":parms.dataType;
@@ -63,7 +63,7 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	var opBuildApp = node_createValueApp(dataDefinition);
 	var request = opBuildApp.getInitRequest({
         success : function(request){
-        	opBuildApp.updateView($("#main"));
+        	$("#main").append(opBuildApp.getView());
         }
     });
 	node_requestServiceProcessor.processRequest(request);			

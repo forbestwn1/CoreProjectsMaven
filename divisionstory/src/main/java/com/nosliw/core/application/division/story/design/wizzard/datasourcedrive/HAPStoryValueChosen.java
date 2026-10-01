@@ -9,6 +9,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.expression.definition.HAPDefinitionRawDataExpression;
@@ -45,21 +46,21 @@ public class HAPStoryValueChosen extends HAPSerializableImp{
 		}
 	}
 
-	@Override
-	protected boolean buildObjectByJson(Object obj){  
-		JSONObject jsonObj = (JSONObject)obj;
+	public static HAPStoryValueChosen buildStoryValueChosen(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		HAPStoryValueChosen out = new HAPStoryValueChosen();
 		
 		Object dataConstantObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.CONSTANTDATA);
 		if(dataConstantObj!=null) {
-			this.setConstantData(HAPUtilityData.buildDataWrapperFromObject(dataConstantObj));
+			out.setConstantData(HAPUtilityData.buildDataWrapperFromObject(dataConstantObj));
 		}
 		
 		Object expressionObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.EXPRESSION);
 		if(expressionObj!=null) {
-			HAPDefinitionRawDataExpression expression = new HAPDefinitionRawDataExpression();
-			expression.buildObject(expressionObj, HAPSerializationFormat.JSON);
-			this.setExpression(expression);
+			HAPDefinitionRawDataExpression expression = HAPDefinitionRawDataExpression.buildRawDataExpression((JSONObject)expressionObj, parseService);
+			out.setExpression(expression);
 		}
-		return true;
+		
+		return out;
 	}
+	
 }
