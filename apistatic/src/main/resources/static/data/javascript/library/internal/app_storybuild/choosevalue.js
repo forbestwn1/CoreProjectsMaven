@@ -14,116 +14,177 @@ var packageObj = library;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
-var loc_createExpression = function(id, dataDefinition, env){
-	var loc_id = id;
+var loc_createRootChoose = function(dataDefinition, env){
 	
-	var loc_eventObject = node_createEventObject();
+	var loc_eventObject;
 
-	var loc_dataDefinition = dataDefinition;
-	var loc_env = env;
+	var loc_dataDefinition;
+	var loc_env;
 		
-	var loc_currentType;
-	var loc_operandChooses = {};
-
-	var loc_containerView = $("<div></div>");
-
-	var loc_selectChooseTypeView = $("<select id=\""+loc_id+"\"></select>");
-	var loc_selectChooseTypeLabelView = $("<label for=\""+loc_id+"\">Please select value type:</label>");
-	var loc_selectChooseTypeContainerView = $("<span></span>");
-	loc_selectChooseTypeContainerView.append(loc_selectChooseTypeLabelView).append(" ").append(loc_selectChooseTypeView);
-	loc_selectChooseTypeContainerView.css(loc_css_selectContainer);
-	loc_selectChooseTypeLabelView.css(loc_css_label);
-	loc_selectChooseTypeView.css(loc_css_select);
-
-	var loc_chooseTypeContainerView = $("<div></div>");
-
+	var loc_currentChoose;
 	
 	var loc_options;
 	var loc_optionsByName = {};
+
+	var loc_containerView = $("<div></div>");
 	
-	var loc_getCurrentChain = function(){
-		return loc_operandChooses[loc_currentType];
+	var loc_selectChooseTypeView;
+	
+	var loc_init = function(dataDefinition, env){
+		loc_dataDefinition = dataDefinition;
+		loc_env = env;
+		loc_eventObject = node_createEventObject();
+
+		loc_options = loc_env.getOptions(loc_dataDefinition);
+
+		if(loc_options.length>1){
+			loc_selectChooseTypeView = $("<select id='chooseRootType'></select>");
+			var loc_selectChooseTypeLabelView = $("<label for='chooseRootType'>Please select value type:</label>");
+			var loc_selectChooseTypeContainerView = $("<span></span>");
+			loc_selectChooseTypeContainerView.append(loc_selectChooseTypeLabelView).append(" ").append(loc_selectChooseTypeView);
+			loc_selectChooseTypeContainerView.css(loc_css_selectContainer);
+			loc_selectChooseTypeLabelView.css(loc_css_label);
+			loc_selectChooseTypeView.css(loc_css_select);
+			loc_containerView.append(loc_selectChooseTypeContainerView);
+
+			_.each(loc_options, function(option, i){
+				loc_selectChooseTypeView.append($('<option>', { value: option.type, text: option.type }));
+				loc_optionsByName[option.type] = option;
+			});
+
+			loc_selectChooseTypeView.on("change", function(event){
+//				var from = loc_currentChoose;
+//				loc_currentChoose = loc_selectChooseTypeView.val();
+				loc_eventObject.triggerEvent("change", loc_selectChooseTypeView.val());
+			});
+		}
+    	loc_currentChoose = loc_options[0].type;
+	};	
+	
+	var loc_out = {
+		
+		getCurrentChoose : function(){
+			return loc_currentChoose;
+		},
+		
+		setCurrentChoose : function(choose){
+			loc_currentChoose = choose;
+			if(loc_options.length>1){
+				loc_selectChooseTypeView.val(loc_currentChoose);
+			}
+		},
+		
+		getView : function(){
+			return loc_containerView;
+		},
+		
+		registerListener : function(handler){
+			return loc_eventObject.registerListener(undefined, undefined, handler, this);
+		},
+		
 	};
 	
-	var loc_getUpdateTypeSelectionRequest = function(type, handlers, request){
-		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		
-		if(loc_currentType!=null){
+	loc_init(dataDefinition, env);
+	return loc_out;
+};
+
+var loc_createExpression = function(id, dataDefinition, env){
+	var loc_id;
+	
+	var loc_eventObject;
+
+	var loc_dataDefinition;
+	var loc_env;
+
+	var loc_containerView = $("<div></div>");
+	var loc_chainContainerView = $("<div></div>");
+
+	var loc_rootChoose;
+	
+	var loc_chainsByType = {};
+
+	var loc_getCurrentRootType = function(){	return loc_rootChoose.getCurrentChoose();	};
+
+	var loc_getCurrentChain = function(){	return loc_chainsByType[loc_getCurrentRootType()];	};
+	
+	var loc_updateRootTypeSelection = function(rootType){
+		if(loc_getCurrentRootType()!=null){
 			loc_getCurrentChain().disable();
 		}
-		
-		loc_currentType = type;
-		var currentChoose = loc_getCurrentChain();
-		if(currentChoose!=null){
-			currentChoose.enable();
+
+		loc_rootChoose.setCurrentChoose(rootType);
+		var currentChain = loc_getCurrentChain();
+		if(currentChain!=null){
+			currentChain.enable();
 		}
-		else{
-			currentChoose = loc_createOperandChain(loc_id+"_"+loc_currentType, loc_currentType, loc_chooseTypeContainerView, loc_env);
-			loc_operandChooses[loc_currentType] = currentChoose;
-			
+	};
+	
+	var loc_getInitNewRequest = function(handlers, request){
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		loc_options = loc_env.getOptions(loc_dataDefinition);
+
+		_.each(loc_options, function(option, name){
+			var rootType = option.type;
+			chain = loc_createOperandChain(loc_id+"_"+rootType, rootType, loc_chainContainerView, loc_env);
+			loc_chainsByType[rootType] = chain;
+
 			var operand;
-			if(loc_currentType=="constant"){
+			if(rootType=="constant"){
 				operand = loc_createOperandConstant(loc_dataDefinition);
 			}
-			else if(loc_currentType=="variable"){
+			else if(rootType=="variable"){
 				operand = loc_createOperandVariable(loc_dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA], loc_env);
 			}
-			
-			out.addRequest(currentChoose.addOperandRequest(operand, {
-				success : function(request, operandWrapper){
-					currentChoose.enable();
-				}
-			}));
-			
-			currentChoose.registerListener(function(eventName, eventData){
-				if(currentChoose.getRootType()==loc_currentType){
+
+			out.addRequest(chain.addOperandRequest(operand));
+		});
+		
+		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+			loc_updateRootTypeSelection("constant");
+			loc_registerListener();
+		}));
+		
+		return out;
+	};
+	
+	var loc_registerListener = function(){
+		loc_rootChoose.registerListener(function(eventName, eventData){
+			if(eventName=="change"){
+				loc_updateRootTypeSelection(eventData);
+			}
+		});
+		_.each(loc_chainsByType, function(chain){
+			chain.registerListener(function(eventName, eventData){
+				if(chain.getRootType()==loc_getCurrentRootType()){
 					if(eventName=="change"){
 						loc_eventObject.triggerEvent(eventName);
 					}
 				}
 			});
-		}
-		
-		return out;
+		});
 	};
-	
-	var loc_getInitRequest = function(handlers, request){
-		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		loc_options = loc_env.getOptions(loc_dataDefinition);
-		
-		if(loc_options.length>1){
-			_.each(loc_options, function(option, i){
-				loc_selectChooseTypeView.append($('<option>', { value: option.type, text: option.type }));
-				loc_optionsByName[option.type] = option;
-			});
-			loc_containerView.append(loc_selectChooseTypeContainerView);
 
-			out.addRequest(loc_getUpdateTypeSelectionRequest(loc_options[0].type));
-			
-			loc_selectChooseTypeView.on("change", function(event){
-				var out = node_createServiceRequestInfoSequence(undefined);
-				var value = loc_selectChooseTypeView.val();
-				out.addRequest(loc_getUpdateTypeSelectionRequest(value, {
-					success : function(request){
-						loc_eventObject.triggerEvent("change");
-					}
-				}));
-    			node_requestServiceProcessor.processRequest(out);
-			});
-		}
-		else{
-			out.addRequest(loc_getUpdateTypeSelectionRequest(loc_options[0].type));
-		}
+	var loc_init = function(id, dataDefinition, env){
+		loc_id = id;
+		loc_dataDefinition = dataDefinition;
+		loc_env = env;
+
+		loc_eventObject = node_createEventObject();
+
+		loc_rootChoose = loc_createRootChoose(loc_dataDefinition, loc_env);
 		
-		loc_containerView.append(loc_chooseTypeContainerView);
-		
-		return out;
+		loc_containerView.append(loc_rootChoose.getView());
+		loc_containerView.append(loc_chainContainerView);
 	};
-	
+
 	var loc_out ={
 		
 		getInitRequest : function(handlers, request){
-			return loc_getInitRequest(handlers, request);
+			return loc_getInitNewRequest(handlers, request);
+		},
+		
+		getInitWithValueRequest : function(expressionObj, handlers, request){
+			
 		},
 		
 		updateView : function(parentView){
@@ -141,7 +202,7 @@ var loc_createExpression = function(id, dataDefinition, env){
 		
 		destroy : function(){
 			loc_containerView.remove();
-			_.each(loc_operandChooses, function(choose){
+			_.each(loc_chainsByType, function(choose){
 				choose.destroy();
 			});
         },
@@ -156,6 +217,7 @@ var loc_createExpression = function(id, dataDefinition, env){
 
 	};
 	
+	loc_init(id, dataDefinition, env);
 	return loc_out;
 };
 
@@ -231,14 +293,6 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 		
 		getRootType : function(){   return loc_rootType;      },
 		
-		buildExpression : function(constants){
-			var out;
-			for(var i in loc_operandChain){
-				out = loc_operandChain[i].getOperand().buildExpression(out, constants);
-			}
-			return out;
-		},
-
 		addOperandRequest : function(operand, handlers, request){
 			return loc_addOperandRequest(operand, handlers, request)
 		},
@@ -419,6 +473,8 @@ var loc_createNextButton = function(parentView){
 	
 	var loc_eventObject = node_createEventObject();
 
+	var loc_enabled;
+	
 	var loc_updateStatus = function(){
 		loc_nextButtonView.text(loc_statusInfo[loc_status].title);
 		loc_nextabelView.text(loc_statusInfo[loc_status].label);
@@ -445,11 +501,17 @@ var loc_createNextButton = function(parentView){
 		},
 		
 		enable : function(){
-			loc_parentView.append(loc_containerView);
+			if(loc_enabled!=true){
+				loc_parentView.append(loc_containerView);
+			}
+    		loc_enabled = true;
 		},
 		
 		disable : function(){
-			loc_containerView.remove();
+			if(loc_enabled==true){
+			     loc_containerView.remove();
+			}
+    		loc_enabled = false;
 		},
 		
 		registerListener : function(handler){
@@ -495,7 +557,7 @@ var loc_createOperandOperation = function(arg1, env){
 			loc_baseDataType = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_DATATYPEID]; 
 			loc_operationName = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
 			loc_parmsObj = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS];
-		}		
+		}
 	};
 	
 	var loc_getInitParmsRequest = function(handlers, request){
@@ -515,7 +577,12 @@ var loc_createOperandOperation = function(arg1, env){
 		return out;
 	};
 	
+	var loc_getInitExistingOperationRequest = function(){
+		
+	};
+	
 	var loc_getInitNewOperationRequest = function(handlers, request){
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		_.each(loc_dataOperation.parms, function(parm){
 			if(parm.isBase!="true"){
 				var datadefinition = {
@@ -534,16 +601,19 @@ var loc_createOperandOperation = function(arg1, env){
 				loc_parms.push(parmInfo);
 			}
 		});
-		return loc_getInitParmsRequest(handlers, request);
+		out.addRequest(loc_getInitParmsRequest({
+			success : function(request){
+				loc_eventObject.triggerEvent("change");
+			}
+		}));
+		return out;
 	};
 	
 	var loc_deleteParms = function(){
-		_.each(loc_dataOperation.parms, function(parmInfo){
-			if(parm.isBase!="true"){
-				parmInfo.view.remove();
-				parmInfo.expression.destroy();
-				loc_parms = [];
-			}
+		_.each(loc_parms, function(parmInfo){
+			parmInfo.view.remove();
+			parmInfo.expression.destroy();
+			loc_parms = [];
 		});
 	};
 	
@@ -567,7 +637,7 @@ var loc_createOperandOperation = function(arg1, env){
 			}
 		});
 
-		var out = node_createServiceRequestInfoSequence();
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		out.addRequest(loc_operationSelection.getInitRequest({
 			success : function(request){
 				loc_dataOperation = loc_operationSelection.getCurrentDataOperation();
@@ -578,7 +648,7 @@ var loc_createOperandOperation = function(arg1, env){
 					return loc_getInitNewOperationRequest();
 				}
 				else{
-					
+					return loc_getInitExistingOperationRequest();
 				}
 			}
 		}));
