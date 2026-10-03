@@ -10,54 +10,64 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.data.HAPData;
-import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.expression.definition.HAPDefinitionRawDataExpression;
 
 @HAPEntityWithAttribute
 public class HAPStoryValueChosen extends HAPSerializableImp{
 
 	@HAPAttribute
-	public static final String CONSTANTDATA = "constantData";
+	public static final String EXPRESSIONTYPE = "expressionType";
 	
 	@HAPAttribute
-	public static final String EXPRESSION = "expression";
+	public static final String CONSTANTEXPRESSION = "constantExpression";
 	
-	private HAPData m_constantData;
+	@HAPAttribute
+	public static final String VARIABLEEXPRESSION = "variableExpression";
 	
-	private HAPDefinitionRawDataExpression m_expression;
+	private String m_expressionType;
+	
+	private HAPDefinitionRawDataExpression m_constantExpression;
+	
+	private HAPDefinitionRawDataExpression m_variableExpression;
 
+	public void setExpressionType(String expressionType) {     this.m_expressionType = expressionType;           }
 
-	public HAPData getConstantData() {    return this.m_constantData;     }
-	public void setConstantData(HAPData data) {    this.m_constantData = data;       }
+	public HAPDefinitionRawDataExpression getConstantExpression() {    return this.m_constantExpression;     }
+	public void setConstantExpression(HAPDefinitionRawDataExpression data) {    this.m_constantExpression = data;       }
 	
-	public HAPDefinitionRawDataExpression getExpression() {     return this.m_expression;     }
-	public void setExpression(HAPDefinitionRawDataExpression expression) {     this.m_expression = expression;        }
+	public HAPDefinitionRawDataExpression getVariableExpression() {     return this.m_variableExpression;     }
+	public void setVariableExpression(HAPDefinitionRawDataExpression expression) {     this.m_variableExpression = expression;        }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		if(this.m_constantData!=null) {
-			jsonMap.put(CONSTANTDATA, HAPManagerSerialize.getInstance().toStringValue(m_constantData, HAPSerializationFormat.JSON));
+		
+		jsonMap.put(EXPRESSIONTYPE, this.m_expressionType);
+		
+		if(this.m_constantExpression!=null) {
+			jsonMap.put(CONSTANTEXPRESSION, HAPManagerSerialize.getInstance().toStringValue(m_constantExpression, HAPSerializationFormat.JSON));
 		}
 		
-		if(this.m_expression!=null) {
-			jsonMap.put(EXPRESSION, this.m_expression.toStringValue(HAPSerializationFormat.JSON));
+		if(this.m_variableExpression!=null) {
+			jsonMap.put(CONSTANTEXPRESSION, HAPManagerSerialize.getInstance().toStringValue(m_variableExpression, HAPSerializationFormat.JSON));
 		}
 	}
 
 	public static HAPStoryValueChosen buildStoryValueChosen(JSONObject jsonObj, HAPServiceParseEntity parseService) {
 		HAPStoryValueChosen out = new HAPStoryValueChosen();
 		
-		Object dataConstantObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.CONSTANTDATA);
-		if(dataConstantObj!=null) {
-			out.setConstantData(HAPUtilityData.buildDataWrapperFromObject(dataConstantObj));
+		out.setExpressionType(jsonObj.getString(HAPStoryValueChosen.EXPRESSIONTYPE));
+		
+		Object constantExpressionObj = jsonObj.opt(HAPStoryValueChosen.CONSTANTEXPRESSION);
+		if(constantExpressionObj!=null) {
+			HAPDefinitionRawDataExpression constantExpression = HAPDefinitionRawDataExpression.buildRawDataExpression((JSONObject)constantExpressionObj, parseService);
+			out.setConstantExpression(constantExpression);
 		}
 		
-		Object expressionObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.EXPRESSION);
-		if(expressionObj!=null) {
-			HAPDefinitionRawDataExpression expression = HAPDefinitionRawDataExpression.buildRawDataExpression((JSONObject)expressionObj, parseService);
-			out.setExpression(expression);
+		Object varExpressionObj = jsonObj.opt(HAPStoryValueChosen.VARIABLEEXPRESSION);
+		if(varExpressionObj!=null) {
+			HAPDefinitionRawDataExpression varExpression = HAPDefinitionRawDataExpression.buildRawDataExpression((JSONObject)varExpressionObj, parseService);
+			out.setVariableExpression(varExpression);
 		}
 		
 		return out;

@@ -88,55 +88,59 @@ var loc_createRootChoose = function(dataDefinition, env){
 	return loc_out;
 };
 
-var loc_createExpression = function(id, dataDefinition, env){
+//id + data definition + env
+//valueChooseObj + undefined + env
+var loc_createValueChoose = function(arg1, arg2, env){
 	var loc_id;
 	
 	var loc_eventObject;
 
 	var loc_dataDefinition;
+
+	var loc_valueChooseObj;
+	
 	var loc_env;
 
 	var loc_containerView = $("<div></div>");
-	var loc_chainContainerView = $("<div></div>");
+	var loc_expressionContainerView = $("<div></div>");
 
 	var loc_rootChoose;
 	
-	var loc_chainsByType = {};
+	var loc_expressionsByType = {};
 
 	var loc_getCurrentRootType = function(){	return loc_rootChoose.getCurrentChoose();	};
 
-	var loc_getCurrentChain = function(){	return loc_chainsByType[loc_getCurrentRootType()];	};
+	var loc_getCurrentExpression = function(){	return loc_expressionsByType[loc_getCurrentRootType()];	};
 	
 	var loc_updateRootTypeSelection = function(rootType){
 		if(loc_getCurrentRootType()!=null){
-			loc_getCurrentChain().disable();
+			loc_getCurrentExpression().disable();
 		}
 
 		loc_rootChoose.setCurrentChoose(rootType);
-		var currentChain = loc_getCurrentChain();
-		if(currentChain!=null){
-			currentChain.enable();
+		var currentExpression = loc_getCurrentExpression();
+		if(currentExpression!=null){
+			currentExpression.enable();
 		}
 	};
-	
+
+	var loc_newRootOperand = function(rootType){
+		var operand;
+		if(rootType=="constant"){
+			operand = loc_createOperandConstant(loc_dataDefinition);
+		}
+		else if(rootType=="variable"){
+			operand = loc_createOperandVariable(loc_dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA], loc_env);
+		}
+		return operand;
+	};
+		
 	var loc_getInitNewRequest = function(handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		loc_options = loc_env.getOptions(loc_dataDefinition);
 
-		_.each(loc_options, function(option, name){
-			var rootType = option.type;
-			chain = loc_createOperandChain(loc_id+"_"+rootType, rootType, loc_chainContainerView, loc_env);
-			loc_chainsByType[rootType] = chain;
-
-			var operand;
-			if(rootType=="constant"){
-				operand = loc_createOperandConstant(loc_dataDefinition);
-			}
-			else if(rootType=="variable"){
-				operand = loc_createOperandVariable(loc_dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA], loc_env);
-			}
-
-			out.addRequest(chain.addOperandRequest(operand));
+		_.each(loc_expressionsByType, function(expression, rootType){
+			var operand = loc_newRootOperand(rootType);
+			out.addRequest(expression.addOperandRequest(operand));
 		});
 		
 		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
@@ -146,6 +150,50 @@ var loc_createExpression = function(id, dataDefinition, env){
 		
 		return out;
 	};
+
+	var loc_buildOperandChain = function(operand){
+		var out = [];
+    	var operandType =  operand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE];
+	    if(operandType==node_COMMONCONSTANT.EXPRESSION_OPERAND_VARIABLE){
+		    out.push(loc_createOperandVariable(operand, loc_env));
+	    }
+	    else if(operandType==node_COMMONCONSTANT.EXPRESSION_OPERAND_CONSTANT){
+		    out.push(loc_createOperandConstant(undefined, operand));
+	    }
+	    else if(operandType==node_COMMONCONSTANT.EXPRESSION_OPERAND_OPERATION){
+			var baseOut = loc_buildOperandChain(operand.base);
+			for(var i in baseOut){
+				out.push(baseOut[i]);
+			}
+		
+    		out.push(loc_createOperandOperation(operand, loc_env));
+	    }
+		return out;
+	};
+	
+	var loc_getInitExistingRequest = function(valueChooseObj, handlers, request){
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		
+		_.each(loc_expressionsByType, function(expression, rootType){
+			var choose = valueChooseObj.chooes[rootType];
+			if(choose!=null){
+				var operandChains = loc_buildOperandChain(choose.operand);
+				_.each(operandChains, function(operand){
+					out.addRequest(expression.addOperandRequest(operand));
+				});
+			}
+			else{
+				var operand = loc_newRootOperand(rootType);
+				out.addRequest(expression.addOperandRequest(operand));
+			}
+		});
+		
+		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+			loc_updateRootTypeSelection(valueChooseObj.chooseType);
+			loc_registerListener();
+		}));
+		return out;
+	};
 	
 	var loc_registerListener = function(){
 		loc_rootChoose.registerListener(function(eventName, eventData){
@@ -153,9 +201,9 @@ var loc_createExpression = function(id, dataDefinition, env){
 				loc_updateRootTypeSelection(eventData);
 			}
 		});
-		_.each(loc_chainsByType, function(chain){
-			chain.registerListener(function(eventName, eventData){
-				if(chain.getRootType()==loc_getCurrentRootType()){
+		_.each(loc_expressionsByType, function(expression){
+			expression.registerListener(function(eventName, eventData){
+				if(expression.getRootType()==loc_getCurrentRootType()){
 					if(eventName=="change"){
 						loc_eventObject.triggerEvent(eventName);
 					}
@@ -164,27 +212,45 @@ var loc_createExpression = function(id, dataDefinition, env){
 		});
 	};
 
-	var loc_init = function(id, dataDefinition, env){
-		loc_id = id;
-		loc_dataDefinition = dataDefinition;
+	var loc_init = function(arg1, arg2, env){
 		loc_env = env;
+		if(arg2!=undefined){
+			loc_id = arg1;
+			loc_dataDefinition = arg2;
+		}
+		else{
+			loc_valueChooseObj = arg1;
+			loc_dataDefinition = loc_valueChooseObj.datadefinition;
+		}
 
 		loc_eventObject = node_createEventObject();
 
 		loc_rootChoose = loc_createRootChoose(loc_dataDefinition, loc_env);
 		
 		loc_containerView.append(loc_rootChoose.getView());
-		loc_containerView.append(loc_chainContainerView);
+		loc_containerView.append(loc_expressionContainerView);
+		
+		loc_options = loc_env.getOptions(loc_dataDefinition);
+
+		_.each(loc_options, function(option, name){
+			var rootType = option.type;
+			var expression = loc_createOperandExpression(loc_id+"_"+rootType, rootType, loc_expressionContainerView, loc_env);
+			loc_expressionsByType[rootType] = expression;
+		});
+
 	};
 
 	var loc_out ={
 		
 		getInitRequest : function(handlers, request){
-			return loc_getInitNewRequest(handlers, request);
-		},
-		
-		getInitWithValueRequest : function(expressionObj, handlers, request){
-			
+			var out;
+			if(loc_valueChooseObj!=undefined){
+				out = loc_getInitNewRequest(handlers, request);
+			}
+			else{
+				out = loc_getInitExistingRequest(valueChooseObj, handlers, request);
+			}
+			return out
 		},
 		
 		updateView : function(parentView){
@@ -192,8 +258,8 @@ var loc_createExpression = function(id, dataDefinition, env){
 		},
 		
 		isReady : function(){
-			if(loc_currentType==undefined)   return false;
-			return loc_getCurrentChain().isReady();
+			if(loc_getCurrentRootType()==undefined)   return false;
+			return loc_getCurrentExpression().isReady();
 		},
 		
     	registerListener : function(handler){
@@ -202,27 +268,34 @@ var loc_createExpression = function(id, dataDefinition, env){
 		
 		destroy : function(){
 			loc_containerView.remove();
-			_.each(loc_chainsByType, function(choose){
-				choose.destroy();
+			_.each(loc_expressionsByType, function(expression){
+				expression.destroy();
 			});
         },
 			
 		buildExpression : function(constants){
-			return loc_getCurrentChain().buildExpression(constants);
+			return loc_getCurrentExpression().buildExpression(constants);
 		},
 
-    	buildExpressionObj : function(constants){
-	    	return loc_getCurrentChain().buildExpressionObj(constants);
+    	buildValueChooseObj : function(constants){
+			var out = {};
+			out.currentRootType = loc_getCurrentRootType;
+			out.chain = {};
+			
+			_.each(loc_chainsByType, function(chain, rootType){
+				out.chain[rootType] = chain.getValue(constants);
+			});
+	    	return out;
 	    },
 
 	};
 	
-	loc_init(id, dataDefinition, env);
+	loc_init(arg1, arg2, env);
 	return loc_out;
 };
 
 
-var loc_createOperandChain = function(id, rootType, parentView, env){
+var loc_createOperandExpression = function(id, rootType, parentView, env){
 	var loc_eventObject = node_createEventObject();
 	
 	var loc_id = id;
@@ -322,18 +395,10 @@ var loc_createOperandChain = function(id, rootType, parentView, env){
 		    return true;
 		},
 
-		buildExpression : function(constants){
-			var out;
-			for(var i in loc_operandChain){
-				out = loc_operandChain[i].getOperand().buildExpression(out, constants);
-			}
-			return out;
-		},
-
-		buildExpressionObj : function(constants){
+		getValue : function(constants){
     		var out;
 	    	for(var i in loc_operandChain){
-		    	out = loc_operandChain[i].getOperand().buildExpressionObj(out, constants);
+		    	out = loc_operandChain[i].getOperand().getValue(out, constants);
 		    }
 		    return out;
 		}
@@ -563,14 +628,14 @@ var loc_createOperandOperation = function(arg1, env){
 	var loc_getInitParmsRequest = function(handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		_.each(loc_parms, function(parmInfo){
-		    parmInfo.expression.registerListener(function(eventName, eventData){
+		    parmInfo.valueChoose.registerListener(function(eventName, eventData){
 			    if(eventName=="change"){
 				    loc_eventObject.triggerEvent("change");
 			    }
 		    });
-		    out.addRequest(parmInfo.expression.getInitRequest({
+		    out.addRequest(parmInfo.valueChoose.getInitRequest({
 			    success : function(request){
-				    parmInfo.expression.updateView(parmInfo.view);
+				    parmInfo.valueChoose.updateView(parmInfo.view);
 			    }
 		    }));
 		});
@@ -578,7 +643,24 @@ var loc_createOperandOperation = function(arg1, env){
 	};
 	
 	var loc_getInitExistingOperationRequest = function(){
-		
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		_.each(loc_parmsObj, function(parmObj, parmName){
+			var parmInfo = {
+				"definition" : parmObj.parm,
+				"valueChoose" : loc_createValueChoose(parmObj.valueChoose, undefined, loc_env),
+				"view" : $("<div>Container for parm: " +parm.name  + "</div>")
+			};
+
+			loc_containerView.append(parmInfo.view);
+
+			loc_parms.push(parmInfo);
+		});
+		out.addRequest(loc_getInitParmsRequest({
+			success : function(request){
+				loc_eventObject.triggerEvent("change");
+			}
+		}));
+		return out;
 	};
 	
 	var loc_getInitNewOperationRequest = function(handlers, request){
@@ -592,7 +674,7 @@ var loc_createOperandOperation = function(arg1, env){
 				
 				var parmInfo = {
 					"definition" : parm,
-					"expression" : loc_createExpression(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
+					"valueChoose" : loc_createValueChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
 					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
 				};
 				
@@ -612,7 +694,7 @@ var loc_createOperandOperation = function(arg1, env){
 	var loc_deleteParms = function(){
 		_.each(loc_parms, function(parmInfo){
 			parmInfo.view.remove();
-			parmInfo.expression.destroy();
+			parmInfo.valueChoose.destroy();
 			loc_parms = [];
 		});
 	};
@@ -631,9 +713,11 @@ var loc_createOperandOperation = function(arg1, env){
 				loc_operationName = loc_dataOperation.name;
 				loc_baseDataType = loc_dataOperation.source;
 
-				loc_eventObject.triggerEvent("truncate");
-				
-				node_requestServiceProcessor.processRequest(loc_getInitNewOperationRequest());
+				node_requestServiceProcessor.processRequest(loc_getInitNewOperationRequest({
+					success : function(request){
+						loc_eventObject.triggerEvent("truncate");
+					}
+				}));
 			}
 		});
 
@@ -679,7 +763,7 @@ var loc_createOperandOperation = function(arg1, env){
 		
 		destroy : function(){
 			_.each(loc_parms, function(parm, i){
-				parm.expression.destroy();
+				parm.valueChoose.destroy();
 			});
 			
 			this.disable();
@@ -687,25 +771,14 @@ var loc_createOperandOperation = function(arg1, env){
 
     	isReady : function(){
 			for(var i in loc_parms){
-				if(!loc_parms[i].expression.isReady()){
+				if(!loc_parms[i].valueChoose.isReady()){
 					return false;
 				}
 			}
 			return true;
 	    },
 		
-		buildExpression : function(previous, constants){
-			var out = "!("+loc_baseDataType+")!."+loc_operationName+"(";
-			out = out + previous
-			for(var i in loc_parms){
-				var parmInfo = loc_parms[i];
-				out = out + ", " + parmInfo.definition.name + ":" + parmInfo.expression.buildExpression(constants);
-			}
-			out = out + ")";
-			return out;
-		},
-
-		buildExpressionObj : function(previous, constants){
+		getValue : function(previous, constants){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_OPERATION;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_DATATYPEID] = loc_baseDataType; 
@@ -714,7 +787,7 @@ var loc_createOperandOperation = function(arg1, env){
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_BASE] = previous; 
 			for(var i in loc_parms){
 				var parmInfo = loc_parms[i];
-				out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS][parmInfo.definition.name] = parmInfo.expression.buildExpressionObj(undefined, constants);
+				out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS][parmInfo.definition.name] = parmInfo.valueChoose.getValue(undefined, constants);
 			}
 			return out;
 		}
@@ -907,14 +980,16 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 								
 								if(loc_constantValue!=undefined){
 									return loc_standaloneApp.executeExecuteCommandRequest("setData", {
-									    "data" : data
+									    "data" : loc_constantValue
 									}, {
 										success : function(request){
 											loc_registerConstantListener();
 										}
 									});
 								}
-								loc_registerConstantListener();
+								else{
+									loc_registerConstantListener();
+								}
 				    		}
 					    }));
 					    return out1;
@@ -939,12 +1014,7 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 
-		buildExpression : function(previous, constants){
-			constants[loc_id] = loc_constantValue;
-			return "&(" + loc_id + ")&";
-		},
-
-		buildExpressionObj : function(previous, constants){
+		getValue : function(previous, constants){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_CONSTANT;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDCONSTANT_DATA] = loc_constantValue; 
@@ -1039,11 +1109,7 @@ var loc_createOperandVariable = function(arg1, env){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 
-    	buildExpression : function(previous, constants){
-	    	return "?(" + loc_varName + ")?";
-	    },
-		
-		buildExpressionObj : function(previous, constants){
+		getValue : function(previous, constants){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_VARIABLE;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDVARIABLE_VARIABLENAME] = loc_varName; 
@@ -1121,38 +1187,30 @@ var node_createValueApp = function(dataDefinition){
 		}
 	};
 
-	var loc_expression = loc_createExpression("expression", dataDefinition, loc_env);
+	var loc_valueChoose = loc_createValueChoose("expression", dataDefinition, loc_env);
 	
 	var loc_containerView = $("<div>AppContainer</div>");
 	
-	var loc_buildExpression = function(){
+	var loc_getValue = function(){
 		var out = {
 			constants : {}
 		};
-		out.expression = loc_expression.buildExpression(out.constants);
-        return out;		
-	};
-	
-	var loc_buildExpressionObj = function(){
-		var out = {
-			constants : {}
-		};
-		out.expression = loc_expression.buildExpressionObj(out.constants);
+		out.expression = loc_expression.getValue(out.constants);
 	    return out;		
 	};
 
 	var loc_out = {
 		
 		getInitRequest : function(handlers, request){
-			loc_expression.updateView(loc_containerView);
-			loc_expression.registerListener(function(eventName, eventData){
+			loc_valueChoose.updateView(loc_containerView);
+			loc_valueChoose.registerListener(function(eventName, eventData){
 				if(eventName=="change"){
 //					console.log(JSON.stringify(loc_buildExpression()));
-    				console.log(JSON.stringify(loc_buildExpressionObj()));
+    				console.log(JSON.stringify(loc_getValue()));
 				}
 			});
 			
-			return loc_expression.getInitRequest(handlers, request);
+			return loc_valueChoose.getInitRequest(handlers, request);
 		},
 
 		getView : function(){

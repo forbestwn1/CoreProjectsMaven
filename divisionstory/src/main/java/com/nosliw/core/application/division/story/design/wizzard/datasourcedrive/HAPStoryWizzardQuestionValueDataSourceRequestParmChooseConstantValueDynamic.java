@@ -44,7 +44,7 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 		this();
 		this.setConstantData(constantData);
 		this.m_valueChosen = new HAPStoryValueChosen();
-		this.m_valueChosen.setConstantData(constantData);
+		this.m_valueChosen.setConstantExpression(constantData);
 	}
 		
 	public HAPStoryValueChosen getValue() {    return this.m_valueChosen;    }
