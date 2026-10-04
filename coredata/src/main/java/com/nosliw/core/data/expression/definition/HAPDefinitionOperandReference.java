@@ -3,15 +3,10 @@ package com.nosliw.core.data.expression.definition;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.springframework.stereotype.Component;
-
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 
 @HAPEntityWithAttribute
@@ -58,28 +53,3 @@ public class HAPDefinitionOperandReference extends HAPDefinitionOperand{
 }
 
 
-@Component
-class HAPDefinitionOperandReference__HAPEntityParsable extends HAPDefinitionOperand__HAPEntityParsable{
-
-	@Override
-	public String getSubName() {     return HAPConstantShared.EXPRESSION_OPERAND_REFERENCE;    }
-	
-	protected void parseToEntity(JSONObject jsonObj, HAPDefinitionOperandReference operandDefinition, HAPServiceParseEntity parseService) {
-		super.parseToEntity(jsonObj, operandDefinition, parseService);
-
-		operandDefinition.setReference(jsonObj.getString(HAPDefinitionOperandReference.REFERENCE));
-		
-		JSONObject varMppingsObj = jsonObj.getJSONObject(HAPDefinitionOperandReference.VARIABLEMAPPING);
-		for(Object key : varMppingsObj.keySet()) {
-			String name = (String)key;
-			operandDefinition.addMapping(name, HAPDefinitionOperand.parseOperandDefinition(varMppingsObj.getJSONObject(name), parseService));
-		}
-	}
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPDefinitionOperandReference out = new HAPDefinitionOperandReference();
-		this.parseToEntity((JSONObject)obj, out, parseService);
-		return out;
-	}
-}

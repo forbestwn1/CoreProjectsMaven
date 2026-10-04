@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
-import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 
@@ -39,14 +38,4 @@ public abstract class HAPDefinitionOperand extends HAPSerializableImp implements
 	public static HAPDefinitionOperand parseOperandDefinition(JSONObject jsonObj, HAPServiceParseEntity parseService) {
 		return (HAPDefinitionOperand)parseService.parseEntityJSONImplicitAttribute(jsonObj, TYPE, PARSABLEENTITYDOMAIN);
 	}
-}
-
-abstract class HAPDefinitionOperand__HAPEntityParsable extends HAPParserEntityImpWithDomain{
-
-	@Override
-	public String getDomain() {   return HAPDefinitionOperand.PARSABLEENTITYDOMAIN;   }
-
-	protected void parseToEntity(JSONObject jsonObj, HAPDefinitionOperand operandDefinition, HAPServiceParseEntity parseService) {
-	}
-	
 }

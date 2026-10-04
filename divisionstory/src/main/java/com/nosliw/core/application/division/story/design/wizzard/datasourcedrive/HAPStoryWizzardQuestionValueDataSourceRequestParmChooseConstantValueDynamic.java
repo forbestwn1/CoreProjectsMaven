@@ -34,7 +34,7 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	
 	private HAPDefinitionRawDataExpression m_expression;
 	
-	private HAPStoryValueChosen m_valueChosen;
+	private HAPStoryDataChosen m_valueChosen;
 	
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
@@ -43,12 +43,12 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(HAPData constantData) {
 		this();
 		this.setConstantData(constantData);
-		this.m_valueChosen = new HAPStoryValueChosen();
+		this.m_valueChosen = new HAPStoryDataChosen();
 		this.m_valueChosen.setConstantExpression(constantData);
 	}
 		
-	public HAPStoryValueChosen getValue() {    return this.m_valueChosen;    }
-	public void setValue(HAPStoryValueChosen value) {      this.m_valueChosen = value;         }
+	public HAPStoryDataChosen getValue() {    return this.m_valueChosen;    }
+	public void setValue(HAPStoryDataChosen value) {      this.m_valueChosen = value;         }
 	
 	public HAPData getConstantData() {    return this.m_constantData;     }
 	public void setConstantData(HAPData data) {    this.m_constantData = data;       }
@@ -88,7 +88,7 @@ class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynami
 		
 		Object valueObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.VALUE);
 		if(valueObj!=null) {
-			HAPStoryValueChosen value = HAPStoryValueChosen.buildStoryValueChosen((JSONObject)valueObj, parseService);
+			HAPStoryDataChosen value = HAPStoryDataChosen.buildStoryValueChosen((JSONObject)valueObj, parseService);
 			out.setValue(value);
 		}
 		

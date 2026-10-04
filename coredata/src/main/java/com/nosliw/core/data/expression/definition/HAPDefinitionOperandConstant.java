@@ -2,17 +2,11 @@ package com.nosliw.core.data.expression.definition;
 
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.springframework.stereotype.Component;
-
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPData;
-import com.nosliw.core.data.HAPUtilityData;
 
 @HAPEntityWithAttribute
 public class HAPDefinitionOperandConstant extends HAPDefinitionOperand{
@@ -57,22 +51,3 @@ public class HAPDefinitionOperandConstant extends HAPDefinitionOperand{
 	}
 }
 
-@Component
-class HAPDefinitionOperandConstant__HAPEntityParsable extends HAPDefinitionOperand__HAPEntityParsable{
-
-	@Override
-	public String getSubName() {     return HAPConstantShared.EXPRESSION_OPERAND_CONSTANT;    }
-	
-	protected void parseToEntity(JSONObject jsonObj, HAPDefinitionOperandConstant operandDefinition, HAPServiceParseEntity parseService) {
-		super.parseToEntity(jsonObj, operandDefinition, parseService);
-		operandDefinition.setStringValue((String)jsonObj.opt(HAPDefinitionOperandConstant.CONSTANTSTR));
-		operandDefinition.setData(HAPUtilityData.buildDataWrapperFromObject(jsonObj.opt(HAPDefinitionOperandConstant.DATA)));
-	}
-
-	@Override
-	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPDefinitionOperandConstant out = new HAPDefinitionOperandConstant();
-		this.parseToEntity((JSONObject)obj, out, parseService);
-		return out;
-	}
-}

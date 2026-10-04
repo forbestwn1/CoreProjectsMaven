@@ -175,9 +175,9 @@ var loc_createValueChoose = function(arg1, arg2, env){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		
 		_.each(loc_expressionsByType, function(expression, rootType){
-			var choose = valueChooseObj.chooes[rootType];
-			if(choose!=null){
-				var operandChains = loc_buildOperandChain(choose.operand);
+			var expression = valueChooseObj[node_COMMONATRIBUTECONSTANT.STORYDATACHOSEN_EXPRESSION][rootType];
+			if(expression!=null){
+				var operandChains = loc_buildOperandChain(expression[node_COMMONATRIBUTECONSTANT.DATABUILDEXPRESSION_OPERAND]);
 				_.each(operandChains, function(operand){
 					out.addRequest(expression.addOperandRequest(operand));
 				});
@@ -220,7 +220,7 @@ var loc_createValueChoose = function(arg1, arg2, env){
 		}
 		else{
 			loc_valueChooseObj = arg1;
-			loc_dataDefinition = loc_valueChooseObj.datadefinition;
+			loc_dataDefinition = loc_valueChooseObj[node_COMMONATRIBUTECONSTANT.STORYDATACHOSEN_DATADEFINITION];
 		}
 
 		loc_eventObject = node_createEventObject();
@@ -244,11 +244,11 @@ var loc_createValueChoose = function(arg1, arg2, env){
 		
 		getInitRequest : function(handlers, request){
 			var out;
-			if(loc_valueChooseObj!=undefined){
+			if(loc_valueChooseObj==undefined){
 				out = loc_getInitNewRequest(handlers, request);
 			}
 			else{
-				out = loc_getInitExistingRequest(valueChooseObj, handlers, request);
+				out = loc_getInitExistingRequest(loc_valueChooseObj, handlers, request);
 			}
 			return out
 		},
@@ -273,19 +273,19 @@ var loc_createValueChoose = function(arg1, arg2, env){
 			});
         },
 			
-		buildExpression : function(constants){
-			return loc_getCurrentExpression().buildExpression(constants);
-		},
-
-    	buildValueChooseObj : function(constants){
+    	getValue : function(){
 			var out = {};
-			out.currentRootType = loc_getCurrentRootType;
-			out.chain = {};
+			out[node_COMMONATRIBUTECONSTANT.STORYDATACHOSEN_EXPRESSIONTYPE] = loc_getCurrentRootType();
+			out[node_COMMONATRIBUTECONSTANT.STORYDATACHOSEN_DATADEFINITION] = loc_dataDefinition;
+
+			var expressions = {};
 			
-			_.each(loc_chainsByType, function(chain, rootType){
-				out.chain[rootType] = chain.getValue(constants);
+			_.each(loc_expressionsByType, function(expression, rootType){
+				expressions[rootType] = expression.getValue();
 			});
-	    	return out;
+			out[node_COMMONATRIBUTECONSTANT.STORYDATACHOSEN_EXPRESSION] = expressions;
+
+        	return out;
 	    },
 
 	};
@@ -334,13 +334,13 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 				loc_eventObject.triggerEvent("change");
 			}
 			else if(eventName=="next"){
-				var out = node_createServiceRequestInfoSequence(undefined, handlers);
-				out.addRequest(loc_addOperandRequest(loc_createOperandOperation(wrapper.getDataType(), loc_env), {
+				var out1 = node_createServiceRequestInfoSequence(undefined);
+				out1.addRequest(loc_addOperandRequest(loc_createOperandOperation(wrapper.getDataType(), loc_env), {
 					success : function(request){
 						loc_eventObject.triggerEvent("change");
 					}
 				}));
-				node_requestServiceProcessor.processRequest(out);
+				node_requestServiceProcessor.processRequest(out1);
 			}
 			else if(eventName=="truncate"){
 				loc_truncate(wrapper);
@@ -395,11 +395,13 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 		    return true;
 		},
 
-		getValue : function(constants){
-    		var out;
+		getValue : function(){
+			var out = {};
+    		var operand;
 	    	for(var i in loc_operandChain){
-		    	out = loc_operandChain[i].getOperand().getValue(out, constants);
+		    	operand = loc_operandChain[i].getOperand().getValue(operand);
 		    }
+			out[node_COMMONATRIBUTECONSTANT.DATABUILDEXPRESSION_OPERAND] = operand;
 		    return out;
 		}
 				
@@ -778,7 +780,7 @@ var loc_createOperandOperation = function(arg1, env){
 			return true;
 	    },
 		
-		getValue : function(previous, constants){
+		getValue : function(previous){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_OPERATION;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_DATATYPEID] = loc_baseDataType; 
@@ -787,7 +789,7 @@ var loc_createOperandOperation = function(arg1, env){
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_BASE] = previous; 
 			for(var i in loc_parms){
 				var parmInfo = loc_parms[i];
-				out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS][parmInfo.definition.name] = parmInfo.valueChoose.getValue(undefined, constants);
+				out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS][parmInfo.definition.name] = parmInfo.valueChoose.getValue(undefined);
 			}
 			return out;
 		}
@@ -972,7 +974,7 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 					success: function (requestInfo, resourceIds) {
 						var bundleDef = nosliw.runtime.getResourceService().getResource(new node_ResourceId(resourceIds[0])).resourceData[node_COMMONATRIBUTECONSTANT.RESOURCEDATAIMPTRANSIENT_VALUE];
 
-    					var out1 = node_createServiceRequestInfoSequence({}, handlers, request);
+    					var out1 = node_createServiceRequestInfoSequence();
 	    				out1.addRequest(nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({ bundleDef: bundleDef }, undefined, {}, undefined, {
 		    				success: function (requestInfo, application) {
 								loc_standaloneApp = application;
@@ -1014,7 +1016,7 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 
-		getValue : function(previous, constants){
+		getValue : function(previous){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_CONSTANT;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDCONSTANT_DATA] = loc_constantValue; 
@@ -1109,7 +1111,7 @@ var loc_createOperandVariable = function(arg1, env){
 			return loc_eventObject.registerListener(undefined, undefined, handler, this);
 		},
 
-		getValue : function(previous, constants){
+		getValue : function(previous){
 			var out = {};
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_VARIABLE;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDVARIABLE_VARIABLENAME] = loc_varName; 
@@ -1145,6 +1147,50 @@ var loc_css_select = {
 		"-moz-appearance":"menulist",
 		"appearance":"menulist"
 };
+
+var loc_dataChosen = {
+	    "expressionType": "variable",
+	    "dataDefinition": {
+	        "criteria": "test.date;1.0.0",
+	        "type": "writable"
+	    },
+	    "expression": {
+	        "constant": {
+	            "operand": {
+	                "type": "constant"
+	            }
+	        },
+	        "variable": {
+	            "operand": {
+	                "type": "operation",
+	                "dataTypeId": "test.date;1.0.0",
+	                "operation": "NDatesLater",
+	                "parms": {
+	                    "n": {
+	                        "expressionType": "constant",
+	                        "dataDefinition": {
+	                            "type": "writable",
+	                            "criteria": "test.integer;1.0.0"
+	                        },
+	                        "expression": {
+	                            "constant": {
+	                                "operand": {
+	                                    "type": "constant"
+	                                }
+	                            }
+	                        }
+	                    }
+	                },
+	                "base": {
+	                    "type": "variable",
+	                    "variableName": "today"
+	                }
+	            }
+	        }
+	    }
+	};
+
+
 
 var node_createValueApp = function(dataDefinition){
 	var loc_eventObject = node_createEventObject();
@@ -1187,16 +1233,13 @@ var node_createValueApp = function(dataDefinition){
 		}
 	};
 
-	var loc_valueChoose = loc_createValueChoose("expression", dataDefinition, loc_env);
+//	var loc_valueChoose = loc_createValueChoose("expression", dataDefinition, loc_env);
+	var loc_valueChoose = loc_createValueChoose(loc_dataChosen, undefined, loc_env);
 	
 	var loc_containerView = $("<div>AppContainer</div>");
 	
 	var loc_getValue = function(){
-		var out = {
-			constants : {}
-		};
-		out.expression = loc_expression.getValue(out.constants);
-	    return out;		
+		return loc_valueChoose.getValue();
 	};
 
 	var loc_out = {
