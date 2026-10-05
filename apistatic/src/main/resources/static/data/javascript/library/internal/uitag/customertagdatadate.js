@@ -55,6 +55,7 @@ var node_createUICustomerTagTestDate = function(envObj){
 				};
 				loc_envObj.onDataChange(currentData);
 			});
+			
 			return loc_dataView;
 		}
 	};

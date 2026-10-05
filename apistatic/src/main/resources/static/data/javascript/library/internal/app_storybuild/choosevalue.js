@@ -13,6 +13,18 @@ var packageObj = library;
 	var node_ResourceId;
 	
 //*******************************************   Start Node Definition  ************************************** 	
+var loc_disable = function(containerView){
+	if (containerView.parent().length > 0){
+		containerView.remove();		
+	}
+};
+
+var loc_enable = function(parentView, containerView){
+	if (containerView.parent().length == 0){
+		parentView.append(containerView);
+	}
+};
+	
 
 var loc_createRootChoose = function(dataDefinition, env){
 	
@@ -304,7 +316,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 	var loc_parentView = parentView;
 	var loc_env = env;
 	
-	var loc_containerview = $("<ul></ul>");
+	var loc_containerView = $("<ul></ul>");
 	
 	var loc_operandChain = [];
 	
@@ -348,7 +360,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 			}
 		});
 
-		out.addRequest(wrapper.getInitRequest(loc_containerview, {
+		out.addRequest(wrapper.getInitRequest(loc_containerView, {
 			success : function(request){
 				wrapper.enable();
 				if(loc_operandChain.length!=0){
@@ -361,7 +373,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 
 		return out;			
 	};
-	
+
 	var loc_out = {
 		
 		getRootType : function(){   return loc_rootType;      },
@@ -370,9 +382,9 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 			return loc_addOperandRequest(operand, handlers, request)
 		},
 		
-		enable : function(){		loc_parentView.append(loc_containerview);		},
+		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
 
-		disable : function(){		loc_containerview.remove();		},
+		disable : function(){		loc_disable(loc_containerView);	    },
 
 		destroy : function(){
 			this.disable();
@@ -430,6 +442,15 @@ var loc_crateOperandWrapper = function(operand, env){
 	var loc_nextInChain;
 
 	var loc_updateNextButton = function(){
+		
+		operandType = loc_operand.getType()
+		if(operandType=="constant"){
+    		if(loc_nextButton!=undefined){
+				loc_nextButton.disable();
+			}
+			return;
+		}
+		
 		if(loc_nextButton==undefined){
 			loc_nextButton = loc_createNextButton(loc_buttonContainerView);
 			loc_nextButton.registerListener(function(eventName, eventData){
@@ -470,7 +491,6 @@ var loc_crateOperandWrapper = function(operand, env){
 			if(operandType=="variable"||operandType=="operation"){
 				loc_operand.registerListener(function(eventName, eventData){
 					loc_eventObject.triggerEvent(eventName);
-					loc_updateNextButton();
 				});
 			}
 			else if(operandType=="constant"){
@@ -480,6 +500,7 @@ var loc_crateOperandWrapper = function(operand, env){
 					}
 				});
 			}
+			loc_updateNextButton();
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(loc_operand.getInitRequest(loc_operandContainerView, {
 				success : function(request){
@@ -490,14 +511,10 @@ var loc_crateOperandWrapper = function(operand, env){
 			return out;
 		},
 		
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
+		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
 
-		disable : function(){
-			loc_containerView.remove();
-		},
-		
+		disable : function(){		loc_disable(loc_containerView);	    },
+
 		destroy : function(){
 			this.disable();
 			loc_operand.destroy();
@@ -514,6 +531,7 @@ var loc_crateOperandWrapper = function(operand, env){
 		
 		setNextInChain : function(nextInChain){
 			loc_nextInChain = nextInChain;
+			loc_updateNextButton();
 		}
 	};
 	return loc_out;
@@ -757,11 +775,9 @@ var loc_createOperandOperation = function(arg1, env){
 			return loc_getInitRequest(parentView, handlers, request);
 		},
 
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
+		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
 
-		disable : function(){		loc_containerView.remove();		},
+		disable : function(){		loc_disable(loc_containerView);	    },
 
 		registerListener : function(handler){		return loc_eventObject.registerListener(undefined, undefined, handler, this);		},
 		
@@ -1015,9 +1031,9 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 		
 		isReady : function(){    return loc_constantValue!=undefined;       },
 
-		enable : function(){		loc_parentView.append(loc_containerView);		},
+		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
 
-		disable : function(){		loc_containerView.remove();		},
+		disable : function(){		loc_disable(loc_containerView);	    },
 
 		destroy : function(){
 			this.disable();
@@ -1110,10 +1126,10 @@ var loc_createOperandVariable = function(arg1, env){
 		
 		isReady : function(){    return loc_varName!=undefined;       },
 		
-		enable : function(){		loc_parentView.append(loc_containerView);		},
-		
-		disable : function(){		loc_containerView.remove();		},
-		
+		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
+
+		disable : function(){		loc_disable(loc_containerView);	    },
+
 		destroy : function(){
 			this.disable();
 		},
@@ -1169,7 +1185,15 @@ var loc_dataChosen =
     "expression": {
         "constant": {
             "operand": {
-                "type": "constant"
+                "type": "constant",
+                "data": {
+                    "dataTypeId": "test.date;1.0.0",
+                    "value": {
+                        "year": 2026,
+                        "month": 9,
+                        "date": 8
+                    }
+                }
             }
         },
         "variable": {
@@ -1201,7 +1225,11 @@ var loc_dataChosen =
                             "expression": {
                                 "constant": {
                                     "operand": {
-                                        "type": "constant"
+                                        "type": "constant",
+                                        "data": {
+                                            "dataTypeId": "test.integer;1.0.0",
+                                            "value": 2
+                                        }
                                     }
                                 }
                             }
