@@ -33,6 +33,4 @@ public class HAPDefinitionDataExpression extends HAPSerializableImp{
 	    out.setOperand(HAPDefinitionOperand.parseOperandDefinition(jsonObj.getJSONObject(OPERAND), parseService));
 	    return out;
 	}
-
-
 }

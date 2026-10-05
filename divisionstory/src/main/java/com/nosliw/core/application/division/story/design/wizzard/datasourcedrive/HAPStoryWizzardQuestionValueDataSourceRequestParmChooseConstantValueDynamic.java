@@ -14,6 +14,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardParserValueInQuestion;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionairImp;
+import com.nosliw.core.application.entity.app.expressionbuild.HAPDataBuild;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.data.expression.definition.HAPDefinitionRawDataExpression;
@@ -34,7 +35,7 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	
 	private HAPDefinitionRawDataExpression m_expression;
 	
-	private HAPStoryDataChosen m_valueChosen;
+	private HAPDataBuild m_valueChosen;
 	
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
@@ -43,12 +44,12 @@ public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValu
 	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(HAPData constantData) {
 		this();
 		this.setConstantData(constantData);
-		this.m_valueChosen = new HAPStoryDataChosen();
+		this.m_valueChosen = new HAPDataBuild();
 		this.m_valueChosen.setConstantExpression(constantData);
 	}
 		
-	public HAPStoryDataChosen getValue() {    return this.m_valueChosen;    }
-	public void setValue(HAPStoryDataChosen value) {      this.m_valueChosen = value;         }
+	public HAPDataBuild getValue() {    return this.m_valueChosen;    }
+	public void setValue(HAPDataBuild value) {      this.m_valueChosen = value;         }
 	
 	public HAPData getConstantData() {    return this.m_constantData;     }
 	public void setConstantData(HAPData data) {    this.m_constantData = data;       }
@@ -88,7 +89,7 @@ class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynami
 		
 		Object valueObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.VALUE);
 		if(valueObj!=null) {
-			HAPStoryDataChosen value = HAPStoryDataChosen.buildStoryValueChosen((JSONObject)valueObj, parseService);
+			HAPDataBuild value = HAPDataBuild.buildStoryValueChosen((JSONObject)valueObj, parseService);
 			out.setValue(value);
 		}
 		

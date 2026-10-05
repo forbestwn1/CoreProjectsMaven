@@ -1,4 +1,4 @@
-package com.nosliw.core.data.expression.definition;
+package com.nosliw.core.application.entity.app.expressionbuild;
 
 import java.util.Map;
 
@@ -7,30 +7,31 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
+import com.nosliw.core.data.expression.definition.HAPDefinitionOperand;
 
 @HAPEntityWithAttribute
-public class HAPDefinitionParmInOperationOperand extends HAPSerializableImp{
+public class HAPDataBuildParmInOperationOperand extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static String NAME = "name";
 	
 	@HAPAttribute
-	public static String OPERAND = "operand";
+	public static String VALUE = "value";
 	
 	@HAPAttribute
 	public static String CRITERIA = "criteria";
 	
 	private String m_name;
 	
-	private HAPDefinitionOperand m_operand;
+	private HAPDataBuild m_operand;
 	
 	//data type
 	private HAPDataTypeCriteria m_criteria;
 
-	public HAPDefinitionParmInOperationOperand(){
+	public HAPDataBuildParmInOperationOperand(){
 	}
 	
-	public HAPDefinitionParmInOperationOperand(String name, HAPDefinitionOperand operand){
+	public HAPDataBuildParmInOperationOperand(String name, HAPDefinitionOperand operand){
 		this.m_name = name;
 		this.m_operand = operand;
 	}

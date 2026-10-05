@@ -29,6 +29,9 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 	@HAPAttribute
 	public static String PARMS = "parms";
 	
+	@HAPAttribute
+	public static String PARMS1 = "parms1";
+	
 	//the data type operation defined on
 	protected HAPDataTypeId m_dataTypeId;
 	
@@ -40,6 +43,9 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 
 	//operation parms
 	protected Map<String, HAPDefinitionOperand> m_parms = new LinkedHashMap<String, HAPDefinitionOperand>();
+
+	//operation parms
+	protected List<HAPDefinitionParmInOperationOperand> m_parms1 = new ArrayList<HAPDefinitionParmInOperationOperand>();
 
 	public HAPDefinitionOperandOperation(){
 		super(HAPConstantShared.EXPRESSION_OPERAND_OPERATION);
@@ -54,6 +60,7 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 
 		for(HAPDefinitionParmInOperationOperand opParm : parms) {
 			this.m_parms.put(opParm.getName(), opParm.getOperand());
+			this.m_parms1.add(opParm);
 		}
 	}
 	
@@ -67,6 +74,7 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 				this.m_base = opParm.getOperand();
 			} else {
 				this.m_parms.put(opParm.getName(), opParm.getOperand());
+				this.m_parms1.add(opParm);
 			}
 		}
 	}
@@ -75,11 +83,11 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 	public void setBase(HAPDefinitionOperand base) {   this.m_base = base;     }
 	
 	public Map<String, HAPDefinitionOperand> getParms(){   return this.m_parms;   }
-	
-	public void addParm(String name, HAPDefinitionOperand parmOperand){
-		this.m_parms.put(name, parmOperand);
-	}
-	
+	public void addParm(String name, HAPDefinitionOperand parmOperand){		this.m_parms.put(name, parmOperand);	}
+
+	public List<HAPDefinitionParmInOperationOperand> getParms1(){   return this.m_parms1;   }
+	public void addParm1(HAPDefinitionParmInOperationOperand parm1){		this.m_parms1.add(parm1);	}
+
 	public HAPDataTypeId getDataTypeId(){   return this.m_dataTypeId; }
 	public void setDataTypeId(HAPDataTypeId dataTypeId) {     this.m_dataTypeId = dataTypeId;        }
 
@@ -115,7 +123,7 @@ public class HAPDefinitionOperandOperation extends HAPDefinitionOperand{
 			jsonMap.put(BASE, this.m_base.toStringValue(HAPSerializationFormat.JSON));
 		}
 		jsonMap.put(PARMS, HAPManagerSerialize.getInstance().toStringValue(m_parms, HAPSerializationFormat.JSON));
+		jsonMap.put(PARMS1, HAPManagerSerialize.getInstance().toStringValue(m_parms1, HAPSerializationFormat.JSON));
 	}
 	
 }
-
