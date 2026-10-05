@@ -623,7 +623,7 @@ var loc_createOperandOperation = function(arg1, env){
 		else{
 			loc_baseDataType = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_DATATYPEID]; 
 			loc_operationName = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
-			loc_parmsObj = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS];
+			loc_parmsObj = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS1];
 		}
 	};
 	
@@ -646,11 +646,12 @@ var loc_createOperandOperation = function(arg1, env){
 	
 	var loc_getInitExistingOperationRequest = function(handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		_.each(loc_parmsObj, function(parmObj, parmName){
+		_.each(loc_parmsObj, function(parmObj, i){
 			var parmInfo = {
-				"definition" : parmObj.parm,
-				"valueChoose" : loc_createValueChoose(parmObj.valueChoose, undefined, loc_env),
-				"view" : $("<div>Container for parm: " +parm.name  + "</div>")
+				"name" : parmObj.name,
+				"criteria" : parmObj.criteria,
+				"valueChoose" : loc_createValueChoose(parmObj.value, undefined, loc_env),
+				"view" : $("<div>Container for parm: " +parmObj.name  + "</div>")
 			};
 
 			loc_containerView.append(parmInfo.view);
@@ -675,7 +676,8 @@ var loc_createOperandOperation = function(arg1, env){
 				};
 				
 				var parmInfo = {
-					"definition" : parm,
+					"name" : parm.name,
+					"criteria" : parm.criteria,
 					"valueChoose" : loc_createValueChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
 					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
 				};
@@ -793,9 +795,9 @@ var loc_createOperandOperation = function(arg1, env){
 				var parmInfo = loc_parms[i];
 				var parm = {};
 				
-				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_NAME] = parmInfo.definition.name;
-				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_CRITERIA] = parmInfo.definition.criteria;
-				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_VALUE] = parmInfo.valueChoose;
+				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_NAME] = parmInfo.name;
+				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_CRITERIA] = parmInfo.criteria;
+				parm[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_VALUE] = parmInfo.valueChoose.getValue();
 				
 				parms.push(parm);
 			}
@@ -1190,7 +1192,20 @@ var loc_dataChosen =
                 "parms1": [{
                         "name": "n",
                         "criteria": "test.integer;1.0.0",
-                        "value": {}
+                        "value": {
+                            "expressionType": "constant",
+                            "dataDefinition": {
+                                "type": "writable",
+                                "criteria": "test.integer;1.0.0"
+                            },
+                            "expression": {
+                                "constant": {
+                                    "operand": {
+                                        "type": "constant"
+                                    }
+                                }
+                            }
+                        }
                     }
                 ]
             }
