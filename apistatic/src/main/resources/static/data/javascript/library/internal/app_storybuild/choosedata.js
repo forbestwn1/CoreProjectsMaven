@@ -25,7 +25,6 @@ var loc_enable = function(parentView, containerView){
 	}
 };
 	
-
 var loc_createRootChoose = function(dataDefinition, env){
 	
 	var loc_eventObject;
@@ -102,7 +101,7 @@ var loc_createRootChoose = function(dataDefinition, env){
 
 //id + data definition + env
 //valueChooseObj + undefined + env
-var loc_createValueChoose = function(arg1, arg2, env){
+var loc_createDataChoose = function(arg1, arg2, env){
 	var loc_id;
 	
 	var loc_eventObject;
@@ -326,11 +325,11 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 				break;
 			}
 			else{
-				if(i!=0){
-					loc_operandChain[i-1].setNextInChain();
-				}
 				loc_operandChain[i].destroy();
 				loc_operandChain.pop();
+    			if(i!=0){
+	    			loc_operandChain[i-1].setNextInChain();
+		    	}
 			}
 		}
 	};
@@ -443,7 +442,7 @@ var loc_crateOperandWrapper = function(operand, env){
 
 	var loc_updateNextButton = function(){
 		
-		operandType = loc_operand.getType()
+		var operandType = loc_operand.getType()
 		if(operandType=="constant"){
     		if(loc_nextButton!=undefined){
 				loc_nextButton.disable();
@@ -491,6 +490,7 @@ var loc_crateOperandWrapper = function(operand, env){
 			if(operandType=="variable"||operandType=="operation"){
 				loc_operand.registerListener(function(eventName, eventData){
 					loc_eventObject.triggerEvent(eventName);
+    				loc_updateNextButton();
 				});
 			}
 			else if(operandType=="constant"){
@@ -540,9 +540,6 @@ var loc_crateOperandWrapper = function(operand, env){
 var loc_createNextButton = function(parentView){
 	var loc_parentView = parentView;
 	
-//	var loc_nextButtonView = $("<button></button>");
-//	loc_parentView.append(loc_nextButtonView);
-
 	var loc_containerView = $("<span></span>");
 	var loc_nextabelView = $("<label></label>");
 	var loc_nextButtonView = $("<button></button>");
@@ -567,10 +564,8 @@ var loc_createNextButton = function(parentView){
 
 	loc_updateStatus();
 	
-	loc_nextButtonView.on("click", function(){
+	loc_nextButtonView.bind("click", function(){
 		loc_eventObject.triggerEvent(loc_statusInfo[loc_status].event);
-		loc_status = 1 - loc_status;
-		loc_updateStatus();
 	});
 	
 	var loc_out = {
@@ -586,16 +581,12 @@ var loc_createNextButton = function(parentView){
 		},
 		
 		enable : function(){
-			if(loc_enabled!=true){
-				loc_parentView.append(loc_containerView);
-			}
+			loc_enable(loc_parentView, loc_containerView);
     		loc_enabled = true;
 		},
 		
 		disable : function(){
-			if(loc_enabled==true){
-			     loc_containerView.remove();
-			}
+			loc_disable(loc_containerView);
     		loc_enabled = false;
 		},
 		
@@ -668,7 +659,7 @@ var loc_createOperandOperation = function(arg1, env){
 			var parmInfo = {
 				"name" : parmObj.name,
 				"criteria" : parmObj.criteria,
-				"valueChoose" : loc_createValueChoose(parmObj.value, undefined, loc_env),
+				"valueChoose" : loc_createDataChoose(parmObj.value, undefined, loc_env),
 				"view" : $("<div>Container for parm: " +parmObj.name  + "</div>")
 			};
 
@@ -696,7 +687,7 @@ var loc_createOperandOperation = function(arg1, env){
 				var parmInfo = {
 					"name" : parm.name,
 					"criteria" : parm.criteria,
-					"valueChoose" : loc_createValueChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
+					"valueChoose" : loc_createDataChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
 					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
 				};
 				
@@ -1283,8 +1274,8 @@ var node_createValueApp = function(dataDefinition){
 		}
 	};
 
-//	var loc_valueChoose = loc_createValueChoose("expression", dataDefinition, loc_env);
-	var loc_valueChoose = loc_createValueChoose(loc_dataChosen, undefined, loc_env);
+//	var loc_valueChoose = loc_createDataChoose("expression", dataDefinition, loc_env);
+	var loc_valueChoose = loc_createDataChoose(loc_dataChosen, undefined, loc_env);
 	
 	var loc_containerView = $("<div>AppContainer</div>");
 	
