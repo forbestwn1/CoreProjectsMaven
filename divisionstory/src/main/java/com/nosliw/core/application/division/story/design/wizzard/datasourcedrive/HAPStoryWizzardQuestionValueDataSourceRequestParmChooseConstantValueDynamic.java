@@ -89,7 +89,7 @@ class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynami
 		
 		Object valueObj = jsonObj.opt(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.VALUE);
 		if(valueObj!=null) {
-			HAPDataBuild value = HAPDataBuild.buildStoryValueChosen((JSONObject)valueObj, parseService);
+			HAPDataBuild value = HAPDataBuild.buildDataBuild((JSONObject)valueObj, parseService);
 			out.setValue(value);
 		}
 		

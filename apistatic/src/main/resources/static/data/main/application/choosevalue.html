@@ -52,7 +52,7 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
 	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
-	var node_createValueApp = nosliw.getNodeData("app_storybuild.createValueApp");
+	var node_chooseDataApp = nosliw.getNodeData("app_storybuild.chooseDataApp");
 
 	var parms = node_basicUtility.getParmsInUrl();
 	var dataType = parms.dataType==undefined?"string":parms.dataType;
@@ -60,13 +60,81 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	var dataDefinition = {};
 	dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA] = "test."+ dataType +";1.0.0";
 	dataDefinition.type = "writable";
-	
-	var opBuildApp = node_createValueApp(dataDefinition);
-	var request = opBuildApp.getInitRequest({
-        success : function(request){
-        	$("#main").append(opBuildApp.getView());
-        }
-    });
+
+	var loc_dataChosen = 
+	{
+	    "expressionChosen": "variable",
+	    "dataDefinition": {
+	        "criteria": "test.date;1.0.0",
+	        "type": "writable"
+	    },
+	    "expression": {
+	        "constant": {
+	            "operand": {
+	                "type": "constant",
+	                "data": {
+	                    "dataTypeId": "test.date;1.0.0",
+	                    "value": {
+	                        "year": 2026,
+	                        "month": 9,
+	                        "date": 8
+	                    }
+	                }
+	            }
+	        },
+	        "variable": {
+	            "operand": {
+	                "type": "operation",
+	                "dataTypeId": "test.date;1.0.0",
+	                "operation": "NDatesLater",
+	                "parms": {},
+	                "base": {
+	                    "type": "operation",
+	                    "dataTypeId": "test.date;1.0.0",
+	                    "operation": "lastDate",
+	                    "parms": {},
+	                    "base": {
+	                        "type": "variable",
+	                        "variableName": "today"
+	                    },
+	                    "parms1": []
+	                },
+	                "parms": [{
+	                        "name": "n",
+	                        "criteria": "test.integer;1.0.0",
+	                        "value": {
+	                            "expressionType": "constant",
+	                            "dataDefinition": {
+	                                "type": "writable",
+	                                "criteria": "test.integer;1.0.0"
+	                            },
+	                            "expression": {
+	                                "constant": {
+	                                    "operand": {
+	                                        "type": "constant",
+	                                        "data": {
+	                                            "dataTypeId": "test.integer;1.0.0",
+	                                            "value": 2
+	                                        }
+	                                    }
+	                                }
+	                            }
+	                        }
+	                    }
+	                ]
+	            }
+	        }
+	    }
+	};
+
+	var chooseDatApp = node_chooseDataApp(dataDefinition);
+	$("#main").append(chooseDatApp.getView());
+	var request = chooseDatApp.getSetValueRequest(loc_dataChosen, {
+         success : function(request){
+
+
+         }
+	});
 	node_requestServiceProcessor.processRequest(request);			
 });
 

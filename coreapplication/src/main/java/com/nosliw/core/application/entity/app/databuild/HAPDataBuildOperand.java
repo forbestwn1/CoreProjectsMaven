@@ -9,8 +9,8 @@ import com.nosliw.core.data.expression.definition.HAPDefinitionOperand;
 public interface HAPDataBuildOperand extends HAPEntityParsable{
 
 
-	public static HAPDefinitionOperand parseOperandDefinition(JSONObject jsonObj, HAPServiceParseEntity parseService) {
-		return (HAPDefinitionOperand)parseService.parseEntityJSONImplicitAttribute(jsonObj, HAPDefinitionOperand.TYPE, HAPDataBuildOperand__HAPEntityParsable.PARSABLEENTITYDOMAIN);
+	public static HAPDataBuildOperand parseOperandDefinition(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		return (HAPDataBuildOperand)parseService.parseEntityJSONImplicitAttribute(jsonObj, HAPDefinitionOperand.TYPE, HAPDataBuildOperand__HAPEntityParsable.PARSABLEENTITYDOMAIN);
 	}
 	
 }

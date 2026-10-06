@@ -12,5 +12,6 @@ public class HAPDataBuildOperandConstant extends HAPDefinitionOperandConstant im
 	public static final String DATADEFINITION = "dataDefinition";
 	
 	private HAPDataDefinition m_dataDefinition;
+
 	
 }

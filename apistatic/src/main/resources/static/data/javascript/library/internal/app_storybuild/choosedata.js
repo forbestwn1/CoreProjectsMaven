@@ -286,7 +286,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 			
     	getValue : function(){
 			var out = {};
-			out[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONTYPE] = loc_getCurrentRootType();
+			out[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN] = loc_getCurrentRootType();
 			out[node_COMMONATRIBUTECONSTANT.DATABUILD_DATADEFINITION] = loc_dataDefinition;
 
 			var expressions = {};
@@ -808,7 +808,7 @@ var loc_createOperandOperation = function(arg1, env){
 				
 				parms.push(parm);
 			}
-			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS1] = parms;
+			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS] = parms;
 			return out;
 		}
 		
@@ -1166,116 +1166,11 @@ var loc_css_select = {
 		"appearance":"menulist"
 };
 
-var loc_dataChosen = 
-{
-    "expressionType": "variable",
-    "dataDefinition": {
-        "criteria": "test.date;1.0.0",
-        "type": "writable"
-    },
-    "expression": {
-        "constant": {
-            "operand": {
-                "type": "constant",
-                "data": {
-                    "dataTypeId": "test.date;1.0.0",
-                    "value": {
-                        "year": 2026,
-                        "month": 9,
-                        "date": 8
-                    }
-                }
-            }
-        },
-        "variable": {
-            "operand": {
-                "type": "operation",
-                "dataTypeId": "test.date;1.0.0",
-                "operation": "NDatesLater",
-                "parms": {},
-                "base": {
-                    "type": "operation",
-                    "dataTypeId": "test.date;1.0.0",
-                    "operation": "lastDate",
-                    "parms": {},
-                    "base": {
-                        "type": "variable",
-                        "variableName": "today"
-                    },
-                    "parms1": []
-                },
-                "parms1": [{
-                        "name": "n",
-                        "criteria": "test.integer;1.0.0",
-                        "value": {
-                            "expressionType": "constant",
-                            "dataDefinition": {
-                                "type": "writable",
-                                "criteria": "test.integer;1.0.0"
-                            },
-                            "expression": {
-                                "constant": {
-                                    "operand": {
-                                        "type": "constant",
-                                        "data": {
-                                            "dataTypeId": "test.integer;1.0.0",
-                                            "value": 2
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ]
-            }
-        }
-    }
-};
 
-
-var node_createValueApp = function(dataDefinition){
+var node_chooseDataApp = function(dataDefinition){
 	var loc_eventObject = node_createEventObject();
 		
-	var loc_env = {
-		
-		getOptions : function(dataDefinition){
-			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-
-			var constantOption = {
-				"type" : "constant"
-			};
-			var variableOption = {
-				"type" : "variable",
-				"variables" : ["today"]
-			};
-			
-			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
-			var out = [];
-			if(criteria=="test.date;1.0.0"){
-				out.push(constantOption);
-    			out.push(variableOption);
-			}
-			else{
-				out.push(constantOption);
-			}
-			return out;
-		},
-		
-		getVariablesByDataType : function(dataType){
-			if(dataType=="test.date;1.0.0"){
-				return ["today"];
-			}
-		},
-		
-		getDataTypeByVariable : function(varName){
-			if(varName=="today"){
-				return "test.date;1.0.0";
-			}
-		}
-	};
-
-//	var loc_valueChoose = loc_createDataChoose("expression", dataDefinition, loc_env);
-	var loc_valueChoose = loc_createDataChoose(loc_dataChosen, undefined, loc_env);
+	var loc_valueChoose;
 	
 	var loc_containerView = $("<div>AppContainer</div>");
 	
@@ -1286,34 +1181,84 @@ var node_createValueApp = function(dataDefinition){
 	var loc_out = {
 		
 		getInitRequest : function(handlers, request){
-			loc_valueChoose.updateView(loc_containerView);
-			loc_valueChoose.registerListener(function(eventName, eventData){
-				if(eventName=="change"){
-//					console.log(JSON.stringify(loc_buildExpression()));
-    				console.log(JSON.stringify(loc_getValue()));
-				}
-			});
-			
-			return loc_valueChoose.getInitRequest(handlers, request);
 		},
 
 		getView : function(){
 			return loc_containerView;
 		},
 		
-		setValue : function(value){
-			
+		getSetValueRequest : function(value, handlers, request){
+			if(loc_valueChoose!=undefined){
+				loc_valueChoose.destroy();
+			}
+			if(value==undefined){
+				loc_valueChoose = loc_createDataChoose("expression", dataDefinition, loc_envObj);
+			}
+			else{
+				loc_valueChoose = loc_createDataChoose(value, undefined, loc_envObj);
+			}
+			loc_valueChoose.updateView(loc_containerView);
+			loc_valueChoose.registerListener(function(eventName, eventData){
+				if(eventName=="change"){
+    				console.log(JSON.stringify(loc_getValue()));
+				}
+			});
+					
+			return loc_valueChoose.getInitRequest(handlers, request);
 		},
 		
 		getValue : function(){
-			
-		}
+			return loc_getValue();
+		},
+		
+		isReady : function(){
+			return loc_valueChoose.isReady();
+		},
 		
 	};
 	
 	return loc_out;
 
 };
+
+var loc_envObj = {
+	
+	getOptions : function(dataDefinition){
+		var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+
+		var constantOption = {
+			"type" : "constant"
+		};
+		var variableOption = {
+			"type" : "variable",
+			"variables" : ["today"]
+		};
+		
+		var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
+		var out = [];
+		if(criteria=="test.date;1.0.0"){
+			out.push(constantOption);
+			out.push(variableOption);
+		}
+		else{
+			out.push(constantOption);
+		}
+		return out;
+	},
+	
+	getVariablesByDataType : function(dataType){
+		if(dataType=="test.date;1.0.0"){
+			return ["today"];
+		}
+	},
+	
+	getDataTypeByVariable : function(varName){
+		if(varName=="today"){
+			return "test.date;1.0.0";
+		}
+	}
+};
+
 
 //*******************************************   End Node Definition  ************************************** 	
 
@@ -1329,7 +1274,7 @@ nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){no
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("createValueApp", node_createValueApp); 
+packageObj.createChildNode("chooseDataApp", node_chooseDataApp); 
 
 })(packageObj);
 
