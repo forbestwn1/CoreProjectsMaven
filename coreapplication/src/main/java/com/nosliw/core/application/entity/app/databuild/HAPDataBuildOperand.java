@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.app.expressionbuild;
+package com.nosliw.core.application.entity.app.databuild;
 
 import org.json.JSONObject;
 
