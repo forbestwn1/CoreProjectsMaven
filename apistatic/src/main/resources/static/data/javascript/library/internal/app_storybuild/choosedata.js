@@ -200,7 +200,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 		});
 		
 		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-			loc_updateRootTypeSelection(valueChooseObj[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONTYPE]);
+			loc_updateRootTypeSelection(valueChooseObj[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN]);
 			loc_registerListener();
 		}));
 		return out;
@@ -632,7 +632,7 @@ var loc_createOperandOperation = function(arg1, env){
 		else{
 			loc_baseDataType = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_DATATYPEID]; 
 			loc_operationName = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
-			loc_parmsObj = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS1];
+			loc_parmsObj = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS];
 		}
 	};
 	

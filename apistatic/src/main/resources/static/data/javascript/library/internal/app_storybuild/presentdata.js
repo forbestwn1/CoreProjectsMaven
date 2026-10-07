@@ -14,6 +14,18 @@ var packageObj = library;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
+var loc_disable = function(containerView){
+	if (containerView.parent().length > 0){
+		containerView.remove();		
+	}
+};
+
+var loc_enable = function(parentView, containerView){
+	if (containerView.parent().length == 0){
+		parentView.append(containerView);
+	}
+};
+
 var loc_createExpressionApp = function(){
 
 	var loc_parentView;
@@ -26,13 +38,9 @@ var loc_createExpressionApp = function(){
 	
 	var loc_out = {
 	
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
+		enable : function(){      loc_enable(loc_parentView, loc_containerView);    },
 		
-		disable : function(){
-			loc_containerView.remove();
-		},
+		disable : function(){   loc_disable(loc_containerView);  },
 	
 		updateView : function(parentView){
 			loc_parentView = parentView;
@@ -41,7 +49,7 @@ var loc_createExpressionApp = function(){
 		getSetValueRequest : function(value, handlers, request){
 			var out = node_createServiceRequestInfoSimple(undefined, function(request){
 				loc_value = value;
-				loc_contentView.text(value[node_COMMONATRIBUTECONSTANT.DEFINITIONRAWDATAEXPRESSION_EXPRESSION]);
+				loc_contentView.text(JSON.stringify(loc_value));
 			}, handlers, request);
 			return out;
 		}
@@ -95,7 +103,7 @@ var loc_createConstantApp = function(dataDefinition){
 					out1.addRequest(nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({ bundleDef: bundleDef }, undefined, {}, undefined, {
 	    				success: function (requestInfo, application) {
 							loc_standaloneApp = application;
-							loc_contantValueWrapperView.append(loc_standaloneApp.getView());
+							loc_containerView.append(loc_standaloneApp.getView());
 							
 							loc_standaloneApp.registerExposeEventListener(undefined, function(eventName, eventValue){
 								if(eventName==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
@@ -119,13 +127,9 @@ var loc_createConstantApp = function(dataDefinition){
 	
 	var loc_out = {
 	
-		enable : function(){
-			loc_parentView.append(loc_containerView);
-		},
-		
-		disable : function(){
-			loc_containerView.remove();
-		},
+		enable : function(){      loc_enable(loc_parentView, loc_containerView);    },
+			
+		disable : function(){   loc_disable(loc_containerView);  },
 	
 		updateView : function(parentView){
 			loc_parentView = parentView;
@@ -138,10 +142,13 @@ var loc_createConstantApp = function(dataDefinition){
 				out.addRequest(loc_getInitStandAloneRequest());
 			}
 
-			out.addRequest(loc_standaloneApp.executeExecuteCommandRequest("setData", {
-			    "data" : value
+			out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+				
+				return loc_standaloneApp.executeExecuteCommandRequest("setData", {
+							    "data" : value[node_COMMONATRIBUTECONSTANT.DATABUILDEXPRESSION_OPERAND][node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDCONSTANT_DATA]
+							});
 			}));
-						
+			
 			return out;
 		}
 		
@@ -150,43 +157,44 @@ var loc_createConstantApp = function(dataDefinition){
 };
 
 
-var node_presentValueApp = function(dataDefinition){
+var node_presentDataApp = function(dataDefinition){
 	
 	var loc_value;
 	
-	var loc_expressionApp = loc_createExpressionApp();
-	var loc_constantApp = loc_createConstantApp(dataDefinition);
-	
 	var loc_containerView = $("<div></div>");
+
+    var loc_presents = {};
+		
+	var loc_init = function(dataDefinition){
+		var loc_expressionApp = loc_createExpressionApp();
+		var loc_constantApp = loc_createConstantApp(dataDefinition);
+		loc_expressionApp.updateView(loc_containerView);
+		loc_constantApp.updateView(loc_containerView);
+
+		loc_presents.variable = loc_expressionApp;
+		loc_presents.constant = loc_constantApp;
+	};
 	
 	var loc_out = {
-		
-		getInitRequest : function(handlers, request){
-			loc_expressionApp.updateView(loc_containerView);
-			loc_constantApp.updateView(loc_containerView);
-			return loc_expression.getInitRequest(handlers, request);
-		},
 		
 		getView : function(){
 			return loc_containerView;
 		},
 
-		getSetValueReqeust : function(value, handlers, request){
+		getSetValueRequest : function(value, handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			
 			loc_value = value;
-			
-			var request;
-			var constantValue = value[node_COMMONATRIBUTECONSTANT.STORYVALUECHOSEN_CONSTANTDATA];
-			var expressionValue = value[node_COMMONATRIBUTECONSTANT.STORYVALUECHOSEN_EXPRESSION];
-			if(constantValue!=undefined){
-				loc_expressionApp.disable();
-			    out.addRequest(loc_constantApp.getSetValueRequest(constantValue));
-			}
-		    else if(expressionValue!=undefined){
-				loc_constantApp.disable();
-				out.addRequest(loc_expressionApp.getSetValueRequest(expressionValue));
-		    }
+			var chosen = loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
+			_.each(loc_presents, function(present, type){
+				if(type==chosen){
+					present.enable();
+     				out.addRequest(present.getSetValueRequest(loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSION][type]));
+				}
+				else{
+					present.disable();
+				}
+			});
 			return out;
 		},
 		
@@ -196,6 +204,7 @@ var node_presentValueApp = function(dataDefinition){
 		
 	};
 	
+	loc_init(dataDefinition);
 	return loc_out;
 
 };
@@ -214,6 +223,6 @@ nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){no
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
 
 //Register Node by Name
-packageObj.createChildNode("presentValueApp", node_presentValueApp); 
+packageObj.createChildNode("presentDataApp", node_presentDataApp); 
 
 })(packageObj);

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8" />
+        <title>Application !!</title>
+
+    	<link rel="stylesheet" href="/data/javascript/library/external/framework7/css/framework7.bundle.min.css">
+        <script src="/data/javascript/library/external/framework7/4.3.1/framework7.bundle.js"></script>
+
+        <script src="http://localhost:8081/static/data/javascript/library/external/jQuery/3.4.1/jquery.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Underscore/1.9.1/underscore.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/Backbone/1.3.3/backbone.js"></script>
+        <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
+
+        <script src="script/utilityfectch.js"></script>
+        <!-- script src="script/choosevalue.js"></script-->
+
+ 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+</head>
+
+<body>
+
+    <div id="main"/>
+	
+	<div>
+	
+   </div>
+</body>
+
+<script>
+
+	
+var fetchTasks = [
+	createCoreStaticTask(),
+	createFetchTask(
+	    {
+		    "staticInfo" : [
+			    {
+				    "type" : "configure",
+				    "name" : "storybuild"
+	            }
+		    ],
+		    "requestId" : "StoryBuild"
+	    }
+	),
+];
+
+
+createStaticFetchTaskManager().fetch(fetchTasks, function(){
+
+	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
+	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
+	var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
+	var node_presentDataApp = nosliw.getNodeData("app_storybuild.presentDataApp");
+
+	var parms = node_basicUtility.getParmsInUrl();
+	var dataType = parms.dataType==undefined?"string":parms.dataType;
+
+	var dataDefinition = {};
+	dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA] = "test."+ dataType +";1.0.0";
+	dataDefinition.type = "writable";
+
+	var loc_dataChosen = 
+	{
+		    "expressionChosen": "constant",
+		    "dataDefinition": {
+		        "criteria": "test.date;1.0.0",
+		        "type": "writable"
+		    },
+		    "expression": {
+		        "constant": {
+		            "operand": {
+		                "type": "constant",
+		                "data": {
+		                    "dataTypeId": "test.date;1.0.0",
+		                    "value": {
+		                        "year": 2026,
+		                        "month": 9,
+		                        "date": 28
+		                    }
+		                }
+		            }
+		        },
+		        "variable": {
+		            "operand": {
+		                "type": "operation",
+		                "dataTypeId": "test.date;1.0.0",
+		                "operation": "NDatesLater",
+		                "parms": [{
+		                        "name": "n",
+		                        "criteria": "test.integer;1.0.0",
+		                        "value": {
+		                            "expressionChosen": "constant",
+		                            "dataDefinition": {
+		                                "type": "writable",
+		                                "criteria": "test.integer;1.0.0"
+		                            },
+		                            "expression": {
+		                                "constant": {
+		                                    "operand": {
+		                                        "type": "constant",
+		                                        "data": {
+		                                            "dataTypeId": "test.integer;1.0.0",
+		                                            "value": 3
+		                                        }
+		                                    }
+		                                }
+		                            }
+		                        }
+		                    }
+		                ],
+		                "base": {
+		                    "type": "operation",
+		                    "dataTypeId": "test.date;1.0.0",
+		                    "operation": "lastDate",
+		                    "parms": [],
+		                    "base": {
+		                        "type": "variable",
+		                        "variableName": "today"
+		                    }
+		                }
+		            }
+		        }
+		    }
+		};
+
+
+	var presentDataApp = node_presentDataApp(dataDefinition);
+	$("#main").append(presentDataApp.getView());
+	var request = presentDataApp.getSetValueRequest(loc_dataChosen, {
+         success : function(request){
+
+
+         }
+	});
+	node_requestServiceProcessor.processRequest(request);			
+});
+
+</script>
+
+</html>
