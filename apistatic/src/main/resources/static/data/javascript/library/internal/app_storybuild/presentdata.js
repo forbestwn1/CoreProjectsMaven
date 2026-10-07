@@ -181,6 +181,8 @@ var node_presentDataApp = function(dataDefinition){
 			return loc_containerView;
 		},
 
+		getInitRequest : function(){},
+		
 		getSetValueRequest : function(value, handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			

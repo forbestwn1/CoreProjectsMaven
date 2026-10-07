@@ -20,11 +20,11 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
-import com.nosliw.core.data.HAPData;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
 
 public class HAPStoryChangeUtility {
 
-	public static HAPStoryChangeItemElementNew buildNewAppendConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPData constantData, HAPEntityInfo entityInfo) {
+	public static HAPStoryChangeItemElementNew buildNewAppendConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataBuild constantData, HAPEntityInfo entityInfo) {
 		//variable element
 		HAPStoryElementAccessoryConstant constantEle = new HAPStoryElementAccessoryConstant(entityInfo);
 		HAPStoryChangeItemElementNew newConstantChange = changeSession.addChangeItemNew(constantEle);

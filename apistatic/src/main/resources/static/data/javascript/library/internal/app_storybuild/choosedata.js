@@ -1187,6 +1187,8 @@ var node_chooseDataApp = function(dataDefinition){
 			return loc_containerView;
 		},
 		
+		getInitRequest : function(){},
+
 		getSetValueRequest : function(value, handlers, request){
 			if(loc_valueChoose!=undefined){
 				loc_valueChoose.destroy();

@@ -8,7 +8,6 @@ import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
-import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
@@ -18,7 +17,8 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemStatic;
 import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
-import com.nosliw.core.data.HAPData;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuildUtility;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
@@ -73,9 +73,9 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 			HAPStoryWizzardQuestionairItemDynamic parmIsConstantQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseIsConstantDynamic(false), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMISCONSTANT);
 			parmDynamicGroupQ.addItem(parmIsConstantQ);
 
-			//dynamic of constant value
-			HAPData initData = HAPUtilityDataDefinition.getInitData(requestParm.getDataDefinition());
-			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(initData), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
+			//dynamic of dataBuild value
+			HAPDataBuild dataBuild = HAPDataBuildUtility.buildDataBuildFromDataDefinition(requestParm.getDataDefinition());
+			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(dataBuild), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag

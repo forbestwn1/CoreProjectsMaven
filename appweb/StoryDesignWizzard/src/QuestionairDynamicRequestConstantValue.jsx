@@ -21,8 +21,8 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	var node_ResourceId = nosliw.getNodeData("resource.entity.ResourceId");
 	var node_ServiceInfo = nosliw.getNodeData("common.service.ServiceInfo");
 	var node_valueInVarOperationServiceUtility = nosliw.getNodeData("variable.valueinvar.operation.valueInVarOperationServiceUtility");
-	var node_createValueApp = nosliw.getNodeData("app_storybuild.createValueApp");
-	var node_presentValueApp = nosliw.getNodeData("app_storybuild.presentValueApp");
+	var node_chooseDataApp = nosliw.getNodeData("app_storybuild.chooseDataApp");
+	var node_presentDataApp = nosliw.getNodeData("app_storybuild.presentDataApp");
 
 	var loc_nameForChange = "forChange";
 	var loc_nameForDisplay = "forDisplay";
@@ -41,8 +41,8 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 			var loc_questionair = questionair;
 
-			var loc_displayApp = node_presentValueApp(datadefinition);
-			var loc_changeApp = node_createValueApp(datadefinition);
+			var loc_displayApp = node_presentDataApp(datadefinition);
+			var loc_changeApp = node_chooseDataApp(datadefinition);
 
 			cache.current[questionair.id].uiTagAppsInfo[loc_nameForDisplay] = {application: loc_displayApp};
 			cache.current[questionair.id].uiTagAppsInfo[loc_nameForChange] = {application: loc_changeApp};
@@ -73,7 +73,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 
 	var loc_getCurrentValue = function () {
-		return questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_VALUE];
+		return questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD];
 	};
 
 	var loc_getUITappAppInfoForDisplay = function(){	return  cache.current[questionair.id].uiTagAppsInfo[loc_nameForDisplay];	};
@@ -82,17 +82,13 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 	var updateUITagForDisplay = function () {
 		var data = loc_getCurrentValue();
-		loc_getUITappAppInfoForDisplay().setValue(data);
+		var request =loc_getUITappAppInfoForDisplay().getSetValueRequest(data);
+		node_requestServiceProcessor.processRequest(request);
 	};
 
 	var updateUITagForChange = function () {
 		var data = loc_getCurrentValue();
-
-   	    var request = loc_getUITappAppInfoForChange().application.executeExecuteCommandRequest("setData", {
-            "data" : data
-        });
-
-//		var request = loc_getUITappAppInfoForChange().variable.getDataOperationRequest(node_valueInVarOperationServiceUtility.createSetOperationService("", data));
+		var request =loc_getUITappAppInfoForChange().getSetValueRequest(data);
 		node_requestServiceProcessor.processRequest(request);
 	};
 
@@ -100,8 +96,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 		questionair.isDirty = true;
 		questionair.changedValue = {};
 		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = questionair.defaultValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE];
-		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_VALUE] = data;
-//		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_CONSTANTDATA] = data;
+		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD] = data;
 
 		updateUITagForDisplay();
 		onChange(data);
