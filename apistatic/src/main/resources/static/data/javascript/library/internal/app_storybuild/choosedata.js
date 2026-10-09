@@ -15,18 +15,10 @@ var packageObj = library;
 //*******************************************   Start Node Definition  ************************************** 	
 var loc_disable = function(containerView){
 	containerView.hide();
-/*
-	if (containerView.parent().length > 0){
-		containerView.remove();		
-	}
-*/	
 };
 
-var loc_enable = function(parentView, containerView){
+var loc_enable = function(containerView){
 	containerView.show();
-	if (containerView.parent().length == 0){
-		parentView.append(containerView);
-	}
 };
 	
 var loc_createRootChoose = function(dataDefinition, env){
@@ -128,15 +120,14 @@ var loc_createDataChoose = function(arg1, arg2, env){
 	var loc_getCurrentExpression = function(){	return loc_expressionsByType[loc_getCurrentRootType()];	};
 	
 	var loc_updateRootTypeSelection = function(rootType){
-		if(loc_getCurrentRootType()!=null){
-			loc_getCurrentExpression().disable();
-		}
-
-		loc_rootChoose.setCurrentChoose(rootType);
-		var currentExpression = loc_getCurrentExpression();
-		if(currentExpression!=null){
-			currentExpression.enable();
-		}
+		_.each(loc_expressionsByType, function(expression, type){
+			if(type==rootType){
+				expression.enable();
+			}
+			else{
+				expression.disable();
+			}
+		});
 	};
 
 	var loc_newRootOperand = function(rootType){
@@ -320,6 +311,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 	var loc_env = env;
 	
 	var loc_containerView = $("<ul></ul>");
+	loc_parentView.append(loc_containerView);
 	
 	var loc_operandChain = [];
 	
@@ -384,7 +376,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 			return loc_addOperandRequest(operand, handlers, request)
 		},
 		
-		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
+		enable : function(){	loc_enable(loc_containerView);   },
 
 		disable : function(){		loc_disable(loc_containerView);	    },
 
@@ -546,6 +538,8 @@ var loc_createNextButton = function(parentView){
 	loc_containerView.css(loc_css_selectContainer);
 	loc_nextabelView.css(loc_css_label);
 	
+	loc_parentView.append(loc_containerView);
+	
 	var loc_status = 0;
 	var loc_statusInfo = [
 		{"name":"next", "label":"Need operation?", "title":"-->", "event":"next"},
@@ -580,7 +574,7 @@ var loc_createNextButton = function(parentView){
 		},
 		
 		enable : function(){
-			loc_enable(loc_parentView, loc_containerView);
+			loc_enable(loc_containerView);
     		loc_enabled = true;
 		},
 		
