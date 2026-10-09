@@ -10,7 +10,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	const contentRefForDisplay = useRef(null);
 	const [, forceUpdate] = useState(0);
 	const [showPopup, setShowPopup] = useState(false);
-	const [saveDataEnable, setSaveDataEnable] = useState(true);
+	const [saveDataEnable, setSaveDataEnable] = useState(false);
 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -58,6 +58,12 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 				questionairData.loading = false;
 				setGlobalLoading(false);
 
+				loc_changeApp.registerListener(function(eventName, eventValue){
+					if(eventName=="change"){
+						loc_updateSaveDataEnable();
+					}
+				});
+
 				forceUpdate(c => c + 1);
 			}));
 			node_requestServiceProcessor.processRequest(request);
@@ -72,6 +78,13 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			$(contentRefForDisplay.current).append(forDisplayAppInfo.application.getView());
 		}
 	});
+
+
+	var loc_updateSaveDataEnable = function(){
+		var forChangeAppInfo = loc_getUITappAppInfoForChange();
+		var value = forChangeAppInfo.application.isReady();
+		setSaveDataEnable(value);
+	};
 
 
 	var loc_getCurrentValue = function () {
@@ -90,7 +103,11 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 	var updateUITagForChange = function () {
 		var data = loc_getCurrentValue();
-		var request =loc_getUITappAppInfoForChange().application.getSetValueRequest(data);
+		var request =loc_getUITappAppInfoForChange().application.getSetValueRequest(data, {
+			success: function(request){
+				loc_updateSaveDataEnable();
+			}
+		});
 		node_requestServiceProcessor.processRequest(request);
 	};
 
