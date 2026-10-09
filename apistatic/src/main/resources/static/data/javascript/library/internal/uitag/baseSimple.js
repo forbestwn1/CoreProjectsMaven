@@ -120,6 +120,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	var loc_out = {
 
 		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			if(commandName=="setData"){
 				var data = commandData.data;
 				loc_coreObj.updateView(data);
@@ -129,6 +130,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 				
 			}
 			
+			return out;
 		},
 				
 		created : function(){
