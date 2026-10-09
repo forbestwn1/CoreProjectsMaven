@@ -120,6 +120,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 	var loc_getCurrentExpression = function(){	return loc_expressionsByType[loc_getCurrentRootType()];	};
 	
 	var loc_updateRootTypeSelection = function(rootType){
+		loc_rootChoose.setCurrentChoose(rootType);
 		_.each(loc_expressionsByType, function(expression, type){
 			if(type==rootType){
 				expression.enable();
