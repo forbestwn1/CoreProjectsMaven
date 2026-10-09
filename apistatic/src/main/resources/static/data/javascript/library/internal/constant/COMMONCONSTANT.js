@@ -773,7 +773,9 @@ var COMMONCONSTANT=
   "STATIC_RESPONSE_TYPE_CONTENT": "content",
   "STATIC_LIBRARY_DOMAIN_INTERNAL": "data.javascript.library.internal",
   "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external",
-  "VARIABLE_GLOBAL_NAME_TODAY": "today"
+  "VARIABLE_GLOBAL_NAME_TODAY": "today",
+  "DATABUILD_CHOSEN_CONSTANT": "constant",
+  "DATABUILD_CHOSEN_EXPRESSION": "expression"
 };
 
 //*******************************************   End Node Definition  ************************************** 	

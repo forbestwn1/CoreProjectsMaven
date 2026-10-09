@@ -1294,6 +1294,10 @@
 			<definition type="space"/>
 			<definition name="VARIABLE_GLOBAL_NAME_TODAY" value="today"/>
 
+			<definition type="space"/>
+			<definition name="DATABUILD_CHOSEN_CONSTANT" value="constant"/>
+			<definition name="DATABUILD_CHOSEN_EXPRESSION" value="expression"/>
+
 		</definitions>
 	</constants>
 </root>

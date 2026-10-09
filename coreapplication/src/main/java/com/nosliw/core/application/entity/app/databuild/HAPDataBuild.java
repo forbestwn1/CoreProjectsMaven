@@ -11,7 +11,9 @@ import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 
 @HAPEntityWithAttribute
@@ -37,11 +39,20 @@ public class HAPDataBuild extends HAPSerializableImp{
 	}
 
 	public HAPDataDefinition getDataDefinition() {      return this.m_dataDefinition;         }
-	public void setDataDefinition(HAPDataDefinition dataDefinition) {      this.m_dataDefinition = dataDefinition;         }
+	public void setDataDefinition(HAPDataDefinition dataDefinition) {     
+		if(dataDefinition!=null && dataDefinition.getType().equals(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT)) {
+			this.m_dataDefinition = new HAPDataDefinitionWritable(dataDefinition);
+		}
+		else {
+			this.m_dataDefinition = dataDefinition;         
+		}
+	}
 	
 	public void setExpressionChosen(String expressionType) {     this.m_expressionChosen = expressionType;           }
 	public String getExpressionChosen() {      return this.m_expressionChosen;         }
 
+	
+	
 	public Map<String, HAPDataBuildExpression> getExpressions() {    return this.m_expressions;     }
 	public void addExpression(String type, HAPDataBuildExpression expression) {    this.m_expressions.put(type, expression);   }
 	
@@ -67,7 +78,7 @@ public class HAPDataBuild extends HAPSerializableImp{
 		JSONObject expressionJsonObj = jsonObj.optJSONObject(EXPRESSION);
 		for(Object key : expressionJsonObj.keySet()) {
 			String name = (String)key;
-			out.addExpression(name, HAPDataBuildExpression.buildDataBuildExpression(jsonObj.getJSONObject(name), parseService));
+			out.addExpression(name, HAPDataBuildExpression.buildDataBuildExpression(expressionJsonObj.getJSONObject(name), parseService));
 		}
 		return out;
 	}

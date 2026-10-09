@@ -10,7 +10,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	const contentRefForDisplay = useRef(null);
 	const [, forceUpdate] = useState(0);
 	const [showPopup, setShowPopup] = useState(false);
-	const [saveDataEnable, setSaveDataEnable] = useState(false);
+	const [saveDataEnable, setSaveDataEnable] = useState(true);
 
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
@@ -44,13 +44,15 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			var loc_displayApp = node_presentDataApp(datadefinition);
 			var loc_changeApp = node_chooseDataApp(datadefinition);
 
-			cache.current[questionair.id].uiTagAppsInfo[loc_nameForDisplay] = {application: loc_displayApp};
-			cache.current[questionair.id].uiTagAppsInfo[loc_nameForChange] = {application: loc_changeApp};
+			var uiTagAppsInfo = {};
+			uiTagAppsInfo[loc_nameForDisplay] = {application: loc_displayApp};
+			uiTagAppsInfo[loc_nameForChange] = {application: loc_changeApp};
+			cache.current[questionair.id].uiTagAppsInfo = uiTagAppsInfo;
 
 			var request = node_createServiceRequestInfoSequence(new node_ServiceInfo("constantValueUITag"));
 			request.addRequest(loc_displayApp.getInitRequest());
 			request.addRequest(loc_changeApp.getInitRequest());
-			request.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+			request.addRequest(node_createServiceRequestInfoSimple({}, function(request){
 				updateUITagForDisplay();
 				updateUITagForChange();
 				questionairData.loading = false;
@@ -82,13 +84,13 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 	var updateUITagForDisplay = function () {
 		var data = loc_getCurrentValue();
-		var request =loc_getUITappAppInfoForDisplay().getSetValueRequest(data);
+		var request =loc_getUITappAppInfoForDisplay().application.getSetValueRequest(data);
 		node_requestServiceProcessor.processRequest(request);
 	};
 
 	var updateUITagForChange = function () {
 		var data = loc_getCurrentValue();
-		var request =loc_getUITappAppInfoForChange().getSetValueRequest(data);
+		var request =loc_getUITappAppInfoForChange().application.getSetValueRequest(data);
 		node_requestServiceProcessor.processRequest(request);
 	};
 
@@ -116,16 +118,8 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	};
 
 	var saveAndClose = function () {
-		try {
-           var request = loc_getUITappAppInfoForChange().variable.getGetValueRequest({
-			success: function (request, data) {
-				setSelectedConstantData(data.value);
-			}
-		   });
-			node_requestServiceProcessor.processRequest(request);
-		} catch (e) {
-			// ignore read errors
-		}
+		var value = loc_getUITappAppInfoForChange().application.getValue();
+		setSelectedConstantData(value);
 		closePopup();
 	};
 

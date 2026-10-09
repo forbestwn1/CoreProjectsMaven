@@ -14,12 +14,16 @@ var packageObj = library;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 var loc_disable = function(containerView){
+	containerView.hide();
+/*
 	if (containerView.parent().length > 0){
 		containerView.remove();		
 	}
+*/	
 };
 
 var loc_enable = function(parentView, containerView){
+	containerView.show();
 	if (containerView.parent().length == 0){
 		parentView.append(containerView);
 	}
@@ -137,10 +141,10 @@ var loc_createDataChoose = function(arg1, arg2, env){
 
 	var loc_newRootOperand = function(rootType){
 		var operand;
-		if(rootType=="constant"){
+		if(rootType==node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT){
 			operand = loc_createOperandConstant(loc_dataDefinition);
 		}
-		else if(rootType=="variable"){
+		else if(rootType==node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION){
 			operand = loc_createOperandVariable(loc_dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA], loc_env);
 		}
 		return operand;
@@ -155,7 +159,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 		});
 		
 		out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
-			loc_updateRootTypeSelection("constant");
+			loc_updateRootTypeSelection(node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT);
 			loc_registerListener();
 		}));
 		
@@ -361,7 +365,6 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 
 		out.addRequest(wrapper.getInitRequest(loc_containerView, {
 			success : function(request){
-				wrapper.enable();
 				if(loc_operandChain.length!=0){
 					loc_operandChain[loc_operandChain.length-1].setNextInChain(wrapper);
 				}
@@ -386,7 +389,7 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 		disable : function(){		loc_disable(loc_containerView);	    },
 
 		destroy : function(){
-			this.disable();
+			loc_containerView.remove();
 			_.each(loc_operandChain, function(wrapper, i){
 				wrapper.destroy();
 			});
@@ -486,6 +489,7 @@ var loc_crateOperandWrapper = function(operand, env){
 		
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
+			parentView.append(loc_containerView);
 			var operandType = loc_operand.getType();
 			if(operandType=="variable"||operandType=="operation"){
 				loc_operand.registerListener(function(eventName, eventData){
@@ -504,19 +508,14 @@ var loc_crateOperandWrapper = function(operand, env){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(loc_operand.getInitRequest(loc_operandContainerView, {
 				success : function(request){
-					loc_operand.enable();
     				loc_updateNextButton();
 				}
 			}));
 			return out;
 		},
 		
-		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
-
-		disable : function(){		loc_disable(loc_containerView);	    },
-
 		destroy : function(){
-			this.disable();
+			loc_containerView.remove();
 			loc_operand.destroy();
 			if(loc_nextButton!=undefined)    loc_nextButton.destroy();
 		},
@@ -714,6 +713,7 @@ var loc_createOperandOperation = function(arg1, env){
 	
 	var loc_getInitRequest = function(parentView, handlers, request){
 		loc_parentView = parentView;
+		loc_parentView.append(loc_containerView);
 		
 		loc_operationSelection = loc_createOperationSelection(loc_baseDataType, loc_operationName);
 		loc_operationSelectionContainerView.append(loc_operationSelection.getView());
@@ -766,18 +766,13 @@ var loc_createOperandOperation = function(arg1, env){
 			return loc_getInitRequest(parentView, handlers, request);
 		},
 
-		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
-
-		disable : function(){		loc_disable(loc_containerView);	    },
-
 		registerListener : function(handler){		return loc_eventObject.registerListener(undefined, undefined, handler, this);		},
 		
 		destroy : function(){
 			_.each(loc_parms, function(parm, i){
 				parm.valueChoose.destroy();
 			});
-			
-			this.disable();
+			loc_containerView.remove();
 		},
 
     	isReady : function(){
@@ -883,7 +878,6 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 		getView : function(){     return loc_containerView;        },
 		
 		destroy : function(){
-			this.disable();
 		},
 		
     	registerListener : function(handler){
@@ -960,6 +954,7 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
+			loc_parentView.append(loc_containerView);
 			
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			var gatewayParm = {};
@@ -1022,12 +1017,10 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 		
 		isReady : function(){    return loc_constantValue!=undefined;       },
 
-		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
-
 		disable : function(){		loc_disable(loc_containerView);	    },
 
 		destroy : function(){
-			this.disable();
+			loc_containerView.remove();
 		},
 
 		registerListener : function(handler){
@@ -1098,6 +1091,7 @@ var loc_createOperandVariable = function(arg1, env){
 		
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
+			loc_parentView.append(loc_containerView);
 			
 			loc_containerView.append(loc_variableChooseViewContainer);
 			_.each(loc_varNames, function(varName){
@@ -1117,12 +1111,8 @@ var loc_createOperandVariable = function(arg1, env){
 		
 		isReady : function(){    return loc_varName!=undefined;       },
 		
-		enable : function(){	loc_enable(loc_parentView, loc_containerView);   },
-
-		disable : function(){		loc_disable(loc_containerView);	    },
-
 		destroy : function(){
-			this.disable();
+			loc_containerView.remove();
 		},
 
 		registerListener : function(handler){
@@ -1187,8 +1177,6 @@ var node_chooseDataApp = function(dataDefinition){
 			return loc_containerView;
 		},
 		
-		getInitRequest : function(){},
-
 		getSetValueRequest : function(value, handlers, request){
 			if(loc_valueChoose!=undefined){
 				loc_valueChoose.destroy();
@@ -1229,10 +1217,10 @@ var loc_envObj = {
 		var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 
 		var constantOption = {
-			"type" : "constant"
+			"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT
 		};
 		var variableOption = {
-			"type" : "variable",
+			"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
 			"variables" : ["today"]
 		};
 		

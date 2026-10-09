@@ -104,17 +104,6 @@ var loc_createConstantApp = function(dataDefinition){
 	    				success: function (requestInfo, application) {
 							loc_standaloneApp = application;
 							loc_containerView.append(loc_standaloneApp.getView());
-							
-							loc_standaloneApp.registerExposeEventListener(undefined, function(eventName, eventValue){
-								if(eventName==node_COMMONCONSTANT.EVENT_UI_VALUE_CHANGE){
-									loc_setConstantValue(eventValue);
-									loc_eventObject.triggerEvent("change");
-								}
-								else if(eventName==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
-									loc_setConstantValue();
-									loc_eventObject.triggerEvent("change");
-								}
-							});
 			    		}
 				    }));
 				    return out1;
@@ -171,8 +160,8 @@ var node_presentDataApp = function(dataDefinition){
 		loc_expressionApp.updateView(loc_containerView);
 		loc_constantApp.updateView(loc_containerView);
 
-		loc_presents.variable = loc_expressionApp;
-		loc_presents.constant = loc_constantApp;
+		loc_presents[node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION] = loc_expressionApp;
+		loc_presents[node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT] = loc_constantApp;
 	};
 	
 	var loc_out = {
@@ -187,16 +176,24 @@ var node_presentDataApp = function(dataDefinition){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			
 			loc_value = value;
-			var chosen = loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
-			_.each(loc_presents, function(present, type){
-				if(type==chosen){
-					present.enable();
-     				out.addRequest(present.getSetValueRequest(loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSION][type]));
-				}
-				else{
-					present.disable();
-				}
-			});
+			if(loc_value==undefined){
+				_.each(loc_presents, function(present, type){
+				    present.disable();	
+				});
+			}
+			else{
+				var chosen = loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
+				_.each(loc_presents, function(present, type){
+					if(type==chosen){
+						present.enable();
+						out.addRequest(present.getSetValueRequest(loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSION][type]));
+					}
+					else{
+						present.disable();
+					}
+				});
+			}
+			
 			return out;
 		},
 		

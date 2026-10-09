@@ -1265,4 +1265,9 @@ public class HAPConstantShared {
 		public static final String VARIABLE_GLOBAL_NAME_TODAY = "today";
 
 
+
+		public static final String DATABUILD_CHOSEN_CONSTANT = "constant";
+		public static final String DATABUILD_CHOSEN_EXPRESSION = "expression";
+
+
 }

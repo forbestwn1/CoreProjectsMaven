@@ -11,6 +11,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuildUtility;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 
@@ -19,7 +21,7 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 	@HAPAttribute
 	public static String INITDATA = "initData";
 
-	private HAPData m_initData;
+	private HAPDataBuild m_dataBuild;
 
 	public HAPDataDefinitionWritableWithInit() {
 		super(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT);
@@ -30,8 +32,10 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 		dataDefinition.cloneToDataDefinition(this);
 	}
 	
-	public HAPData getInitData() {    return this.m_initData;     }
-	public void setInitData(HAPData initData) {    this.m_initData = initData;      }
+	public HAPData getInitData() {   return HAPDataBuildUtility.getData(m_dataBuild);	}
+	
+	public HAPDataBuild getInitDataBuild() {     return this.m_dataBuild;       }
+	public void setInitDataBuild(HAPDataBuild dataBuild) {      this.m_dataBuild = dataBuild;         }
 
 	@Override
 	public boolean equals(Object obj){
@@ -49,8 +53,8 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
-		if(this.m_initData!=null) {
-			jsonMap.put(INITDATA, this.m_initData.toStringValue(HAPSerializationFormat.JSON));
+		if(this.m_dataBuild!=null) {
+			jsonMap.put(INITDATA, this.m_dataBuild.toStringValue(HAPSerializationFormat.JSON));
 		}
 	}
 	
@@ -95,7 +99,20 @@ class HAPDataDefinitionWritableWithInit__HAPEntityParsable extends HAPDataDefini
 		super.parseToEntity(jsonObj, dataDefinition, parseService);
 		Object initDataObj = jsonObj.opt(HAPDataDefinitionWritableWithInit.INITDATA);
 		if(initDataObj!=null) {
-			dataDefinition.setInitData(HAPUtilityData.buildDataWrapperFromObject(initDataObj));
+			HAPDataBuild dataBuild = null;
+			if(initDataObj instanceof String) {
+				dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj), dataDefinition);
+			}
+			else {
+				JSONObject initDataJsonObj = (JSONObject)initDataObj;
+				if(initDataJsonObj.opt(HAPData.DATATYPEID)!=null) {
+					dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj), dataDefinition);
+				}
+				else {
+					dataBuild = HAPDataBuild.buildDataBuild(initDataJsonObj, parseService);
+				}
+			}
+			dataDefinition.setInitDataBuild(dataBuild);
 		}
 	}
 
@@ -107,4 +124,3 @@ class HAPDataDefinitionWritableWithInit__HAPEntityParsable extends HAPDataDefini
 	}
 
 }
-
