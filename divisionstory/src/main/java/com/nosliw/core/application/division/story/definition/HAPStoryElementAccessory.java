@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.story.definition;
 
 import com.nosliw.common.info.HAPEntityInfo;
 
-//access element that attached to entity (command, event, variable, constant)
+//access element that attached to entity (command, event, variable, constant, dataexpression)
 public abstract class HAPStoryElementAccessory extends HAPStoryElementImpWithEntityInfo{
 
 	public HAPStoryElementAccessory(HAPStoryIdElementType elementType) {

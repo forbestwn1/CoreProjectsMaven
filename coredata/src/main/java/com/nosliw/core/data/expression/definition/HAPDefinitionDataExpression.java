@@ -29,6 +29,10 @@ public class HAPDefinitionDataExpression extends HAPSerializableImp{
 	}
 
 	public static HAPDefinitionDataExpression buildDataExpressionDefinition(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		if(jsonObj==null) {
+			return null;
+		}
+		
 		HAPDefinitionDataExpression out = new HAPDefinitionDataExpression();
 	    out.setOperand(HAPDefinitionOperand.parseOperandDefinition(jsonObj.getJSONObject(OPERAND), parseService));
 	    return out;

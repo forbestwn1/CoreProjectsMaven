@@ -9,7 +9,8 @@ public abstract class HAPStoryElementEntityComplex
                                    HAPStoryElementWithConstant, 
                                    HAPStoryElementWithVariable, 
                                    HAPStoryElementWithEvent,
-                                   HAPStoryElementWithTask{
+                                   HAPStoryElementWithTask,
+                                   HAPStoryElementWithDataExpression{
 
 	
 	public HAPStoryElementEntityComplex(HAPStoryIdElementType elementType) {

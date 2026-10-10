@@ -855,6 +855,7 @@
 			<definition name="STORYNODE_TYPE_VARIABLE" value="variable"/>
 			<definition name="STORYNODE_TYPE_COMMAND" value="command"/>
 			<definition name="STORYNODE_TYPE_EVENT" value="event"/>
+			<definition name="STORYNODE_TYPE_DATAEXPRESSION" value="dataExpression"/>
 
 			<definition name="STORYNODE_TYPE_MODULE" value="module"/>
 			<definition name="STORYNODE_TYPE_SERVICE" value="service"/>

@@ -779,6 +779,7 @@ public class HAPConstantShared {
 		public static final String STORYNODE_TYPE_VARIABLE = "variable";
 		public static final String STORYNODE_TYPE_COMMAND = "command";
 		public static final String STORYNODE_TYPE_EVENT = "event";
+		public static final String STORYNODE_TYPE_DATAEXPRESSION = "dataExpression";
 		public static final String STORYNODE_TYPE_MODULE = "module";
 		public static final String STORYNODE_TYPE_SERVICE = "service";
 		public static final String STORYNODE_TYPE_UIPAGE = "UIPage";

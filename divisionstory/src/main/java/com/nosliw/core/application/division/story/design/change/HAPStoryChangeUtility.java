@@ -11,11 +11,13 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementEndPointIO;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataExpression;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryReferenceElement;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryConstant;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryDataExpression;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
@@ -41,9 +43,11 @@ public class HAPStoryChangeUtility {
 			return newConstantChange;
 		}
 		else if(HAPConstantShared.DATABUILD_CHOSEN_EXPRESSION.equals(dataBuildType)){
+			HAPStoryElementAccessoryDataExpression dataExpressionEle = new HAPStoryElementAccessoryDataExpression(entityInfo);
+			dataExpressionEle.setValueObj(HAPDataBuildUtility.getExpressionObj(dataBuild));
 			
-			
-			
+			HAPStoryChangeItemElementNew newDataExpressionChange = changeSession.addChangeItemNew(dataExpressionEle);
+			changeSession.addChangeConnectionNew(parentRef, newDataExpressionChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithDataExpression.getAddDataExpressionChildPath(entityInfo.getName())));
 		}
 		
 		return null;
