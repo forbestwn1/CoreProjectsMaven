@@ -16,18 +16,18 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
 
 @HAPEntityWithAttribute
-public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic extends HAPStoryWizzardValueInQuestionairImp{
+public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic extends HAPStoryWizzardValueInQuestionairImp{
 
 	@HAPAttribute
 	public static final String DATABUILD = "dataBuild";
 	
 	private HAPDataBuild m_dataBuild;
 	
-	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic() {
+	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic() {
 		super(HAPConstantShared.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
 	}
 	
-	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(HAPDataBuild dataBuild) {
+	public HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic(HAPDataBuild dataBuild) {
 		this();
 		this.m_dataBuild = dataBuild;
 	}
@@ -53,11 +53,11 @@ class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynami
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic out = new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic();
+		HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic out = new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic();
 		
 		JSONObject jsonObj = (JSONObject)obj;
 
-		out.setDataBuild(HAPDataBuild.buildDataBuild(jsonObj.optJSONObject(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic.DATABUILD), parseService));
+		out.setDataBuild(HAPDataBuild.buildDataBuild(jsonObj.optJSONObject(HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic.DATABUILD), parseService));
 		
 		return out;
 	}

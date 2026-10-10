@@ -2,13 +2,17 @@ package com.nosliw.core.application.entity.app.databuild;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
-import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
 import com.nosliw.core.data.HAPData;
 
 public class HAPDataBuildUtility {
 
 	public static HAPDataBuild buildDataBuildFromDataDefinition(HAPDataDefinition dataDefinition) {
-		return HAPUtilityDataDefinition.getInitDataBuild(dataDefinition);
+    	HAPDataBuild out = null;
+		if(dataDefinition.getType().equals(HAPConstantShared.DATADEFINITION_TYPE_WRITEABLEWITHINIT)){
+			out = ((HAPDataDefinitionWritableWithInit)dataDefinition).getInitDataBuild();
+		}
+		return out;
 	}
 
 	public static HAPData getData(HAPDataBuild dataBuild) {

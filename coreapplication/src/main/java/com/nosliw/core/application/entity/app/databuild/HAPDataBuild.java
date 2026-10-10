@@ -45,6 +45,10 @@ public class HAPDataBuild extends HAPSerializableImp{
 	}
 
 	public static HAPDataBuild buildDataBuild(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		if(jsonObj==null) {
+			return null;
+		}
+		
 		HAPDataBuild out = new HAPDataBuild();
 		
 		out.setExpressionChosen((String)jsonObj.opt(HAPDataBuild.EXPRESSIONCHOSEN));

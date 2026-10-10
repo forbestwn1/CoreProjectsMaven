@@ -21,21 +21,33 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
+import com.nosliw.core.application.entity.app.databuild.HAPDataBuildUtility;
 
 public class HAPStoryChangeUtility {
 
-	public static HAPStoryChangeItemElementNew buildNewAppendConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataBuild constantData, HAPEntityInfo entityInfo) {
-		//variable element
-		HAPStoryElementAccessoryConstant constantEle = new HAPStoryElementAccessoryConstant(entityInfo);
-		HAPStoryChangeItemElementNew newConstantChange = changeSession.addChangeItemNew(constantEle);
-		changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithConstant.getAddConstantChildPath(entityInfo.getName())));
+	public static HAPStoryChangeItemElementNew buildNewAppendConstantChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataBuild dataBuild, HAPEntityInfo entityInfo) {
+		
+		String dataBuildType = dataBuild.getExpressionChosen();
+		if(HAPConstantShared.DATABUILD_CHOSEN_CONSTANT.equals(dataBuildType)) {
+			//variable element
+			HAPStoryElementAccessoryConstant constantEle = new HAPStoryElementAccessoryConstant(entityInfo);
+			HAPStoryChangeItemElementNew newConstantChange = changeSession.addChangeItemNew(constantEle);
+			changeSession.addChangeConnectionNew(parentRef, newConstantChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithConstant.getAddConstantChildPath(entityInfo.getName())));
 
-		//end point element
-		HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOConstant(constantData);
-		HAPStoryChangeItemElementNew newEndpointChange = changeSession.addChangeItemNew(endPointEle);
-		changeSession.addChangeConnectionNew(newConstantChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)));
-
-		return newConstantChange;
+			//end point element
+			HAPStoryElementEndPointIO endPointEle = new HAPStoryElementEndPointIOConstant(HAPDataBuildUtility.getData(dataBuild));
+			HAPStoryChangeItemElementNew newEndpointChange = changeSession.addChangeItemNew(endPointEle);
+			changeSession.addChangeConnectionNew(newConstantChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)));
+			return newConstantChange;
+		}
+		else if(HAPConstantShared.DATABUILD_CHOSEN_EXPRESSION.equals(dataBuildType)){
+			
+			
+			
+		}
+		
+		return null;
+		
 	}
 	
 	public static HAPStoryChangeItemElementNew buildNewAppendVariableChange(HAPStoryDesignSessionChange changeSession, HAPStoryReferenceElement parentRef, HAPDataDefinitionWritable dataDefinition, HAPEntityInfo variableInfo) {

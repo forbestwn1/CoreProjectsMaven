@@ -46,6 +46,10 @@ public class HAPDataBuildInfo extends HAPSerializableImp{
 	}
 
 	public static HAPDataBuildInfo buildDataBuildInfo(JSONObject jsonObj, HAPServiceParseEntity parseService) {
+		if(jsonObj==null) {
+			return null;
+		}
+		
 		HAPDataBuildInfo out = new HAPDataBuildInfo();
 		out.setDataDefinition(HAPParserDataDefinition.parseDataDefinition(jsonObj.optJSONObject(DATADEFINITION), parseService));
 		out.setDataBuild(HAPDataBuild.buildDataBuild(jsonObj.optJSONObject(DATABUILD), parseService));

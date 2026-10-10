@@ -88,7 +88,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 
 	var loc_getCurrentValue = function () {
-		return questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD];
+		return questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSEDATABUILDDYNAMIC_DATABUILD];
 	};
 
 	var loc_getUITappAppInfoForDisplay = function(){	return  cache.current[questionair.id].uiTagAppsInfo[loc_nameForDisplay];	};
@@ -115,7 +115,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 		questionair.isDirty = true;
 		questionair.changedValue = {};
 		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = questionair.defaultValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE];
-		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD] = dataBuild;
+		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSEDATABUILDDYNAMIC_DATABUILD] = dataBuild;
 
 		updateUITagForDisplay();
 		onChange(dataBuild);

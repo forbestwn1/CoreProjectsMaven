@@ -240,10 +240,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 				if(parmIsConstantQValue.getIsConstant()) {
 					HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
-					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic constantValueInQ = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic)parmConstantValueQ.getValue();
+					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic dataBuildInQ = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic)parmConstantValueQ.getValue();
 					
 					//add constant
-					HAPStoryChangeItemElementNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), constantValueInQ.getDataBuild(), parmDef);
+					HAPStoryChangeItemElementNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), dataBuildInQ.getDataBuild(), parmDef);
 
 					//build tunnel between constant endpoint and command endpoint
 					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());

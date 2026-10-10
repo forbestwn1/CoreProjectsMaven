@@ -75,7 +75,7 @@ public class HAPStoryWizzardDataSourceUtilityPrepareQuestionair {
 
 			//dynamic of dataBuild value
 			HAPDataBuild dataBuild = HAPDataBuildUtility.buildDataBuildFromDataDefinition(requestParm.getDataDefinition());
-			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseConstantValueDynamic(dataBuild), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
+			HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = new HAPStoryWizzardQuestionairItemDynamic(new HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic(dataBuild), HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
 			parmDynamicGroupQ.addItem(parmConstantValueQ);
 
 			//dynamic of uitag
