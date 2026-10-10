@@ -111,14 +111,14 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 		node_requestServiceProcessor.processRequest(request);
 	};
 
-	var setSelectedConstantData = function (data) {
+	var setSelectedConstantData = function (dataBuild) {
 		questionair.isDirty = true;
 		questionair.changedValue = {};
 		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE] = questionair.defaultValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDVALUEINQUESTIONAIR_VALUETYPE];
-		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD] = data;
+		questionair.changedValue[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSECONSTANTVALUEDYNAMIC_DATABUILD] = dataBuild;
 
 		updateUITagForDisplay();
-		onChange(data);
+		onChange(dataBuild);
 	};
 
 	var openPopup = function (e) {
@@ -136,7 +136,7 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 
 	var saveAndClose = function () {
 		var value = loc_getUITappAppInfoForChange().application.getValue();
-		setSelectedConstantData(value);
+		setSelectedConstantData(value[node_COMMONATRIBUTECONSTANT.DATABUILDINFO_DATABUILD]);
 		closePopup();
 	};
 

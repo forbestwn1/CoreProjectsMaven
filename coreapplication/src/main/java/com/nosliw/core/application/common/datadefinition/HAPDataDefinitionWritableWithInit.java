@@ -101,12 +101,12 @@ class HAPDataDefinitionWritableWithInit__HAPEntityParsable extends HAPDataDefini
 		if(initDataObj!=null) {
 			HAPDataBuild dataBuild = null;
 			if(initDataObj instanceof String) {
-				dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj), null);
+				dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj));
 			}
 			else {
 				JSONObject initDataJsonObj = (JSONObject)initDataObj;
 				if(initDataJsonObj.opt(HAPData.DATATYPEID)!=null) {
-					dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj), null);
+					dataBuild = HAPDataBuildUtility.buildDataBuildByConstant(HAPUtilityData.buildDataWrapperFromObject(initDataObj));
 				}
 				else {
 					dataBuild = HAPDataBuild.buildDataBuild(initDataJsonObj, parseService);

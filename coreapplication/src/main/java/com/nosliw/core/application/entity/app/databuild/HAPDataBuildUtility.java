@@ -25,10 +25,9 @@ public class HAPDataBuildUtility {
 		return out;
 	}
 
-	public static HAPDataBuild buildDataBuildByConstant(HAPData data, HAPDataDefinition dataDefinition) {
+	public static HAPDataBuild buildDataBuildByConstant(HAPData data) {
 		HAPDataBuild out = new HAPDataBuild();
 		out.setExpressionChosen(HAPConstantShared.DATABUILD_CHOSEN_CONSTANT);
-		out.setDataDefinition(dataDefinition);
 		
 		HAPDataBuildOperandConstant constantOperand = new HAPDataBuildOperandConstant();
 		constantOperand.setData(data);
