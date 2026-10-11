@@ -90,6 +90,7 @@ public class HAPDataBuildUtility {
 				parmDef.setOperand(operationOperandDef);
 				operationOperandDef.addParm1(parmDef);
 			}
+			out = operationOperandDef;
 			
 			break;
 		}

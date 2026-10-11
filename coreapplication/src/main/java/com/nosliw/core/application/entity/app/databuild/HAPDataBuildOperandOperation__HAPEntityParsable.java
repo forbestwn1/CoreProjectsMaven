@@ -2,6 +2,7 @@ package com.nosliw.core.application.entity.app.databuild;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -10,6 +11,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.expression.definition.HAPDefinitionOperandOperation;
 
+@Component
 public class HAPDataBuildOperandOperation__HAPEntityParsable extends HAPDataBuildOperand__HAPEntityParsable{
 
 	@Override
@@ -38,7 +40,7 @@ public class HAPDataBuildOperandOperation__HAPEntityParsable extends HAPDataBuil
 		}
 		operandDefinition.setOperation(jsonObj.getString(HAPDefinitionOperandOperation.OPERATION));
 		
-		JSONArray parms1JsonArray = jsonObj.optJSONArray(HAPDefinitionOperandOperation.PARMS1);
+		JSONArray parms1JsonArray = jsonObj.optJSONArray(HAPDefinitionOperandOperation.PARMS);
 		for(int i=0; i<parms1JsonArray.length(); i++) {
 			operandDefinition.addParm(HAPDataBuildParmInOperationOperand.buildDataBuildParm(parms1JsonArray.getJSONObject(i), parseService));
 		}
