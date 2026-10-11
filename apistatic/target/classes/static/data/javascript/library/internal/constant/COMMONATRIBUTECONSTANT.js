@@ -664,6 +664,8 @@ var COMMONATRIBUTECONSTANT=
   "MANUALBRICK_VALUECONTEXT": "valueContext",
   "_ISCOMPLEX": "isComplex",
   "_DYNAMIC": "dynamic",
+  "_VALUESTR": "valueStr",
+  "_VALUEOBJ": "valueObj",
   "STORYALIAS_NAME": "name",
   "STORYALIAS_TEMPORARY": "temporary",
   "_ELEMENTID": "elementId",

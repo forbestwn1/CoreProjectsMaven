@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 
+import com.nosliw.common.container.HAPItemWrapper;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.path.HAPPath;
@@ -37,6 +38,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryChildElemen
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsCollection;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsWrapper;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataExpression;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithEndPoint;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
@@ -47,6 +49,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStor
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIODataExpression;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityDataSource;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEntityModule;
@@ -241,6 +244,13 @@ public class HAPStoryConverterToManual {
 					.setParm("valuePortIdInBundle", sourceValuePort.toStringValue(HAPSerializationFormat.JSON))
 					.getContent();			
 		}
+		else if(sourceEndpointEle.getElementType().equals(HAPStoryElementEndPointIODataExpression.TYPE)) {
+			HAPStoryElementEndPointIODataExpression dataExpressionEndPointElement = (HAPStoryElementEndPointIODataExpression)sourceEndpointEle;
+			source = new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "tunnel_source_dataexpression.temp"))
+					.setParm("dataExpressionId", tunnel.getSource())
+					.setParm("brickId", sourceValuePort.getBrickId().toStringValue(HAPSerializationFormat.JSON))
+					.getContent();			
+		}
 		
 		HAPStoryElement targetEndpointEle = HAPStoryUtilityStory.getDescendantElement(new HAPStoryPath(endPointWrapperEleIdTarget, new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)), story);
 		HAPStoryElementEndPointIOVariable targetEndPointElement = (HAPStoryElementEndPointIOVariable)targetEndpointEle;
@@ -275,6 +285,9 @@ public class HAPStoryConverterToManual {
 		if(contentChild!=null) {
 			templateParms.put("html", convertUIContent(contentChild.getElementId(), story));
 		}
+		
+		String dataExpressionStr = convertWithDataExpression(contentWrapperElement, story, true);
+		templateParms.put("dataExpression", dataExpressionStr);
 		
 		InputStream valueContextTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "ui_valuecontextinui.temp");
 		Map<String, String> valueContexTemplateParms = new LinkedHashMap<String, String>();
@@ -389,6 +402,28 @@ public class HAPStoryConverterToManual {
 		valueContext.addValueStructure(new HAPWrapperValueStructureDefinitionImp(valueStructure));
 		
 		return valueContext.toStringValue(HAPSerializationFormat.JSON);
+	}
+	
+	private static String convertWithDataExpression(HAPStoryElementWithDataExpression withDataExpressionElement, HAPStoryStory story, boolean returnSthWithEmpty) {
+		List<HAPStoryContainerChildrenElementsWrapper> variablesChildren =((HAPStoryElement)withDataExpressionElement).getChildCollection(HAPStoryElementWithDataExpression.CHILD_DATAEXPRESSION);
+		
+		if(!returnSthWithEmpty&&variablesChildren.size()==0) {
+			return null;
+		}
+
+		List<String> outStrList = new ArrayList<String>();
+		
+		for(HAPStoryContainerChildrenElementsWrapper variableChild : variablesChildren) {
+			HAPStoryElementAccessoryVariable dataExpressionElement = (HAPStoryElementAccessoryVariable)story.getElement(variableChild.getChildElement().getElementId());
+
+			HAPItemWrapper item = new HAPItemWrapper();
+			item.setName(dataExpressionElement.getEntityInfo().getName());
+			
+			HAPStoryElementEndPointIODataExpression dataExpressionEndpoint = (HAPStoryElementEndPointIODataExpression)story.getElement(dataExpressionElement.getChildElement(HAPStoryElementWithEndPoint.CHILD_ENDPOINT).getElementId());
+			item.setValue(dataExpressionEndpoint.getValueObj());
+			outStrList.add(item.toStringValue(HAPSerializationFormat.JSON));
+		}
+		return HAPUtilityJson.buildArrayJson(outStrList.toArray(new String[0]));
 	}
 	
 }

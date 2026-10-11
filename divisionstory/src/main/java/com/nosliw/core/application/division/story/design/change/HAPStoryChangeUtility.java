@@ -20,6 +20,7 @@ import com.nosliw.core.application.division.story.definition.element.HAPStoryEle
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryDataExpression;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIODataExpression;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOVariable;
 import com.nosliw.core.application.division.story.design.HAPStoryDesignSessionChange;
 import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
@@ -44,10 +45,15 @@ public class HAPStoryChangeUtility {
 		}
 		else if(HAPConstantShared.DATABUILD_CHOSEN_EXPRESSION.equals(dataBuildType)){
 			HAPStoryElementAccessoryDataExpression dataExpressionEle = new HAPStoryElementAccessoryDataExpression(entityInfo);
-			dataExpressionEle.setValueObj(HAPDataBuildUtility.getExpressionObj(dataBuild));
-			
 			HAPStoryChangeItemElementNew newDataExpressionChange = changeSession.addChangeItemNew(dataExpressionEle);
 			changeSession.addChangeConnectionNew(parentRef, newDataExpressionChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementWithDataExpression.getAddDataExpressionChildPath(entityInfo.getName())));
+
+			//end point element
+			HAPStoryElementEndPointIODataExpression endPointEle = new HAPStoryElementEndPointIODataExpression();
+			endPointEle.setValueObj(HAPDataBuildUtility.getExpressionObj(dataBuild));
+			HAPStoryChangeItemElementNew newEndpointChange = changeSession.addChangeItemNew(endPointEle);
+			changeSession.addChangeConnectionNew(newDataExpressionChange.getElementId(), newEndpointChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementWithEndPoint.CHILD_ENDPOINT)));
+			return newDataExpressionChange;
 		}
 		
 		return null;

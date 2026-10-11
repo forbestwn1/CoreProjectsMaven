@@ -17,6 +17,7 @@ import com.nosliw.core.application.division.story.api.HAPConfigureMiniApp;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
+import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataExpression;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithDataSource;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithVariable;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
@@ -220,6 +221,13 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
 
+			HAPStoryDataAssociation requestDataAssociationForDataExpression = new HAPStoryDataAssociation(
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithDataExpression.CHILD_DATAEXPRESSION),
+					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
+					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+					);
+
+
 			//data association between page and data source response
 			HAPStoryDataAssociation responseDataAssociation = new HAPStoryDataAssociation(
 					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_RESPONSE).appendSegment(HAPConstantShared.SERVICE_RESULT_SUCCESS),
@@ -245,9 +253,17 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					//add constant
 					HAPStoryChangeItemElementNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), dataBuildInQ.getDataBuild(), parmDef);
 
-					//build tunnel between constant endpoint and command endpoint
-					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
-					requestDataAssociationForConstant.addTunnel(tunnel);
+					String dataBuildType = dataBuildInQ.getDataBuild().getExpressionChosen();
+					if(HAPConstantShared.DATABUILD_CHOSEN_CONSTANT.equals(dataBuildType)) {
+						//build tunnel between constant endpoint and command endpoint
+						HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
+						requestDataAssociationForConstant.addTunnel(tunnel);
+					}
+					else if(HAPConstantShared.DATABUILD_CHOSEN_EXPRESSION.equals(dataBuildType)) {
+						//build tunnel between dataexpression endpoint and command endpoint
+						HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
+						requestDataAssociationForDataExpression.addTunnel(tunnel);
+					}
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
@@ -330,6 +346,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryDataAssociationComplex requestDAComplex = new HAPStoryDataAssociationComplex();
 			requestDAComplex.addDataAssociation(requestDataAssociationForConstant);
 			requestDAComplex.addDataAssociation(requestDataAssociationForVariable);
+			requestDAComplex.addDataAssociation(requestDataAssociationForDataExpression);
 			dataAssociationForTask.setRequestDataAssociation(requestDAComplex);
 
 			HAPStoryDataAssociationComplex responseDAComplex = new HAPStoryDataAssociationComplex();
