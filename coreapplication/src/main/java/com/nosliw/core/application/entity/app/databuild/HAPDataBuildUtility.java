@@ -87,7 +87,7 @@ public class HAPDataBuildUtility {
 				HAPDefinitionParmInOperationOperand parmDef = new HAPDefinitionParmInOperationOperand();
 				parmDef.setDataTypeCriteria(parmDataBuild.getDataTypeCriteria());
 				parmDef.setName(parmDataBuild.getName());
-				parmDef.setOperand(operationOperandDef);
+				parmDef.setOperand(parmOperandDef);
 				operationOperandDef.addParm1(parmDef);
 			}
 			out = operationOperandDef;

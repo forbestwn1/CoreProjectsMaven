@@ -1,5 +1,7 @@
 package com.nosliw.core.application.division.manual.core.process;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
@@ -29,6 +31,7 @@ import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityExpressionData;
+import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResourceId;
 
@@ -117,7 +120,7 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 
 		HAPContainerVariableInfo varInfoContainer = brickExe.getVariableInfoContainer();
 
-		//data process
+		//data expression
 		HAPContainerDataExpression dataExpressContainer = brickExe.getDataExpressions();
 		for(HAPItemInContainerDataExpression dataExpresionItem : dataExpressContainer.getItems()) {
 			HAPBasicExpressionData dataExpression = (HAPBasicExpressionData)dataExpresionItem.getDataExpression();
@@ -135,7 +138,20 @@ public abstract class HAPManualPluginProcessorBlockImp extends HAPManualPluginPr
 	public void postProcessVariableResolve(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
 	
 	//matcher
-	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
+	public void processValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
+		HAPManualDefinitionBrick brickDef = blockPair.getLeft();
+		HAPManualBrick brickExe = blockPair.getRight();
+
+		HAPContainerVariableInfo varInfoContainer = brickExe.getVariableInfoContainer();
+
+		//data expression
+		HAPContainerDataExpression dataExpressContainer = brickExe.getDataExpressions();
+		for(HAPItemInContainerDataExpression dataExpresionItem : dataExpressContainer.getItems()) {
+			HAPBasicExpressionData dataExpression = (HAPBasicExpressionData)dataExpresionItem.getDataExpression();
+			Pair<HAPContainerVariableInfo, Map<String, HAPMatchers>> discoverResult = HAPUtilityWithVarible.discoverVariableCriteria(dataExpression, null, varInfoContainer, processContext.getWithVariablePluginManager());
+		}
+	}
 	public void postProcessValueContextDiscovery(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
 
 	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {}
