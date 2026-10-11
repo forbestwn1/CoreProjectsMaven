@@ -1057,7 +1057,7 @@ var loc_createOperandVariable = function(arg1, env){
 
 	var loc_dataType;
 	
-	var loc_varNames;
+	var loc_varInfos;
 	var loc_varName;
 
 	var loc_parentView;
@@ -1084,7 +1084,7 @@ var loc_createOperandVariable = function(arg1, env){
 			loc_varName = arg1[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDVARIABLE_VARIABLENAME];
 			loc_dataType = loc_env.getDataTypeByVariable(loc_varName);
 		}
-		loc_varNames = loc_env.getVariablesByDataType(loc_dataType);
+		loc_varInfos = loc_env.getVariablesByDataType(loc_dataType);
 	};
 	
 	var loc_out = {
@@ -1101,11 +1101,11 @@ var loc_createOperandVariable = function(arg1, env){
 			loc_parentView.append(loc_containerView);
 			
 			loc_containerView.append(loc_variableChooseViewContainer);
-			_.each(loc_varNames, function(varName){
-				loc_variableChooseView.append($('<option>', { value: varName, text: varName }));
+			_.each(loc_varInfos, function(varInfo){
+				loc_variableChooseView.append($('<option>', { value: varInfo.name, text: varInfo.text }));
 			});
 			if(loc_varName==undefined){
-				loc_varName = loc_varNames[0];
+				loc_varName = loc_varInfos[0].name;
 			}
 			loc_variableChooseView.val(loc_varName);
 			loc_variableChooseView.on("change", function(event){
@@ -1239,7 +1239,11 @@ var loc_envObj = {
 		};
 		var variableOption = {
 			"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
-			"variables" : ["today"]
+			"variables" : [
+				{
+					"name":"nosliw_today",
+					"text":"today"
+				}]
 		};
 		
 		var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
@@ -1256,12 +1260,16 @@ var loc_envObj = {
 	
 	getVariablesByDataType : function(dataType){
 		if(dataType=="test.date;1.0.0"){
-			return ["today"];
-		}
+			return 	[
+				{
+					"name":"nosliw_today",
+					"text":"today"
+				}];
+		};
 	},
 	
 	getDataTypeByVariable : function(varName){
-		if(varName=="today"){
+		if(varName=="nosliw_today"){
 			return "test.date;1.0.0";
 		}
 	}

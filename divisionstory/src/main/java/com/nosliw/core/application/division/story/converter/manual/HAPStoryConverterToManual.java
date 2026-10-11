@@ -47,6 +47,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
+import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryDataExpression;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryVariable;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIOConstant;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementEndPointIODataExpression;
@@ -414,7 +415,7 @@ public class HAPStoryConverterToManual {
 		List<String> outStrList = new ArrayList<String>();
 		
 		for(HAPStoryContainerChildrenElementsWrapper variableChild : variablesChildren) {
-			HAPStoryElementAccessoryVariable dataExpressionElement = (HAPStoryElementAccessoryVariable)story.getElement(variableChild.getChildElement().getElementId());
+			HAPStoryElementAccessoryDataExpression dataExpressionElement = (HAPStoryElementAccessoryDataExpression)story.getElement(variableChild.getChildElement().getElementId());
 
 			HAPItemWrapper item = new HAPItemWrapper();
 			item.setName(dataExpressionElement.getEntityInfo().getName());

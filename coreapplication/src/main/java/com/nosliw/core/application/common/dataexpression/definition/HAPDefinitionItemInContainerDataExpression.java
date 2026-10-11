@@ -42,8 +42,7 @@ class HAPDefinitionItemInContainerDataExpression_parser implements HAPParserEnti
 		JSONObject jsonObj = (JSONObject)obj;
 		out.buildEntityInfoByJson(jsonObj);
 		
-		String dataExpressionStr = jsonObj.getString(HAPItemWrapper.VALUE);
-		HAPDefinitionDataExpression dataExpressionDef = this.m_dataExpressionParser.parseExpression(dataExpressionStr);
+		HAPDefinitionDataExpression dataExpressionDef = HAPDefinitionDataExpression.buildDataExpressionDefinition(jsonObj.opt(HAPItemWrapper.VALUE), parseService, m_dataExpressionParser);
 		out.setValue(dataExpressionDef);
 		
 		return out;

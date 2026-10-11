@@ -66,7 +66,7 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 
 	var chooseDatApp = node_chooseDataApp(dataDefinition);
 	$("#main").append(chooseDatApp.getView());
-	var request = chooseDatApp.getSetValueRequest(node_utility.getSampleDataBuild(), {
+	var request = chooseDatApp.getSetValueRequest(node_utility.getSampleDataBuild().aa, {
          success : function(request){
          }
 	});
