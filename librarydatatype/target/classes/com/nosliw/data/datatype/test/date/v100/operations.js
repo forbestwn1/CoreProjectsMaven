@@ -25,11 +25,11 @@ dataTypeDefition.operations['todayDate'] = {
 
 dataTypeDefition.operations['nextDate'] = {
 		operation : function(parms, context){
-			var date = new Date(this.getFullYear(), this.getMonth(), this.getDate());
-			date.setDate(this.getDate()-1);
+			var date = new Date(this.year, this.month, this.date);
+			date.setDate(this.date+1);
 
 			return {
-				dataTypeId : "test.string;1.0.0",
+				dataTypeId : "test.date;1.0.0",
 				value : {
 					year : date.getFullYear(),
 					month : date.getMonth(),
@@ -41,11 +41,11 @@ dataTypeDefition.operations['nextDate'] = {
 
 dataTypeDefition.operations['lastDate'] = {
 		operation : function(parms, context){
-			var date = new Date(this.getFullYear(), this.getMonth(), this.getDate());
-			date.setDate(this.getDate()+1);
+			var date = new Date(this.year, this.month, this.date);
+			date.setDate(this.date-1);
 			
 			return {
-				dataTypeId : "test.string;1.0.0",
+				dataTypeId : "test.date;1.0.0",
 				value : {
 					year : date.getFullYear(),
 					month : date.getMonth(),
@@ -57,11 +57,11 @@ dataTypeDefition.operations['lastDate'] = {
 
 dataTypeDefition.operations['NDatesLater'] = {
 		operation : function(parms, context){
-			var date = new Date(this.getFullYear(), this.getMonth(), this.getDate());
-			date.setDate(this.getDate()+parms.getParm("n").value);
+			var date = new Date(this.year, this.month, this.date);
+			date.setDate(this.date+parms.getParm("n").value);
 
 			return {
-				dataTypeId : "test.string;1.0.0",
+				dataTypeId : "test.date;1.0.0",
 				value : {
 					year : date.getFullYear(),
 					month : date.getMonth(),
