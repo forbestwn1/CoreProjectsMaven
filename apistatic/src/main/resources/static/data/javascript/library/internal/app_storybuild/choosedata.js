@@ -298,7 +298,10 @@ var loc_createDataChoose = function(arg1, arg2, env){
 
         	return out;
 	    },
-
+		
+		getDescription : function(){
+			return loc_expressionsByType[loc_getCurrentRootType()].getDescription();
+		}
 	};
 	
 	loc_init(arg1, arg2, env);
@@ -414,8 +417,18 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 		    }
 			out[node_COMMONATRIBUTECONSTANT.DATABUILDEXPRESSION_OPERAND] = operand;
 		    return out;
-		}
-				
+		},
+		
+		getDescription : function(){
+			var out = "";
+			for(var i in loc_operandChain){
+				if(i!=0){
+					out = out + " --> ";
+				}
+				out = out + loc_operandChain[i].getOperand().getDescription();
+			}
+		    return out;
+        }				
 	};
 	
 	return loc_out;
@@ -812,8 +825,28 @@ var loc_createOperandOperation = function(arg1, env){
 			}
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS] = parms;
 			return out;
-		}
+		},
 		
+    	getDescription : function(){
+			var out = " " + loc_operationName;
+			
+			if(loc_parms.length>0){
+				out = out + "(";
+			}
+			
+			for(var i in loc_parms){
+				var parmInfo = loc_parms[i];
+				if(i!=0){
+					out = out + ", "
+				}
+				out = out + parmInfo.name + ":" + parmInfo.valueChoose.getDescription()
+			}
+			
+			if(loc_parms.length>0){
+				out = out + ")";
+			}
+			return out;
+	    },
     };
 
 	loc_init(arg1, env);
@@ -1039,8 +1072,11 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_CONSTANT;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDCONSTANT_DATA] = loc_constantValue; 
 			return out;
-		}
+		},
 		
+     	getDescription : function(){
+    		return loc_constantValue==undefined? "?" : (loc_constantValue.value+"");
+	    },
 	};
 	
 	loc_init(dataDefinition, arg1);
@@ -1131,7 +1167,17 @@ var loc_createOperandVariable = function(arg1, env){
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE] = node_COMMONCONSTANT.EXPRESSION_OPERAND_VARIABLE;
 			out[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDVARIABLE_VARIABLENAME] = loc_varName; 
 			return out;
-		}
+		},
+		
+		getDescription : function(){
+			for(var i in loc_varInfos){
+				var varInfo = loc_varInfos[i];
+				if(varInfo.name==loc_varName){
+					return varInfo.text;
+				}
+			}
+			return "?";
+		},
 
 	};
 
@@ -1205,6 +1251,7 @@ var node_chooseDataApp = function(dataDefinition){
 				if(eventName=="change"){
 					loc_eventObject.triggerEvent(eventName);
     				console.log(JSON.stringify(loc_getValue()));
+					console.log(JSON.stringify(loc_out.getDescription()));
 				}
 			});
 					
@@ -1213,6 +1260,10 @@ var node_chooseDataApp = function(dataDefinition){
 		
 		getValue : function(){
 			return loc_getValue();
+		},
+		
+		getDescription : function(){
+			return loc_valueChoose.getDescription();
 		},
 		
 		isReady : function(){
