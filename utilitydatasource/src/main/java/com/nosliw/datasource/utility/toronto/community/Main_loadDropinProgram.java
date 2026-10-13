@@ -44,29 +44,33 @@ public class Main_loadDropinProgram {
 		//read
 		for(String ccId : ccDropinMan.getAllCommunityCenterIds()) {
 			String ccName = ccDropinMan.getCommnityCenterNameById(ccId);
+			System.out.println("Processing community center:   " + ccName);
 			for(String categaryId : ccDropinMan.getAllProgramCategary()) {
+				System.out.println("Processing dropin categary:   " + categaryId);
 				Map<String, List<String>> programResults = new LinkedHashMap<String, List<String>>(); 
 				
-		        String programString = Utility.httpRead("https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId+"/info.json");
+		        String programString = Utility.httpRead("https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId.toLowerCase()+"/info.json");
 		        if(programString!=null) {
 		        	JSONObject programsJsonObj = new JSONObject(programString);
 		        	JSONArray byWeekJsonArray = programsJsonObj.getJSONArray("weeks");
 		        	for(int i=0; i<byWeekJsonArray.length(); i++) {
 		        		JSONObject weekInfoJsonObj = byWeekJsonArray.getJSONObject(i);
 		        		
-		        		LocalDate baseDate = LocalDate.parse(weekInfoJsonObj.getString("title"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+		        		LocalDate baseDate = LocalDate.parse(weekInfoJsonObj.getString("title"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		        		
-				        String urlString = "https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId+"/week"+weekInfoJsonObj.getString("json");
+				        String urlString = "https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId.toLowerCase()+"/"+weekInfoJsonObj.getString("json");
+						System.out.println("Processing week:   " + weekInfoJsonObj.getString("json"));
 				        String content = Utility.httpRead(urlString);
 				        if(content!=null) {
 				        	JSONObject contentJsonObj = new JSONObject(content);
 				        	JSONArray programJsonArray = contentJsonObj.getJSONArray("programs");
-				        	for(int j=0; i<programJsonArray.length(); j++) {
-				        		JSONArray programsJsonArray = programJsonArray.getJSONObject(i).getJSONArray("days");
+				        	for(int j=0; j<programJsonArray.length(); j++) {
+				        		JSONArray programsJsonArray = programJsonArray.getJSONObject(j).getJSONArray("days");
 				        		for(int k=0; k<programsJsonArray.length(); k++) {
 				        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
 				        			String program = programJsnObj.getString("title");
 				        			String programId = ccDropinMan.getProgramIdByName(program);
+									System.out.println("Processing program:   " + program);
 				        			
 				        			if(programId==null){
 				        				System.out.println("Program not defined:   " + program);
@@ -81,7 +85,7 @@ public class Main_loadDropinProgram {
 				        			
 				        			JSONArray timesJsonArray = programJsnObj.getJSONArray("times");
 				        			for(int m=0; m<timesJsonArray.length(); m++) {
-				        				JSONObject timeJonsObj = timesJsonArray.getJSONObject(i);
+				        				JSONObject timeJonsObj = timesJsonArray.getJSONObject(m);
 				        				
 				        				Map<String, String> programMap = new LinkedHashMap<String, String>();
 				        				
@@ -90,7 +94,7 @@ public class Main_loadDropinProgram {
 				        				
 				        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
 				        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(
-				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonth()+""), entry("date", date.getDayOfMonth()+"")), 
+				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonthValue()+""), entry("date", date.getDayOfMonth()+"")), 
 				        						Map.ofEntries(entry("year", Integer.class), entry("month", Integer.class), entry("date", Integer.class)))
 				        				));
 				        				
@@ -139,7 +143,5 @@ public class Main_loadDropinProgram {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
+
 }

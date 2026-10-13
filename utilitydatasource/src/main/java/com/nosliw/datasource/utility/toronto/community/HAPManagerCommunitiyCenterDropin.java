@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import com.nosliw.common.utils.HAPUtilityFile;
+
 public class HAPManagerCommunitiyCenterDropin {
 
 	private List<String> ccIds;
@@ -54,10 +56,10 @@ public class HAPManagerCommunitiyCenterDropin {
 		return nameById.get(id); 
 	}
 	
-	private List<String> category;
+	private List<String> categories;
 	public List<String> getAllProgramCategary(){
-		if(category==null) {
-			List<String> categories = new ArrayList<>();
+		if(categories==null) {
+			categories = new ArrayList<>();
 			if(!Files.exists(Utility.PROGRAM_CODETABLE_PATH)) {
 				throw new IllegalStateException("Program codetable not found: " + Utility.PROGRAM_CODETABLE_PATH);
 			}
@@ -87,7 +89,7 @@ public class HAPManagerCommunitiyCenterDropin {
 				throw new IllegalStateException("Failed to read program categories from codetable: " + Utility.PROGRAM_CODETABLE_PATH, e);
 			}
 		}
-		return category;
+		return categories;
 	}
 
 	Map<String, String> idByName;
@@ -95,34 +97,19 @@ public class HAPManagerCommunitiyCenterDropin {
 		if(name == null) {
 			return null;
 		}
-		
+
 		if(idByName==null) {
 			idByName = new LinkedHashMap<String, String>();
-			if(!Files.exists(Utility.PROGRAM_CODETABLE_PATH)) {
-				throw new IllegalStateException("Program codetable not found: " + Utility.PROGRAM_CODETABLE_PATH);
-			}
-			try {
-				String content = Files.readString(Utility.PROGRAM_CODETABLE_PATH, StandardCharsets.UTF_8);
-				JSONObject root = new JSONObject(new JSONTokener(content));
-				JSONArray dataSet = root.optJSONArray("dataSet");
-				if(dataSet != null) {
-					for(int i=0; i<dataSet.length(); i++) {
-						JSONObject ele = dataSet.optJSONObject(i);
-						if(ele == null) {
-							continue;
-						}
-						JSONObject value = ele.optJSONObject("value");
-						if(value == null) {
-							continue;
-						}
-						idByName.put(value.optString("name", ""), value.optString("id", null));
-					}
+			String content = HAPUtilityFile.readFile(HAPManagerCommunitiyCenterDropin.class, "dropprogrammapping.json");
+			JSONObject jsonObj = new JSONObject(content);
+			for(Object k : jsonObj.keySet()) {
+				String key = (String)k;
+				JSONArray jsonArray = jsonObj.getJSONArray(key);
+				for(int i=0; i<jsonArray.length(); i++) {
+					idByName.put(jsonArray.getString(i), key);
 				}
-			} catch(Exception e) {
-				throw new IllegalStateException("Failed to find program id by name: " + name, e);
 			}
 		}
-		
 		return idByName.get(name);
 	}
 

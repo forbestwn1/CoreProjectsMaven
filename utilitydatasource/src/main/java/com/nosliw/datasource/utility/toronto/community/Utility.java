@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 
 public class Utility {
@@ -27,8 +26,8 @@ public class Utility {
     	Map<String, Class<?>> jsonTypeMap = new LinkedHashMap<String, Class<?>>();
     	
     	jsonMap.put("dataTypeId", dataType);
-    	jsonMap.put("value", HAPUtilityJson.buildJson(jsonTypeMap, HAPSerializationFormat.JSON));
-    	jsonTypeMap.put("value", value.getClass());
+    	jsonMap.put("value", value+"");
+//    	jsonTypeMap.put("value", value.getClass());
     	
     	return HAPUtilityJson.buildMapJson(jsonMap, jsonTypeMap);
     }
