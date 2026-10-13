@@ -2,6 +2,10 @@ package com.nosliw.datasource.utility.toronto.community;
 
 import static java.util.Map.entry;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -124,7 +128,16 @@ public class Main_loadDropinProgram {
 	}
 
 	private static void writeProgram(String commiunityId, String categary, String program, List<String> data) {
-		
+		try {
+			Path targetDir = Utility.DROPIN_DATASOURCEDATA_PATH.resolve(commiunityId).resolve(categary);
+			Files.createDirectories(targetDir);
+			String safeProgramName = program.replaceAll("[\\/:*?\"<>|]", "_");
+			Path targetFile = targetDir.resolve(safeProgramName + ".json");
+			String json = HAPUtilityJson.buildArrayJson(data.toArray(new String[0]));
+			Files.writeString(targetFile, json, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
