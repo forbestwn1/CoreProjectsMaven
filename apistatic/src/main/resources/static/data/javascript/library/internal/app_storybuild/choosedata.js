@@ -1219,6 +1219,7 @@ var node_chooseDataApp = function(dataDefinition){
 	var loc_valueChoose;
 	
 	var loc_containerView = $("<div>AppContainer</div>");
+	var loc_epxressionDescriptionView = $("<span></span>");
 	
 	var loc_getValue = function(){
 		return loc_valueChoose.getValue();
