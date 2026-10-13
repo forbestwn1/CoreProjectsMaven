@@ -11,6 +11,8 @@ var packageObj = library;
 	var node_createEventObject;
 	var node_requestServiceProcessor;
 	var node_ResourceId;
+	var node_envObj;
+	var node_utility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -49,7 +51,7 @@ var loc_createExpressionApp = function(){
 		getSetValueRequest : function(value, handlers, request){
 			var out = node_createServiceRequestInfoSimple(undefined, function(request){
 				loc_value = value;
-				loc_contentView.text(JSON.stringify(loc_value));
+				loc_contentView.text(node_utility.getDataBuildOperandDescription(loc_value.operand, node_envObj));
 			}, handlers, request);
 			return out;
 		}
@@ -220,6 +222,8 @@ nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_b
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
+nosliw.registerSetNodeDataEvent("app_storybuild.envObj", function(){node_envObj = this.getData();});
+nosliw.registerSetNodeDataEvent("app_storybuild.utility", function(){node_utility = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("presentDataApp", node_presentDataApp); 

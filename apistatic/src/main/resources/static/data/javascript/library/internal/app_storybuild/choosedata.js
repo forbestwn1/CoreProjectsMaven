@@ -303,10 +303,6 @@ var loc_createDataChoose = function(arg1, arg2, env){
         	return out;
 	    },
 		
-		getDescription : function(){
-			return loc_expressionsByType[loc_getCurrentRootType()].getDescription();
-		},
-		
     	getCurrentChoose : function(){
 	    	return loc_getCurrentRootType();
 	    },
@@ -428,16 +424,6 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 		    return out;
 		},
 		
-		getDescription : function(){
-			var out = "";
-			for(var i in loc_operandChain){
-				if(i!=0){
-					out = out + " --> ";
-				}
-				out = out + loc_operandChain[i].getOperand().getDescription();
-			}
-		    return out;
-        }				
 	};
 	
 	return loc_out;
@@ -836,26 +822,6 @@ var loc_createOperandOperation = function(arg1, env){
 			return out;
 		},
 		
-    	getDescription : function(){
-			var out = " " + loc_operationName;
-			
-			if(loc_parms.length>0){
-				out = out + "(";
-			}
-			
-			for(var i in loc_parms){
-				var parmInfo = loc_parms[i];
-				if(i!=0){
-					out = out + ", "
-				}
-				out = out + parmInfo.name + ":" + parmInfo.valueChoose.getDescription()
-			}
-			
-			if(loc_parms.length>0){
-				out = out + ")";
-			}
-			return out;
-	    },
     };
 
 	loc_init(arg1, env);
@@ -1083,9 +1049,6 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 			return out;
 		},
 		
-     	getDescription : function(){
-    		return loc_constantValue==undefined? "?" : (loc_constantValue.value+"");
-	    },
 	};
 	
 	loc_init(dataDefinition, arg1);
@@ -1178,16 +1141,6 @@ var loc_createOperandVariable = function(arg1, env){
 			return out;
 		},
 		
-		getDescription : function(){
-			for(var i in loc_varInfos){
-				var varInfo = loc_varInfos[i];
-				if(varInfo.name==loc_varName){
-					return varInfo.text;
-				}
-			}
-			return "?";
-		},
-
 	};
 
 	loc_init(arg1, env);
@@ -1292,7 +1245,7 @@ var node_chooseDataApp = function(dataDefinition){
 				var dataBuildInfo = {};
 				dataBuildInfo[node_COMMONATRIBUTECONSTANT.DATABUILDINFO_DATADEFINITION] = loc_dataDefinition;
 				dataBuildInfo[node_COMMONATRIBUTECONSTANT.DATABUILDINFO_DATABUILD] = value;
-				loc_valueChoose = loc_createDataChoose(dataBuildInfo, undefined, loc_getDataBuildOperandDescription);
+				loc_valueChoose = loc_createDataChoose(dataBuildInfo, undefined, node_envObj);
 			}
 			loc_valueChoose.updateView(loc_containerView);
 			loc_valueChoose.registerListener(function(eventName, eventData){
@@ -1300,7 +1253,6 @@ var node_chooseDataApp = function(dataDefinition){
 					loc_updateExpressionDescription();
 					loc_eventObject.triggerEvent(eventName);
     				console.log(JSON.stringify(loc_getValue()));
-					console.log(JSON.stringify(loc_out.getDescription()));
     				console.log(JSON.stringify(node_utility.getDataBuildDescription(loc_out.getValue().dataBuild, node_envObj)));
 				}
 			});
@@ -1310,10 +1262,6 @@ var node_chooseDataApp = function(dataDefinition){
 		
 		getValue : function(){
 			return loc_getValue();
-		},
-		
-		getDescription : function(){
-			return loc_valueChoose.getDescription();
 		},
 		
 		isReady : function(){

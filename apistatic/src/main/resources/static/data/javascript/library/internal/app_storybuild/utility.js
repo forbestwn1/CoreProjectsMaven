@@ -149,8 +149,11 @@ var node_utility = function(){
 		
 	    getDataBuildDescription : function(dataBuild, env){
 			return loc_getDataBuildDescription(dataBuild, env);
-		}
+		},
 		
+    	getDataBuildOperandDescription : function(dataBuildOperand, env){
+	    	return loc_getDataBuildOperandDescription(dataBuildOperand, env);
+	    }
 	};
 	
 	return loc_out;
