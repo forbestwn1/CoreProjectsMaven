@@ -1,6 +1,7 @@
 
 import { newDesignService, nextStepDesignService } from './Service'
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
+import { setGlobalLoading } from './globalLoading'
 
 export const naviationUtility = function () {
 
@@ -20,6 +21,7 @@ export const naviationUtility = function () {
         },
 
         next: function (designState, designDispatch) {
+            setGlobalLoading(true);
             const designSteps = designState.steps;
             const currentStep = designSteps ? designSteps[designState.currentStepUI] : undefined;
             if (designState.currentStepUI < designState.currentStepServer && designState.isStepDirty[designState.currentStepUI] == false) {
@@ -31,6 +33,7 @@ export const naviationUtility = function () {
                     var steps = response.data.data.stepInfo;
                     var currentStepIndex = response.data.data.currentStep;
                     designDispatch(updateDesignGlobal(steps, currentStepIndex));
+                    setGlobalLoading(false);
                 });
             }
         }

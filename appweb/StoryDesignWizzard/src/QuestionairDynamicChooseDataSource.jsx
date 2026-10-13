@@ -4,6 +4,7 @@ import { questionairUtility, naviationUtility } from './Utility'
 import { createComponentQuestionItemService } from './Service'
 import ErrorInQuestionair from './ErrorInQuestionair'
 import './QuestionairDynamicChooseDataSource.css'
+import { setGlobalLoading } from './globalLoading'
 
 export default function QuestionairDynamicChooseDataSource({ questionair, onChange }) {
     const cache = useContext(CacheContext);
@@ -13,11 +14,13 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
 
     useEffect(() => {
         if (cache.current[questionair.id] == undefined) {
+            setGlobalLoading(true);
             console.log("load all services response");
             const service = createComponentQuestionItemService();
             service.getLoadServicesRequest((services) => {
                 cache.current[questionair.id] = services;
                 forceUpdate(c => c + 1);
+                setGlobalLoading(false);
             });
         }
     }, []);
