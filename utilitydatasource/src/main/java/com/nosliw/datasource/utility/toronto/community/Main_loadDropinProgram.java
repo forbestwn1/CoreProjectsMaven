@@ -3,18 +3,22 @@ package com.nosliw.datasource.utility.toronto.community;
 import static java.util.Map.entry;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nosliw.common.serialization.HAPUtilityJson;
+
 public class Main_loadDropinProgram {
 
-	private static Map<String, Integer> byDay = Map.ofEntries(
+	private static Map<String, Integer> dayOfWeek = Map.ofEntries(
 		    entry("monday", 0),
 		    entry("tuesday", 1),
 		    entry("wednesday", 2),
@@ -35,8 +39,9 @@ public class Main_loadDropinProgram {
 		
 		//read
 		for(String ccId : ccDropinMan.getAllCommunityCenterIds()) {
+			String ccName = ccDropinMan.getCommnityCenterNameById(ccId);
 			for(String categaryId : ccDropinMan.getAllProgramCategary()) {
-				Map<String, List<JSONObject>> programResults = new LinkedHashMap<String, List<JSONObject>>(); 
+				Map<String, List<String>> programResults = new LinkedHashMap<String, List<String>>(); 
 				
 		        String programString = Utility.httpRead("https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId+"/info.json");
 		        if(programString!=null) {
@@ -57,19 +62,51 @@ public class Main_loadDropinProgram {
 				        		for(int k=0; k<programsJsonArray.length(); k++) {
 				        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
 				        			String program = programJsnObj.getString("title");
+				        			String programId = ccDropinMan.getProgramIdByName(program);
 				        			
-				        			List<JSONObject> programList = programResults.get(program);
+				        			if(programId==null){
+				        				System.out.println("Program not defined:   " + program);
+				        				continue;
+				        			}
+				        			
+				        			List<String> programList = programResults.get(program);
 				        			if(programList==null) {
-				        				programList = new ArrayList<JSONObject>();
+				        				programList = new ArrayList<String>();
 				        				programResults.put(program, programList);
 				        			}
 				        			
 				        			JSONArray timesJsonArray = programJsnObj.getJSONArray("times");
 				        			for(int m=0; m<timesJsonArray.length(); m++) {
+				        				JSONObject timeJonsObj = timesJsonArray.getJSONObject(i);
+				        				
 				        				Map<String, String> programMap = new LinkedHashMap<String, String>();
-				        				programMap.put("", ccId)
 				        				
+				        				programMap.put("CommunityCenter", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", ccName), entry("id", ccId)))));
+				        				programMap.put("Program", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", program), entry("id", programId)))));
 				        				
+				        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
+				        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(
+				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonth()+""), entry("date", date.getDayOfMonth()+"")), 
+				        						Map.ofEntries(entry("year", Integer.class), entry("month", Integer.class), entry("date", Integer.class)))
+				        				));
+				        				
+				        				String timeStr = timeJonsObj.getString("title");
+				        				String[] timeStrs = timeStr.split("-");
+				        				
+				        		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+				        		        LocalTime fromTime = LocalTime.parse(timeStrs[0].trim(), formatter);
+				        		        LocalTime toTime = LocalTime.parse(timeStrs[1].trim(), formatter);
+
+				        				programMap.put("fromTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
+				        						Map.ofEntries(entry("hour", fromTime.getHour()+""), entry("minute", fromTime.getMinute()+""), entry("second", fromTime.getSecond()+"")), 
+				        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
+				        				));
+				        				programMap.put("toTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
+				        						Map.ofEntries(entry("hour", toTime.getHour()+""), entry("minute", toTime.getMinute()+""), entry("second", toTime.getSecond()+"")), 
+				        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
+				        				));
+				        		        
+				        				programList.add(HAPUtilityJson.buildMapJson(programMap));
 				        			}
 				        			
 				        		}
@@ -78,18 +115,15 @@ public class Main_loadDropinProgram {
 				        }
 		        	}
 		        }
+		        
+		        for(String program : programResults.keySet()) {
+		        	writeProgram(ccId, categaryId, program, programResults.get(program));
+		        }
 			}
 		}
-
-		
 	}
 
-	private static void buildProgramqResult() {
-		
-	}
-	
-	
-	private static void writeProgram(String commiunityId, String program, Object data) {
+	private static void writeProgram(String commiunityId, String categary, String program, List<String> data) {
 		
 	}
 	
