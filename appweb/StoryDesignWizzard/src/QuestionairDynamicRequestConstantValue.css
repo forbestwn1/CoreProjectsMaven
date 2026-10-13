@@ -86,9 +86,9 @@
 .modal-footer .btn-secondary {
   padding: 8px 14px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #374151;
+  border: none;
+  background: #2563eb;
+  color: white;
   cursor: pointer;
 }
 
@@ -100,4 +100,12 @@
   background: #2563eb;
   color: white;
   cursor: pointer;
+}
+
+.modal-footer .btn-primary:disabled,
+.modal-footer .btn-reset:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+  opacity: 0.8;
 }
