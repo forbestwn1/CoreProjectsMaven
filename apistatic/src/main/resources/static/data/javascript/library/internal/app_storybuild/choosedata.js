@@ -1252,8 +1252,8 @@ var node_chooseDataApp = function(dataDefinition){
 				if(eventName=="change"){
 					loc_updateExpressionDescription();
 					loc_eventObject.triggerEvent(eventName);
-    				console.log(JSON.stringify(loc_getValue()));
-    				console.log(JSON.stringify(node_utility.getDataBuildDescription(loc_out.getValue().dataBuild, node_envObj)));
+//    				console.log(JSON.stringify(loc_getValue()));
+//    				console.log(JSON.stringify(node_utility.getDataBuildDescription(loc_out.getValue().dataBuild, node_envObj)));
 				}
 			});
 			loc_updateExpressionDescription();
