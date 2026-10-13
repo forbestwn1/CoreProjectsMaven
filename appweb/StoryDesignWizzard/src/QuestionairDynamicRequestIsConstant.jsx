@@ -15,7 +15,7 @@ export default function QuestionairDynamicRequestIsConstant({questionair, onChan
 
     return (
         <div>
-            <label>When the input data provided?</label>
+            <label>When the filter data provided?</label>
             <div>
                 <label>
                     <input
@@ -23,7 +23,7 @@ export default function QuestionairDynamicRequestIsConstant({questionair, onChan
                         checked={selected === true}
                         onChange={() => setSelectedDataSource(true)}
                     />
-                    Provide data now
+                    Provide filter data now
                 </label>
                 <label style={{ marginLeft: '12px' }}>
                     <input
@@ -31,7 +31,7 @@ export default function QuestionairDynamicRequestIsConstant({questionair, onChan
                         checked={selected === false}
                         onChange={() => setSelectedDataSource(false)}
                     />
-                    Provide data later when run APP
+                    Provide filter data later when run APP
                 </label>
             </div>
         </div>

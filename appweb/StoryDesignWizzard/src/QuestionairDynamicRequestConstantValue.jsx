@@ -143,11 +143,10 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 	return (
 		<>
 			<div className="constant-value-root">
-				<div className="constant-value-header">
-					<span>constant value questionair!!!!</span>
-					<a href="#" className="change-value-link" onClick={openPopup}>change value</a>
-				</div>
-				<div ref={contentRefForDisplay} className="constant-value-inline">
+				<div className="constant-value-row">
+					<span className="constant-value-title">Value:</span>
+					<div ref={contentRefForDisplay} className="constant-value-inline"></div>
+					<a href="#" className="change-value-link" onClick={openPopup}>change</a>
 				</div>
 			</div>
 

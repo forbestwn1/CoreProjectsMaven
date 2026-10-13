@@ -38,6 +38,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
     };
 
     const selected = questionairUtility.getValueFromQuestionairItem(questionair)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCECHOOSEDYNAMIC_DATASOURCEID];
+    const selectedDataSource = cache.current[questionair.id]?.find((source) => source.id === selected || source.name === selected);
 
     var onNext = function(){
         naviationUtility.next(designState, designDispatch);
@@ -71,7 +72,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                 <div className="panel panel-right">
                     <div className="source-description">
                         <h4>Description</h4>
-                        <p>description</p>
+                        <p>{selectedDataSource?.description || 'No description available.'}</p>
                     </div>
                 </div>
 

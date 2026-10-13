@@ -25,10 +25,7 @@ export default function Step() {
         <>
             <div className="step-content">
 
-                Hello Step  {stepDisplayInfo?stepDisplayInfo.name:null}!!!!
-
                 {!isFinishStep ? questionair && (<Questionair questionair={questionair} onChange={onChange}></Questionair>) : (<StepComplete step={currentStep}/> )}
-
 
             </div>
         </>
