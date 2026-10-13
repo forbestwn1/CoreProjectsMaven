@@ -88,6 +88,55 @@ var loc_dataDefinition =
 
 var node_utility = function(){
 	
+	var loc_getDataBuildOperandDescription = function(dataBuildOperand, env){
+		var type = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERAND_TYPE];
+		if(type==node_COMMONCONSTANT.EXPRESSION_OPERAND_CONSTANT){
+			var constantValue = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDCONSTANT_DATA];
+			return constantValue==undefined? "?" : (constantValue.value+"");
+		}
+		else if(type==node_COMMONCONSTANT.EXPRESSION_OPERAND_VARIABLE){
+			var varName = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDVARIABLE_VARIABLENAME];
+			var varText;
+			if(varName!=undefined){
+				varText = env.getVariableTextByName(varName);
+			}
+			return varText==undefined?"?":varText;
+		}
+		else if(type==node_COMMONCONSTANT.EXPRESSION_OPERAND_OPERATION){
+			var baseOperand = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_BASE]
+			var out = loc_getDataBuildOperandDescription(baseOperand, env);
+			
+			out = out + " --> " + dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
+			
+			var parms = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS];
+			if(parms.length>0){
+				out = out + "(";
+			}
+			for(var i in parms){
+				var parmInfo = parms[i];
+				if(i!=0){
+					out = out + ", "
+				}
+				
+				var dataBuildInParm = parmInfo[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_VALUE];
+				out = out + parmInfo[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_NAME] + ":" + loc_getDataBuildDescription(dataBuildInParm, env)
+			}			
+
+			if(parms.length>0){
+				out = out + ")";
+			}
+			return out;
+		}
+		
+	};
+	
+	var loc_getDataBuildDescription = function(dataBuild, env){
+		var epxressionChosen = dataBuild[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
+		var operandInParm = dataBuild[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSION][epxressionChosen][node_COMMONATRIBUTECONSTANT.DATABUILDEXPRESSION_OPERAND];
+		return loc_getDataBuildOperandDescription(operandInParm, env);
+	}
+	
+	
 	var loc_out = {
 		
 		getSampleDdataDefinition : function(){
@@ -97,6 +146,10 @@ var node_utility = function(){
 		getSampleDataBuild : function(){
 			return loc_dataBuild;
 		},
+		
+	    getDataBuildDescription : function(dataBuild, env){
+			return loc_getDataBuildDescription(dataBuild, env);
+		}
 		
 	};
 	

@@ -11,6 +11,8 @@ var packageObj = library;
 	var node_createEventObject;
 	var node_requestServiceProcessor;
 	var node_ResourceId;
+	var node_envObj;
+	var node_utility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 var loc_disable = function(containerView){
@@ -207,6 +209,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 		loc_rootChoose.registerListener(function(eventName, eventData){
 			if(eventName=="change"){
 				loc_updateRootTypeSelection(eventData);
+    			loc_eventObject.triggerEvent(eventName);
 			}
 		});
 		_.each(loc_expressionsByType, function(expression){
@@ -243,6 +246,7 @@ var loc_createDataChoose = function(arg1, arg2, env){
 		_.each(loc_options, function(option, name){
 			var rootType = option.type;
 			var expression = loc_createOperandExpression(loc_id+"_"+rootType, rootType, loc_expressionContainerView, loc_env);
+			expression.disable();
 			loc_expressionsByType[rootType] = expression;
 		});
 
@@ -301,7 +305,12 @@ var loc_createDataChoose = function(arg1, arg2, env){
 		
 		getDescription : function(){
 			return loc_expressionsByType[loc_getCurrentRootType()].getDescription();
-		}
+		},
+		
+    	getCurrentChoose : function(){
+	    	return loc_getCurrentRootType();
+	    },
+
 	};
 	
 	loc_init(arg1, arg2, env);
@@ -1218,13 +1227,51 @@ var node_chooseDataApp = function(dataDefinition){
 		
 	var loc_valueChoose;
 	
-	var loc_containerView = $("<div>AppContainer</div>");
+	var loc_containerView = $("<div></div>");
+	var loc_descriptionView = $("<div></div>");
+	loc_descriptionView.css({
+	    "margin-top": "14px",
+	    "margin-bottom": "8px",
+	    "display": "inline-block",
+	    "padding-top": "4px",
+	    "line-height": "1.5"
+	});
+	var loc_descriptionLabelView = $("<label>Expression description: </label>");
+	loc_descriptionLabelView.css({
+	    "font-weight": "bold",
+	    "color": "#0b3d91",
+	    "background-color": "#eaf2ff",
+	    "padding": "2px 6px",
+	    "border-radius": "3px"
+	});
+	loc_descriptionView.append(loc_descriptionLabelView);
 	var loc_epxressionDescriptionView = $("<span></span>");
+	loc_epxressionDescriptionView.attr("title", "Expression description");
+	loc_epxressionDescriptionView.css({
+	    "color": "#0066cc",
+	    "font-weight": "bold",
+	    "margin-left": "4px"
+	});
+	loc_descriptionView.append(loc_epxressionDescriptionView);
+	loc_containerView.append(loc_descriptionView);
 	
 	var loc_getValue = function(){
 		return loc_valueChoose.getValue();
 	};
 
+	var loc_updateExpressionDescription = function(){
+		var currentChooseType = loc_valueChoose.getCurrentChoose();
+		var description = "";
+		if(currentChooseType==node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION){
+			loc_enable(loc_descriptionView);
+			description = node_utility.getDataBuildDescription(loc_out.getValue().dataBuild, node_envObj);
+		}
+		else{
+			loc_disable(loc_descriptionView);
+		}
+		loc_epxressionDescriptionView.text(description);
+	};
+	
 	var loc_out = {
 		
 		getInitRequest : function(handlers, request){
@@ -1239,23 +1286,25 @@ var node_chooseDataApp = function(dataDefinition){
 				loc_valueChoose.destroy();
 			}
 			if(value==undefined){
-				loc_valueChoose = loc_createDataChoose("expression", loc_dataDefinition, loc_envObj);
+				loc_valueChoose = loc_createDataChoose("expression", loc_dataDefinition, node_envObj);
 			}
 			else{
 				var dataBuildInfo = {};
 				dataBuildInfo[node_COMMONATRIBUTECONSTANT.DATABUILDINFO_DATADEFINITION] = loc_dataDefinition;
 				dataBuildInfo[node_COMMONATRIBUTECONSTANT.DATABUILDINFO_DATABUILD] = value;
-				loc_valueChoose = loc_createDataChoose(dataBuildInfo, undefined, loc_envObj);
+				loc_valueChoose = loc_createDataChoose(dataBuildInfo, undefined, loc_getDataBuildOperandDescription);
 			}
 			loc_valueChoose.updateView(loc_containerView);
 			loc_valueChoose.registerListener(function(eventName, eventData){
 				if(eventName=="change"){
+					loc_updateExpressionDescription();
 					loc_eventObject.triggerEvent(eventName);
     				console.log(JSON.stringify(loc_getValue()));
 					console.log(JSON.stringify(loc_out.getDescription()));
+    				console.log(JSON.stringify(node_utility.getDataBuildDescription(loc_out.getValue().dataBuild, node_envObj)));
 				}
 			});
-					
+			loc_updateExpressionDescription();
 			return loc_valueChoose.getInitRequest(handlers, request);
 		},
 		
@@ -1281,52 +1330,6 @@ var node_chooseDataApp = function(dataDefinition){
 
 };
 
-var loc_envObj = {
-	
-	getOptions : function(dataDefinition){
-		var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
-
-		var constantOption = {
-			"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT
-		};
-		var variableOption = {
-			"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
-			"variables" : [
-				{
-					"name":"nosliw_today",
-					"text":"today"
-				}]
-		};
-		
-		var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
-		var out = [];
-		if(criteria=="test.date;1.0.0"){
-			out.push(constantOption);
-			out.push(variableOption);
-		}
-		else{
-			out.push(constantOption);
-		}
-		return out;
-	},
-	
-	getVariablesByDataType : function(dataType){
-		if(dataType=="test.date;1.0.0"){
-			return 	[
-				{
-					"name":"nosliw_today",
-					"text":"today"
-				}];
-		};
-	},
-	
-	getDataTypeByVariable : function(varName){
-		if(varName=="nosliw_today"){
-			return "test.date;1.0.0";
-		}
-	}
-};
-
 
 //*******************************************   End Node Definition  ************************************** 	
 
@@ -1340,10 +1343,11 @@ nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_b
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
+nosliw.registerSetNodeDataEvent("app_storybuild.envObj", function(){node_envObj = this.getData();});
+nosliw.registerSetNodeDataEvent("app_storybuild.utility", function(){node_utility = this.getData();});
+
 
 //Register Node by Name
 packageObj.createChildNode("chooseDataApp", node_chooseDataApp); 
 
 })(packageObj);
-
-

@@ -65,6 +65,15 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	dataDefinition.type = "writable";
 
 	var chooseDatApp = node_chooseDataApp(dataDefinition);
+	
+	chooseDatApp.registerListener(function(eventName, eventData){
+        if(eventName=="change"){
+//			console.log(JSON.stringify(chooseDatApp.getValue()));
+ //       	console.log(node_utility.getDataBuildDescription(chooseDatApp.getValue()));
+        }
+	
+	});
+	
 	$("#main").append(chooseDatApp.getView());
 	var request = chooseDatApp.getSetValueRequest(node_utility.getSampleDataBuild().aa, {
          success : function(request){
