@@ -25,15 +25,15 @@
 					"name" : "program",
 					"dataDefinition" : {
 						"criteria" : "test.entity;1.0.0",
+    				    "rule" : [
+	                        {
+               			    	"name" : "Community Location",
+                                "status": "disabled1",
+    				            "ruleType" : "enum",
+	    			            "enumCode" : "toronto_community_program_dropin"
+		    		        }
+			    	    ],
 					},
-				    "rule" : [
-				        {
-               				"name" : "Community Location",
-                            "status": "disabled1",
-				            "ruleType" : "enum",
-				            "enumCode" : "toronto_program_dropin"
-				        }
-				    ],
 				},
 				{
 					"name" : "fromDate",

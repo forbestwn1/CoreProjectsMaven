@@ -53,7 +53,7 @@ var node_createUICustomerTagTestStringMultiple = function(envObj){
 		initViews : function(handlers, request){
 			
 			if(envObj.isDataEnum()!=null){
-				loc_dataViewForEnum = $('<select name="data" multiple/>');
+				loc_dataViewForEnum = $('<select name="data" multiple  style="border:solid 1px;" />');
 				for(var k in loc_enumDatas){
 					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));

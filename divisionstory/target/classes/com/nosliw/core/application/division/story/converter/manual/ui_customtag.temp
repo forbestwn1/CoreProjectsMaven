@@ -1,6 +1,7 @@
-<nosliw-|||tagname||| |||attributes|||>
+<nosliw-|||tagname||| |||attributes||| nosliw-metadata="name:|||elementId|||">
 
 |||html|||
 
 </nosliw-|||tagname|||>
 
+<nosliw-debug_test_error reference_tag="name:|||elementId|||"/>

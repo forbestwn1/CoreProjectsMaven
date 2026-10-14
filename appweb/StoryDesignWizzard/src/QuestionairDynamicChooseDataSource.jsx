@@ -54,7 +54,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                         <select name="DataSource" id="dataSource" value={selected} onChange={(e) => setSelectedDataSource(e.target.value)}>
                             <option value="" disabled selected hidden>-- Please choose an data source --</option>
                             {cache.current[questionair.id] && cache.current[questionair.id].map((source) => {
-                                return (<option key={source.id} value={source.name}>
+                                return (<option key={source.id} value={source.id}>
                                     {source.name}
                                 </option>);
                             })}

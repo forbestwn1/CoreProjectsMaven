@@ -322,6 +322,7 @@ public class HAPStoryConverterToManual {
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 
 		templateParms.put("tagname", uiTagElement.getTagId());
+		templateParms.put("elementId", uiTagElement.getElementId().getKey());
 		
 		StringBuffer attContent = new StringBuffer();
 		Map<String, String> attributes = uiTagElement.getAttributes();

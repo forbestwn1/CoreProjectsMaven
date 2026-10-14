@@ -313,7 +313,7 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 			//customer tag views
 			_.each(loc_customerTagByUIId, function(uiCustomTag, id){
 				var uiId = loc_getUpdateUIId(uiCustomTag.getUIId());
-				var tagWrapperView = $("<span " + node_COMMONCONSTANT.UIRESOURCE_ATTRIBUTE_STYLEID + "=" + "'" + uiCustomTag.getUIId() + "'" + "></span>");
+				var tagWrapperView = $("<span style='display: flex; flex-direction: column;'  " + node_COMMONCONSTANT.UIRESOURCE_ATTRIBUTE_STYLEID + "=" + "'" + uiCustomTag.getUIId() + "'" + "></span>");
 				var tagPostfix = loc_getLocalElementByUIId(uiCustomTag.getUIId()+node_COMMONCONSTANT.UIRESOURCE_CUSTOMTAG_WRAPER_START_POSTFIX);
 				tagWrapperView.insertAfter(tagPostfix);
 				uiCustomTag.updateView(tagWrapperView);

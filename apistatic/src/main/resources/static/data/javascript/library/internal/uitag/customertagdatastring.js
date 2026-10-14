@@ -55,7 +55,7 @@ var node_createUICustomerTagTestString = function(envObj){
 
 		initViews : function(handlers, request){
 			if(envObj.isDataEnum()!=null){
-				loc_dataViewForEnum = $('<select name="data"/>');
+				loc_dataViewForEnum = $('<select name="data"  style="border:solid 1px;" />');
 				for(var k in loc_enumDatas){
 					var dataValue = loc_enumDatas[k][node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
@@ -71,7 +71,7 @@ var node_createUICustomerTagTestString = function(envObj){
 			}
 			else{
 //				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
-				loc_dataView = $('<input type="text" placeholder="string type value111111"></input>');
+				loc_dataView = $('<input type="text" id="myheeaa" placeholder="string type value111111"></input>');
 
 				loc_dataView.bind('change', function(){
 					var currentData = {

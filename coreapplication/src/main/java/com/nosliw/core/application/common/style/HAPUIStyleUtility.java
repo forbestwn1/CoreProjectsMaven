@@ -26,7 +26,7 @@ public class HAPUIStyleUtility {
 
 	public static String process(HAPBlockComplexUIPage page) {
 		List<String> out = new ArrayList<String>();
-		processWithUIContent(out, page, new ArrayList<String>());
+//		processWithUIContent(out, page, new ArrayList<String>());
 		
 //		return String.join(" ", out).replaceAll("(\\r|\\n)", "");
 		
