@@ -100,6 +100,10 @@ if(typeof nosliw=="undefined")
 			
 			isPromiseSupported : function(){
 				return typeof Promise !== 'undefined' && typeof Promise === 'function';
+			},
+			
+			getMode : function(){
+				return this.getConfigureValue("mode", "development");
 			}
 			
 		};

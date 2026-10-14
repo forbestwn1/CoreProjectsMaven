@@ -157,12 +157,13 @@ var createCoreStaticTask = function(){
 	        },
 	        function(env){
 	        	nosliw.createNode("runtime.name", "browser");
-	            
+/*	            
 	        	configureData = _.extend(configureData, {
 	        		logging : {
 	        			module : ["process", "requestInfo", "requestManager"]
 	        		}
 	        	});
+*/				
 	        	nosliw.setConfigure(configureData);
 
 	        	  nosliw.registerNodeEvent("runtime", "active",

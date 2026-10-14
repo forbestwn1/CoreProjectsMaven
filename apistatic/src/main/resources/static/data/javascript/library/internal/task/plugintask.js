@@ -110,37 +110,40 @@ var loc_createTaskCore = function(taskDef, configure){
 		},
 		
 		updateView : function(view){
-			var rootView =  $('<div>Task' + '</div>');
-			$(view).append(rootView);
+			if(nosliw.getMode()=="development"){
+						var rootView =  $('<div>Task' + '</div>');
+						$(view).append(rootView);
 
-			loc_taskInfoView = $('<span></span>');
-			rootView.append(loc_taskInfoView);
-			
-			var taskTrigueView = $('<button>Execute Task</button>');
-			taskTrigueView.click(function() {
-				var out = node_createServiceRequestInfoSequence();
-	
-				//create task entity runtime
-				var taskId = loc_createTaskId();
-				out.addRequest(loc_createTaskEntityCoreRequest(taskId, {
-					success : function(request, taskEntityCore){
-						loc_updateViewTaskValuePortContainerInfo(taskEntityCore);
-						return node_taskExecuteUtility.getExecuteEntityTaskWithAdapterRequest(taskEntityCore, undefined, undefined, {
-							success : function(request, taskResult){
-								loc_updateViewTaskResult(taskResult);
-								return taskResult;
-							}
+						loc_taskInfoView = $('<span></span>');
+						rootView.append(loc_taskInfoView);
+						
+						var taskTrigueView = $('<button>Execute Task</button>');
+						taskTrigueView.click(function() {
+							var out = node_createServiceRequestInfoSequence();
+
+							//create task entity runtime
+							var taskId = loc_createTaskId();
+							out.addRequest(loc_createTaskEntityCoreRequest(taskId, {
+								success : function(request, taskEntityCore){
+									loc_updateViewTaskValuePortContainerInfo(taskEntityCore);
+									return node_taskExecuteUtility.getExecuteEntityTaskWithAdapterRequest(taskEntityCore, undefined, undefined, {
+										success : function(request, taskResult){
+											loc_updateViewTaskResult(taskResult);
+											return taskResult;
+										}
+									});
+								}
+							}));
+							node_requestServiceProcessor.processRequest(out);
 						});
-					}
-				}));
-				node_requestServiceProcessor.processRequest(out);
-			});
-			rootView.append(taskTrigueView);
+						rootView.append(taskTrigueView);
 
-			loc_outputView =  $('<textarea rows="5" cols="200"></textarea>');
-			rootView.append(loc_outputView);
-			loc_taskViewContainer =  $('<div></div>');
-			rootView.append(loc_taskViewContainer);
+						loc_outputView =  $('<textarea rows="5" cols="200"></textarea>');
+						rootView.append(loc_outputView);
+						loc_taskViewContainer =  $('<div></div>');
+						rootView.append(loc_taskViewContainer);				
+			}
+			
 		},
 		
 	};

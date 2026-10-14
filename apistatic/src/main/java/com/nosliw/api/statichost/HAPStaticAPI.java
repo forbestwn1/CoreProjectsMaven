@@ -109,17 +109,15 @@ public class HAPStaticAPI {
 				urlData.put("storyUrl", "http://localhost:8083/");
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
-			if(configureName.equals("scriptreproduce")) {
+			else if(configureName.equals("scriptreproduce")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
 				urlData.put("gatewayUrl", "http://localhost:8080/");
 				urlData.put("staticUrl", "http://localhost:8081/");
 				out.add(new HAPStaticResponseInfoData(urlData));
             }
-			else if(configureName.equals("story")) {
+			else if(configureName.equals("production")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
-//				urlData.put("gatewayUrl", "http://localhost:8080/");
-//				urlData.put("staticUrl", "http://localhost:8081/");
-//				urlData.put("storyUrl", "http://localhost:8083/");
+				urlData.put("mode", "production");
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
 		}
@@ -172,10 +170,6 @@ public class HAPStaticAPI {
 			    out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));
                 out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null), consolidate));
             }
-			else if(configureName.equals("story")) {
-//				out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "core", null), consolidate));
-//    			out.addAll(this.fetchScript(new HAPStaticRequestInfoLibrary(HAPConstantShared.STATIC_LIBRARY_DOMAIN_INTERNAL, "runtimebrowserinit", null), consolidate));
-			}
 		}
 		return out;
 	}
