@@ -409,41 +409,46 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			//get static info
 			HAPStoryWizzardQuestionairItemStatic dataStaticInfoQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATAINFO);
 			HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic dataInfoValue = (HAPStoryWizzardQuestionValueDataSourceResponseDataCriteriaInfoStatic)dataStaticInfoQ.getValue();
-			
-			//get entity info
-			HAPStoryWizzardQuestionairItemStatic dataEntityInfoQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_ENTITYINFO);
-			HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic dataEntityInfoValue = (HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic)dataEntityInfoQ.getValue();
-			
-			//append input content
-			out = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "output.html", this.getClass());
-			
-			//inject label
-			HAPStoryChangeItemElementNew newResponseInputLabelContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "inputlabel.html", this.getClass());
-			changeSession.addChangeConnectionNew(out.getElementId(), newResponseInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
 
-			//inject title
+			//data name
 			String[] dataNameSegs = HAPUtilityNamingConversion.parsePaths(dataInfoValue.getDataName());
-			HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataNameSegs[dataNameSegs.length-1]);
-			changeSession.addChangeConnectionNew(newResponseInputLabelContentChange.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
-			
-			//get ui tag info
-			HAPStoryWizzardQuestionairItemDynamic dataUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);
-			HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic)dataUITagChooseQ.getValue();
-			HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
-			
-			//inject uiTag
-			HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
-			changeSession.addChangeConnectionNew(out.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
+			String dataName = dataNameSegs[dataNameSegs.length-1];
 
-			//inject content wrapper into uitag
-			HAPStoryChangeItemElementNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
-			changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
+			HAPStoryChangeItemElementNew newUITagWrapperChange = null;
+			if(!dataName.equals("element")) {
+				//get entity info
+				HAPStoryWizzardQuestionairItemStatic dataEntityInfoQ = (HAPStoryWizzardQuestionairItemStatic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_ENTITYINFO);
+				HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic dataEntityInfoValue = (HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic)dataEntityInfoQ.getValue();
+				
+				//append input content
+				out = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "output.html", this.getClass());
+				
+				//inject label
+				HAPStoryChangeItemElementNew newResponseInputLabelContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "inputlabel.html", this.getClass());
+				changeSession.addChangeConnectionNew(out.getElementId(), newResponseInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
+
+				//inject title
+				HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataName);
+				changeSession.addChangeConnectionNew(newResponseInputLabelContentChange.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
+				
+				//get ui tag info
+				HAPStoryWizzardQuestionairItemDynamic dataUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);
+				HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceResponseParmChooseUIDynamic)dataUITagChooseQ.getValue();
+				HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
+				
+				//inject uiTag
+				HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
+				changeSession.addChangeConnectionNew(out.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
+
+				//inject content wrapper into uitag
+				newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
+				changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
+			}
 
 			//children data
 			HAPStoryWizzardQuestionairGroup dataChildrenGroupQ = (HAPStoryWizzardQuestionairGroup)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDREN);
 			if(dataChildrenGroupQ!=null) {
 				HAPStoryChangeItemElementNew newRootContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "uitagmain.html", this.getClass());
-				changeSession.addChangeConnectionNew(newUITagWrapperChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIWrapperContent.CHILD_CONTENT)));
 
 				for(HAPStoryWizzardQuestionair childDataQ : dataChildrenGroupQ.getItems()) {
 					HAPStoryWizzardQuestionairGroup childDataGroupQ = (HAPStoryWizzardQuestionairGroup)childDataQ;
@@ -452,7 +457,14 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryChangeItemElementNew newChildDataContentChange = buildResponseUIByData(changeSession, childDataGroupQ);
 					changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newChildDataContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("children")));
 				}
-			}
+
+				if(newUITagWrapperChange!=null) {
+					changeSession.addChangeConnectionNew(newUITagWrapperChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIWrapperContent.CHILD_CONTENT)));
+				}
+				else {
+					out = newRootContentChange;
+				}
+             }
 		}
 		return out;
 	}
