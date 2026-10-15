@@ -22,25 +22,34 @@ var packageObj = library.getChildPackage();
 var node_createUICustomerTagTestEntity = function(envObj){
 	var loc_envObj = envObj;
 
-	var loc_dataViewForEnum;
+	loc_containerView = $('<div/>');
+	var loc_dataViewsForCategory = [];
+	var loc_dataViewsForData;
 	
-	var loc_enumDatas;
-	
-	
+	var loc_codeTableEntity;
 	
 	var loc_out = {
 
 		preInit : function(handlers, request){
 			if(loc_envObj.isDataEnum()!=null){
 				var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-				out.addRequest(envObj.getDataEnumRequest({
-					success : function(request, enumDatas){
-						loc_enumDatas = enumDatas;
+				out.addRequest(envObj.getCodeTableRequest({
+					success : function(request, codeTable){
+						loc_codeTableEntity = node_createEntityCodeTable(codeTable);
 					}
 				}));
 				return out;
 			}
 			
+			var categoryNames = loc_codeTableEntity.getCategoryNames();
+			_.each(categoryNames, function(categoryName, i){
+				var categoryView = $('<select name="data"/>');
+    			loc_dataViewsForCategory.push(categoryView);
+				loc_containerView.append(categoryView);
+			});
+			
+			loc_dataViewsForData = $('<select name="data"/>');
+    		loc_containerView.append(loc_dataViewsForData);
 		},
 				
 		updateView : function(currentData){

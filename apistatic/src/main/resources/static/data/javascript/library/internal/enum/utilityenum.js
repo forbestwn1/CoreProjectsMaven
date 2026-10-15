@@ -14,23 +14,27 @@ var packageObj = library;
 
 var node_enumUtility = function(){
 	
-	var loc_getEnumDataSetFromCodeTableRequest = function(codeTableId, handlers, request){
-		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+	var loc_getCodeTableRequest = function(codeTableId, handlers, request){
 		var gatewayParm = {};
 		gatewayParm[node_COMMONATRIBUTECONSTANT.GATEWAYCODETABLE_PARMS_GETCODETABLE_ID] = codeTableId;
-		out.addRequest(nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(
+		return nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(
 				node_COMMONCONSTANT.GATEWAY_CODETABLE, 
 				node_COMMONATRIBUTECONSTANT.GATEWAYCODETABLE_COMMAND_GETCODETABLE, 
-				gatewayParm,
-				{
-					success : function(requestInfo, codeTable){
-						return codeTable[node_COMMONATRIBUTECONSTANT.CODETABLE_DATASET];
-					}
-				}
-		));
+				gatewayParm, handlers, request
+		);
+	};
+
+		
+	var loc_getEnumDataSetFromCodeTableRequest = function(codeTableId, handlers, request){
+		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+		out.addRequest(loc_getCodeTableRequest(codeTableId, {
+			success : function(requestInfo, codeTable){
+				return codeTable[node_COMMONATRIBUTECONSTANT.CODETABLE_DATASET];
+			}
+		}));
 		return out;
 	};
-	
+
 	var loc_getEnumDataSetFromEnumRuleRequest = function(enumRuleDef, handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 
@@ -51,16 +55,25 @@ var node_enumUtility = function(){
 		
 		return out;
 	};
-	
+
 	var loc_out = {
 
 		getEnumDataSetFromCodeTableReqeust : function(codeTableId, handlers, request){
 			loc_getEnumDataSetFromCodeTableRequest(codeTableId, handlers, request);
 		},
-		
+
 		getEnumDataSetFromEnumRuleRequest : function(enumRuleDef, handlers, request){
 			return loc_getEnumDataSetFromEnumRuleRequest(enumRuleDef, handlers, request);
-		}
+		},
+
+		getCodeTableRequest : function(codeTableId, handlers, request){
+			return loc_getCodeTableRequest(codeTableId, handlers, request);
+		},
+
+    	getCodeTableFromEnumRuleRequest : function(enumRuleDef, handlers, request){
+		    return loc_getCodeTableRequest(enumRuleDef[node_COMMONATRIBUTECONSTANT.DATARULEENUM_ENUMCODE], handlers, request);
+	    }
+
 	};
 
 	return loc_out;

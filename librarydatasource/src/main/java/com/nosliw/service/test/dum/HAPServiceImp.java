@@ -17,6 +17,10 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 		HAPData parm1 = parms.get("serviceParmString");
 		
 		output.put("outputInService1", parm1);
+		output.put("outputInService2", parm1);
+		output.put("outputInService3", parm1);
+		output.put("outputInService4", parm1);
+		output.put("outputInService5", parm1);
 		return HAPUtilityService.generateSuccessResult(output);
 	}
 

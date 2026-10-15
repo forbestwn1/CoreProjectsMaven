@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
@@ -421,8 +422,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			changeSession.addChangeConnectionNew(out.getElementId(), newResponseInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
 
 			//inject title
-			HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataInfoValue.getDataName());
-			changeSession.addChangeConnectionNew(out.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
+			String[] dataNameSegs = HAPUtilityNamingConversion.parsePaths(dataInfoValue.getDataName());
+			HAPStoryChangeItemElementNew newResponseInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataNameSegs[dataNameSegs.length-1]);
+			changeSession.addChangeConnectionNew(newResponseInputLabelContentChange.getElementId(), newResponseInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
 			
 			//get ui tag info
 			HAPStoryWizzardQuestionairItemDynamic dataUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATAUITAG);

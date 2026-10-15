@@ -1,0 +1,73 @@
+{
+	"dataTypeId": "test.array;1.0.0",
+	"value": [
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"stringAttr1": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 1111!"
+				},
+				"stringAttr2": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 2222!"
+				}
+			}
+		},
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"stringAttr1": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 33333!"
+				},
+				"stringAttr2": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 44444!"
+				}
+			}
+		},
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"stringAttr1": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 55555!"
+				},
+				"stringAttr2": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 6666!"
+				}
+			}
+		},
+		
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"stringAttr1": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 7777!"
+				},
+				"stringAttr2": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 8888!"
+				}
+			}
+		},
+
+		{
+			"dataTypeId": "test.map;1.0.0",
+			"value": {
+				"stringAttr1": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 99999!"
+				},
+				"stringAttr2": {
+					"dataTypeId": "test.string;1.0.0",
+					"value": "This is my world 11111!"
+				}
+			}
+		}
+				
+	]
+}

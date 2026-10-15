@@ -33,6 +33,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	
 	var loc_isDataEnum;
 	var loc_enumDatas;
+	var loc_codeTable;
 	
 	var loc_createCoreObj = function(){
 		loc_coreObj = loc_tagDefScriptFun(loc_coreEnvObj); 
@@ -86,7 +87,25 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 			}
 			return out;
 		},
-		
+
+		getCodeTableRequest : function(handlers, request){
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+			if(loc_enumDatas==null){
+				out.addRequest(node_enumUtility.getCodeTableFromEnumRuleRequest(loc_isDataEnum, {
+					success : function(request, codeTable){
+						loc_codeTable = codeTable;
+						return loc_codeTable;
+					}
+				}));
+			}
+			else{
+				out.addRequest(node_createServiceRequestInfoSimple(undefined, function(request){
+					return loc_codeTable;
+				}));
+			}
+			return out;
+		},
+				
 		onDataChange : function(data, reqeust){
 			var configure;
 			if(loc_enumDatas!=undefined){

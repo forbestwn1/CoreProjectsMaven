@@ -22,6 +22,30 @@
   							"dataDefinition" : {
 	    						"criteria" : "test.string;1.0.0"
 	    					}
+						},
+						{
+							"name" : "outputInService2",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
+						},
+						{
+							"name" : "outputInService3",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
+						},
+						{
+							"name" : "outputInService4",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
+						},
+						{
+							"name" : "outputInService5",
+  							"dataDefinition" : {
+	    						"criteria" : "test.string;1.0.0"
+	    					}
 						}
 					]
 				}
