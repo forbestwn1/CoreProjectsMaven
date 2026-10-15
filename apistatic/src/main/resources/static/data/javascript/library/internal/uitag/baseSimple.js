@@ -54,7 +54,12 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 	};
 
 	var loc_coreEnvObj = {
-			
+		
+		getDataMode : function(){
+			var dataMode = loc_envObj.getAttributeValue(node_uiContentUtility.buildKeyAttribute(node_COMMONCONSTANT.UITAG_ATTRIBUTE_DATAMODE));
+			return dataMode;
+		},
+		
 		isDataEnum : function(){
 			if(loc_isDataEnum==undefined){
 				var ruleInfos = loc_envObj.getVariableRulesInfo(loc_dataVariable);

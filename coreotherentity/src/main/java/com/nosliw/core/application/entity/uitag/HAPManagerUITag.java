@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
+import com.nosliw.core.application.common.uicontent.HAPUIConentUtility;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttributeVariable;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionData;
@@ -163,6 +164,12 @@ public class HAPManagerUITag{
 		HAPUITagQueryResultSet out = new HAPUITagQueryResultSet();
 		for(HAPUITagCandidate candidate : candidates) {
 			HAPUITagInfo result = new HAPUITagInfo(candidate.getUITagDef());
+
+			//if multiple vlaue allowed
+			if(query.getDataDefinition().getIsMultipleAllowed()) {
+				result.addAttribute(HAPUIConentUtility.makeKeyAttribute(HAPConstantShared.UITAG_ATTRIBUTE_DATAMODE), HAPConstantShared.UITAG_DATAMODE_MULTIPLE);
+			}
+			
 			result.setAttributeForData(candidate.getDataAttributeName());
 			result.addMatchers("internal_data", candidate.getMatchers());
 			HAPUITagQueryResult resultInfo = new HAPUITagQueryResult(result, candidate.getScore());

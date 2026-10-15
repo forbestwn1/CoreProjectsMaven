@@ -16,6 +16,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 
 	var loc_categoryNames = [];
 	var loc_entitysByCategary;
+	var loc_entityById = {};
 	
 	var loc_init = function(entityCodeTable){
 		loc_categoryNames = entityCodeTable[info].category;
@@ -27,6 +28,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 		else{
 			loc_buildStructure = {};
     		_.each(dataSet, function(entity, i){
+				loc_entityById[entity.id] = entity;
 				var value = entity.value;
 				var node = loc_buildStructure;
 				for(var i=0; i<loc_categoryNames.length; i++){
@@ -51,7 +53,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 	
 	var loc_getAllEntities = function(node, output){
 		if(node==undefined)   return;
-		if(node_basicUtility.isArray()){
+		if(node_basicUtility.isArray(node)){
 			output.push(node);
 		}
 		else{
@@ -63,8 +65,30 @@ var node_createEntityCodeTable = function(entityCodeTable){
 	
 	var loc_out = {
 
+		getEntityById : function(id){
+			return loc_entityById[id];
+		},
+		
 		getCategoryNames: function(){
 			return loc_categoryNames;
+		},
+		
+		getChildrenByPath : function(pathArray){
+			var node = loc_entitysByCategary;
+			for(var i in pathArray){
+				node = loc_entitysByCategary[i];
+				if(node==undefined)   return;
+			}
+			if(node_basicUtility.isArray(node)){
+				return node;
+			}
+			else{
+				var out = [];
+				_.each(node, function(child, i){
+					out.push(out);
+				});
+				return out;
+			}
 		},
 		
     	getEntitysByCategorys: function(categorys){

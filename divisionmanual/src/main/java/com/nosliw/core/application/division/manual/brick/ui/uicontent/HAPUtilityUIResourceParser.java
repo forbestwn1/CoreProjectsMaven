@@ -27,8 +27,6 @@ public class HAPUtilityUIResourceParser {
 			HAPWithValueContext.VALUECONTEXT,
 			HAPManualDefinitionWithBrickTasks.TASK);
 	
-	public static final String CUSTOMTAG_PREFIX = "nosliw-";
-	
 	/*
 	 * build expression function name based on id
 	 */
@@ -37,28 +35,13 @@ public class HAPUtilityUIResourceParser {
 	}
 
 	/*
-	 * build custom tag name based on tag basic name
-	 */
-	public static String makeCustomTagName(String tag){
-		return HAPUtilityNamingConversion.createKeyword(tag, CUSTOMTAG_PREFIX);
-	}
-	
-	/*
 	 * check whether a tag is custom tag
 	 * if yes, return custom tag name
 	 * if no, return null
 	 */
 	public static String isCustomTag(Element ele){
 		String tagName = ele.tagName();
-		return HAPUtilityNamingConversion.getKeyword(tagName, CUSTOMTAG_PREFIX);
-	}
-	
-	public static boolean isDataKeyAttribute(String attribute){
-		return attribute.startsWith(CUSTOMTAG_PREFIX+HAPConstantShared.UIRESOURCE_ATTRIBUTE_DATABINDING);
-	}
-	
-	public static String makeKeyAttribute(String attribute){
-		return HAPConstantShared.UIRESOURCE_CUSTOMTAG_KEYATTRIBUTE_PREFIX+attribute;
+		return HAPUtilityNamingConversion.getKeyword(tagName, HAPConstantShared.CUSTOMTAG_PREFIX);
 	}
 	
 	/*

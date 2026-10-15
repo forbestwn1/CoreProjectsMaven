@@ -404,6 +404,8 @@
 			<definition name="ENTITYOPERATION_ENTITYATTR_REMOVE" value="ENTITYOPERATION_ENTITYATTR_REMOVE"/>
 			<definition name="ENTITYOPERATIONCODE_ENTITYATTR_REMOVE" value="113" type="int"/>
 			<definition type="space"/>
+			<definition name="CUSTOMTAG_PREFIX" value="nosliw-"/>
+			<definition type="space"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_CONTEXT" value="context"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_UIID" value="nosliwid"/>
 			<definition name="UIRESOURCE_ATTRIBUTE_STYLEID" value="nosliwstyleid"/>
@@ -528,6 +530,7 @@
 
 			<definition type="space"/>
 			<definition name="UITAG_ATTRIBUTE_DATA" value="data"/>
+			<definition name="UITAG_ATTRIBUTE_DATAMODE" value="datamode"/>
 
 			<definition type="space"/>
 			<definition name="UITAG_NAME_INCLUDE" value="include"/>

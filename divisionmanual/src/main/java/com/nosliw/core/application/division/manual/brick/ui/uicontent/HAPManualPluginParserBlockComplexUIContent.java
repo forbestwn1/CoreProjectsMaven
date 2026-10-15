@@ -32,6 +32,7 @@ import com.nosliw.core.application.common.structure.HAPElementStructureLeafValue
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.common.structure.HAPStructureImp;
+import com.nosliw.core.application.common.uicontent.HAPUIConentUtility;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualDefinitionBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
@@ -207,7 +208,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 		for(Attribute eleAttr : eleAttrs){
 			String eleAttrValue = eleAttr.getValue();
 			String eleAttrName = eleAttr.getKey();
-			String keyAttrName = HAPUtilityUIResourceParser.isKeyAttribute(eleAttrName);
+			String keyAttrName = HAPUIConentUtility.isKeyAttribute(eleAttrName);
 			
 			if(keyAttrName!=null){
 				if(keyAttrName.equals(HAPConstantShared.UIRESOURCE_ATTRIBUTE_ALIAS)) {

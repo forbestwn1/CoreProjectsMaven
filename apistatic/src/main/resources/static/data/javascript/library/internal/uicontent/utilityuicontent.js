@@ -23,6 +23,10 @@ var node_uiContentUtility = function(){
 	
 	var loc_out = {
 		
+		buildKeyAttribute : function(attrName){
+			return node_COMMONCONSTANT.UIRESOURCE_CUSTOMTAG_KEYATTRIBUTE_PREFIX+attrName;
+		},
+		
 		queryCustomTag : function(currentUIEntity, query){
 			var queryResult = undefined;
 			while(queryResult==undefined){

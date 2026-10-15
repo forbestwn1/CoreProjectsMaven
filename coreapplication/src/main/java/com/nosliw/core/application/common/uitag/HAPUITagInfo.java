@@ -42,6 +42,7 @@ public class HAPUITagInfo extends HAPEntityInfoImp{
 	}
 	
 	public Map<String, String> getAttributes(){   return this.m_attributes;    }
+	public void addAttribute(String name, String vlaue) {     this.m_attributes.put(name, vlaue);        }
 
 	public void setAttributeForData(String attrName) {       this.m_attributeForData = attrName;        }
 	public String getAttributeForData() {     return this.m_attributeForData;      }

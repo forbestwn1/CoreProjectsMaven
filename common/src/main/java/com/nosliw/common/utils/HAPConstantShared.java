@@ -290,6 +290,10 @@ public class HAPConstantShared {
 
 
 
+		public static final String CUSTOMTAG_PREFIX = "nosliw-";
+
+
+
 		public static final String UIRESOURCE_ATTRIBUTE_CONTEXT = "context";
 		public static final String UIRESOURCE_ATTRIBUTE_UIID = "nosliwid";
 		public static final String UIRESOURCE_ATTRIBUTE_STYLEID = "nosliwstyleid";
@@ -440,6 +444,7 @@ public class HAPConstantShared {
 
 
 		public static final String UITAG_ATTRIBUTE_DATA = "data";
+		public static final String UITAG_ATTRIBUTE_DATAMODE = "datamode";
 
 
 

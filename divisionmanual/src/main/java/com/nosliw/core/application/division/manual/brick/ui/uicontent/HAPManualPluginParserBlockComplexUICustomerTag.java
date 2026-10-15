@@ -26,6 +26,7 @@ import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPValueStructure;
 import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
+import com.nosliw.core.application.common.uicontent.HAPUIConentUtility;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttributeVariable;
@@ -70,7 +71,7 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPlu
 		for(Attribute eleAttr : eleAttrs){
 			String eleAttrValue = eleAttr.getValue();
 			String eleAttrName = eleAttr.getKey();
-			String keyAttrName = HAPUtilityUIResourceParser.isKeyAttribute(eleAttrName);
+			String keyAttrName = HAPUIConentUtility.isKeyAttribute(eleAttrName);
 			
 			if(keyAttrName!=null){
 				if(keyAttrName.equals(HAPConstantShared.UIRESOURCE_ATTRIBUTE_METADATA)) {
