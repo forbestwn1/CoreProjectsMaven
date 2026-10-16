@@ -122,7 +122,8 @@ var node_createUICustomerTagTestEntity = function(envObj){
 	var loc_removeValue = function(dataInfo){
 		const index = loc_dataInfo.indexOf(dataInfo);
 		if (index !== -1) {
-		  loc_dataInfo.splice(index, 1);
+			loc_dataInfo[index].view.remove();
+		    loc_dataInfo.splice(index, 1);
 		}
 	};
 	
