@@ -19,18 +19,18 @@ var node_createEntityCodeTable = function(entityCodeTable){
 	var loc_entityById = {};
 	
 	var loc_init = function(entityCodeTable){
-		loc_categoryNames = entityCodeTable[info].category;
+		loc_categoryNames = entityCodeTable.info.category;
 		var dataSet = entityCodeTable[node_COMMONATRIBUTECONSTANT.DATARULEENUM_DATASET];
 		
 		if(loc_categoryNames==undefined){
 			loc_entitysByCategary = dataSet;
 		}
 		else{
-			loc_buildStructure = {};
+			loc_entitysByCategary = {};
     		_.each(dataSet, function(entity, i){
 				loc_entityById[entity.id] = entity;
 				var value = entity.value;
-				var node = loc_buildStructure;
+				var node = loc_entitysByCategary;
 				for(var i=0; i<loc_categoryNames.length; i++){
 					var name = value[loc_categoryNames[i]];
 					var child = node[name];
@@ -76,7 +76,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 		getChildrenByPath : function(pathArray){
 			var node = loc_entitysByCategary;
 			for(var i in pathArray){
-				node = loc_entitysByCategary[i];
+				node = node[pathArray[i]];
 				if(node==undefined)   return;
 			}
 			if(node_basicUtility.isArray(node)){
@@ -85,7 +85,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 			else{
 				var out = [];
 				_.each(node, function(child, i){
-					out.push(out);
+					out.push(i);
 				});
 				return out;
 			}
@@ -117,7 +117,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 
 	loc_init(entityCodeTable);
 	return loc_out;
-}();
+};
 
 //*******************************************   End Node Definition  ************************************** 	
 

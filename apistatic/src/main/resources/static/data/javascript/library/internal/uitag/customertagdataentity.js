@@ -17,14 +17,15 @@ var packageObj = library.getChildPackage();
 	var node_createHandleEachElementProcessor;
 	var node_namingConvensionUtility;
 	var node_ruleUtility;
+	var node_createEntityCodeTable;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_createUICustomerTagTestEntity = function(envObj){
 	var loc_envObj = envObj;
 
-	loc_containerView = $('<div/>');
-	loc_valueContainerView = $('<div/>');
-	loc_selectionContainerView = $('<div/>');
+	var loc_containerView = $('<div>Hello Entity</div>');
+	var loc_valueContainerView = $('<div/>');
+	var loc_selectionContainerView = $('<div/>');
 	loc_containerView.append(loc_valueContainerView);
 	loc_containerView.append(loc_selectionContainerView);
 
@@ -62,9 +63,10 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		}
 		else{
 			//entity
+			loc_dataSelView.empty();
 			_.each(children, function(child){
 				var value = child.value;
-				categoryView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));
+				loc_dataSelView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));
 			});
 		}
 		
@@ -201,6 +203,7 @@ nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_b
 nosliw.registerSetNodeDataEvent("variable.orderedcontainer.createHandleEachElementProcessor", function(){node_createHandleEachElementProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("enum.createEntityCodeTable", function(){node_createEntityCodeTable = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("debug_test_data_entity", node_createUICustomerTagTestEntity); 
