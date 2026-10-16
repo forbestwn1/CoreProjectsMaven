@@ -28,7 +28,7 @@ var node_createEntityCodeTable = function(entityCodeTable){
 		else{
 			loc_entitysByCategary = {};
     		_.each(dataSet, function(entity, i){
-				loc_entityById[entity.id] = entity;
+				loc_entityById[entity.value.id] = entity;
 				var value = entity.value;
 				var node = loc_entitysByCategary;
 				for(var i=0; i<loc_categoryNames.length; i++){

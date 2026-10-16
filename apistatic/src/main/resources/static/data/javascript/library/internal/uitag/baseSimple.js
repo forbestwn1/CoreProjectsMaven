@@ -19,6 +19,7 @@ var packageObj = library;
 	var node_ruleUtility;
 	var node_getObjectType;
 	var node_enumUtility;
+	var node_uiContentUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -211,6 +212,8 @@ nosliw.registerSetNodeDataEvent("uitag.uiTagUtility", function(){node_uiTagUtili
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("enum.enumUtility", function(){node_enumUtility = this.getData();	});
+nosliw.registerSetNodeDataEvent("uicontent.uiContentUtility", function(){node_uiContentUtility = this.getData();	});
+
 
 //Register Node by Name
 packageObj.createChildNode("base_simple", node_createUITagOnBaseSimple); 

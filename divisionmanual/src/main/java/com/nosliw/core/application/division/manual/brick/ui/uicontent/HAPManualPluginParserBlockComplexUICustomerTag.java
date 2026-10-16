@@ -96,6 +96,9 @@ public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPlu
 						uiCustomerTag.addEventProcess(new HAPEventProcess(eventEmitter, eventHandler.getHandlerInfo()));
 					}
 				}
+				else {
+					uiCustomerTag.addTagAttribute(eleAttrName, eleAttrValue);
+				}
 			}
 			else if(uiTagDef.getAttributeDefinitions().get(eleAttr.getKey())!=null) {
 				uiCustomerTag.addTagAttribute(eleAttrName, eleAttrValue);

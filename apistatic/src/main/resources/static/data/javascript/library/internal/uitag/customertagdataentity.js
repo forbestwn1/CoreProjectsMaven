@@ -93,8 +93,8 @@ var node_createUICustomerTagTestEntity = function(envObj){
 	}
 	
 	var loc_selectEntity = function(entityId){
-		var entity = loc_codeTableEntity.getEntityById();
-		loc_addEntity(entity);
+		var entity = loc_codeTableEntity.getEntityById(entityId);
+		loc_addValue(entity.value);
 	};
 	
 	var loc_onValueChange = function(){
@@ -108,7 +108,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 			});
 		}
 		else{
-			value = loc_dataInfo[0].value;
+			value = loc_dataInfo.length==0? undefined : loc_dataInfo[0].value;
 		}
 		
 		var currentData = {
@@ -126,7 +126,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		}
 	};
 	
-	var loc_addEntity = function(value){
+	var loc_addValue = function(value, informEx){
 		var dataInfo = {};
 		dataInfo.value = value;
 		dataInfo.view = $("<button>"+value.name+"  x"+"</button>");
@@ -142,15 +142,16 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		else{
 			loc_removeValue(loc_dataInfo[0]);
 		}
+		if(informEx!=false) loc_onValueChange();
 	};
 	
-	var loc_updateDateInfo = function(values){
+	var loc_updateDateInfo = function(values, informEx){
 		_.each(loc_dataInfo, function(dataInfo, i){
 			dataInfo.view.remove();
 		});
 		loc_dataInfo = [];
 		_.each(values, function(value, i){
-			loc_addEntity(value);
+			loc_addValue(value, informEx);
 		});
 	};
 	
@@ -175,7 +176,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 				
 		updateView : function(currentData){
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_updateDateInfo(value);
+			loc_updateDateInfo(value, false);
 		},
 
 		initViews : function(handlers, request){
