@@ -52,6 +52,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 				var categoryView = loc_categorySelViews[i];
 				categoryView.empty();
 				if(i==index+1){
+					categoryView.append($("<option value='' disabled selected hidden>Select a "+loc_categoryNames[i]+"</option>"));
 					_.each(children, function(child){
 						categoryView.append($("<option value='"+child+"'>"+child+"</option>"));
 					});
@@ -64,6 +65,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		else{
 			//entity
 			loc_dataSelView.empty();
+			loc_dataSelView.append($("<option value='' disabled selected hidden>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
 			_.each(children, function(child){
 				var value = child.value;
 				loc_dataSelView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));

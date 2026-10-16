@@ -14,11 +14,13 @@ var packageObj = library;
 
 var node_createEntityCodeTable = function(entityCodeTable){
 
+	var loc_entityName;
 	var loc_categoryNames = [];
 	var loc_entitysByCategary;
 	var loc_entityById = {};
 	
 	var loc_init = function(entityCodeTable){
+		loc_entityName = entityCodeTable.name;
 		loc_categoryNames = entityCodeTable.info.category;
 		var dataSet = entityCodeTable[node_COMMONATRIBUTECONSTANT.DATARULEENUM_DATASET];
 		
@@ -65,6 +67,8 @@ var node_createEntityCodeTable = function(entityCodeTable){
 	
 	var loc_out = {
 
+		getEntityName : function(){    return loc_entityName;      },
+		
 		getEntityById : function(id){
 			return loc_entityById[id];
 		},
