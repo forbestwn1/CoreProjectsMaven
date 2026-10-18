@@ -12,11 +12,20 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.data.HAPData;
+import com.nosliw.core.data.HAPDataTypeId;
+import com.nosliw.core.data.HAPDataWrapper;
 
 public class HAPUtilityService {
 
 	public static HAPResultInteractiveTask generateSuccessResult(Map<String, HAPData> output) {
 		return new HAPResultInteractiveTask(HAPConstantShared.SERVICE_RESULT_SUCCESS, output);
+	}
+
+	public static HAPResultInteractiveTask generateFailResult(String errorMessage) {
+		Map<String, HAPData> output = new LinkedHashMap<String, HAPData>();
+		
+		output.put("message", new HAPDataWrapper(new HAPDataTypeId("test.string;1.0.0"), errorMessage));
+		return new HAPResultInteractiveTask(HAPConstantShared.SERVICE_RESULT_FAIL, output);
 	}
 
 	public static Map<String, HAPResultInteractiveTask> readServiceResult(InputStream inputStream) {

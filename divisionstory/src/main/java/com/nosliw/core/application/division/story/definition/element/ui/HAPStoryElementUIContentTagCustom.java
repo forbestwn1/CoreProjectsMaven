@@ -11,8 +11,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.division.story.definition.HAPStoryElement;
-import com.nosliw.core.application.division.story.definition.HAPStoryParserElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
+import com.nosliw.core.application.division.story.definition.HAPStoryParserElement;
 
 public class HAPStoryElementUIContentTagCustom extends HAPStoryElement{
 
@@ -22,13 +22,18 @@ public class HAPStoryElementUIContentTagCustom extends HAPStoryElement{
 	
 	public static final String ATTRIBUTES = "attributes";
 	
+	public static final String METADATAS = "metaDatas";
+	
 	private String m_uiTagId;
 	
 	private Map<String, String> m_attributes;
 	
+	private Map<String, String> m_metaData;
+	
 	public HAPStoryElementUIContentTagCustom() {
 		super(new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_UICONTENT_CUSTOMTAG));
 		this.m_attributes = new LinkedHashMap<String, String>();
+		this.m_metaData = new LinkedHashMap<String, String>();
 	}
 	
 	public HAPStoryElementUIContentTagCustom(String uiTagId, Map<String, String> attributes) {
@@ -38,10 +43,13 @@ public class HAPStoryElementUIContentTagCustom extends HAPStoryElement{
 	}
 
 	public String getTagId() {   return this.m_uiTagId;   }
-	void setUITagId(String uiTagId) {      this.m_uiTagId = uiTagId;      }
+	public void setUITagId(String uiTagId) {      this.m_uiTagId = uiTagId;      }
 	
 	public Map<String, String> getAttributes(){    return this.m_attributes;      }
-	void addAttribute(String name, String value) {     this.m_attributes.put(name, value);        }
+	public void addAttribute(String name, String value) {     this.m_attributes.put(name, value);        }
+	
+	public Map<String, String> getMetadatas(){    return this.m_metaData;      }
+	public void addMetadata(String name, String value) {     this.m_metaData.put(name, value);        }
 	
 	@Override
 	public HAPStoryElement cloneStoryElement() {
@@ -54,6 +62,7 @@ public class HAPStoryElementUIContentTagCustom extends HAPStoryElement{
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(UITAGID, this.m_uiTagId);
 		jsonMap.put(ATTRIBUTES, HAPUtilityJson.buildMapJson(this.m_attributes));
+		jsonMap.put(METADATAS, HAPUtilityJson.buildMapJson(this.m_metaData));
 	}
 	
 }
@@ -72,6 +81,12 @@ class HAPStoryElementUIContentTagCustom__HAPEntityParsable extends HAPStoryParse
 		for(Object key : attrJsonObj.keySet()) {
 			String name = (String)key;
 			element.addAttribute(name, attrJsonObj.getString(name));
+		}
+
+		JSONObject metaDataJsonObj = jsonObj.getJSONObject(HAPStoryElementUIContentTagCustom.METADATAS);
+		for(Object key : metaDataJsonObj.keySet()) {
+			String name = (String)key;
+			element.addMetadata(name, metaDataJsonObj.getString(name));
 		}
 	}
 

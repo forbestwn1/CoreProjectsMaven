@@ -68,6 +68,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	public static final String STEP_CUSTOMIZEUI = "customizeUI"; 
 	public static final String STEP_EXTRAINFO = "extraInfo"; 
 	
+	public static final String METADATA_PROFILE_REQUEST = "REQUEST";
+	public static final String METADATA_PROFILE_RESPONSE = "RESPONSE";
+	
 	private final static HAPStoryAlias ALIAS_ELEMENT_MODULE = new HAPStoryAlias(HAPStoryStory.ALIAS_ROOT, false);
 	private final static HAPStoryAlias ALIAS_ELEMENT_DATASOURCE = new HAPStoryAlias("dataSource", false);
 //	private final static HAPStoryAliasElement ALIAS_ELEMENT_UIPAGE = new HAPStoryAliasElement("uiPage", false);
@@ -291,7 +294,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					changeSession.addChangeConnectionNew(newRequestInputLabelContentChange.getElementId(), newRequestInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
 					
 					//inject uiTag
-					HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
+					HAPStoryElementUIContentTagCustom uiTagCustom = new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes());
+					uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_PROFILE, METADATA_PROFILE_REQUEST);
+					HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(uiTagCustom);
+					uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_ID, uiTagChangeNew.getElementId().getKey());
 					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
 					
 					//inject content wrapper into uitag
@@ -437,7 +443,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
 				
 				//inject uiTag
-				HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes()));
+				HAPStoryElementUIContentTagCustom uiTagCustom = new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes());
+				uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_PROFILE, METADATA_PROFILE_RESPONSE);
+				HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(uiTagCustom);
+				uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_ID, uiTagChangeNew.getElementId().getKey());
 				changeSession.addChangeConnectionNew(out.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
 
 				//inject content wrapper into uitag

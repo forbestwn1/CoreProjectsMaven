@@ -457,6 +457,9 @@ public class HAPConstantShared {
 		public static final String UITAG_PARM_MAPPING = "mapping";
 		public static final String UITAG_METADATA_UITAGNAME = "uiTagName";
 		public static final String UITAG_METADATA_UITAGVERSION = "uiTagVersion";
+		public static final String UITAG_METADATA_ID = "id";
+		public static final String UITAG_METADATA_NAME = "name";
+		public static final String UITAG_METADATA_PROFILE = "profile";
 		public static final String UITAGDEFINITION_ATTRIBUTETYPE_SIMPLE = "simple";
 		public static final String UITAGDEFINITION_ATTRIBUTETYPE_VARIABLE = "variable";
 		public static final String UIRESOURCE_CONTEXTINFO_INSTANTIATE = "instantiate";

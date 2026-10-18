@@ -56,7 +56,12 @@ var node_createUICustomerTagTestError = function(envObj){
 					if(event==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
 						_.each(eventData, function(item){
 							_.each(item.resultValue, function(r){{
-								erroeMsg = erroeMsg + r.description + "\n";
+								var description = r.description;
+								if(description==undefined){
+									description = r.resultData.value;
+								}
+								
+								erroeMsg = erroeMsg + description + "\n";
 							}});
 						});
 						

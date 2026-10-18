@@ -65,7 +65,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		else{
 			//entity
 			loc_dataSelView.empty();
-			loc_dataSelView.append($("<option value='' disabled selected hidden>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
+			loc_dataSelView.append($("<option value='' disabled selected>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
 			_.each(children, function(child){
 				var value = child.value;
 				loc_dataSelView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));

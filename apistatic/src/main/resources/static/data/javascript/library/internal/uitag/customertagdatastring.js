@@ -71,12 +71,13 @@ var node_createUICustomerTagTestString = function(envObj){
 			}
 			else{
 //				loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="string type value"></input>');
-				loc_dataView = $('<input type="text" id="myheeaa" placeholder="string type value111111"></input>');
+				loc_dataView = $('<input type="text" placeholder="provide value here"></input>');
 
 				loc_dataView.bind('change', function(){
+					var value = loc_dataView.val().trim();
 					var currentData = {
 						dataTypeId: "test.string;1.0.0",
-						value: loc_dataView.val()
+						value: value==""?undefined:value
 					};
 					loc_envObj.onDataChange(currentData);
 				});

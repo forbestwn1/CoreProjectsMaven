@@ -544,7 +544,9 @@
 
 			<definition name="UITAG_METADATA_UITAGNAME" value="uiTagName"/>
 			<definition name="UITAG_METADATA_UITAGVERSION" value="uiTagVersion"/>
-
+			<definition name="UITAG_METADATA_ID" value="id"/>
+			<definition name="UITAG_METADATA_NAME" value="name"/>
+			<definition name="UITAG_METADATA_PROFILE" value="profile"/>
 
 			<definition name="UITAGDEFINITION_ATTRIBUTETYPE_SIMPLE" value="simple"/>
 			<definition name="UITAGDEFINITION_ATTRIBUTETYPE_VARIABLE" value="variable"/>

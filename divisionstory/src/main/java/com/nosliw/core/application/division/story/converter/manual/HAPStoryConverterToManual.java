@@ -330,6 +330,16 @@ public class HAPStoryConverterToManual {
 			attContent.append(name + "=\"" + attributes.get(name) + "\" ");
 		}
 		templateParms.put("attributes", attContent.toString());
+	
+		StringBuffer metadataContent = new StringBuffer();
+		Map<String, String> metadatas = uiTagElement.getMetadatas();
+		for(String name : metadatas.keySet()) {
+			metadataContent.append(name);
+			metadataContent.append(":");
+			metadataContent.append(metadatas.get(name));
+			metadataContent.append(";");
+		}
+		templateParms.put("metadata", metadataContent.toString());
 		
 		HAPStoryElementUIWrapperContent contentWrapperElement = (HAPStoryElementUIWrapperContent)story.getElement(uiTagElement.getChildElement(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER).getElementId());
 		templateParms.put("html", convertUIContentWrapper(contentWrapperElement, story));
