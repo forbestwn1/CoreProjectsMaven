@@ -33,9 +33,9 @@ export const naviationUtility = function () {
                     var steps = response.data.data.stepInfo;
                     var currentStepIndex = response.data.data.currentStep;
                     designDispatch(updateDesignGlobal(steps, currentStepIndex));
-                    setGlobalLoading(false);
                 });
             }
+            setGlobalLoading(false);
         }
 
     };

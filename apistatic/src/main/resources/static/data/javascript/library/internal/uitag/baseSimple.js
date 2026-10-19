@@ -163,7 +163,14 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 			}
 			else if(commandName=="validateData"){
 				var dataOperation = loc_getDataOperationSet(loc_coreObj.getCurrentData());
-				out.addRequest(node_ruleExecuteUtility.getExecuteRuleValidationForVariableOperationRequest(dataOperation, loc_envObj.getBundleCore()));
+				out.addRequest(node_ruleExecuteUtility.getExecuteRuleValidationForVariableOperationRequest(dataOperation, loc_envObj.getBundleCore(), {
+					success : function(request, result){
+						if(!node_ruleUtility.isRuleValidationSuccess(result)){
+							loc_envObj.trigueEvent(node_COMMONCONSTANT.ERROR_VALIDATION_VALUE, result.resultValue);
+						}
+						return result;
+					}
+				}));
 			}
 			
 			return out;
