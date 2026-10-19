@@ -140,6 +140,11 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 			}
 		},
 		
+		getDataValidationRequest : function(data, handlers, request){
+			var dataOperation = loc_envObj.getDataOperationSet(loc_dataVariable, "", data, configure)
+			return node_ruleExecuteUtility.getExecuteRuleValidationForVariableOperationRequest(dataOperation, loc_envObj.getBundleCore());
+		}
+		
 	};
 	
 	var loc_out = {

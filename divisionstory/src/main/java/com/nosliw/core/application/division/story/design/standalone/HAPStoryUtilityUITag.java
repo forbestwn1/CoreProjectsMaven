@@ -118,6 +118,29 @@ public class HAPStoryUtilityUITag {
 			contentProvider.addExposedCommand(commandProcess);
 		}
 
+		{
+			HAPCommandProcess commandProcess = new HAPCommandProcess();
+			
+			String commandName = "validateData";
+			
+			HAPCommandHandlerReferenceCommand handler = new HAPCommandHandlerReferenceCommand();
+			handler.setCommandName(commandName);
+			HAPIdBrickInBundle commandHandlerBrickId = new HAPIdBrickInBundle();
+			commandHandlerBrickId.setAlias(tagAlias);
+			handler.setBrickId(commandHandlerBrickId);
+			commandProcess.setCommandHandler(handler);
+			
+			HAPCommandDefinition commandDef = new HAPCommandDefinition();
+			commandDef.setName(commandName);
+
+			HAPDefinitionParmRequest requestParm = new HAPDefinitionParmRequest();
+			HAPInteractiveTask taskInteractive = new HAPInteractiveTask(List.of(requestParm), null);
+			commandDef.setTaskInterface(taskInteractive);
+			
+			commandProcess.setCommandDefinition(commandDef);
+			contentProvider.addExposedCommand(commandProcess);
+		}
+
 		return contentProvider;
 	}
 	

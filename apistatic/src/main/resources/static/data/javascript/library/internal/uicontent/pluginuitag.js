@@ -201,6 +201,7 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 			return this.processRequest(this.getDataOperationRequestGet(target, path, handler, request));		
 		},
 
+		
 		//--------------------------------- query tag
 		queryCustomTagInstance : function(query){    return node_uiTagUtility.queryCustomTag(loc_out, query);      },
 		
@@ -236,6 +237,9 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 			}));
 			return out;
 		},
+
+		//---------------------------------env
+		getBundleCore : function(){   return loc_bundleCore;   }
 
 	};
 

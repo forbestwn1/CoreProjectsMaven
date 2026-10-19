@@ -20,6 +20,12 @@
   cursor: pointer;
 }
 
+.button-row .error-message {
+  color: #dc2626;
+  margin-right: auto;
+  align-self: center;
+}
+
 .button-row button:hover {
   background: #1d4ed8;
 }

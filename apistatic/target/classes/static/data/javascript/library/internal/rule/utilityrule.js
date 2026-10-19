@@ -86,6 +86,20 @@ var node_ruleUtility = function(){
 		
 		isRuleValidationSuccess : function(result){
 			return result.resultName == node_COMMONCONSTANT.TASK_RESULT_SUCCESS;
+		},
+		
+		isManadtoryRule : function(dataDefinition){
+			var rules = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_RULE];
+			for(var i in rules){
+				var rule = rules[i];
+				var path = rule[node_COMMONATRIBUTECONSTANT.DEFINITIONDATARULE_PATH];
+				if(path==null||path==""){
+					if(rule[node_COMMONATRIBUTECONSTANT.DEFINITIONDATARULE_DATARULE][node_COMMONATRIBUTECONSTANT.DATARULE_RULETYPE]==node_COMMONCONSTANT.DATARULE_TYPE_MANDATORY){
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 		
 	};

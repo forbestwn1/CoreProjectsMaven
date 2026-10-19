@@ -13,6 +13,7 @@ var packageObj = library;
 	var node_ResourceId;
 	var node_envObj;
 	var node_utility;
+	var node_ruleUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -54,8 +55,13 @@ var loc_createExpressionApp = function(){
 				loc_contentView.text(node_utility.getDataBuildOperandDescription(loc_value.operand, node_envObj));
 			}, handlers, request);
 			return out;
-		}
+		},
 		
+    	getValidateDataRequest : function(handlers, request){
+			return node_createServiceRequestInfoSimple({}, function(request){
+				return node_ruleUtility.createRuleValidationSuccessResult();
+			}, handlers, request);
+	    }
 	};
 	return loc_out;
 };
@@ -141,14 +147,19 @@ var loc_createConstantApp = function(dataDefinition){
 			}));
 			
 			return out;
-		}
+		},
 		
+    	getValidateDataRequest : function(handlers, request){
+			return loc_standaloneApp.getExecuteCommandRequest("validateData", {}, handlers, request);
+	    }
 	};
 	return loc_out;
 };
 
 
 var node_presentDataApp = function(dataDefinition){
+	
+	var loc_dataDefinition = dataDefinition;
 	
 	var loc_value;
 	
@@ -203,6 +214,27 @@ var node_presentDataApp = function(dataDefinition){
 			return loc_value;
 		},
 		
+		getValidateDataRequest : function(handlers, request){
+			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
+			var chosen = loc_value==undefined? undefined : loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
+			if(chosen!=null){
+				out.addRequest(loc_presents[chosen].getValidateDataRequest(handlers, request));
+			}
+			else{
+				if(node_ruleUtility.isManadtoryRule(loc_dataDefinition)){
+					out.addRequest(node_createServiceRequestInfoSimple({}, function(request){
+						return node_ruleUtility.createRuleValidationFailResult("Mandatory error!!!");
+					}));
+				}
+				else{
+					out.addRequest(node_createServiceRequestInfoSimple({}, function(request){
+						return node_ruleUtility.createRuleValidationSuccessResult();
+					}));
+				}
+			}
+			return out;
+		}
+		
 	};
 	
 	loc_init(dataDefinition);
@@ -224,6 +256,8 @@ nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){no
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();});
 nosliw.registerSetNodeDataEvent("app_storybuild.envObj", function(){node_envObj = this.getData();});
 nosliw.registerSetNodeDataEvent("app_storybuild.utility", function(){node_utility = this.getData();});
+nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility = this.getData();});
+
 
 //Register Node by Name
 packageObj.createChildNode("presentDataApp", node_presentDataApp); 
