@@ -164,6 +164,8 @@ var node_presentDataApp = function(dataDefinition){
 	var loc_value;
 	
 	var loc_containerView = $("<div></div>");
+	var loc_errorView = $("<span></span>");
+	loc_errorView.css("color", "red");
 
     var loc_presents = {};
 		
@@ -183,7 +185,10 @@ var node_presentDataApp = function(dataDefinition){
 			return loc_containerView;
 		},
 
-		getInitRequest : function(){},
+		getInitRequest : function(){
+			loc_containerView.append(loc_errorView);
+			loc_errorView.hide();
+		},
 		
 		getSetValueRequest : function(value, handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
@@ -193,6 +198,8 @@ var node_presentDataApp = function(dataDefinition){
 				_.each(loc_presents, function(present, type){
 				    present.disable();	
 				});
+				loc_errorView.show();
+    			loc_errorView.text("");
 			}
 			else{
 				var chosen = loc_value[node_COMMONATRIBUTECONSTANT.DATABUILD_EXPRESSIONCHOSEN];
@@ -205,6 +212,7 @@ var node_presentDataApp = function(dataDefinition){
 						present.disable();
 					}
 				});
+    			loc_errorView.hide();
 			}
 			
 			return out;
@@ -223,11 +231,13 @@ var node_presentDataApp = function(dataDefinition){
 			else{
 				if(node_ruleUtility.isManadtoryRule(loc_dataDefinition)){
 					out.addRequest(node_createServiceRequestInfoSimple({}, function(request){
+						loc_errorView.text("Value should not be empty");
 						return node_ruleUtility.createRuleValidationFailResult("Mandatory error!!!");
 					}));
 				}
 				else{
 					out.addRequest(node_createServiceRequestInfoSimple({}, function(request){
+						loc_errorView.text("");
 						return node_ruleUtility.createRuleValidationSuccessResult();
 					}));
 				}
