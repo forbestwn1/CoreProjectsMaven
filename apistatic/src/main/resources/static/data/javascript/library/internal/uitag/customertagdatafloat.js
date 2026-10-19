@@ -24,6 +24,13 @@ var node_createUICustomerTagTestFloat = function(envObj){
 
     var loc_dataView;
 	
+	var loc_getCurrentData = function(){
+		return {
+			dataTypeId: "test.float;1.0.0",
+			value: parseFloat(loc_dataView.val())
+		};
+	};
+	
 	var loc_out = {
 
 		preInit : function(handlers, request){
@@ -38,14 +45,14 @@ var node_createUICustomerTagTestFloat = function(envObj){
 			loc_dataView = $('<input type="text" style="border:solid 1px;" data-role="none" placeholder="float type value"></input>');
 
 			loc_dataView.bind('change', function(){
-				var currentData = {
-					dataTypeId: "test.float;1.0.0",
-					value: parseFloat(loc_dataView.val())
-				};
-				loc_envObj.onDataChange(currentData);
+				loc_envObj.onDataChange(loc_getCurrentData());
 			});
 			return loc_dataView;
-		}
+		},
+
+    	getCurrentData : function(){
+	    	return loc_getCurrentData();
+	    }
 	};
 	
 	return loc_out;

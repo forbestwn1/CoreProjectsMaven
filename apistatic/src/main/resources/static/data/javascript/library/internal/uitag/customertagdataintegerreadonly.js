@@ -24,9 +24,12 @@ var node_createUICustomerTagTestIntegerReadOnly = function(envObj){
 
     var loc_dataView;
 	
+	var loc_currentData;
+	
 	var loc_out = {
 		
 		updateView : function(currentData){
+			loc_currentData = currentData;
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 			loc_dataView.html(value+"");
 		},
@@ -34,7 +37,12 @@ var node_createUICustomerTagTestIntegerReadOnly = function(envObj){
 		initViews : function(handlers, request){
 			loc_dataView = $('<div></div>');
 			return loc_dataView;
+		},
+		
+		getCurrentData : function(){
+			return loc_currentData;
 		}
+				
 	};
 	
 	return loc_out;

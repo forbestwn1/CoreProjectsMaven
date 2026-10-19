@@ -28,6 +28,14 @@ var node_createUICustomerTagTestString = function(envObj){
 	
 	var loc_enumDatas;
 	
+	var loc_getCurrentData = function(){
+		var value = loc_dataView.val().trim();
+		return {
+			dataTypeId: "test.string;1.0.0",
+			value: value==""?undefined:value
+		};
+	};
+	
 	var loc_out = {
 
 		preInit : function(handlers, request){
@@ -74,16 +82,16 @@ var node_createUICustomerTagTestString = function(envObj){
 				loc_dataView = $('<input type="text" placeholder="provide value here"></input>');
 
 				loc_dataView.bind('change', function(){
-					var value = loc_dataView.val().trim();
-					var currentData = {
-						dataTypeId: "test.string;1.0.0",
-						value: value==""?undefined:value
-					};
-					loc_envObj.onDataChange(currentData);
+					loc_envObj.onDataChange(loc_getCurrentData());
 				});
     			return loc_dataView;
 			}
+		},
+		
+		getCurrentData : function(){
+			return loc_getCurrentData();
 		}
+
 	};
 	
 	return loc_out;

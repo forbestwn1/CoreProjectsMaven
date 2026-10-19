@@ -28,6 +28,14 @@ var node_createUICustomerTagTestStringMultiple = function(envObj){
 	
 	var loc_enumDatas;
 	
+	var loc_getCurrentData = function(){
+		return {
+			isMultipleValue : true,
+			dataTypeId: "test.string;1.0.0",
+			value: loc_dataViewForEnum.val()
+		};
+	};
+	
 	var loc_out = {
 
 		preInit : function(handlers, request){
@@ -59,20 +67,19 @@ var node_createUICustomerTagTestStringMultiple = function(envObj){
 					loc_dataViewForEnum.append($('<option key="'+ k + '" value="'+dataValue+'">' + dataValue +'</option>'));
 				}
 				loc_dataViewForEnum.bind('change', function(){
-					var currentData = {
-						isMultipleValue : true,
-						dataTypeId: "test.string;1.0.0",
-						value: loc_dataViewForEnum.val()
-					};
-					loc_envObj.onDataChange(currentData);
+					loc_envObj.onDataChange(loc_getCurrentData());
 				});
 				return loc_dataViewForEnum;
 			}
 			else{
 				return $("<div>Multiple string view without enum!!!!!!!!</div>");
 			}
-			
+		},
+		
+		getCurrentData : function(){
+			return loc_getCurrentData();
 		}
+		
 	};
 	
 	return loc_out;

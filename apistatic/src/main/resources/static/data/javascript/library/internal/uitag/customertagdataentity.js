@@ -99,9 +99,9 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		loc_addValue(entity.value);
 	};
 	
-	var loc_onValueChange = function(){
+	var loc_getCurrentData = function(){
 		var isMutipleValue = loc_isMutipleValue();
-		
+
 		var value;
 		if(isMutipleValue){
 			value = [];
@@ -112,13 +112,17 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		else{
 			value = loc_dataInfo.length==0? undefined : loc_dataInfo[0].value;
 		}
-		
+
 		var currentData = {
 			isMultipleValue : isMutipleValue,
 			dataTypeId: "test.entity;1.0.0",
 			value: value
 		};
-		loc_envObj.onDataChange(currentData);
+		return currentData;
+	};
+	
+	var loc_onValueChange = function(){
+		loc_envObj.onDataChange(loc_getCurrentData());
 	};
 	
 	var loc_removeValue = function(dataInfo){
@@ -184,6 +188,10 @@ var node_createUICustomerTagTestEntity = function(envObj){
 
 		initViews : function(handlers, request){
 			return loc_containerView;
+		},
+		
+		getCurrentData : function(){
+			return loc_getCurrentData();
 		}
 	};
 	

@@ -33,7 +33,9 @@ export default function QuestionairGroupDataSourceUICustomize({ questionair, onC
     			var uiTagAppsInfo = cache.current[questionairConstantValue.id].uiTagAppsInfo;
                 out.addRequest(uiTagAppsInfo.forDisplay.application.getValidateDataRequest({
                     success : function(request, result){
-                        results.push(result);
+                        if(!node_ruleUtility.isRuleValidationSuccess(result)){
+                            results.push(result);
+                        }
                     }
                 }));
             }

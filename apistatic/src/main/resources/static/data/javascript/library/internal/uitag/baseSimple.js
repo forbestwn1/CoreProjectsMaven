@@ -20,6 +20,7 @@ var packageObj = library;
 	var node_getObjectType;
 	var node_enumUtility;
 	var node_uiContentUtility;
+	var node_ruleExecuteUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -54,6 +55,18 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		}, request);
 	};
 
+	var loc_getDataOperationSet = function(data){
+		var configure;
+		if(loc_enumDatas!=undefined){
+			configure = {
+				excludeRuleTypes : []
+			};
+			configure.excludeRuleTypes.push(node_COMMONCONSTANT.DATARULE_TYPE_ENUM);
+		}
+		
+		return loc_envObj.getDataOperationSet(loc_dataVariable, "", data, configure)
+	};
+		
 	var loc_coreEnvObj = {
 		
 		getDataMode : function(){
@@ -113,16 +126,8 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		},
 				
 		onDataChange : function(data, reqeust){
-			var configure;
-			if(loc_enumDatas!=undefined){
-				configure = {
-					excludeRuleTypes : []
-				};
-				configure.excludeRuleTypes.push(node_COMMONCONSTANT.DATARULE_TYPE_ENUM);
-			}
-			
 			loc_envObj.executeBatchDataOperationRequest([
-				loc_envObj.getDataOperationSet(loc_dataVariable, "", data, configure)
+				loc_getDataOperationSet(data)
 			], {
 				success : function(requet){
 					loc_currentData = data;
@@ -146,7 +151,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 		}
 		
 	};
-	
+
 	var loc_out = {
 
 		getExecuteCommandRequest : function(commandName, commandData, handlers, request){
@@ -156,8 +161,9 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 				loc_coreObj.updateView(data);
 				loc_coreEnvObj.onDataChange(data, request);
 			}
-			else{
-				
+			else if(commandName=="validateData"){
+				var dataOperation = loc_getDataOperationSet(loc_coreObj.getCurrentData());
+				out.addRequest(node_ruleExecuteUtility.getExecuteRuleValidationForVariableOperationRequest(dataOperation, loc_envObj.getBundleCore()));
 			}
 			
 			return out;
@@ -218,7 +224,7 @@ nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){node_ruleUtility 
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("enum.enumUtility", function(){node_enumUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("uicontent.uiContentUtility", function(){node_uiContentUtility = this.getData();	});
-
+nosliw.registerSetNodeDataEvent("rule.ruleExecuteUtility", function(){node_ruleExecuteUtility = this.getData();	});
 
 //Register Node by Name
 packageObj.createChildNode("base_simple", node_createUITagOnBaseSimple); 

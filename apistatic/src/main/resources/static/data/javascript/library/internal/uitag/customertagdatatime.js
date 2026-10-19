@@ -24,6 +24,20 @@ var node_createUICustomerTagTestTime = function(envObj){
 
     var loc_dataView;
 	
+	var loc_getCurrentData = function(){
+		var date = loc_dataView.val();
+		var segs = date.split(":");
+
+		return {
+			dataTypeId: "test.time;1.0.0",
+			value: {
+				hour : parseInt(segs[0]),
+				minute : parseInt(segs[1]),
+				second : parseInt(segs[2])
+			}
+		};
+	};
+	
 	var loc_out = {
 
 		preInit : function(handlers, request){
@@ -43,21 +57,15 @@ var node_createUICustomerTagTestTime = function(envObj){
 			loc_dataView = $('<input type="time"></input>');
 
 			loc_dataView.bind('change', function(){
-				var date = loc_dataView.val();
-				var segs = date.split(":");
-				
-				var currentData = {
-					dataTypeId: "test.time;1.0.0",
-					value: {
-						hour : parseInt(segs[0]),
-						minute : parseInt(segs[1]),
-						second : parseInt(segs[2])
-					}
-				};
-				loc_envObj.onDataChange(currentData);
+				loc_envObj.onDataChange(loc_getCurrentData());
 			});
 			return loc_dataView;
-		}
+		},
+		
+    	getCurrentData : function(){
+	    	return loc_getCurrentData();
+	    }
+
 	};
 	
 	return loc_out;
