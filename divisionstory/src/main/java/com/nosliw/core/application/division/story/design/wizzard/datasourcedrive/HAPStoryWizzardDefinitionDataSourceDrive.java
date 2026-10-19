@@ -189,6 +189,9 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		else if(STEP_CUSTOMIZEUI.equals(stepName)) {
 			HAPStoryWizzardQuestionairGroup questionair = (HAPStoryWizzardQuestionairGroup)stepData.getQuestionair();
 
+			//set answer
+			this.setAnsweredQuestionairToStep(design.getCurrentStep(), questionair);
+
 			HAPStoryDesignSessionChange changeSession = design.newChangeReqestSession();
 			
 			//add page to module
