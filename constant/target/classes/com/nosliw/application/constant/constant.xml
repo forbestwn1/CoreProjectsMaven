@@ -873,6 +873,7 @@
 			<definition name="STORYNODE_TYPE_TASK_COMMAND" value="commandTask"/>
 			<definition name="STORYNODE_TYPE_TASK_PRESENTPAGE" value="presentPage"/>
 			<definition name="STORYNODE_TYPE_TASK_NAVIGATEPAGE" value="navigatePage"/>
+			<definition name="STORYNODE_TYPE_TASK_VALIDATEPAGEINPUT" value="validatePageInput"/>
 			<definition name="STORYNODE_TYPE_TASK_SEQUENCE" value="sequence"/>
 
 
@@ -1080,6 +1081,11 @@
 			<definition name="TASK_TYPE_TASK" value="task"/>
 			<definition name="TASK_TYPE_CONTAINER_EXPRESSION" value="expressionContainer"/>
 			<definition name="TASK_TYPE_CONTAINER_TASK" value="taskContainer"/>
+			
+			<definition type="space"/>
+			<definition name="TASK_NAME_INIT" value="nosliw_init"/>
+			<definition name="TASK_NAME_SUBMIT" value="submit"/>
+			
 			
 			<definition type="space"/>
 			<definition name="VALUESTRUCTUREPART_TYPE_SIMPLE" value="simple"/>

@@ -798,6 +798,7 @@ public class HAPConstantShared {
 		public static final String STORYNODE_TYPE_TASK_COMMAND = "commandTask";
 		public static final String STORYNODE_TYPE_TASK_PRESENTPAGE = "presentPage";
 		public static final String STORYNODE_TYPE_TASK_NAVIGATEPAGE = "navigatePage";
+		public static final String STORYNODE_TYPE_TASK_VALIDATEPAGEINPUT = "validatePageInput";
 		public static final String STORYNODE_TYPE_TASK_SEQUENCE = "sequence";
 		public static final String STORYNODE_TYPE_IOENDPOINT = "ioEndPoint";
 		public static final String STORYNODE_TYPE_SCRIPT = "script";
@@ -1011,6 +1012,11 @@ public class HAPConstantShared {
 		public static final String TASK_TYPE_TASK = "task";
 		public static final String TASK_TYPE_CONTAINER_EXPRESSION = "expressionContainer";
 		public static final String TASK_TYPE_CONTAINER_TASK = "taskContainer";
+
+
+
+		public static final String TASK_NAME_INIT = "nosliw_init";
+		public static final String TASK_NAME_SUBMIT = "submit";
 
 
 

@@ -38,6 +38,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDa
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationForTask;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPageInputValidation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
@@ -343,6 +344,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			//module init task
 			HAPStoryRunnableSequence moculeInitRunnable = new HAPStoryRunnableSequence();
+			moculeInitRunnable.setId(HAPConstantShared.TASK_NAME_INIT);
 			moculeInitRunnable.addRunnable(presentPageRunableChangeNew.getRunnable().getId());
 			HAPStoryChangeItemRunnableNew moduleInitRunableChangeNew = changeSession.addChangeItemNew(moculeInitRunnable);
 
@@ -367,7 +369,22 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			
 			HAPStoryChangeItemRunnableNew dataSourceCommandRunChangeNew = changeSession.addChangeItemNew(dataSourceCommandRunnable);
 
-			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataSourceCommandRunChangeNew.getRunnable().getId());
+			//validate page input
+			HAPStoryRunnableUIPageInputValidation validatePageInputRunnable = new HAPStoryRunnableUIPageInputValidation();
+			validatePageInputRunnable.setPage(pageElementId.getId());
+			HAPStoryChangeItemRunnableNew validatePageInputRunableChangeNew = changeSession.addChangeItemNew(validatePageInputRunnable);
+			
+			//module submit task
+			HAPStoryRunnableSequence submitEventRunnable = new HAPStoryRunnableSequence();
+			submitEventRunnable.setId(HAPConstantShared.TASK_NAME_SUBMIT);
+			submitEventRunnable.addRunnable(validatePageInputRunableChangeNew.getRunnable().getId());
+			submitEventRunnable.addRunnable(dataSourceCommandRunChangeNew.getRunnable().getId());
+			HAPStoryChangeItemRunnableNew submitEventRunableChangeNew = changeSession.addChangeItemNew(submitEventRunnable);
+
+
+			
+//			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataSourceCommandRunChangeNew.getRunnable().getId());   //kkkkkk
+			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, HAPConstantShared.TASK_NAME_SUBMIT);
 			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), submitTaskContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("submitTask")));
 			
 			changeSession.commit();

@@ -86,7 +86,7 @@ var loc_createModuleCore = function(complexEntityDef, valueContextId, bundleCore
 		},
 		
 		getPostInitRequest : function(handlers, request){
-			var taskCoreEntity = loc_tasks.getChildCoreEntity("nosliw_init");
+			var taskCoreEntity = loc_tasks.getChildCoreEntity(node_COMMONCONSTANT.TASK_NAME_INIT);
 			return node_taskExecuteUtility.getExecuteInteractiveBrickPackageRequest(node_createCoreEntityPackage(node_createReferenceCoreEntity(taskCoreEntity.getBrickCoreEntity()), node_createAdapterInfo(undefined, false)), undefined, handlers, request);
 		}
 		

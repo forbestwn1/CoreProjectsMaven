@@ -1,0 +1,21 @@
+	        {
+	    		"name" : "|||taskName|||",
+			    "description" : "Validate page iput",
+        		"brickType" : {
+		    	    "brickType" : "taskTaskScript",
+			        "version" : "1.0.0"
+		        },
+		        "brick" : {
+					"info" : {
+					},
+    				"scriptResourceId": "task_page_input_validation",
+    				"brickReferences" : {
+						"alias" : "|||pageAlias|||"
+    				},
+    				"parm": {
+    				    "quot" : {
+    				        "profile" : |||profile|||
+    				    }
+    				}
+		        }
+	        }

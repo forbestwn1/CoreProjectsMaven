@@ -64,6 +64,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDa
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryDataAssociationForTask;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableCommand;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableSequence;
+import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPageInputValidation;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
@@ -145,6 +146,7 @@ public class HAPStoryConverterToManual {
 				
 				InputStream sequenceTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_sequence.temp");
 				Map<String, String> sequenceTemplateParms = new LinkedHashMap<String, String>();
+				sequenceTemplateParms.put("id", sequenceRunnable.getId());
 				
 				List<String> subRunnables = new ArrayList<String>();
 				for(String subRunnable : sequenceRunnable.getRunnables()) {
@@ -156,6 +158,17 @@ public class HAPStoryConverterToManual {
 				
 				sequenceTemplateParms.put("subTasks", subRunnables.toString());
 				tasksList.add(HAPStringTemplateUtil.getStringValue(sequenceTemplateStream, sequenceTemplateParms));
+			}
+			else if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_VALIDATEPAGEINPUT)) {
+				HAPStoryRunnableUIPageInputValidation pageInputValidateRunnable = (HAPStoryRunnableUIPageInputValidation)runnable;
+				InputStream pageInputValidateTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_validatepageinput.temp");
+				Map<String, String> pageInputValidateTemplateParms = new LinkedHashMap<String, String>();
+				pageInputValidateTemplateParms.put("profile", "request");
+				pageInputValidateTemplateParms.put("taskName", runnable.getId());
+				pageInputValidateTemplateParms.put("alias", pageInputValidateRunnable.getPage());
+				
+				tasksList.add(HAPStringTemplateUtil.getStringValue(pageInputValidateTemplateStream, pageInputValidateTemplateParms));
+				
 			}
 		}
 		moduleTemplateParms.put("tasks", tasksList.toString());
