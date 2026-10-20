@@ -27,29 +27,9 @@ var node_uiContentUtility = function(){
 			return node_COMMONCONSTANT.UIRESOURCE_CUSTOMTAG_KEYATTRIBUTE_PREFIX+attrName;
 		},
 		
-		queryCustomTag : function(currentUIEntity, query){
-			var queryResult = undefined;
-			while(queryResult==undefined){
-				var brickType = node_getObjectType(currentUIEntity)[node_COMMONATRIBUTECONSTANT.IDBRICKTYPE_BRICKTYPE];
-				if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICONTENT){
-					queryResult = currentUIEntity.queryCustomTagLocally(query);
-					if(queryResult==undefined){
-						currentUIEntity = currentUIEntity.getParentUIEntity();
-					}
-				}
-				else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICUSTOMERTAG){
-					currentUIEntity = currentUIEntity.getParentUIEntity();
-				}
-				else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UIPAGE){
-					break;
-				}
-			}
-			return queryResult;
-		},
+
 		
-		
-		
-		
+				
 		
 		findEntityUp : function(currentUIContent, entityType, entityName){
 			var entityInfo;

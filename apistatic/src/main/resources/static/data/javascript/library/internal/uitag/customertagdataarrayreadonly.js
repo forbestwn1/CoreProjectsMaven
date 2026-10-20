@@ -25,8 +25,6 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
     var loc_dataView;
 	var loc_elementWrapperView;
 	
-	var loc_elements = [];
-	
 	var loc_dataVariable;
 	
 	var loc_updateView = function(){
@@ -37,10 +35,7 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 	};
 	
 	var loc_removeElements = function(){
-		_.each(loc_elements, function(element, i){
-			element.destroy();
-		});
-		loc_elements = [];
+		loc_envObj.removeAllContent();
 	};
 	
 	    var loc_presentArrayRequest = function(arrayVariable, wrapperView, handlers, requestInfo){
@@ -61,9 +56,8 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 								valueStructure.addVariable(ele.indexVar, loc_envObj.getAttributeValue("arrayindex"));
 							}
 						}
-						addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(variationPoints, wrapperView, {
+						addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(index, variationPoints, wrapperView, {
 							success: function(request, uiConentNode){
-    							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
 							}
 						}));
 					});

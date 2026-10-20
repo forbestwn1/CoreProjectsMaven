@@ -17,7 +17,9 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.HAPWithBrickReferences;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionItemInContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionWithDataExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
@@ -182,6 +184,25 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 	    		Object scriptObj = jsonObj.opt(HAPWithScriptReference.SCRIPTRESOURCEID);
 	    		HAPResourceId scriptResourceId = HAPFactoryResourceId.tryNewInstance(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SCRIPT, null, scriptObj, false);
 	    		brickDefinition.setAttributeValueWithValue(HAPWithScriptReference.SCRIPTRESOURCEID, scriptResourceId);
+	        }
+	        
+	        //brick reference
+	        if(brickDefinition instanceof HAPWithBrickReferences) {
+	        	Object brickRefsObj = jsonObj.opt(HAPWithBrickReferences.BRICKREFERENCES);
+	        	if(brickRefsObj instanceof JSONObject) {
+	        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
+	        		id.buildObject(brickRefsObj, HAPSerializationFormat.JSON);
+	        		((HAPWithBrickReferences)brickDefinition).addBrickReference(HAPConstantShared.NAME_DEFAULT, id);
+	        	}
+	        	else if(brickRefsObj instanceof JSONObject) {
+	        		JSONObject brickRefsJsonObj = (JSONObject)brickRefsObj;
+	        		for(Object key : brickRefsJsonObj.keySet()) {
+	        			String name = (String)key;
+		        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
+		        		id.buildObject(brickRefsJsonObj.getJSONObject(name), HAPSerializationFormat.JSON);
+		        		((HAPWithBrickReferences)brickDefinition).addBrickReference(name, id);
+	        		}
+	        	}
 	        }
 			
 		}

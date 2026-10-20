@@ -16,11 +16,6 @@ var node_uiTagUtility = function(){
 	
 	var loc_out = {
 		
-		queryCustomTag : function(currentCustomTag, query){
-			var results = node_uiContentUtility.queryCustomTag(currentCustomTag, query);
-			return results.filter(customTag=>customTag.getUIId()!=currentCustomTag.getUIId());
-        },		
-		
 		getUITagFunctionRequest : function(uiTagDefinition, handlers, request){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 

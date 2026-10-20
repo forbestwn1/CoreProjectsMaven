@@ -46,7 +46,7 @@ var node_createUICustomerTagTest = function(envObj){
 					value : segs[1]
 				});
 			});
-    		loc_referencedCustomTags = loc_envObj.queryCustomTagInstance(query);
+    		loc_referencedCustomTags = loc_envObj.queryCustomTagInstanceUpwards(query);
     		_.each(loc_referencedCustomTags, function(customTag, i){
 				customTag.registerEventListener(undefined, function(event, eventData){
 					loc_referenceCustomEventViews[i].val(node_basicUtility.stringify({
@@ -76,7 +76,7 @@ var node_createUICustomerTagTest = function(envObj){
 							valueStructure.addVariable(ele.indexVar, loc_envObj.getAttributeValue("arrayindex"));
 						}
 					}
-					addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(variationPoints, wrapperView, {
+					addEleRequest.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(index, variationPoints, wrapperView, {
 						success: function(request, uiConentNode){
 //							loc_elements.push(uiConentNode.getChildValue().getCoreEntity());
 						}
@@ -220,7 +220,7 @@ var node_createUICustomerTagTest = function(envObj){
 	    var showEmbededButtonView = $('<button type="button">'+"Show Emdeded"+'</button>');	
 		embededsWrapperView.append(showEmbededButtonView);
 		showEmbededButtonView.bind('click', function(){
-			var requestInfo = loc_envObj.getCreateDefaultUIContentWithInitRequest(undefined, embededsWrapperView, {
+			var requestInfo = loc_envObj.getCreateDefaultUIContentWithInitRequest(undefined, undefined, embededsWrapperView, {
 				success: function(request, uiConentNode){
 				}
 			});

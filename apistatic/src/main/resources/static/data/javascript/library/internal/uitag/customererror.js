@@ -44,7 +44,7 @@ var node_createUICustomerTagTestError = function(envObj){
 					value : segs[1]
 				});
 			});
-    		loc_referencedCustomTags = loc_envObj.queryCustomTagInstance(query);
+    		loc_referencedCustomTags = loc_envObj.queryCustomTagInstanceUpwards(query);
     		_.each(loc_referencedCustomTags, function(customTag, i){
 				customTag.registerEventListener(undefined, function(event, eventData){
 					eventView.val(node_basicUtility.stringify({

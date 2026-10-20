@@ -58,6 +58,7 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
     
 	var loc_envInterface = {};
 
+	var loc_customerTags = [];
 	var loc_customerTagByUIId = {};
 
     var loc_uiIdByCustomerTagMetaData = {};
@@ -192,15 +193,13 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 		setParentUIEntity : function(parentUIEntity){	loc_parentUIEntity = parentUIEntity;	},
 		getParentUIEntity : function(){   return loc_parentUIEntity;     },
 		
+		getChildrenCustomTags : function(){       return loc_customerTags;           },
+		
 		queryCustomTagLocally : function(query){   return loc_queryCustomTag(query);     },
 		
-		findEntityLocally : function(entityType, entityName){  return loc_findEntityLocally(entityType, entityName);  },
-		
-//		findHandlerLocally : function(handlerName){   return loc_findHandlerLocally(handlerName);  },
-		
 		callScriptFunction : function(funName, args){   return loc_callScriptFunction(funName, args);     },
-		
-		
+
+				
 		setEnvironmentInterface : function(envInterface){	loc_envInterface = envInterface;	},
 		
 		getEntityInitRequest : function(handlers, request){
@@ -250,6 +249,7 @@ var loc_createUIContentComponentCore = function(complexEntityDef, valueContextId
 				success: function(request, attrNode){
 					_.each(attrNode.getChildValue().getCoreEntity().getChildrenEntity(), function(child){
 						var customTag = child.getCoreEntity();
+						loc_customerTags.push(customTag);
 						loc_customerTagByUIId[customTag.getUIId()] = customTag;
 						customTag.setParentUIEntity(loc_out);
 

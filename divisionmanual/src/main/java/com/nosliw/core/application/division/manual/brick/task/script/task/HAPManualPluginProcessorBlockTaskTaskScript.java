@@ -1,13 +1,17 @@
 package com.nosliw.core.application.division.manual.brick.task.script.task;
 
+import java.util.Map;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
+import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessBrickPath;
 
 public class HAPManualPluginProcessorBlockTaskTaskScript extends HAPManualPluginProcessorBlockImp{
 
@@ -24,6 +28,11 @@ public class HAPManualPluginProcessorBlockTaskTaskScript extends HAPManualPlugin
 
 		executableBlock.setScriptResourceId(definitionBlock.getScriptResourceId());
 		executableBlock.setParms(definitionBlock.getParms());
+		
+		Map<String, HAPIdBrickInBundle> brickRefs = definitionBlock.getBrickReferences();
+		for(String name : brickRefs.keySet()) {
+			executableBlock.addBrickReference(name, brickRefs.get(name).cloneValue());
+		}
 	}
 
 	@Override
@@ -35,6 +44,20 @@ public class HAPManualPluginProcessorBlockTaskTaskScript extends HAPManualPlugin
 	public void processBrick(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
 		super.processBrick(pathFromRoot, processContext);
 		
+	}
+
+	@Override
+	public void normalizeBrickPath(HAPPath pathFromRoot, HAPManualContextProcessBrick processContext) {
+		super.normalizeBrickPath(pathFromRoot, processContext);
+		
+		Pair<HAPManualDefinitionBrick, HAPManualBrick> blockPair = this.getBrickPair(pathFromRoot, processContext);
+		HAPManualDefinitionBlockTaskTaskScript definitionBlock = (HAPManualDefinitionBlockTaskTaskScript)blockPair.getLeft();
+		HAPManualBlockTaskTaskScript executableBlock = (HAPManualBlockTaskTaskScript)blockPair.getRight();
+
+		Map<String, HAPIdBrickInBundle> brickRefs = executableBlock.getBrickReferences();
+		for(String name : brickRefs.keySet()) {
+			HAPManualUtilityProcessBrickPath.normalizeBrickReferenceInBundle(brickRefs.get(name), pathFromRoot, true, processContext);
+		}
 	}
 
 }

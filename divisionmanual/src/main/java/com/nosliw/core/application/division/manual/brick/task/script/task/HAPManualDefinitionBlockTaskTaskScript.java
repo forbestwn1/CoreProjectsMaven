@@ -1,11 +1,15 @@
 package com.nosliw.core.application.division.manual.brick.task.script.task;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.brick.HAPWithBrickReferences;
 import com.nosliw.core.application.brick.spec.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugDefinition;
@@ -13,11 +17,12 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.entity.script.HAPWithScriptReference;
 import com.nosliw.core.resource.HAPResourceId;
 
-public class HAPManualDefinitionBlockTaskTaskScript extends HAPManualDefinitionBrick implements HAPWithBlockInteractiveTask, HAPWithScriptReference, HAPWithParms{
+public class HAPManualDefinitionBlockTaskTaskScript extends HAPManualDefinitionBrick implements HAPWithBlockInteractiveTask, HAPWithScriptReference, HAPWithParms, HAPWithBrickReferences{
 
 	public HAPManualDefinitionBlockTaskTaskScript() {
 		super(HAPEnumBrickType.TASK_TASK_SCRIPT_100);
 		this.setAttributeValueWithValue(HAPWithVariableDebugDefinition.VARIABLE, new ArrayList<String>());
+		this.setAttributeValueWithValue(HAPWithBrickReferences.BRICKREFERENCES, new LinkedHashMap<String, HAPIdBrickInBundle>());
 	}
 
 	@Override
@@ -34,5 +39,10 @@ public class HAPManualDefinitionBlockTaskTaskScript extends HAPManualDefinitionB
 
 	@Override
 	public void setParms(HAPParms parms) {    this.setAttributeValueWithValue(HAPWithParms.PARM, parms);    }
+
+	@Override
+	public Map<String, HAPIdBrickInBundle> getBrickReferences() {    return (Map<String, HAPIdBrickInBundle>)this.getAttributeValueOfValue(HAPWithBrickReferences.BRICKREFERENCES);   }
+	@Override
+	public void addBrickReference(String name, HAPIdBrickInBundle brickRef) {      this.getBrickReferences().put(name, brickRef);           }
 
 }

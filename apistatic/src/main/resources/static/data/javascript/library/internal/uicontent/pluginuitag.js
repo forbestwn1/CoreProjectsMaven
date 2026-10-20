@@ -29,6 +29,7 @@ var packageObj = library;
 	var node_createUICustomerTagViewVariable;
 	var node_getEntityObjectInterface;
 	var node_uiTagUtility;
+	var node_uiUtility;
 	var node_complexEntityUtility;
 	var node_createTaskSetup;
 	var node_taskUtility;
@@ -73,6 +74,8 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 	var loc_envInterface = {};
 	var loc_uiTagCore;
 
+	var loc_childrenCustomerTagNode = [];
+	
 	var loc_attributes = {};
 	var loc_attributeDefinition = {};
 
@@ -203,7 +206,9 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 
 		
 		//--------------------------------- query tag
-		queryCustomTagInstance : function(query){    return node_uiTagUtility.queryCustomTag(loc_out, query);      },
+		queryCustomTagInstanceUpwards : function(query){    return node_uiUtility.queryInSiblingUpwards(loc_out, query);      },
+		queryCustomTagInstanceDownwards : function(query){    return node_uiUtility.queryInSiblingDownwards(loc_out, query);      },
+		queryCustomTagInstanceInPage : function(query){    return node_uiUtility.queryInPage(loc_out, query);      },
 		
 		//--------------------------------- event
 		trigueEvent : function(event, eventData, requestInfo){   
@@ -217,27 +222,44 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 	    },
 
 		//---------------------------------ui resource view
-		getCreateDefaultUIContentRequest : function(variationPoints, handlers, requestInfo){
+		getCreateDefaultUIContentRequest : function(id, variationPoints, handlers, requestInfo){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
 			out.addRequest(loc_envInterface[node_CONSTANT.INTERFACE_ENTITY].createBrickAttributeRequest(node_COMMONATRIBUTECONSTANT.WITHUICONTENT_UICONTENT, variationPoints, {
 				success : function(request, childNode){
 					childNode.getChildValue().getCoreEntity().setParentUIEntity(loc_out);
+					loc_childrenCustomerTagNode.push({
+						node : childNode,
+					    id : id
+					});
+					
 					return childNode;
 				}
 			}));
 			return out;
 		},
-		getCreateDefaultUIContentWithInitRequest : function(variationPoints, view, handlers, requestInfo){
+		getCreateDefaultUIContentWithInitRequest : function(id, variationPoints, view, handlers, requestInfo){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, requestInfo);
 			out.addRequest(loc_envInterface[node_CONSTANT.INTERFACE_ENTITY].createBrickAttributeWithInitRequest(node_COMMONATRIBUTECONSTANT.WITHUICONTENT_UICONTENT, variationPoints, view, {
 				success : function(request, childNode){
 					childNode.getChildValue().getCoreEntity().setParentUIEntity(loc_out);
+					loc_childrenCustomerTagNode.push({
+						node : childNode,
+					    id : id==undefined?node_COMMONCONSTANT.NAME_DEFAULT:id
+					});
 					return childNode;
 				}
 			}));
 			return out;
 		},
 
+		getAllContent : function(){    return loc_childrenCustomerTagNode;        },
+		removeAllContent : function(){
+			_.each(loc_childrenCustomerTagNode, function(childNode, i){
+				childNode.getChildValue().getCoreEntity().destroy();
+			});
+			loc_childrenCustomerTagNode = [];
+		},
+		
 		//---------------------------------env
 		getBundleCore : function(){   return loc_bundleCore;   }
 
@@ -246,9 +268,10 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 	var loc_out = {
 
 		setParentUIEntity : function(parentUIEntity){	loc_parentUIEntity = parentUIEntity;	},
-		
 		getParentUIEntity : function(){   return loc_parentUIEntity;     },
-		
+
+		getAllChildrenCustomerNode : function(){      return loc_childrenCustomerTagNode;      },
+				
 		updateAttributes : function(attributes){
 			loc_attributes = _.extend(loc_attributes, attributes);    
 			loc_uiTagCore.updateAttributes(attributes);       
@@ -354,6 +377,7 @@ nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagTest", function()
 nosliw.registerSetNodeDataEvent("uitag.test.createUICustomerTagViewVariable", function(){node_createUICustomerTagViewVariable = this.getData();	});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("uicontent.uiTagUtility", function(){node_uiTagUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("uicontent.uiUtility", function(){node_uiUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("task.createTaskSetup", function(){node_createTaskSetup = this.getData();});
 nosliw.registerSetNodeDataEvent("task.taskUtility", function(){node_taskUtility = this.getData();});

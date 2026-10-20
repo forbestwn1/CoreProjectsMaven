@@ -78,6 +78,10 @@ var loc_createUIPageComponentCore = function(complexEntityDef, valueContextId, b
 			return out;
 		},
 
+		getUIContent : function(){
+			return loc_uiContent;
+		},
+		
 		updateView : function(view){
 			loc_attachStyle();
 			

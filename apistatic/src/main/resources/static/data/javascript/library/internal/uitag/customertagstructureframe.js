@@ -37,7 +37,7 @@ var node_createUICustomerTagStructureFrame = function(envObj){
 		
 		preInit : function(request){
 			var out = node_createServiceRequestInfoSequence(undefined, undefined, request);
-			out.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(undefined, loc_containerView, {
+			out.addRequest(loc_envObj.getCreateDefaultUIContentWithInitRequest(undefined, undefined, loc_containerView, {
 				success: function(request, uiConentNode){
 				}
 			}));

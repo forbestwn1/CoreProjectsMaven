@@ -3,11 +3,12 @@ package com.nosliw.core.application.brick.spec.task.script.task;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.brick.HAPBrick;
+import com.nosliw.core.application.brick.HAPWithBrickReferences;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.entity.script.HAPWithScriptReference;
 
 @HAPEntityWithAttribute
-public interface HAPBlockTaskTaskScript extends HAPBrick, HAPWithBlockInteractiveTask, HAPWithScriptReference, HAPWithParms{
+public interface HAPBlockTaskTaskScript extends HAPBrick, HAPWithBlockInteractiveTask, HAPWithScriptReference, HAPWithParms, HAPWithBrickReferences{
 
 }
 
