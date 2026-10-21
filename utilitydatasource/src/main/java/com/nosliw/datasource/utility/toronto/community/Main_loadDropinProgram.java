@@ -70,7 +70,7 @@ public class Main_loadDropinProgram {
 				        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
 				        			String program = programJsnObj.getString("title");
 				        			String programId = ccDropinMan.getProgramIdByName(program);
-									System.out.println("Processing program:   " + program);
+//									System.out.println("Processing program:   " + program);
 				        			
 				        			if(programId==null){
 				        				System.out.println("Program not defined:   " + program);
@@ -91,6 +91,7 @@ public class Main_loadDropinProgram {
 				        				
 				        				programMap.put("CommunityCenter", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", ccName), entry("id", ccId)))));
 				        				programMap.put("Program", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", program), entry("id", programId)))));
+				        				programMap.put("Url", Utility.buildData("test.url;1.0.0", "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id="+ccId));
 				        				
 				        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
 				        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(

@@ -1,0 +1,7 @@
+{
+  "dataType": "test.entity;1.0.0",
+  "name" : "toronto_community_program_dropin",
+  "id" : "toronto_community_program_dropin",
+  "info": {"category": ["category"]},
+  "dataSet": |||dataSet|||
+}

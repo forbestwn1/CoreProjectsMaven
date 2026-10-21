@@ -16,12 +16,18 @@ import com.nosliw.common.utils.HAPUtilityFile;
 public class HAPManagerCommunitiyCenterDropin {
 
 	private List<String> ccIds;
-	private Map<String, String> nameById; 
+	private Map<String, String> ccNameById; 
+	
+	private List<String> categories;
+	private Map<String, String> programIdByName;
+	private List<String> programIds;
+	private Map<String, String> categoryIdByProgramId;
+	
 	
 	public List<String> getAllCommunityCenterIds(){
 		if(ccIds==null) {
 			ccIds = new ArrayList<String>();
-			nameById = new LinkedHashMap<String, String>();
+			ccNameById = new LinkedHashMap<String, String>();
 			
 			if(!Files.exists(Utility.COMMUNITY_CENTER_CODETABLE_PATH)) {
 				throw new IllegalStateException("Community center codetable not found: " + Utility.COMMUNITY_CENTER_CODETABLE_PATH);
@@ -40,7 +46,7 @@ public class HAPManagerCommunitiyCenterDropin {
 						if(value != null && value.has("id")) {
 							String id = String.valueOf(value.opt("id"));
 							ccIds.add(id);
-							nameById.put(id, String.valueOf(value.opt("name")));
+							ccNameById.put(id, String.valueOf(value.opt("name")));
 						}
 					}
 				}
@@ -53,64 +59,67 @@ public class HAPManagerCommunitiyCenterDropin {
 	}
 	
 	public String getCommnityCenterNameById(String id) {
-		return nameById.get(id); 
+		return ccNameById.get(id); 
 	}
 	
-	private List<String> categories;
 	public List<String> getAllProgramCategary(){
-		if(categories==null) {
-			categories = new ArrayList<>();
-			if(!Files.exists(Utility.PROGRAM_CODETABLE_PATH)) {
-				throw new IllegalStateException("Program codetable not found: " + Utility.PROGRAM_CODETABLE_PATH);
-			}
-			try {
-				String content = Files.readString(Utility.PROGRAM_CODETABLE_PATH, StandardCharsets.UTF_8);
-				JSONObject root = new JSONObject(new JSONTokener(content));
-				JSONArray dataSet = root.optJSONArray("dataSet");
-				if(dataSet != null) {
-					for(int i=0; i<dataSet.length(); i++) {
-						JSONObject ele = dataSet.optJSONObject(i);
-						if(ele == null) {
-							continue;
-						}
-						JSONObject value = ele.optJSONObject("value");
-						if(value == null) {
-							continue;
-						}
-						String categary = (String)value.opt("category");
-						if(categary!=null) {
-							if(!categories.contains(categary)) {
-								categories.add(categary);
-							}
-						}
-					}
-				}
-			} catch(Exception e) {
-				throw new IllegalStateException("Failed to read program categories from codetable: " + Utility.PROGRAM_CODETABLE_PATH, e);
-			}
+		if(this.categories==null) {
+			this.buildProgramData();
 		}
-		return categories;
+		return this.categories;
 	}
 
-	Map<String, String> idByName;
+	public List<String> getAllPrograms(){
+		if(this.programIds==null) {
+			this.buildProgramData();
+		}
+		return this.programIds;
+	}
+
+	public String getCategoryByProgramId(String programId) {
+		if(this.categoryIdByProgramId==null) {
+			this.buildProgramData();
+		}
+		return this.categoryIdByProgramId.get(programId);
+	}
+	
 	public String getProgramIdByName(String name) {
 		if(name == null) {
 			return null;
 		}
 
-		if(idByName==null) {
-			idByName = new LinkedHashMap<String, String>();
-			String content = HAPUtilityFile.readFile(HAPManagerCommunitiyCenterDropin.class, "dropprogrammapping.json");
-			JSONObject jsonObj = new JSONObject(content);
-			for(Object k : jsonObj.keySet()) {
-				String key = (String)k;
-				JSONArray jsonArray = jsonObj.getJSONArray(key);
-				for(int i=0; i<jsonArray.length(); i++) {
-					idByName.put(jsonArray.getString(i), key);
+		if(this.programIdByName==null) {
+			this.buildProgramData();
+		}
+		return this.programIdByName.get(name);
+	}
+
+	private void buildProgramData() {
+		this.categories = new ArrayList<String>();
+		this.programIdByName = new LinkedHashMap<String, String>();
+		this.programIds = new ArrayList<String>();
+		this.categoryIdByProgramId = new LinkedHashMap<String, String>();
+		
+		JSONArray categorysJsonArray = new JSONArray(HAPUtilityFile.readFile(HAPManagerCommunitiyCenterDropin.class, "dropprogrammapping.json"));
+		for(int i=0; i<categorysJsonArray.length(); i++) {
+			JSONObject categoryJsonObj = categorysJsonArray.getJSONObject(i);
+			if(categoryJsonObj.optBoolean("enable", true)) {
+				String categoryName = categoryJsonObj.getString("category");
+				this.categories.add(categoryName);
+				
+				JSONObject programsJsonObj = categoryJsonObj.getJSONObject("program");
+				for(Object key : programsJsonObj.keySet()) {
+					String programId = (String)key;
+					this.programIds.add(programId);
+					this.categoryIdByProgramId.put(programId, categoryName);
+					
+					JSONArray programNamesArray = programsJsonObj.getJSONArray(programId);
+					for(int j=0; j<programNamesArray.length(); j++) {
+						this.programIdByName.put(programNamesArray.getString(j), programId);
+					}
 				}
 			}
 		}
-		return idByName.get(name);
 	}
-
+	
 }

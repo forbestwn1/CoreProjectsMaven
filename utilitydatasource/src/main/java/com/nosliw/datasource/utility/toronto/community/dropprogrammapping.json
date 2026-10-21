@@ -1,9 +1,36 @@
-{
-	"Lane Swim" : ["Lane Swim"],
-	"Lane Swim Older Adult" : ["Lane Swim Older Adult", "Lane Swim: Older Adult"],
-	"Leisure Swim" : ["Leisure Swim"],
-	"Leisure Swim Preschool" : ["Leisure Swim Preschool", "Leisure Swim: Preschool"],
-	"Aquatic Fitness Shallow" : ["Aquatic Fitness Shallow", "Aquatic Fitness: Shallow"],
-	"Aquatic Fitness Arthritis" : ["Aquatic Fitness Arthritis", "Aquatic Fitness: Arthritis"]
-	
-}
+[
+   {
+       "category" : "Swim",
+	   "enable" : true,
+	   "program" : {
+    		"Lane Swim" : ["Lane Swim"],
+	    	"Lane Swim Older Adult" : ["Lane Swim Older Adult", "Lane Swim: Older Adult"],
+		    "Leisure Swim" : ["Leisure Swim"],
+    		"Leisure Swim Preschool" : ["Leisure Swim Preschool", "Leisure Swim: Preschool"],
+	    	"Leisure Swim Women" : ["Leisure Swim Women", "Leisure Swim (Women)"],
+    		"Leisure Swim Family" : ["Leisure Swim Family", "Leisure Swim: Family"],
+    		"Aquatic Fitness Shallow" : ["Aquatic Fitness Shallow", "Aquatic Fitness: Shallow"],
+			"Aquatic Fitness Deep" : ["Aquatic Fitness Deep", "Aquatic Fitness: Deep"],
+    		"Aquatic Fitness Arthritis" : ["Aquatic Fitness Arthritis", "Aquatic Fitness: Arthritis"],
+    		"Aquatic Fitness Mind Body" : ["Aquatic Fitness Mind Body", "Aquatic Fitness: Mind Body"],
+    		"Aquatic Fitness Circuit Training" : ["Aquatic Fitness Circuit Training", "Aquatic Fitness: Circuit Training"]
+	   }
+   },
+   {
+      "category" : "Skate",
+	  "enable" : true,
+      "program" : {
+		    "Figure Skating" : ["Figure Skating"],
+			"Leisure Skate" : ["Leisure Skate"],
+			"Leisure Skate Adult" : ["Leisure Skate Adult", "Leisure Skate: Adult"],
+			"Leisure Skate Adult (Unsupervised)" : ["Leisure Skate Adult (Unsupervised)", "Leisure Skate: Adult (Unsupervised)"],
+			"Leisure Skate Older Adult (Unsupervised)" : ["Leisure Skate Older Adult (Unsupervised)", "Leisure Skate: Older Adult (Unsupervised)"],
+			"Leisure Skate Child with Caregiver" : ["Leisure Skate Child with Caregiver", "Leisure Skate: Child with Caregiver"],
+			"Leisure Skate Child with Caregiver (Unsupervised)" : ["Leisure Skate Child with Caregiver (Unsupervised)", "Leisure Skate: Child with Caregiver (Unsupervised)"],
+			"Adapted Leisure Skate with Family" : ["Adapted Leisure Skate with Family"],
+			"Shinny Adult (Women)" : ["Shinny Adult (Women)", "Shinny: Adult (Women)"],
+    		"Shinny Child with Caregiver" : ["Shinny Child with Caregiver", "Shinny: Child with Caregiver"]
+      }
+	  
+   }
+]

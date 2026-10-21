@@ -1,0 +1,7 @@
+{
+  "dataType": "test.entity;1.0.0",
+  "name": "Community",
+  "id": "toronto_community",
+  "info": {"category": ["district"]},
+  "dataSet": |||dataSet|||
+}
