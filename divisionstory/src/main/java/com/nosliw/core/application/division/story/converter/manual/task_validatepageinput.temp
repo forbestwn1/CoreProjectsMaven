@@ -14,9 +14,12 @@
 						"alias" : "|||pageAlias|||"
     				},
     				"parm": {
-    				    "quot" : {
-    				        "profile" : |||profile|||
-    				    }
+    				    "query" : [
+							{
+								"key" : "profile",
+								"value" : "|||profile|||"
+							}
+						]
     				}
 		        }
 	        }

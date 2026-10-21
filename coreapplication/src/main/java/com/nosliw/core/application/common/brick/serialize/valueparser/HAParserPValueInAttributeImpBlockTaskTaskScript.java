@@ -9,7 +9,6 @@ import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.HAPWithBrickReferences;
 import com.nosliw.core.application.brick.spec.task.script.task.HAPBlockTaskTaskScript;
@@ -35,11 +34,6 @@ public class HAParserPValueInAttributeImpBlockTaskTaskScript implements HAParser
 		{
 			Map<String, HAPIdBrickInBundle> brickRefs = new LinkedHashMap<String, HAPIdBrickInBundle>();
         	if(obj instanceof JSONObject) {
-        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
-        		id.buildObject(obj, HAPSerializationFormat.JSON);
-        		brickRefs.put(HAPConstantShared.NAME_DEFAULT, id);
-        	}
-        	else if(obj instanceof JSONObject) {
         		JSONObject brickRefsJsonObj = (JSONObject)obj;
         		for(Object key : brickRefsJsonObj.keySet()) {
         			String name = (String)key;

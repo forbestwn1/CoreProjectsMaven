@@ -42,16 +42,16 @@ var node_uiUtility = function(){
 		if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICONTENT){
 			results.push(...uiEntity.queryCustomTagLocally(query));
     		_.each(uiEntity.getChildrenCustomTags(), function(childCustomTag, i){
-				loc_queryInUIEntity(childCustomTag, query, results);
+				loc_queryDownwards(childCustomTag, query, results);
 			});
 		}
 		else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICUSTOMERTAG){
 			_.each(uiEntity.getAllChildrenCustomerNode(), function(childNodeInfo, i){
-				loc_queryInUIEntity(childNodeInfo.node.getChildValue().getCoreEntity(), query, results);
+				loc_queryDownwards(childNodeInfo.node.getChildValue().getCoreEntity(), query, results);
 			});
 		}
 		else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UIPAGE){
-			loc_queryInUIEntity(uiEntity.getUIContent(), query, results);
+			loc_queryDownwards(uiEntity.getUIContent(), query, results);
 		}
 	};
 	

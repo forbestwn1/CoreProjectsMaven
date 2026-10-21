@@ -166,7 +166,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 				out.addRequest(node_ruleExecuteUtility.getExecuteRuleValidationForVariableOperationRequest(dataOperation, loc_envObj.getBundleCore(), {
 					success : function(request, result){
 						if(!node_ruleUtility.isRuleValidationSuccess(result)){
-							loc_envObj.trigueEvent(node_COMMONCONSTANT.ERROR_VALIDATION_VALUE, result.resultValue);
+							loc_envObj.trigueEvent(node_COMMONCONSTANT.ERROR_VALIDATION_VALUE, result);
 						}
 						return result;
 					}

@@ -158,9 +158,9 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 					_.each(validationsResult.getResults(), function(validationResult, i){
 						if(!node_ruleUtility.isRuleValidationSuccess(validationResult)){
 							if(errorData==undefined){
-								errorData = {};
+								errorData = [];
 							}
-							errorData[i] = validationResult;
+							errorData.push(validationResult);
 						}
 					});
 					if(errorData!=undefined){

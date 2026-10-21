@@ -69,8 +69,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 	public static final String STEP_CUSTOMIZEUI = "customizeUI"; 
 	public static final String STEP_EXTRAINFO = "extraInfo"; 
 	
-	public static final String METADATA_PROFILE_REQUEST = "REQUEST";
-	public static final String METADATA_PROFILE_RESPONSE = "RESPONSE";
+	public static final String METADATA_PROFILE_REQUEST = "request";
+	public static final String METADATA_PROFILE_RESPONSE = "response";
 	
 	private final static HAPStoryAlias ALIAS_ELEMENT_MODULE = new HAPStoryAlias(HAPStoryStory.ALIAS_ROOT, false);
 	private final static HAPStoryAlias ALIAS_ELEMENT_DATASOURCE = new HAPStoryAlias("dataSource", false);

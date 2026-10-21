@@ -30,6 +30,19 @@ var node_createUICustomerTagTestError = function(envObj){
 
     var loc_referencedCustomTags;
 
+	var loc_processValidationResult = function(result){
+		var erroeMsg = "";					
+		_.each(result.resultValue, function(r){{
+			var description = r.description;
+			if(description==undefined){
+				description = r.resultData.value;
+			}
+			
+			erroeMsg = erroeMsg + description + "\n";
+		}});
+		return erroeMsg;
+	};
+	
     var loc_processReferencedCustomerTag = function(){
 		var query = {
 			elements : []
@@ -54,6 +67,16 @@ var node_createUICustomerTagTestError = function(envObj){
 
 					var erroeMsg = "";					
 					if(event==node_COMMONCONSTANT.ERROR_VALIDATION_VALUE){
+						if(node_basicUtility.isArray(eventData)){
+							_.each(eventData, function(item){
+								erroeMsg = erroeMsg + loc_processValidationResult(item);
+							});
+							
+						}
+						else{
+							erroeMsg = erroeMsg + loc_processValidationResult(eventData);
+						}
+/*						
 						_.each(eventData, function(item){
 							_.each(item.resultValue, function(r){{
 								var description = r.description;
@@ -64,7 +87,7 @@ var node_createUICustomerTagTestError = function(envObj){
 								erroeMsg = erroeMsg + description + "\n";
 							}});
 						});
-						
+*/						
 						errorView.text(erroeMsg);
 						errorView.show();
 					}

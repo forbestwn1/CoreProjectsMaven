@@ -2,6 +2,7 @@ package com.nosliw.core.application.division.manual.core.definition;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -189,18 +190,21 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 	        //brick reference
 	        if(brickDefinition instanceof HAPWithBrickReferences) {
 	        	Object brickRefsObj = jsonObj.opt(HAPWithBrickReferences.BRICKREFERENCES);
-	        	if(brickRefsObj instanceof JSONObject) {
-	        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
-	        		id.buildObject(brickRefsObj, HAPSerializationFormat.JSON);
-	        		((HAPWithBrickReferences)brickDefinition).addBrickReference(HAPConstantShared.NAME_DEFAULT, id);
-	        	}
-	        	else if(brickRefsObj instanceof JSONObject) {
+	        	if((brickRefsObj instanceof JSONObject)) {
 	        		JSONObject brickRefsJsonObj = (JSONObject)brickRefsObj;
-	        		for(Object key : brickRefsJsonObj.keySet()) {
-	        			String name = (String)key;
+	        		Set keys = brickRefsJsonObj.keySet();
+	        		if(keys.contains(HAPIdBrickInBundle.ALIAS)||keys.contains(HAPIdBrickInBundle.IDPATH)||keys.contains(HAPIdBrickInBundle.RELATIVEPATH)) {
 		        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
-		        		id.buildObject(brickRefsJsonObj.getJSONObject(name), HAPSerializationFormat.JSON);
-		        		((HAPWithBrickReferences)brickDefinition).addBrickReference(name, id);
+		        		id.buildObject(brickRefsObj, HAPSerializationFormat.JSON);
+		        		((HAPWithBrickReferences)brickDefinition).addBrickReference(HAPConstantShared.NAME_DEFAULT, id);
+	        		}
+	        		else {
+		        		for(Object key : brickRefsJsonObj.keySet()) {
+		        			String name = (String)key;
+			        		HAPIdBrickInBundle id = new HAPIdBrickInBundle();
+			        		id.buildObject(brickRefsJsonObj.getJSONObject(name), HAPSerializationFormat.JSON);
+			        		((HAPWithBrickReferences)brickDefinition).addBrickReference(name, id);
+		        		}
 	        		}
 	        	}
 	        }
