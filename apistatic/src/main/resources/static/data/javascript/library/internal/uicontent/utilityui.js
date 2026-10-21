@@ -37,7 +37,7 @@ var node_uiUtility = function(){
 		}
 	};
 		
-	var loc_queryDownwards : function(uiEntity, query, results){
+	var loc_queryDownwards = function(uiEntity, query, results){
 		var brickType = node_getObjectType(uiEntity)[node_COMMONATRIBUTECONSTANT.IDBRICKTYPE_BRICKTYPE];
 		if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICONTENT){
 			results.push(...uiEntity.queryCustomTagLocally(query));
@@ -55,12 +55,12 @@ var node_uiUtility = function(){
 		}
 	};
 	
-	var loc_queryUpwards : function(uiEntity, query, results){
+	var loc_queryUpwards = function(uiEntity, query, results){
 		var currentUIEntity = uiEntity;
-		whild(true){
+		while(true){
 			var brickType = node_getObjectType(currentUIEntity)[node_COMMONATRIBUTECONSTANT.IDBRICKTYPE_BRICKTYPE];
 			if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICONTENT){
-				results.push(...uiEntity.queryCustomTagLocally(query));
+				results.push(...currentUIEntity.queryCustomTagLocally(query));
 				currentUIEntity = currentUIEntity.getParentUIEntity();
 			}
 			else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UICUSTOMERTAG){

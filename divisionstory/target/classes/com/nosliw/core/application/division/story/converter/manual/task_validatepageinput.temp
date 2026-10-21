@@ -6,8 +6,9 @@
 			        "version" : "1.0.0"
 		        },
 		        "brick" : {
-					"info" : {
-					},
+                    "info": {
+                        "nosliw_alias": "|||alias|||"
+                    },
     				"scriptResourceId": "task_page_input_validation",
     				"brickReferences" : {
 						"alias" : "|||pageAlias|||"

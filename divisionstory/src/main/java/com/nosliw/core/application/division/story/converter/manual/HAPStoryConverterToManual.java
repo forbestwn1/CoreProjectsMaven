@@ -147,6 +147,7 @@ public class HAPStoryConverterToManual {
 				InputStream sequenceTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_sequence.temp");
 				Map<String, String> sequenceTemplateParms = new LinkedHashMap<String, String>();
 				sequenceTemplateParms.put("id", sequenceRunnable.getId());
+				sequenceTemplateParms.put("alias", sequenceRunnable.getId());
 				
 				List<String> subRunnables = new ArrayList<String>();
 				for(String subRunnable : sequenceRunnable.getRunnables()) {
@@ -163,9 +164,10 @@ public class HAPStoryConverterToManual {
 				HAPStoryRunnableUIPageInputValidation pageInputValidateRunnable = (HAPStoryRunnableUIPageInputValidation)runnable;
 				InputStream pageInputValidateTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_validatepageinput.temp");
 				Map<String, String> pageInputValidateTemplateParms = new LinkedHashMap<String, String>();
+				pageInputValidateTemplateParms.put("alias", pageInputValidateRunnable.getId());
 				pageInputValidateTemplateParms.put("profile", "request");
 				pageInputValidateTemplateParms.put("taskName", runnable.getId());
-				pageInputValidateTemplateParms.put("alias", pageInputValidateRunnable.getPage());
+				pageInputValidateTemplateParms.put("pageAlias", pageInputValidateRunnable.getPage());
 				
 				tasksList.add(HAPStringTemplateUtil.getStringValue(pageInputValidateTemplateStream, pageInputValidateTemplateParms));
 				

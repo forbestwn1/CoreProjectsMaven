@@ -17,6 +17,7 @@ public class HAPStoryUtilityConverter {
 		InputStream brickWrapperTemplateStream = HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "wrapperbrick_reference.temp");
 		Map<String, String> templateParms = new LinkedHashMap<String, String>();
 		templateParms.put("name", elementId.getId());
+		templateParms.put("alias", elementId.getKey());
 		templateParms.put("localId", brickId.toStringValue(HAPSerializationFormat.LITERATE));
 		return HAPStringTemplateUtil.getStringValue(brickWrapperTemplateStream, templateParms);
 	}

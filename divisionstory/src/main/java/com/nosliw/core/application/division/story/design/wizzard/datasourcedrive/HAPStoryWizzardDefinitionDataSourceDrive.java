@@ -371,7 +371,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 			//validate page input
 			HAPStoryRunnableUIPageInputValidation validatePageInputRunnable = new HAPStoryRunnableUIPageInputValidation();
-			validatePageInputRunnable.setPage(pageElementId.getId());
+			validatePageInputRunnable.setPage(pageElementId.getKey());
 			HAPStoryChangeItemRunnableNew validatePageInputRunableChangeNew = changeSession.addChangeItemNew(validatePageInputRunnable);
 			
 			//module submit task
@@ -384,7 +384,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 			
 //			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, dataSourceCommandRunChangeNew.getRunnable().getId());   //kkkkkk
-			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, HAPConstantShared.TASK_NAME_SUBMIT);
+			HAPStoryChangeItemElementNew submitTaskContentChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, submitEventRunableChangeNew.getRunnable().getId());
 			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), submitTaskContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("submitTask")));
 			
 			changeSession.commit();
