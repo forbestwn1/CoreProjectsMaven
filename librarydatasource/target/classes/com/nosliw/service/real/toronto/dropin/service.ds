@@ -30,7 +30,7 @@
                			    	"name" : "Community Location",
                                 "status": "disabled1",
     				            "ruleType" : "enum",
-	    			            "enumCode" : "toronto_community_program_dropin"
+	    			            "enumCode" : "toronto_program_dropin"
 		    		        }
 			    	    ],
 					},
@@ -44,7 +44,7 @@
 				{
 					"name" : "fromTime",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0",
+						"criteria" : "test.time;1.0.0",
 						"initData" : {
 							"dataTypeId": "test.time;1.0.0",
 							"value": {
@@ -62,7 +62,7 @@
 				{
 					"name" : "toTime",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0",
+						"criteria" : "test.time;1.0.0",
 						"initData" : {
 							"dataTypeId": "test.time;1.0.0",
 							"value": {
