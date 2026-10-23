@@ -21,6 +21,8 @@ var packageObj = library.getChildPackage();
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_createUICustomerTagTestEntity = function(envObj){
+	var loc_emptySelect = "NA";
+	
 	var loc_envObj = envObj;
 
 	var loc_containerView = $('<div>Hello Entity</div>');
@@ -65,13 +67,12 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		else{
 			//entity
 			loc_dataSelView.empty();
-			loc_dataSelView.append($("<option value='' disabled selected>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
+			loc_dataSelView.append($("<option value='"+loc_emptySelect+"' selected>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
 			_.each(children, function(child){
 				var value = child.value;
 				loc_dataSelView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));
 			});
 		}
-		
 	};
 		
 	var loc_initCodeTableEntity = function(){
@@ -87,7 +88,12 @@ var node_createUICustomerTagTestEntity = function(envObj){
 
 		loc_dataSelView = $('<select name="data"/>');
 		loc_dataSelView.on("change", function(){
-			loc_selectEntity(loc_dataSelView.val());
+			var entityId = loc_dataSelView.val();
+			if(entityId!=loc_emptySelect){
+				var entity = loc_codeTableEntity.getEntityById(entityId);
+				loc_addValue(entity.value);
+				loc_dataSelView.val(loc_emptySelect);
+			}
 		});
 		loc_containerView.append(loc_dataSelView);
 		
@@ -134,6 +140,13 @@ var node_createUICustomerTagTestEntity = function(envObj){
 	};
 	
 	var loc_addValue = function(value, informEx){
+		for(var i in loc_dataInfo){
+			if(loc_dataInfo[i].value.id==value.id){
+				//already exist, then do nothing
+				return;
+			}
+		}
+		
 		var dataInfo = {};
 		dataInfo.value = value;
 		dataInfo.view = $("<button>"+value.name+"  x"+"</button>");

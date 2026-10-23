@@ -45,12 +45,22 @@ var node_ruleExecuteUtility = function(){
 		_.each(ruleValidationItems, function(ruleValidationItem){
 			if(ruleValidationItem.data.isMultipleValue==true){
 				var dataWithMultipleValue = ruleValidationItem.data;
-				_.each(dataWithMultipleValue.value, function(value){
+				if(dataWithMultipleValue==undefined){
+					out.push(ruleValidationItem);
+				}
+				else if(dataWithMultipleValue.value==undefined||dataWithMultipleValue.value.length==0){
 					out.push(new node_createRuleValidationItem(ruleValidationItem.ruleDef, {
-						"dataTypeId" : dataWithMultipleValue.dataTypeId,
-						"value" : value
+						"dataTypeId" : dataWithMultipleValue.dataTypeId
 					}));
-				});
+				}
+				else{
+					_.each(dataWithMultipleValue.value, function(value){
+						out.push(new node_createRuleValidationItem(ruleValidationItem.ruleDef, {
+							"dataTypeId" : dataWithMultipleValue.dataTypeId,
+							"value" : value
+						}));
+					});
+				}
 			}
 			else{
 				out.push(ruleValidationItem);

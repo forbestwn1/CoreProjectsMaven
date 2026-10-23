@@ -57,7 +57,7 @@ var node_createUITagOnBaseSimple = function(tagDefScriptFun, envObj){
 
 	var loc_getDataOperationSet = function(data){
 		var configure;
-		if(loc_enumDatas!=undefined){
+		if(loc_isDataEnum!=undefined){
 			configure = {
 				excludeRuleTypes : []
 			};
