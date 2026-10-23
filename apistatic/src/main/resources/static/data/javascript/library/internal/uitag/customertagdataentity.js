@@ -25,7 +25,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 	
 	var loc_envObj = envObj;
 
-	var loc_containerView = $('<div>Hello Entity</div>');
+	var loc_containerView = $('<div></div>');
 	loc_containerView.css({
 		'display': 'flex',
 		'flex-direction': 'column',

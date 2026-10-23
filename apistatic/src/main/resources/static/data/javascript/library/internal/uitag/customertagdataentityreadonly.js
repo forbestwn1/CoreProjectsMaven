@@ -41,9 +41,8 @@ var node_createUICustomerTagTestEntityReadOnly = function(envObj){
 					content = JSON.stringify(contentArray);
 				}
 				else{
-					conent = value.name;
+					content = value.name;
 				}
-				
 			}
 			
 			loc_dataView.html(content);
