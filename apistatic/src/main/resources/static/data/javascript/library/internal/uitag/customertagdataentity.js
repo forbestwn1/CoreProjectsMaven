@@ -26,11 +26,51 @@ var node_createUICustomerTagTestEntity = function(envObj){
 	var loc_envObj = envObj;
 
 	var loc_containerView = $('<div>Hello Entity</div>');
+	loc_containerView.css({
+		'display': 'flex',
+		'flex-direction': 'column',
+		'align-items': 'flex-start',
+		'gap': '6px',
+		'width': '100%',
+		'box-sizing': 'border-box'
+	});
 	var loc_valueContainerView = $('<div/>');
+	loc_valueContainerView.css({
+		'display': 'flex',
+		'flex-wrap': 'wrap',
+		'align-items': 'center',
+		'gap': '4px',
+		'width': '100%',
+		'box-sizing': 'border-box'
+	});
 	var loc_selectionContainerView = $('<div/>');
+	loc_selectionContainerView.css({
+		'display': 'flex',
+		'flex-wrap': 'wrap',
+		'align-items': 'center',
+		'gap': '4px',
+		'width': '100%',
+		'box-sizing': 'border-box'
+	});
 	loc_containerView.append(loc_valueContainerView);
 	loc_containerView.append(loc_selectionContainerView);
 
+	var loc_applySelectStyle = function(selectView){
+		selectView.css({
+			'display': 'inline-block',
+			'padding': '2px 8px',
+			'border-radius': '6px',
+			'border': '1px solid #c9d6ff',
+			'background': '#ffffff',
+			'color': '#2d3a5a',
+			'font-size': '12px',
+			'line-height': '1.2',
+			'height': 'auto',
+			'min-height': '0',
+			'box-sizing': 'border-box'
+		});
+	};
+	
 	var loc_categorySelViews = [];
 	var loc_dataSelView;
 	
@@ -79,6 +119,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		loc_categoryNames = loc_codeTableEntity.getCategoryNames();
 		_.each(loc_categoryNames, function(categoryName, i){
 			var categoryView = $("<select name='"+i+"'/>");
+			loc_applySelectStyle(categoryView);
 			categoryView.on("change", function(){
 				loc_updateCategory(i);
 			});
@@ -87,6 +128,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		});
 
 		loc_dataSelView = $('<select name="data"/>');
+		loc_applySelectStyle(loc_dataSelView);
 		loc_dataSelView.on("change", function(){
 			var entityId = loc_dataSelView.val();
 			if(entityId!=loc_emptySelect){
@@ -95,7 +137,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 				loc_dataSelView.val(loc_emptySelect);
 			}
 		});
-		loc_containerView.append(loc_dataSelView);
+		loc_selectionContainerView.append(loc_dataSelView);
 		
 		loc_updateCategory(-1);
 	}
@@ -149,7 +191,26 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		
 		var dataInfo = {};
 		dataInfo.value = value;
-		dataInfo.view = $("<button>"+value.name+"  x"+"</button>");
+		dataInfo.view = $("<button type='button'></button>");
+		dataInfo.view.css({
+			'display': 'inline-flex',
+			'align-items': 'center',
+			'justify-content': 'center',
+			'padding': '2px 6px',
+			'border-radius': '999px',
+			'background': '#eaf0ff',
+			'border': '1px solid #c9d6ff',
+			'color': '#2d3a5a',
+			'font-size': '12px',
+			'line-height': '1.2',
+			'white-space': 'nowrap',
+			'width': 'auto',
+			'height': 'auto',
+			'min-height': '0',
+			'cursor': 'pointer'
+		});
+		dataInfo.view.append($('<span>'+value.name+'</span>'));
+		dataInfo.view.append($('<span style="margin-left: 4px; font-size: 11px; line-height: 1;">×</span>'));
 		loc_valueContainerView.append(dataInfo.view);
 		dataInfo.view.on("click", function(){
 			loc_removeValue(dataInfo);
