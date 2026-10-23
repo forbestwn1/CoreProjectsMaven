@@ -105,9 +105,10 @@ var node_createUICustomerTagTestEntity = function(envObj){
 			}
 		}
 		else{
+			var action = loc_isMutipleValue()?"Add":"Select";
 			//entity
 			loc_dataSelView.empty();
-			loc_dataSelView.append($("<option value='"+loc_emptySelect+"' selected>Select a "+loc_codeTableEntity.getEntityName()+"</option>"));
+			loc_dataSelView.append($("<option value='"+loc_emptySelect+"' selected>"+action+" a "+loc_codeTableEntity.getEntityName()+"</option>"));
 			_.each(children, function(child){
 				var value = child.value;
 				loc_dataSelView.append($("<option value='"+value.id+"'>"+value.name+"</option>"));
@@ -141,11 +142,6 @@ var node_createUICustomerTagTestEntity = function(envObj){
 		
 		loc_updateCategory(-1);
 	}
-	
-	var loc_selectEntity = function(entityId){
-		var entity = loc_codeTableEntity.getEntityById(entityId);
-		loc_addValue(entity.value);
-	};
 	
 	var loc_getCurrentData = function(){
 		var isMutipleValue = loc_isMutipleValue();
@@ -188,7 +184,14 @@ var node_createUICustomerTagTestEntity = function(envObj){
 				return;
 			}
 		}
-		
+
+		if(!loc_isMutipleValue()){
+			//for single value, remove the current value first
+			if(loc_dataInfo.length!=0){
+				loc_removeValue(loc_dataInfo[0]);
+			}
+		}
+				
 		var dataInfo = {};
 		dataInfo.value = value;
 		dataInfo.view = $("<button type='button'></button>");
@@ -217,12 +220,7 @@ var node_createUICustomerTagTestEntity = function(envObj){
 			loc_onValueChange();
 		});
 		
-		if(loc_isMutipleValue()){
-			loc_dataInfo.push(dataInfo);
-		}
-		else{
-			loc_removeValue(loc_dataInfo[0]);
-		}
+		loc_dataInfo.push(dataInfo);
 		if(informEx!=false) loc_onValueChange();
 	};
 	
@@ -231,9 +229,17 @@ var node_createUICustomerTagTestEntity = function(envObj){
 			dataInfo.view.remove();
 		});
 		loc_dataInfo = [];
-		_.each(values, function(value, i){
-			loc_addValue(value, informEx);
-		});
+		
+		if(values!=undefined){
+			if(node_basicUtility.isArray(values)){
+				_.each(values, function(value, i){
+					loc_addValue(value, informEx);
+				});
+			}
+			else{
+				loc_addValue(values, informEx);
+			}
+		}
 	};
 	
 	var loc_isMutipleValue = function(){

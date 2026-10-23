@@ -41,6 +41,11 @@ public class HAPStoryUtilityUITag {
 		StringBuffer attContent = new StringBuffer();
 		Map<String, String> attributes = new LinkedHashMap<>(uiTagInfo.getAttributes());
 		attributes.put(uiTagInfo.getAttributeForData(), dataVariableName);
+		
+		if(dataDefinition.getIsMultipleAllowed()) {
+			attributes.put("nosliw-datamode", "multiple");
+		}
+		
 		for(String name : attributes.keySet()) {
 			attContent.append(name + "=\"" + attributes.get(name) + "\" ");
 		}
