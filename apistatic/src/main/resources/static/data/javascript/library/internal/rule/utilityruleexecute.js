@@ -43,7 +43,10 @@ var node_ruleExecuteUtility = function(){
 		var out = [];
 		
 		_.each(ruleValidationItems, function(ruleValidationItem){
-			if(ruleValidationItem.data.isMultipleValue==true){
+			if(ruleValidationItem.data==undefined||ruleValidationItem.data.isMultipleValue!=true){
+				out.push(ruleValidationItem);
+			}
+			else{
 				var dataWithMultipleValue = ruleValidationItem.data;
 				if(dataWithMultipleValue==undefined){
 					out.push(ruleValidationItem);
@@ -61,9 +64,6 @@ var node_ruleExecuteUtility = function(){
 						}));
 					});
 				}
-			}
-			else{
-				out.push(ruleValidationItem);
 			}
 		});
 		

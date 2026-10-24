@@ -14,6 +14,11 @@
 					    "isMultipleAllowed" : true,
 					    "rule" : [
 					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        },
+					        {
                    				"name" : "Community Location",
 	                            "status": "disabled1",
 					            "ruleType" : "enum",
@@ -28,6 +33,11 @@
 						"criteria" : "test.entity;1.0.0",
 					    "isMultipleAllowed" : true,
     				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        },
 	                        {
                			    	"name" : "Community Location",
                                 "status": "disabled1",
@@ -40,7 +50,14 @@
 				{
 					"name" : "fromDate",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0"
+						"criteria" : "test.date;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
 					}
 				},
 				{
@@ -60,7 +77,14 @@
 				{
 					"name" : "toDate",
 					"dataDefinition" : {
-						"criteria" : "test.date;1.0.0"
+						"criteria" : "test.date;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
 					}
 				},
 				{

@@ -25,7 +25,12 @@ var node_createUICustomerTagTestDate = function(envObj){
     var loc_dataView;
 	
 	var loc_getCurrentData = function(){
-		var date = new Date(loc_dataView.val()+"T00:00:00");
+		var val = loc_dataView.val();
+		if(val==""||val==undefined){
+			return;
+		}
+		
+		var date = new Date(val+"T00:00:00");
 		var currentData = {
 			dataTypeId: "test.date;1.0.0",
 			value: {
