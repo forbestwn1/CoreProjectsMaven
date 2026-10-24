@@ -46,7 +46,12 @@ var node_createUICustomerTagTestTime = function(envObj){
 		updateView : function(currentData){
 			if(currentData!=undefined){
 				var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-				loc_dataView.val(value.hour.toString().padStart(2, "0")+":"+value.minute.toString().padStart(2, "0")+":"+value.second.toString().padStart(2, "0"));
+				
+				var hour = value.hour==undefined?0:value.hour;
+				var minute = value.minute==undefined?0:value.minute;
+				var second = value.second==undefined?0:value.second;
+				
+				loc_dataView.val(hour.toString().padStart(2, "0")+":"+minute.toString().padStart(2, "0")+":"+second.toString().padStart(2, "0"));
 			}
 			else{
 				loc_dataView.val();

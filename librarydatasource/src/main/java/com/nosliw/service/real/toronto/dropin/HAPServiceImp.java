@@ -23,9 +23,9 @@ import com.nosliw.core.data.HAPUtilityData;
 
 public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 
-    public static final Path DROPIN_DATASOURCEDATA_PATH = Paths.get("file:///C:/ApplicationData/datasource/toronto/dropin");
+    public static final Path DROPIN_DATASOURCEDATA_PATH = Paths.get("C:/ApplicationData/datasource/toronto/dropin");
 
-	Map<String, Map<String, List<JSONObject>>> m_programs = new LinkedHashMap<String, Map<String, List<JSONObject>>>();
+	Map<String, Map<String, List<JSONObject>>> m_programs = null;
 	
 	private List<JSONObject> getPrograms(String ccId, String programId){
 		List<JSONObject> out = new ArrayList<JSONObject>();
@@ -143,17 +143,17 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 	}
 	
 	public LocalDate toDate(JSONObject dateDate) {
-		JSONObject valueJsonObj = dateDate.getJSONObject("value");
+		JSONObject valueJsonObj = dateDate.optJSONObject("value");
 		if(valueJsonObj==null) {
 			valueJsonObj = dateDate;
 		}
 		
-		LocalDate date = LocalDate.of(valueJsonObj.getInt("year"), valueJsonObj.getInt("month"), valueJsonObj.getInt("day"));
+		LocalDate date = LocalDate.of(valueJsonObj.getInt("year"), valueJsonObj.getInt("month"), valueJsonObj.getInt("date"));
 		return date;
 	}
 	
 	public LocalTime toTime(JSONObject timeObj) {
-		JSONObject valueJsonObj = timeObj.getJSONObject("value");
+		JSONObject valueJsonObj = timeObj.optJSONObject("value");
 		if(valueJsonObj==null) {
 			valueJsonObj = timeObj;
 		}

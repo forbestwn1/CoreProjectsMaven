@@ -69,6 +69,9 @@ var node_uiUtility = function(){
 			else if(brickType==node_COMMONCONSTANT.RUNTIME_RESOURCE_TYPE_UIPAGE){
 				break;
 			}
+			else{
+				break;
+			}
 		}
 	};
 

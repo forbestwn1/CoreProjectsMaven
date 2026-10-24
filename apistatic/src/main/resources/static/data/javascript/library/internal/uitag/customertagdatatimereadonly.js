@@ -31,8 +31,11 @@ var node_createUICustomerTagTestTimeReadOnly = function(envObj){
     	updateView : function(currentData){
 			loc_currentData = currentData;
 	    	if(currentData!=undefined){
-		    	var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			    loc_dataView.html(value.hour+":"+value.minute+":"+value.second);
+		    	var value = currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
+				var hour = value.hour==undefined?0:value.hour;
+				var minute = value.minute==undefined?0:value.minute;
+				var second = value.second==undefined?0:value.second;
+			    loc_dataView.html(hour.toString().padStart(2, "0")+":"+minute.toString().padStart(2, "0")+":"+second.toString().padStart(2, "0"));
 		    }
 		    else{
 			    loc_dataView.html("");

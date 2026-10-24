@@ -255,7 +255,7 @@ var loc_createUITagComponentCore = function(uiTagDefinition, complexEntityDef, t
 		getAllContent : function(){    return loc_childrenCustomerTagNode;        },
 		removeAllContent : function(){
 			_.each(loc_childrenCustomerTagNode, function(childNode, i){
-				childNode.getChildValue().getCoreEntity().destroy();
+				childNode.node.getChildValue().getCoreEntity().destroy();
 			});
 			loc_childrenCustomerTagNode = [];
 		},
