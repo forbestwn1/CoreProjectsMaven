@@ -95,10 +95,10 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 			programIds.add(((JSONObject)programValue).getString("id"));
 		}
 		
-		LocalDate fromDate = toDate((JSONObject)fromDateData.getValue());
+		LocalDate fromDate = objtoLocalDate((JSONObject)fromDateData.getValue());
 		LocalTime fromTime = toTime((JSONObject)fromTimeData.getValue());
 		
-		LocalDate toDate = toDate((JSONObject)toDateData.getValue());
+		LocalDate toDate = objtoLocalDate((JSONObject)toDateData.getValue());
 		LocalTime toTime = toTime((JSONObject)toTimeData.getValue());
 
 		List<String> programStrList = new ArrayList<String>();
@@ -123,7 +123,7 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 	}
 
 	private boolean isValid(JSONObject jsonObj, LocalDate fromDate, LocalDate toDate, LocalTime fromTime, LocalTime toTime) {
-		LocalDate date = toDate(jsonObj.getJSONObject("Date"));
+		LocalDate date = localObjtoLocalDate(jsonObj.getJSONObject("Date"));
 		LocalTime time1 = toTime(jsonObj.getJSONObject("fromTime"));
 		LocalTime time2 = toTime(jsonObj.getJSONObject("toTime"));
 		
@@ -142,7 +142,17 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 		return HAPUtilityJson.buildMapJson(outMap);
 	}
 	
-	public LocalDate toDate(JSONObject dateDate) {
+	public LocalDate objtoLocalDate(JSONObject dateDate) {
+		JSONObject valueJsonObj = dateDate.optJSONObject("value");
+		if(valueJsonObj==null) {
+			valueJsonObj = dateDate;
+		}
+		
+		LocalDate date = LocalDate.of(valueJsonObj.getInt("year"), valueJsonObj.getInt("month")+1, valueJsonObj.getInt("date"));
+		return date;
+	}
+	
+	public LocalDate localObjtoLocalDate(JSONObject dateDate) {
 		JSONObject valueJsonObj = dateDate.optJSONObject("value");
 		if(valueJsonObj==null) {
 			valueJsonObj = dateDate;

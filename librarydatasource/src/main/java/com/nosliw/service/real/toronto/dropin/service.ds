@@ -84,8 +84,7 @@
 						{
 							"name" : "output",
   							"dataDefinition" : {
-    							"criteria1" : "test.array;1.0.0%||element:test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,fromTime:test.time;1.0.0,toTime:test.time;1.0.0,Url:test.url;1.0.0||%%||%",
-    							"criteria" : "test.array;1.0.0%||element:test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0||%%||%"
+    							"criteria" : "test.array;1.0.0%||element:test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,fromTime:test.time;1.0.0,toTime:test.time;1.0.0,Url:test.url;1.0.0||%%||%"
     						}
 						}
 					]
