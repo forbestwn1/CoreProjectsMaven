@@ -95,7 +95,7 @@ public class Main_loadDropinProgram {
 				        				
 				        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
 				        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(
-				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonthValue()+""), entry("date", date.getDayOfMonth()+"")), 
+				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonthValue()-1+""), entry("date", date.getDayOfMonth()+"")), 
 				        						Map.ofEntries(entry("year", Integer.class), entry("month", Integer.class), entry("date", Integer.class)))
 				        				));
 				        				
@@ -139,6 +139,7 @@ public class Main_loadDropinProgram {
 			String safeProgramName = program.replaceAll("[\\/:*?\"<>|]", "_");
 			Path targetFile = targetDir.resolve(safeProgramName + ".json");
 			String json = HAPUtilityJson.buildArrayJson(data.toArray(new String[0]));
+			json = HAPUtilityJson.formatJson(json);
 			Files.writeString(targetFile, json, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
 		} catch (Exception e) {
 			e.printStackTrace();

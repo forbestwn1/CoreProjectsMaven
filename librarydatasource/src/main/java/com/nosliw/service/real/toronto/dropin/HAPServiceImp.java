@@ -123,12 +123,12 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 	}
 
 	private boolean isValid(JSONObject jsonObj, LocalDate fromDate, LocalDate toDate, LocalTime fromTime, LocalTime toTime) {
-		LocalDate date = localObjtoLocalDate(jsonObj.getJSONObject("Date"));
+		LocalDate date = objtoLocalDate(jsonObj.getJSONObject("Date"));
 		LocalTime time1 = toTime(jsonObj.getJSONObject("fromTime"));
 		LocalTime time2 = toTime(jsonObj.getJSONObject("toTime"));
 		
-		if(date.isAfter(fromDate)&&date.isBefore(toDate)) {
-			if(time1.isAfter(fromTime)&&time1.isBefore(toTime)) {
+		if((date.isAfter(fromDate)||date.isEqual(fromDate))&&(date.isBefore(toDate)||date.isEqual(toDate))) {
+			if((time1.isAfter(fromTime)||time1.equals(fromTime))&&(time1.isBefore(toTime)||time1.equals(toTime))) {
 				return true;
 			}
 		}
@@ -149,16 +149,6 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 		}
 		
 		LocalDate date = LocalDate.of(valueJsonObj.getInt("year"), valueJsonObj.getInt("month")+1, valueJsonObj.getInt("date"));
-		return date;
-	}
-	
-	public LocalDate localObjtoLocalDate(JSONObject dateDate) {
-		JSONObject valueJsonObj = dateDate.optJSONObject("value");
-		if(valueJsonObj==null) {
-			valueJsonObj = dateDate;
-		}
-		
-		LocalDate date = LocalDate.of(valueJsonObj.getInt("year"), valueJsonObj.getInt("month"), valueJsonObj.getInt("date"));
 		return date;
 	}
 	

@@ -32,9 +32,9 @@ public class Main3_buildDropinProgramCodeTable {
 					.setParm("dataSet", HAPUtilityJson.buildArrayJson(dataListStr.toArray(new String[0])))
 		    		.getContent();
 
-            Files.createDirectories(Utility.COMMUNITY_CENTER_CODETABLE_PATH.getParent());
+            Files.createDirectories(Utility.PROGRAM_CODETABLE_PATH.getParent());
             Files.writeString(
-            		Utility.COMMUNITY_CENTER_CODETABLE_PATH_ALL,
+            		Utility.PROGRAM_CODETABLE_PATH,
                     new JSONObject(outputContent).toString(2),
                     StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
@@ -42,7 +42,7 @@ public class Main3_buildDropinProgramCodeTable {
                     StandardOpenOption.WRITE
             );
 
-            System.out.println("Wrote " + manager.getAllPrograms().size() + " community centers to " + Utility.COMMUNITY_CENTER_CODETABLE_PATH.toAbsolutePath());
+            System.out.println("Wrote " + manager.getAllPrograms().size() + " dropin program to " + Utility.PROGRAM_CODETABLE_PATH.toAbsolutePath());
         } catch (Exception e) {
             System.err.println("Failed to build community center code table.");
             e.printStackTrace();
