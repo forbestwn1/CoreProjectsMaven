@@ -26,14 +26,17 @@ var node_createUICustomerTagTestTime = function(envObj){
 	
 	var loc_getCurrentData = function(){
 		var date = loc_dataView.val();
-		var segs = date.split(":");
+		if(date==""||date==undefined){
+			return;
+		}
 
+		var segs = date.split(":");
 		return {
 			dataTypeId: "test.time;1.0.0",
 			value: {
 				hour : parseInt(segs[0]),
-				minute : parseInt(segs[1]),
-				second : parseInt(segs[2])
+				minute : segs.length>=2?parseInt(segs[1]):0,
+				second : segs.length>=3?parseInt(segs[2]):0
 			}
 		};
 	};

@@ -157,7 +157,7 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 		if(valueJsonObj==null) {
 			valueJsonObj = timeObj;
 		}
-		LocalTime time = LocalTime.of(valueJsonObj.getInt("hour"), valueJsonObj.getInt("minute"), valueJsonObj.getInt("second"));
+		LocalTime time = LocalTime.of(valueJsonObj.optInt("hour", 0), valueJsonObj.optInt("minute", 0), valueJsonObj.optInt("second", 0));
 		return time;
 	}
 	

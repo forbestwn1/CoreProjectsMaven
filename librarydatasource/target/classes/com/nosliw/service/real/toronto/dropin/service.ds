@@ -64,12 +64,19 @@
 					"name" : "fromTime",
 					"dataDefinition" : {
 						"criteria" : "test.time;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
 						"initData" : {
 							"dataTypeId": "test.time;1.0.0",
 							"value": {
 							    hour: 6,
 							    minute : 0,
-							    second : 0
+							    second : 0,
 							}
 						}
 					}
@@ -91,12 +98,18 @@
 					"name" : "toTime",
 					"dataDefinition" : {
 						"criteria" : "test.time;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
 						"initData" : {
 							"dataTypeId": "test.time;1.0.0",
 							"value": {
 							    hour: 22,
 							    minute : 0,
-							    second : 0
 							}
 						}
 					}
