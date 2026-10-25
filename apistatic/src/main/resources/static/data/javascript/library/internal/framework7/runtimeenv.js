@@ -70,7 +70,7 @@ var node_createRuntimeEnv = function(parentView){
 	var loc_init = function(parentView){
     	loc_framework7App = node_framework7Utility.createTypicalFramework7App(parentView); 
 		
-		loc_containerView = $('<div class="view view-main" style="height1:1200px;overflow-y1: scroll; "></div>');
+		loc_containerView = $('<div class="view view-main" style="overflow-y: auto; "></div>');
 
     	$(parentView).append(loc_containerView);
 	
