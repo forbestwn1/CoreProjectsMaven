@@ -473,6 +473,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 				newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
 				changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
 			}
+			else {
+				//for element in array
+				out = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "elementwrapper.html", this.getClass());
+			}
 
 			//children data
 			HAPStoryWizzardQuestionairGroup dataChildrenGroupQ = (HAPStoryWizzardQuestionairGroup)HAPStoryWizzardUtilityQuestion.findChildSingleQuestionairByTag(dataGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDREN);
@@ -491,7 +495,8 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					changeSession.addChangeConnectionNew(newUITagWrapperChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIWrapperContent.CHILD_CONTENT)));
 				}
 				else {
-					out = newRootContentChange;
+					changeSession.addChangeConnectionNew(out.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("child")));
+//					out = newRootContentChange;
 				}
              }
 		}

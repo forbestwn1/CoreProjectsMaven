@@ -33,7 +33,7 @@ var node_createUICustomerTagTestDateReadOnly = function(envObj){
 			if(currentData!=undefined){
 				var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
 				var date = new Date(value.year, value.month, value.date);
-				loc_dataView.html(date.toLocaleDateString('en-CA'));
+				loc_dataView.html(date.toLocaleDateString('en-CA') + "  " + date.toLocaleDateString('en-US', { weekday: 'long' }));
 			}
 			else{
 				loc_dataView.html("");

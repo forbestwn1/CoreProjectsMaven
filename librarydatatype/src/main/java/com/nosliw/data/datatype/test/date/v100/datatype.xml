@@ -14,7 +14,13 @@
 			</parms>
 			<output criteria="test.date;1.0.0"/>
 		</operation>
-		<operation name="lastDate" >
+		<operation name="nextSaturaday" >
+			<parms>
+				<parm name="base" criteria="test.date" isBase="true"/>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
+		<operation name="nextSunday" >
 			<parms>
 				<parm name="base" criteria="test.date" isBase="true"/>
 			</parms>
@@ -27,8 +33,13 @@
 			</parms>
 			<output criteria="test.date;1.0.0"/>
 		</operation>
+		<operation name="lastDate" >
+			<parms>
+				<parm name="base" criteria="test.date" isBase="true"/>
+			</parms>
+			<output criteria="test.date;1.0.0"/>
+		</operation>
 	
 	</operations>
-
 
 </definition>
