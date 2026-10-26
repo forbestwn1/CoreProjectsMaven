@@ -151,8 +151,8 @@ export default function QuestionairDynamicRequestConstantValue({ questionair, da
 			</div>
 
 			{showPopup && (
-				<div className="modal-overlay" onClick={closePopup}>
-					<div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+				<div className="modal-overlay">
+					<div className="modal-panel">
 						<div className="modal-header">
 							<h3>Change Value</h3>
 							<button className="modal-close" onClick={closePopup}>×</button>
