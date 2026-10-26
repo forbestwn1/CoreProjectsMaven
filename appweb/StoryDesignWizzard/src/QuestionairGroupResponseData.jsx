@@ -10,7 +10,8 @@ export default function QuestionairGroupResponseData({ questionair, onChange }) 
   
   var dataEntityInfoQ = questionairUtility.getChildQuestionairByTag(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_ENTITYINFO);
   const dataEntityInfo = questionairUtility.getValueFromQuestionairItem(dataEntityInfoQ)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEENTITYINFOSTATIC_ENTITYINFO];
-  
+  const skipCurrent = dataEntityInfo.name=="default";
+
   var childrenGroupQ = questionairUtility.getChildQuestionairByTag(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTION_TAG_DATASOURCERESPONSEDATACHILDREN);
   var childItemsQ = childrenGroupQ==undefined? [] : childrenGroupQ[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONAIR_ITEM];
 
@@ -28,7 +29,16 @@ export default function QuestionairGroupResponseData({ questionair, onChange }) 
     };
 
 
-  return (
+  return skipCurrent ? (
+    childItemsQ.map((childQ) => (
+      <QuestionairGroupResponseData
+        key={childQ.id}
+        questionair={childQ}
+        onChange={onChange}
+      />
+    ))
+  ) : (
+
     <div className="response-data-card">
       <div className="response-data-header">
         <button
@@ -63,7 +73,11 @@ export default function QuestionairGroupResponseData({ questionair, onChange }) 
 
         {childItemsQ.map((childQ) => {
           return (
-            <QuestionairGroupResponseData questionair={childQ} onChange={onChange} />
+            <QuestionairGroupResponseData
+              key={childQ.id}
+              questionair={childQ}
+              onChange={onChange}
+            />
           );
         })}
       </div>
