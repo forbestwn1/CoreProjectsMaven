@@ -8,6 +8,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
@@ -294,7 +295,11 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
 
 					//inject title
-					HAPStoryChangeItemElementNew newRequestInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, parmDef.getName());
+					String title = parmDef.getDescription();
+					if(HAPUtilityBasic.isStringEmpty(title)) {
+						title = parmDef.getName();
+					}
+					HAPStoryChangeItemElementNew newRequestInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, title);
 					changeSession.addChangeConnectionNew(newRequestInputLabelContentChange.getElementId(), newRequestInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
 					
 					//inject uiTag

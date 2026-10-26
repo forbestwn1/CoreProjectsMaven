@@ -9,6 +9,7 @@
 			"request" : [
 				{
 					"name" : "location",
+					"description" : "Community Center",
 					"dataDefinition" : {
 						"criteria" : "test.entity;1.0.0",
 					    "isMultipleAllowed" : true,
@@ -29,6 +30,7 @@
 				},
 				{
 					"name" : "program",
+					"description" : "Program Name",
 					"dataDefinition" : {
 						"criteria" : "test.entity;1.0.0",
 					    "isMultipleAllowed" : true,
@@ -49,6 +51,7 @@
 				},
 				{
 					"name" : "fromDate",
+					"description" : "From Date",
 					"dataDefinition" : {
 						"criteria" : "test.date;1.0.0",
     				    "rule" : [
@@ -62,6 +65,7 @@
 				},
 				{
 					"name" : "fromTime",
+					"description" : "From Time",
 					"dataDefinition" : {
 						"criteria" : "test.time;1.0.0",
     				    "rule" : [
@@ -83,6 +87,7 @@
 				},
 				{
 					"name" : "toDate",
+					"description" : "To Date",
 					"dataDefinition" : {
 						"criteria" : "test.date;1.0.0",
     				    "rule" : [
@@ -96,6 +101,7 @@
 				},
 				{
 					"name" : "toTime",
+					"description" : "To Time",
 					"dataDefinition" : {
 						"criteria" : "test.time;1.0.0",
     				    "rule" : [

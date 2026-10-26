@@ -20,6 +20,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
 
   var loc_requestParmDef = questionairUtility.getValueFromQuestionairItem(questionairParmInfo)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMINFOSTATIC_REQUESTPARMDEF];
   var loc_requestParmName = loc_requestParmDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME];
+  var loc_requestParmDesc = loc_requestParmDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DESCRIPTION]==undefined?loc_requestParmName:loc_requestParmDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DESCRIPTION];
   var loc_dataDefinition = loc_requestParmDef[node_COMMONATRIBUTECONSTANT.DEFINITIONPARMREQUEST_DATADEFINITION];
   var loc_isConstant = questionairUtility.getValueFromQuestionairItem(questionairIsConstant)[node_COMMONATRIBUTECONSTANT.STORYWIZZARDQUESTIONVALUEDATASOURCEREQUESTPARMCHOOSEISCONSTANTDYNAMIC_ISCONSTANT];
 
@@ -46,7 +47,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
         className="request-parm-toggle"
         onClick={() => setCollapsed(!collapsed)}
       >
-        <span>{loc_requestParmName}</span>
+        <span>{loc_requestParmDesc}</span>
         <span className="request-parm-state-group">
           <span className={`request-parm-state-icon ${loc_isConstant ? 'is-constant' : 'is-input'}`} title={stateTitle} aria-label={stateTitle}>{stateIcon}</span>
           <span className="toggle-icon">{collapsed ? '⌄' : '⌃'}</span>
