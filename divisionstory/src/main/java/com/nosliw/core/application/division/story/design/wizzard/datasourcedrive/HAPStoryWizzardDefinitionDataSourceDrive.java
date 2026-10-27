@@ -15,6 +15,8 @@ import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmReques
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
+import com.nosliw.core.application.common.uitag.HAPUITagInfo;
+import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.application.division.story.api.HAPConfigureMiniApp;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
@@ -207,6 +209,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			HAPStoryChangeItemElementNew newRootContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "main.html", this.getClass());
 			changeSession.addChangeConnectionNew(newPageContentWrapperChange.getElementId(), newRootContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIWrapperContent.CHILD_CONTENT)));
 
+			//add preselected request content and inject it to "request" slot
+			HAPStoryChangeItemElementNew newPreselectRequestContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "request.html", this.getClass());
+			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newPreselectRequestContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("requestPreselected")));
+			
 			//add request content and inject it to "request" slot
 			HAPStoryChangeItemElementNew newRequestContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "request.html", this.getClass());
 			changeSession.addChangeConnectionNew(newRootContentChange.getElementId(), newRequestContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("request")));
@@ -224,17 +230,17 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
 
-			HAPStoryDataAssociation requestDataAssociationForConstant = new HAPStoryDataAssociation(
-					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithConstant.CHILD_CONSTANT),
-					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
-					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
-					);
-
-			HAPStoryDataAssociation requestDataAssociationForDataExpression = new HAPStoryDataAssociation(
-					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithDataExpression.CHILD_DATAEXPRESSION),
-					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
-					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
-					);
+//			HAPStoryDataAssociation requestDataAssociationForConstant = new HAPStoryDataAssociation(
+//					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithConstant.CHILD_CONSTANT),
+//					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
+//					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+//					);
+//
+//			HAPStoryDataAssociation requestDataAssociationForDataExpression = new HAPStoryDataAssociation(
+//					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithDataExpression.CHILD_DATAEXPRESSION),
+//					new HAPStoryPath(dataSourceElementId, null), HAPStoryElementEntityDataSource.buildPathToCommandExecute().appendSegment(HAPStoryElementAccessoryCommand.CHILD_REQUEST),
+//					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+//					);
 
 
 			//data association between page and data source response
@@ -244,6 +250,19 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
 					);
 
+			//data association from constant/expression to variable in page
+			HAPStoryDataAssociation preselWithConstantDataAssociationForPage = new HAPStoryDataAssociation(
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithConstant.CHILD_CONSTANT),
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithVariable.CHILD_VARIABLE),
+					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+					);
+
+			HAPStoryDataAssociation preselWithDataExpressionDataAssociationForPage = new HAPStoryDataAssociation(
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithDataExpression.CHILD_DATAEXPRESSION),
+					new HAPStoryPath(uiWrapperElementId, null), new HAPPath(HAPStoryElementWithVariable.CHILD_VARIABLE),
+					HAPConstantShared.DATAASSOCIATION_DIRECTION_DOWNSTREAM
+					);
+			
 			
 			//request
 			List<HAPStoryWizzardQuestionair> requestParmGroupQs = HAPStoryWizzardUtilityQuestion.findQuestionairsByTag(questionair, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMGROUP);
@@ -259,61 +278,43 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPStoryWizzardQuestionairItemDynamic parmConstantValueQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMCONSTANTVALUE);
 					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic dataBuildInQ = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic)parmConstantValueQ.getValue();
 					
+					//build ui & variable for parm
+					HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(parmDef.getDataDefinition());
+					uiTagQuery.setIOMode(HAPConstantShared.DATAFLOW_OUT);;
+					HAPUITagInfo uiTagInfo = this.m_uiTagService.getDefaultUITagData(uiTagQuery);
+					buildReqestParm(changeSession, parmDef, new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes()), newPageContentWrapperChange, newPreselectRequestContentChange, true);
+
+					//build tunnel between variable endpoint and command endpoint
+					requestDataAssociationForVariable.addTunnel(new HAPStoryTunnel(parmDef.getName(), parmDef.getName()));
+
+					
 					//add constant
 					HAPStoryChangeItemElementNew newConstantChange = HAPStoryChangeUtility.buildNewAppendConstantChange(changeSession, newPageContentWrapperChange.getElementId(), dataBuildInQ.getDataBuild(), parmDef);
 
+					//build tunnel between constant/data expression endpoint and variable endpoint in page
 					String dataBuildType = dataBuildInQ.getDataBuild().getExpressionChosen();
 					if(HAPConstantShared.DATABUILD_CHOSEN_CONSTANT.equals(dataBuildType)) {
-						//build tunnel between constant endpoint and command endpoint
+						//build tunnel between constant endpoint and variable endpoint in page
 						HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
-						requestDataAssociationForConstant.addTunnel(tunnel);
+						preselWithConstantDataAssociationForPage.addTunnel(tunnel);
 					}
 					else if(HAPConstantShared.DATABUILD_CHOSEN_EXPRESSION.equals(dataBuildType)) {
-						//build tunnel between dataexpression endpoint and command endpoint
+						//build tunnel between dataexpression endpoint and variable endpoint in page
 						HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
-						requestDataAssociationForDataExpression.addTunnel(tunnel);
+						preselWithDataExpressionDataAssociationForPage.addTunnel(tunnel);
 					}
 				}
 				else {
 					HAPStoryWizzardQuestionairItemDynamic parmUITagChooseQ = (HAPStoryWizzardQuestionairItemDynamic)HAPStoryWizzardUtilityQuestion.findSingleQuestionairByTag(requestParmGroupQ, HAPConstantShared.STORYDESIGN_QUESTION_TAG_DATASOURCEREQUESTPARMUITAG);
 					HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic chooseUITagValue = (HAPStoryWizzardQuestionValueDataSourceRequestParmChooseUIDynamic)parmUITagChooseQ.getValue();
 					HAPStoryWizzardUITagInfo uiTagInfo = chooseUITagValue.getUITagInfo();
-					
-					//add variable
-					HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
 
+					//build ui & variable for parm
+					buildReqestParm(changeSession, parmDef, uiTagInfo, newPageContentWrapperChange, newRequestContentChange, false);
+					
 					//build tunnel between variable endpoint and command endpoint
 					HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
 					requestDataAssociationForVariable.addTunnel(tunnel);
-					
-					//append input content
-					HAPStoryChangeItemElementNew newRequestInputContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "input.html", this.getClass());
-					changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("input")));
-					
-					//inject label
-					HAPStoryChangeItemElementNew newRequestInputLabelContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "inputlabel.html", this.getClass());
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
-
-					//inject title
-					String title = parmDef.getDescription();
-					if(HAPUtilityBasic.isStringEmpty(title)) {
-						title = parmDef.getName();
-					}
-					HAPStoryChangeItemElementNew newRequestInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, title);
-					changeSession.addChangeConnectionNew(newRequestInputLabelContentChange.getElementId(), newRequestInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
-					
-					//inject uiTag
-					HAPStoryElementUIContentTagCustom uiTagCustom = new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes());
-					uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_PROFILE, METADATA_PROFILE_REQUEST);
-					HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(uiTagCustom);
-					uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_ID, uiTagChangeNew.getElementId().getKey());
-					changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
-					
-					//inject content wrapper into uitag
-					HAPStoryChangeItemElementNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
-					changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
-					
-					//inject error tag
 					
 				}
 			}
@@ -331,8 +332,7 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 
 				if(this.isDataShown(dataQ)) {
 				    //build tunnel between variable endpoint and command endpoint
-				    HAPStoryTunnel tunnel = new HAPStoryTunnel(parmDef.getName(), parmDef.getName());
-				    responseDataAssociation.addTunnel(tunnel);
+				    responseDataAssociation.addTunnel(new HAPStoryTunnel(parmDef.getName(), parmDef.getName()));
 
 					//add variable
 					HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), new HAPDataDefinitionWritable(parmDef.getDataDefinition()), parmDef);
@@ -343,9 +343,19 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			}
 
 			//present page task
-			HAPStoryRunnableUIPagePresent presentPageRunnable = new HAPStoryRunnableUIPagePresent();
-			presentPageRunnable.setPage(pageElementId.getId());
-			HAPStoryChangeItemRunnableNew presentPageRunableChangeNew = changeSession.addChangeItemNew(presentPageRunnable);
+			HAPStoryChangeItemRunnableNew presentPageRunableChangeNew = null;
+			{
+				HAPStoryRunnableUIPagePresent presentPageRunnable = new HAPStoryRunnableUIPagePresent();
+				presentPageRunnable.setPage(pageElementId.getId());
+				presentPageRunableChangeNew = changeSession.addChangeItemNew(presentPageRunnable);
+
+				HAPStoryDataAssociationForTask dataAssociationForPresentPageTask = new HAPStoryDataAssociationForTask();
+				HAPStoryDataAssociationComplex requestDAComplex = new HAPStoryDataAssociationComplex();
+				requestDAComplex.addDataAssociation(preselWithConstantDataAssociationForPage);
+				requestDAComplex.addDataAssociation(preselWithDataExpressionDataAssociationForPage);
+				dataAssociationForPresentPageTask.setRequestDataAssociation(requestDAComplex);
+				presentPageRunnable.setDataAssociation(dataAssociationForPresentPageTask);
+			}
 			
 			//module init task
 			HAPStoryRunnableSequence moculeInitRunnable = new HAPStoryRunnableSequence();
@@ -358,19 +368,17 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			dataSourceCommandRunnable.setPathToCommandHost(new HAPStoryPath(dataSourceElementId, null));
 			dataSourceCommandRunnable.setSubpathToValuePort(null);
 
-			HAPStoryDataAssociationForTask dataAssociationForTask = new HAPStoryDataAssociationForTask();
+			HAPStoryDataAssociationForTask dataAssociationForDataSourceCommandTask = new HAPStoryDataAssociationForTask();
 			
 			HAPStoryDataAssociationComplex requestDAComplex = new HAPStoryDataAssociationComplex();
-			requestDAComplex.addDataAssociation(requestDataAssociationForConstant);
 			requestDAComplex.addDataAssociation(requestDataAssociationForVariable);
-			requestDAComplex.addDataAssociation(requestDataAssociationForDataExpression);
-			dataAssociationForTask.setRequestDataAssociation(requestDAComplex);
+			dataAssociationForDataSourceCommandTask.setRequestDataAssociation(requestDAComplex);
 
 			HAPStoryDataAssociationComplex responseDAComplex = new HAPStoryDataAssociationComplex();
 			responseDAComplex.addDataAssociation(responseDataAssociation);
-			dataAssociationForTask.addResponseDataAssociation(HAPConstantShared.SERVICE_RESULT_SUCCESS, responseDAComplex);
+			dataAssociationForDataSourceCommandTask.addResponseDataAssociation(HAPConstantShared.SERVICE_RESULT_SUCCESS, responseDAComplex);
 
-			dataSourceCommandRunnable.setDataAssociation(dataAssociationForTask);
+			dataSourceCommandRunnable.setDataAssociation(dataAssociationForDataSourceCommandTask);
 			
 			HAPStoryChangeItemRunnableNew dataSourceCommandRunChangeNew = changeSession.addChangeItemNew(dataSourceCommandRunnable);
 
@@ -421,6 +429,45 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 			stepMetaData.setUrl(url);
 			design.newEndStep(stepMetaData);
 		}
+		
+	}
+	
+	private void buildReqestParm(HAPStoryDesignSessionChange changeSession, HAPDefinitionParmRequest parmDef, HAPStoryWizzardUITagInfo uiTagInfo, HAPStoryChangeItemElementNew newPageContentWrapperChange, HAPStoryChangeItemElementNew newRequestContentChange, boolean isPreselected) {
+
+		//add variable
+		HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
+
+		//append input content
+		HAPStoryChangeItemElementNew newRequestInputContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "input.html", this.getClass());
+		changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("input")));
+		
+		//inject label
+		HAPStoryChangeItemElementNew newRequestInputLabelContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "inputlabel.html", this.getClass());
+		changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequestInputLabelContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("label")));
+
+		//inject title
+		String title = parmDef.getDescription();
+		if(HAPUtilityBasic.isStringEmpty(title)) {
+			title = parmDef.getName();
+		}
+		HAPStoryChangeItemElementNew newRequestInputLabelTitleChange = HAPStoryDesignUtilityUI.newUIContentHtml(changeSession, title);
+		changeSession.addChangeConnectionNew(newRequestInputLabelContentChange.getElementId(), newRequestInputLabelTitleChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("labeltitle")));
+		
+		//inject uiTag
+		HAPStoryElementUIContentTagCustom uiTagCustom = new HAPStoryElementUIContentTagCustom(uiTagInfo.getTagName(), uiTagInfo.getAttributes());
+		if(!isPreselected) {
+			uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_PROFILE, METADATA_PROFILE_REQUEST);
+		}
+		HAPStoryChangeItemElementNew uiTagChangeNew = changeSession.addChangeItemNew(uiTagCustom);
+		uiTagCustom.addMetadata(HAPConstantShared.UITAG_METADATA_ID, uiTagChangeNew.getElementId().getKey());
+		changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), uiTagChangeNew.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("uitag")));
+		
+		//inject content wrapper into uitag
+		HAPStoryChangeItemElementNew newUITagWrapperChange = changeSession.addChangeItemNew(new HAPStoryElementUIWrapperContent());
+		changeSession.addChangeConnectionNew(uiTagChangeNew.getElementId(), newUITagWrapperChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(new HAPPath(HAPStoryElementUIContentTagCustom.CHILD_CONTENTWRAPPER)));
+		
+		//inject error tag
+		
 		
 	}
 	

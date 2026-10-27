@@ -10,23 +10,19 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnable;
+import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnableTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryPath;
-import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnableTask;
 
-public class HAPStoryRunnableCommand extends HAPStoryRunnable{
+public class HAPStoryRunnableCommand extends HAPStoryRunnableTask{
 
 	public final static String PATHTOCOMMANDHOST = "pathToCommandHost";
 
 	public final static String SUBPATHTOVALUEPORT = "subPathToValuePort";
 
-	public final static String DATAASSOCIATION = "dataAssociation";
-	
 	private HAPStoryPath m_pathToCommandHost;
 
 	private HAPPath m_subPathToValuePort;
-	
-	private HAPStoryDataAssociationForTask m_dataAssociation;
 	
 	public HAPStoryRunnableCommand() {
 		super(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND);
@@ -38,9 +34,6 @@ public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 	public void setSubpathToValuePort(HAPPath path) {      this.m_subPathToValuePort = path;         }
 	public HAPPath getSubpathToValuePort() {      return this.m_subPathToValuePort;       }
 	
-	public HAPStoryDataAssociationForTask getDataAssociation() {      return this.m_dataAssociation;        }
-	public void setDataAssociation(HAPStoryDataAssociationForTask dataAssociation) {      this.m_dataAssociation = dataAssociation;         }
-	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
 		super.buildJsonMap(jsonMap, typeJsonMap);
@@ -48,15 +41,12 @@ public class HAPStoryRunnableCommand extends HAPStoryRunnable{
 		if(this.m_subPathToValuePort!=null) {
 			jsonMap.put(SUBPATHTOVALUEPORT, this.m_subPathToValuePort.toString());
 		}
-		if(this.m_dataAssociation!=null) {
-			jsonMap.put(DATAASSOCIATION, this.m_dataAssociation.toStringValue(HAPSerializationFormat.JSON));
-		}
 	}
 	
 }
 
 @Component
-class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRunnable{
+class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRunnableTask{
 
 	@Override
 	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND;    }
@@ -69,14 +59,6 @@ class HAPStoryElementRunnableCommand__HAPEntityParsable extends HAPStoryParserRu
 		runnable.setPathToCommandHost(path);
 		
 		runnable.setSubpathToValuePort(new HAPPath((String)jsonObj.opt(HAPStoryRunnableCommand.SUBPATHTOVALUEPORT)));
-		
-		JSONObject daJsonObj = jsonObj.optJSONObject(HAPStoryRunnableCommand.DATAASSOCIATION);
-		if(daJsonObj!=null) {
-			HAPStoryDataAssociationForTask da = new HAPStoryDataAssociationForTask();
-			da.buildObject(daJsonObj, HAPSerializationFormat.JSON);
-			runnable.setDataAssociation(da);
-		}
-
 	}
 
 	@Override

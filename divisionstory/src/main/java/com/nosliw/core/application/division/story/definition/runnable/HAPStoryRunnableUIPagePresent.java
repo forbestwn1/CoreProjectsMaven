@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnable;
-import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
+import com.nosliw.core.application.division.story.definition.HAPStoryParserRunnableTask;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnableTask;
 
-public class HAPStoryRunnableUIPagePresent extends HAPStoryRunnable{
+public class HAPStoryRunnableUIPagePresent extends HAPStoryRunnableTask{
 
 	public static final String PAGE = "PAGE";
 	
@@ -38,7 +38,7 @@ public class HAPStoryRunnableUIPagePresent extends HAPStoryRunnable{
 }
 
 @Component
-class HAPStoryRunnableUIPagePresent__HAPEntityParsable extends HAPStoryParserRunnable{
+class HAPStoryRunnableUIPagePresent__HAPEntityParsable extends HAPStoryParserRunnableTask{
 
 	@Override
 	public String getSubName() {    return HAPConstantShared.STORYNODE_TYPE_TASK_PRESENTPAGE;    }

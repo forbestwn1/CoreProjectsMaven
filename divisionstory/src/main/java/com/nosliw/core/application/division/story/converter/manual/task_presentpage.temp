@@ -9,9 +9,12 @@
 					"info" : {
 						"nosliw_alias" : "|||alias|||"
 					},
-    				"scriptResourceId": "task_page_present",
-    				"parm": {
-    				    "page" : "|||pageId|||"
-    				}
+					"brick" : {
+        				"scriptResourceId": "task_page_present",
+         				"parm": {
+    	    			    "page" : "|||pageId|||"
+    		    		}
+					},
+    				"adapter" : |||adapters|||
 		        }
 	        }

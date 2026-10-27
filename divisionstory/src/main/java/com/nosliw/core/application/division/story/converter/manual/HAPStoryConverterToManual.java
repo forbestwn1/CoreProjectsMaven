@@ -44,6 +44,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElementWith
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryPath;
 import com.nosliw.core.application.division.story.definition.HAPStoryRunnable;
+import com.nosliw.core.application.division.story.definition.HAPStoryRunnableTask;
 import com.nosliw.core.application.division.story.definition.HAPStoryStory;
 import com.nosliw.core.application.division.story.definition.HAPStoryUtilityStory;
 import com.nosliw.core.application.division.story.definition.element.HAPStoryElementAccessoryCommand;
@@ -103,29 +104,17 @@ public class HAPStoryConverterToManual {
 			String runnableType = runnable.getRunnableType();
 			if(runnableType.equals(HAPConstantShared.STORYNODE_TYPE_TASK_COMMAND)) {
 				HAPStoryRunnableCommand commandRunnable = (HAPStoryRunnableCommand)runnable;
-				HAPStoryDataAssociationForTask dataAssociationForTask = commandRunnable.getDataAssociation();
 
 				HAPStoryElement commandHostEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommandHost(), story);
 				HAPStoryElement commandValePortEle = HAPStoryUtilityStory.getDescendantElement(commandRunnable.getPathToCommandHost().getBaseStoryElementId(), new HAPPath(commandRunnable.getPathToCommandHost().getPath()).appendPath(commandRunnable.getSubpathToValuePort()), story);
 
-				HAPStoryDataAssociationComplex requestDataAssociation = dataAssociationForTask.getRequestDataAssociation();
-				String requestDAContent = converDataAssociation(requestDataAssociation, commandValePortEle.getElementId(), story);
-
-				Map<String, String> responseDAContent = new LinkedHashMap<String, String>();
-				Map<String, HAPStoryDataAssociationComplex> responseDAComplexs = dataAssociationForTask.getResponseDataAssociations();
-				for(String resultName : responseDAComplexs.keySet()) {
-					HAPStoryDataAssociationComplex responseDataAssociation = responseDAComplexs.get(resultName);
-					responseDAContent.put(resultName, converDataAssociation(responseDataAssociation, commandValePortEle.getElementId(), story));
-				}
-				
 				if(commandHostEle.getElementType().getElementType().equals(HAPConstantShared.STORYNODE_TYPE_SERVICE)) {
 					HAPStoryElementEntityDataSource dataSourceElement = (HAPStoryElementEntityDataSource)commandHostEle;
 					tasksList.add(new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "task_datasource.temp"))
 							.setParm("taskId", runnable.getId())
 							.setParm("alias", runnable.getId())
-			    			.setParm("requestDataAssociation", requestDAContent)
-			    			.setParm("responseDataAssociation", HAPUtilityJson.buildMapJson(responseDAContent))
 			    			.setParm("dataSourceId", dataSourceElement.getServiceId())
+			    			.setParm("adapters", buildAdapters(commandRunnable, commandValePortEle==null?null:commandValePortEle.getElementId(), story))
 				    		.getContent());
 				}
 			}
@@ -138,6 +127,7 @@ public class HAPStoryConverterToManual {
 				presentPageTemplateParms.put("pageId", presentPageRunnable.getPage());
 				presentPageTemplateParms.put("taskName", presentPageRunnable.getId());
 				presentPageTemplateParms.put("alias", presentPageRunnable.getId());
+				presentPageTemplateParms.put("adapters", buildAdapters(presentPageRunnable, null, story));
 				
 				tasksList.add(HAPStringTemplateUtil.getStringValue(presentPageTemplateStream, presentPageTemplateParms));
 			}
@@ -180,6 +170,30 @@ public class HAPStoryConverterToManual {
 		return out;
 	}
 	
+	private static String buildAdapters(HAPStoryRunnableTask taskRunnable, HAPStoryIdElement baseElementId, HAPStoryStory story) {
+		List<String> out = new ArrayList<String>();
+		out.add(buildAdapter(taskRunnable.getDataAssociation(), baseElementId, story));
+		return HAPUtilityJson.buildArrayJson(out.toArray(new String[0]));
+	}
+	
+	private static String buildAdapter(HAPStoryDataAssociationForTask dataAssociationForTask, HAPStoryIdElement baseElementId, HAPStoryStory story) {
+		HAPStoryDataAssociationComplex requestDataAssociation = dataAssociationForTask.getRequestDataAssociation();
+		String requestDAContent = converDataAssociation(requestDataAssociation, baseElementId, story);
+
+		Map<String, String> responseDAContent = new LinkedHashMap<String, String>();
+		Map<String, HAPStoryDataAssociationComplex> responseDAComplexs = dataAssociationForTask.getResponseDataAssociations();
+		for(String resultName : responseDAComplexs.keySet()) {
+			HAPStoryDataAssociationComplex responseDataAssociation = responseDAComplexs.get(resultName);
+			responseDAContent.put(resultName, converDataAssociation(responseDataAssociation, baseElementId, story));
+		}
+		
+		return new HAPStringTemplate(HAPUtilityFile.getInputStreamOnClassPath(HAPStoryConverterToManual.class, "adapter_task.temp"))
+    		.setParm("adapterId", dataAssociationForTask.getId()==null?"":dataAssociationForTask.getId())
+	    	.setParm("requestDataAssociation", requestDAContent)
+		    .setParm("responseDataAssociation", HAPUtilityJson.buildMapJson(responseDAContent))
+		    .getContent();
+	}
+	
 	private static String converDataAssociation(HAPStoryDataAssociationComplex dataAssociationComplex, HAPStoryIdElement defaultElementId, HAPStoryStory story) {
 		List<String> tunnelsContent = new ArrayList<String>();
 
@@ -219,7 +233,7 @@ public class HAPStoryConverterToManual {
 		}
 		
 		HAPIdBrickInBundle brickIdInBundle = null;
-		if(!defaultElementId.equals(entityElement.getElementId())) {
+		if(!entityElement.getElementId().equals(defaultElementId)) {
 			//default brick id do not need to show
 			brickIdInBundle = new HAPIdBrickInBundle();
 			brickIdInBundle.setAlias(entityElement.getElementId().getId());

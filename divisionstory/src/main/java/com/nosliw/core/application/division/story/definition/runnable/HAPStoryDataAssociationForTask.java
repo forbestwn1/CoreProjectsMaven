@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
+import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPManagerSerialize;
-import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
-public class HAPStoryDataAssociationForTask extends HAPSerializableImp{
+public class HAPStoryDataAssociationForTask extends HAPEntityInfoImp{
 
 	public final static String REQUESTDATAASSOCIATION = "requestDataAssociation";
 	
@@ -40,6 +40,9 @@ public class HAPStoryDataAssociationForTask extends HAPSerializableImp{
 	@Override
 	protected boolean buildObjectByJson(Object json){  
 		JSONObject jsonObj = (JSONObject)json;
+		
+		this.buildEntityInfoByJson(jsonObj);
+		
 		JSONObject requestDAJson = jsonObj.getJSONObject(REQUESTDATAASSOCIATION);
 		if(requestDAJson!=null) {
 			HAPStoryDataAssociationComplex requestDataAssociation = new HAPStoryDataAssociationComplex(); 
