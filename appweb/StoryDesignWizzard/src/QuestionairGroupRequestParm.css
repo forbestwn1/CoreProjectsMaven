@@ -26,6 +26,10 @@
   background: #eef2ff;
 }
 
+.request-parm-toggle .request-parm-required {
+  color: #dc2626;
+}
+
 .request-parm-toggle .request-parm-state-group {
   display: inline-flex;
   align-items: center;

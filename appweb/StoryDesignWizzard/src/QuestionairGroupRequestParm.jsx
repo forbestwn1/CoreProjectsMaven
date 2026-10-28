@@ -12,6 +12,7 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
 
   var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
   var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
+  var node_ruleUtility = nosliw.getNodeData("rule.ruleUtility");
 
   var questionairIsConstant = questionairUtility.getChildQuestionairByValueType(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMISCONSTANT);
   var questionairConstantValue = questionairUtility.getChildQuestionairByValueType(questionair, node_COMMONCONSTANT.STORYDESIGN_QUESTIONVALUE_TYPE_DATASOURCEREQUESTPARMCONSTANTVALUE);
@@ -37,6 +38,10 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
     }
   };
 
+  var loc_isParmInputMandatory = function(){
+    return node_ruleUtility.isManadtoryRule(loc_dataDefinition);
+  }
+
   const stateIcon = loc_isConstant ? '🔒' : '🔓';
   const stateTitle = loc_isConstant ? 'constant' : 'not constant';
 
@@ -47,7 +52,10 @@ export default function QuestionairGroupRequestParm({ questionair, onChange }) {
         className="request-parm-toggle"
         onClick={() => setCollapsed(!collapsed)}
       >
-        <span>{loc_requestParmDesc}</span>
+        <span>
+          {loc_requestParmDesc}
+          {loc_isParmInputMandatory() && <span className="request-parm-required">*</span>}
+        </span>
         <span className="request-parm-state-group">
           <span className={`request-parm-state-icon ${loc_isConstant ? 'is-constant' : 'is-input'}`} title={stateTitle} aria-label={stateTitle}>{stateIcon}</span>
           <span className="toggle-icon">{collapsed ? '⌄' : '⌃'}</span>
