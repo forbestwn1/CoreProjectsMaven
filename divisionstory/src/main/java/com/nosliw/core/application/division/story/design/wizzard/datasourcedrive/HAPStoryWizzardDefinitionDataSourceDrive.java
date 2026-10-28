@@ -63,6 +63,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardStepDefinition;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
 import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
+import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 
@@ -440,9 +441,17 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 		//add variable
 		HAPStoryChangeItemElementNew newVariableChange = HAPStoryChangeUtility.buildNewAppendVariableChange(changeSession, newPageContentWrapperChange.getElementId(), parmDef.getDataDefinition(), parmDef);
 
-		//append input content
+    	//append input content
 		HAPStoryChangeItemElementNew newRequestInputContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "input.html", this.getClass());
 		changeSession.addChangeConnectionNew(newRequestContentChange.getElementId(), newRequestInputContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIAppend("input")));
+		
+		//inject required or not
+		if(!isPreselected) {
+			if(HAPUtilityDataRule.isContainerMandatoryRule(parmDef.getDataDefinition())) {
+				HAPStoryChangeItemElementNew newRequiredContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "mandatorysign.html", this.getClass());
+				changeSession.addChangeConnectionNew(newRequestInputContentChange.getElementId(), newRequiredContentChange.getElementId(), new HAPStoryChangeInfoConnectionContainer(HAPStoryElementUIContentHtml.getAddChildChildPath(), new HAPStoryMetaDataChildElementUIInject("required")));
+			}
+		}
 		
 		//inject label
 		HAPStoryChangeItemElementNew newRequestInputLabelContentChange = HAPStoryDesignUtilityUI.newUIContentHtmlFromFile(changeSession, "inputlabel.html", this.getClass());

@@ -8,7 +8,10 @@ import org.json.JSONObject;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionDataRule;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
@@ -19,6 +22,21 @@ import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 
 public class HAPUtilityDataRule {
 
+	public static boolean isContainerMandatoryRule(HAPDataDefinition dataDefinition) {
+		if(dataDefinition instanceof HAPDataDefinitionWritable) {
+			HAPDataDefinitionWritable writableDataDef = (HAPDataDefinitionWritable)dataDefinition;
+			
+			for(HAPDefinitionDataRule ruleDef : writableDataDef.getRules()) {
+				if(ruleDef.getPath()==null||ruleDef.getPath().isBlank()) {
+					if(ruleDef.getDataRule().getRuleType().equals(HAPConstantShared.DATARULE_TYPE_MANDATORY)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
 	public static HAPDataRule parseDataRule(JSONObject dataRuleJson, HAPServiceParseEntity entityParseService) {
 		return (HAPDataRule)entityParseService.parseEntityJSONImplicitAttribute(dataRuleJson, HAPDataRule.RULETYPE, HAPDataRule.ENTITYPARSEDOMAIN);		
 	}
