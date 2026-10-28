@@ -282,7 +282,10 @@ public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDef
 					HAPUITageQueryData uiTagQuery = new HAPUITageQueryData(parmDef.getDataDefinition());
 					uiTagQuery.setIOMode(HAPConstantShared.DATAFLOW_OUT);;
 					HAPUITagInfo uiTagInfo = this.m_uiTagService.getDefaultUITagData(uiTagQuery);
-					buildReqestParm(changeSession, parmDef, new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes()), newPageContentWrapperChange, newPreselectRequestContentChange, true);
+					HAPStoryWizzardUITagInfo wizzardUITagInfo = new HAPStoryWizzardUITagInfo(uiTagInfo.getName(), uiTagInfo.getAttributes());
+					wizzardUITagInfo.setAttribute(uiTagInfo.getAttributeForData(), parmDef.getName());
+
+					buildReqestParm(changeSession, parmDef, wizzardUITagInfo, newPageContentWrapperChange, newPreselectRequestContentChange, true);
 
 					//build tunnel between variable endpoint and command endpoint
 					requestDataAssociationForVariable.addTunnel(new HAPStoryTunnel(parmDef.getName(), parmDef.getName()));
