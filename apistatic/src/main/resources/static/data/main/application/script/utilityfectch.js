@@ -14,6 +14,8 @@ var createFetchTask = function(staticInfos, processData, processFile, callBackFu
 	return loc_out;
 };
 
+const nosliw_libraryBaseUrl = new URL(document.currentScript.src).origin;
+
 var createStaticFetchTaskManager = function(domainName){
 	
 	var loc_processedTasks = {};
@@ -24,8 +26,7 @@ var createStaticFetchTaskManager = function(domainName){
 		var processFile = fetchTask.processFile;
 
 		$.ajax({
-//			url : "../../../nosliw/static/fetch",
-			url : (domainName==undefined?"../../..":domainName) + "/nosliw/static/fetch",
+			url : nosliw_libraryBaseUrl+"/nosliw/static/fetch",
 			type : "POST",
 			dataType: "json",
 			data : JSON.stringify(staticInfos),
