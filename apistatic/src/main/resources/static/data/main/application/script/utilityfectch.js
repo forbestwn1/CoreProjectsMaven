@@ -16,7 +16,7 @@ var createFetchTask = function(staticInfos, processData, processFile, callBackFu
 
 const nosliw_libraryBaseUrl = new URL(document.currentScript.src).origin;
 
-var createStaticFetchTaskManager = function(domainName){
+var createStaticFetchTaskManager = function(){
 	
 	var loc_processedTasks = {};
 	
@@ -25,43 +25,63 @@ var createStaticFetchTaskManager = function(domainName){
 		var processData = fetchTask.processData;
 		var processFile = fetchTask.processFile;
 
-		$.ajax({
-			url : nosliw_libraryBaseUrl+"/nosliw/static/fetch",
-			type : "POST",
-			dataType: "json",
-			data : JSON.stringify(staticInfos),
-			async : true,
-			success : function(serviceData, status){
+		const xhr = new XMLHttpRequest();
+		const url = nosliw_libraryBaseUrl+"/nosliw/static/fetch";
+		
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+
+		// 3. Track response status and process data
+		xhr.onload = function () {
+		    if (xhr.status >= 200 && xhr.status < 300) {
+				const serviceData = JSON.parse(xhr.responseText);
 				var result = serviceData.data.item;
-				
+
 				var fileNumber = result.length;
 				var count = 0;
-				
+
 				var processItem = function(){
 					var item = result[count];
 					
 					if(item.type=="url"){
-		               //for file
+				       //for file
 					    if(processFile!=undefined){
-		                     processFile(item.uri);			    
+				             processFile(item.uri);			    
 					    }
-						var scriptEle = document.createElement('script');
-						scriptEle.setAttribute('src', item.uri);
-						scriptEle.setAttribute('defer', "defer");
-						scriptEle.setAttribute('type', 'text/javascript');
-
-						scriptEle.onload = processNext;
-						document.getElementsByTagName("head")[0].appendChild(scriptEle);
+						
+						var scriptEle;
+						if(item.uri.endsWith(".css")){
+							scriptEle = document.createElement('link');
+							scriptEle.rel = 'stylesheet';
+//							scriptEle.type = 'text/css';
+							scriptEle.href = item.uri;	
+							scriptEle.async = false;						
+//							scriptEle.setAttribute('href ', item.uri);
+//							scriptEle.setAttribute('rel', "stylesheet");
+//							scriptEle.setAttribute('type', 'text/css');
+                            scriptEle.onload = processNext;
+							document.getElementsByTagName("head")[0].appendChild(scriptEle);
+//                            document.head.appendChild(scriptEle);
+						}
+						else{
+							scriptEle = document.createElement('script');
+							scriptEle.setAttribute('src', item.uri);
+							scriptEle.setAttribute('defer', "defer");
+							scriptEle.setAttribute('type', 'text/javascript');
+    						scriptEle.onload = processNext;
+	    					document.getElementsByTagName("head")[0].appendChild(scriptEle);
+						}
+						
 					}
 					else if(item.type=="data"){
 					    if(processData!=undefined){
-		                     processData(item.data);			    
+				             processData(item.data);			    
 					    }
 						processNext();
 					}
 					
 				};
-				
+
 				var processNext = function(){
 					count++;
 					if(count>=fileNumber){
@@ -73,14 +93,18 @@ var createStaticFetchTaskManager = function(domainName){
 						processItem();
 					}
 				};
-				
-				processItem();
-			},
-			error: function(obj, textStatus, errorThrown){
-				var kkkkk = 5555;
-			},
-		});
-				
+
+				processItem();				
+		    } else {
+		        console.error("Server error:", xhr.status, xhr.statusText);
+		    }
+		};
+
+		xhr.onerror = function () {
+		    console.error("Network error occurred.");
+		};
+
+		xhr.send(JSON.stringify(staticInfos));		
 	};
 	
 	var loc_processFetchTasks = function(fetchTasks, i, callBackFun){
