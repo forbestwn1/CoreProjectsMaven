@@ -9,17 +9,45 @@
   <body>
     <div id="root"></div>
 
-    <script src="http://localhost:8081/static/data/javascript/library/external/jQuery/3.4.1/jquery.js"></script>
-    <script src="http://localhost:8081/static/data/javascript/library/external/Underscore/1.9.1/underscore.js"></script>
-    <script src="http://localhost:8081/static/data/javascript/library/external/Backbone/1.3.3/backbone.js"></script>
-    <script src="http://localhost:8081/static/data/javascript/library/external/log4javascript/1.0.0/log4javascript.js"></script>
-
     <script src="http://localhost:8081/data/main/application/script/utilityfectch.js"></script>
     <script type="module" src="/src/main.jsx"></script>
 
     <script>
 
 var fetchTasks = [
+	createFetchTask(
+		    {
+			    "staticInfo" : [
+				    {
+					    "type" : "library",
+					    "domain" : "data.javascript.library.external",
+					    "name" : "jQuery",
+					    "version" : "3.4.1"
+		            },
+				    {
+					    "type" : "library",
+					    "domain" : "data.javascript.library.external",
+					    "name" : "Underscore",
+					    "version" : "1.9.1"
+		            },
+				    {
+					    "type" : "library",
+					    "domain" : "data.javascript.library.external",
+					    "name" : "Backbone",
+					    "version" : "1.3.3"
+		            },
+				    {
+					    "type" : "library",
+					    "domain" : "data.javascript.library.external",
+					    "name" : "log4javascript",
+					    "version" : "1.0.0"
+            },
+			    ],
+			    "requestId" : "ExternalLibrary"
+		    },
+		    function(data){
+	        }
+	),
  	createCoreStaticTask(),
 	createFetchTask(
 	    {
