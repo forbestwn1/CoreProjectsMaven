@@ -6,13 +6,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 
 @Configuration
 public class HAPStaticServiceFactory {
 
 	@Autowired
-	private HAPConfigureStaticService m_staticConfigure;
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
 
 	@Autowired
 	private RestTemplate m_restTemplate;
@@ -22,7 +23,7 @@ public class HAPStaticServiceFactory {
 	
 	@Bean
 	HAPServiceStaticResource getStaticService() {
-		return new HAPServiceStaticResource(this.m_staticConfigure.getBaseurl(), this.m_restTemplate, this.m_parseServices);
+		return new HAPServiceStaticResource(this.m_globalAppConfigure.getStaticBaseurl(), this.m_restTemplate, this.m_parseServices);
 	}
 	
 }

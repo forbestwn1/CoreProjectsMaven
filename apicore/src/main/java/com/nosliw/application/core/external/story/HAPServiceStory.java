@@ -20,13 +20,14 @@ import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualSta
 import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
 public class HAPServiceStory {
 
 	@Autowired
-	private HAPConfigureStoryService m_storyConfigure;
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
 	
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
@@ -41,14 +42,14 @@ public class HAPServiceStory {
 	private HAPManualManagerBrick m_manualBrickManager;
 	
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
-		String responsStr = this.m_restTemplate.getForObject(m_storyConfigure.getBaseurl()+"bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
+		String responsStr = this.m_restTemplate.getForObject(m_globalAppConfigure.getStoryBaseurl()+"bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
 		return HAPManualUtilityExport.deserializeBundle((JSONObject)serviceData.getData(), m_entityParseService, m_brickMan, m_manualBrickManager);
 	}	
 
 	public HAPServiceData buildStandAlone(List<HAPManualStandaloneProviderRequest> requests) {
-		String responsStr = this.m_restTemplate.postForObject(m_storyConfigure.getBaseurl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
+		String responsStr = this.m_restTemplate.postForObject(m_globalAppConfigure.getStoryBaseurl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);

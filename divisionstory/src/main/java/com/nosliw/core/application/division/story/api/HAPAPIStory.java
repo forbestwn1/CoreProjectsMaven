@@ -53,14 +53,6 @@ public class HAPAPIStory {
     public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
 		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(new HAPIdBrickType(brickType, brickVersion), builderId, null);
 		HAPServiceData out = HAPServiceData.createSuccessData(newResponse);
-		
-//		try {
-//			Thread.sleep(5000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
@@ -69,14 +61,6 @@ public class HAPAPIStory {
 		HAPStoryBuilderRequest request = (HAPStoryBuilderRequest)this.m_entityParseService.parseEntityJSONExplicit(new JSONObject(requestBody), HAPStoryBuilderRequest.ENTITYNAMEFORSERIALIZE);
 		HAPStoryBuilderResponseBuild buildResponse = m_designManager.designStory(request);
 		HAPServiceData out = HAPServiceData.createSuccessData(buildResponse);
-
-//		try {
-//			Thread.sleep(5000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
 		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
@@ -125,5 +109,4 @@ public class HAPAPIStory {
 	private HAPIdBrick buildBrickId(String brickType, String brickVersion, String brickId) {
 		return new HAPIdBrick(new HAPIdBrickType(brickType, brickVersion), HAPConstantShared.BRICK_DIVISION_STORY, brickId);
 	}
-
 }

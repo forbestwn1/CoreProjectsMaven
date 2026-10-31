@@ -193,7 +193,8 @@ var createCoreStaticTask = function(){
 
 	        	  nosliw.registerNodeEvent("runtime", "active",
 	        				function(eventName, nodeName) {
-	        			  		$(document).trigger("nosliwActive");
+								document.dispatchEvent(new Event('nosliwActive'));
+//	        			  		$(document).trigger("nosliwActive");
 								env.doFinish();
 	        		  		}
 	        	  );

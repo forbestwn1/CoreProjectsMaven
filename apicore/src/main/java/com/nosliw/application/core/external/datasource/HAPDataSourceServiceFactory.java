@@ -7,12 +7,13 @@ import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
+import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
 
 @Configuration
 public class HAPDataSourceServiceFactory {
 
 	@Autowired
-	private HAPConfigureDataSourceService m_dataSourceConfigure;
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
 
 	@Autowired
 	private HAPServiceParseEntity m_entityParseService;
@@ -22,7 +23,7 @@ public class HAPDataSourceServiceFactory {
 
 	@Bean
 	HAPServiceDataSource getDataSourceService() {
-		return new HAPServiceDataSource(this.m_dataSourceConfigure.getBaseurl(), this.m_entityParseService, this.m_restTemplate);
+		return new HAPServiceDataSource(this.m_globalAppConfigure.getDatasourceBaseurl(), this.m_entityParseService, this.m_restTemplate);
 	}
 	
 }
