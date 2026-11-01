@@ -2,13 +2,12 @@ nosliw.utility = function(){
 	
 	var loc_out = {
 		
-		getServerBase : function(){
-			return nosliw.getConfigureValue("gatewayUrl", "");
-//			return nosliw.getConfigureValue("serverBase", "");
+		getCoreApplicationBaseUrl : function(){
+			return nosliw.getConfigureValue("coreUrl", "");
 		},	
 			
 		buildNosliwUrl : function(url){
-			return loc_out.getServerBase()+url;
+			return nosliw.getConfigureValue("gatewayUrl", "")+url;   //"http://localhost:8080"
 		},
 	};
 	return loc_out;

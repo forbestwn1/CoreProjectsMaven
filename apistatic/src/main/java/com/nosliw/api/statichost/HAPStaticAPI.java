@@ -108,13 +108,12 @@ public class HAPStaticAPI {
 			String configureName = staticInfoConfigure.getName();
 			if(configureName.equals("core")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
-				urlData.put("gatewayUrl", "http://localhost:8080/");
+				urlData.put("coreUrl", m_globalAppConfigure.getCoreBaseurl());
 				urlData.put("storyUrl", m_globalAppConfigure.getStoryBaseurl());
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
 			else if(configureName.equals("scriptreproduce")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
-				urlData.put("gatewayUrl", "http://localhost:8080/");
 				out.add(new HAPStaticResponseInfoData(urlData));
             }
 			else if(configureName.equals("production")) {
