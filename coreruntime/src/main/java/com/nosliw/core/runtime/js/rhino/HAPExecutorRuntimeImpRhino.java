@@ -73,10 +73,12 @@ public class HAPExecutorRuntimeImpRhino implements HAPExecutorRuntimeWithScript{
 		}
 	}
 	
-	private Path getRootScriptExportPath() {     
-		String exportPath = this.m_rhinoRuntimeConfigure.getScriptExportPath();
-		if(exportPath!=null) {
-			return HAPUtilityFileNio.buildPath(exportPath);
+	private Path getRootScriptExportPath() {   
+		if(m_rhinoRuntimeConfigure.isScriptExport()) {
+			String exportPath = this.m_rhinoRuntimeConfigure.getScriptExportPath();
+			if(exportPath!=null) {
+				return HAPUtilityFileNio.buildPath(exportPath);
+			}
 		}
 		return null;
 	}

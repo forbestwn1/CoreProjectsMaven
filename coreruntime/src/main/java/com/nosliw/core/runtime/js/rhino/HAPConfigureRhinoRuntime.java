@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="runtime.rhino")
 public class HAPConfigureRhinoRuntime {
 
+	private boolean scriptExport;
+	
 	private String scriptExportPath;
 
 	public String getScriptExportPath() {
@@ -17,4 +19,12 @@ public class HAPConfigureRhinoRuntime {
 		this.scriptExportPath = path;
 	}
 	
+	public boolean isScriptExport() {
+		return scriptExport;
+	}
+
+	public void setScriptExport(boolean scriptExport) {
+		this.scriptExport = scriptExport;
+	}
+
 }

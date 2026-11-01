@@ -11,9 +11,11 @@ public class HAPUtilityOtherBundleForBrick {
 
 	public static HAPBundleForBrick getBrickBundle(HAPResourceIdSimple resourceId, HAPManagerApplicationBrick brickMan, HAPRuntimeInfo runtimeInfo) {
 		HAPBundleForBrick bundle = brickMan.getBrickBundle(HAPUtilityBrickId.fromResourceId2BrickId(resourceId), runtimeInfo);
-		String exportPath = brickMan.getBundleConfigure().getExportPath();
-		if(exportPath!=null) {
-			HAPUtilityExport.exportBundle(resourceId, bundle, HAPUtilityFileNio.buildPath(exportPath));
+		if(brickMan.getBundleConfigure().isExport()) {
+			String exportPath = brickMan.getBundleConfigure().getExportPath();
+			if(exportPath!=null) {
+				HAPUtilityExport.exportBundle(resourceId, bundle, HAPUtilityFileNio.buildPath(exportPath));
+			}
 		}
 		return bundle;
 	}

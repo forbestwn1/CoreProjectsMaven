@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="app")
+@ConfigurationProperties(prefix="application.nosliw-static.dynamic")
 public class HAPConfigureApp {
 
 	private String version;
