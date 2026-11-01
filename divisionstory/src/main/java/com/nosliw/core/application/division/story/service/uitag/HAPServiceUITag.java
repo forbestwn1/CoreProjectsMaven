@@ -14,7 +14,7 @@ import com.nosliw.core.application.common.gateway.HAPUtilityGateway;
 import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 
 @Component

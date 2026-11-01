@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
-import com.nosliw.core.application.division.story.api.HAPConfigureMiniApp;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryBuilderDesignWizard;
 import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
+import com.nosliw.core.configure.global.HAPConfigureMiniApp;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 

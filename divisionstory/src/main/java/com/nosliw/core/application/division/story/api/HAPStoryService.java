@@ -22,7 +22,7 @@ import com.nosliw.core.application.common.manual.gateway.compile.HAPManualGatewa
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
-import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

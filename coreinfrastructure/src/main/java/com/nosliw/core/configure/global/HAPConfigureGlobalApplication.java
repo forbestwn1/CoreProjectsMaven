@@ -1,4 +1,4 @@
-package com.nosliw.core.application.entity.configure.global;
+package com.nosliw.core.configure.global;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.Name;

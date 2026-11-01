@@ -1,10 +1,10 @@
-package com.nosliw.core.application.division.story.api;
+package com.nosliw.core.configure.global;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix="app.miniapp")
+@ConfigurationProperties(prefix="global.app.miniapp")
 public class HAPConfigureMiniApp {
 
 	private String url;

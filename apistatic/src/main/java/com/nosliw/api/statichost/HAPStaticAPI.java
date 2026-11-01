@@ -26,6 +26,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.service.staticresource.HAPStaticRequest;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
 import com.nosliw.core.service.staticresource.HAPStaticRequestInfoConfigure;
@@ -46,6 +47,9 @@ public class HAPStaticAPI {
 	@Autowired
 	private HAPServiceParseEntity m_paserEntity;
 
+	@Autowired
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
+	
 	@Autowired
 	private HAPConfigureApp m_appConfigure;
 	
@@ -105,14 +109,12 @@ public class HAPStaticAPI {
 			if(configureName.equals("core")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
 				urlData.put("gatewayUrl", "http://localhost:8080/");
-				urlData.put("staticUrl", "http://localhost:8081/");
-				urlData.put("storyUrl", "http://localhost:8083/");
+				urlData.put("storyUrl", m_globalAppConfigure.getStoryBaseurl());
 				out.add(new HAPStaticResponseInfoData(urlData));
 			}
 			else if(configureName.equals("scriptreproduce")) {
 				Map<String, String> urlData = new LinkedHashMap<String, String>();
 				urlData.put("gatewayUrl", "http://localhost:8080/");
-				urlData.put("staticUrl", "http://localhost:8081/");
 				out.add(new HAPStaticResponseInfoData(urlData));
             }
 			else if(configureName.equals("production")) {

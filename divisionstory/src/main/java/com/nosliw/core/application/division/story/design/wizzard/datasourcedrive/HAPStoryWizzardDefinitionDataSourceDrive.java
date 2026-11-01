@@ -17,7 +17,6 @@ import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.api.HAPConfigureMiniApp;
 import com.nosliw.core.application.division.story.api.HAPStoryService;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryElementWithConstant;
@@ -64,6 +63,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardUtilityQuestion;
 import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
 import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
+import com.nosliw.core.configure.global.HAPConfigureMiniApp;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeManager;
 

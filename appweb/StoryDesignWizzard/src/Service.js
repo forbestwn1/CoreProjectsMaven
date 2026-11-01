@@ -9,12 +9,12 @@ export const nextStepDesignService = function(designId, step){
 			"step" : step
 		}
 	};
-	const url = getStoryBaseUrl() + "nosliw/story/design/build";
+	const url = getStoryBaseUrl() + "design/build";
 	return axios.post(url, payload, {});
 };
 
 export const newDesignService = function(payload = {}, config = {}){
-	const url = getStoryBaseUrl() + "nosliw/story/design/new?builderId=dataSourceDrive&brickType=module&brickVersion=1.0.0";
+	const url = getStoryBaseUrl() + "design/new?builderId=dataSourceDrive&brickType=module&brickVersion=1.0.0";
 	return axios.post(url, payload, config);
 };
 

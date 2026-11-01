@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 
 @Configuration

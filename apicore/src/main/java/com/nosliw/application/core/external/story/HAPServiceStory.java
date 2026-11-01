@@ -20,7 +20,7 @@ import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualSta
 import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

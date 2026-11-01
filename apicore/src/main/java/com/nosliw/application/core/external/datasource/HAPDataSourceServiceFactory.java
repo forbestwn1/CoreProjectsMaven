@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
-import com.nosliw.core.application.entity.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 
 @Configuration
 public class HAPDataSourceServiceFactory {
