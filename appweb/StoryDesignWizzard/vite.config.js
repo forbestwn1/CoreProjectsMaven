@@ -5,7 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
 server: {
     allowedHosts: [
-      'ec2-15-222-65-127.ca-central-1.compute.amazonaws.com'
+      'ec2-15-222-65-127.ca-central-1.compute.amazonaws.com',
+      'lastonemile.ca'
     ]
   },
 
