@@ -137,7 +137,12 @@ public class HAPStaticAPI {
 
 			if(consolidate) {
 				for(Resource resource : resources) {
-					out.add(new HAPStaticResponseInfoContent(HAPUtilityFileNio.readFile(resource.getInputStream())));
+					if(!resource.getFilename().endsWith(".css")) {
+						out.add(new HAPStaticResponseInfoContent(HAPUtilityFileNio.readFile(resource.getInputStream())));
+					}
+					else {
+						out.add(new HAPStaticResponseInfoUrl(new URI(getUriPathForLibrary(domain, staticInfoLib.getName(), staticInfoLib.getVersion()) + "/" + resource.getFilename())));
+					}
 				}
 			}
 			else {
