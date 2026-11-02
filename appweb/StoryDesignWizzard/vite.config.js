@@ -3,6 +3,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+server: {
+    allowedHosts: [
+      'ec2-15-222-65-127.ca-central-1.compute.amazonaws.com'
+    ]
+  },
+
   plugins: [react()],
 resolve: {
   alias: {
