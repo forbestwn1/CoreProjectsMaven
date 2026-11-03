@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
@@ -12,3 +13,5 @@ public class HAPManualBlockTaskFlowActivity extends HAPManualBrickWithEntityInfo
 	public void setNext(HAPTaskFlowNext next) {   this.setAttributeValueWithValue(HAPBlockTaskFlowActivityTask.NEXT, next);    }
 
 }
+
+*/

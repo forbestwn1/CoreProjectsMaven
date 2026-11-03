@@ -39,7 +39,7 @@ public class HAPInteractiveResultTask extends HAPEntityInfoWritableImp{
 	protected void cloneToInteractiveResult(HAPInteractiveResultTask result) {
 		this.cloneToEntityInfo(result);
 		for(HAPDefinitionParmResponse output : this.m_output) {
-			result.addOutput(output.cloneInteractiveOutput());
+			result.addOutput(output);
 		}
 	}
 	

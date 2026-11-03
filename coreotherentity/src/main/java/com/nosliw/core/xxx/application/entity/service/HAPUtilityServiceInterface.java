@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.entity.service;
 
 import java.util.List;
@@ -85,3 +86,4 @@ public class HAPUtilityServiceInterface {
 //		}
 	}
 }
+*/

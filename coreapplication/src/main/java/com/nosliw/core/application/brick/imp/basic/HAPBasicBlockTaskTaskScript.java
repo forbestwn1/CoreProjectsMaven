@@ -1,11 +1,14 @@
 package com.nosliw.core.application.brick.imp.basic;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.brick.spec.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBlockTaskTaskScript;
 import com.nosliw.core.resource.HAPResourceId;
@@ -30,6 +33,18 @@ public class HAPBasicBlockTaskTaskScript extends HAPBasicBrick implements HAPBlo
 	public HAPParms getParms() {   return (HAPParms)this.getAttributeValueOfValue(HAPWithParms.PARM);  }
 	@Override
 	public void setParms(HAPParms parms) {   this.setAttributeValueWithValue(HAPWithParms.PARM, parms);  }
+
+	@Override
+	public Map<String, HAPIdBrickInBundle> getBrickReferences() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addBrickReference(String name, HAPIdBrickInBundle brickRef) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
 

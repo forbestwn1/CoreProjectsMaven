@@ -32,7 +32,7 @@ public class HAPStoryChangeItemPatch extends HAPStoryChangeItemModifyElement{
 	}
 	
 	public HAPStoryChangeItemPatch(HAPStoryReferenceElement targetReference, String path, Object value) {
-		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_PATCH, targetReference);
+		super(HAPConstantShared.STORYDESIGN_CHANGETYPE_PATCH);
 		this.m_path = path;
 		this.m_value = value;
 	}

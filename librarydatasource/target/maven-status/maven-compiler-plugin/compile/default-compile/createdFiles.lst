@@ -1,0 +1,11 @@
+com\nosliw\service\test\map\HAPServiceImp.class
+com\nosliw\service\test\date\HAPServiceImp.class
+com\nosliw\service\test\array\array\HAPServiceImp.class
+com\nosliw\service\test\basic\HAPServiceImp.class
+com\nosliw\service\test\array\complex\HAPServiceImp.class
+com\nosliw\service\test\dum\HAPServiceImp.class
+com\nosliw\service\test\multiple\HAPServiceImp.class
+com\nosliw\service\real\toronto\dropin\HAPServiceImp.class
+com\nosliw\service\test\error\HAPServiceImp.class
+com\nosliw\service\test\rule\HAPServiceImp.class
+com\nosliw\service\test\array\simple\HAPServiceImp.class

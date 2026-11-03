@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.common.valuecontext;
 
 import com.nosliw.common.utils.HAPConstantShared;
@@ -17,3 +18,4 @@ public class HAPManualValuePortValueContext extends HAPValuePort{
 		this.m_valueStructureDomain = valueStructureDomain;
 	}
 }
+*/

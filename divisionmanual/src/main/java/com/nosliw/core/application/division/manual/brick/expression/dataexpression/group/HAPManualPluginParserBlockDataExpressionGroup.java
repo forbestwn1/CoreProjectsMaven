@@ -4,20 +4,24 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.nosliw.common.info.HAPUtilityEntityInfo;
+import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
-import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
-import com.nosliw.data.core.runtime.HAPRuntimeEnvironment;
+import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 
 public class HAPManualPluginParserBlockDataExpressionGroup extends HAPManualDefinitionPluginParserBrickImpComplex{
 
-	public HAPManualPluginParserBlockDataExpressionGroup(HAPManualManagerBrick manualDivisionEntityMan, HAPRuntimeEnvironment runtimeEnv) {
-		super(HAPEnumBrickType.DATAEXPRESSIONGROUP_100, HAPManualDefinitionBlockDataExpressionGroup.class, manualDivisionEntityMan, runtimeEnv);
+	private HAPParserDataExpression m_dataExpressionParser;
+	
+	public HAPManualPluginParserBlockDataExpressionGroup(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan, HAPParserDataExpression dataExpressionParser) {
+		super(HAPEnumBrickType.DATAEXPRESSIONGROUP_100, HAPManualDefinitionBlockDataExpressionGroup.class, manualDivisionEntityMan, brickMan);
+		this.m_dataExpressionParser = dataExpressionParser;
 	}
 
 	@Override
@@ -29,7 +33,7 @@ public class HAPManualPluginParserBlockDataExpressionGroup extends HAPManualDefi
 			JSONObject elementObj = dataExpressionArray.getJSONObject(i);
 			if(HAPUtilityEntityInfo.isEnabled(elementObj)) {
 				String expressionStr = elementObj.getString(HAPItemInContainerDataExpression.DATAEXPRESSION);
-				HAPDefinitionDataExpression dataExpression =  this.getRuntimeEnvironment().getDataExpressionParser().parseExpression(expressionStr);
+				HAPDefinitionDataExpression dataExpression =  this.m_dataExpressionParser.parseExpression(expressionStr);
 				HAPManualDefinitionDataExpressionItemInContainer item = new HAPManualDefinitionDataExpressionItemInContainer(dataExpression);
 				item.buildEntityInfoByJson(elementObj);
 				groupBlock.getValue().addItem(item);

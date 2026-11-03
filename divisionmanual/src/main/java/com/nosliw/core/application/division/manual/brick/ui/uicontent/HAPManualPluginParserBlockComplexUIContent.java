@@ -17,7 +17,6 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPElementEvent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
@@ -42,7 +41,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImp;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrick;
-import com.nosliw.core.application.division.manual.core.definition.HAPWithAttachment;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
@@ -369,7 +367,7 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 	
 	
 	
-	
+/*	
 	
 	@Override
 	protected void parseDefinitionContentHtml(HAPIdEntityInDomain entityId, Object obj, HAPContextParser parserContext) {
@@ -425,9 +423,9 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 	}
 
 
-	/*
-	 * process all script blocks under unit
-	 */
+	
+	 //* process all script blocks under unit
+	 
 	private void parseUnitScriptBlocks(Element ele, HAPDefinitionEntityComplexUIContent resource, HAPContextParser parserContext){
 		List<Element> scirptEles = new ArrayList<Element>();
 		
@@ -478,6 +476,6 @@ public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinit
 	private HAPDefinitionEntityComplexUIContent getUIContentEntityById(HAPIdEntityInDomain entityId, HAPContextParser parserContext) {
 		return (HAPDefinitionEntityComplexUIContent)parserContext.getGlobalDomain().getEntityInfoDefinition(entityId).getEntity();
 	}
-
+*/
 
 }

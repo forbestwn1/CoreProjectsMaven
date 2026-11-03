@@ -26,14 +26,14 @@ public class HAPUtilityParserStructure {
 		if(valueStructuresArray!=null) {
 			for(int i=0; i<valueStructuresArray.length(); i++) {
 				JSONObject valueStructureWrapperObj = valueStructuresArray.getJSONObject(i);
-				HAPWrapperValueStructureDefinitionImp valueStructureWrapper = HAPUtilityParserStructure.parseValueStructureWrapper(valueStructureWrapperObj, entityParseService); 
+				HAPWrapperValueStructureDefinition valueStructureWrapper = HAPUtilityParserStructure.parseValueStructureWrapper(valueStructureWrapperObj, entityParseService); 
 				valueContext.getValueStructures().add(valueStructureWrapper);
 			}
 		}
 		return valueContext;
 	}
 
-	static public HAPWrapperValueStructureDefinitionImp parseValueStructureWrapper(JSONObject wrapperObj, HAPServiceParseEntity entityParseService) {
+	static public HAPWrapperValueStructureDefinition parseValueStructureWrapper(JSONObject wrapperObj, HAPServiceParseEntity entityParseService) {
 		HAPWrapperValueStructureDefinitionImp valueStructureWrapper = new HAPWrapperValueStructureDefinitionImp();
 		
 		JSONObject vsInfoJsonObj = wrapperObj.optJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTUREINFO);

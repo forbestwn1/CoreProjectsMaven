@@ -5,13 +5,14 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 
 public class HAPManualPluginParserBlockData extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	public HAPManualPluginParserBlockData(HAPManualManagerBrick manualDivisionEntityMan) {
-		super(HAPEnumBrickType.DATA_100, HAPManualDefinitionBlockData.class, manualDivisionEntityMan);
+	public HAPManualPluginParserBlockData(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan) {
+		super(HAPEnumBrickType.DATA_100, HAPManualDefinitionBlockData.class, manualDivisionEntityMan, brickMan);
 	}
 
 	@Override

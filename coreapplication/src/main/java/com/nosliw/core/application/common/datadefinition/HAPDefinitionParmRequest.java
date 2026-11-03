@@ -45,10 +45,10 @@ public class HAPDefinitionParmRequest extends HAPEntityInfoImp{
 	@Override
 	public boolean equals(Object obj){
 		boolean out = false;
-		if(obj instanceof HAPRequestParmInInteractive){
-			HAPRequestParmInInteractive varInfo = (HAPRequestParmInInteractive)obj;
-			return super.equals(varInfo);
-		}
+//		if(obj instanceof HAPRequestParmInInteractive){
+//			HAPRequestParmInInteractive varInfo = (HAPRequestParmInInteractive)obj;
+//			return super.equals(varInfo);
+//		}
 		return out;
 	}
 	

@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.core.a;
 
 import com.nosliw.core.application.brick.HAPIdBrickType;
@@ -18,3 +19,4 @@ public abstract class HAPManualPluginProcessorBlockSimple extends HAPManualPlugi
 	
 	public abstract void process(HAPManualBrick blockExe, HAPManualDefinitionBrick blockDef, HAPManualContextProcessBrick processContext);
 }
+*/

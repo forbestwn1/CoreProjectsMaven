@@ -19,7 +19,6 @@ import com.nosliw.core.application.division.manual.core.HAPManualUtilityBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;
 import com.nosliw.core.application.division.manual.core.HAPTreeNodeBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueReferenceAttachment;
 
 public class HAPManualDefinitionUtilityBrick {
 
@@ -79,8 +78,8 @@ public class HAPManualDefinitionUtilityBrick {
 			out = brickRefWrapper.getBrickTypeId();
 		}
 		else if(attrValueWrapperType.equals(HAPConstantShared.EMBEDEDVALUE_TYPE_ATTACHMENTREFERENCE)) {
-			HAPManualDefinitionWrapperValueReferenceAttachment attachmentRefWrapper = (HAPManualDefinitionWrapperValueReferenceAttachment)attrValueWrapper;
-			out = attachmentRefWrapper.getBrickTypeId();
+//			HAPManualDefinitionWrapperValueReferenceAttachment attachmentRefWrapper = (HAPManualDefinitionWrapperValueReferenceAttachment)attrValueWrapper;
+//			out = attachmentRefWrapper.getBrickTypeId();
 		}
 		
 		return out;

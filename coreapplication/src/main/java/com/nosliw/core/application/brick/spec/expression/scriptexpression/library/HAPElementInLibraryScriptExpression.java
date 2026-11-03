@@ -1,6 +1,5 @@
 package com.nosliw.core.application.brick.spec.expression.scriptexpression.library;
 
-import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
@@ -8,7 +7,10 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
+import com.nosliw.common.variable.HAPVariableInfo;
 import com.nosliw.common.variable.HAPWithVariable;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBrick;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPWithDataExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
@@ -16,15 +18,16 @@ import com.nosliw.core.application.common.interactive.HAPWithInteractiveExpressi
 import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScript;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.valueport.HAPGroupValuePorts;
+import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.xxx.application.valueport.HAPWithValuePortGroup;
-import com.nosliw.data.core.matcher.HAPMatchers;
-import com.nosliw.data.core.resource.HAPManagerResource;
-import com.nosliw.data.core.resource.HAPResourceDependency;
-import com.nosliw.data.core.runtime.HAPExecutableImpEntityInfo;
-import com.nosliw.data.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute
-public class HAPElementInLibraryScriptExpression extends HAPExecutableImpEntityInfo implements HAPWithInteractiveExpression, HAPWithVariable, HAPWithValuePortGroup, HAPWithDataExpression{
+public class HAPElementInLibraryScriptExpression extends HAPBasicBrick implements HAPWithInteractiveExpression, HAPWithVariable, HAPWithValuePortGroup, HAPWithDataExpression{
+
+	public HAPElementInLibraryScriptExpression(HAPIdBrickType brickTypeId) {
+		super(brickTypeId);
+		// TODO Auto-generated constructor stub
+	}
 
 	@HAPAttribute
 	public static String EXPRESSION = "expression";
@@ -42,10 +45,10 @@ public class HAPElementInLibraryScriptExpression extends HAPExecutableImpEntityI
 	
 	private HAPContainerDataExpression m_dataExpressionGroup;
 	
-	public HAPElementInLibraryScriptExpression() {
-		this.m_variableInfo = new HAPContainerVariableInfo();
-		this.m_dataExpressionGroup = new HAPContainerDataExpression();
-	}
+//	public HAPElementInLibraryScriptExpression() {
+//		this.m_variableInfo = new HAPContainerVariableInfo();
+//		this.m_dataExpressionGroup = new HAPContainerDataExpression();
+//	}
 	
 	public HAPExpressionScript getExpression() {	return m_scriptExpression;	}
 	public void setExpression(HAPExpressionScript scriptExpression) {	this.m_scriptExpression = scriptExpression;	}
@@ -60,15 +63,15 @@ public class HAPElementInLibraryScriptExpression extends HAPExecutableImpEntityI
 	public HAPInteractiveExpression getInteractive() {    return this.m_interactive;      }
 	public void setInteractive(HAPInteractiveExpression interactive) {    this.m_interactive = interactive;     }
 	
-	@Override
-	public HAPContainerVariableInfo getVariablesInfo() {   return this.m_variableInfo;  }
+//	@Override
+//	public HAPContainerVariableInfo getVariablesInfo() {   return this.m_variableInfo;  }
 	public void setVariablesInfo(HAPContainerVariableInfo varsInfo) {    this.m_variableInfo = varsInfo;     }
 	
-	@Override
-	public HAPGroupValuePorts getExternalValuePortGroup() {   return this.m_interactive.getExternalValuePortGroup();  }
+//	@Override
+//	public HAPGroupValuePorts getExternalValuePortGroup() {   return this.m_interactive.getExternalValuePortGroup();  }
 	
-	@Override
-	public HAPGroupValuePorts getInternalValuePortGroup() {   return this.m_interactive.getInternalValuePortGroup();  }
+//	@Override
+//	public HAPGroupValuePorts getInternalValuePortGroup() {   return this.m_interactive.getInternalValuePortGroup();  }
 
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -85,14 +88,47 @@ public class HAPElementInLibraryScriptExpression extends HAPExecutableImpEntityI
 		jsonMap.put(EXPRESSION, HAPManagerSerialize.getInstance().toStringValue(this.getExpression(), HAPSerializationFormat.JAVASCRIPT));
 	}
 	
+//	@Override
+//	protected void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
+//		super.buildResourceDependency(dependency, runtimeInfo, resourceManager);
+//		//get converter resource id from var converter in expression 
+//		HAPMatchers matchers = this.getResultMatchers();
+//		if(matchers!=null){
+//			dependency.addAll(matchers.getResourceDependency(runtimeInfo, resourceManager));
+//		}
+//	}
+
 	@Override
-	protected void buildResourceDependency(List<HAPResourceDependency> dependency, HAPRuntimeInfo runtimeInfo, HAPManagerResource resourceManager) {
-		super.buildResourceDependency(dependency, runtimeInfo, resourceManager);
-		//get converter resource id from var converter in expression 
-		HAPMatchers matchers = this.getResultMatchers();
-		if(matchers!=null){
-			dependency.addAll(matchers.getResourceDependency(runtimeInfo, resourceManager));
-		}
+	public void addVariableInfo(HAPVariableInfo variableInfo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getWithVariableEntityType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HAPInteractiveExpression getExpressionInterface() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Map<String, HAPVariableInfo> getVariablesInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HAPGroupValuePorts getInternalValuePortGroup() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public HAPGroupValuePorts getExternalValuePortGroup() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

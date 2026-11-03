@@ -45,6 +45,7 @@ public class HAPUtilityService {
 		return readServiceResult(inputStream).get(name);
 	}
 
+/*	
 	public static void solveServiceProvider(HAPWithServiceUse child, HAPWithServiceUse parent, HAPDefinitionEntityContainerAttachment attachment, HAPNameMapping nameMapping, HAPManagerServiceDefinition serviceDefinitionMan) {
 		Map<String, HAPDefinitionServiceProvider> parentProviders = parent!=null?parent.getServiceProviderDefinitions() : new LinkedHashMap<String, HAPDefinitionServiceProvider>();
 		Map<String, HAPDefinitionServiceProvider> mappedParentProviders = null;
@@ -59,5 +60,5 @@ public class HAPUtilityService {
 			child.addServiceProviderDefinition(provider);
 		}
 	}
-
+*/
 }

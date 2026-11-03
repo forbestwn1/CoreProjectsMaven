@@ -2,20 +2,27 @@ package com.nosliw.core.application.brick.spec.expression.scriptexpression.libra
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBrick;
 import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
-import com.nosliw.core.xxx.application1.division.manual.executable.HAPBrickBlockSimple;
 
 @HAPEntityWithAttribute
-public class HAPBlockScriptExpressionLibrary extends HAPBrickBlockSimple{
+public class HAPBlockScriptExpressionLibrary extends HAPBasicBrick{
+
+	public HAPBlockScriptExpressionLibrary(HAPIdBrickType brickTypeId) {
+		super(brickTypeId);
+		// TODO Auto-generated constructor stub
+	}
 
 	@HAPAttribute
 	public static String ITEM = "item";
 
-
+/*
 	@Override
 	public void init() {	
 		this.setAttributeValueWithBrick(ITEM, new HAPBrickContainer());
 	}
+*/
 
 	public HAPBrickContainer getItems() {
 		return (HAPBrickContainer)this.getAttributeValueOfBrickLocal(ITEM);

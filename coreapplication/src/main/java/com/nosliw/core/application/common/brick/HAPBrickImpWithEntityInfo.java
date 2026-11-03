@@ -7,6 +7,10 @@ import com.nosliw.core.application.brick.HAPIdBrickType;
 
 abstract public class HAPBrickImpWithEntityInfo extends HAPBrickImp implements HAPEntityInfo{
 
+	public HAPBrickImpWithEntityInfo() {
+		
+	}
+
 	public HAPBrickImpWithEntityInfo(HAPIdBrickType brickTypeId, String division) {
 		super(brickTypeId, division);
 	}

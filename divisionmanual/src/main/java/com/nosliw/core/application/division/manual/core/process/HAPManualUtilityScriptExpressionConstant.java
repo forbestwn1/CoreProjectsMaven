@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScriptImp;
@@ -26,8 +25,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickTraverse;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.runtime.HAPRuntimeManager;
-import com.nosliw.core.runtime.js.rhino.task.HAPRuntimeTaskExecuteRhinoScriptExpressionConstantGroup;
-import com.nosliw.core.xxx.runtimeenv.js.rhino.HAPRuntimeEnvironmentImpRhino;
 
 public class HAPManualUtilityScriptExpressionConstant {
 
@@ -123,7 +120,7 @@ public class HAPManualUtilityScriptExpressionConstant {
 		return out;
 	}
 	
-	
+/*	
 	public static String discoverConstantScript(String content, HAPWithScriptExpressionConstantMaster withConstantScriptExpression) {
 		String out = null;
 		if(HAPUtilityScriptExpressionDefinition.isScriptExpression(content)) {
@@ -149,5 +146,5 @@ public class HAPManualUtilityScriptExpressionConstant {
 		HAPServiceData out = runtimeEnvironment.getRuntime().executeTaskSync(task);
 		return out;
 	}
-	
+*/	
 }

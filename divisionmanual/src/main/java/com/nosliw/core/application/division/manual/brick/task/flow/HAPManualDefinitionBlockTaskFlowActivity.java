@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import com.nosliw.core.application.brick.HAPIdBrickType;
@@ -15,3 +16,4 @@ abstract public class HAPManualDefinitionBlockTaskFlowActivity extends HAPManual
 	public void setNext(HAPTaskFlowNext next) {    this.setAttributeValueWithValue(HAPBlockTaskFlowActivity.NEXT, next);      }
 	
 }
+*/

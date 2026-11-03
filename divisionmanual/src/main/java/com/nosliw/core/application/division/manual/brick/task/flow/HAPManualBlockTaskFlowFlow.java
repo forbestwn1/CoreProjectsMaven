@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
@@ -25,3 +26,4 @@ public class HAPManualBlockTaskFlowFlow extends HAPManualBrickImp implements HAP
 	public void setTaskInterface(HAPEntityOrReference taskInterface) {   this.setAttributeValueWithBrick(TASKINTERFACE, taskInterface);     }
 
 }
+*/

@@ -11,8 +11,6 @@ import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 
 public abstract class HAPPluginTransformerDataRuleImp implements HAPPluginTransformerDataRule{
 
@@ -35,9 +33,10 @@ public abstract class HAPPluginTransformerDataRuleImp implements HAPPluginTransf
 	}
 
 	protected HAPInteractiveExpression buildValuePortGroupForRuleTaskBrickExpression(HAPDataRule dataRule, HAPBrick brick, HAPDomainValueStructure valueStructureDomian) {
-		HAPInteractiveExpression interactive = HAPUtilityDataRule.buildExpressionInterface(dataRule.getDataCriteria());
-		HAPUtilityInteractiveTaskValuePort.buildValuePortGroupForInteractiveExpression(Pair.of(brick.getInternalValuePorts(), brick.getExternalValuePorts()), interactive, valueStructureDomian);
-		return interactive;
+//		HAPInteractiveExpression interactive = HAPUtilityDataRule.buildExpressionInterface(dataRule.getDataCriteria());
+//		HAPUtilityInteractiveTaskValuePort.buildValuePortGroupForInteractiveExpression(Pair.of(brick.getInternalValuePorts(), brick.getExternalValuePorts()), interactive, valueStructureDomian);
+//		return interactive;
+		return null;
 	}
 	
 }

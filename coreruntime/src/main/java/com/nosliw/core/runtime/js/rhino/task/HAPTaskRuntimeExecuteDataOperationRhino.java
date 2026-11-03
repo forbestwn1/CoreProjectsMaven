@@ -1,13 +1,10 @@
 package com.nosliw.core.runtime.js.rhino.task;
 
-import java.util.List;
-
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.script.HAPJSScriptInfo;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPInfoRuntimeTaskExecuteDataOperation;
 import com.nosliw.core.data.HAPTaskRuntimeImp;
-import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
 import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 import com.nosliw.core.runtime.execute.HAPRunTaskEventListener;
@@ -29,21 +26,21 @@ public class HAPTaskRuntimeExecuteDataOperationRhino extends HAPTaskRuntimeImp{
 	
 	@Override
 	public HAPTaskRuntime execute(HAPExecutorRuntime runtime){
-		try{
-			HAPExecutorRuntimeImpRhino rhinoRuntime = (HAPExecutorRuntimeImpRhino)runtime;
-			
-			//prepare resources for data operation in the runtime (resource and dependency)
-			//execute expression after load required resources
-			List<HAPResourceInfo> resourcesId =	HAPUtilityExpressionResource.discoverResourceRequirement(this.m_taskInfo.getDataTypeId(), this.m_taskInfo,rhinoRuntime.getRuntimeEnvironment().getResourceManager(), runtime.getRuntimeInfo());
-			
-			HAPTaskRuntime loadResourcesTask = new HAPTaskRuntimeLoadResourcesRhino(resourcesId);
-			loadResourcesTask.registerListener(new HAPRunTaskEventListenerInner(this, rhinoRuntime));
-			return loadResourcesTask;
-		}
-		catch(Exception e){
-			this.finish(HAPServiceData.createFailureData(e, ""));
-			e.printStackTrace();
-		}
+//		try{
+//			HAPExecutorRuntimeImpRhino rhinoRuntime = (HAPExecutorRuntimeImpRhino)runtime;
+//			
+//			//prepare resources for data operation in the runtime (resource and dependency)
+//			//execute expression after load required resources
+//			List<HAPResourceInfo> resourcesId =	HAPUtilityExpressionResource.discoverResourceRequirement(this.m_taskInfo.getDataTypeId(), this.m_taskInfo,rhinoRuntime.getRuntimeEnvironment().getResourceManager(), runtime.getRuntimeInfo());
+//			
+//			HAPTaskRuntime loadResourcesTask = new HAPTaskRuntimeLoadResourcesRhino(resourcesId);
+//			loadResourcesTask.registerListener(new HAPRunTaskEventListenerInner(this, rhinoRuntime));
+//			return loadResourcesTask;
+//		}
+//		catch(Exception e){
+//			this.finish(HAPServiceData.createFailureData(e, ""));
+//			e.printStackTrace();
+//		}
 		return null;
 	}
 	
@@ -73,5 +70,11 @@ public class HAPTaskRuntimeExecuteDataOperationRhino extends HAPTaskRuntimeImp{
 				this.m_parent.finish(resourceTaskResult);
 			}
 		}
+	}
+
+	@Override
+	public String getTaskType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

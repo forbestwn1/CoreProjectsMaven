@@ -59,7 +59,7 @@ public class HAPDataTypeCriteriaAnd extends HAPDataTypeCriteriaComplex{
 	}
 
 	@Override
-	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper) {
+	public Set<HAPDataTypeCriteriaId> getValidDataTypeCriteriaId(HAPCriteriaHelper criteriaHelper, HAPDataTypeHelper dataTypeHelper) {
 		List<HAPDataTypeCriteria> elements = this.getChildren();
 		HAPDataTypeCriteria out = null;
 		for(int i=0; i<elements.size(); i++){
@@ -70,7 +70,7 @@ public class HAPDataTypeCriteriaAnd extends HAPDataTypeCriteriaComplex{
 				out = criteriaHelper.and(out, elements.get(i));
 			}
 		}
-		return out.getValidDataTypeCriteriaId(criteriaHelper);
+		return out.getValidDataTypeCriteriaId(criteriaHelper, dataTypeHelper);
 	}
 
 }

@@ -1,47 +1,7 @@
 package com.nosliw.core.application.common.dataexpression.imp.basic;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPProcessTracker;
-import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.HAPExecutableExpressionData1;
-import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
-import com.nosliw.core.application.common.dataexpression.HAPUtilityOperand;
-import com.nosliw.core.application.common.structure.HAPElementStructure;
-import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
-import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
-import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.application.valueport.HAPIdElement;
-import com.nosliw.core.application.valueport.HAPInfoElementResolve;
-import com.nosliw.core.application.valueport.HAPWithInternalValuePort;
-import com.nosliw.core.data.HAPData;
-import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
-import com.nosliw.core.data.criteria.HAPInfoCriteria;
-import com.nosliw.core.data.expression.HAPExpressionData;
-import com.nosliw.core.data.expression.HAPOperand;
-import com.nosliw.core.data.expression.HAPOperandConstant;
-import com.nosliw.core.data.expression.HAPOperandReference;
-import com.nosliw.core.data.expression.HAPOperandVariable;
-import com.nosliw.core.data.expression.imp.basic.HAPBasicHandlerOperand;
-import com.nosliw.core.data.matcher.HAPMatchers;
-import com.nosliw.core.resource.HAPFactoryResourceId;
-import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.resource.HAPUtilityResource;
-import com.nosliw.core.runtimeenv.HAPRuntimeEnvironment;
-import com.nosliw.core.xxx.application.common.dataexpression1.HAPWrapperOperand;
-import com.nosliw.core.xxx.application.valueport.HAPUtilityStructureElementReference;
-import com.nosliw.core.xxx.application.valueport.HAPUtilityValuePort1;
-import com.nosliw.core.xxx.application.valueport.HAPValuePort1111;
-
 public class HAPUtilityExpressionProcessor {
-
+/*
 	public static Pair<HAPContainerVariableInfo, List<HAPMatchers>> processDataExpressionGroup(HAPContainerDataExpression dataExpressionGroup, List<HAPDataTypeCriteria> expectOutput, HAPContainerVariableInfo varInfoContainer, HAPWithInternalValuePort withInternalValuePort, HAPRuntimeEnvironment runtimeEnv) {
 		List<HAPMatchers> matchers = new ArrayList<HAPMatchers>();
 		HAPContainerVariableInfo currentVarInfoContainer = varInfoContainer;
@@ -215,4 +175,5 @@ public class HAPUtilityExpressionProcessor {
 			}
 		}
 	}
+*/	
 }

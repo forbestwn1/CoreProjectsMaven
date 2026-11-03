@@ -5,10 +5,8 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPSegmentParser;
-import com.nosliw.data.core.domain.entity.task.HAPInfoTask;
 
 /*
  * store 
@@ -39,7 +37,7 @@ public class HAPElementEvent extends HAPSerializableImp{
 	//with this attribute set, then the event is based on all child element that meet this selection, rath than the element itself
 	private String m_selection;
 	//envent handler info
-	private HAPInfoTask m_taskInfo;
+//	private HAPInfoTask m_taskInfo;
 	
 	public HAPElementEvent(String uiId, String eventInfos){
 		this.m_uiId = uiId;
@@ -50,7 +48,7 @@ public class HAPElementEvent extends HAPSerializableImp{
 		this.m_selection = events.next();
 	}
 	
-	public void setTaskInfo(HAPInfoTask taskInfo) {    this.m_taskInfo = taskInfo;      }
+//	public void setTaskInfo(HAPInfoTask taskInfo) {    this.m_taskInfo = taskInfo;      }
 	
 	public String getHandlerName() {    return this.m_handlerName;     }
 
@@ -60,9 +58,9 @@ public class HAPElementEvent extends HAPSerializableImp{
 		jsonMap.put(EVENT, this.m_event);
 		jsonMap.put(HANDLERNAME, this.m_handlerName);
 		jsonMap.put(SELECTION, this.m_selection);
-		if(this.m_taskInfo!=null) {
-			jsonMap.put(TASKINFO, this.m_taskInfo.toStringValue(HAPSerializationFormat.JSON));
-		}
+//		if(this.m_taskInfo!=null) {
+//			jsonMap.put(TASKINFO, this.m_taskInfo.toStringValue(HAPSerializationFormat.JSON));
+//		}
 	}
 	
 }

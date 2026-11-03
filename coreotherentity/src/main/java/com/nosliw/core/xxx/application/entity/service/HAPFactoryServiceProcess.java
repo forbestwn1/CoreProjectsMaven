@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.entity.service;
 
 import java.util.LinkedHashMap;
@@ -128,3 +129,4 @@ public class HAPFactoryServiceProcess implements HAPFactoryService{
 		}
 	}
 }
+*/

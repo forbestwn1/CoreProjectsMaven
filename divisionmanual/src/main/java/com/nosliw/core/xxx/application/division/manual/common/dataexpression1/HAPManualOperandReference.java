@@ -9,6 +9,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPProcessTracker;
+import com.nosliw.common.variable.HAPIdVariable;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.valueport.HAPIdElement;
 import com.nosliw.core.data.HAPDataTypeHelper;
@@ -61,8 +62,14 @@ public class HAPManualOperandReference extends HAPManualOperand implements HAPOp
 
 	@Override
 	public Map<String, HAPMatchers> getMatchers(){	return this.m_matchers;	}
+//	@Override
+//	public Map<String, HAPIdElement> getResolvedVariable(){   return this.m_resolvedVariable;     }
 	@Override
-	public Map<String, HAPIdElement> getResolvedVariable(){   return this.m_resolvedVariable;     }
+	public Map<String, HAPIdVariable> getResolvedVariable() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	
 	@Override
 	public List<HAPManualWrapperOperand> getChildren(){   
@@ -109,5 +116,5 @@ public class HAPManualOperandReference extends HAPManualOperand implements HAPOp
 		jsonMap.put(VARRESOLVE, HAPUtilityJson.buildJson(this.m_resolvedVariable, HAPSerializationFormat.JSON));
 		jsonMap.put(VARMATCHERS, HAPUtilityJson.buildJson(this.m_matchers, HAPSerializationFormat.JSON));
 	}
-	
+
 }

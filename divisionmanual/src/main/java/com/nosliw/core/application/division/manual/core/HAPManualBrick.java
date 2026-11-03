@@ -95,7 +95,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	}
 	
 	public void setAttributeValueWithBrickNew(String attributeName, HAPIdBrickType brickTypeId) {
-		this.setAttributeValueWithBrick(attributeName, this.getManualBrickManager().newBrick(brickTypeId));
+		this.setAttributeValueWithBrick(attributeName, this.getManualBrickManager().newBrick(brickTypeId, this.m_bundle));
 	}
 	
 	@Override

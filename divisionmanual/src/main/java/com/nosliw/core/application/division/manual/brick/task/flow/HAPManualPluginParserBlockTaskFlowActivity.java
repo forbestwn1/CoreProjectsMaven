@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import org.json.JSONObject;
@@ -31,3 +32,4 @@ public class HAPManualPluginParserBlockTaskFlowActivity extends HAPManualDefinit
 		
 	}
 }
+*/

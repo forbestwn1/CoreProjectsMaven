@@ -2,9 +2,7 @@ package com.nosliw.core.application.division.manual.core;
 
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPInfo;
-import com.nosliw.common.info.HAPInfoImpSimple;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.brick.HAPIdBrickType;
 
 public class HAPManualBrickWithEntityInfo extends HAPManualBrickImp implements HAPEntityInfo{
@@ -100,28 +98,5 @@ public class HAPManualBrickWithEntityInfo extends HAPManualBrickImp implements H
 		return null;
 	}
 
-	@Override
-	protected Object buildAttributeValueFormatJson(String attrName, Object obj) {
-		Object out = null;
-		if(attrName.equals(NAME)) {
-			out = obj;
-		}
-		else if(attrName.equals(ID)) {
-			out = obj;
-		}
-		else if(attrName.equals(DESCRIPTION)) {
-			out = obj;
-		}
-		else if(attrName.equals(STATUS)) {
-			out = obj;
-		}
-		else if(attrName.equals(INFO)) {
-			HAPInfoImpSimple info = new HAPInfoImpSimple();
-			info.buildObject(obj, HAPSerializationFormat.JSON);
-			out = info;
-		}
-		
-		return out;
-	}
 }
 

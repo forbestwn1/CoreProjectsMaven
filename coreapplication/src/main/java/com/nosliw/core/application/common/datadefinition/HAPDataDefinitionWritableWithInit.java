@@ -64,20 +64,14 @@ public class HAPDataDefinitionWritableWithInit extends HAPDataDefinitionWritable
 		if(value instanceof String) {
 		}
 		else if(value instanceof JSONObject){
-			JSONObject jsonValue = (JSONObject)value;
-			
-			Object initDataObj = jsonValue.opt(INITDATA);
-			if(initDataObj!=null) {
-				this.m_initData = HAPUtilityData.buildDataWrapperFromObject(initDataObj);
-			}
 		}
 		return true;
 	}
 	
 	protected void cloneToDataDefinition(HAPDataDefinitionWritableWithInit out) {
 		super.cloneToDataDefinition(out);
-		if(this.m_initData!=null) {
-			out.m_initData = this.m_initData.cloneData();
+		if(this.m_dataBuild!=null) {
+			out.m_dataBuild = this.m_dataBuild;
 		}
 	}
 	

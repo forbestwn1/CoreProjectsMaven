@@ -9,13 +9,12 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
-import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityParserBrickFormatJson;
-import com.nosliw.core.xxx.runtimeenv.HAPRuntimeEnvironment;
+import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 
 public class HAPManualPluginParserBlockScriptExpressionLibrary extends HAPManualDefinitionPluginParserBrickImpSimple{
 
-	public HAPManualPluginParserBlockScriptExpressionLibrary(HAPManualManagerBrick manualDivisionEntityMan, HAPRuntimeEnvironment runtimeEnv) {
-		super(HAPEnumBrickType.DATAEXPRESSIONLIB_100, HAPManualBlockScriptExpressionLibrary.class, manualDivisionEntityMan, runtimeEnv);
+	public HAPManualPluginParserBlockScriptExpressionLibrary(HAPManualManagerBrick manualDivisionEntityMan, HAPManagerApplicationBrick brickMan) {
+		super(HAPEnumBrickType.DATAEXPRESSIONLIB_100, HAPManualBlockScriptExpressionLibrary.class, manualDivisionEntityMan, brickMan);
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class HAPManualPluginParserBlockScriptExpressionLibrary extends HAPManual
 		for(int i=0; i<scriptExpressionArray.length(); i++) {
 			JSONObject elementObj = scriptExpressionArray.getJSONObject(i);
 			if(HAPUtilityEntityInfo.isEnabled(elementObj)) {
-				scriptExpressionLibrary.addElement((HAPManualBlockScriptExpressionElementInLibrary)HAPManualDefinitionUtilityParserBrickFormatJson.parseBrick(elementObj, HAPEnumBrickType.SCRIPTEXPRESSIONLIBELEMENT_100, parseContext, getManualDivisionBrickManager(), getBrickManager()));
+//				scriptExpressionLibrary.addElement((HAPManualBlockScriptExpressionElementInLibrary)HAPManualDefinitionUtilityParserBrickFormatJson.parseBrick(elementObj, HAPEnumBrickType.SCRIPTEXPRESSIONLIBELEMENT_100, parseContext, getManualDivisionBrickManager(), getBrickManager()));
 			}
 		}
 	}

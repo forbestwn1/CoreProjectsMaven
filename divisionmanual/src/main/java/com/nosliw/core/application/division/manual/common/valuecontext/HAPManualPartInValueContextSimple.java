@@ -121,7 +121,7 @@ public class HAPManualPartInValueContextSimple extends HAPManualPartInValueConte
 	public String toExpandedString(HAPDomainValueStructure valueStructureDomain) {
 		List<String> arrayJson = new ArrayList<String>();
 		for(HAPManualWrapperStructure valueStructure : this.m_structureWrappers) {
-			arrayJson.add(valueStructure.toExpandedString(valueStructureDomain));
+//			arrayJson.add(valueStructure.toExpandedString(valueStructureDomain));
 		}
 		return HAPUtilityJson.buildArrayJson(arrayJson.toArray(new String[0]));
 	}

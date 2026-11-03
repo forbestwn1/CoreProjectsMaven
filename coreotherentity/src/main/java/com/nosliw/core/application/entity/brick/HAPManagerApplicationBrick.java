@@ -213,7 +213,7 @@ public class HAPManagerApplicationBrick {
 		if(!dependency.contains(complexEntityResourceId)) {
 			dependency.add(complexEntityResourceId);
 
-			HAPBundleForBrick bundle = this.getBrickBundle(HAPUtilityBrickId.parseBrickId(complexEntityResourceId));
+			HAPBundleForBrick bundle = this.getBrickBundle(HAPUtilityBrickId.parseBrickId(complexEntityResourceId), null);
 			Set<HAPResourceIdSimple> bundleDependency = bundle.getResourceDependency();
 			for(HAPResourceIdSimple id : bundleDependency) {
 				buildDependencyGroup(id, dependency);

@@ -178,7 +178,7 @@ public class HAPUtilityProcessRelativeElementInBundle {
 	
 	
 	
-	
+/*	
 	
 	public static void processRelativeInStructure(HAPStructure valueStructure, HAPStructure structureFromParent, HAPConfigureProcessorRelative processRelativeConfigure, Set<HAPIdValuePortInBundle>  dependency, List<HAPServiceData> errors, HAPRuntimeEnvironment runtimeEnv) {
 		if(processRelativeConfigure==null) {
@@ -251,7 +251,7 @@ public class HAPUtilityProcessRelativeElementInBundle {
 		}
 		return out;
 	}
-	
+*/	
 	
 	
 }

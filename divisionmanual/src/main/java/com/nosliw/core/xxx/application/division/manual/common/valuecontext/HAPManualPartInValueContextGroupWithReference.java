@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.common.valuecontext;
 
 import java.util.ArrayList;
@@ -31,3 +32,4 @@ public class HAPManualPartInValueContextGroupWithReference extends HAPManualPart
 	public HAPManualPartInValueContext cloneValueContextPart() {   return this.cloneValueStructureComplexPartGroup();  }
 	
 }
+*/

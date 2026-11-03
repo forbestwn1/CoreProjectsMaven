@@ -1,23 +1,7 @@
 package com.nosliw.core.xxx.application.valueport;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import com.nosliw.common.path.HAPComplexPath;
-import com.nosliw.common.path.HAPPath;
-import com.nosliw.common.utils.HAPConstant;
-import com.nosliw.core.application.common.structure.HAPElementStructure;
-import com.nosliw.core.application.common.structure.HAPUtilityElement;
-import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
-import com.nosliw.core.application.valueport.HAPInfoValuePort;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
-import com.nosliw.core.application.valueport.HAPReferenceValueStructure;
-import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
-import com.nosliw.core.xxx.application.common.structure.HAPElementStructureUnknown;
-
 public abstract class HAPValuePortImp implements HAPValuePort1111{
-
+/*
 	private HAPInfoValuePort m_valuePortInfo;
 	
 	public HAPValuePortImp(HAPInfoValuePort valuePortInfo) {
@@ -116,6 +100,6 @@ public abstract class HAPValuePortImp implements HAPValuePort1111{
 		}
 		return out;
 	}
-
+*/
 	
 }

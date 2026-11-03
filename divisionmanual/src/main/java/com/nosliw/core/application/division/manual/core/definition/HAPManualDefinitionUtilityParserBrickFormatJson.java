@@ -20,7 +20,6 @@ import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickId;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
-import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueReferenceAttachment;
 
 public class HAPManualDefinitionUtilityParserBrickFormatJson {
 
@@ -141,11 +140,11 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 		
 		//reference
 		if(out==null) {
-			Object referenceObj = jsonObj.opt(HAPManualDefinitionWrapperValueReferenceAttachment.REFERENCE);
-			if(referenceObj!=null) {
-				HAPManualDefinitionReferenceAttachment reference = HAPManualDefinitionReferenceAttachment.newInstance(referenceObj, brickTypeId.getBrickType());
-				out = new HAPManualDefinitionWrapperValueReferenceAttachment(reference);
-			}
+//			Object referenceObj = jsonObj.opt(HAPManualDefinitionWrapperValueReferenceAttachment.REFERENCE);
+//			if(referenceObj!=null) {
+//				HAPManualDefinitionReferenceAttachment reference = HAPManualDefinitionReferenceAttachment.newInstance(referenceObj, brickTypeId.getBrickType());
+//				out = new HAPManualDefinitionWrapperValueReferenceAttachment(reference);
+//			}
 		}
 		
 		//dynamic
@@ -199,11 +198,11 @@ public class HAPManualDefinitionUtilityParserBrickFormatJson {
 		return adapterInfo;
 	}
 	
-	private static String figureoutAdatperType(String entityType, String adapterType, HAPManagerDomainEntityDefinition domainEntityManager) {
-		if(adapterType!=null) {
-			return adapterType;
-		} else {
-			return domainEntityManager.getDefaultAdapterByEntity(entityType);
-		}
-	}
+//	private static String figureoutAdatperType(String entityType, String adapterType, HAPManagerDomainEntityDefinition domainEntityManager) {
+//		if(adapterType!=null) {
+//			return adapterType;
+//		} else {
+//			return domainEntityManager.getDefaultAdapterByEntity(entityType);
+//		}
+//	}
 }

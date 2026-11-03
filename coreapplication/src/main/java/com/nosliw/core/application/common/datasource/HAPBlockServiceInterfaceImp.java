@@ -29,6 +29,9 @@ public class HAPBlockServiceInterfaceImp extends HAPBrickImpWithEntityInfo imple
 	public HAPBlockServiceInterfaceImp(String division) {
 		super(HAPEnumBrickType.SERVICEINTERFACE_100, division);
 	}
+	public HAPBlockServiceInterfaceImp() {
+	}
+	
 	
 	@Override
 	public HAPBlockInteractiveInterfaceTask getTaskInteractiveInterface() {  return (HAPBlockInteractiveInterfaceTask)this.getAttributeValueOfBrickLocal(INTERFACE);  }

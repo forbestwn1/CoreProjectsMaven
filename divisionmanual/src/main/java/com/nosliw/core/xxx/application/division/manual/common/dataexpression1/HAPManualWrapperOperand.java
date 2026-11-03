@@ -36,6 +36,6 @@ public class HAPManualWrapperOperand extends HAPSerializableImp{
 	public boolean isEmpty(){ return this.m_operand==null;  }
 	
 	public HAPManualWrapperOperand cloneWrapper(){
-		return new HAPManualWrapperOperand(this.getOperand().cloneOperand());
+		return new HAPManualWrapperOperand(this.getOperand());
 	}
 }

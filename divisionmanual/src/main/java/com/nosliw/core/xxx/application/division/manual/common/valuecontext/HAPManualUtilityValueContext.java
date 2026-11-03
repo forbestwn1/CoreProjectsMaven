@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.common.valuecontext;
 
 import java.util.ArrayList;
@@ -139,3 +140,4 @@ public class HAPManualUtilityValueContext {
 	public static void setParentPart(HAPWithValueContext child, HAPWithValueContext parent) {	setValueStructureFromParent(child, parent.getValueContext().getValueStructures());	}
 
 }
+*/

@@ -59,7 +59,7 @@ public class HAPBlockServiceProfileImp extends HAPBrickImpWithEntityInfo impleme
 			this.setTaskInterface(resourceId);
 		}
 		else {
-			this.setTaskInterface(HAPUtilityServiceParse.parseTaskInterfaceInterfaceBlock(jsonObj));
+			this.setTaskInterface(HAPUtilityServiceParse.parseTaskInterfaceInterfaceBlock(jsonObj, null));
 		}
 		
 		List<String> tags = new ArrayList<String>();

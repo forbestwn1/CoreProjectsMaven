@@ -6,6 +6,7 @@ import com.nosliw.common.utils.HAPProcessTracker;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.data.HAPDataTypeHelper;
+import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaAny;
 import com.nosliw.core.data.matcher.HAPMatchers;
@@ -28,6 +29,7 @@ public class HAPManualUtilityOperand {
 			HAPContainerVariableInfo inVariablesInfo, 
 			List<HAPMatchers> matchers,
 			HAPDataTypeHelper dataTypeHelper,
+			HAPCriteriaHelper criteriaHelper,
 			HAPProcessTracker processTracker) {
 		//do discovery on operand
 		HAPContainerVariableInfo varsInfo = inVariablesInfo.clone();
@@ -45,7 +47,7 @@ public class HAPManualUtilityOperand {
 					expectOutput = HAPDataTypeCriteriaAny.getCriteria(); 
 				}
 				
-				matchers.add(operands.get(i).discover(varsInfo, expectOutput, processTracker, dataTypeHelper));
+				matchers.add(operands.get(i).discover(varsInfo, expectOutput, processTracker, dataTypeHelper, criteriaHelper));
 			}
 		}while(!HAPUtilityBasic.isEqualMaps(varsInfo.getVariableCriteriaInfos(), oldVarsInfo.getVariableCriteriaInfos()) && processTracker.isSuccess());
 		return varsInfo;

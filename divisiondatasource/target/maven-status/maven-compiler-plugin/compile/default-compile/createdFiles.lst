@@ -1,0 +1,15 @@
+com\nosliw\core\application\entity\datasource\HAPProviderResourcePluginDataSource.class
+com\nosliw\core\application\entity\datasource\HAPImporterDataSourceDefinition$1.class
+com\nosliw\core\application\entity\taskinterface\HAPPluginResourceManagerTaskInterface.class
+com\nosliw\core\application\entity\taskinterface\HAPUtilityTaskInterface.class
+com\nosliw\core\application\entity\datasource\HAPManagerService.class
+com\nosliw\core\application\entity\datasource\HAPInfoService.class
+com\nosliw\core\application\entity\datasource\HAPInfoServiceRuntime.class
+com\nosliw\core\application\entity\taskinterface\HAPResourceDataTaskInterface.class
+com\nosliw\core\application\entity\datasource\HAPImporterDataSourceDefinition.class
+com\nosliw\core\application\entity\datasource\HAPInstanceService.class
+com\nosliw\core\application\entity\datasource\HAPFactoryService.class
+com\nosliw\core\application\entity\datasource\HAPExecutableServiceImp.class
+com\nosliw\core\application\entity\taskinterface\HAPConfigureDataSource.class
+com\nosliw\core\application\entity\taskinterface\HAPProviderResourcePluginTaskInterface.class
+com\nosliw\core\application\entity\datasource\HAPIdServcieInterface.class

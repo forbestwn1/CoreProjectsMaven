@@ -1,16 +1,9 @@
 package com.nosliw.core.xxx.application.valueport;
 
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-
-import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
-import com.nosliw.core.xxx.application1.division.manual.brick.valuestructure.HAPManualBrickValueStructure;
 
 public class HAPValueStructureInValuePort11111 extends HAPEntityInfoImp{
-
+/*
 	@HAPAttribute
 	public static final String ROOT = "root";
 
@@ -58,5 +51,5 @@ public class HAPValueStructureInValuePort11111 extends HAPEntityInfoImp{
 		}
 		return out;
 	}
-
+*/
 }

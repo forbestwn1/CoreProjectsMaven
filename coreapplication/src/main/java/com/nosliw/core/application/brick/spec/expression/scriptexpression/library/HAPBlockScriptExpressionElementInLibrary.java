@@ -2,14 +2,20 @@ package com.nosliw.core.application.brick.spec.expression.scriptexpression.libra
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.valueport.HAPContainerValuePorts;
+import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.brick.imp.basic.HAPBasicBrick;
 
 @HAPEntityWithAttribute
-public class HAPBlockScriptExpressionElementInLibrary extends HAPManualBrickWithEntityInfoSimple{
+public class HAPBlockScriptExpressionElementInLibrary extends HAPBasicBrick{
+
+	public HAPBlockScriptExpressionElementInLibrary(HAPIdBrickType brickTypeId) {
+		super(brickTypeId);
+	}
 
 	@HAPAttribute
 	public static String VALUE = "value";
-	
+
+/*	
 	@Override
 	public void init() {
 		super.init();
@@ -31,5 +37,5 @@ public class HAPBlockScriptExpressionElementInLibrary extends HAPManualBrickWith
 		out.addValuePortGroup(this.getValue().getInternalValuePortGroup(), true);
 		return out;
 	}
-
+*/
 }

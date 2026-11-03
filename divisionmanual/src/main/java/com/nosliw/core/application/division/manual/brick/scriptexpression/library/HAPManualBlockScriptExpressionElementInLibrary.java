@@ -1,7 +1,6 @@
 package com.nosliw.core.application.division.manual.brick.scriptexpression.library;
 
 import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.expression.scriptexpression.library.HAPBlockScriptExpressionElementInLibrary;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 
 public class HAPManualBlockScriptExpressionElementInLibrary extends HAPManualDefinitionBrick{
@@ -10,7 +9,7 @@ public class HAPManualBlockScriptExpressionElementInLibrary extends HAPManualDef
 		super(HAPEnumBrickType.SCRIPTEXPRESSIONLIBELEMENT_100);
 	}
 
-	public HAPManualScriptExpressionLibraryElement getValue() {   return (HAPManualScriptExpressionLibraryElement)this.getAttributeValueOfValue(HAPBlockScriptExpressionElementInLibrary.VALUE);      }
-	public void setValue(HAPManualScriptExpressionLibraryElement value) {     this.setAttributeValueWithValue(HAPBlockScriptExpressionElementInLibrary.VALUE, value);      }
+//	public HAPManualScriptExpressionLibraryElement getValue() {   return (HAPManualScriptExpressionLibraryElement)this.getAttributeValueOfValue(HAPBlockScriptExpressionElementInLibrary.VALUE);      }
+//	public void setValue(HAPManualScriptExpressionLibraryElement value) {     this.setAttributeValueWithValue(HAPBlockScriptExpressionElementInLibrary.VALUE, value);      }
 	
 }

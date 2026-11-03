@@ -1,3 +1,5 @@
+C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\configure\global\HAPConfigureGlobalApplication.java
+C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\configure\global\HAPConfigureMiniApp.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\gateway\HAPGateway.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\gateway\HAPGatewayImp.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\gateway\HAPGatewayOutput.java
@@ -65,7 +67,8 @@ C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\ser
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticRequestInfoLibrary.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponse.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponseInfo.java
+C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponseInfoContent.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponseInfoData.java
-C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponseInfoFile.java
+C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\service\staticresource\HAPStaticResponseInfoUrl.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\system\HAPSystem.java
 C:\Mywork\CoreProjectsMaven\coreinfrastructure\src\main\java\com\nosliw\core\system\HAPSystemUtility.java

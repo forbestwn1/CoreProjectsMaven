@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.core.b;
 
 import org.json.JSONObject;
@@ -18,3 +19,4 @@ public class HAPUtilitySerializeJson {
 	}
 	
 }
+*/

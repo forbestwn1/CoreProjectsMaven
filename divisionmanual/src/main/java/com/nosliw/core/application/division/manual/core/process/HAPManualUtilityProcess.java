@@ -3,12 +3,8 @@ package com.nosliw.core.application.division.manual.core.process;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPBrick;
 import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
 import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelationAutoProcess;
 import com.nosliw.core.application.division.manual.core.HAPInfoTreeNode;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -44,27 +40,27 @@ public class HAPManualUtilityProcess {
 	
 	
 	
-	public static void processComplexDynamicAttribute(HAPManualContextProcessBrick processContext) {
-		HAPManualUtilityBrickTraverse.traverseTreeWithDynamic(processContext, new HAPHandlerDownward() {
-
-			@Override
-			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-				HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
-				
-				
-				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
-				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).processInit(path, processContext);
-				return true;
-			}
-
-			@Override
-			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
-				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
-				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).postProcessInit(path, processContext);
-			}
-
-		}, null);
-	}
+//	public static void processComplexDynamicAttribute(HAPManualContextProcessBrick processContext) {
+//		HAPManualUtilityBrickTraverse.traverseTreeWithDynamic(processContext, new HAPHandlerDownward() {
+//
+//			@Override
+//			public boolean processBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+//				HAPAttributeInBrick attr = HAPUtilityBrick.getDescendantAttribute(bundle, path);
+//				
+//				
+//				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
+//				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).processInit(path, processContext);
+//				return true;
+//			}
+//
+//			@Override
+//			public void postProcessBrickNode(HAPBundleForBrick bundle, HAPPath path, Object data) {
+//				HAPBrick complexBrick = HAPUtilityBrick.getDescdentBrickLocal(bundle, path);
+//				((HAPManualPluginProcessorBlockImp)processContext.getManualBrickManager().getBlockProcessPlugin(complexBrick.getBrickType())).postProcessInit(path, processContext);
+//			}
+//
+//		}, null);
+//	}
 	
 	
 	

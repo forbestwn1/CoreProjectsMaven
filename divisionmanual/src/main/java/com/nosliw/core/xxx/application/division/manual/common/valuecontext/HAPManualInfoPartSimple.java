@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.common.valuecontext;
 
 import java.util.LinkedHashMap;
@@ -31,3 +32,4 @@ public class HAPManualInfoPartSimple {
 		return HAPUtilityJson.buildMapJson(jsonMap);
 	}
 }
+*/

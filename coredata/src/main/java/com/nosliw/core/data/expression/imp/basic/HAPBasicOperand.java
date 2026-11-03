@@ -80,6 +80,11 @@ public abstract class HAPBasicOperand extends HAPSerializableImp implements HAPO
 	static public HAPBasicOperand parseOperandJson(JSONObject jsonObj, HAPServiceParseEntity parseService) {
 		return (HAPBasicOperand)parseService.parseEntityJSONImplicitAttribute(jsonObj, HAPBasicOperand.TYPE, PARSE_DOMAIN);
 	}
+
+	public HAPBasicOperand cloneOperand() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 

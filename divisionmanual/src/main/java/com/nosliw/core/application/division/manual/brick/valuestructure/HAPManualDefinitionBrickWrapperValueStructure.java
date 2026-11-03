@@ -48,9 +48,9 @@ public class HAPManualDefinitionBrickWrapperValueStructure extends HAPManualDefi
 		HAPManualDefinitionBrickWrapperValueStructure out = new HAPManualDefinitionBrickWrapperValueStructure();
 		
 		
-		out.m_name = this.m_name;
-		out.m_groupType = this.m_groupType;
-		out.m_info = this.m_info.cloneInfo();
+//		out.m_name = this.m_name;
+//		out.m_groupType = this.m_groupType;
+//		out.m_info = this.m_info.cloneInfo();
 		return out;
 	}
 

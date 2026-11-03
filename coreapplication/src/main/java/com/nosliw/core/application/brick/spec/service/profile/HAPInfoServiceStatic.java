@@ -13,6 +13,7 @@ import com.nosliw.common.info.HAPEntityInfoWritableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.brick.spec.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.common.datasource.HAPBlockServiceInterfaceImp;
 
 //static information for a service. readable, query for service
 //information needed during configuration time
@@ -53,7 +54,7 @@ public class HAPInfoServiceStatic extends HAPEntityInfoWritableImp{
 //				this.m_interface = HAPFactoryResourceId.newInstance(HAPConstantShared.RUNTIME_RESOURCE_TYPE_SERVICEINTERFACE, interfaceObj);
 			}
 			else {
-				HAPBlockServiceInterface serviceInterfaceInfo = new HAPBlockServiceInterface();
+				HAPBlockServiceInterface serviceInterfaceInfo = new HAPBlockServiceInterfaceImp();
 				serviceInterfaceInfo.buildObject(objJson, HAPSerializationFormat.JSON);
 				this.m_interface = serviceInterfaceInfo;
 			}

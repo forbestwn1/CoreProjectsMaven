@@ -112,12 +112,12 @@ public class HAPUtilityUIResourceParser {
 	/*
 	 * find all child customer tags
 	 */
-	public static void getAllChildTags(HAPDefinitionUIUnit uiUnit, Set<HAPDefinitionUITag> tags){
-		for(HAPDefinitionUITag tag : uiUnit.getUITags()){
-			tags.add(tag);
-			getAllChildTags(tag, tags);
-		}
-	}
+//	public static void getAllChildTags(HAPDefinitionUIUnit uiUnit, Set<HAPDefinitionUITag> tags){
+//		for(HAPDefinitionUITag tag : uiUnit.getUITags()){
+//			tags.add(tag);
+//			getAllChildTags(tag, tags);
+//		}
+//	}
 
 	public static List<Element> getDescentElementsByTag(Element parent, String tagName){
 		List<Element> out = new ArrayList<Element>();

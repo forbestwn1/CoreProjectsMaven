@@ -40,7 +40,9 @@ public class HAPIdRootElement extends HAPSerializableImp{
 			this.m_valueStructureId = parts[1];
 		}
 		if(parts.length>2) {
-			this.m_valuePortId = parts[2];
+			HAPIdValuePortInBundle id = new HAPIdValuePortInBundle();
+			id.buildObject(parts[2], HAPSerializationFormat.JSON);
+			this.m_valuePortId = id;
 		}
 	}
 	

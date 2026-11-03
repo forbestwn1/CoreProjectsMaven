@@ -30,8 +30,8 @@ public class HAPRootInStructure extends HAPEntityInfoWritableImp{
 
 	public void setDefinition(HAPElementStructure definition) {   this.m_definition = definition;  }
 
-	public HAPRootStructure cloneRootBase() {
-		HAPRootStructure out = new HAPRootStructure();
+	public HAPRootInStructure cloneRootBase() {
+		HAPRootInStructure out = new HAPRootInStructure();
 		this.cloneToEntityInfo(out);
 		return out;
 	}

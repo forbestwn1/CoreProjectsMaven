@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.application.division.manual.brick.task.flow;
 
 import com.nosliw.core.application.brick.HAPValueOfDynamic;
@@ -18,3 +19,4 @@ public class HAPManualDefinitionBlockTaskFlowActivityDynamic extends HAPManualDe
 	public void setTaskAddress(HAPAddressValue taskAddress) {    this.setAttributeValueWithValue(HAPBlockTaskFlowActivityDynamic.TASKADDRESS, taskAddress);      }
 	
 }
+*/

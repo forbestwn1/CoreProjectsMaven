@@ -38,6 +38,7 @@ public class HAPManualUtilityExporterContentProvider {
 //		String content = HAPUtilityFileNio.readFile(contentPathText);
 //		HAPManualContentProviderText out = (HAPManualContentProviderText)parseService.parseEntityJSONExplicit(new JSONObject(content), HAPManualContentProviderTextENTITYTYPE);
 //		return out;
+		return null;
 	}
 	
 	public static void export(HAPManualContentProviderText cotentProvider, Path rootFolder) {

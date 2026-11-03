@@ -219,10 +219,10 @@ public class HAPManualDefinitionPluginParserBrickImp implements HAPManualDefinit
 	protected void parseDefinitionContent(HAPManualDefinitionBrick entityDefinition, Object obj, HAPSerializationFormat format, HAPManualDefinitionContextParse parseContext) {}
 	
 	private void processReservedAttribute(HAPManualDefinitionBrick entity, String attrName) {
-		String attrEntityValueType = entity.getAttribute(attrName).getValueTypeInfo().getValueType();
-		if(attrEntityValueType.equals(HAPConstantShared.RUNTIME_RESOURCE_TYPE_ATTACHMENT)||attrEntityValueType.equals(HAPConstantShared.RUNTIME_RESOURCE_TYPE_VALUECONTEXT)) {
-			entity.getAttribute(attrName).setAttributeAutoProcess(false);
-		}
+//		String attrEntityValueType = entity.getAttribute(attrName).getValueTypeInfo().getValueType();
+//		if(attrEntityValueType.equals(HAPConstantShared.RUNTIME_RESOURCE_TYPE_ATTACHMENT)||attrEntityValueType.equals(HAPConstantShared.RUNTIME_RESOURCE_TYPE_VALUECONTEXT)) {
+//			entity.getAttribute(attrName).setAttributeAutoProcess(false);
+//		}
 	}
 
 	//*************************************   attribute parse helper

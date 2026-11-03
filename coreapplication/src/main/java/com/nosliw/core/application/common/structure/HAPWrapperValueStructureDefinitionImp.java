@@ -73,10 +73,10 @@ class HAPWrapperValueStructureDefinitionImp_parser implements HAPParserEntity{
 		JSONObject vsInfoJsonObj = jsonObj.optJSONObject(HAPWrapperValueStructureDefinition.VALUESTRUCTUREINFO);
 		if(vsInfoJsonObj!=null) {
 			
-			out.setStructureInfo(HAPUtilityParserStructure.parseValueStructureWrapper(vsInfoJsonObj, parseService));
+			HAPWrapperValueStructureDefinition wrapperVSDef = HAPUtilityParserStructure.parseValueStructureWrapper(vsInfoJsonObj, parseService);
+			out.setStructureInfo(wrapperVSDef.getStructureInfo());
 			
-			HAPInfoStructureInWrapper vsInfo = new HAPInfoStructureInWrapper(); 
-			out.setValueStructure(vs);
+			out.setValueStructure(wrapperVSDef.getValueStructure());
 		}
 
 		

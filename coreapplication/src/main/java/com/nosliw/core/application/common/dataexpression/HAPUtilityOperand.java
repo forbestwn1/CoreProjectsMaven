@@ -1,39 +1,7 @@
 package com.nosliw.core.application.common.dataexpression;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.nosliw.common.updatename.HAPUpdateName;
-import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.common.utils.HAPProcessTracker;
-import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.data.expression.HAPOperand;
-import com.nosliw.core.data.expression.HAPOperandAttribute;
-import com.nosliw.core.data.expression.HAPOperandConstant;
-import com.nosliw.core.data.expression.HAPOperandOperation;
-import com.nosliw.core.data.expression.HAPOperandReference;
-import com.nosliw.core.data.expression.HAPOperandVariable;
-import com.nosliw.core.xxx.application1.common.dataexpressionimp.HAPInterfaceProcessOperand;
-import com.nosliw.data.core.data.HAPData;
-import com.nosliw.data.core.data.HAPDataTypeHelper;
-import com.nosliw.data.core.data.HAPDataTypeId;
-import com.nosliw.data.core.data.HAPDataTypeOperation;
-import com.nosliw.data.core.data.HAPDataWrapper;
-import com.nosliw.data.core.data.HAPOperationParmInfo;
-import com.nosliw.data.core.data.criteria.HAPDataTypeCriteria;
-import com.nosliw.data.core.data.criteria.HAPDataTypeCriteriaAny;
-import com.nosliw.data.core.domain.entity.expression.data1.HAPExecutableEntityExpressionDataGroup;
-import com.nosliw.data.core.matcher.HAPMatchers;
-
 public class HAPUtilityOperand {
-
+/*
 	static public void replaceAttributeOpWithOperationOp(HAPWrapperOperand operand) {
 		List<HAPWrapperOperand> attrOperands = new ArrayList<HAPWrapperOperand>();
 		HAPUtilityOperand.processAllOperand(operand, null, new HAPInterfaceProcessOperand(){
@@ -281,11 +249,11 @@ public class HAPUtilityOperand {
 		return out;
 	}
 
-	/**
-	 * Find all the unsolved constants names: constants that only provide name
-	 * @param operand
-	 * @return
-	 */
+	
+//	 * Find all the unsolved constants names: constants that only provide name
+//	 * @param operand
+//	 * @return
+//	 *
 	static public Set<String> discoveryUnsolvedConstants(HAPWrapperOperand operand){
 		Set<String> out = new HashSet<String>();
 		processAllOperand(operand, out, new HAPInterfaceProcessOperand(){
@@ -382,12 +350,12 @@ public class HAPUtilityOperand {
 		return varsInfo;
 	}
 
-	/**
-	 * Process anonomouse parameter in operaion
-	 * Add parm name to it
-	 * It only works for OperationOperand with clear data typeId
-	 * @param expression
-	 */
+	
+//	 * Process anonomouse parameter in operaion
+//	 * Add parm name to it
+//	 * It only works for OperationOperand with clear data typeId
+//	 * @param expression
+//	 *
 	public void processDefaultAnonomousParmInOperation(HAPWrapperOperand operand, HAPDataTypeHelper dataTypeHelper){
 		HAPUtilityOperand.processAllOperand(operand, null, new HAPInterfaceProcessOperand(){
 			@Override
@@ -415,9 +383,10 @@ public class HAPUtilityOperand {
 			}
 		});		
 	}
-
+*/
 }
 
+/*
 class HAPAttributeOperandChainInfo{
 	public HAPWrapperOperand startOperand;
 	
@@ -439,4 +408,4 @@ class HAPAttributeOperandChainInfo{
 		path.add(0, seg);
 	}
 }
-
+*/

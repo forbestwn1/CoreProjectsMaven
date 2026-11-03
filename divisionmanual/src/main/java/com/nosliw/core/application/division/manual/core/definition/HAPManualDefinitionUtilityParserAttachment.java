@@ -21,7 +21,7 @@ public class HAPManualDefinitionUtilityParserAttachment{
 				String brickVersion = (String)versionKey;
 				JSONArray brickWrapperJsonArray = byVersionJsonObj.getJSONArray(brickVersion);
 				for(int i=0; i<brickWrapperJsonArray.length(); i++) {
-					HAPManualDefinitionWrapperBrickRoot brickWrapper = HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(brickWrapperJsonArray.get(i), new HAPIdBrickType(brickType, brickVersion), HAPSerializationFormat.JSON, parseContext, manualBrickMan, brickMan);
+					HAPManualDefinitionWrapperBrickRoot brickWrapper = HAPManualDefinitionUtilityParserBrick.parseBrickDefinitionWrapper(brickWrapperJsonArray.get(i), new HAPIdBrickType(brickType, brickVersion), HAPSerializationFormat.JSON, parseContext);
 					attachment.addItem(brickWrapper);
 				}
 			}

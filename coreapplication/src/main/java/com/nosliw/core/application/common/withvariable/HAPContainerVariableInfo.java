@@ -2,8 +2,8 @@ package com.nosliw.core.application.common.withvariable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Set;
 
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
@@ -136,8 +136,8 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 			//brand new
 			String key = this.m_nextId + "";
 			this.m_nextId++;
-			this.m_variableIdByName.put(key, variableId);
-			this.m_criteriaInfosByKey.put(variableId, new HAPInfoCriteria());
+//			this.m_variableIdByName.put(key, variableId);
+//			this.m_criteriaInfosByKey.put(variableId, new HAPInfoCriteria());
 			return key;
 		}
 	}
@@ -146,7 +146,7 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 	
 	
 	
-	public Set<HAPIdElement> getVariablesId(){    return this.m_criteriaInfosByKey.keySet();     }
+//	public Set<HAPIdElement> getVariablesId(){    return this.m_criteriaInfosByKey.keySet();     }
 	
 //	public HAPInfoCriteria getVariableCriteriaInfo(HAPIdElement variableId) {     return this.m_criteriaInfosById.get(variableId);     }
 	
@@ -158,7 +158,7 @@ public class HAPContainerVariableInfo extends HAPSerializableImp{
 		for(String name : this.m_variableIdByName.keySet()) {
 			Map<String, String> entryMap = new LinkedHashMap<String, String>();
 			entryMap.put(VARIABLENAME, name);
-			entryMap.put(VARIABLEID, m_variableIdByName.get(name).toStringValue(HAPSerializationFormat.JSON));
+			entryMap.put(VARIABLEID, HAPManagerSerialize.getInstance().toStringValue(m_variableIdByName.get(name), HAPSerializationFormat.JSON));
 			entryMap.put(CRITERIA, this.m_criteriaInfosByKey.get(m_variableIdByName.get(name)).toStringValue(HAPSerializationFormat.JSON));
 			outMap.put(name, HAPUtilityJson.buildMapJson(entryMap));
 		}

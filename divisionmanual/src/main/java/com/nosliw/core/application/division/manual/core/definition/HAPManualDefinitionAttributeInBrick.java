@@ -87,7 +87,7 @@ public class HAPManualDefinitionAttributeInBrick extends HAPEntityInfoImp implem
 
 	
 	
-	
+/*	
 	
 	protected void cloneToEntityAttribute(HAPManualDefinitionAttributeInBrick attr) {
 		super.cloneToEntityAttribute(attr);
@@ -100,5 +100,5 @@ public class HAPManualDefinitionAttributeInBrick extends HAPEntityInfoImp implem
 		this.cloneToEntityAttribute(out);
 		return out;
 	}
-
+*/
 }

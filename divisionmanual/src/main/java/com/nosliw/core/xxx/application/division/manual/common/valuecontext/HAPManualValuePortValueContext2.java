@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.common.valuecontext;
 
 import java.util.ArrayList;
@@ -111,3 +112,4 @@ public class HAPManualValuePortValueContext2 extends HAPValuePort{
 	}
 
 }
+*/

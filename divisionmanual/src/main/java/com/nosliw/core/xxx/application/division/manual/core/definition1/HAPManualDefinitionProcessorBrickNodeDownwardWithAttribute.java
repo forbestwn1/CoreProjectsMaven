@@ -1,3 +1,4 @@
+/*
 package com.nosliw.core.xxx.application.division.manual.core.definition1;
 
 import com.nosliw.common.path.HAPPath;
@@ -20,3 +21,4 @@ public abstract class HAPManualDefinitionProcessorBrickNodeDownwardWithAttribute
 	}
 	
 }
+*/

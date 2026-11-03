@@ -7,7 +7,6 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 import com.nosliw.core.runtime.execute.HAPExecutorRuntime;
 import com.nosliw.core.runtime.execute.HAPTaskRuntime;
-import com.nosliw.core.runtime.js.rhino.HAPRuntimeTaskExecuteDataOperationRhino;
 
 public class HAPUtilityExecuteTask {
 
@@ -18,7 +17,7 @@ public class HAPUtilityExecuteTask {
 		HAPTaskRuntime task = null;
 
 		if (runtimeInfo.equals(HAPRuntimeManager.RUNTIME_JS_RHION)) {
-			task = new HAPRuntimeTaskExecuteDataOperationRhino(dataTypeId, operation, parmsData);
+//			task = new HAPRuntimeTaskExecuteDataOperationRhino(dataTypeId, operation, parmsData);
 		}
 
 		HAPServiceData serviceData = runtime.executeTaskSync(task);
