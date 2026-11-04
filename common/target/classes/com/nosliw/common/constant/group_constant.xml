@@ -1,3 +1,0 @@
-<group_constant parent="group" class="com.nosliw.common.constant.HAPConstantGroup">
-	<override path="type" attributes="default=constant"/>
-</group_constant>

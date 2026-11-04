@@ -42,7 +42,7 @@ var node_createErrorManager = function(){
 			errorData.push(errorEle);
 			if(errorData.length>loc_MAX_ERROR){
 				//keep less than max errors 
-				errorData = errorData.slice(0, errorData.length);
+				errorData = errorData.slice(0, loc_MAX_ERROR);
 			}
 			localStorage.errorData = JSON.stringify(errorData);
 			return errorData;

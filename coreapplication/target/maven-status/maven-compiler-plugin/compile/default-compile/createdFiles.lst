@@ -184,7 +184,6 @@ com\nosliw\core\application\common\dataassociation\definition\HAPDefinitionMappi
 com\nosliw\core\application\brick\spec\task\flow\HAPBlockTaskFlowActivityContainer.class
 com\nosliw\core\application\brick\imp\basic\HAPBasicBlockInteractiveInterfaceTask.class
 com\nosliw\core\application\brick\spec\test\complex\task\script\HAPBlockTestComplexTaskScript.class
-META-INF\maven\com.nosliw\coreapplication\pom.properties
 com\nosliw\core\application\common\structure\HAPUtilityParserElement.class
 com\nosliw\core\application\common\dataassociation\definition\HAPDefinitionDataAssociationMirror.class
 com\nosliw\core\application\valueport\HAPResultReferenceResolve.class
@@ -205,7 +204,6 @@ com\nosliw\core\application\common\dataassociation\HAPEndPointInTunnelDataExpres
 com\nosliw\core\application\valueport\HAPWithInternalValuePort.class
 com\nosliw\core\application\brick\ui\uicontent\HAPBlockComplexUIContent.class
 com\nosliw\core\application\common\brick\serialize\valueparser\HAParserPValueInAttributeImpBlockTaskTaskScript.class
-META-INF\maven\com.nosliw\coreapplication\pom.xml
 com\nosliw\core\application\brick\imp\basic\HAPBasicBlockTaskWrapper.class
 com\nosliw\core\application\brick\HAPBundleForExecute.class
 com\nosliw\core\application\common\datadefinition\HAPUtilityDataDefinition.class
@@ -446,7 +444,6 @@ com\nosliw\core\application\entity\brickfacade\HAPManagerBrickTypeFacade.class
 com\nosliw\core\application\brick\spec\service\interfacee\HAPBlockServiceInterface.class
 com\nosliw\core\application\common\datadefinition\HAPParserDataDefinition.class
 com\nosliw\core\application\entity\script\HAPWithScriptReference.class
-META-INF\MANIFEST.MF
 com\nosliw\core\xxx\application\valueport\HAPValueStructureInValuePort11111.class
 com\nosliw\core\application\brick\HAPValueOfDynamic.class
 com\nosliw\core\application\entity\datarule\HAPDataRuleEnumCode_Parser.class

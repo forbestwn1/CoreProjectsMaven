@@ -1,3 +1,0 @@
-<entity name="merge_entity" description="" class="com.nosliw.entity.definition.HAPEntityDefinitionSegment">
-	<property name="type" type="string" description="merge type"/>
-</entity>

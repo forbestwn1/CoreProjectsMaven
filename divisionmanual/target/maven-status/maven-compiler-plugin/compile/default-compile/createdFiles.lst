@@ -51,7 +51,6 @@ com\nosliw\core\application\division\manual\common\valuecontext\HAPManualPartInV
 com\nosliw\core\application\division\manual\brick\adapter\dataassociation\HAPManualPluginParserAdapterDataAssociation.class
 com\nosliw\core\application\division\manual\core\process\HAPManualUtilityProcessorInit$2.class
 com\nosliw\core\xxx\application\division\manual\common\dataexpression1\HAPPluginProcessorEntityWithVariableDataExpression.class
-META-INF\maven\com.nosliw\divisionmanual\pom.properties
 com\nosliw\core\application\division\manual\core\definition\HAPManualDefinitionUtilityParserAttachment.class
 com\nosliw\core\application\division\manual\common\valuecontext\HAPManualPartInValueContext.class
 com\nosliw\core\application\division\manual\core\process\HAPManualUtilityProcessorPre$1.class
@@ -235,7 +234,6 @@ com\nosliw\core\application\division\manual\brick\expression\dataexpression\lib\
 com\nosliw\core\application\division\manual\core\process\HAPManualUtilityProcessorValuePort$3.class
 com\nosliw\core\application\division\manual\core\process\HAPManualPluginProcessorBrick.class
 com\nosliw\core\xxx\application\division\manual\common\dataexpression1\HAPManualUtilityOperand.class
-META-INF\maven\com.nosliw\divisionmanual\pom.xml
 com\nosliw\core\application\division\manual\core\definition\HAPManualDefinitionPluginParserBrickImpSimple.class
 com\nosliw\core\application\division\manual\brick\test\complex\testcomplex1\HAPManualDefinitionBlockTestComplex1.class
 com\nosliw\core\application\division\manual\common\valuecontext\HAPManualWrapperStructure.class
@@ -262,7 +260,6 @@ com\nosliw\core\application\division\manual\core\process\HAPManualUtilityProcess
 com\nosliw\core\application\division\manual\core\definition\HAPManualDefinitionWrapperValueReferenceBrick.class
 com\nosliw\core\application\division\manual\brick\ui\uicontent\HAPManualProviderBrickInfoMultipleUIContent$3.class
 com\nosliw\core\application\division\manual\brick\wrapperbrick\HAPManualPluginParserBrickWrapperBrick.class
-META-INF\MANIFEST.MF
 com\nosliw\core\application\division\manual\core\process\HAPManualPluginProcessorBlockImp.class
 com\nosliw\core\application\division\manual\brick\service\provider\HAPManualProviderBrickInfoServiceProvider.class
 com\nosliw\core\application\division\manual\common\valuecontext\HAPManualUtilityValueContext$1.class

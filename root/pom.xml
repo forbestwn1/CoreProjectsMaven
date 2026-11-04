@@ -18,12 +18,15 @@
     <module>../coreapplication</module>
     <module>../divisionmanual</module>
     <module>../divisiondatasource</module>
+
     <module>../apidatasource</module>
     <module>../apistatic</module>
     <module>../divisionstory</module>
     <module>../apicore</module>
     <module>../serverservicediscovery</module>
+
   </modules>
+
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -129,10 +132,7 @@
 
   <build>
     <plugins>
-      <!--plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin-->
+    
     </plugins>
   </build>
 

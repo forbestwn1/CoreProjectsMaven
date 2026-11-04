@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -212,7 +213,17 @@ public class HAPStaticAPI {
 
     private HAPStaticResponseInfo uploadContentToTemp(String content, String domain, String name) throws IOException, URISyntaxException {
     	String path = getFilePathForTemp(domain, name);
-        HAPUtilityFileNio.writeFile(HAPUtilityFileNio.buildPath(path), content);
+    	
+    	Path outputPath = HAPUtilityFileNio.buildPath(path);
+    	
+    	if(this.m_temporaryConfigure.isOverrideexisting()) {
+            HAPUtilityFileNio.writeFile(outputPath, content);
+    	}
+    	else {
+        	if(!Files.exists(outputPath)) {
+                HAPUtilityFileNio.writeFile(outputPath, content);
+        	}
+    	}
         HAPStaticResponseInfo out = new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name)));
         return out;
 	}

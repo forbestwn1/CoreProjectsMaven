@@ -11,6 +11,12 @@ public class HAPConfigureTemporary {
 	
 	private String path;
 	
+	private boolean overrideexisting;
+	
+	public boolean isOverrideexisting() {		return overrideexisting;	}
+
+	public void setOverrideexisting(boolean overrideexisting) {		this.overrideexisting = overrideexisting;	}
+
 	public String getUrl() {   return this.url;    }
 	
 	public void setUrl(String url) {    this.url = url;        }

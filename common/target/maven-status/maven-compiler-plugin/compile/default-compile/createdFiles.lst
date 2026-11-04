@@ -71,7 +71,6 @@ com\nosliw\common\logic\HAPLogicExpression.class
 com\nosliw\common\strvalue\mode\HAPStringableValueModeList.class
 com\nosliw\common\interpolate\HAPPatternProcessorInterpolation.class
 com\nosliw\common\updatename\HAPUpdateNameMapRoot.class
-META-INF\maven\com.nosliw\common\pom.properties
 com\nosliw\common\parm\HAPManagerParm.class
 com\nosliw\common\strvalue\HAPStringableValueComplex.class
 com\nosliw\common\interfac\HAPEventListener.class
@@ -95,7 +94,6 @@ com\nosliw\common\configure\HAPResolvableConfigureItem.class
 com\nosliw\common\test\HAPTestInfo.class
 com\nosliw\common\utils\HAPUtilityIO.class
 com\nosliw\common\utils\HAPSegmentParser.class
-META-INF\maven\com.nosliw\common\pom.xml
 com\nosliw\common\constant\HAPConstantManager.class
 com\nosliw\common\serialization\HAPSerializableImp$1.class
 com\nosliw\common\strvalue\valueinfo\HAPValueInfoImporterXML.class
@@ -196,7 +194,6 @@ com\nosliw\common\constant\HAPConstantUtility$1.class
 com\nosliw\common\strvalue\valueinfo\HAPValueInfoManager$1.class
 com\nosliw\common\exception\HAPServiceDataException.class
 com\nosliw\common\strvalue\HAPStringableValueEntityBasic.class
-META-INF\MANIFEST.MF
 com\nosliw\common\utils\HAPUrlUtility.class
 com\nosliw\common\test\HAPAssert.class
 com\nosliw\common\strvalue\valueinfo\HAPEntityValueInfo.class
