@@ -5,6 +5,7 @@ import { createComponentQuestionItemService } from './Service'
 import ErrorInQuestionair from './ErrorInQuestionair'
 import './QuestionairDynamicChooseDataSource.css'
 import { setGlobalLoading } from './globalLoading'
+import { setGlobalError } from './globalError'
 
 export default function QuestionairDynamicChooseDataSource({ questionair, onChange }) {
     const cache = useContext(CacheContext);
@@ -20,8 +21,12 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                 cache.current[questionair.id] = services;
                 forceUpdate(c => c + 1);
                 setGlobalLoading(false);
-            }, undefined, (exception) => {
-                setGlobalLoading(true);
+            }, (error) => {
+                setGlobalLoading(false);
+                setGlobalError(error?.message || error || 'Unable to load data sources.');
+            }, (exception) => {
+                setGlobalLoading(false);
+                setGlobalError(exception?.message || exception || 'Unable to load data sources.');
             });
         }
     }, []);

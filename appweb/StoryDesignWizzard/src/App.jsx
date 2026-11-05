@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Design from './Design';
 import { isGlobalLoading, subscribeToGlobalLoading } from './globalLoading';
+import ErrorMessagePopup from './ErrorMessagePopup';
+import { clearGlobalError, getGlobalError, subscribeToGlobalError } from './globalError';
 
 function GlobalLoadingSpinner() {
     const [isLoading, setIsLoading] = useState(isGlobalLoading());
@@ -23,10 +25,28 @@ function GlobalLoadingSpinner() {
     );
 }
 
+function GlobalErrorPopup() {
+    const [errorMessage, setErrorMessage] = useState(getGlobalError());
+
+    useEffect(() => {
+        const syncErrorState = () => setErrorMessage(getGlobalError());
+        const unsubscribe = subscribeToGlobalError(syncErrorState);
+        return unsubscribe;
+    }, []);
+
+    return (
+        <ErrorMessagePopup
+            message={errorMessage}
+            onClose={clearGlobalError}
+        />
+    );
+}
+
 export default function App() {
     return (
         <div className="app-shell">
             <GlobalLoadingSpinner />
+            <GlobalErrorPopup />
             <Design />
         </div>
     );
