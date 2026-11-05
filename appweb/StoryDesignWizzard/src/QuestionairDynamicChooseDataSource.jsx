@@ -15,12 +15,13 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
     useEffect(() => {
         if (cache.current[questionair.id] == undefined) {
             setGlobalLoading(true);
-            console.log("load all services response");
             const service = createComponentQuestionItemService();
             service.getLoadServicesRequest((services) => {
                 cache.current[questionair.id] = services;
                 forceUpdate(c => c + 1);
                 setGlobalLoading(false);
+            }, undefined, (exception) => {
+                setGlobalLoading(true);
             });
         }
     }, []);

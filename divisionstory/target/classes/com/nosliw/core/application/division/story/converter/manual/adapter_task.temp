@@ -1,0 +1,13 @@
+ 	    				{
+		    				"name" : "|||adapterId|||",
+				    		"brickTypeId" : {
+					    		"brickType": "dataAssociationForTask",
+    							"version": "1.0.0"
+	    					},
+		    				"brick" : {
+			    				"definition" : {
+				    				"in" : |||requestDataAssociation|||,
+			    					"out" : |||responseDataAssociation|||, 
+			    				}
+		    				}
+	    				}

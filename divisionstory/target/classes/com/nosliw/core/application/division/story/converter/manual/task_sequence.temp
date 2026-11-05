@@ -1,0 +1,22 @@
+	        {
+	    		"name" : "|||id|||",
+		    	"status": "disabled1",
+			    "description" : "",
+		        "brick" : {
+                    "info": {
+                        "nosliw_alias": "|||alias|||"
+                    },
+        			"resourceId":"taskTaskScript|1.0.0|sequence",  
+        			"dynamicInput" : { 
+	        			"element" :
+		        		[ 
+			        		{
+								"name" : "tasks",
+				        		"type" : "multiple",
+    						    "brickPackages" : 
+        		        		     |||subTasks||| 
+	    			    	}
+    	    			]
+	    	    	}
+		        }
+	        }

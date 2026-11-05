@@ -1,0 +1,13 @@
+{
+	"dataTypeId": "test.map;1.0.0",
+	"value": {
+		"stringAttr1": {
+			"dataTypeId": "test.string;1.0.0",
+			"value": "This is my world 1111!"
+		},
+		"stringAttr2": {
+			"dataTypeId": "test.string;1.0.0",
+			"value": "This is my world 2222!"
+		}
+	}
+}

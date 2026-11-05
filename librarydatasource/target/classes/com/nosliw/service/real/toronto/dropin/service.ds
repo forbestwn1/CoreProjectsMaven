@@ -1,0 +1,141 @@
+[{
+	"profile": {
+		"id": "toronto_program_dropin",
+		"status":"disabled1",
+		"name": "Toronto Dropin Program",
+		"description" : "Toronto Dropin Program",
+		"tag" : ["public"],
+		"taskInterface" : {
+			"request" : [
+				{
+					"name" : "location",
+					"description" : "Community Center",
+					"dataDefinition" : {
+						"criteria" : "test.entity;1.0.0",
+					    "isMultipleAllowed" : true,
+					    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        },
+					        {
+                   				"name" : "Community Location",
+	                            "status": "disabled1",
+					            "ruleType" : "enum",
+					            "enumCode" : "toronto_community"
+					        }
+					    ],
+					}
+				},
+				{
+					"name" : "program",
+					"description" : "Program Name",
+					"dataDefinition" : {
+						"criteria" : "test.entity;1.0.0",
+					    "isMultipleAllowed" : true,
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        },
+	                        {
+               			    	"name" : "Community Location",
+                                "status": "disabled1",
+    				            "ruleType" : "enum",
+	    			            "enumCode" : "toronto_program_dropin"
+		    		        }
+			    	    ],
+					},
+				},
+				{
+					"name" : "fromDate",
+					"description" : "From Date",
+					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
+					}
+				},
+				{
+					"name" : "fromTime",
+					"description" : "From Time",
+					"dataDefinition" : {
+						"criteria" : "test.time;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
+						"initData" : {
+							"dataTypeId": "test.time;1.0.0",
+							"value": {
+							    hour: 6,
+							    minute : 0,
+							    second : 0,
+							}
+						}
+					}
+				},
+				{
+					"name" : "toDate",
+					"description" : "To Date",
+					"dataDefinition" : {
+						"criteria" : "test.date;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
+					}
+				},
+				{
+					"name" : "toTime",
+					"description" : "To Time",
+					"dataDefinition" : {
+						"criteria" : "test.time;1.0.0",
+    				    "rule" : [
+					        {
+                   				"name" : "mandatory",
+	                            "status": "disabled1",
+					            "ruleType" : "mandatory"
+					        }
+			    	    ],
+						"initData" : {
+							"dataTypeId": "test.time;1.0.0",
+							"value": {
+							    hour: 22,
+							    minute : 0,
+							}
+						}
+					}
+				}
+			],
+			"result" : {
+				"success": {
+					"output": [
+						{
+							"name" : "output",
+  							"dataDefinition" : {
+    							"criteria" : "test.array;1.0.0%||element:test.map;1.0.0%%||CommunityCenter:test.entity;1.0.0,Program:test.entity;1.0.0,Date:test.date;1.0.0,fromTime:test.time;1.0.0,toTime:test.time;1.0.0,Url:test.url;1.0.0||%%||%"
+    						}
+						}
+					]
+				}
+			},
+		}
+	},
+	"runtime": {
+	    "implementation" : "com.nosliw.service.real.toronto.dropin.HAPServiceImp",
+	}
+}]

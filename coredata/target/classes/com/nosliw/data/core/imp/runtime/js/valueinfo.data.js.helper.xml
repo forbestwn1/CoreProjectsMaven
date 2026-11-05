@@ -1,0 +1,19 @@
+<entity name="data.js.helper"
+		table="nosliw.HELPERJS"
+		primaryKeys="id" 
+		class="com.nosliw.data.core.imp.runtime.js.resource.HAPResourceDataHelperImp" 
+		description="">
+
+	<property name="id" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(20) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+	<property name="value" dataType="string" description="">
+		<dbColumnInfos>
+			<dbColumnInfo definition="VARCHAR(2000) NOT NULL"/>
+		</dbColumnInfos>
+	</property>
+
+</entity>

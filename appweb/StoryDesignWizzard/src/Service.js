@@ -33,7 +33,7 @@ export const createComponentQuestionItemService = function(){
 	var node_createServiceRequestInfoSequence = nosliw.getNodeData("request.request.createServiceRequestInfoSequence");
     var node_requestServiceProcessor = nosliw.getNodeData("request.requestServiceProcessor");
 
-	var loc_loadServices = function(handler){
+	var loc_loadServices = function(handler, errorHandler, exceptionHandler){
 		var request = node_createServiceRequestInfoSequence({}, {
 			success : function(request, serviceDefs){
 				var services = [];
@@ -52,6 +52,16 @@ export const createComponentQuestionItemService = function(){
 				});
 				handler(services);
 				return services;
+			},
+			error : function(request, error){
+				if(errorHandler!=undefined){
+					errorHandler(error);
+				}
+			},
+			exception : function(request, exception){
+				if(exceptionHandler!=undefined){
+					exceptionHandler(exception);
+				}
 			}
 		});
 
@@ -68,8 +78,8 @@ export const createComponentQuestionItemService = function(){
 	};
 	
 	return {
-		getLoadServicesRequest : function(handler){
-			loc_loadServices(handler);
+		getLoadServicesRequest : function(handler, errorHandler, exceptionHandler){
+			loc_loadServices(handler, errorHandler, exceptionHandler);
 		}
 	};
 };	
