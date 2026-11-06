@@ -39,11 +39,14 @@ var node_utility = function(){
 					framework7App.preloader.hide();
 					
 					if(eventData.result.type==node_CONSTANT.REQUEST_FINISHTYPE_ERROR || eventData.result.type==node_CONSTANT.REQUEST_FINISHTYPE_EXCEPTION){
-						var toastBottom = framework7App.toast.create({
-						  text: eventData.result.data.message,
-						  closeTimeout: 2000,
-						});
+/*
+    					var toastBottom = framework7App.toast.create({
+												  text: eventData.result.data.message,
+												  closeTimeout: 2000,
+												});
 						toastBottom.open();
+*/						
+						framework7App.dialog.alert("Something went wrong, please try again later", 'Error');
 					}
 				}
 			});
