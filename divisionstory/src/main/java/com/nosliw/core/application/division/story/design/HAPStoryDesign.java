@@ -87,9 +87,8 @@ public class HAPStoryDesign extends HAPEntityInfoImp{
 
 	public void addStep(HAPStoryDesignStep step) {    this.m_changeHistory.add(step);     }
 	
-	public void newInitStep() {
-		this.m_initStep = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_INIT, new HAPStoryDesignMetadataStepInit());
-}
+	public void newInitStep() {		this.m_initStep = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_INIT, new HAPStoryDesignMetadataStepInit());}
+	public void setInitStep(HAPStoryDesignStep step) {     this.m_initStep = step;       }
 	
 	public void newStep(HAPStoryDesignMetadataStep metaData) {
 		HAPStoryDesignStep step = new HAPStoryDesignStep(HAPConstantShared.STORYDESIGN_STEP_TYPE_WIZZARD, metaData);

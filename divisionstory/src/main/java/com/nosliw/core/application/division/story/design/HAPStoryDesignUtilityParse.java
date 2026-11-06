@@ -31,6 +31,10 @@ public class HAPStoryDesignUtilityParse {
 		out.setBuilderId(designJsonObj.getString(HAPStoryDesign.BUILDERID));
 
 		out.setStory(HAPStoryUtilityStoryParse.parseStory(designJsonObj.getJSONObject(HAPStoryDesign.STORY), entityParseService));
+
+		JSONObject initStepJson = designJsonObj.getJSONObject(HAPStoryDesign.INITSTEP);
+		HAPStoryDesignStep initStep = parseDesignStep(initStepJson, entityParseService);
+		out.setInitStep(initStep);
 		
 		JSONArray stepJsonArray = designJsonObj.optJSONArray(HAPStoryDesign.STEP);
 		if(stepJsonArray!=null) {

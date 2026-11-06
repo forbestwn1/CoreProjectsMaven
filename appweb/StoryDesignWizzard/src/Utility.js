@@ -2,6 +2,7 @@
 import { newDesignService, nextStepDesignService } from './Service'
 import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, lastStep } from './reducers/designReducer';
 import { setGlobalLoading } from './globalLoading'
+import { setGlobalError } from './globalError'
 
 export const naviationUtility = function () {
 
@@ -28,12 +29,16 @@ export const naviationUtility = function () {
                 designDispatch(nextStep());
             }
             else {
-                nextStepDesignService(designState.designId, currentStep).then((response) => {
-                    // Handle response
-                    var steps = response.data.data.stepInfo;
-                    var currentStepIndex = response.data.data.currentStep;
-                    designDispatch(updateDesignGlobal(steps, currentStepIndex));
-                });
+                nextStepDesignService(designState.designId, currentStep)
+                    .then((response) => {
+                        // Handle response
+                        var steps = response.data.data.stepInfo;
+                        var currentStepIndex = response.data.data.currentStep;
+                        designDispatch(updateDesignGlobal(steps, currentStepIndex));
+                    })
+                    .catch((error) => {
+                        setGlobalError('Error, please try again later');
+                    });
             }
             setGlobalLoading(false);
         }

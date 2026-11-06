@@ -76,7 +76,7 @@ public class HAPStaticAPI {
 
 		//process script
 		HAPStaticResponseInfoUrl cachedRespnse = null;
-		if(request.isScriptFileConsolidated()) {
+		if(request.isScriptFileConsolidated()&&(!this.m_temporaryConfigure.isOverrideexisting())) {
 			cachedRespnse = isContentAvailableForTemp(TEMP_DOMAIN_CONSOLIDATION, request.getRequestId());
 		}
 		if(cachedRespnse!=null) {

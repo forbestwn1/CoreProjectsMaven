@@ -10,6 +10,7 @@ import { designReducer, initialState, newDesign, updateDesignGlobal, nextStep, l
 import { stateUtility } from './Utility'
 import Step from './Step'
 import { setGlobalLoading } from './globalLoading'
+import { setGlobalError } from './globalError'
 
 export default function Design() {
   const [designState, designDispatch] = useReducer(designReducer, initialState);
@@ -19,10 +20,9 @@ export default function Design() {
     var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
     setGlobalLoading(true);
     newDesignService().then((response) => {
-      console.log("newDesignService response: ", response);
       designDispatch(newDesign(response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_DESIGNID], response.data.data[node_COMMONATRIBUTECONSTANT.STORYBUILDERRESPONSENEW_STEPINFO]));
     }).catch((error) => {
-      console.error("newDesignService error: ", error);
+      setGlobalError('Error, please try again later');
     }).finally(() => {
       setGlobalLoading(false);
     });

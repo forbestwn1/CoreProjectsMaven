@@ -30,7 +30,8 @@ public class HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic extends HAPS
 	
 	public HAPStoryWizzardQuestionValueDataSourceEntityInfoStatic(HAPEntityInfo entityInfo) {
 		this();
-		this.m_entityInfo = entityInfo;
+		this.m_entityInfo = new HAPEntityInfoImp();
+		entityInfo.cloneToEntityInfo(m_entityInfo);
 	}
 	
 	public HAPEntityInfo getEntityInfo() {

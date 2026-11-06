@@ -148,6 +148,8 @@ var node_createRuntime = function(name){
 		 
 		 //create node for runtime object
 		 nosliw.createNode("runtime", loc_out);
+		 console.log("nosliw inited");
+		 nosliw.status = "active";
 		 nosliw.triggerNodeEvent("runtime", "active");
 
 		return true;
