@@ -674,7 +674,7 @@ var loc_createOperandOperation = function(arg1, env){
 				"name" : parmObj[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_NAME],
 				"criteria" : parmObj[node_COMMONATRIBUTECONSTANT.DATABUILDPARMINOPERATIONOPERAND_CRITERIA],
 				"valueChoose" : loc_createDataChoose(dataBuilderInfo, undefined, loc_env),
-				"view" : $("<div>Container for parm: " +parmObj.name  + "</div>")
+				"view" : $("<div>Parm: " +parmObj.name  + "</div>")
 			};
 
 			loc_containerView.append(parmInfo.view);
