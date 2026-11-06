@@ -691,30 +691,32 @@ var loc_createOperandOperation = function(arg1, env){
 	
 	var loc_getInitNewOperationRequest = function(handlers, request){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
-		_.each(loc_dataOperation.parms, function(parm){
-			if(parm.isBase!="true"){
-				var datadefinition = {
-				    "type" : "writable",   
-					"criteria" : parm.criteria,
-				};
-				
-				var parmInfo = {
-					"name" : parm.name,
-					"criteria" : parm.criteria,
-					"valueChoose" : loc_createDataChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
-					"view" : $("<div>Container for parm: " +parm.name  + "</div>")
-				};
-				
-				loc_containerView.append(parmInfo.view);
-				
-				loc_parms.push(parmInfo);
-			}
-		});
-		out.addRequest(loc_getInitParmsRequest({
-			success : function(request){
-				loc_eventObject.triggerEvent("change");
-			}
-		}));
+		if(loc_dataOperation!=undefined){
+			_.each(loc_dataOperation.parms, function(parm){
+				if(parm.isBase!="true"){
+					var datadefinition = {
+					    "type" : "writable",   
+						"criteria" : parm.criteria,
+					};
+					
+					var parmInfo = {
+						"name" : parm.name,
+						"criteria" : parm.criteria,
+						"valueChoose" : loc_createDataChoose(loc_id+"_parm_"+parm.name, datadefinition, loc_env),
+						"view" : $("<div>Container for parm: " +parm.name  + "</div>")
+					};
+					
+					loc_containerView.append(parmInfo.view);
+					
+					loc_parms.push(parmInfo);
+				}
+			});
+			out.addRequest(loc_getInitParmsRequest({
+				success : function(request){
+					loc_eventObject.triggerEvent("change");
+				}
+			}));
+		}
 		return out;
 	};
 	
@@ -753,8 +755,10 @@ var loc_createOperandOperation = function(arg1, env){
 		out.addRequest(loc_operationSelection.getInitRequest({
 			success : function(request){
 				loc_dataOperation = loc_operationSelection.getCurrentDataOperation();
-				loc_operationName = loc_dataOperation.name;
-				loc_baseDataType = loc_dataOperation.source;
+				if(loc_dataOperation!=undefined){
+					loc_operationName = loc_dataOperation.name;
+					loc_baseDataType = loc_dataOperation.source;
+				}
 				
 				if(loc_parmsObj==undefined){
 					return loc_getInitNewOperationRequest();
@@ -791,6 +795,7 @@ var loc_createOperandOperation = function(arg1, env){
 		},
 
     	isReady : function(){
+			if(loc_dataOperation==undefined)   return false;
 			for(var i in loc_parms){
 				if(!loc_parms[i].valueChoose.isReady()){
 					return false;
@@ -835,6 +840,7 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 	var loc_containerView = $("<span></span>");
 	var loc_selectOperationLabelView = $("<label>Please select operation : </label>");
 	var loc_selectOperationView = $("<select></select>");
+	loc_selectOperationView.append($("<option value='' disabled selected>Select a operation</option>"));
 
 	loc_containerView.append(loc_selectOperationLabelView).append(" ").append(loc_selectOperationView);
 	loc_containerView.css(loc_css_selectContainer);
@@ -877,11 +883,16 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 						loc_dataOperations[dataOperation.name] = dataOperation;
 					});
 
+/*										
 					if(loc_currentOperation==undefined){
 						loc_currentOperation = dataOperations[0].name;
 					}
 					loc_selectOperationView.val(loc_currentOperation);
-									
+*/	
+                    if(loc_currentOperation!=undefined){
+						loc_selectOperationView.val(loc_currentOperation);
+					}
+
 					loc_selectOperationView.on("change", function(event){
 						loc_currentOperation = loc_selectOperationView.val();
 						loc_eventObject.triggerEvent("selectOperation", loc_dataOperations[loc_currentOperation]);

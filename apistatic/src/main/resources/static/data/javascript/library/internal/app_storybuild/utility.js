@@ -106,7 +106,8 @@ var node_utility = function(){
 			var baseOperand = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_BASE]
 			var out = loc_getDataBuildOperandDescription(baseOperand, env);
 			
-			out = out + " --> " + dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
+			var operationName = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_OPERATION];
+			out = out + " --> " + (operationName==undefined?"?":operationName);
 			
 			var parms = dataBuildOperand[node_COMMONATRIBUTECONSTANT.DEFINITIONOPERANDOPERATION_PARMS];
 			if(parms.length>0){
