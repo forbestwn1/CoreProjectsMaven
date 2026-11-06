@@ -27,11 +27,13 @@ var node_envObj = function(){
 			var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 
 			var constantOption = {
-				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT
+				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT,
+				"text" : "Value"
 			};
 			var variableOption = {
 				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
-				"variables" : loc_variables
+				"variables" : loc_variables,
+    			"text" : "Expression"
 			};
 			
 			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];

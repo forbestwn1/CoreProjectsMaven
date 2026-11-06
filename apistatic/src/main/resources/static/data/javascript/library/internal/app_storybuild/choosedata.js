@@ -57,7 +57,7 @@ var loc_createRootChoose = function(dataDefinition, env){
 			loc_containerView.append(loc_selectChooseTypeContainerView);
 
 			_.each(loc_options, function(option, i){
-				loc_selectChooseTypeView.append($('<option>', { value: option.type, text: option.type }));
+				loc_selectChooseTypeView.append($('<option>', { value: option.type, text: option.text }));
 				loc_optionsByName[option.type] = option;
 			});
 
@@ -555,8 +555,8 @@ var loc_createNextButton = function(parentView){
 	
 	var loc_status = 0;
 	var loc_statusInfo = [
-		{"name":"next", "label":"Need operation?", "title":"-->", "event":"next"},
-		{"name":"back", "label":"Revers operation?", "title":"<--", "event":"back"} 
+		{"name":"next", "label":"More operation?", "title":"-->", "event":"next"},
+		{"name":"back", "label":"Undo operation?", "title":"<--", "event":"back"} 
     ];
 	
 	var loc_eventObject = node_createEventObject();
