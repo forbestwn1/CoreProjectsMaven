@@ -555,7 +555,7 @@ var loc_createNextButton = function(parentView){
 	
 	var loc_status = 0;
 	var loc_statusInfo = [
-		{"name":"next", "label":"More operation?", "title":"-->", "event":"next"},
+		{"name":"next", "label":"More operation?", "title":" + ", "event":"next"},
 		{"name":"back", "label":"Undo operation?", "title":"<--", "event":"back"} 
     ];
 	
@@ -835,6 +835,7 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 	var loc_containerView = $("<span></span>");
 	var loc_selectOperationLabelView = $("<label>Please select operation : </label>");
 	var loc_selectOperationView = $("<select></select>");
+
 	loc_containerView.append(loc_selectOperationLabelView).append(" ").append(loc_selectOperationView);
 	loc_containerView.css(loc_css_selectContainer);
 	loc_selectOperationLabelView.css(loc_css_label);
@@ -875,12 +876,12 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 						loc_selectOperationView.append($('<option>', { value: dataOperation.name, text: dataOperation.name }));
 						loc_dataOperations[dataOperation.name] = dataOperation;
 					});
-					
+
 					if(loc_currentOperation==undefined){
 						loc_currentOperation = dataOperations[0].name;
 					}
 					loc_selectOperationView.val(loc_currentOperation);
-					
+									
 					loc_selectOperationView.on("change", function(event){
 						loc_currentOperation = loc_selectOperationView.val();
 						loc_eventObject.triggerEvent("selectOperation", loc_dataOperations[loc_currentOperation]);
@@ -919,7 +920,7 @@ var loc_createOperandConstant = function(dataDefinition, arg1){
 
 	var loc_containerView = $("<div></div>");
 
-	var loc_contantValueWrapperView = $("<div>Please choose constant value : </div>");
+	var loc_contantValueWrapperView = $("<div>Please choose value : </div>");
 	loc_containerView.append(loc_contantValueWrapperView);
 
 	var loc_standaloneApp;
