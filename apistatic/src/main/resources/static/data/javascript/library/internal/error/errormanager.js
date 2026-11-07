@@ -77,12 +77,19 @@ var node_createErrorManager = function(){
 		if (typeof console != "undefined") console.log(error);
 	}
 	
+	const stringToHex = (str) => {
+	  const encoder = new TextEncoder();
+	  const bytes = encoder.encode(str); // Converts string to Uint8Array bytes
+	  return bytes.toHex();              // Converts bytes to a hex string
+	};
+	
 	var loc_logErrorToServer = function(errorData){
 		//gateway request
 		var gatewayId = node_COMMONCONSTANT.GATEWAY_ERRORLOG;
 		var command = node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_COMMAND_LOGERRRO;
 		var parms = {};
-		parms[node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_PARMS_ERROR] = node_basicUtility.escapeJsonString(JSON.stringify(errorData));
+//		parms[node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_PARMS_ERROR] = node_basicUtility.escapeJsonString(JSON.stringify(errorData));
+		parms[node_COMMONATRIBUTECONSTANT.GATEWAYERRORLOGGER_PARMS_ERROR] = stringToHex(node_basicUtility.escapeJsonString(JSON.stringify(errorData)));
 		var gatewayRequest = nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(gatewayId, command, parms, {
 			success : function(request, data){
 				loc_clearErrorInStorage();
