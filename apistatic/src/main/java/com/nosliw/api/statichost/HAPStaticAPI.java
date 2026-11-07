@@ -77,7 +77,7 @@ public class HAPStaticAPI {
 		//process script
 		HAPStaticResponseInfoUrl cachedRespnse = null;
 		if(request.isScriptFileConsolidated()&&(!this.m_temporaryConfigure.isOverrideexisting())) {
-			cachedRespnse = isContentAvailableForTemp(TEMP_DOMAIN_CONSOLIDATION, request.getRequestId());
+			cachedRespnse = isContentAvailableForTemp(TEMP_DOMAIN_CONSOLIDATION, request.getRequestId(), "js");
 		}
 		if(cachedRespnse!=null) {
 			response.addItem(cachedRespnse);
@@ -96,7 +96,7 @@ public class HAPStaticAPI {
 				}
 			}
 			if(!content.isEmpty()) {
-				response.addItem(this.uploadContentToTemp(content.toString(), TEMP_DOMAIN_CONSOLIDATION, request.getRequestId()));
+				response.addItem(this.uploadContentToTemp(content.toString(), TEMP_DOMAIN_CONSOLIDATION, request.getRequestId(), "js"));
 			}
 		}
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
@@ -190,17 +190,17 @@ public class HAPStaticAPI {
 	}
 
 	@PostMapping("/upload")
-    public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name) throws IOException, URISyntaxException {
+    public String upload(@RequestBody String content, @RequestParam String domain, @RequestParam String name, @RequestParam String extension) throws IOException, URISyntaxException {
 		HAPStaticResponse response = new HAPStaticResponse();
-        HAPStaticResponseInfo responsInfo = uploadContentToTemp(content, domain, name);
+        HAPStaticResponseInfo responsInfo = uploadContentToTemp(content, domain, name, extension);
         response.addItem(responsInfo);
 		return HAPServiceData.createSuccessData(response).toStringValue(HAPSerializationFormat.JSON);
 	}
 
-	private HAPStaticResponseInfoUrl isContentAvailableForTemp(String domain, String name)  throws IOException, URISyntaxException {
-    	String path = getFilePathForTemp(domain, name);
+	private HAPStaticResponseInfoUrl isContentAvailableForTemp(String domain, String name, String extension)  throws IOException, URISyntaxException {
+    	String path = getFilePathForTemp(domain, name, extension);
 		if(HAPUtilityFileNio.isPathExists(HAPUtilityFileNio.buildPath(path))){
-			return new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name)));
+			return new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name, extension)));
 		}
 		else {
 			return null;
@@ -211,8 +211,8 @@ public class HAPStaticAPI {
 		return this.normaliizePath(m_temporaryConfigure.getUrl()+ path);
 	}
 
-    private HAPStaticResponseInfo uploadContentToTemp(String content, String domain, String name) throws IOException, URISyntaxException {
-    	String path = getFilePathForTemp(domain, name);
+    private HAPStaticResponseInfo uploadContentToTemp(String content, String domain, String name, String extendsion) throws IOException, URISyntaxException {
+    	String path = getFilePathForTemp(domain, name, extendsion);
     	
     	Path outputPath = HAPUtilityFileNio.buildPath(path);
     	
@@ -224,18 +224,18 @@ public class HAPStaticAPI {
                 HAPUtilityFileNio.writeFile(outputPath, content);
         	}
     	}
-        HAPStaticResponseInfo out = new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name)));
+        HAPStaticResponseInfo out = new HAPStaticResponseInfoUrl(new URI(getUriPathForTemp(domain, name, extendsion)));
         return out;
 	}
 	
-    private String getFilePathForTemp(String domain, String name) {
+    private String getFilePathForTemp(String domain, String name, String extension) {
 		String path = this.domainToPath(domain);
-    	return this.m_temporaryConfigure.getPath() + "/" + (path==null?"":(path+"/")) + this.buildName(name);
+    	return this.m_temporaryConfigure.getPath() + "/" + (path==null?"":(path+"/")) + this.buildName(name) + "." + extension;
     }
     
-	private String getUriPathForTemp(String domain, String name) {
+	private String getUriPathForTemp(String domain, String name, String extension) {
 		String path = this.domainToPath(domain);
-		return m_temporaryConfigure.getUrl() + (path==null?"":(path+"/")) + this.buildName(name);
+		return m_temporaryConfigure.getUrl() + (path==null?"":(path+"/")) + this.buildName(name) + "." + extension;
 	}
 
 	private String buildName(String name) {

@@ -17,7 +17,6 @@ public class HAPBeanFactoryRestTemplate {
 		restTemplate.getInterceptors().add((request, body, execution) -> {
 			request.getHeaders().setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 			request.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-			request.getHeaders().set("Host", request.getURI().getHost());
 			return execution.execute(request, body);
 		});
 

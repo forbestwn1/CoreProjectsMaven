@@ -64,7 +64,7 @@ public class HAPUtilityRuntimeJsScriptResource {
 			name = name.replace("|", "_");
 			
 			
-			HAPServiceData serviceData = staticResourceService.upload(script, "resource", name);
+			HAPServiceData serviceData = staticResourceService.upload(script, "resource", name, "js");
 			HAPStaticResponse staticResponse = (HAPStaticResponse)serviceData.getData();
 			out = HAPJSScriptInfo.buildByURI(((HAPStaticResponseInfoUrl)staticResponse.getItems().get(0)).getURI(), name);
 			

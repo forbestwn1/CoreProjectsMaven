@@ -26,7 +26,7 @@ public class HAPServiceStaticResource {
         return this.processResponse(responsStr, this.m_parseServices);
 	}
 	
-	public HAPServiceData upload(String content, String domain, String name) {
+	public HAPServiceData upload(String content, String domain, String name, String extension) {
 		
 		StringBuffer url = new StringBuffer(this.m_staticServerUrl+"upload");
 		StringBuffer parms = new StringBuffer();
@@ -40,6 +40,13 @@ public class HAPServiceStaticResource {
 				parms.append("&");
 			}
 			parms.append("name=" + name);
+			num++;
+		}
+		if(extension!=null) {
+			if(num>0) {
+				parms.append("&");
+			}
+			parms.append("extension=" + extension);
 			num++;
 		}
 		if(num>0) {

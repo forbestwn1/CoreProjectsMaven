@@ -57,6 +57,7 @@ var node_createGatewayService = function(){
 		out.setRequestExecuteInfo(new node_ServiceRequestExecuteInfo(function(requestInfo){
 			var script = document.createElement('script');
 			script.setAttribute('src', requestInfo.getService().parms.url);
+			script.setAttribute('defer', "defer");
 			script.setAttribute('type', 'text/javascript');
 			script.onload = function(){
 				requestInfo.successFinish(undefined, requestInfo);
