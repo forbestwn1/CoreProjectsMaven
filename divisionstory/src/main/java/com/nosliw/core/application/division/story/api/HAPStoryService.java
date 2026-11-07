@@ -15,7 +15,6 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
-import com.nosliw.core.application.common.gateway.HAPUtilityGateway;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualUtilityExporterContentProvider;
 import com.nosliw.core.application.common.manual.gateway.compile.HAPManualGatewayCompile;
@@ -24,6 +23,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.gateway.HAPGatewayOutput;
+import com.nosliw.core.gateway.HAPUtilityGateway;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

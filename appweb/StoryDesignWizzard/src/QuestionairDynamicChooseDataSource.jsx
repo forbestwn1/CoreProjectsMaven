@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { DesignContext, DesignDispatchContext, CacheContext } from './DesignContext'
 import { questionairUtility, naviationUtility } from './Utility'
-import { createComponentQuestionItemService } from './Service'
+import { getDataSourcesService, createComponentQuestionItemService } from './Service'
 import ErrorInQuestionair from './ErrorInQuestionair'
 import './QuestionairDynamicChooseDataSource.css'
 import { setGlobalLoading } from './globalLoading'
@@ -16,6 +16,36 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
     useEffect(() => {
         if (cache.current[questionair.id] == undefined) {
             setGlobalLoading(true);
+
+            getDataSourcesService()
+                .then((serviceData) => {
+                    var serviceDefs = serviceData.data.data.data;
+    				var services = [];
+	    			_.each(serviceDefs, function(serviceDef, i){
+		    			var displayResource = serviceDef[node_COMMONATRIBUTECONSTANT.INFOSERVICEINTERFACE_DISPLAY];
+			    		var displayName = displayResource!=undefined?displayResource[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DISPLAYNAME]:undefined;
+				    	if(displayName==undefined)  displayName = serviceDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DISPLAYNAME];   
+					    var service = {
+    						id : serviceDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_ID], 
+	    					name : serviceDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_NAME], 
+		    				displayName : displayName, 
+			    			description : serviceDef[node_COMMONATRIBUTECONSTANT.ENTITYINFO_DESCRIPTION], 
+				    		sinterface :  serviceDef[node_COMMONATRIBUTECONSTANT.SERVICEPROFILE_INTERFACE],
+					    };
+    					services.push(service);
+	    			});
+
+                    cache.current[questionair.id] = services;
+                    forceUpdate(c => c + 1);
+                })
+                .catch((error) => {
+                    setGlobalError('Error, please try again later');
+                })
+                .finally(() => {
+                    setGlobalLoading(false);
+                });
+
+/*
             const service = createComponentQuestionItemService();
             service.getLoadServicesRequest((services) => {
                 cache.current[questionair.id] = services;
@@ -28,6 +58,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
                 setGlobalLoading(false);
                 setGlobalError(exception?.message || exception || 'Unable to load data sources.');
             });
+*/            
         }
     }, []);
 

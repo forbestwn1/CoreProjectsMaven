@@ -10,12 +10,12 @@ import org.springframework.web.client.RestTemplate;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.gateway.HAPUtilityGateway;
 import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.gateway.HAPGatewayOutput;
+import com.nosliw.core.gateway.HAPUtilityGateway;
 
 @Component
 public class HAPServiceUITag {

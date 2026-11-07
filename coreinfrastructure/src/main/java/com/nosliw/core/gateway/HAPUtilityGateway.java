@@ -1,4 +1,4 @@
-package com.nosliw.core.application.common.gateway;
+package com.nosliw.core.gateway;
 
 import java.util.Map;
 
@@ -9,8 +9,6 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.gateway.HAPGatewayOutput;
-import com.nosliw.core.gateway.HAPServiceInfo;
 
 public class HAPUtilityGateway {
 

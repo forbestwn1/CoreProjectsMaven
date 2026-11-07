@@ -18,6 +18,12 @@ export const newDesignService = function(payload = {}, config = {}){
 	return axios.post(url, payload, config);
 };
 
+export const getDataSourcesService = function(payload = {}, config = {}){
+	const url = getStoryBaseUrl() + "design/datasource";
+	return axios.post(url, payload, config);
+};
+
+
 const getStoryBaseUrl = function(){
 	return nosliw.getConfigureValue("storyUrl");
 }

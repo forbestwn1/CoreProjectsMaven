@@ -7,8 +7,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.common.constant.HAPAttribute;
-import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -20,31 +18,16 @@ import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.gateway.HAPGatewayImp;
+import com.nosliw.core.gateway.types.HAPGatewayService;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
-@HAPEntityWithAttribute
 @Component
-public class HAPGatewayService extends HAPGatewayImp{
-
-	@HAPAttribute
-	final public static String COMMAND_REQUEST = "request";
-
-	@HAPAttribute
-	final public static String COMMAND_REQUEST_QUERY = "query";
-
-	@HAPAttribute
-	final public static String COMMAND_REQUEST_PARMS = "parms";
-
-	@HAPAttribute
-	final public static String COMMAND_SEARCHDEFINITION = "searchDefinition";
-
-	@HAPAttribute
-	final public static String COMMAND_SEARCHDEFINITION_QUERY = "query";
+public class HAPGatewayServiceImp extends HAPGatewayImp implements HAPGatewayService{
 
 	@Autowired
 	private HAPServiceDataSource m_dataSourceService;
 
-	public HAPGatewayService(){
+	public HAPGatewayServiceImp(){
 	}
 	
 	@Override

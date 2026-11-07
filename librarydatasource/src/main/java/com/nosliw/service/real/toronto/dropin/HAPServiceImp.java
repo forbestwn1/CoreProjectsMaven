@@ -23,7 +23,7 @@ import com.nosliw.core.data.HAPUtilityData;
 
 public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 
-    public static final Path DROPIN_DATASOURCEDATA_PATH = Paths.get("C:/ApplicationData/datasource/toronto/dropin");
+    public static final Path DROPIN_DATASOURCEDATA_PATH = Paths.get("C:/nosliw/ApplicationData/datasource/toronto/dropin");
 
 	Map<String, Map<String, List<JSONObject>>> m_programs = null;
 	
@@ -123,14 +123,19 @@ public class HAPServiceImp implements HAPExecutableService, HAPProviderService{
 	}
 
 	private boolean isValid(JSONObject jsonObj, LocalDate fromDate, LocalDate toDate, LocalTime fromTime, LocalTime toTime) {
-		LocalDate date = objtoLocalDate(jsonObj.getJSONObject("Date"));
-		LocalTime time1 = toTime(jsonObj.getJSONObject("fromTime"));
-		LocalTime time2 = toTime(jsonObj.getJSONObject("toTime"));
-		
-		if((date.isAfter(fromDate)||date.isEqual(fromDate))&&(date.isBefore(toDate)||date.isEqual(toDate))) {
-			if((time1.isAfter(fromTime)||time1.equals(fromTime))&&(time1.isBefore(toTime)||time1.equals(toTime))) {
-				return true;
+		try {
+			LocalDate date = objtoLocalDate(jsonObj.getJSONObject("Date"));
+			LocalTime time1 = toTime(jsonObj.getJSONObject("fromTime"));
+			LocalTime time2 = toTime(jsonObj.getJSONObject("toTime"));
+			
+			if((date.isAfter(fromDate)||date.isEqual(fromDate))&&(date.isBefore(toDate)||date.isEqual(toDate))) {
+				if((time1.isAfter(fromTime)||time1.equals(fromTime))&&(time1.isBefore(toTime)||time1.equals(toTime))) {
+					return true;
+				}
 			}
+		}
+		catch(Throwable e) {
+			e.printStackTrace();
 		}
 		return false;
 	}

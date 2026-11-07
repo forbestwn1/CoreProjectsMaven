@@ -1,7 +1,9 @@
 package com.nosliw.core.application.division.story.api;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
@@ -22,6 +25,7 @@ import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.brick.HAPIdBrick;
 import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.datasource.HAPQueryServiceDefinition;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
@@ -30,6 +34,9 @@ import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponse
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.division.story.design.standalone.HAPStoryManagerStandalone;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
+import com.nosliw.core.gateway.HAPUtilityGateway;
+import com.nosliw.core.gateway.types.HAPGatewayService;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @RestController
@@ -49,6 +56,12 @@ public class HAPAPIStory {
 	@Autowired
 	private HAPStoryManagerStandalone m_standaloneMan;
 	
+	@Autowired
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
+	
+	@Autowired
+	private RestTemplate m_resteTemplate;
+	
 	@PostMapping("/design/new")
     public String newDesign(@RequestParam String builderId, @RequestParam String brickType, @RequestParam String brickVersion) {
 		HAPStoryBuilderResponseNew newResponse = m_designManager.newStoryDesign(new HAPIdBrickType(brickType, brickVersion), builderId, null);
@@ -62,6 +75,16 @@ public class HAPAPIStory {
 		HAPStoryBuilderResponseBuild buildResponse = m_designManager.designStory(request);
 		HAPServiceData out = HAPServiceData.createSuccessData(buildResponse);
 		return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
+	}	
+
+	@PostMapping("/design/datasource")
+    public String queryDataSource() {
+		Map<String, Object> parmsValue = new LinkedHashMap<String, Object>();
+		HAPQueryServiceDefinition query = new HAPQueryServiceDefinition();
+		query.addKeywords("production");
+		parmsValue.put(HAPGatewayService.COMMAND_SEARCHDEFINITION_QUERY, query);
+		HAPServiceData out = HAPUtilityGateway.executeGatewaySingle(m_globalAppConfigure.getCoreBaseurl(), HAPConstantShared.GATEWAY_SERVICE, HAPGatewayService.COMMAND_SEARCHDEFINITION, parmsValue, this.m_resteTemplate);
+	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
 	}	
 
 	@GetMapping("/design/{brickType}/{brickVersion}/{id}")

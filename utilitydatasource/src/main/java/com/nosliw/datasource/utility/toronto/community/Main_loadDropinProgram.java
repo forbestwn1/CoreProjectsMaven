@@ -42,7 +42,7 @@ public class Main_loadDropinProgram {
 		System.out.println(programCategorys);
 		
 		//read
-		for(String ccId : ccDropinMan.getAllCommunityCenterIds()) {
+		for(String ccId : ccs) {
 			String ccName = ccDropinMan.getCommnityCenterNameById(ccId);
 			System.out.println("Processing community center:   " + ccName);
 			for(String categaryId : ccDropinMan.getAllProgramCategary()) {
@@ -60,68 +60,74 @@ public class Main_loadDropinProgram {
 		        		
 				        String urlString = "https://www.toronto.ca/data/parks/live/locations/"+ccId+"/"+categaryId.toLowerCase()+"/"+weekInfoJsonObj.getString("json");
 						System.out.println("Processing week:   " + weekInfoJsonObj.getString("json"));
-				        String content = Utility.httpRead(urlString);
-				        if(content!=null) {
-				        	JSONObject contentJsonObj = new JSONObject(content);
-				        	JSONArray programJsonArray = contentJsonObj.getJSONArray("programs");
-				        	for(int j=0; j<programJsonArray.length(); j++) {
-				        		JSONArray programsJsonArray = programJsonArray.getJSONObject(j).getJSONArray("days");
-				        		for(int k=0; k<programsJsonArray.length(); k++) {
-				        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
-				        			String program = programJsnObj.getString("title");
-				        			String programId = ccDropinMan.getProgramIdByName(program);
-//									System.out.println("Processing program:   " + program);
-				        			
-				        			if(programId==null){
-				        				System.out.println("Program not defined:   " + program);
-				        				continue;
-				        			}
-				        			
-				        			List<String> programList = programResults.get(program);
-				        			if(programList==null) {
-				        				programList = new ArrayList<String>();
-				        				programResults.put(program, programList);
-				        			}
-				        			
-				        			JSONArray timesJsonArray = programJsnObj.getJSONArray("times");
-				        			for(int m=0; m<timesJsonArray.length(); m++) {
-				        				JSONObject timeJonsObj = timesJsonArray.getJSONObject(m);
-				        				
-				        				Map<String, String> programMap = new LinkedHashMap<String, String>();
-				        				
-				        				programMap.put("CommunityCenter", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", ccName), entry("id", ccId)))));
-				        				programMap.put("Program", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", program), entry("id", programId)))));
-				        				programMap.put("Url", Utility.buildData("test.url;1.0.0", "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id="+ccId));
-				        				
-				        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
-				        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(
-				        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonthValue()-1+""), entry("date", date.getDayOfMonth()+"")), 
-				        						Map.ofEntries(entry("year", Integer.class), entry("month", Integer.class), entry("date", Integer.class)))
-				        				));
-				        				
-				        				String timeStr = timeJonsObj.getString("title");
-				        				String[] timeStrs = timeStr.split("-");
-				        				
-				        		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
-				        		        LocalTime fromTime = LocalTime.parse(timeStrs[0].trim(), formatter);
-				        		        LocalTime toTime = LocalTime.parse(timeStrs[1].trim(), formatter);
+						try {
+					        String content = Utility.httpRead(urlString);
+					        if(content!=null) {
+					        	JSONObject contentJsonObj = new JSONObject(content);
+					        	JSONArray programJsonArray = contentJsonObj.getJSONArray("programs");
+					        	for(int j=0; j<programJsonArray.length(); j++) {
+					        		JSONArray programsJsonArray = programJsonArray.getJSONObject(j).getJSONArray("days");
+					        		for(int k=0; k<programsJsonArray.length(); k++) {
+					        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
+					        			String program = programJsnObj.getString("title");
+					        			String programId = ccDropinMan.getProgramIdByName(program);
+//										System.out.println("Processing program:   " + program);
+					        			
+					        			if(programId==null){
+					        				System.out.println("Program not defined:   " + program);
+					        				continue;
+					        			}
+					        			
+					        			List<String> programList = programResults.get(program);
+					        			if(programList==null) {
+					        				programList = new ArrayList<String>();
+					        				programResults.put(program, programList);
+					        			}
+					        			
+					        			JSONArray timesJsonArray = programJsnObj.getJSONArray("times");
+					        			for(int m=0; m<timesJsonArray.length(); m++) {
+					        				JSONObject timeJonsObj = timesJsonArray.getJSONObject(m);
+					        				
+					        				Map<String, String> programMap = new LinkedHashMap<String, String>();
+					        				
+					        				programMap.put("CommunityCenter", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", ccName), entry("id", ccId)))));
+					        				programMap.put("Program", Utility.buildData("test.entity;1.0.0", HAPUtilityJson.buildMapJson(Map.ofEntries(entry("name", program), entry("id", programId)))));
+					        				programMap.put("Url", Utility.buildData("test.url;1.0.0", "https://www.toronto.ca/explore-enjoy/parks-recreation/places-spaces/parks-and-recreation-facilities/location/?id="+ccId));
+					        				
+					        				LocalDate date = baseDate.plusDays(dayOfWeek.get(timeJonsObj.getString("day")));
+					        				programMap.put("Date", Utility.buildData("test.date;1.0.0", HAPUtilityJson.buildMapJson(
+					        						Map.ofEntries(entry("year", date.getYear()+""), entry("month", date.getMonthValue()-1+""), entry("date", date.getDayOfMonth()+"")), 
+					        						Map.ofEntries(entry("year", Integer.class), entry("month", Integer.class), entry("date", Integer.class)))
+					        				));
+					        				
+					        				String timeStr = timeJonsObj.getString("title");
+					        				String[] timeStrs = timeStr.split("-");
+					        				
+					        		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+					        		        LocalTime fromTime = LocalTime.parse(timeStrs[0].trim(), formatter);
+					        		        LocalTime toTime = LocalTime.parse(timeStrs[1].trim(), formatter);
 
-				        				programMap.put("fromTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
-				        						Map.ofEntries(entry("hour", fromTime.getHour()+""), entry("minute", fromTime.getMinute()+""), entry("second", fromTime.getSecond()+"")), 
-				        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
-				        				));
-				        				programMap.put("toTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
-				        						Map.ofEntries(entry("hour", toTime.getHour()+""), entry("minute", toTime.getMinute()+""), entry("second", toTime.getSecond()+"")), 
-				        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
-				        				));
-				        		        
-				        				programList.add(HAPUtilityJson.buildMapJson(programMap));
-				        			}
-				        			
-				        		}
-				        		
-				        	}
-				        }
+					        				programMap.put("fromTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
+					        						Map.ofEntries(entry("hour", fromTime.getHour()+""), entry("minute", fromTime.getMinute()+""), entry("second", fromTime.getSecond()+"")), 
+					        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
+					        				));
+					        				programMap.put("toTime", Utility.buildData("test.time;1.0.0", HAPUtilityJson.buildMapJson(
+					        						Map.ofEntries(entry("hour", toTime.getHour()+""), entry("minute", toTime.getMinute()+""), entry("second", toTime.getSecond()+"")), 
+					        						Map.ofEntries(entry("hour", Integer.class), entry("minute", Integer.class), entry("second", Integer.class)))
+					        				));
+					        		        
+					        				programList.add(HAPUtilityJson.buildMapJson(programMap));
+					        			}
+					        			
+					        		}
+					        		
+					        	}
+					        }							
+						}
+						catch(Throwable e) {
+							e.printStackTrace();
+						}
+
 		        	}
 		        }
 		        
