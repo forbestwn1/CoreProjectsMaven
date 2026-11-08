@@ -63,9 +63,12 @@ public class HAPManualUtilityProcessorValuePort {
 		Set<HAPRootInStructure> roots = new HashSet<HAPRootInStructure>();
 		String todayRootName = HAPUtilityNosliw.buildNosliwFullName(HAPConstantShared.VARIABLE_GLOBAL_NAME_TODAY);
 		roots.add(HAPUtilityElement.buildRootInStructure("test.date;1.0.0", todayRootName));
+		String nowRootName = HAPUtilityNosliw.buildNosliwFullName(HAPConstantShared.VARIABLE_GLOBAL_NAME_NOW);
+		roots.add(HAPUtilityElement.buildRootInStructure("test.time;1.0.0", nowRootName));
 
 		Map<String, String> initValue = new LinkedHashMap<String, String>();
 		initValue.put(todayRootName, todayRootName);
+		initValue.put(nowRootName, nowRootName);
 		
 		String valueStructureId = bundle.getValueStructureDomain().newValueStructure(roots, HAPUtilityJson.buildMapJson(initValue), null, null);
 

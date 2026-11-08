@@ -1279,6 +1279,7 @@ public class HAPConstantShared {
 
 
 		public static final String VARIABLE_GLOBAL_NAME_TODAY = "today";
+		public static final String VARIABLE_GLOBAL_NAME_NOW = "now";
 
 
 

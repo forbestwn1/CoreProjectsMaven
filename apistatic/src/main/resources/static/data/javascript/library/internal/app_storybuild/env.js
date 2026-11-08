@@ -16,11 +16,42 @@ var packageObj = library;
 
 var node_envObj = function(){
 
+	var loc_variableInfos = [
+		{
+			"dataType" : "test.date;1.0.0",
+			"variables" : [
+				{
+					"name":"nosliw_today",
+					"text":"today"
+				}
+			]
+		},
+		{
+			"dataType" : "test.time;1.0.0",
+			"variables" : [
+				{
+					"name":"nosliw_now",
+					"text":"now"
+				}
+			]
+		},
+	];
+	
 	var loc_variables = [
 		{
 			"name":"nosliw_today",
 			"text":"today"
 		}];
+	
+	var loc_getVariablesByDataType = function(dataType){
+		for(var i in loc_variableInfos){
+			var varInfo = loc_variableInfos[i];
+			if(varInfo.dataType==dataType){
+				return varInfo.variables;
+			}
+		}
+	};
+		
 		
 	var loc_out = {
 		getOptions : function(dataDefinition){
@@ -30,17 +61,26 @@ var node_envObj = function(){
 				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_CONSTANT,
 				"text" : "Value"
 			};
-			var variableOption = {
+			var variableOptionForDate = {
 				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
-				"variables" : loc_variables,
+				"variables" : loc_getVariablesByDataType("test.date;1.0.0"),
     			"text" : "Expression"
+			};
+			var variableOptionForTime = {
+				"type" : node_COMMONCONSTANT.DATABUILD_CHOSEN_EXPRESSION,
+				"variables" : loc_getVariablesByDataType("test.time;1.0.0"),
+				"text" : "Expression"
 			};
 			
 			var criteria = dataDefinition[node_COMMONATRIBUTECONSTANT.DATADEFINITION_CRITERIA];
 			var out = [];
 			if(criteria=="test.date;1.0.0"){
 				out.push(constantOption);
-				out.push(variableOption);
+				out.push(variableOptionForDate);
+			}
+			else if(criteria=="test.time;1.0.0"){
+				out.push(constantOption);
+				out.push(variableOptionForTime);
 			}
 			else{
 				out.push(constantOption);
@@ -49,26 +89,28 @@ var node_envObj = function(){
 		},
 
 		getVariablesByDataType : function(dataType){
-			if(dataType=="test.date;1.0.0"){
-				return 	[
-					{
-						"name":"nosliw_today",
-						"text":"today"
-					}];
-			};
+			return loc_getVariablesByDataType(dataType);
 		},
 
-		getVariableTextByName : function(name){
-			for(var i in loc_variables){
-				if(loc_variables[i].name==name){
-					return loc_variables[i].text;
-				}
+		getVariableTextByName : function(varName){
+			for(var i in loc_variableInfos){
+				var variables = loc_variableInfos[i].variables;
+    			for(var i in variables){
+	    			if(variables[i].name==varName){
+		    			return variables[i].text;
+			    	}
+			    }
 			}
 		},
 
 		getDataTypeByVariable : function(varName){
-			if(varName=="nosliw_today"){
-				return "test.date;1.0.0";
+			for(var i in loc_variableInfos){
+				var variables = loc_variableInfos[i].variables;
+				for(var i in variables){
+					if(variables[i].name==varName){
+						return loc_variableInfos[i].dataType;
+			    	}
+			    }
 			}
 		}
 	};

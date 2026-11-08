@@ -784,6 +784,7 @@ var COMMONCONSTANT=
   "STATIC_LIBRARY_DOMAIN_INTERNAL": "data.javascript.library.internal",
   "STATIC_LIBRARY_DOMAIN_EXTERNAL": "data.javascript.library.external",
   "VARIABLE_GLOBAL_NAME_TODAY": "today",
+  "VARIABLE_GLOBAL_NAME_NOW": "now",
   "DATABUILD_CHOSEN_CONSTANT": "constant",
   "DATABUILD_CHOSEN_EXPRESSION": "expression"
 };

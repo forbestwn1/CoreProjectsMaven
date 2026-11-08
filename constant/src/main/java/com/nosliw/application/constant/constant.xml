@@ -1306,6 +1306,7 @@
 			
 			<definition type="space"/>
 			<definition name="VARIABLE_GLOBAL_NAME_TODAY" value="today"/>
+			<definition name="VARIABLE_GLOBAL_NAME_NOW" value="now"/>
 
 			<definition type="space"/>
 			<definition name="DATABUILD_CHOSEN_CONSTANT" value="constant"/>

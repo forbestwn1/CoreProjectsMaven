@@ -10,7 +10,15 @@ if(typeof nosliw=="undefined")
 				month : date.getMonth(),
 				date : date.getDate()
 			}
-		}
+		},
+    	nosliw_now : {
+	    	dataTypeId : "test.time;1.0.0",
+		    value : {
+			    hour : date.getHours(),
+			    minute : date.getMinutes(),
+			    second : date.getSeconds()
+		    }
+	    }
 	};
 	
 	_.extend(nosliw, function(){
