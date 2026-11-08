@@ -45,7 +45,7 @@ dataTypeDefition.operations['nextSaturaday'] = {
 			var value = this.value;
 			var date = new Date(value.year, value.month, value.date);
 
-			const daysToAdd = (6 - date.getDay() + 7) % 7 || 0;
+			const daysToAdd = (6 - date.getDay() + 7) % 7 || 7;
 		    date.setDate(date.getDate() + daysToAdd);			
 			
 			return {
@@ -64,7 +64,7 @@ dataTypeDefition.operations['nextSunday'] = {
 			var value = this.value;
 			var date = new Date(value.year, value.month, value.date);
 
-			const daysUntilSunday = date.getDay()==0? 0: 7 - date.getDay(); 
+			const daysUntilSunday = (7 - date.getDay()) % 7 || 7;
 			date.setDate(date.getDate() + daysUntilSunday);			
 			
 			return {
@@ -95,7 +95,7 @@ dataTypeDefition.operations['NDatesLater'] = {
 		},
 };
 
-dataTypeDefition.operations['lastDate'] = {
+dataTypeDefition.operations['yesterday'] = {
 		operation : function(parms, context){
 			var value = this.value;
 			var date = new Date(value.year, value.month, value.date);

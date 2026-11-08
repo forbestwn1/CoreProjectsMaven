@@ -33,7 +33,7 @@
 			</parms>
 			<output criteria="test.date;1.0.0"/>
 		</operation>
-		<operation name="lastDate" >
+		<operation name="yesterday" >
 			<parms>
 				<parm name="base" criteria="test.date" isBase="true"/>
 			</parms>
