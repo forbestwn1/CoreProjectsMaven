@@ -5,8 +5,6 @@ if (typeof globalThis !== 'undefined') {
 }
 
 export const setGlobalLoading = (isLoading) => {
-  console.log("global loading    " + isLoading);
-
   if (typeof globalThis !== 'undefined') {
     globalThis.__APP_LOADING__ = Boolean(isLoading);
     globalThis.dispatchEvent?.(new Event(LOADING_EVENT_NAME));

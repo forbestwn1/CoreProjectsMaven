@@ -370,11 +370,18 @@ var loc_createOperandExpression = function(id, rootType, parentView, env){
 
 		out.addRequest(wrapper.getInitRequest(loc_containerView, {
 			success : function(request){
-				if(loc_operandChain.length!=0){
-					loc_operandChain[loc_operandChain.length-1].setNextInChain(wrapper);
+				if(wrapper.isValid()){
+					if(loc_operandChain.length!=0){
+						loc_operandChain[loc_operandChain.length-1].setNextInChain(wrapper);
+					}
+					loc_operandChain.push(wrapper);
+					return wrapper;
 				}
-				loc_operandChain.push(wrapper);
-				return wrapper;
+				else{
+					//not valid, Ignore the new operand wrapper
+					//terminate late wrapper
+					loc_operandChain[loc_operandChain.length-1].terminate();
+				}
 			}
 		}));
 
@@ -447,7 +454,7 @@ var loc_crateOperandWrapper = function(operand, env){
 	var loc_eventObject = node_createEventObject();
 	
 	var loc_nextInChain;
-
+	
 	var loc_updateNextButton = function(){
 		
 		var operandType = loc_operand.getType()
@@ -485,7 +492,15 @@ var loc_crateOperandWrapper = function(operand, env){
 		}
 		
 	};
-	
+
+	var loc_isValid = function(){
+		if(loc_operand!=undefined && loc_operand.isValid!=undefined){
+			return loc_operand.isValid();
+		}
+		return true;
+	};
+
+		
 	var loc_out = {
 		
 		getOperand : function(){   return loc_operand;    },
@@ -494,7 +509,6 @@ var loc_crateOperandWrapper = function(operand, env){
 		
 		getInitRequest : function(parentView, handlers, request){
 			loc_parentView = parentView;
-			parentView.append(loc_containerView);
 			var operandType = loc_operand.getType();
 			if(operandType=="variable"||operandType=="operation"){
 				loc_operand.registerListener(function(eventName, eventData){
@@ -513,10 +527,17 @@ var loc_crateOperandWrapper = function(operand, env){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(loc_operand.getInitRequest(loc_operandContainerView, {
 				success : function(request){
-    				loc_updateNextButton();
+					if(loc_isValid()){
+						parentView.append(loc_containerView);
+						loc_updateNextButton();
+					}
 				}
 			}));
 			return out;
+		},
+		
+		isValid : function(){
+			return loc_isValid();
 		},
 		
 		destroy : function(){
@@ -536,7 +557,12 @@ var loc_crateOperandWrapper = function(operand, env){
 		setNextInChain : function(nextInChain){
 			loc_nextInChain = nextInChain;
 			loc_updateNextButton();
+		},
+		
+		terminate : function(){
+			loc_nextButton.terminate();
 		}
+		
 	};
 	return loc_out;
 };
@@ -547,7 +573,9 @@ var loc_createNextButton = function(parentView){
 	var loc_containerView = $("<span></span>");
 	var loc_nextabelView = $("<label></label>");
 	var loc_nextButtonView = $("<button></button>");
-	loc_containerView.append(loc_nextabelView).append(" ").append(loc_nextButtonView);
+	var loc_notAvailableMessageView = $("<span>No operation available</span>");
+	loc_containerView.append(loc_nextabelView).append(" ").append(loc_nextButtonView).append(loc_notAvailableMessageView);
+	loc_notAvailableMessageView.hide();
 	loc_containerView.css(loc_css_selectContainer);
 	loc_nextabelView.css(loc_css_label);
 	
@@ -602,6 +630,11 @@ var loc_createNextButton = function(parentView){
 		
     	destroy : function(){
 	    },
+		
+		terminate : function(){
+			loc_nextButtonView.hide();
+			loc_notAvailableMessageView.show();
+		}
 
 	};
 	return loc_out;
@@ -754,17 +787,19 @@ var loc_createOperandOperation = function(arg1, env){
 		var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 		out.addRequest(loc_operationSelection.getInitRequest({
 			success : function(request){
-				loc_dataOperation = loc_operationSelection.getCurrentDataOperation();
-				if(loc_dataOperation!=undefined){
-					loc_operationName = loc_dataOperation.name;
-					loc_baseDataType = loc_dataOperation.source;
-				}
-				
-				if(loc_parmsObj==undefined){
-					return loc_getInitNewOperationRequest();
-				}
-				else{
-					return loc_getInitExistingOperationRequest();
+				if(!loc_operationSelection.isEmpty()){
+					loc_dataOperation = loc_operationSelection.getCurrentDataOperation();
+					if(loc_dataOperation!=undefined){
+						loc_operationName = loc_dataOperation.name;
+						loc_baseDataType = loc_dataOperation.source;
+					}
+
+					if(loc_parmsObj==undefined){
+						return loc_getInitNewOperationRequest();
+					}
+					else{
+						return loc_getInitExistingOperationRequest();
+					}
 				}
 			}
 		}));
@@ -794,6 +829,10 @@ var loc_createOperandOperation = function(arg1, env){
 			loc_containerView.remove();
 		},
 
+		isValid : function(){
+			return !loc_operationSelection.isEmpty();
+		},
+		
     	isReady : function(){
 			if(loc_dataOperation==undefined)   return false;
 			for(var i in loc_parms){
@@ -849,6 +888,8 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 
 	var loc_dataOperations;
 	
+	var loc_isEmpty = true;
+	
 	var loc_eventObject = node_createEventObject();
 
 	var loc_getRelatedOperationsRequest = function(baseDatatType, resultDataType, handlers, request){
@@ -877,30 +918,38 @@ var loc_createOperationSelection = function(baseDataType, currentOperation){
 			var out = node_createServiceRequestInfoSequence(undefined, handlers, request);
 			out.addRequest(loc_getRelatedOperationsRequest(loc_baseDataType, loc_baseDataType, {
 				success : function(request, dataOperations){
-					loc_dataOperations = {};
-					_.each(dataOperations, function(dataOperation, i){
-						loc_selectOperationView.append($('<option>', { value: dataOperation.name, text: dataOperation.name }));
-						loc_dataOperations[dataOperation.name] = dataOperation;
-					});
-
-/*										
-					if(loc_currentOperation==undefined){
-						loc_currentOperation = dataOperations[0].name;
+					if(dataOperations.length>0){
+						loc_isEmpty = false;
 					}
-					loc_selectOperationView.val(loc_currentOperation);
-*/	
-                    if(loc_currentOperation!=undefined){
-						loc_selectOperationView.val(loc_currentOperation);
-					}
+					
+					if(!loc_isEmpty){
+											loc_dataOperations = {};
+											_.each(dataOperations, function(dataOperation, i){
+												loc_selectOperationView.append($('<option>', { value: dataOperation.name, text: dataOperation.name }));
+												loc_dataOperations[dataOperation.name] = dataOperation;
+											});
 
-					loc_selectOperationView.on("change", function(event){
-						loc_currentOperation = loc_selectOperationView.val();
-						loc_eventObject.triggerEvent("selectOperation", loc_dataOperations[loc_currentOperation]);
-					});
+						/*										
+											if(loc_currentOperation==undefined){
+												loc_currentOperation = dataOperations[0].name;
+											}
+											loc_selectOperationView.val(loc_currentOperation);
+						*/	
+						                    if(loc_currentOperation!=undefined){
+												loc_selectOperationView.val(loc_currentOperation);
+											}
+
+											loc_selectOperationView.on("change", function(event){
+												loc_currentOperation = loc_selectOperationView.val();
+												loc_eventObject.triggerEvent("selectOperation", loc_dataOperations[loc_currentOperation]);
+											});
+					}
 				}
 			}));
 			return out;
 		},
+		
+		isEmpty : function(){    return loc_isEmpty;      },
 		
 		getView : function(){     return loc_containerView;        },
 		

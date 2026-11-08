@@ -35,8 +35,7 @@ var node_createUICustomerTagTestUrlReadOnly = function(envObj){
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<a>Link</a>');
-			loc_dataView.attr('target', '_blank');
+			loc_dataView = $('<a target="_blank">Link</a>');
 			return loc_dataView;
 		},
 		
