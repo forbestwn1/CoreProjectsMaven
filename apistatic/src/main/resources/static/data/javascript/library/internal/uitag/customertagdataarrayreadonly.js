@@ -24,6 +24,7 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 
     var loc_dataView;
 	var loc_elementWrapperView;
+	var loc_emptyOutputView;
 	
 	var loc_dataVariable;
 	
@@ -62,6 +63,14 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 						}));
 					});
 					addEleRequest.setParmData("processMode", "promiseBased");
+					
+					if(eles.length>0){
+						loc_emptyOutputView.hide();
+					}
+					else{
+						loc_emptyOutputView.show();
+					}
+					
 					return addEleRequest;
 				}
 			}));
@@ -81,7 +90,10 @@ var node_createUICustomerTagTestArrayReadOnly = function(envObj){
 		initViews : function(handlers, request){
 			loc_dataView = $("<div/>");
 			loc_elementWrapperView = $("<div/>");
+			loc_emptyOutputView = $("<span>No result</span>");
 			loc_dataView.append(loc_elementWrapperView);
+			loc_dataView.append(loc_emptyOutputView);
+			loc_emptyOutputView.hide();
 			return loc_dataView;
 		},
 		

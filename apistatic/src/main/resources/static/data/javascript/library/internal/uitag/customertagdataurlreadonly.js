@@ -31,11 +31,12 @@ var node_createUICustomerTagTestUrlReadOnly = function(envObj){
 		updateView : function(currentData){
 			loc_currentData = currentData;
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.html(value);
+			loc_dataView.attr('href', value);
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<div></div>');
+			loc_dataView = $('<a>Link</a>');
+			loc_dataView.attr('target', '_blank');
 			return loc_dataView;
 		},
 		
