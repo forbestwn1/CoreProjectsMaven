@@ -39,7 +39,7 @@ public class HAPStoryService{
 	private HAPStoryManagerDesign m_designManager;
 
 	@Autowired
-	private HAPConfigureStory m_storyConfigure;
+	private HAPConfigureStoryPersistence m_storyConfigure;
 	
 	@Autowired
 	private HAPConfigureGlobalApplication m_globalAppConfigure;

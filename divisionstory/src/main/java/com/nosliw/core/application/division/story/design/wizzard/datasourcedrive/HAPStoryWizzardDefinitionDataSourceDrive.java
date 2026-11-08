@@ -69,9 +69,9 @@ import com.nosliw.core.data.HAPDataTypeManager;
 
 public class HAPStoryWizzardDefinitionDataSourceDrive extends HAPStoryWizzardDefinition{
 
-	public static final String STEP_SELECTDATASOURCE = "selectDataSource"; 
-	public static final String STEP_CUSTOMIZEUI = "customizeUI"; 
-	public static final String STEP_EXTRAINFO = "extraInfo"; 
+	public static final String STEP_SELECTDATASOURCE = "Select DataSource"; 
+	public static final String STEP_CUSTOMIZEUI = "Customize UI"; 
+	public static final String STEP_EXTRAINFO = "Extra Info"; 
 	
 	public static final String METADATA_PROFILE_REQUEST = "request";
 	public static final String METADATA_PROFILE_RESPONSE = "response";

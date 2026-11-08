@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix="application.nosliw-story.persistence")
-public class HAPConfigureStory {
+public class HAPConfigureStoryPersistence {
 
 	private String path;
 	

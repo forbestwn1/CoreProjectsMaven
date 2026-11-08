@@ -22,6 +22,7 @@ var packageObj = library.getChildPackage();
 var node_createUICustomerTagTestUrlReadOnly = function(envObj){
 	var loc_envObj = envObj;
 
+	var loc_containerView;
     var loc_dataView;
 	
 	var loc_currentData;
@@ -31,12 +32,16 @@ var node_createUICustomerTagTestUrlReadOnly = function(envObj){
 		updateView : function(currentData){
 			loc_currentData = currentData;
 			var value = currentData==undefined?undefined:currentData[node_COMMONATRIBUTECONSTANT.DATA_VALUE];
-			loc_dataView.attr('href', value);
+			loc_dataView = $("<a target='_blank' href='"+value+"'>Link</a>");
+			loc_containerView.append(loc_dataView);
+
+//			loc_dataView.attr('href', value);
 		},
 
 		initViews : function(handlers, request){
-			loc_dataView = $('<a target="_blank">Link</a>');
-			return loc_dataView;
+			loc_containerView = $('<div></div>');
+//			loc_dataView = $('<a target="_blank" rel="noopener noreferrer">Link</a>');
+			return loc_containerView;
 		},
 		
 		getCurrentData : function(){

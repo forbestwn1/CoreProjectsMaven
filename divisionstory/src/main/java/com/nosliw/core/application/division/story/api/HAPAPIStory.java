@@ -60,6 +60,9 @@ public class HAPAPIStory {
 	private HAPConfigureGlobalApplication m_globalAppConfigure;
 	
 	@Autowired
+	private HAPConfigureStoryDataSource m_dataSourceConfigure;
+	
+	@Autowired
 	private RestTemplate m_resteTemplate;
 	
 	@PostMapping("/design/new")
@@ -81,7 +84,14 @@ public class HAPAPIStory {
     public String queryDataSource() {
 		Map<String, Object> parmsValue = new LinkedHashMap<String, Object>();
 		HAPQueryServiceDefinition query = new HAPQueryServiceDefinition();
-		query.addKeywords("production");
+		
+		List<String> tags = m_dataSourceConfigure.getTag();
+		if(tags!=null) {
+			for(String tag : tags) {
+				query.addKeywords(tag);
+			}
+		}
+		
 		parmsValue.put(HAPGatewayService.COMMAND_SEARCHDEFINITION_QUERY, query);
 		HAPServiceData out = HAPUtilityGateway.executeGatewaySingle(m_globalAppConfigure.getCoreBaseurl(), HAPConstantShared.GATEWAY_SERVICE, HAPGatewayService.COMMAND_SEARCHDEFINITION, parmsValue, this.m_resteTemplate);
 	    return HAPUtilityJson.formatJson(out.toStringValue(HAPSerializationFormat.JSON_FULL));
