@@ -2,8 +2,8 @@
 	"profile": {
 		"id": "toronto_program_dropin",
 		"status":"disabled1",
-		"name": "Toronto Dropin Program",
-		"description" : "Toronto Dropin Program",
+		"name": "Toronto Community Centre Drop-in Program",
+		"description" : "Toronto Community Centre Drop-in Program Schedule",
 		"tag" : ["public", "production"],
 		"taskInterface" : {
 			"request" : [

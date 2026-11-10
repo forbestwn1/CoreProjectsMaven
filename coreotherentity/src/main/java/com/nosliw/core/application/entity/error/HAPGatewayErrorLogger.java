@@ -29,7 +29,7 @@ public class HAPGatewayErrorLogger extends HAPGatewayImp{
 		if(COMMAND_LOGERRRO.equals(command)) {
 			JSONArray errorArray = parms.optJSONArray(PARMS_ERROR);
 			if(errorArray!=null) {
-				LOGGER.severe(errorArray.toString());
+				LOGGER.severe("from UI : " +  errorArray.toString());
 			}
 			return this.createSuccessWithObject(null);
 		}
