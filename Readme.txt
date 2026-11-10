@@ -1,3 +1,4 @@
+cd C:\Mywork\CoreProjectsMaven\appweb\StoryDesignWizzard
 npm run dev -- --host
 
 
