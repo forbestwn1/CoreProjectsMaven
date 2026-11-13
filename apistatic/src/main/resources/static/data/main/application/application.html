@@ -87,8 +87,6 @@ var fetchTasks = [
 
 createStaticFetchTaskManager().fetch(fetchTasks, function(){
 
-	var node_CONSTANT = nosliw.getNodeData("constant.CONSTANT");
-	var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
@@ -122,28 +120,6 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	
 	out.addRequest(nosliw.runtime.getComplexEntityService().getCreateApplicationRequest({brickId:brickId, resourceId:resourceId}, configure==""?undefined:configure, runtimeContext, undefined, {
 		success : function(request, application){
-           application.registerExposeEventListener(undefined, function(eventName, eventValue, request){
-         		console.log(JSON.stringify(eventName));
-         		console.log(JSON.stringify(eventValue));
-           }, application);
-			
-			
-           $("#command").on("click", function(event) {
-        	    event.preventDefault(); // Stop the default page navigation
-        	    application.executeExecuteCommandRequest("setData", {
-                    "data" : {
-    					dataTypeId: "test.string;1.0.0",
-	                	value: "value from command"
-	                }
-        	    });
-        	});
-           
-			var event = new CustomEvent("nosliwApplicationActive", {
-				bubbles: true,
-				detail: application
-			});
-		    window.dispatchEvent(event);
-			return application;
 		}
 	}));
 	node_requestServiceProcessor.processRequest(out);

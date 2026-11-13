@@ -70,7 +70,7 @@ public class Main_loadDropinProgram {
 					        		for(int k=0; k<programsJsonArray.length(); k++) {
 					        			JSONObject programJsnObj = programsJsonArray.getJSONObject(k);
 					        			String program = programJsnObj.getString("title");
-					        			String programId = ccDropinMan.getProgramIdByName(program);
+					        			String programId = ccDropinMan.getProgramIdByName(program.toLowerCase());
 //										System.out.println("Processing program:   " + program);
 					        			
 					        			if(programId==null){

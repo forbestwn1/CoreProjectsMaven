@@ -115,7 +115,7 @@ public class HAPManagerCommunitiyCenterDropin {
 					
 					JSONArray programNamesArray = programsJsonObj.getJSONArray(programId);
 					for(int j=0; j<programNamesArray.length(); j++) {
-						this.programIdByName.put(programNamesArray.getString(j), programId);
+						this.programIdByName.put(programNamesArray.getString(j).toLowerCase(), programId);
 					}
 				}
 			}
