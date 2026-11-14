@@ -37,7 +37,7 @@ import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
 import com.nosliw.core.application.division.story.design.standalone.HAPStoryManagerStandalone;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.gateway.HAPUtilityGateway;
-import com.nosliw.core.gateway.types.HAPGatewayService;
+import com.nosliw.core.gateway.types.service.HAPGatewayService;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @RestController

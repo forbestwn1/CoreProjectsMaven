@@ -18,7 +18,7 @@ import com.nosliw.core.application.common.interactive.HAPResultInteractiveTask;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 import com.nosliw.core.gateway.HAPGatewayImp;
-import com.nosliw.core.gateway.types.HAPGatewayService;
+import com.nosliw.core.gateway.types.service.HAPGatewayService;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

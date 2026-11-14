@@ -1,4 +1,4 @@
-package com.nosliw.core.gateway.types;
+package com.nosliw.core.gateway.types.service;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;

@@ -472,6 +472,7 @@ var COMMONCONSTANT=
   "GATEWAY_SERVICE": "service",
   "GATEWAY_UITAG": "uiTag",
   "GATEWAY_LOADLIBRARIES": "loadLibraries",
+  "GATEWAY_DATACOLLECTION": "dataCollection",
   "GATEWAY_ERRORLOG": "errorLog",
   "GATEWAY_CODETABLE": "codetable",
   "GATEWAY_UITAG_STANDALONE": "uiTagStandalone",

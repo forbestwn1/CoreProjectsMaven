@@ -78,10 +78,10 @@ public class Main_loadDropinProgram {
 					        				continue;
 					        			}
 					        			
-					        			List<String> programList = programResults.get(program);
+					        			List<String> programList = programResults.get(programId);
 					        			if(programList==null) {
 					        				programList = new ArrayList<String>();
-					        				programResults.put(program, programList);
+					        				programResults.put(programId, programList);
 					        			}
 					        			
 					        			JSONArray timesJsonArray = programJsnObj.getJSONArray("times");

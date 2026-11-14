@@ -779,6 +779,7 @@
 			<definition name="GATEWAY_SERVICE" value="service"/>
 			<definition name="GATEWAY_UITAG" value="uiTag"/>
 			<definition name="GATEWAY_LOADLIBRARIES" value="loadLibraries"/>
+			<definition name="GATEWAY_DATACOLLECTION" value="dataCollection"/>
 			<definition name="GATEWAY_ERRORLOG" value="errorLog"/>
 			<definition name="GATEWAY_CODETABLE" value="codetable"/>
 			<definition name="GATEWAY_UITAG_STANDALONE" value="uiTagStandalone"/>
