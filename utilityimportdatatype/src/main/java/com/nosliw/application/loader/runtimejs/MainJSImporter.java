@@ -3,6 +3,7 @@ package com.nosliw.application.loader.runtimejs;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -18,6 +19,7 @@ import com.nosliw.data.core.imp.runtime.js.HAPModuleRuntimeJS;
 public class MainJSImporter {
 
 	@Autowired
+	@Qualifier("dataTypeDataSource")
 	DataSource m_dataSource;
 	
 	public static void main(String[] args) {

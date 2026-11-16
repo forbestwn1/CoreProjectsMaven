@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.configure.HAPConfigurableImp;
@@ -16,7 +17,7 @@ public class HAPDBSource  extends HAPConfigurableImp{
 
 	private DataSource m_dataSource;
 	
-	public HAPDBSource(DataSource dataSource) {
+	public HAPDBSource(@Qualifier("dataTypeDataSource") DataSource dataSource) {
 //		HAPConfigureImp configure = (HAPConfigureImp) HAPConfigureManager.getInstance().createConfigure()
 //				.cloneChildConfigure("dataTypeManager.database");
 //		this.setConfiguration(configure);
