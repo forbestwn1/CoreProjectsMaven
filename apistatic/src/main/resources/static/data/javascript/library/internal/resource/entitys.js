@@ -41,6 +41,12 @@ var node_ResourceId = function(id, typeParm1, typeParm2){
 	var normalizedId = node_resourceUtility.buildReourceCoreIdLiterate(this[node_COMMONATRIBUTECONSTANT.RESOURCEID_ID]);
 	this[node_COMMONATRIBUTECONSTANT.RESOURCEID_ID] = normalizedId;
 	this.name = normalizedId;
+	
+	this.getKey = function(){
+		var resourceTypeId = this[node_COMMONATRIBUTECONSTANT.RESOURCEID_RESOURCETYPEID];
+		var resourceTypeIdStr = node_namingConvensionUtility.cascadeLevel2(resourceTypeId[node_COMMONATRIBUTECONSTANT.IDRESOURCETYPE_RESOURCETYPE], resourceTypeId[node_COMMONATRIBUTECONSTANT.IDRESOURCETYPE_VERSION]);
+		return node_namingConvensionUtility.cascadeLevel2(resourceTypeIdStr, this[node_COMMONATRIBUTECONSTANT.RESOURCEID_ID]);
+	}
 };	
 	
 var node_Resource = function(resourceInfo, resourceData, info){

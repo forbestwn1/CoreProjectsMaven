@@ -20,6 +20,9 @@ public interface HAPGatewayDataCollection extends HAPGateway{
 	final public static String COMMAND_REQUEST_APPLICATION = "application";
 
 	@HAPAttribute
+	final public static String COMMAND_REQUEST_APPLICATION_APPLICATION = "application";
+
+	@HAPAttribute
 	final public static String COMMAND_REQUEST_APPLICATION_TIME = "time";
 
 	@HAPAttribute

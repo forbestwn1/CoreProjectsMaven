@@ -86,7 +86,7 @@ var fetchTasks = [
 ];
 
 createStaticFetchTaskManager().fetch(fetchTasks, function(){
-
+    var node_COMMONCONSTANT = nosliw.getNodeData("constant.COMMONCONSTANT");
 	var node_COMMONATRIBUTECONSTANT = nosliw.getNodeData("constant.COMMONATRIBUTECONSTANT");
 	
 	var node_basicUtility = nosliw.getNodeData("common.utility.basicUtility");
@@ -104,7 +104,7 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 	var resourceId = resourceType==null? null : new node_ResourceId(parms.resourceId, resourceType);
 
 	var brickType = parms.brickType==undefined?undefined : node_namingConvensionUtility.cascadeLevel1(parms.brickType, "1.0.0");
-	var brickId = brickType==null? null : new node_BrickId(parms.brickId, parms.division, brickType);
+	var brickId = brickType==undefined? undefined : new node_BrickId(parms.brickId, parms.division, brickType);
 	
 	var configure = parms.configure;
 		
@@ -123,6 +123,20 @@ createStaticFetchTaskManager().fetch(fetchTasks, function(){
 		}
 	}));
 	node_requestServiceProcessor.processRequest(out);
+	
+	//gateway request
+	var gatewayId = node_COMMONCONSTANT.GATEWAY_DATACOLLECTION;
+	var command = node_COMMONATRIBUTECONSTANT.GATEWAYDATACOLLECTION_COMMAND_REQUEST_APPLICATION;
+	var parms = {};
+	parms[node_COMMONATRIBUTECONSTANT.GATEWAYDATACOLLECTION_COMMAND_REQUEST_APPLICATION_APPLICATION] = "application";
+	parms[node_COMMONATRIBUTECONSTANT.GATEWAYDATACOLLECTION_COMMAND_REQUEST_APPLICATION_TIME] = new Date().toLocaleDateString('en-CA');
+	parms[node_COMMONATRIBUTECONSTANT.GATEWAYDATACOLLECTION_COMMAND_REQUEST_APPLICATION_RESOURCEID] = brickId!=undefined?brickId.getKey():resourceId.getKey();
+	var gatewayRequest = nosliw.runtime.getGatewayService().getExecuteGatewayCommandRequest(gatewayId, command, parms, {
+		success : function(request){
+		}
+	});
+	node_requestServiceProcessor.processRequest(gatewayRequest);
+	
 });
 
 </script>
