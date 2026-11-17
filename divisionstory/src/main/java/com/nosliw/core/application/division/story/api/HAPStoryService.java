@@ -13,7 +13,7 @@ import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualUtilityExporterContentProvider;

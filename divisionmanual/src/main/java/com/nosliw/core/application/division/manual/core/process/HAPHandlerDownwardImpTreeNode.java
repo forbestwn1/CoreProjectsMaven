@@ -2,12 +2,12 @@ package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
-import com.nosliw.core.application.brick.HAPUtilityBundleForBrick;
-import com.nosliw.core.application.brick.HAPWithBrick;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPUtilityBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPWithBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualWrapperBrickRoot;

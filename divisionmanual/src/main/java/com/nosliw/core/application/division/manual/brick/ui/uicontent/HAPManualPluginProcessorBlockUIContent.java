@@ -4,20 +4,20 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPDomainValueStructure;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.scriptexpressio.HAPItemInContainerScriptExpression;
-import com.nosliw.core.application.common.scriptexpressio.HAPUtilityScriptExpression;
+import com.nosliw.core.application.common.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
-import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
-import com.nosliw.core.application.valueport.HAPUtilityValuePortVariable;
+import com.nosliw.core.application.entity.scriptexpression.HAPUtilityScriptExpression;
+import com.nosliw.core.application.entity.withvariable.HAPManagerWithVariablePlugin;
+import com.nosliw.core.application.entity.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.data.matcher.HAPMatchers;
 

@@ -1,0 +1,57 @@
+package com.nosliw.core.application.common.dynamic;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPManagerSerialize;
+import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
+
+@HAPEntityWithAttribute
+public class HAPDynamicExecuteInputContainer extends HAPSerializableImp{
+
+	@HAPAttribute
+	public final static String ELEMENT = "element"; 
+	
+	private Map<String, HAPDynamicExecuteInputItem> m_dynamicInputs;
+
+	public HAPDynamicExecuteInputContainer() {
+		this.m_dynamicInputs = new LinkedHashMap<String, HAPDynamicExecuteInputItem>();
+	}
+	
+	public Map<String, HAPDynamicExecuteInputItem> getDyanmicTaskReference() {		return this.m_dynamicInputs;	}
+	public void addDynamicTaskReference(HAPDynamicExecuteInputItem ref) {   this.m_dynamicInputs.put(ref.getName(), ref);     }
+	
+	@Override
+	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
+		super.buildJsonMap(jsonMap, typeJsonMap);
+		jsonMap.put(ELEMENT, HAPManagerSerialize.getInstance().toStringValue(m_dynamicInputs, HAPSerializationFormat.JSON)); 
+	}
+	
+	@Override
+	protected boolean buildObjectByJson(Object json){
+		JSONObject jsonObj = (JSONObject)json;
+		
+		Object dynamicInputObj = jsonObj.opt(ELEMENT);
+		if(dynamicInputObj instanceof JSONObject) {
+			JSONObject dynamicInputJsonObj = (JSONObject)dynamicInputObj;
+			for(Object key : dynamicInputJsonObj.keySet()) {
+				String name = (String)key;
+				this.addDynamicTaskReference(HAPDynamicExecuteInputItem.parse(dynamicInputJsonObj.getJSONObject(name)));
+			}
+		}
+		else if(dynamicInputObj instanceof JSONArray) {
+			JSONArray dynamicInputJsonArray = (JSONArray)dynamicInputObj;
+			for(int i=0; i<dynamicInputJsonArray.length(); i++) {
+				this.addDynamicTaskReference(HAPDynamicExecuteInputItem.parse(dynamicInputJsonArray.getJSONObject(i)));
+			}
+		}
+		
+		return true;  
+	}
+}

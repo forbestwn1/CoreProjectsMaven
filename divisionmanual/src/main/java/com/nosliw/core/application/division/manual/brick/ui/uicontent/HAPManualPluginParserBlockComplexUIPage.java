@@ -6,9 +6,9 @@ import org.json.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualParserValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;

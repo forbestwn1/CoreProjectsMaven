@@ -3,9 +3,9 @@ package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTagDebugger;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUICustomerTagDebugger;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;

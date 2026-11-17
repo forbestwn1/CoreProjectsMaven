@@ -2,7 +2,7 @@ package com.nosliw.core.xxx.application.valueport;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
-import com.nosliw.core.application.valueport.HAPGroupValuePorts;
+import com.nosliw.core.application.common.valueport.HAPGroupValuePorts;
 
 @HAPEntityWithAttribute
 public interface HAPWithInternalValuePortGroup {

@@ -7,26 +7,26 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONArray;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
-import com.nosliw.core.application.brick.spec.test.complex.script.HAPBlockTestComplexScript;
-import com.nosliw.core.application.brick.spec.test.complex.script.HAPTestTaskTrigguer;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPBlockTestComplexScript;
+import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.task.HAPInfoTrigguerTask;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
+import com.nosliw.core.application.common.valueport.HAPResultReferenceResolve;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessBrickPath;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
-import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
-import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
-import com.nosliw.core.application.valueport.HAPUtilityValuePort;
+import com.nosliw.core.application.entity.valueport.HAPUtilityResovleElement;
+import com.nosliw.core.application.entity.valueport.HAPUtilityValuePort;
 
 public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPManualPluginProcessorBlockImp{
 

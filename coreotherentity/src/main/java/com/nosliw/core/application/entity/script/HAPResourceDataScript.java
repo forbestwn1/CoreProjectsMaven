@@ -5,6 +5,7 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPJsonTypeScript;
 import com.nosliw.common.serialization.HAPSerializationFormat;
+import com.nosliw.core.application.common.script.HAPWithScript;
 import com.nosliw.core.resource.HAPResourceDataImp;
 
 @HAPEntityWithAttribute

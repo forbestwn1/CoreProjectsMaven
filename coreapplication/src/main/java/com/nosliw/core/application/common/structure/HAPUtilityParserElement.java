@@ -5,11 +5,11 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPParserDataDefinition;
 import com.nosliw.core.application.common.structure.reference.HAPInfoRelativeResolve;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 
 public class HAPUtilityParserElement {
 

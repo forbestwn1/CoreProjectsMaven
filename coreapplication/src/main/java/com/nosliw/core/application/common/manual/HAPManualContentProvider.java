@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.serialization.HAPSerializable;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.dynamic.HAPDynamicDefinitionContainer;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
-import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public interface HAPManualContentProvider extends HAPSerializable{
 

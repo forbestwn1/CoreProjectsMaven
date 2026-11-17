@@ -9,17 +9,17 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPWrapperValue;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPWrapperValue;
+import com.nosliw.core.application.common.valueport.HAPContainerValuePorts;
+import com.nosliw.core.application.common.valueport.HAPGroupValuePorts;
+import com.nosliw.core.application.common.valueport.HAPValuePort;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualValueContext;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
-import com.nosliw.core.application.valueport.HAPContainerValuePorts;
-import com.nosliw.core.application.valueport.HAPGroupValuePorts;
-import com.nosliw.core.application.valueport.HAPValuePort;
 
 @HAPEntityWithAttribute
 public abstract class HAPManualBrick extends HAPBrickImp{

@@ -3,13 +3,13 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
-import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.spec.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
+import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.common.brick.spec.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.core.application.common.valueport.HAPIdElement;
+import com.nosliw.core.application.common.valueport.HAPResultReferenceResolve;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
-import com.nosliw.core.application.valueport.HAPIdElement;
-import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
 
 public class HAPManualBlockTestComplexTask extends HAPManualBrickImp implements HAPBlockTestComplexTask{
 

@@ -45,7 +45,7 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 		this.m_path = new HAPRelationshipPath();
 		this.m_path.buildObject(jsonObj.getJSONArray(PATH)+"", HAPSerializationFormat.LITERATE);
 		
-		this.setTargetType((String)jsonObj.opt(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE));
+//		this.setTargetType((String)jsonObj.opt(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE));   kkkkk
 		return true;
 	}
 	
@@ -54,7 +54,7 @@ public class HAPRelationshipImp extends HAPSerializableImp implements HAPRelatio
 		jsonMap.put(SOURCE, HAPManagerSerialize.getInstance().toStringValue(this.getSource(), HAPSerializationFormat.LITERATE));
 		jsonMap.put(TARGET, HAPManagerSerialize.getInstance().toStringValue(this.getTarget(), HAPSerializationFormat.LITERATE));
 		jsonMap.put(PATH, HAPManagerSerialize.getInstance().toStringValue(this.getPath(), HAPSerializationFormat.LITERATE));
-		jsonMap.put(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE, m_targetType);
+//		jsonMap.put(com.nosliw.data.core.imp.HAPRelationshipImp.TARGETDATATYPE, m_targetType);       kkkkkk
 	}
 
 	@Override

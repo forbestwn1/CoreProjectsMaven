@@ -7,13 +7,13 @@ import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
-import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEventHandlerInfoCustom;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
@@ -30,12 +30,12 @@ import com.nosliw.core.application.common.uicontent.HAPUIConentUtility;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttributeVariable;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualUtilityValueContext;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
 
 public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPluginParserBlockComplexWithUIContent{
 

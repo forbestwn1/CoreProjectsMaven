@@ -2,18 +2,18 @@ package com.nosliw.core.application.division.manual.common.datarule.expression;
 
 import java.util.List;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
+import com.nosliw.core.application.common.datarule.HAPDataRule;
+import com.nosliw.core.application.common.datarule.HAPDataRuleExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.division.manual.brick.expression.dataexpression.standalone.HAPManualDefinitionBlockDataExpressionStandAlone;
 import com.nosliw.core.application.division.manual.common.datarule.HAPManualTransformerDataRule;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
-import com.nosliw.core.application.entity.datarule.HAPDataRuleExpression;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
 

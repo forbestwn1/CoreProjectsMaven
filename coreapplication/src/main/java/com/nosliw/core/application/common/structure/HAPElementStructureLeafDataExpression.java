@@ -5,7 +5,7 @@ import java.util.Map;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 
 public class HAPElementStructureLeafDataExpression extends HAPElementStructure{
 

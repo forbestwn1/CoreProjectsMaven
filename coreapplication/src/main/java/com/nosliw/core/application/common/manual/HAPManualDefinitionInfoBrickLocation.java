@@ -4,7 +4,7 @@ import java.nio.file.Path;
 
 import com.nosliw.common.location.HAPPathLocationBase;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
 
 public class HAPManualDefinitionInfoBrickLocation {
 

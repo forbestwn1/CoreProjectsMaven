@@ -6,11 +6,11 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
 import com.nosliw.core.application.common.event.HAPEventHandlerReference;

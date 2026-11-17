@@ -2,8 +2,8 @@ package com.nosliw.core.application.division.manual.brick.adapter.dataassociatio
 
 import org.json.JSONObject;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociationForExpression;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionParserDataAssociationForExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;

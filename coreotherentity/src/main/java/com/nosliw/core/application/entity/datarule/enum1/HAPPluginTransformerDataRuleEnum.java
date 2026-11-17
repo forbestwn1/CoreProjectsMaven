@@ -2,11 +2,11 @@ package com.nosliw.core.application.entity.datarule.enum1;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockTaskTaskScript;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.imp.basic.HAPBasicBlockTaskTaskScript;
+import com.nosliw.core.application.common.datarule.HAPDataRule;
+import com.nosliw.core.application.common.datarule.HAPUtilityDataRule;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;
-import com.nosliw.core.application.entity.datarule.HAPUtilityDataRule;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 
 public class HAPPluginTransformerDataRuleEnum extends HAPPluginTransformerDataRuleImp{

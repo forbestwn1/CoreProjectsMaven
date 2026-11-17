@@ -2,6 +2,9 @@ package com.nosliw.core.application.entity.codetable;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.core.application.common.codetable.HAPCodeTable;
+import com.nosliw.core.application.common.codetable.HAPResourceDataCodeTable;
+import com.nosliw.core.application.common.codetable.HAPResourceIdCodeTable;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPPluginResourceManager;
 import com.nosliw.core.resource.HAPResourceDataOrWrapper;

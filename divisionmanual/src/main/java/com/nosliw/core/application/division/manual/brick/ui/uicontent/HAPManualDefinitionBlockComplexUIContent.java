@@ -7,10 +7,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUIContent;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUIContent;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;

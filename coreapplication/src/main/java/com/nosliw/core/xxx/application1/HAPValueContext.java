@@ -6,7 +6,7 @@ import java.util.Set;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializable;
-import com.nosliw.core.application.valueport.HAPInfoValueStructure;
+import com.nosliw.core.application.common.valueport.HAPInfoValueStructure;
 
 @HAPEntityWithAttribute
 public interface HAPValueContext extends HAPSerializable{

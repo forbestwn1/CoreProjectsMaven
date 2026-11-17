@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.container.HAPItemWrapper;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
@@ -19,13 +20,11 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrick;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
 import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritableWithInit;
 import com.nosliw.core.application.common.datadefinition.HAPUtilityDataDefinition;
-import com.nosliw.core.application.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualInfoContent;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
@@ -33,6 +32,8 @@ import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinitionImp;
 import com.nosliw.core.application.common.structure.HAPValueStructureImp;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinitionImp;
+import com.nosliw.core.application.common.valueport.HAPIdValuePort;
+import com.nosliw.core.application.common.valueport.HAPIdValuePortInBundle;
 import com.nosliw.core.application.division.story.definition.HAPStoryAlias;
 import com.nosliw.core.application.division.story.definition.HAPStoryChildElement;
 import com.nosliw.core.application.division.story.definition.HAPStoryContainerChildrenElementsCollection;
@@ -69,8 +70,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRu
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
-import com.nosliw.core.application.valueport.HAPIdValuePort;
-import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
+import com.nosliw.core.application.entity.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.data.HAPData;
 
 public class HAPStoryConverterToManual {

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.parm.HAPManagerParm;
@@ -17,14 +18,14 @@ import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPWithBrickReferences;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPWithBrickReferences;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionItemInContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionWithDataExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
+import com.nosliw.core.application.common.script.HAPWithScriptReference;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugDefinition;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.brick.ui.uicontent.HAPUtilityUIResourceParser;
@@ -32,7 +33,6 @@ import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualD
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.application.entity.script.HAPWithScriptReference;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 

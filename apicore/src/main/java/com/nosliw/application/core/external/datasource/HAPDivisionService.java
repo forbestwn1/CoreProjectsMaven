@@ -6,18 +6,18 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrick;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPWrapperBrickRoot;
-import com.nosliw.core.application.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.brick.spec.service.profile.HAPBlockServiceProfile;
-import com.nosliw.core.application.common.datasource.HAPBlockServiceProfileImp;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPWrapperBrickRoot;
+import com.nosliw.core.application.common.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.common.brick.spec.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.datasource.HAPServiceDataSource;
 import com.nosliw.core.application.common.datasource.HAPServiceProfile;
 import com.nosliw.core.application.entity.brick.HAPPluginDivision;
+import com.nosliw.core.application.entity.datasource.HAPBlockServiceProfileImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component

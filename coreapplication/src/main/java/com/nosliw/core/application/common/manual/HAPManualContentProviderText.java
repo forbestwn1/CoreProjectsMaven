@@ -16,10 +16,10 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
+import com.nosliw.core.application.common.dynamic.HAPDynamicDefinitionContainer;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
-import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
 
 public class HAPManualContentProviderText extends HAPSerializableImp implements HAPManualContentProvider, HAPEntityParsable{
 

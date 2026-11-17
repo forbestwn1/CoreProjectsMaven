@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.brick.valuestructure;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinition;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainerList;

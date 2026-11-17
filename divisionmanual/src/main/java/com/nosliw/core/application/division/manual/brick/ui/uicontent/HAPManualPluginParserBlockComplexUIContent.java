@@ -12,14 +12,14 @@ import org.jsoup.nodes.TextNode;
 import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
-import com.nosliw.core.application.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEventHandlerInfoNormal;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionItemInContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionWithDataExpression;
 import com.nosliw.core.application.common.event.HAPEventDefinition;

@@ -3,16 +3,16 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.core.application.common.brick.spec.test.complex.task.HAPBlockTestComplexTask;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
 
 public class HAPManualPluginParserBlockTestComplexTask extends HAPManualDefinitionPluginParserBrickImpComplex{
 

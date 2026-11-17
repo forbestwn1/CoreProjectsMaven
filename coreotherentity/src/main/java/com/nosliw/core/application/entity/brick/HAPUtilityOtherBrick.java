@@ -2,11 +2,11 @@ package com.nosliw.core.application.entity.brick;
 
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPInfoBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPInfoBrickType;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
 import com.nosliw.core.resource.HAPInfoResourceIdNormalize;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResourceId;

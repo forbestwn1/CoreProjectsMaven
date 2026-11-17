@@ -15,15 +15,15 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.common.jslibrary.HAPResourceDataJSLibrary;
-import com.nosliw.core.application.entity.resource.HAPGatewayResource;
+import com.nosliw.core.application.entity.jslibrary.HAPResourceDataJSLibrary;
+import com.nosliw.core.entity.staticresource.HAPServiceStaticResource;
+import com.nosliw.core.entity.staticresource.HAPStaticResponse;
+import com.nosliw.core.entity.staticresource.HAPStaticResponseInfoUrl;
+import com.nosliw.core.gateway.types.resource.HAPGatewayResource;
 import com.nosliw.core.resource.HAPConfigureResource;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceDataJSValue;
 import com.nosliw.core.resource.HAPResourceInfo;
-import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
-import com.nosliw.core.service.staticresource.HAPStaticResponse;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoUrl;
 
 public class HAPUtilityRuntimeJsScriptResource {
 

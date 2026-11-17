@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.manual.brick.adapter.dataassociatio
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociation;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 

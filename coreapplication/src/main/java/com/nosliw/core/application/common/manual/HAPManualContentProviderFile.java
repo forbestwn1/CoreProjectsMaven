@@ -15,14 +15,14 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
+import com.nosliw.core.application.common.dynamic.HAPDynamicDefinitionContainer;
+import com.nosliw.core.application.common.dynamic.HAPDynamicUtilityParser;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
-import com.nosliw.core.application.dynamic.HAPDynamicDefinitionContainer;
-import com.nosliw.core.application.dynamic.HAPDynamicUtilityParser;
-import com.nosliw.core.application.entity.brickcriteria.HAPManagerBrickCriteria;
 
 public class HAPManualContentProviderFile extends HAPSerializableImp implements HAPManualContentProvider{
 

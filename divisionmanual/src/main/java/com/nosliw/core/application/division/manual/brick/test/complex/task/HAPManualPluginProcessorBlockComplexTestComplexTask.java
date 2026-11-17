@@ -5,26 +5,26 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
 import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
+import com.nosliw.core.application.common.valueport.HAPIdElement;
+import com.nosliw.core.application.common.valueport.HAPIdValuePort;
+import com.nosliw.core.application.common.valueport.HAPIdValuePortInBundle;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
-import com.nosliw.core.application.valueport.HAPIdElement;
-import com.nosliw.core.application.valueport.HAPIdValuePort;
-import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
-import com.nosliw.core.application.valueport.HAPUtilityResovleElement;
-import com.nosliw.core.application.valueport.HAPUtilityValuePort;
+import com.nosliw.core.application.entity.valueport.HAPUtilityResovleElement;
+import com.nosliw.core.application.entity.valueport.HAPUtilityValuePort;
 
 public class HAPManualPluginProcessorBlockComplexTestComplexTask extends HAPManualPluginProcessorBlockImp{
 

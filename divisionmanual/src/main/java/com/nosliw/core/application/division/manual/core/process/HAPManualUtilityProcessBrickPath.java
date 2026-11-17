@@ -2,19 +2,19 @@ package com.nosliw.core.application.division.manual.core.process;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
-import com.nosliw.core.application.brick.HAPPackageBrickInBundle;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
-import com.nosliw.core.application.brick.HAPUtilityBrickReference;
-import com.nosliw.core.application.brick.HAPUtilityBundleForBrick;
-import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
-import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItem;
-import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItemMultiple;
-import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItemSingle;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPPackageBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPUtilityBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPWrapperValueOfReferenceResource;
+import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItem;
+import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItemMultiple;
+import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItemSingle;
+import com.nosliw.core.application.entity.brick.HAPUtilityBrickReference;
 
 public class HAPManualUtilityProcessBrickPath {
 

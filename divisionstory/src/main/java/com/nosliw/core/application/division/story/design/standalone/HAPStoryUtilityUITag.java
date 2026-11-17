@@ -4,12 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrickInBundle;
+import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.command.HAPCommandDefinition;
 import com.nosliw.core.application.common.command.HAPCommandHandlerReferenceCommand;
 import com.nosliw.core.application.common.command.HAPCommandProcess;

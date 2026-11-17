@@ -3,11 +3,11 @@ package com.nosliw.core.application.division.manual.brick.wrapperbrick;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.wrapperbrick.HAPBrickWrapperBrick;
+import com.nosliw.core.application.common.brick.spec.wrapperbrick.HAPBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo_parser;
 

@@ -1,0 +1,95 @@
+package com.nosliw.core.application.common.datarule;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONObject;
+
+import com.nosliw.common.parm.HAPWithParms;
+import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinition;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionReadonly;
+import com.nosliw.core.application.common.datadefinition.HAPDataDefinitionWritable;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionDataRule;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmRequest;
+import com.nosliw.core.application.common.datadefinition.HAPDefinitionParmResponse;
+import com.nosliw.core.application.common.interactive.HAPInteractiveResultTask;
+import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
+import com.nosliw.core.data.HAPDataTypeId;
+import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
+import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
+
+public class HAPUtilityDataRule {
+
+	public static boolean isContainerMandatoryRule(HAPDataDefinition dataDefinition) {
+		if(dataDefinition instanceof HAPDataDefinitionWritable) {
+			HAPDataDefinitionWritable writableDataDef = (HAPDataDefinitionWritable)dataDefinition;
+			
+			for(HAPDefinitionDataRule ruleDef : writableDataDef.getRules()) {
+				if(ruleDef.getPath()==null||ruleDef.getPath().isBlank()) {
+					if(ruleDef.getDataRule().getRuleType().equals(HAPConstantShared.DATARULE_TYPE_MANDATORY)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static HAPDataRule parseDataRule(JSONObject dataRuleJson, HAPServiceParseEntity entityParseService) {
+		return (HAPDataRule)entityParseService.parseEntityJSONImplicitAttribute(dataRuleJson, HAPDataRule.RULETYPE, HAPDataRule.ENTITYPARSEDOMAIN);		
+	}
+	
+	public static void setRuleDefParm(HAPWithParms withParms, HAPDataRule dataRule) {
+		withParms.getParms().setParm(HAPConstantShared.PARM_RULETASK_RULEDEF, dataRule);
+	}
+	
+	
+//	public static HAPInteractiveExpression buildExpressionInterface(HAPDataTypeCriteria dataCriteria) {
+//		HAPDefinitionParm parm = new HAPDefinitionParm();
+//		parm.getDataDefinition().setCriteria(dataCriteria);
+//		parm.setName(HAPConstantShared.NAME_ROOT_DATA);
+//		
+//		HAPDefinitionResult result = new HAPDefinitionResult();
+//		result.setDataDefinition(new HAPDataDefinitionReadonly());
+//		result.getDataDefinition().setCriteria(new HAPDataTypeCriteriaId(new HAPDataTypeId("boolean", "1.0.0"), null));
+//
+//		HAPInteractiveExpression interactive = new HAPInteractiveExpression(List.of(parm), result);
+//        return interactive;		
+//	}
+	
+	public static HAPInteractiveTask buildTaskInterface(HAPDataTypeCriteria dataCriteria) {
+		HAPDefinitionParmRequest parm = new HAPDefinitionParmRequest();
+		parm.getDataDefinition().setCriteria(dataCriteria);
+		parm.setName(HAPConstantShared.NAME_ROOT_DATA);
+		
+		List<HAPInteractiveResultTask> interactiveResults = new ArrayList<HAPInteractiveResultTask>();
+
+		{
+			//success
+			HAPInteractiveResultTask interactiveResult = new HAPInteractiveResultTask();
+			interactiveResult.setName(HAPConstantShared.TASK_RESULT_SUCCESS);
+		    interactiveResults.add(interactiveResult);
+		}
+
+		{
+			//fail
+			HAPInteractiveResultTask interactiveResult = new HAPInteractiveResultTask();
+			interactiveResult.setName(HAPConstantShared.TASK_RESULT_FAIL);
+			
+			HAPDefinitionParmResponse output = new HAPDefinitionParmResponse();
+			output.setName(HAPConstantShared.NAME_ROOT_ERROR);
+		    output.setDataDefinition(new HAPDataDefinitionReadonly());
+		    output.getDataDefinition().setCriteria(new HAPDataTypeCriteriaId(new HAPDataTypeId("string", "1.0.0"), null));
+		    interactiveResult.addOutput(output);
+
+		    interactiveResults.add(interactiveResult);
+		}
+
+		HAPInteractiveTask interactive = new HAPInteractiveTask(List.of(parm), interactiveResults);
+        return interactive;		
+	}
+	
+	
+}

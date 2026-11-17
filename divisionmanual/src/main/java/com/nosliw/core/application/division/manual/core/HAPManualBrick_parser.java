@@ -4,13 +4,13 @@ import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.HAPAdapter;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPAdapter;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.brick.serialize.HAPParserBrick;
+import com.nosliw.core.application.common.valueport.HAPContainerValuePorts;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualValueContext;
-import com.nosliw.core.application.valueport.HAPContainerValuePorts;
 
 public abstract class HAPManualBrick_parser extends HAPParserBrick{
 

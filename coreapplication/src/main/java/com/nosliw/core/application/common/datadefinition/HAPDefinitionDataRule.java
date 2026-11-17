@@ -7,7 +7,7 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.info.HAPEntityInfoImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
+import com.nosliw.core.application.common.datarule.HAPDataRule;
 
 @HAPEntityWithAttribute
 public class HAPDefinitionDataRule extends HAPEntityInfoImp{

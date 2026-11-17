@@ -1,0 +1,13 @@
+package com.nosliw.core.application.spec.brick.ui.uicontent;
+
+import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.core.application.common.brick.HAPBrick;
+
+@HAPEntityWithAttribute
+public interface HAPBlockComplexUIWrapperContentInCustomerTagDebugger extends HAPBrick{
+
+	@HAPAttribute
+	public static final String CHILD = "child";
+
+}

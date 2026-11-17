@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.nosliw.common.path.HAPPath;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerBrickWrapper;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
-import com.nosliw.core.application.brick.HAPWithBrick;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerBrickWrapper;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPWithBrick;
 
 public class HAPUtilityOtherBrickTraverse {
 

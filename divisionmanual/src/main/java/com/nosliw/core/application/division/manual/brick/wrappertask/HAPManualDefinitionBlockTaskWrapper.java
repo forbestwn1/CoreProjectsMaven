@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.manual.brick.wrappertask;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapper;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.spec.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 
 public class HAPManualDefinitionBlockTaskWrapper extends HAPManualDefinitionBrick{

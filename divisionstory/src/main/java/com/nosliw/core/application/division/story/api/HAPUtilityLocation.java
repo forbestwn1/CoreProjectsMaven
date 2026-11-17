@@ -3,7 +3,7 @@ package com.nosliw.core.application.division.story.api;
 import java.nio.file.Path;
 
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
 
 public class HAPUtilityLocation {
 

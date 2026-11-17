@@ -2,9 +2,9 @@ package com.nosliw.core.application.entity.brick;
 
 import java.util.Set;
 
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPIdBrick;
-import com.nosliw.core.application.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public interface HAPPluginDivision {

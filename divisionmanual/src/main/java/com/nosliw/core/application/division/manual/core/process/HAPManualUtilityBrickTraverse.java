@@ -1,10 +1,10 @@
 package com.nosliw.core.application.division.manual.core.process;
 
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPHandlerBrickWrapper;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPWithBrick;
-import com.nosliw.core.application.brick.HAPWrapperValue;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerBrickWrapper;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPWithBrick;
+import com.nosliw.core.application.common.brick.HAPWrapperValue;
 import com.nosliw.core.application.division.manual.core.HAPManualUtilityBrick;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 

@@ -2,12 +2,12 @@ package com.nosliw.core.application.division.manual.brick.wrappertask;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.wrappertask.HAPBlockTaskWrapper;
-import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBlockTaskWrapper;
+import com.nosliw.core.application.common.brick.spec.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.entity.brick.serialize.HAParserPValueInAttributeImpBlockTaskWrapper;
 
 public class HAPManualBlockTaskWrapper extends HAPManualBrickImp implements HAPBlockTaskWrapper{
 

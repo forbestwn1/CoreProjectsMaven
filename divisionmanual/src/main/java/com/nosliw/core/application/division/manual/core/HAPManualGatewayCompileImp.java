@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.gateway.compile.HAPManualGatewayCompile;
 import com.nosliw.core.gateway.HAPGatewayImp;

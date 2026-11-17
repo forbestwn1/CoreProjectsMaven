@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.core.application.common.datarule.HAPDataRule;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
-import com.nosliw.core.application.entity.datarule.HAPDataRule;
 
 @Component
 public class HAPManualManagerDataRule {

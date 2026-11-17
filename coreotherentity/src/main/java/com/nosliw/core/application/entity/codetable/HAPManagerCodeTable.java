@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFileNio;
+import com.nosliw.core.application.common.codetable.HAPCodeTable;
+import com.nosliw.core.application.common.codetable.HAPCodeTableId;
+import com.nosliw.core.application.common.codetable.HAPConfigureCodeTable;
 
 @Component
 public class HAPManagerCodeTable {

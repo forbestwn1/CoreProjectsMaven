@@ -11,9 +11,9 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.databuild.HAPDataBuild;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardParserValueInQuestion;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardValueInQuestionairImp;
-import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
 
 @HAPEntityWithAttribute
 public class HAPStoryWizzardQuestionValueDataSourceRequestParmChooseDataBuildDynamic extends HAPStoryWizzardValueInQuestionairImp{

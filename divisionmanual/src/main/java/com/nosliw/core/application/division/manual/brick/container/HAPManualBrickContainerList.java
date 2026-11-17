@@ -7,12 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.brick.HAPAttributeInBrick;
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.container.HAPBrickContainer;
-import com.nosliw.core.application.brick.spec.container.HAPBrickContainerList;
+import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
+import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainer;
+import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
 
 public class HAPManualBrickContainerList extends HAPManualBrickContainer implements HAPBrickContainerList{

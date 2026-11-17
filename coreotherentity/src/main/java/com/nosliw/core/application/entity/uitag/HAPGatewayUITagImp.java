@@ -8,12 +8,12 @@ import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.uitag.HAPGatewayUITag;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.gateway.HAPGatewayImp;
+import com.nosliw.core.gateway.types.uitag.HAPGatewayUITag;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @HAPEntityWithAttribute

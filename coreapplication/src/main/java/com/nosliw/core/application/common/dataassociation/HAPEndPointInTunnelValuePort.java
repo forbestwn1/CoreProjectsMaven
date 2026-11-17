@@ -11,7 +11,7 @@ import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.valueport.HAPIdValuePortInBundle;
+import com.nosliw.core.application.common.valueport.HAPIdValuePortInBundle;
 
 @HAPEntityWithAttribute
 public class HAPEndPointInTunnelValuePort extends HAPEndpointInTunnel{

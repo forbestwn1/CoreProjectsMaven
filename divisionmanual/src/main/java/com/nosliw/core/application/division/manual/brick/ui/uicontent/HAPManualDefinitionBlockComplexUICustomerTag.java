@@ -5,8 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUICustomerTag;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;

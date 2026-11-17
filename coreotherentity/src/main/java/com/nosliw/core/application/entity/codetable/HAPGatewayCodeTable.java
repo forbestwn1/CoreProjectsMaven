@@ -7,6 +7,8 @@ import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.codetable.HAPCodeTable;
+import com.nosliw.core.application.common.codetable.HAPCodeTableId;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

@@ -12,8 +12,8 @@ import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
-import com.nosliw.core.application.valueport.HAPResultDesendantResolve;
-import com.nosliw.core.application.valueport.HAPResultReferenceResolve;
+import com.nosliw.core.application.common.valueport.HAPResultDesendantResolve;
+import com.nosliw.core.application.common.valueport.HAPResultReferenceResolve;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 

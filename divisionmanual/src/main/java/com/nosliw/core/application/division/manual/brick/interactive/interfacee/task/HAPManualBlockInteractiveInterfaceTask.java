@@ -2,12 +2,12 @@ package com.nosliw.core.application.division.manual.brick.interactive.interfacee
 
 import org.springframework.stereotype.Component;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.common.brick.serialize.valueparser.HAParserPValueInAttributeImpBlockInteractiveInterfaceTask;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.entity.brick.serialize.HAParserPValueInAttributeImpBlockInteractiveInterfaceTask;
 
 public class HAPManualBlockInteractiveInterfaceTask extends HAPManualBrickImp implements HAPBlockInteractiveInterfaceTask{
 

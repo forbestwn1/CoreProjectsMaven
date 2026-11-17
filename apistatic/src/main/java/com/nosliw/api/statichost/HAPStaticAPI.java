@@ -28,16 +28,16 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
-import com.nosliw.core.service.staticresource.HAPStaticRequest;
-import com.nosliw.core.service.staticresource.HAPStaticRequestInfo;
-import com.nosliw.core.service.staticresource.HAPStaticRequestInfoConfigure;
-import com.nosliw.core.service.staticresource.HAPStaticRequestInfoFolder;
-import com.nosliw.core.service.staticresource.HAPStaticRequestInfoLibrary;
-import com.nosliw.core.service.staticresource.HAPStaticResponse;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfo;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoContent;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoData;
-import com.nosliw.core.service.staticresource.HAPStaticResponseInfoUrl;
+import com.nosliw.core.entity.staticresource.HAPStaticRequest;
+import com.nosliw.core.entity.staticresource.HAPStaticRequestInfo;
+import com.nosliw.core.entity.staticresource.HAPStaticRequestInfoConfigure;
+import com.nosliw.core.entity.staticresource.HAPStaticRequestInfoFolder;
+import com.nosliw.core.entity.staticresource.HAPStaticRequestInfoLibrary;
+import com.nosliw.core.entity.staticresource.HAPStaticResponse;
+import com.nosliw.core.entity.staticresource.HAPStaticResponseInfo;
+import com.nosliw.core.entity.staticresource.HAPStaticResponseInfoContent;
+import com.nosliw.core.entity.staticresource.HAPStaticResponseInfoData;
+import com.nosliw.core.entity.staticresource.HAPStaticResponseInfoUrl;
 
 @RestController
 @RequestMapping("/nosliw/static")

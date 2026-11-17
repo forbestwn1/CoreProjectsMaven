@@ -9,12 +9,12 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.structure.HAPUtilityScope;
 import com.nosliw.core.application.common.structure.HAPValueContextDefinition;
 import com.nosliw.core.application.common.structure.HAPWrapperValueStructureDefinition;
+import com.nosliw.core.application.common.valueport.HAPUtilityValueStructure;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueStructure;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickWrapperValueStructure;
 import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
-import com.nosliw.core.application.valueport.HAPUtilityValueStructure;
 
 public class HAPManualUtilityValueContext {
 

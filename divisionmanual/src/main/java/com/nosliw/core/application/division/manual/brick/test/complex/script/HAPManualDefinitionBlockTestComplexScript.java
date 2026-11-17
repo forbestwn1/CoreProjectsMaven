@@ -5,9 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.core.application.brick.HAPEnumBrickType;
-import com.nosliw.core.application.brick.spec.test.complex.script.HAPBlockTestComplexScript;
-import com.nosliw.core.application.brick.spec.test.complex.script.HAPTestTaskTrigguer;
+import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPBlockTestComplexScript;
+import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.resource.HAPResourceId;
 

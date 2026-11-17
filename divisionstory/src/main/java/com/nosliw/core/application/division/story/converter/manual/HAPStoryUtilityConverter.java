@@ -8,7 +8,7 @@ import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPUtilityFile;
-import com.nosliw.core.application.brick.HAPIdBrick;
+import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElement;
 
 public class HAPStoryUtilityConverter {

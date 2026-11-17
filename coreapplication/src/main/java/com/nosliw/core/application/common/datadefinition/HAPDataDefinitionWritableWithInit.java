@@ -11,8 +11,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
-import com.nosliw.core.application.entity.app.databuild.HAPDataBuild;
-import com.nosliw.core.application.entity.app.databuild.HAPDataBuildUtility;
+import com.nosliw.core.application.common.databuild.HAPDataBuild;
+import com.nosliw.core.application.common.databuild.HAPDataBuildUtility;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.data.HAPUtilityData;
 

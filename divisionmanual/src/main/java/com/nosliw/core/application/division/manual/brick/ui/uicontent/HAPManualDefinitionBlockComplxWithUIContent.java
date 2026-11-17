@@ -1,8 +1,8 @@
 package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIContent;
-import com.nosliw.core.application.brick.ui.uicontent.HAPWithUIId;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
+import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIId;
 import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 

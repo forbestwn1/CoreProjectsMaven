@@ -4,15 +4,16 @@ import java.util.List;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.brick.HAPBrick;
-import com.nosliw.core.application.brick.HAPBundleForBrick;
-import com.nosliw.core.application.brick.HAPHandlerDownward;
-import com.nosliw.core.application.brick.HAPIdBrickType;
-import com.nosliw.core.application.brick.HAPUtilityBrick;
-import com.nosliw.core.application.brick.HAPWrapperValue;
-import com.nosliw.core.application.brick.HAPWrapperValueOfBrick;
-import com.nosliw.core.application.brick.HAPWrapperValueOfDynamic;
-import com.nosliw.core.application.brick.HAPWrapperValueOfReferenceResource;
+import com.nosliw.core.application.common.brick.HAPBrick;
+import com.nosliw.core.application.common.brick.HAPBundleForBrick;
+import com.nosliw.core.application.common.brick.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.HAPWrapperValue;
+import com.nosliw.core.application.common.brick.HAPWrapperValueOfBrick;
+import com.nosliw.core.application.common.brick.HAPWrapperValueOfDynamic;
+import com.nosliw.core.application.common.brick.HAPWrapperValueOfReferenceResource;
+import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItem;
 import com.nosliw.core.application.division.manual.core.HAPManualAdapter;
 import com.nosliw.core.application.division.manual.core.HAPManualAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -27,7 +28,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValue;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueReferenceResource;
-import com.nosliw.core.application.dynamic.HAPDynamicExecuteInputItem;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
 

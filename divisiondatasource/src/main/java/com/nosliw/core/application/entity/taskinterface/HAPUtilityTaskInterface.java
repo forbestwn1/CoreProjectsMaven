@@ -4,8 +4,8 @@ import org.json.JSONObject;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.brick.spec.service.interfacee.HAPBlockServiceInterface;
-import com.nosliw.core.application.common.datasource.HAPBlockServiceInterfaceImp;
+import com.nosliw.core.application.common.brick.spec.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.entity.datasource.HAPBlockServiceInterfaceImp;
 
 public class HAPUtilityTaskInterface {
 

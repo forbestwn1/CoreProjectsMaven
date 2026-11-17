@@ -11,8 +11,8 @@ import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.structure.HAPUtilityParserElement;
-import com.nosliw.core.application.valueport.HAPReferenceElement;
-import com.nosliw.core.application.valueport.HAPReferenceRootElement;
+import com.nosliw.core.application.common.valueport.HAPReferenceElement;
+import com.nosliw.core.application.common.valueport.HAPReferenceRootElement;
 
 public class HAPDefinitionParserMapping {
 
