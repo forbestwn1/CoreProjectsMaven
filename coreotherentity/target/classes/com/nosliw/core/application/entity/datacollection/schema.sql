@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `nosliw_datacollection`; 
 USE `nosliw_datacollection`;
 
-DROP TABLE IF EXISTS `applicationhit`;
-CREATE TABLE `applicationhit` (
+DROP TABLE IF EXISTS `ApplicationHit`;
+CREATE TABLE `ApplicationHit` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `app` varchar(255) DEFAULT NULL,
   `parm` varchar(255) DEFAULT NULL,

@@ -5,6 +5,10 @@ npm run dev -- --host
 \connect admin@db-core.cbuqogwi0wb5.ca-central-1.rds.amazonaws.com:3306
 source c:/Mywork/Library/dbpump/Dump20261108.sql
 
+\connect admin@db-core.cbuqogwi0wb5.ca-central-1.rds.amazonaws.com:3306
+source C:/Mywork/CoreProjectsMaven/coreotherentity/src/main/java/com/nosliw/core/application/entity/datacollection/schema.sql
+
+
 
 应用链接
 http://lastonemile.ca:5173/
