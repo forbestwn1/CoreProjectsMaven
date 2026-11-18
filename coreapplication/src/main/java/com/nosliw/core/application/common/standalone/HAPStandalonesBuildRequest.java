@@ -1,4 +1,4 @@
-package com.nosliw.core.application.common.manual.gateway.standalone;
+package com.nosliw.core.application.common.standalone;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +14,18 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
 @HAPEntityWithAttribute
-public class HAPManualStandalonesBuildRequest  extends HAPSerializableImp{
+public class HAPStandalonesBuildRequest  extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static final String ITEM = "item";
 
-	private List<HAPManualStandaloneRequest> m_Items;
+	private List<HAPStandaloneRequest> m_Items;
 	
-	public HAPManualStandalonesBuildRequest() {
-		this.m_Items = new ArrayList<HAPManualStandaloneRequest>();
+	public HAPStandalonesBuildRequest() {
+		this.m_Items = new ArrayList<HAPStandaloneRequest>();
 	}
 	
-	public List<HAPManualStandaloneRequest> getItems(){      return this.m_Items;    }
+	public List<HAPStandaloneRequest> getItems(){      return this.m_Items;    }
 	
 	@Override
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap){
@@ -40,7 +40,7 @@ public class HAPManualStandalonesBuildRequest  extends HAPSerializableImp{
 		JSONArray providerRequestJsonArray = jsonObj.optJSONArray(ITEM);
 		if(providerRequestJsonArray!=null) {
 			for(int i=0; i<providerRequestJsonArray.length(); i++) {
-				HAPManualStandaloneRequest item = new HAPManualStandaloneRequest();
+				HAPStandaloneRequest item = new HAPStandaloneRequest();
 				item.buildObject(providerRequestJsonArray.get(i), HAPSerializationFormat.JSON);
 				this.m_Items.add(item);
 			}

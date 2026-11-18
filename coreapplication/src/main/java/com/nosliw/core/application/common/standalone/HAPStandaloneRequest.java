@@ -1,4 +1,4 @@
-package com.nosliw.core.application.common.manual.gateway.standalone;
+package com.nosliw.core.application.common.standalone;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
 @HAPEntityWithAttribute
-public class HAPManualStandaloneRequest extends HAPSerializableImp{
+public class HAPStandaloneRequest extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static final String PROVIDERNAME = "providerName";
@@ -21,11 +21,11 @@ public class HAPManualStandaloneRequest extends HAPSerializableImp{
 
 	private String m_providerName;
 	
-	private HAPManualStandaloneProviderRequest m_providerRequest;
+	private HAPStandaloneProviderRequest m_providerRequest;
 	
 	public String getProviderName() {     return this.m_providerName;      }
 
-	public HAPManualStandaloneProviderRequest getProviderRequest() {     return this.m_providerRequest;        }
+	public HAPStandaloneProviderRequest getProviderRequest() {     return this.m_providerRequest;        }
 
 
 	@Override
@@ -42,7 +42,7 @@ public class HAPManualStandaloneRequest extends HAPSerializableImp{
 		
 		JSONObject providerRequestJsonObj = jsonObj.optJSONObject(PROVIDERREQUEST);
 		if(providerRequestJsonObj!=null) {
-			this.m_providerRequest = new HAPManualStandaloneProviderRequest();
+			this.m_providerRequest = new HAPStandaloneProviderRequest();
 			this.m_providerRequest.buildObject(providerRequestJsonObj, HAPSerializationFormat.JSON);
 		}
 		return true;  

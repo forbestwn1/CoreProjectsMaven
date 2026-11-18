@@ -16,8 +16,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
-import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;
-import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
+import com.nosliw.core.application.common.standalone.HAPStandaloneProviderRequest;
+import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -47,16 +47,16 @@ public class HAPServiceStory {
 		return this.m_manualService.deserializeBundle((JSONObject)serviceData.getData());
 	}	
 
-	public HAPServiceData buildStandAlone(List<HAPManualStandaloneProviderRequest> requests) {
+	public HAPServiceData buildStandAlone(List<HAPStandaloneProviderRequest> requests) {
 		String responsStr = this.m_restTemplate.postForObject(m_globalAppConfigure.getStoryBaseurl()+"standalone", HAPManagerSerialize.getInstance().toStringValue(requests, HAPSerializationFormat.JSON) ,String.class);
 		
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
 		
-		List<HAPManualStandaloneResponse> out = new ArrayList<HAPManualStandaloneResponse>();
+		List<HAPStandaloneResponse> out = new ArrayList<HAPStandaloneResponse>();
 		JSONArray responseJsonArray = (JSONArray)serviceData.getData();
 		for(int i=0; i<responseJsonArray.length(); i++) {
-			out.add((HAPManualStandaloneResponse)m_entityParseService.parseEntityJSONExplicit(responseJsonArray.getJSONObject(i), HAPManualStandaloneResponse.ENTITYNAMEFORSERIALIZE));
+			out.add((HAPStandaloneResponse)m_entityParseService.parseEntityJSONExplicit(responseJsonArray.getJSONObject(i), HAPStandaloneResponse.ENTITYNAMEFORSERIALIZE));
 		}
 		
 		return HAPServiceData.createSuccessData(out);

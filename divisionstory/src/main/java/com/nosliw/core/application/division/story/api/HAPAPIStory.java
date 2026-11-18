@@ -27,8 +27,8 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.datasource.HAPQueryServiceDefinition;
-import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;
-import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
+import com.nosliw.core.application.common.standalone.HAPStandaloneProviderRequest;
+import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderRequest;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseBuild;
 import com.nosliw.core.application.division.story.design.HAPStoryBuilderResponseNew;
@@ -153,10 +153,10 @@ public class HAPAPIStory {
 	@PostMapping("/standalone")
     public String buildStandAlone(@RequestBody String requestBody) {
 		logEndpoint("/standalone", "requestBody=" + requestBody);
-		List<HAPManualStandaloneResponse> out = new ArrayList<HAPManualStandaloneResponse>();
+		List<HAPStandaloneResponse> out = new ArrayList<HAPStandaloneResponse>();
 		JSONArray requestJsonArray = new JSONArray(requestBody);
 		for(int i=0; i<requestJsonArray.length(); i++) {
-			HAPManualStandaloneProviderRequest request = new HAPManualStandaloneProviderRequest();
+			HAPStandaloneProviderRequest request = new HAPStandaloneProviderRequest();
 			request.buildObject(requestJsonArray.getJSONObject(i), HAPSerializationFormat.JSON);
 			
 			out.add(this.m_standaloneMan.buildStandalone((JSONObject)request.getParms()));

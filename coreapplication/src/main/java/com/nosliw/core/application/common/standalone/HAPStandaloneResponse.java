@@ -1,4 +1,4 @@
-package com.nosliw.core.application.common.manual.gateway.standalone;
+package com.nosliw.core.application.common.standalone;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import com.nosliw.core.application.common.manual.HAPManualContentProvider;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 
 @HAPEntityWithAttribute
-public class HAPManualStandaloneResponse extends HAPSerializableImp implements HAPEntityParsable{
+public class HAPStandaloneResponse extends HAPSerializableImp implements HAPEntityParsable{
 	
 	public static final String ENTITYNAMEFORSERIALIZE = "HAPManualStandaloneResponse";
 	
@@ -31,9 +31,9 @@ public class HAPManualStandaloneResponse extends HAPSerializableImp implements H
 	
 	private HAPManualContentProvider m_contentProvider;
 
-	public HAPManualStandaloneResponse() {}
+	public HAPStandaloneResponse() {}
 
-	public HAPManualStandaloneResponse(HAPManualContentProvider contentProvider) {
+	public HAPStandaloneResponse(HAPManualContentProvider contentProvider) {
 		this.m_contentProvider = contentProvider;
 	}
 	
@@ -56,17 +56,17 @@ public class HAPManualStandaloneResponse extends HAPSerializableImp implements H
 class HAPManualStandaloneResponse_parse implements HAPParserEntity{
 
 	@Override
-	public String getEntityType() {   return HAPManualStandaloneResponse.ENTITYNAMEFORSERIALIZE;   }
+	public String getEntityType() {   return HAPStandaloneResponse.ENTITYNAMEFORSERIALIZE;   }
 
 	@Override
 	public HAPEntityParsable parseEntityJson(Object obj, HAPServiceParseEntity parseService) {
-		HAPManualStandaloneResponse out = new HAPManualStandaloneResponse();
+		HAPStandaloneResponse out = new HAPStandaloneResponse();
 		
 		JSONObject jsonObj = (JSONObject)obj;
 
-		out.setId((String)jsonObj.opt(HAPManualStandaloneResponse.ID));
+		out.setId((String)jsonObj.opt(HAPStandaloneResponse.ID));
 		
-		JSONObject contentProviderJsonObj = jsonObj.optJSONObject(HAPManualStandaloneResponse.CONTENTPROVIDER);
+		JSONObject contentProviderJsonObj = jsonObj.optJSONObject(HAPStandaloneResponse.CONTENTPROVIDER);
 		if(contentProviderJsonObj!=null) {
 			String type = contentProviderJsonObj.getString(HAPManualContentProvider.TYPE);
 			if(type.equals(HAPConstantShared.MANUAL_CONTENTPROVIDER_TYPE_TEXT)) {

@@ -1,4 +1,4 @@
-package com.nosliw.core.application.common.manual.gateway.standalone;
+package com.nosliw.core.application.common.standalone;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 
 @HAPEntityWithAttribute
-public class HAPManualStandaloneProviderRequest extends HAPSerializableImp{
+public class HAPStandaloneProviderRequest extends HAPSerializableImp{
 
 	@HAPAttribute
 	public static final String IDPREFIX = "idPrefix";
