@@ -1,4 +1,4 @@
-package com.nosliw.application.core.external.story;
+package com.nosliw.application.entity.story;
 
 import java.util.Set;
 

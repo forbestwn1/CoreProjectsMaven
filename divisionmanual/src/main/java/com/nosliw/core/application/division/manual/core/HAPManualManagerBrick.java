@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.nosliw.application.entity.manual.HAPServiceManual;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
@@ -40,7 +42,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @Component
-public class HAPManualManagerBrick implements HAPPluginDivision{
+public class HAPManualManagerBrick implements HAPPluginDivision, HAPServiceManual{
 
 	private Map<String, HAPManualDefinitionPluginParserBrick> m_brickParserPlugin;
 	private Map<String, HAPManualPluginProcessorBrick> m_brickProcessorPlugin;
@@ -141,6 +143,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 		return out1;
 	}
 	
+	@Override
 	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
 		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, this.m_criteriaHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService, this.m_withVariableMan);
 	}
@@ -225,6 +228,11 @@ public class HAPManualManagerBrick implements HAPPluginDivision{
 	
 	private void init() {
 
+	}
+
+	@Override
+	public HAPBundleForBrick deserializeBundle(JSONObject jsonObj) {
+		return HAPManualUtilityExport.deserializeBundle(jsonObj, this.m_parseService, this.m_brickManager, this);
 	}
 
 }

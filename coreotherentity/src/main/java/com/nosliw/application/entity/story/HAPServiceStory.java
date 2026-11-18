@@ -1,4 +1,4 @@
-package com.nosliw.application.core.external.story;
+package com.nosliw.application.entity.story;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.nosliw.application.entity.manual.HAPServiceManual;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -17,8 +18,6 @@ import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneResponse;
-import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
-import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
@@ -39,13 +38,13 @@ public class HAPServiceStory {
 	HAPManagerApplicationBrick m_brickMan; 
 	
 	@Autowired
-	private HAPManualManagerBrick m_manualBrickManager;
+	private HAPServiceManual m_manualService;
 	
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		String responsStr = this.m_restTemplate.getForObject(m_globalAppConfigure.getStoryBaseurl()+"bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
-		return HAPManualUtilityExport.deserializeBundle((JSONObject)serviceData.getData(), m_entityParseService, m_brickMan, m_manualBrickManager);
+		return this.m_manualService.deserializeBundle((JSONObject)serviceData.getData());
 	}	
 
 	public HAPServiceData buildStandAlone(List<HAPManualStandaloneProviderRequest> requests) {
