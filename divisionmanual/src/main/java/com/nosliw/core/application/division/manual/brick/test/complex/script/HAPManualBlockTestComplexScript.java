@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPBlockTestComplexScript;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPExecutableVariableExpected;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPInfoAttachmentResolve;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 import com.nosliw.core.application.common.valueport.HAPResultReferenceResolve;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPBlockTestComplexScript;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPExecutableVariableExpected;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPInfoAttachmentResolve;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockTestComplexScript extends HAPManualBrickImp implements HAPBlockTestComplexScript{

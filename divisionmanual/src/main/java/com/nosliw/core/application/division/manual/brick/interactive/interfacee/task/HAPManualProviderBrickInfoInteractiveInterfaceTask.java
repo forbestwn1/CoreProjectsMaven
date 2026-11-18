@@ -3,7 +3,6 @@ package com.nosliw.core.application.division.manual.brick.interactive.interfacee
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
@@ -12,6 +11,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 @Component
 public class HAPManualProviderBrickInfoInteractiveInterfaceTask extends HAPManualProviderBrickInfoImp{

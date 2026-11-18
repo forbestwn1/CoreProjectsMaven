@@ -5,9 +5,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.com.application.spec.common.dataassociation.HAPBasicPluginProcessorEntityWithVariableDataExpression;
+import com.nosliw.com.application.spec.common.withvariable.HAPContainerVariableInfoImp;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.imp.basic.HAPBasicBlockTaskWrapperDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionDataExpressionStandAlone;
 import com.nosliw.core.application.common.datarule.HAPDataRule;
@@ -15,10 +16,10 @@ import com.nosliw.core.application.common.datarule.HAPDataRuleExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.application.entity.dataexpression.HAPBasicPluginProcessorEntityWithVariableDataExpression;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
+import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.application.entity.datarule.HAPPluginTransformerDataRuleImp;
-import com.nosliw.core.application.entity.withvariable.HAPManagerWithVariablePlugin;
-import com.nosliw.core.application.entity.withvariable.HAPUtilityWithVarible;
+import com.nosliw.core.application.spec.imp.basic.HAPBasicBlockTaskWrapperDataExpression;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteriaId;
@@ -52,7 +53,7 @@ public class HAPPluginTransformerDataRuleExpression extends HAPPluginTransformer
 		//interactive request
 //		dataExpressionStandAloneExe.setExpressionInteractive(new HAPInteractiveExpression(dataExpressionStandAloneDef.getRequestParms(), dataExpressionStandAloneDef.getResult()));
 
-		HAPContainerVariableInfo varInfoContainer = new HAPContainerVariableInfo(brick, bundle);
+		HAPContainerVariableInfo varInfoContainer = new HAPContainerVariableInfoImp(brick, bundle);
 
 		//resolve variable name, build var info container
 		HAPUtilityWithVarible.resolveVariable(dataExpressionStandAloneExe.getExpression(), varInfoContainer, null, this.m_withVariableMan, null);

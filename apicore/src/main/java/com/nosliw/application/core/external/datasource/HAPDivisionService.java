@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.task.HAPEnumBrickType;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrick;

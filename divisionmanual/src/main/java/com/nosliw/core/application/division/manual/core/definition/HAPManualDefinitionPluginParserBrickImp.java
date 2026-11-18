@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Parser;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPEntityInfo;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.parm.HAPManagerParm;
@@ -33,6 +32,7 @@ import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualD
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 

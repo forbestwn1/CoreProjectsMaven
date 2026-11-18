@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
@@ -14,7 +13,6 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.brick.HAPValueOfDynamic;
-import com.nosliw.core.application.common.brick.spec.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.constant.HAPWithConstantDefinition;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionContainerDataExpression;
@@ -32,6 +30,8 @@ import com.nosliw.core.application.division.manual.brick.wrappertask.HAPManualDe
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionUtilityValueContext;
 import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;

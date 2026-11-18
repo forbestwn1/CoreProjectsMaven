@@ -8,8 +8,6 @@ import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.definition.HAPDefinitionContainerDataExpression;
@@ -20,6 +18,7 @@ import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveExp
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.common.valueport.HAPUtilityValuePortVariable;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
+import com.nosliw.core.application.common.withvariable.HAPUtilityWithVarible;
 import com.nosliw.core.application.division.manual.brick.interactive.interfacee.expression.HAPManualDefinitionBlockInteractiveInterfaceExpression;
 import com.nosliw.core.application.division.manual.brick.interactive.interfacee.task.HAPManualDefinitionBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
@@ -28,7 +27,8 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
-import com.nosliw.core.application.entity.withvariable.HAPUtilityWithVarible;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.expression.HAPBlockInteractiveInterfaceExpression;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityExpressionData;
 import com.nosliw.core.data.matcher.HAPMatchers;

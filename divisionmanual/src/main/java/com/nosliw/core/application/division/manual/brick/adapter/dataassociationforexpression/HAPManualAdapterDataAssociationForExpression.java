@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.manual.brick.adapter.dataassociationforexpression;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
-import com.nosliw.core.application.common.brick.spec.adapter.dataassociationforexpression.HAPAdapterDataAssociationForExpression;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociationForExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.adapter.dataassociationforexpression.HAPAdapterDataAssociationForExpression;
 
 public class HAPManualAdapterDataAssociationForExpression extends HAPManualBrickImp implements HAPAdapterDataAssociationForExpression{
 

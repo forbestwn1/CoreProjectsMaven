@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.brick.container;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManualDefinitionBrickContainer extends HAPManualDefinitionBrickContainerBase{
 

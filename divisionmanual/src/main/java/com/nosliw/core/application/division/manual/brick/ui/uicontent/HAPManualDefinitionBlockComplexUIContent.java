@@ -7,10 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUIContent;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.parentrelation.HAPManualDefinitionBrickRelation;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
@@ -21,6 +17,10 @@ import com.nosliw.core.application.division.manual.core.HAPManualEnumBrickType;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUIContent;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPManualDefinitionBlockComplexUIContent extends HAPManualDefinitionBrick  implements HAPManualDefinitionWithBrickTasks{

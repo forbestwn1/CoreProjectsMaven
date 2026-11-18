@@ -2,8 +2,8 @@ package com.nosliw.core.application.spec.imp.basic;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.serialize.HAParserPValueInAttributeImpBlockTaskWrapper;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.entity.brick.serialize.HAParserPValueInAttributeImpBlockTaskWrapper;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.wrappertask.HAPBlockTaskWrapper;
 

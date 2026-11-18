@@ -2,15 +2,15 @@ package com.nosliw.core.application.division.manual.brick.interactive.interfacee
 
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 
 public class HAPManualPluginParserBlockSimpleInteractiveInterfaceTask extends HAPManualDefinitionPluginParserBrickImpSimple{
 

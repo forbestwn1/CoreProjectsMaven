@@ -2,14 +2,14 @@ package com.nosliw.core.application.division.manual.brick.wrappertask;
 
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
-import com.nosliw.core.application.common.brick.spec.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpSimple;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.wrappertask.HAPBlockTaskWrapper;
 
 public class HAPManualPluginParserBlockTaskWrapper extends HAPManualDefinitionPluginParserBrickImpSimple{
 

@@ -2,13 +2,13 @@ package com.nosliw.core.application.entity.datasource;
 
 import java.util.List;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.displayresource.HAPDisplayResourceNode;
 import com.nosliw.core.application.common.brick.HAPBrickImpWithEntityInfo;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.common.brick.spec.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.spec.brick.service.interfacee.HAPBlockServiceInterface;
 
 //static information for a service. readable, query for service
 //information needed during configuration time

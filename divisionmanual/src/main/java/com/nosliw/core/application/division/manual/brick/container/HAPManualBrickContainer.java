@@ -5,16 +5,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.serialize.HAParserPValueInAttributeImpBrickContainer;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
-import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainer;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo_parser;
-import com.nosliw.core.application.entity.brick.serialize.HAParserPValueInAttributeImpBrickContainer;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.container.HAPBrickContainer;
 
 public class HAPManualBrickContainer extends HAPManualBrickWithEntityInfo implements HAPBrickContainer{
 

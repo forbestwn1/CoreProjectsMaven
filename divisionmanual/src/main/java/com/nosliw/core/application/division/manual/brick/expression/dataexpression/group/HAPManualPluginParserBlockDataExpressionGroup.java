@@ -3,7 +3,6 @@ package com.nosliw.core.application.division.manual.brick.expression.dataexpress
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.core.application.common.dataexpression.HAPContainerDataExpression;
 import com.nosliw.core.application.common.dataexpression.HAPItemInContainerDataExpression;
@@ -12,6 +11,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 

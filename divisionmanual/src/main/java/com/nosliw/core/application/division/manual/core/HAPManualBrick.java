@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.nosliw.com.application.spec.common.withvariable.HAPContainerVariableInfoImp;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
@@ -62,7 +63,7 @@ public abstract class HAPManualBrick extends HAPBrickImp{
 	}
 	
 	public void init() {
-		this.m_varInfoContainer = new HAPContainerVariableInfo(this, this.m_bundle); 
+		this.m_varInfoContainer = new HAPContainerVariableInfoImp(this, this.m_bundle); 
 	}
 
 	public void setBundle(HAPBundleForBrick bundle) {    this.m_bundle = bundle;      }

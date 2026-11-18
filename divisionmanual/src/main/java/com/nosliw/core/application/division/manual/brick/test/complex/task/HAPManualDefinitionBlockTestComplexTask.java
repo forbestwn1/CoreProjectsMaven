@@ -3,11 +3,11 @@ package com.nosliw.core.application.division.manual.brick.test.complex.task;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.common.brick.spec.test.complex.task.HAPBlockTestComplexTask;
 import com.nosliw.core.application.common.valueport.HAPReferenceElement;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.test.complex.task.HAPBlockTestComplexTask;
 
 public class HAPManualDefinitionBlockTestComplexTask extends HAPManualDefinitionBrick{
 

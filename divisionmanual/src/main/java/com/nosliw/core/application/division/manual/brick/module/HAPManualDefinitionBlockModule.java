@@ -1,11 +1,11 @@
 package com.nosliw.core.application.division.manual.brick.module;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.common.brick.spec.module.HAPBlockModule;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.module.HAPBlockModule;
 
 public class HAPManualDefinitionBlockModule extends HAPManualDefinitionBrick implements HAPManualDefinitionWithBrickTasks{
 

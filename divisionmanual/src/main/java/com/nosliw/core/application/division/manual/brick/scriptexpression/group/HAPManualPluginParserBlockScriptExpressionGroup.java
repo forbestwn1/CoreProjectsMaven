@@ -3,7 +3,6 @@ package com.nosliw.core.application.division.manual.brick.scriptexpression.group
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
@@ -15,6 +14,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManualPluginParserBlockScriptExpressionGroup extends HAPManualDefinitionPluginParserBrickImpComplex{
 

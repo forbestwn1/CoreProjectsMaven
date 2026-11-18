@@ -25,6 +25,8 @@ public interface HAPContainerVariableInfo extends HAPSerializable{
 	public HAPIdElement getVariableId(String key);
 	public Map<String, HAPIdElement> getVariables();
 
+	public HAPContainerVariableInfo clone();
+
 /*	
 	public String addVariable(HAPIdElement variableId) {
 		if(variableId==null) {

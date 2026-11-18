@@ -2,13 +2,13 @@ package com.nosliw.core.application.division.manual.common.event;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.com.application.spec.common.event.HAPEventUtilityValuePort;
+import com.nosliw.com.application.spec.common.task.HAPUtilityTask;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventHandlerReferenceTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
-import com.nosliw.core.application.entity.event.HAPEventUtilityValuePort;
-import com.nosliw.core.application.entity.task.HAPUtilityTask;
 
 public class HAPManualUtilityEvent {
 

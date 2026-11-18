@@ -9,8 +9,8 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.variable.HAPWithVariable;
 import com.nosliw.core.application.common.structure.reference.HAPConfigureResolveElementReference;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
-import com.nosliw.core.application.entity.withvariable.HAPManagerWithVariablePlugin;
-import com.nosliw.core.application.entity.withvariable.HAPPluginProcessorEntityWithVariable;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
+import com.nosliw.core.application.common.withvariable.HAPPluginProcessorEntityWithVariable;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 public class HAPPluginProcessorEntityWithVariableDataExpression implements HAPPluginProcessorEntityWithVariable{

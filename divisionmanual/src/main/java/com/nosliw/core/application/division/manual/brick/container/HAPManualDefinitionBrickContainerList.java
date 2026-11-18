@@ -3,10 +3,10 @@ package com.nosliw.core.application.division.manual.brick.container;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
-import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainerList;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.container.HAPBrickContainerList;
 
 public class HAPManualDefinitionBrickContainerList extends HAPManualDefinitionBrickContainerBase{
 

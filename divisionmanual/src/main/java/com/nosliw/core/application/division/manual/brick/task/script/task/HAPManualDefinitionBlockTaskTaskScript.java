@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.common.brick.HAPWithBrickReferences;
-import com.nosliw.core.application.common.brick.spec.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.common.script.HAPWithScriptReference;
 import com.nosliw.core.application.common.withvariable.HAPWithVariableDebugDefinition;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualDefinitionBlockTaskTaskScript extends HAPManualDefinitionBrick implements HAPWithBlockInteractiveTask, HAPWithScriptReference, HAPWithParms, HAPWithBrickReferences{

@@ -6,16 +6,16 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.displayresource.HAPDisplayResourceNode;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.brick.HAPBrickImpWithEntityInfo;
 import com.nosliw.core.application.common.brick.HAPWrapperValueOfReferenceResource;
-import com.nosliw.core.application.common.brick.spec.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
 import com.nosliw.core.application.common.valueport.HAPContainerValuePorts;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.service.profile.HAPBlockServiceProfile;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 

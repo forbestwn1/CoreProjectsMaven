@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
@@ -12,6 +11,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.division.manual.core.process.HAPManualUtilityProcessBrickPath;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManualPluginProcessorBlockTaskTaskScript extends HAPManualPluginProcessorBlockImp{
 

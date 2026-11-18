@@ -3,14 +3,14 @@ package com.nosliw.core.application.division.manual.brick.service.provider;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.spec.service.provider.HAPBlockServiceProvider;
-import com.nosliw.core.application.common.brick.spec.service.provider.HAPKeyService;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.service.provider.HAPBlockServiceProvider;
+import com.nosliw.core.application.spec.brick.service.provider.HAPKeyService;
 
 public class HAPManualBlockSimpleServiceProvider extends HAPManualBrickImp implements HAPBlockServiceProvider{
 

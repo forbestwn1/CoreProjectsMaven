@@ -10,6 +10,9 @@ import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import com.nosliw.com.application.spec.common.interactive.HAPUtilityInteractiveTaskValuePort;
+import com.nosliw.com.application.spec.common.structure.HAPUtilityProcessRelativeElementInBundle;
+import com.nosliw.com.application.spec.common.valueport.HAPUtilityValuePort;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.info.HAPUtilityEntityInfo;
 import com.nosliw.common.path.HAPPath;
@@ -53,9 +56,6 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionWrapperValueBrick;
-import com.nosliw.core.application.entity.interactive.HAPUtilityInteractiveTaskValuePort;
-import com.nosliw.core.application.entity.structure.HAPUtilityProcessRelativeElementInBundle;
-import com.nosliw.core.application.entity.valueport.HAPUtilityValuePort;
 
 public class HAPManualUtilityProcessorValuePort {
 

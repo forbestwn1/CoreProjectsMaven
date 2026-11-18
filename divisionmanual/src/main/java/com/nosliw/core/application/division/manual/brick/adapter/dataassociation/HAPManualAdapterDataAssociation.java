@@ -3,14 +3,14 @@ package com.nosliw.core.application.division.manual.brick.adapter.dataassociatio
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.spec.adapter.dataassociation.HAPAdapterDataAssociation;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociation;
 import com.nosliw.core.application.division.manual.brick.adapter.dataassociationfortask.HAPManualAdapterDataAssociationForTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.adapter.dataassociation.HAPAdapterDataAssociation;
 
 public class HAPManualAdapterDataAssociation extends HAPManualBrickImp implements HAPAdapterDataAssociation{
 

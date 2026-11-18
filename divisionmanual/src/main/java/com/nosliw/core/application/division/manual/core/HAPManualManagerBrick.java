@@ -20,6 +20,7 @@ import com.nosliw.core.application.common.brickcriteria.HAPManagerBrickCriteria;
 import com.nosliw.core.application.common.manual.HAPManualContentProvider;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderFile;
 import com.nosliw.core.application.common.manual.HAPManualDefinitionUtilityBrickLocation;
+import com.nosliw.core.application.common.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.application.division.manual.common.serialize.HAPManualUtilityExport;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrick;
@@ -31,7 +32,6 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualProcess
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPPluginDivision;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
-import com.nosliw.core.application.entity.withvariable.HAPManagerWithVariablePlugin;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;

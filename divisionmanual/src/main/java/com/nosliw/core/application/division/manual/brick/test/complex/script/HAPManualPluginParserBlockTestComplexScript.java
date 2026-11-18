@@ -3,16 +3,16 @@ package com.nosliw.core.application.division.manual.brick.test.complex.script;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPBlockTestComplexScript;
-import com.nosliw.core.application.common.brick.spec.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImpComplex;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPBlockTestComplexScript;
+import com.nosliw.core.application.spec.brick.test.complex.script.HAPTestTaskTrigguer;
 import com.nosliw.core.resource.HAPFactoryResourceId;
 import com.nosliw.core.resource.HAPResourceId;
 

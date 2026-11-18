@@ -1,8 +1,8 @@
 package com.nosliw.core.application.division.manual.brick.adapter.dataassociationfortask;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.common.dataassociation.definition.HAPDefinitionDataAssociationForTask;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManualDefinitionAdapterDataAssociationForTask extends HAPManualDefinitionBrick{
 

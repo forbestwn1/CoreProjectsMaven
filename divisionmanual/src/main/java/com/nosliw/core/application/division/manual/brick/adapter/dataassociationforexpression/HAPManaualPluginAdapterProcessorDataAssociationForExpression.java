@@ -1,6 +1,6 @@
 package com.nosliw.core.application.division.manual.brick.adapter.dataassociationforexpression;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.dataassociation.HAPDefinitionProcessorDataAssociation;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociation;
 import com.nosliw.core.application.common.dataassociation.HAPDataAssociationForExpression;
@@ -9,7 +9,7 @@ import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessAdapter;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorAdapter;
-import com.nosliw.core.application.entity.dataassociation.HAPDefinitionProcessorDataAssociation;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManaualPluginAdapterProcessorDataAssociationForExpression extends HAPManualPluginProcessorAdapter{
 

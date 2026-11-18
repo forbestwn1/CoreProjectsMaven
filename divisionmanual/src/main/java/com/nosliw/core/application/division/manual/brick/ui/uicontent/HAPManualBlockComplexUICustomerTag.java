@@ -6,18 +6,18 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUIContent;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUICustomerTag;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIId;
 import com.nosliw.core.application.common.style.HAPUIStyle;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUIContent;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUICustomerTag;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPWithUIContent;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPWithUIId;
 import com.nosliw.core.resource.HAPResourceId;
 
 public class HAPManualBlockComplexUICustomerTag extends HAPManualBrickImp implements HAPBlockComplexUICustomerTag{

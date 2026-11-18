@@ -4,9 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUICustomerTagDebugger;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinition;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickWithEntityInfo;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUICustomerTagDebugger;
 
 public class HAPManualBlockComplexUICustomerTagDebugger extends HAPManualBrickWithEntityInfo implements HAPBlockComplexUICustomerTagDebugger{
 

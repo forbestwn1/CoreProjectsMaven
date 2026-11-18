@@ -3,10 +3,10 @@ package com.nosliw.core.application.entity.datasource;
 import org.json.JSONObject;
 
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.interactive.HAPWithBlockInteractiveTask;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.spec.imp.basic.HAPBasicBlockInteractiveInterfaceTask;
 
 public class HAPUtilityServiceParse {
 

@@ -4,11 +4,11 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.nosliw.com.application.spec.common.serialize.HAParserPValueInAttributeImpBlockTaskTaskScript;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.parm.HAPParms;
 import com.nosliw.common.parm.HAPWithParms;
 import com.nosliw.core.application.common.brick.HAPIdBrickInBundle;
-import com.nosliw.core.application.entity.brick.serialize.HAParserPValueInAttributeImpBlockTaskTaskScript;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.task.script.task.HAPBlockTaskTaskScript;
 import com.nosliw.core.resource.HAPResourceId;

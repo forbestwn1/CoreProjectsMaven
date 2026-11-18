@@ -1,7 +1,7 @@
 package com.nosliw.core.application.division.manual.brick.test.complex.testcomplex1;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 
 public class HAPManualPluginProcessorBlockComplexImpTestComplex1 extends HAPManualPluginProcessorBlockImp{
 

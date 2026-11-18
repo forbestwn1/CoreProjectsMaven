@@ -2,13 +2,13 @@ package com.nosliw.core.xxx.application.division.manual.core.definition1;
 
 import java.util.Map;
 
+import com.nosliw.com.application.spec.common.scriptexpression.HAPUtilityScriptExpressionConstant;
+import com.nosliw.com.application.spec.common.structure.HAPUtilityStructureWithScriptExpression;
 import com.nosliw.core.application.common.scriptexpressio.HAPUtilityScriptExpressionParser;
 import com.nosliw.core.application.common.scriptexpressio.definition.HAPDefinitionContainerScriptExpression;
 import com.nosliw.core.application.common.structure.HAPValueStructure;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickValueContext;
 import com.nosliw.core.application.division.manual.brick.valuestructure.HAPManualDefinitionBrickWrapperValueStructure;
-import com.nosliw.core.application.entity.scriptexpression.HAPUtilityScriptExpressionConstant;
-import com.nosliw.core.application.entity.structure.HAPUtilityStructureWithScriptExpression;
 
 public class HAPManualDefinitionUtilityValueContext {
 

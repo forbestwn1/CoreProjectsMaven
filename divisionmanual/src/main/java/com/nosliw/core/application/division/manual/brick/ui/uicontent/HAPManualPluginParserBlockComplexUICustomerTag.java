@@ -7,13 +7,10 @@ import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Attributes;
 import org.jsoup.nodes.Element;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEventHandlerInfoCustom;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.common.constant.HAPDefinitionConstant;
 import com.nosliw.core.application.common.event.HAPEventDefinition;
 import com.nosliw.core.application.common.event.HAPEventEmitter;
@@ -36,6 +33,9 @@ import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.uitag.HAPManagerUITag;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEventHandlerInfoCustom;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPWithUIContent;
 
 public class HAPManualPluginParserBlockComplexUICustomerTag extends HAPManualPluginParserBlockComplexWithUIContent{
 

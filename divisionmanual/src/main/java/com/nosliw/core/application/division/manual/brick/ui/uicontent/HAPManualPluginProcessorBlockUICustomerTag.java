@@ -4,16 +4,16 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPWithUIContent;
 import com.nosliw.core.application.common.uitag.HAPUITagDefinitionAttribute;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPWithUIContent;
 
 public class HAPManualPluginProcessorBlockUICustomerTag extends HAPManualPluginProcessorBlockImp{
 

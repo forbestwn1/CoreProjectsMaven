@@ -9,17 +9,17 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
-import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainer;
-import com.nosliw.core.application.common.brick.spec.container.HAPBrickContainerList;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUIContent;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick_parser;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.container.HAPBrickContainer;
+import com.nosliw.core.application.spec.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUIContent;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 
 public class HAPManualBlockComplexUIContent extends HAPManualBrickImp implements HAPBlockComplexUIContent{
 

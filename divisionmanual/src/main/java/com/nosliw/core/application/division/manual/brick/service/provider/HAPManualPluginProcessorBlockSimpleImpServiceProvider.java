@@ -2,13 +2,9 @@ package com.nosliw.core.application.division.manual.brick.service.provider;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
-import com.nosliw.core.application.common.brick.spec.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
-import com.nosliw.core.application.common.brick.spec.service.profile.HAPBlockServiceProfile;
-import com.nosliw.core.application.common.brick.spec.service.provider.HAPKeyService;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
@@ -16,6 +12,10 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualContext
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.interactive.interfacee.task.HAPBlockInteractiveInterfaceTask;
+import com.nosliw.core.application.spec.brick.service.profile.HAPBlockServiceProfile;
+import com.nosliw.core.application.spec.brick.service.provider.HAPKeyService;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.resource.HAPUtilityResourceId;
 

@@ -1,9 +1,9 @@
 package com.nosliw.core.application.division.manual.brick.ui.uicontent;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
-import com.nosliw.core.application.common.brick.spec.ui.uicontent.HAPBlockComplexUIWrapperContentInCustomerTagDebugger;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainerList;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
+import com.nosliw.core.application.spec.brick.ui.uicontent.HAPBlockComplexUIWrapperContentInCustomerTagDebugger;
 
 public class HAPManualDefinitionBlockComplexUIWrapperContentInCustomerTagDebugger extends HAPManualDefinitionBrick{
 
