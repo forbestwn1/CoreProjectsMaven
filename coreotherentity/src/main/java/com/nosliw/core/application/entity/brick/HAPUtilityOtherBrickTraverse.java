@@ -8,10 +8,10 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPHandlerBrickWrapper;
-import com.nosliw.core.application.common.brick.HAPHandlerDownward;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
 import com.nosliw.core.application.common.brick.HAPWithBrick;
+import com.nosliw.core.application.common.brick.util.HAPHandlerBrickWrapper;
+import com.nosliw.core.application.common.brick.util.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 
 public class HAPUtilityOtherBrickTraverse {
 

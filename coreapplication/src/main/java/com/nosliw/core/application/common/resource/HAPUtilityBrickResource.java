@@ -3,7 +3,7 @@ package com.nosliw.core.application.common.resource;
 import com.google.common.collect.Lists;
 import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBundleForExecute;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForExecute;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.runtime.HAPRuntimeInfo;

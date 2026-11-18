@@ -1,0 +1,28 @@
+package com.nosliw.core.service.staticresource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+import com.nosliw.common.serialization.HAPServiceParseEntity;
+import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
+
+@Configuration
+public class HAPStaticServiceFactory {
+
+	@Autowired
+	private HAPConfigureGlobalApplication m_globalAppConfigure;
+
+	@Autowired
+	private RestTemplate m_restTemplate;
+
+	@Autowired
+	private HAPServiceParseEntity m_parseServices;
+	
+	@Bean
+	HAPServiceStaticResource getStaticService() {
+		return new HAPServiceStaticResource(this.m_globalAppConfigure.getStaticBaseurl(), this.m_restTemplate, this.m_parseServices);
+	}
+	
+}

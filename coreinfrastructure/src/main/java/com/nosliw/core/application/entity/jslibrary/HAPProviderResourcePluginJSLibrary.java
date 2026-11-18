@@ -3,9 +3,9 @@ package com.nosliw.core.application.entity.jslibrary;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.utils.HAPConstantShared;
-import com.nosliw.core.entity.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.resource.HAPFactoryResourceTypeId;
 import com.nosliw.core.resource.HAPProviderResourcePluginImp;
+import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 
 @Component
 public class HAPProviderResourcePluginJSLibrary extends HAPProviderResourcePluginImp{

@@ -6,10 +6,10 @@ import com.nosliw.common.path.HAPComplexPath;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPHandlerDownward;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPWrapperBrickRoot;
+import com.nosliw.core.application.common.brick.util.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForBrick;
 
 public class HAPManualUtilityProcessAlias {
 

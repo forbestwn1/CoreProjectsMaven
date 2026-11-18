@@ -4,8 +4,8 @@ import java.util.Set;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPHandlerDownward;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPHandlerDownward;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 import com.nosliw.core.application.division.manual.core.HAPManualBrickImp;
 import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrickTraverse;
 

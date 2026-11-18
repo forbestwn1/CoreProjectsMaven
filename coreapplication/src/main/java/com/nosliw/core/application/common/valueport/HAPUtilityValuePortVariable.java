@@ -5,7 +5,7 @@ import java.util.Map;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.core.application.common.brick.HAPDomainValueStructure;
-import com.nosliw.core.application.common.brick.HAPUtilityValueStructureDomain;
+import com.nosliw.core.application.common.brick.util.HAPUtilityValueStructureDomain;
 import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.structure.HAPElementStructureLeafData;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;

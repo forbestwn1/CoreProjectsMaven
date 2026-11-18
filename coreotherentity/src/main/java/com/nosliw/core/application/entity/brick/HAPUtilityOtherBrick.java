@@ -6,7 +6,7 @@ import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
 import com.nosliw.core.application.common.brick.HAPInfoBrickType;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 import com.nosliw.core.resource.HAPInfoResourceIdNormalize;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPUtilityResourceId;

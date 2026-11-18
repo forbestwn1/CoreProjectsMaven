@@ -4,7 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrickId;
 import com.nosliw.core.application.division.manual.common.task.HAPManualUtilityTask;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;

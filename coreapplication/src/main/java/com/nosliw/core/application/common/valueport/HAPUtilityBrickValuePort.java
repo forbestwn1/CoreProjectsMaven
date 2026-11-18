@@ -8,7 +8,7 @@ import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForExecute;
 import com.nosliw.core.application.common.brick.HAPResultBrickDescentValue;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 import com.nosliw.core.application.common.resource.HAPResourceDataBrick;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.resource.HAPUtilityResource;

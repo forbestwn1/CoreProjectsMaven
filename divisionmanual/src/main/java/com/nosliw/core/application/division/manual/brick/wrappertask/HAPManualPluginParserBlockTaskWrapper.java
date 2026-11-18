@@ -2,7 +2,7 @@ package com.nosliw.core.application.division.manual.brick.wrappertask;
 
 import org.json.JSONObject;
 
-import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrickId;
 import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionContextParse;

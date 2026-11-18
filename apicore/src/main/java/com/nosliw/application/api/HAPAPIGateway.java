@@ -26,11 +26,11 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 import com.nosliw.core.application.entity.jslibrary.HAPUtilityJSLibrary;
-import com.nosliw.core.entity.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.gateway.HAPGatewayManager;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.gateway.HAPServiceInfo;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
+import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 
 @RestController
 @RequestMapping("/nosliw/core")

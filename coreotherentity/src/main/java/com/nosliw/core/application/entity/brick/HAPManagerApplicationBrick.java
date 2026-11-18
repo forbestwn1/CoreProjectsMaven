@@ -23,7 +23,7 @@ import com.nosliw.core.application.common.brick.HAPInfoBrickType;
 import com.nosliw.core.application.common.brick.HAPInfoExportBrick;
 import com.nosliw.core.application.common.brick.HAPPluginBrick;
 import com.nosliw.core.application.common.brick.HAPProviderPluginBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrickId;
 import com.nosliw.core.resource.HAPIdResourceType;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceIdEmbeded;

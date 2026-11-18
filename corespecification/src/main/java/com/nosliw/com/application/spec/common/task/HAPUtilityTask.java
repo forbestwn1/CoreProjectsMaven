@@ -5,7 +5,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.brick.HAPBrickImp;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.wrappertask.HAPBlockTaskWrapper;
 

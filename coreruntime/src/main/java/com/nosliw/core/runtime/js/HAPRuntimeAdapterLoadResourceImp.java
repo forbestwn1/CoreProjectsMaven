@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.script.HAPJSScriptInfo;
-import com.nosliw.core.entity.staticresource.HAPServiceStaticResource;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
 import com.nosliw.core.resource.HAPResourceId;
 import com.nosliw.core.resource.HAPResourceInfo;
 import com.nosliw.core.runtime.HAPRuntimeAdapterLoadResource;
+import com.nosliw.core.service.staticresource.HAPServiceStaticResource;
 
 public class HAPRuntimeAdapterLoadResourceImp implements HAPRuntimeAdapterLoadResource{
 

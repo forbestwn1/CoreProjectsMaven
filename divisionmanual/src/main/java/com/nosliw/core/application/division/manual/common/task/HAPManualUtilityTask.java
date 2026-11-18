@@ -7,7 +7,7 @@ import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPDomainValueStructure;
-import com.nosliw.core.application.common.brick.HAPUtilityBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrick;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveTask;
 import com.nosliw.core.application.common.structure.HAPElementStructure;

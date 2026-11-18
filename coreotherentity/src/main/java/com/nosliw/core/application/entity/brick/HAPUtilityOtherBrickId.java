@@ -5,7 +5,7 @@ import org.json.JSONObject;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
-import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrickId;
 
 public class HAPUtilityOtherBrickId {
 

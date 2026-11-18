@@ -22,6 +22,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.common.utils.HAPConstantShared;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.common.command.HAPCommandProcess;
 import com.nosliw.core.application.common.command.HAPCommandWithExport;
 import com.nosliw.core.application.common.dynamic.HAPDynamicDefinitionContainer;

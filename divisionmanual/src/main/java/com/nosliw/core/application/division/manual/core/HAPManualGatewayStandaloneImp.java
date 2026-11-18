@@ -14,7 +14,7 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPBundleForExecute;
-import com.nosliw.core.application.common.brick.HAPUtilityBundleForExecute;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForExecute;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualGatewayStandalone;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProvider;
 import com.nosliw.core.application.common.manual.gateway.standalone.HAPManualStandaloneProviderRequest;

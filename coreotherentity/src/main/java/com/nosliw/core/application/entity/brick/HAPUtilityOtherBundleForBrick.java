@@ -2,7 +2,7 @@ package com.nosliw.core.application.entity.brick;
 
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBrickId;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBrickId;
 import com.nosliw.core.application.common.resource.HAPUtilityExport;
 import com.nosliw.core.resource.HAPResourceIdSimple;
 import com.nosliw.core.runtime.HAPRuntimeInfo;

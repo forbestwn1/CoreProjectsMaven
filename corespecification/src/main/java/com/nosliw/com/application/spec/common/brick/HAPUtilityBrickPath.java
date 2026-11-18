@@ -3,7 +3,7 @@ package com.nosliw.com.application.spec.common.brick;
 import com.nosliw.com.application.spec.common.task.HAPUtilityTask;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
-import com.nosliw.core.application.common.brick.HAPUtilityBundleForBrick;
+import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForBrick;
 
 public class HAPUtilityBrickPath {
 
