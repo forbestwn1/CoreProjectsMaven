@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.nosliw.application.entity.manual.HAPServiceManual;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
@@ -23,6 +22,7 @@ import com.nosliw.core.application.common.standalone.HAPStandaloneProviderReques
 import com.nosliw.core.application.common.standalone.HAPStandaloneRequest;
 import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
 import com.nosliw.core.application.common.standalone.HAPStandalonesBuildRequest;
+import com.nosliw.core.application.entity.manual.HAPServiceManual;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;

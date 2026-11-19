@@ -14,7 +14,7 @@
 
    <dependency>
      	<groupId>com.nosliw</groupId>
-    	<artifactId>coreapplication</artifactId>
+    	<artifactId>coreapplicationcommon</artifactId>
         <version>0.0.1-SNAPSHOT</version>
    </dependency>
 

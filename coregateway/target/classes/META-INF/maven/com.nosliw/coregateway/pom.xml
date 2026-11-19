@@ -4,6 +4,7 @@
     <groupId>com.nosliw</groupId>
     <artifactId>root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../root</relativePath>
   </parent>
   <artifactId>coregateway</artifactId>
   <name>coregateway</name>
@@ -13,20 +14,14 @@
 
    <dependency>
      	<groupId>com.nosliw</groupId>
-    	<artifactId>coreapplication</artifactId>
+    	<artifactId>coremanual</artifactId>
         <version>0.0.1-SNAPSHOT</version>
    </dependency>
    <dependency>
-     	<groupId>com.nosliw</groupId>
-    	<artifactId>divisionmanual</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-   </dependency>
-  	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>coreotherentity</artifactId>
+  		<artifactId>coreapplicationentity</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
-
 
 </project>

@@ -25,14 +25,8 @@
 
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>divisiondatasource</artifactId>
+  		<artifactId>coredataimp</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-
-  	<dependency>
-  		<groupId>com.nosliw</groupId>
-  		<artifactId>utilityparserexpression</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
 
   	<dependency>
@@ -40,18 +34,6 @@
   		<artifactId>coreinfrastructure</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
-
-  	<dependency>
-  		<groupId>com.nosliw</groupId>
-  		<artifactId>apicore</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-
-    <dependency>
-    	<groupId>com.nosliw</groupId>
-    	<artifactId>coreotherentity</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-    </dependency>
 
     <dependency>
     	<groupId>com.nosliw</groupId>
