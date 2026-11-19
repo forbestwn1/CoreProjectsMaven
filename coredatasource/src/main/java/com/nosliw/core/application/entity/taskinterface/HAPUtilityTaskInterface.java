@@ -4,8 +4,8 @@ import org.json.JSONObject;
 
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityFileNio;
-import com.nosliw.core.application.common.brick.spec.service.interfacee.HAPBlockServiceInterface;
-import com.nosliw.core.application.entity.datasource.HAPBlockServiceInterfaceImp;
+import com.nosliw.core.application.spec.brick.service.interfacee.HAPBlockServiceInterface;
+import com.nosliw.core.application.spec.imp.basic.HAPBasicBlockServiceInterface;
 
 public class HAPUtilityTaskInterface {
 
@@ -14,7 +14,7 @@ public class HAPUtilityTaskInterface {
 	}
 
 	public static HAPBlockServiceInterface buildTaskInterfaceBlock(HAPConfigureDataSource taskInterfaceConfigure, String id) {
-		HAPBlockServiceInterfaceImp out = new HAPBlockServiceInterfaceImp(HAPConstantShared.BRICK_DIVISION_SERVICE);
+		HAPBasicBlockServiceInterface out = new HAPBasicBlockServiceInterface(HAPConstantShared.BRICK_DIVISION_SERVICE);
 		
 		String content = readTaskInterfaceContent(taskInterfaceConfigure, id);
 		JSONObject jsonObj = new JSONObject(content);

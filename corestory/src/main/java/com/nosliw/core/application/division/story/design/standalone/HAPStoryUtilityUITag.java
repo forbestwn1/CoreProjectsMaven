@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -24,7 +23,8 @@ import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualInfoContent;
 import com.nosliw.core.application.common.uitag.HAPUITagInfo;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
+import com.nosliw.core.application.entity.uitag.HAPServiceUITag;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.data.HAPData;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 

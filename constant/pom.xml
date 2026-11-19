@@ -12,7 +12,7 @@
   <dependencies>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>coreapplication</artifactId>
+  		<artifactId>coreapplicationcommon</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
@@ -22,34 +22,28 @@
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>apicore</artifactId>
+  		<artifactId>apigateway</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>divisionmanual</artifactId>
+  		<artifactId>coremanual</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>divisionstory</artifactId>
+  		<artifactId>corestory</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
-  		<artifactId>coreotherentity</artifactId>
+  		<artifactId>coreapplicationentity</artifactId>
         <version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
   		<artifactId>coreruntime</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.nosliw</groupId>
-  		<artifactId>utilityparserexpression</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <scope>runtime</scope>
   	</dependency>
   </dependencies>
 </project>

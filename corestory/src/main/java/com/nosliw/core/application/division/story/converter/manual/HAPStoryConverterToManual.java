@@ -10,7 +10,7 @@ import java.util.Set;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.HAPEnumBrickType;
+import com.nosliw.com.application.spec.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.common.container.HAPItemWrapper;
 import com.nosliw.common.interpolate.HAPStringTemplate;
 import com.nosliw.common.interpolate.HAPStringTemplateUtil;
@@ -70,7 +70,7 @@ import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRu
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryRunnableUIPagePresent;
 import com.nosliw.core.application.division.story.definition.runnable.HAPStoryTunnel;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
-import com.nosliw.core.application.entity.interactive.HAPUtilityInteractiveTaskValuePort;
+import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.data.HAPData;
 
 public class HAPStoryConverterToManual {

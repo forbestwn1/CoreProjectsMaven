@@ -7,8 +7,8 @@ import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
-import com.nosliw.core.application.division.story.api.HAPUtilityLocation;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
+import com.nosliw.core.application.division.story.service.HAPUtilityLocation;
 
 public class HAPStoryDesignUtilityExport {
 

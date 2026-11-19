@@ -12,8 +12,8 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPUtilityFileNio;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrickType;
-import com.nosliw.core.application.division.story.api.HAPConfigureStoryPersistence;
 import com.nosliw.core.application.division.story.design.change.HAPStoryManagerChange;
+import com.nosliw.core.application.division.story.service.HAPConfigureStoryPersistence;
 import com.nosliw.core.service.idgenerator.HAPServiceIdGenerator;
 
 @Component

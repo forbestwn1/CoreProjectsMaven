@@ -1,4 +1,4 @@
-package com.nosliw.core.application.division.story.api;
+package com.nosliw.core.application.division.story.service;
 
 import java.nio.file.Path;
 

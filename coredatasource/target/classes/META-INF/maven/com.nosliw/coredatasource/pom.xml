@@ -11,12 +11,11 @@
 
   <dependencies>
 
-   <dependency>
-     	<groupId>com.nosliw</groupId>
-    	<artifactId>coreapplicationcommon</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-   </dependency>
-
+    <dependency>
+    	<groupId>com.nosliw</groupId>
+    	<artifactId>coreapplicationspecification</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   	<dependency>
   		<groupId>com.nosliw</groupId>
   		<artifactId>librarydatasource</artifactId>
@@ -24,12 +23,6 @@
         <scope>runtime</scope>
   	</dependency>
 
-    <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-starter-config</artifactId>
-    </dependency>
-
-
-</dependencies>
+  </dependencies>
 
 </project>

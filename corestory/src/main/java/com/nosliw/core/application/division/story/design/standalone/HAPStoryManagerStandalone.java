@@ -10,7 +10,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
 import com.nosliw.core.application.common.uitag.HAPUITageQueryData;
-import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
+import com.nosliw.core.application.entity.uitag.HAPServiceUITag;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
 @HAPEntityWithAttribute

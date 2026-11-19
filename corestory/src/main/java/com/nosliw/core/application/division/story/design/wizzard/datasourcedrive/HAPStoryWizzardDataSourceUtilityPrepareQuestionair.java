@@ -18,7 +18,7 @@ import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzard
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairGroup;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemDynamic;
 import com.nosliw.core.application.division.story.design.wizzard.HAPStoryWizzardQuestionairItemStatic;
-import com.nosliw.core.application.division.story.service.uitag.HAPServiceUITag;
+import com.nosliw.core.application.entity.uitag.HAPServiceUITag;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.HAPDataTypeId;
