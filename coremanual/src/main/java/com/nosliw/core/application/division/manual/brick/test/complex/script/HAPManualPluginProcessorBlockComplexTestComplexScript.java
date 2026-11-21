@@ -7,8 +7,6 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONArray;
 
-import com.nosliw.com.application.spec.common.valueport.HAPUtilityResovleElement;
-import com.nosliw.com.application.spec.common.valueport.HAPUtilityValuePort;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -27,6 +25,8 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualUtility
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.test.complex.script.HAPBlockTestComplexScript;
 import com.nosliw.core.application.spec.brick.test.complex.script.HAPTestTaskTrigguer;
+import com.nosliw.core.application.spec.common.valueport.HAPUtilityResovleElement;
+import com.nosliw.core.application.spec.common.valueport.HAPUtilityValuePort;
 
 public class HAPManualPluginProcessorBlockComplexTestComplexScript extends HAPManualPluginProcessorBlockImp{
 

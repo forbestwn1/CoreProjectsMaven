@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.nosliw.com.application.spec.common.withvariable.HAPContainerVariableInfoImp;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
@@ -21,6 +20,7 @@ import com.nosliw.core.application.common.valueport.HAPValuePort;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.division.manual.common.valuecontext.HAPManualValueContext;
 import com.nosliw.core.application.division.manual.core.process.HAPManualInfoBrickType;
+import com.nosliw.core.application.spec.common.withvariable.HAPContainerVariableInfoImp;
 
 @HAPEntityWithAttribute
 public abstract class HAPManualBrick extends HAPBrickImp{

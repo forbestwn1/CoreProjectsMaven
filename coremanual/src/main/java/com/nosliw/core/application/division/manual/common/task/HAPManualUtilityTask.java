@@ -2,7 +2,6 @@ package com.nosliw.core.application.division.manual.common.task;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.com.application.spec.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
@@ -14,6 +13,7 @@ import com.nosliw.core.application.common.structure.HAPElementStructure;
 import com.nosliw.core.application.common.valueport.HAPInfoValuePortContainer;
 import com.nosliw.core.application.common.valueport.HAPUtilityBrickValuePort;
 import com.nosliw.core.application.division.manual.core.HAPManualBrick;
+import com.nosliw.core.application.spec.common.interactive.HAPUtilityInteractiveTaskValuePort;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;

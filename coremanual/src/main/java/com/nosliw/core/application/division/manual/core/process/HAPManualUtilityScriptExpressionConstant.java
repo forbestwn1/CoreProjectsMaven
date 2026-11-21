@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 
-import com.nosliw.com.application.spec.common.scriptexpression.HAPUtilityScriptExpressionConstant;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
@@ -23,6 +22,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionProcessorBrickNodeDownwardWithPath;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionUtilityBrickTraverse;
+import com.nosliw.core.application.spec.common.scriptexpression.HAPUtilityScriptExpressionConstant;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 

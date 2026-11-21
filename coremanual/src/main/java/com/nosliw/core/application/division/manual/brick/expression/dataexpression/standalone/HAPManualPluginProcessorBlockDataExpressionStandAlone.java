@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.nosliw.com.application.spec.common.dataassociation.HAPBasicPluginProcessorEntityWithVariableDataExpression;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.core.application.common.brick.HAPDomainValueStructure;
 import com.nosliw.core.application.common.dataexpression.HAPDataExpressionStandAlone;
@@ -22,6 +21,7 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualContext
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlockImp;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.expression.dataexpression.standalone.HAPBlockDataExpressionStandAlone;
+import com.nosliw.core.application.spec.common.dataassociation.HAPBasicPluginProcessorEntityWithVariableDataExpression;
 import com.nosliw.core.data.criteria.HAPDataTypeCriteria;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicExpressionData;
 import com.nosliw.core.data.expression.imp.basic.HAPBasicUtilityOperand;

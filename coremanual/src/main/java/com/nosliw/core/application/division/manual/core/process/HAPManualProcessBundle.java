@@ -3,7 +3,6 @@ package com.nosliw.core.application.division.manual.core.process;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.brick.HAPUtilityBrickReference;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -24,6 +23,7 @@ import com.nosliw.core.application.division.manual.core.definition.HAPManualDefi
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
 import com.nosliw.core.application.entity.datarule.HAPProcessorRuleInBundle;
+import com.nosliw.core.application.spec.common.brick.HAPUtilityBrickReference;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;

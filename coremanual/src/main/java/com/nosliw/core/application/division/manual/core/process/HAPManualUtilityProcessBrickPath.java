@@ -1,6 +1,5 @@
 package com.nosliw.core.application.division.manual.core.process;
 
-import com.nosliw.com.application.spec.common.brick.HAPUtilityBrickReference;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
@@ -15,6 +14,7 @@ import com.nosliw.core.application.common.brick.util.HAPUtilityBundleForBrick;
 import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItem;
 import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItemMultiple;
 import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputItemSingle;
+import com.nosliw.core.application.spec.common.brick.HAPUtilityBrickReference;
 
 public class HAPManualUtilityProcessBrickPath {
 

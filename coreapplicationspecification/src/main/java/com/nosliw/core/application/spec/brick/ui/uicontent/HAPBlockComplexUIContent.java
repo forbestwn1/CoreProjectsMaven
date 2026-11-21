@@ -3,12 +3,12 @@ package com.nosliw.core.application.spec.brick.ui.uicontent;
 import java.util.List;
 import java.util.Map;
 
-import com.nosliw.com.application.spec.common.task.HAPWithBrickTasks;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.application.common.brick.HAPBrick;
 import com.nosliw.core.application.common.scriptexpressio.HAPContainerScriptExpression;
 import com.nosliw.core.application.spec.brick.container.HAPBrickContainerList;
+import com.nosliw.core.application.spec.common.task.HAPWithBrickTasks;
 
 @HAPEntityWithAttribute
 public interface HAPBlockComplexUIContent extends HAPBrick, HAPWithBrickTasks{

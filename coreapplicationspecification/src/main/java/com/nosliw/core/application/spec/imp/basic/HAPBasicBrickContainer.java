@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.nosliw.com.application.spec.common.serialize.HAParserPValueInAttributeImpBrickContainer;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNosliw;
 import com.nosliw.core.application.common.brick.HAPAttributeInBrick;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.container.HAPBrickContainer;
+import com.nosliw.core.application.spec.common.serialize.HAParserPValueInAttributeImpBrickContainer;
 
 public class HAPBasicBrickContainer extends HAPBasicBrick implements HAPBrickContainer{
 
