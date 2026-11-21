@@ -19,7 +19,7 @@ export default function QuestionairDynamicChooseDataSource({ questionair, onChan
 
             getDataSourcesService()
                 .then((serviceData) => {
-                    var serviceDefs = serviceData.data;
+                    var serviceDefs = serviceData.data.data;
     				var services = [];
 	    			_.each(serviceDefs, function(serviceDef, i){
 		    			var displayResource = serviceDef[node_COMMONATRIBUTECONSTANT.INFOSERVICEINTERFACE_DISPLAY];
