@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
@@ -15,11 +14,10 @@ import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.brick.serialize.HAPUtilityExport;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
 import com.nosliw.core.application.common.manual.HAPManualUtilityExporterContentProvider;
+import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.application.division.story.converter.manual.HAPStoryConverterToManual;
 import com.nosliw.core.application.division.story.design.HAPStoryDesign;
 import com.nosliw.core.application.division.story.design.HAPStoryManagerDesign;
-import com.nosliw.core.application.entity.manual.HAPServiceManual;
-import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
 @Component
@@ -38,13 +36,7 @@ public class HAPStoryService{
 	private HAPConfigureStoryPersistence m_storyConfigure;
 	
 	@Autowired
-	private HAPConfigureGlobalApplication m_globalAppConfigure;
-	
-	@Autowired
-	private RestTemplate m_resteTemplate;
-	
-	@Autowired
-	private HAPServiceManual m_manualService;
+	private HAPManualManagerBrick m_manualService;
 
 	public HAPManualContentProviderText convertDesignToManual(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		HAPStoryDesign design = m_designManager.getDesign(brickId);
@@ -83,7 +75,7 @@ public class HAPStoryService{
 		Path manualFolder = HAPUtilityLocation.getManualFolder(this.getStoryStorageRootPath(), brickId);
 		HAPManualContentProviderText contentProviderText = HAPManualUtilityExporterContentProvider.importContentText(manualFolder, m_parseService);
 		
-		HAPBundleForBrick bundleForBrick = m_manualService.buildBundle(contentProviderText, runtimeInfo);
+		HAPBundleForBrick bundleForBrick = m_manualService.compileToBundle(contentProviderText, runtimeInfo);
 		JSONObject out = new JSONObject(bundleForBrick.toStringValue(HAPSerializationFormat.JSON));
 
 		Path rootPath = this.m_storyDesignMan.getStoryStorageRootPath();

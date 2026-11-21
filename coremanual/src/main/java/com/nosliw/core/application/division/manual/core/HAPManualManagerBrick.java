@@ -30,10 +30,10 @@ import com.nosliw.core.application.division.manual.core.process.HAPManualPluginP
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBlock;
 import com.nosliw.core.application.division.manual.core.process.HAPManualPluginProcessorBrick;
 import com.nosliw.core.application.division.manual.core.process.HAPManualProcessBundle;
+import com.nosliw.core.application.entity.brick.HAPDeserilizerBundle;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
 import com.nosliw.core.application.entity.brick.HAPPluginDivision;
 import com.nosliw.core.application.entity.datarule.HAPManagerDataRule;
-import com.nosliw.core.application.entity.manual.HAPServiceManual;
 import com.nosliw.core.data.HAPDataTypeHelper;
 import com.nosliw.core.data.criteria.HAPCriteriaHelper;
 import com.nosliw.core.data.expression.definition.HAPParserDataExpression;
@@ -41,8 +41,8 @@ import com.nosliw.core.resource.HAPManagerResource;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.core.runtime.HAPRuntimeManager;
 
-@Component
-public class HAPManualManagerBrick implements HAPPluginDivision, HAPServiceManual{
+@Component("manual")
+public class HAPManualManagerBrick implements HAPPluginDivision, HAPDeserilizerBundle{
 
 	private Map<String, HAPManualDefinitionPluginParserBrick> m_brickParserPlugin;
 	private Map<String, HAPManualPluginProcessorBrick> m_brickProcessorPlugin;
@@ -132,7 +132,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision, HAPServiceManua
 //			HAPUtilityExport.exportBundle(out, bundle.getAbsolutePath(), HAPSerializationFormat.JSON);
 //		}
 
-		out = this.buildBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
+		out = this.compileToBundle(new HAPManualContentProviderFile(brickId, HAPManualDefinitionUtilityBrickLocation.getBrickLocationInfo(getSrouceRootPath(), brickId),  this.m_brickCriteriaMan, this.m_parseService), runtimeInfo);
 
 		HAPUtilityExport.exportBundle(out, this.getBundleExportFolder(brickId));
 		
@@ -143,8 +143,7 @@ public class HAPManualManagerBrick implements HAPPluginDivision, HAPServiceManua
 		return out1;
 	}
 	
-	@Override
-	public HAPBundleForBrick buildBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
+	public HAPBundleForBrick compileToBundle(HAPManualContentProvider contentProvider, HAPRuntimeInfo runtimeInfo) {
 		return HAPManualProcessBundle.buildBundle(contentProvider, runtimeInfo, this, m_runtimeMan, m_brickManager, m_dataTypeHelper, this.m_criteriaHelper, m_resourceMan, m_dataRuleManager, m_dataExpressionParser, this.m_parseService, this.m_withVariableMan);
 	}
 	

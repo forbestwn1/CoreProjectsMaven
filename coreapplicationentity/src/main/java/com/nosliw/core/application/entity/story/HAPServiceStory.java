@@ -6,6 +6,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,8 +18,8 @@ import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.brick.HAPIdBrick;
 import com.nosliw.core.application.common.standalone.HAPStandaloneProviderRequest;
 import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
+import com.nosliw.core.application.entity.brick.HAPDeserilizerBundle;
 import com.nosliw.core.application.entity.brick.HAPManagerApplicationBrick;
-import com.nosliw.core.application.entity.manual.HAPServiceManual;
 import com.nosliw.core.configure.global.HAPConfigureGlobalApplication;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -38,13 +39,14 @@ public class HAPServiceStory {
 	HAPManagerApplicationBrick m_brickMan; 
 	
 	@Autowired
-	private HAPServiceManual m_manualService;
+	@Qualifier("manual")
+	private HAPDeserilizerBundle m_manualSerilizer;
 	
 	public HAPBundleForBrick getBundle(HAPIdBrick brickId, HAPRuntimeInfo runtimeInfo) {
 		String responsStr = this.m_restTemplate.getForObject(m_globalAppConfigure.getStoryBaseurl()+"bundle/"+brickId.getBrickTypeId().getBrickType()+"/" + brickId.getBrickTypeId().getVersion() + "/" + brickId.getId(), String.class);
 		HAPServiceData serviceData = new HAPServiceData();
 		serviceData.buildObject(new JSONObject(responsStr), HAPSerializationFormat.JSON);
-		return this.m_manualService.deserializeBundle((JSONObject)serviceData.getData());
+		return this.m_manualSerilizer.deserializeBundle((JSONObject)serviceData.getData());
 	}	
 
 	public HAPServiceData buildStandAlone(List<HAPStandaloneProviderRequest> requests) {

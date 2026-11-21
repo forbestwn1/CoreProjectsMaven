@@ -32,7 +32,7 @@ public class HAPManualManangerStandalone {
 			contentProvider.addExposedCommand(command);
 		}
 		
-		return this.m_manualBrickMan.buildBundle(contentProvider, runtimeInfo);
+		return this.m_manualBrickMan.compileToBundle(contentProvider, runtimeInfo);
 	}
 	
 }

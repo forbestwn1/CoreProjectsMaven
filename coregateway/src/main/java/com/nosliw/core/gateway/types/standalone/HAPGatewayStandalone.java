@@ -22,7 +22,7 @@ import com.nosliw.core.application.common.standalone.HAPStandaloneProviderReques
 import com.nosliw.core.application.common.standalone.HAPStandaloneRequest;
 import com.nosliw.core.application.common.standalone.HAPStandaloneResponse;
 import com.nosliw.core.application.common.standalone.HAPStandalonesBuildRequest;
-import com.nosliw.core.application.entity.manual.HAPServiceManual;
+import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.gateway.HAPGatewayOutput;
 import com.nosliw.core.resource.HAPResource;
@@ -48,7 +48,7 @@ public class HAPGatewayStandalone extends HAPGatewayImp{
 	private Map<String, HAPStandaloneProvider> m_providers;
 	
 	@Autowired
-	private HAPServiceManual m_manualService;
+	private HAPManualManagerBrick m_manualService;
 
 	@Autowired
 	HAPRuntimeManager m_runtimeManager;
@@ -111,7 +111,7 @@ public class HAPGatewayStandalone extends HAPGatewayImp{
 			Map<HAPResourceId, HAPResourceInfo> resourcesInfo = new LinkedHashMap<HAPResourceId, HAPResourceInfo>();
 			List<HAPResource> resources = new ArrayList<HAPResource>();
 			for(HAPStandaloneResponse response : allContent) {
-				HAPBundleForBrick bundleForBrick = m_manualService.buildBundle(response.getContentProvider(), runtimeInfo);
+				HAPBundleForBrick bundleForBrick = m_manualService.compileToBundle(response.getContentProvider(), runtimeInfo);
 				HAPBundleForExecute bundleForExecutable = HAPUtilityBundleForExecute.toBundleExecutable(bundleForBrick, null);
 			
 				HAPResourceId resourceId = new HAPResourceIdSimple(HAPConstantShared.RUNTIME_RESOURCE_TYPE_TRANSIENT, "1.0.0", response.getId());

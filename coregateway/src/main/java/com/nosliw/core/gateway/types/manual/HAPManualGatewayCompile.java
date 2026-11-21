@@ -11,7 +11,7 @@ import com.nosliw.common.serialization.HAPServiceParseEntity;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPBundleForBrick;
 import com.nosliw.core.application.common.manual.HAPManualContentProviderText;
-import com.nosliw.core.application.entity.manual.HAPServiceManual;
+import com.nosliw.core.application.division.manual.core.HAPManualManagerBrick;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
@@ -25,7 +25,7 @@ public class HAPManualGatewayCompile extends HAPGatewayImp{
 	static public final String PARMS_CONTENT = "content";
 	
 	@Autowired
-	private HAPServiceManual m_manualService;
+	private HAPManualManagerBrick m_manualService;
 	
 	@Autowired
 	private HAPServiceParseEntity m_parseService;
@@ -40,7 +40,7 @@ public class HAPManualGatewayCompile extends HAPGatewayImp{
 	public HAPServiceData command(String command, JSONObject parms, HAPRuntimeInfo runtimeInfo) throws Exception {
 		if(COMMAND_COMPILE.equals(command)) {
 			HAPManualContentProviderText contentProvider = (HAPManualContentProviderText)m_parseService.parseEntityJSONExplicit(parms.getJSONObject(PARMS_CONTENT), HAPManualContentProviderText.ENTITYNAMEFORSERIALIZE);
-			HAPBundleForBrick bundle = this.m_manualService.buildBundle(contentProvider, runtimeInfo);
+			HAPBundleForBrick bundle = this.m_manualService.compileToBundle(contentProvider, runtimeInfo);
 			return this.createSuccessWithObject(bundle);
 		}
 		return null;
