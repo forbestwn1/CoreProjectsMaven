@@ -1,4 +1,4 @@
-package com.nosliw.core.xxx.application1;
+package com.nosliw.core.application.common.valuecontext;
 
 import java.util.List;
 import java.util.Set;

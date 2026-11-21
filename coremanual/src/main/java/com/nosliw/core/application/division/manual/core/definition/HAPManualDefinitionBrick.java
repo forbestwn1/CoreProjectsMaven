@@ -33,8 +33,6 @@ import com.nosliw.core.application.entity.brick.HAPUtilityOtherBrick;
 import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.wrappertask.HAPBlockTaskWrapper;
 import com.nosliw.core.resource.HAPResourceId;
-import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionUtilityValueContext;
-import com.nosliw.core.xxx.application.division.manual.core.definition1.HAPManualDefinitionWrapperValueDynamic;
 
 public abstract class HAPManualDefinitionBrick extends HAPSerializableImp implements HAPEntityOrReference, HAPEventWithProcess, HAPWithConstantDefinition, HAPWithScriptExpressionConstantMaster, HAPDefinitionWithDataExpression{
 

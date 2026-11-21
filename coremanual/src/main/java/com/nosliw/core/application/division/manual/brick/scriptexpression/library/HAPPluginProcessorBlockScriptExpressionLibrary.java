@@ -2,10 +2,6 @@
 package com.nosliw.core.application.division.manual.brick.scriptexpression.library;
 
 import com.nosliw.core.application.division.manual.core.process.HAPManualContextProcessBrick;
-import com.nosliw.core.xxx.application.division.manual.core.a.HAPManualPluginProcessorBlockSimple;
-import com.nosliw.core.xxx.application1.brick.HAPEnumBrickType;
-import com.nosliw.core.xxx.application1.division.manual.definition.HAPManualDefinitionBrickBlockSimple;
-import com.nosliw.core.xxx.application1.division.manual.executable.HAPManualBrickBlockSimple;
 
 public class HAPPluginProcessorBlockScriptExpressionLibrary extends HAPManualPluginProcessorBlockSimple{
 

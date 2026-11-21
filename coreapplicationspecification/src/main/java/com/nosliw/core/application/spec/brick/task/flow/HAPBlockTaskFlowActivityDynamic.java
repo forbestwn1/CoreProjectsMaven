@@ -3,7 +3,7 @@ package com.nosliw.core.application.spec.brick.task.flow;
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.application.common.brick.HAPValueOfDynamic;
-import com.nosliw.core.xxx.application1.HAPAddressValue;
+import com.nosliw.core.application.common.valuecontext.HAPAddressValue;
 
 @HAPEntityWithAttribute
 public interface HAPBlockTaskFlowActivityDynamic extends HAPBlockTaskFlowActivity{

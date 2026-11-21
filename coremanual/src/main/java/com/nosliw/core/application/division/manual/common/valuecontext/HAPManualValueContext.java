@@ -15,8 +15,8 @@ import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.application.common.brick.HAPDomainValueStructure;
+import com.nosliw.core.application.common.valuecontext.HAPValueContext;
 import com.nosliw.core.application.common.valueport.HAPInfoValueStructure;
-import com.nosliw.core.xxx.application1.HAPValueContext;
 
 public class HAPManualValueContext extends HAPSerializableImp implements HAPValueContext{
 

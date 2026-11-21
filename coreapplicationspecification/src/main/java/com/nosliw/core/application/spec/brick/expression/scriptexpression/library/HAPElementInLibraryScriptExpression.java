@@ -15,14 +15,13 @@ import com.nosliw.core.application.common.dataexpression.HAPWithDataExpression;
 import com.nosliw.core.application.common.interactive.HAPInteractiveExpression;
 import com.nosliw.core.application.common.interactive.HAPWithInteractiveExpression;
 import com.nosliw.core.application.common.scriptexpressio.HAPExpressionScript;
-import com.nosliw.core.application.common.valueport.HAPGroupValuePorts;
+import com.nosliw.core.application.common.valueport.HAPWithValuePort;
 import com.nosliw.core.application.common.withvariable.HAPContainerVariableInfo;
 import com.nosliw.core.application.spec.imp.basic.HAPBasicBrick;
 import com.nosliw.core.data.matcher.HAPMatchers;
-import com.nosliw.core.xxx.application.valueport.HAPWithValuePortGroup;
 
 @HAPEntityWithAttribute
-public class HAPElementInLibraryScriptExpression extends HAPBasicBrick implements HAPWithInteractiveExpression, HAPWithVariable, HAPWithValuePortGroup, HAPWithDataExpression{
+public class HAPElementInLibraryScriptExpression extends HAPBasicBrick implements HAPWithInteractiveExpression, HAPWithVariable, HAPWithValuePort, HAPWithDataExpression{
 
 	public HAPElementInLibraryScriptExpression(HAPIdBrickType brickTypeId) {
 		super(brickTypeId);
@@ -117,16 +116,6 @@ public class HAPElementInLibraryScriptExpression extends HAPBasicBrick implement
 	}
 	@Override
 	public Map<String, HAPVariableInfo> getVariablesInfo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public HAPGroupValuePorts getInternalValuePortGroup() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public HAPGroupValuePorts getExternalValuePortGroup() {
 		// TODO Auto-generated method stub
 		return null;
 	}

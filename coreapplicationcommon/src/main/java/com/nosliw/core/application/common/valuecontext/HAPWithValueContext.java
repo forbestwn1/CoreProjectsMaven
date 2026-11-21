@@ -1,4 +1,4 @@
-package com.nosliw.core.xxx.application1;
+package com.nosliw.core.application.common.valuecontext;
 
 import com.nosliw.common.constant.HAPAttribute;
 import com.nosliw.common.constant.HAPEntityWithAttribute;

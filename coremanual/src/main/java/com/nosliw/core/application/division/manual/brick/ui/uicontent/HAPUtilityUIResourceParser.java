@@ -14,10 +14,10 @@ import com.google.common.collect.Sets;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
+import com.nosliw.core.application.common.valuecontext.HAPWithValueContext;
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionAttributeInBrick;
 import com.nosliw.core.application.division.manual.core.definition.HAPManualDefinitionPluginParserBrickImp;
-import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPUtilityUIResourceParser {
 

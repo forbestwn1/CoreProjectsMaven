@@ -28,6 +28,7 @@ import com.nosliw.core.application.common.structure.HAPRootInStructure;
 import com.nosliw.core.application.common.structure.HAPStructure;
 import com.nosliw.core.application.common.structure.HAPStructureImp;
 import com.nosliw.core.application.common.uicontent.HAPUIConentUtility;
+import com.nosliw.core.application.common.valuecontext.HAPWithValueContext;
 import com.nosliw.core.application.division.manual.brick.container.HAPManualDefinitionBrickContainer;
 import com.nosliw.core.application.division.manual.brick.wrapperbrick.HAPManualDefinitionBrickWrapperBrick;
 import com.nosliw.core.application.division.manual.common.task.HAPManualDefinitionWithBrickTasks;
@@ -42,7 +43,6 @@ import com.nosliw.core.application.spec.HAPEnumBrickType;
 import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInAttribute;
 import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEmbededScriptExpressionInContent;
 import com.nosliw.core.application.spec.brick.ui.uicontent.HAPUIEventHandlerInfoNormal;
-import com.nosliw.core.xxx.application1.HAPWithValueContext;
 
 public class HAPManualPluginParserBlockComplexUIContent extends HAPManualDefinitionPluginParserBrickImp{
 
