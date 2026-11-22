@@ -3,11 +3,13 @@ package com.nosliw.core.application.common.datarule;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public interface HAPDataRuleImplementation extends HAPSerializable, HAPEntityParsable{
 
 	public static final String DOMAIN_PARSER = "datarule.implmentation";

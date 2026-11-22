@@ -14,7 +14,7 @@ public abstract class HAPDefinitionDataAssociation extends HAPEntityInfoImp{
 	public static String TYPE = "type";
 
 	@HAPAttribute
-	public static final String DIRECTION = "direction";
+	public static String DIRECTION = "direction";
 
 	private String m_type;
 	

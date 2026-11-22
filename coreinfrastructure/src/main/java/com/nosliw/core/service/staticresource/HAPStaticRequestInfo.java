@@ -5,11 +5,13 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPParserEntityImpWithDomain;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public class HAPStaticRequestInfo extends HAPSerializableImp implements HAPEntityParsable{
 
 	public static final String DOMAIN_PARSE = "api.request.static";
