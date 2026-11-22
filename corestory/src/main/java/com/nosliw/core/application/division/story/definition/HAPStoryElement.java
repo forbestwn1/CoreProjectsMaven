@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.path.HAPPath;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializableImp;
@@ -13,6 +14,7 @@ import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 
 //root class for all element
+@HAPEntityWithAttribute
 public abstract class HAPStoryElement extends HAPSerializableImp implements HAPEntityParsable{
 
 	public static final String PARSABLEENTITYDOMAIN = "story.definition.element";

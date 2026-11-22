@@ -1,9 +1,11 @@
 package com.nosliw.core.data;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.core.data.matcher.HAPMatchers;
 import com.nosliw.core.runtime.execute.HAPInfoRuntimeTask;
 
+@HAPEntityWithAttribute
 public class HAPInfoRuntimeTaskExecuteConverter implements HAPInfoRuntimeTask{
 
 	final public static String TASK = "ExecuteConverter"; 

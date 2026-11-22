@@ -3,11 +3,13 @@ package com.nosliw.core.application.division.manual.core.definition;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.brick.HAPValueOfDynamic;
 
+@HAPEntityWithAttribute
 public class HAPManualDefinitionWrapperValueDynamic extends HAPManualDefinitionWrapperValue{
 
 	@HAPAttribute

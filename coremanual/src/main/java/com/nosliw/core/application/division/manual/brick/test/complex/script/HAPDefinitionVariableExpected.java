@@ -3,10 +3,12 @@ package com.nosliw.core.application.division.manual.brick.test.complex.script;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPUtilitySerialize;
 import com.nosliw.core.data.HAPDataTypeId;
 
+@HAPEntityWithAttribute
 public class HAPDefinitionVariableExpected extends HAPSerializableImp{
 
 	@HAPAttribute

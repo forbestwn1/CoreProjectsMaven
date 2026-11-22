@@ -3,15 +3,18 @@ package com.nosliw.core.application.division.manual.core.definition;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.application.common.dynamic.HAPDynamicExecuteInputContainer;
 import com.nosliw.core.resource.HAPResourceId;
 
+@HAPEntityWithAttribute
 public class HAPManualDefinitionWrapperValueReferenceResource extends HAPManualDefinitionWrapperValue{
 
 	//resource id
+	@HAPAttribute
 	public static final String RESOURCEID = "resourceId";
 
 	@HAPAttribute

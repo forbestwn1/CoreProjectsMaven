@@ -5,12 +5,14 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.interfac.HAPEntityOrReference;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityNamingConversion;
 
+@HAPEntityWithAttribute
 public class HAPManualDefinitionReferenceAttachment extends HAPSerializableImp implements HAPEntityOrReference{
 
 	@HAPAttribute
@@ -33,7 +35,9 @@ public class HAPManualDefinitionReferenceAttachment extends HAPSerializableImp i
 	public static HAPManualDefinitionReferenceAttachment newInstance(String name, String type) {
 		HAPManualDefinitionReferenceAttachment out = new HAPManualDefinitionReferenceAttachment();
 		out.buildObject(name, HAPSerializationFormat.LITERATE);
-		if(out.m_dataType==null)  out.m_dataType = type;
+		if(out.m_dataType==null) {
+			out.m_dataType = type;
+		}
 		return out;
 	}
 
@@ -45,8 +49,11 @@ public class HAPManualDefinitionReferenceAttachment extends HAPSerializableImp i
 		else if(obj instanceof String) {
 			out.buildObjectByLiterate((String)obj);
 		}
-		if(out.m_dataType==null)	out.m_dataType = type;
-		else if(!out.m_dataType.equals(type))  throw new RuntimeException();
+		if(out.m_dataType==null) {
+			out.m_dataType = type;
+		} else if(!out.m_dataType.equals(type)) {
+			throw new RuntimeException();
+		}
 		return out;
 	}
 
@@ -76,7 +83,9 @@ public class HAPManualDefinitionReferenceAttachment extends HAPSerializableImp i
 	protected boolean buildObjectByLiterate(String literateValue){
 		String[] segs = HAPUtilityNamingConversion.parseLevel1(literateValue);
 		this.m_name = segs[0];
-		if(segs.length>1)  this.m_dataType = segs[1];
+		if(segs.length>1) {
+			this.m_dataType = segs[1];
+		}
 		return true;  
 	}
 
@@ -84,7 +93,9 @@ public class HAPManualDefinitionReferenceAttachment extends HAPSerializableImp i
 	protected boolean buildObjectByJson(Object json){
 		JSONObject jsonObj = (JSONObject)json;
 		Object typeObj = jsonObj.opt(DATATYPE);
-		if(typeObj!=null)		this.m_dataType = (String)typeObj;
+		if(typeObj!=null) {
+			this.m_dataType = (String)typeObj;
+		}
 		this.m_name = jsonObj.getString(NAME);
 		return true;  
 	}

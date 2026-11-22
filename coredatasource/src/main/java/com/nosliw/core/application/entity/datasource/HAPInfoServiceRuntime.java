@@ -5,9 +5,11 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 
 //information related with service needed during runtime
+@HAPEntityWithAttribute
 public class HAPInfoServiceRuntime extends HAPSerializableImp{
 
 	@HAPAttribute
@@ -46,7 +48,9 @@ public class HAPInfoServiceRuntime extends HAPSerializableImp{
 	protected void buildJsonMap(Map<String, String> jsonMap, Map<String, Class<?>> typeJsonMap) {
 		super.buildJsonMap(jsonMap, typeJsonMap);
 		jsonMap.put(IMPLEMENTATION, this.m_implementation);
-		if(this.m_configure!=null)  jsonMap.put(CONFIGURE, this.m_configure.toString());
+		if(this.m_configure!=null) {
+			jsonMap.put(CONFIGURE, this.m_configure.toString());
+		}
 	}
 	
 }

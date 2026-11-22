@@ -1,6 +1,7 @@
 package com.nosliw.data.core.imp.runtime.js.resource;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.core.data.HAPOperation;
 import com.nosliw.core.data.HAPOperationId;
@@ -12,6 +13,7 @@ import com.nosliw.core.runtime.HAPRuntimeInfo;
 import com.nosliw.data.core.imp.HAPDataAccessDataType;
 import com.nosliw.data.core.imp.runtime.js.HAPDataAccessRuntimeJS;
 
+@HAPEntityWithAttribute
 public class HAPPluginResourceManagerJSOperation extends HAPPluginResourceManagerWithDataAccess{
 
 	@HAPAttribute

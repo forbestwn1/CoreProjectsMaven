@@ -3,8 +3,10 @@ package com.nosliw.core.application.division.manual.core.process;
 import java.util.Map;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPSerializableImp;
 
+@HAPEntityWithAttribute
 public class HAPManualInfoBrickType extends HAPSerializableImp{
 
 	@HAPAttribute

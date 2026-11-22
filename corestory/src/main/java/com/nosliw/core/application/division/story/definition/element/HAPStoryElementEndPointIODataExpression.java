@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
@@ -16,6 +17,7 @@ import com.nosliw.core.application.division.story.definition.HAPStoryElementEndP
 import com.nosliw.core.application.division.story.definition.HAPStoryIdElementType;
 import com.nosliw.core.data.expression.definition.HAPDefinitionDataExpression;
 
+@HAPEntityWithAttribute
 public class HAPStoryElementEndPointIODataExpression extends HAPStoryElementEndPointIO{
 
 	public static final HAPStoryIdElementType TYPE = new HAPStoryIdElementType(HAPConstantShared.STORYNODE_TYPE_ENDPOINT_DATAEXPRESSION);

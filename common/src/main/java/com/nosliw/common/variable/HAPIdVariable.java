@@ -3,10 +3,12 @@ package com.nosliw.common.variable;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.serialization.HAPEntityParsable;
 import com.nosliw.common.serialization.HAPSerializable;
 import com.nosliw.common.serialization.HAPServiceParseEntity;
 
+@HAPEntityWithAttribute
 public interface HAPIdVariable extends HAPSerializable, HAPEntityParsable{
 
 	public static final String PARSER_DOMAIN = "variable.id";

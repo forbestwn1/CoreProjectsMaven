@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
 import com.nosliw.common.exception.HAPServiceData;
 import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.utils.HAPConstantShared;
@@ -17,6 +18,7 @@ import com.nosliw.core.data.criteria.HAPUtilityCriteria;
 import com.nosliw.core.gateway.HAPGatewayImp;
 import com.nosliw.core.runtime.HAPRuntimeInfo;
 
+@HAPEntityWithAttribute
 @Component
 public class HAPGatewayCriteriaOperation extends HAPGatewayImp{
 

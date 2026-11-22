@@ -5,12 +5,14 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.serialization.HAPSerializableImp;
 import com.nosliw.common.serialization.HAPSerializationFormat;
-import com.nosliw.common.serialization.HAPManagerSerialize;
 import com.nosliw.common.utils.HAPConstantShared;
 import com.nosliw.common.utils.HAPUtilityBasic;
 
+@HAPEntityWithAttribute
 public class HAPInfoCriteria extends HAPSerializableImp{
 
 	@HAPAttribute
@@ -42,7 +44,9 @@ public class HAPInfoCriteria extends HAPSerializableImp{
 
 	public static HAPInfoCriteria buildCriteriaInfo(HAPDataTypeCriteria criteria) {
 		HAPInfoCriteria out = new HAPInfoCriteria();
-		if(criteria!=null)		out.m_criteria = HAPUtilityCriteria.cloneDataTypeCriteria(criteria);
+		if(criteria!=null) {
+			out.m_criteria = HAPUtilityCriteria.cloneDataTypeCriteria(criteria);
+		}
 		out.initWithDefault();
 		return out;
 	}
@@ -62,8 +66,11 @@ public class HAPInfoCriteria extends HAPSerializableImp{
 	
 	private void initWithDefault() {
 		if(this.m_status==null) {
-			if(this.m_criteria==null)   this.m_status = HAPConstantShared.EXPRESSION_VARIABLE_STATUS_OPEN;
-			else   this.m_status = HAPConstantShared.EXPRESSION_VARIABLE_STATUS_CLOSE;
+			if(this.m_criteria==null) {
+				this.m_status = HAPConstantShared.EXPRESSION_VARIABLE_STATUS_OPEN;
+			} else {
+				this.m_status = HAPConstantShared.EXPRESSION_VARIABLE_STATUS_CLOSE;
+			}
 		}
 	}
 

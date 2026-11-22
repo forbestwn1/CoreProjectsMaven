@@ -6,14 +6,16 @@ import java.util.Map;
 import java.util.Set;
 
 import com.nosliw.common.constant.HAPAttribute;
+import com.nosliw.common.constant.HAPEntityWithAttribute;
+import com.nosliw.common.serialization.HAPSerializableImp;
+import com.nosliw.common.serialization.HAPSerializationFormat;
 import com.nosliw.common.serialization.HAPUtilityJson;
 import com.nosliw.core.data.HAPDataType;
 import com.nosliw.core.data.HAPDataTypeId;
 import com.nosliw.core.data.HAPDataTypePicture;
 import com.nosliw.core.data.HAPRelationship;
-import com.nosliw.common.serialization.HAPSerializableImp;
-import com.nosliw.common.serialization.HAPSerializationFormat;
 
+@HAPEntityWithAttribute
 public class HAPDataTypePictureImp extends HAPSerializableImp implements HAPDataTypePicture{
 
 	@HAPAttribute
