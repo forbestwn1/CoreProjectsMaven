@@ -6,13 +6,7 @@ var packageObj = library;
 	var node_CONSTANT;
 	var node_buildInterface;
 	var node_getInterface;
-	var node_eventUtility;
-	var node_getObjectName;
-	var node_getObjectType;
 	var node_requestServiceProcessor;
-	var node_getComponentLifecycleInterface;
-	var node_createComponentManagementInterfaceDelegateObject;
-	var node_componentUtility;
 	var node_createLifecycleTask;
 
 //*******************************************   Start Node Definition  ************************************** 	
@@ -84,13 +78,7 @@ var node_makeObjectWithComponentManagementInterface = function(thisContext, rawO
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interface.buildInterface", function(){node_buildInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interface.getInterface", function(){node_getInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectName", function(){node_getObjectName = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getComponentLifecycleInterface", function(){node_getComponentLifecycleInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("component.createComponentManagementInterfaceDelegateObject", function(){node_createComponentManagementInterfaceDelegateObject = this.getData();});
-nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createLifecycleTask", function(){node_createLifecycleTask = this.getData();});
 nosliw.registerSetNodeDataEvent("component.getComponentInterface", function(){node_getComponentInterface = this.getData();});
 

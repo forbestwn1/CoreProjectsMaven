@@ -5,12 +5,10 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_createEventObject;
-	var node_requestUtility;
 	var node_requestServiceProcessor;
 	var node_getObjectType;
 	var node_createServiceRequestInfoSequence;
 	var node_createServiceRequestInfoSimple;
-	var node_ServiceInfo;
 	var node_createServiceRequestInfoCommon;
 	var node_ServiceRequestExecuteInfo;
 	var node_buildServiceProvider;
@@ -20,6 +18,8 @@ var packageObj = library;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
+//multiple statemachines and multiple steps, 
+//sometimes, there are multiple statemachines need to transit at the same time
 //task handle transaction ( multiple transition steps )
 //  handle success
 //  handle roll back when fail
@@ -426,12 +426,10 @@ var node_createStateMachine = function(initState, thisContext, id){
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
-nosliw.registerSetNodeDataEvent("request.utility", function(){node_requestUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoCommon", function(){	node_createServiceRequestInfoCommon = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){	node_ServiceRequestExecuteInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.buildServiceProvider", function(){node_buildServiceProvider = this.getData();});

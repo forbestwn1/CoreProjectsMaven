@@ -49,7 +49,6 @@ var node_getComponentLifecycleInterface = function(baseObject){
 	return node_getInterface(baseObject, INTERFACENAME);
 };
 
-
 var node_createLifecycleTask = function(next, rootComponent, request){
 	var lifecycleEntity = rootComponent.getLifecycleEntity();
 
@@ -79,7 +78,6 @@ var node_createLifecycleTask = function(next, rootComponent, request){
 		},
 	});
 };
-
 
 var node_getStateMachineDefinition = function(){
 	var loc_stateMachineDef = node_createStateMachineDef(

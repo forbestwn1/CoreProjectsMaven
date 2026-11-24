@@ -264,8 +264,6 @@ public class HAPStaticAPI {
 				"logging",
 				"common",
 				"data",
-				"process",
-				"sequence",
 				"request",
 				"id",
 				"resource",
@@ -281,7 +279,6 @@ public class HAPStaticAPI {
 				"configure",
 				"component",
 				"complexentity",
-				"entitycontainer",
 				"valueport",
 				"enum",
 				"statemachine",
@@ -300,6 +297,7 @@ public class HAPStaticAPI {
 				"brick_task",
 				"brick_scripttaskgroup",
 				"brick_taskflow",
+				"brick_entitycontainer",
 
 				
 				"xxx_activity",

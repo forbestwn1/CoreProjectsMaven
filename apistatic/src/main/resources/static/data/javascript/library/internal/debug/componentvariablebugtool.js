@@ -14,7 +14,6 @@ var packageObj = library.getChildPackage();
 	var node_requestServiceProcessor;
 	var node_getComponentManagementInterface;
 	var node_componentUtility;
-	var node_getStateMachineDefinition;
 	var node_getEntityObjectInterface;
 	var node_complexEntityUtility;
 	var node_valueInVarOperationServiceUtility;
@@ -116,7 +115,6 @@ nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple"
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("component.getComponentManagementInterface", function(){node_getComponentManagementInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getStateMachineDefinition", function(){node_getStateMachineDefinition = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){  node_complexEntityUtility = this.getData();});
 
