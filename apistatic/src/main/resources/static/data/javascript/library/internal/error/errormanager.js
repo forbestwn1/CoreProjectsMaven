@@ -3,8 +3,7 @@ var packageObj = library;
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
+var node_COMMONCONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
 	var node_requestServiceProcessor;
 	var node_basicUtility;
@@ -127,7 +126,6 @@ var node_createErrorManager = function(){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});

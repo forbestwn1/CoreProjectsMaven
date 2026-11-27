@@ -5,8 +5,7 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_makeObjectWithLifecycle;
+var node_makeObjectWithLifecycle;
 	var node_createEventObject;
 	var node_getLifecycleInterface;
 	var node_createExpressionTaskWatch;
@@ -86,7 +85,6 @@ var packageObj = library;
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});

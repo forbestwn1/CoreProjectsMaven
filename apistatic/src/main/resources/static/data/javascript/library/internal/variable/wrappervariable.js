@@ -3,21 +3,14 @@ var packageObj = library.getChildPackage("wrapper");
 
 (function(packageObj){
 //get used node
-var node_ServiceInfo;
 var node_CONSTANT;
 var node_makeObjectWithLifecycle;
 var node_getLifecycleInterface;
 var node_makeObjectWithType;
 var node_getObjectType;
 var node_makeObjectWithId;
-var node_eventUtility;
-var node_requestUtility;
-var node_wrapperFactory;
 var node_basicUtility;
 var node_createEventObject;
-var node_createServiceRequestInfoSequence;
-var node_valueInVarOperationServiceUtility;
-var node_getHandleEachElementRequest;
 var node_requestServiceProcessor;
 
 //*******************************************   Start Node Definition  **************************************
@@ -124,21 +117,14 @@ var node_createVariableWrapper = function(data1, data2, adapterInfo, info){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithId", function(){node_makeObjectWithId = this.getData();});
-nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.request.utility", function(){node_requestUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.wrapper.wrapperFactory", function(){node_wrapperFactory = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.valueInVarOperationServiceUtility", function(){node_valueInVarOperationServiceUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.orderedcontainer.getHandleEachElementRequest", function(){node_getHandleEachElementRequest = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 
 //Register Node by Name

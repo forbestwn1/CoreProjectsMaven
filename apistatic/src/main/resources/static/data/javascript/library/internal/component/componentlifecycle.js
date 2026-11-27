@@ -4,13 +4,8 @@ var packageObj = library;
 (function(packageObj){
 	//get used node
 	var node_CONSTANT;
-	var node_buildInterface;
-	var node_getInterface;
-	var node_eventUtility;
-	var node_getObjectName;
-	var node_getObjectType;
-	var node_requestUtility;
-	var node_createServiceRequestInfoSequence;
+var node_getObjectType;
+var node_createServiceRequestInfoSequence;
 	var node_ServiceInfo;
 	var node_createServiceRequestInfoSimple;
 	var node_createServiceRequestInfoError;
@@ -18,9 +13,7 @@ var packageObj = library;
 	var node_createStateMachineDef;
 	var node_SMCommandInfo;
 	var node_SMTransitDefinition;
-	var node_StateTransitPath;
-	var node_requestServiceProcessor;
-	var node_createComponentState;
+var node_createComponentState;
 	var node_createStateMachineTask;
 
 //*******************************************   Start Node Definition  ************************************** 	
@@ -135,6 +128,8 @@ var node_createComponentLifecycleEntity = function(withState, withLifecycle, thi
 	
 	var loc_stateMachine;
 
+	var loc_getState = function(){		return loc_withState.getBackupState();	};
+
 	//state
 	var loc_componentState = node_createComponentState(loc_getState(), 
 		function(handlers, request){
@@ -146,7 +141,7 @@ var node_createComponentLifecycleEntity = function(withState, withLifecycle, thi
 	);
 
 	//init statemachine for component
-	var loc_init = function(componentCoreComplex, id){
+	var loc_init = function(withState, withLifecycle, thisContext, id){
 
 		//component lifecycle call back methods
 		var lifecycleCallback = {};
@@ -275,8 +270,6 @@ var node_createComponentLifecycleEntity = function(withState, withLifecycle, thi
 		loc_getState().clear(request);
 	};
 
-	var loc_getState = function(){		return loc_withState.getBackupState();	};
-
 	var loc_out = {
 
 		getStateMachine : function(){  return loc_stateMachine;   },
@@ -295,7 +288,7 @@ var node_createComponentLifecycleEntity = function(withState, withLifecycle, thi
 
 	};
 
-	loc_init(componentCoreComplex, id);
+	loc_init(withState, withLifecycle, thisContext, id);
 	
 	return loc_out;
 };
@@ -333,12 +326,7 @@ var node_getStateMachineDefinition = function(){
 //*******************************************   End Node Definition  ************************************** 	
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interface.buildInterface", function(){node_buildInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interface.getInterface", function(){node_getInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectName", function(){node_getObjectName = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
-nosliw.registerSetNodeDataEvent("request.utility", function(){node_requestUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
@@ -347,8 +335,6 @@ nosliw.registerSetNodeDataEvent("statemachine.createStateMachine", function(){no
 nosliw.registerSetNodeDataEvent("statemachine.SMCommandInfo", function(){node_SMCommandInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("statemachine.createStateMachineDef", function(){node_createStateMachineDef = this.getData();	});
 nosliw.registerSetNodeDataEvent("statemachine.SMTransitDefinition", function(){node_SMTransitDefinition = this.getData();	});
-nosliw.registerSetNodeDataEvent("statemachine.StateTransitPath", function(){node_StateTransitPath = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createComponentState", function(){node_createComponentState = this.getData();});
 nosliw.registerSetNodeDataEvent("statemachine.createStateMachineTask", function(){node_createStateMachineTask = this.getData();});
 

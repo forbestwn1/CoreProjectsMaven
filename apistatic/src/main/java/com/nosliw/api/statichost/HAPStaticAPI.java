@@ -271,7 +271,6 @@ public class HAPStaticAPI {
 				"rule",
 				"remoteservice",
 				"error",
-				"runtime",
 				"runtimebrowser",
 				"uicommon",
 				"uitag",

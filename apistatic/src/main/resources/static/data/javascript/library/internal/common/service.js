@@ -3,7 +3,6 @@ var packageObj = library.getChildPackage("service");
 
 (function(packageObj){
 	//get used node
-	var node_basicUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
 /*

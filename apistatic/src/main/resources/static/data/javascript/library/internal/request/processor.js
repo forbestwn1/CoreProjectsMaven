@@ -5,8 +5,7 @@ var packageObj = library;
 	//get used node
 	var node_createEventObject;
 	var node_CONSTANT;
-	var node_ServiceData;
-	var node_requestProcessErrorUtility;
+var node_requestProcessErrorUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var loc_RequestInfo = function(request, processRemote, attchedTo){
@@ -389,7 +388,6 @@ var node_createRequestServiceProcessor = function(){
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestProcessErrorUtility", function(){node_requestProcessErrorUtility = this.getData();});
 
 //Register Node by Name

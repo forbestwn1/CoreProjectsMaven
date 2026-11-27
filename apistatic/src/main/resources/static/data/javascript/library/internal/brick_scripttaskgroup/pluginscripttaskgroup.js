@@ -5,17 +5,9 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_createServiceRequestInfoSimple;
+var node_createServiceRequestInfoSimple;
 	var node_createServiceRequestInfoSequence;
-	var node_ServiceInfo;
-	var node_createConfigure;
-	var node_createErrorData;
-	var node_componentUtility;
-	var node_requestServiceProcessor;
-	var node_createDataAssociation;
-	var node_createIODataSet;
-	var node_makeObjectWithApplicationInterface;
+var node_makeObjectWithApplicationInterface;
 	var node_getObjectType;
 	var node_createTaskContainerInterface;
 	
@@ -120,17 +112,9 @@ var loc_createScriptTaskGroup = function(scriptTaskGroupDef, valueContextId, bun
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
-nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
-nosliw.registerSetNodeDataEvent("error.entity.createErrorData", function(){node_createErrorData = this.getData();});
-nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
-nosliw.registerSetNodeDataEvent("iovalue.createDataAssociation", function(){node_createDataAssociation = this.getData();});
-nosliw.registerSetNodeDataEvent("iovalue.entity.createIODataSet", function(){node_createIODataSet = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("task.createTaskContainerInterface", function(){	node_createTaskContainerInterface = this.getData();	});

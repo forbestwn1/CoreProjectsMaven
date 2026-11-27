@@ -6,15 +6,12 @@ var packageObj = library;
 	var node_makeObjectWithName;
 	var node_makeObjectWithLifecycle;
 	var node_createIdService;
-	var node_createLoggingService;
-	var node_createResourceManager;
+var node_createResourceManager;
 	var node_createResourceService;
 	var node_createExpressionService;
 	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_createGatewayService;
-	var node_createTaskRuntimeFactory;
-	var node_createDataService;
+var node_createGatewayService;
+var node_createDataService;
 	var node_createRequestServiceProcessor;
 	var node_createSecurityService;
 	var node_createErrorManager;
@@ -127,7 +124,6 @@ var node_createRuntime = function(name){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithName", function(){node_makeObjectWithName = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("service.idservice.createIdService", function(){node_createIdService = this.getData();});
@@ -135,7 +131,6 @@ nosliw.registerSetNodeDataEvent("resource.createResourceManager", function(){nod
 nosliw.registerSetNodeDataEvent("expression.service.createExpressionService", function(){node_createExpressionService = this.getData();});
 nosliw.registerSetNodeDataEvent("resource.createResourceService", function(){node_createResourceService = this.getData();});
 nosliw.registerSetNodeDataEvent("runtime.createGatewayService", function(){node_createGatewayService = this.getData();});
-nosliw.registerSetNodeDataEvent("task.createTaskRuntimeFactory", function(){node_createTaskRuntimeFactory = this.getData();});
 nosliw.registerSetNodeDataEvent("dataservice.createDataService", function(){node_createDataService = this.getData();});
 nosliw.registerSetNodeDataEvent("request.createRequestServiceProcessor", function(){ node_createRequestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("security.createSecurityService", function(){ node_createSecurityService = this.getData();});

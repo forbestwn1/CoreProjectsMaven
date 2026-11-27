@@ -9,14 +9,9 @@ var packageObj = library.getChildPackage();
 	var node_makeObjectWithLifecycle;
 	var node_createEventObject;
 	var node_getLifecycleInterface;
-	var node_getApplicationInterface;
-	var node_getEntityObjectInterface;
-	var node_createVariablesGroup;
-	var node_createServiceRequestInfoSequence;
-	var node_ServiceInfo;
-	var node_requestServiceProcessor;
-	var node_basicUtility;
-	var node_expressionUtility;
+var node_createVariablesGroup;
+var node_requestServiceProcessor;
+var node_expressionUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
 
@@ -145,13 +140,8 @@ nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){no
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("variable.createVariablesGroup", function(){  node_createVariablesGroup = this.getData();});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
-nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();});
 
 packageObj.createChildNode("createExpressionTaskWatch", node_createExpressionTaskWatch); 

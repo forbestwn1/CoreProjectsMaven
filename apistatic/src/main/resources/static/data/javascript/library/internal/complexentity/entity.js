@@ -3,15 +3,10 @@ var packageObj = library.getChildPackage("entity");
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
+var node_COMMONCONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_createServiceRequestInfoSequence;
-	var node_createServiceRequestInfoSimple;
-	var node_makeObjectWithType;
-	var node_complexEntityUtility;
-	var node_getApplicationInterface;
-	var node_basicUtility;
+var node_complexEntityUtility;
+var node_basicUtility;
 	var node_namingConvensionUtility;
 	
 //*******************************************   Start Node Definition  ************************************** 	
@@ -400,14 +395,9 @@ var loc_createAttributeValueWithDynamic = function(valueWrapper){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
 

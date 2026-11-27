@@ -5,24 +5,10 @@ var packageObj = library;
 (function(packageObj){
 	//get used node
 	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_COMMONATRIBUTECONSTANT;
-	var node_ServiceInfo;
-	var node_createServiceRequestInfoSimple;
-	var node_createServiceRequestInfoSequence;
-	var node_makeObjectWithType;
-	var node_resourceUtility;
-	var node_createPackageDebugView;
-	var node_createConfigure;
+var node_COMMONATRIBUTECONSTANT;
+var node_makeObjectWithType;
+var node_createConfigure;
 	var node_basicUtility;
-	var node_componentUtility;
-	var node_namingConvensionUtility;
-	var node_getEntityTreeNodeInterface;
-	var node_makeObjectWithApplicationInterface;
-	var node_getApplicationInterface;
-	var node_taskExecuteUtility;
-	var node_requestServiceProcessor;
-	
 //*******************************************   Start Node Definition  ************************************** 	
 
 //bundle is executable resource unit
@@ -139,23 +125,10 @@ var node_createDynamicCore = function(dynamicDef, bundleCore, configure){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
-nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("debug.createPackageDebugView", function(){node_createPackageDebugView = this.getData();});
 nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.getEntityTreeNodeInterface", function(){node_getEntityTreeNodeInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("task.taskExecuteUtility", function(){node_taskExecuteUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 
 
 //Register Node by Name

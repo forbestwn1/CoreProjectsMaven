@@ -4,7 +4,6 @@ var packageObj = library;
 (function(packageObj){
 //get used node
 var node_CONSTANT;
-var node_COMMONCONSTANT;
 //*******************************************   Start Node Definition  ************************************** 	
 
 // indicator ui to indicate the start of request and end of request
@@ -60,7 +59,6 @@ var node_utility = function(){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 
 
 

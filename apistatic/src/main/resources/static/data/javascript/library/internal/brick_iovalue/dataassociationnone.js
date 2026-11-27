@@ -3,10 +3,7 @@ var packageObj = library;
 
 (function(packageObj){
 	//get used node
-	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_ServiceInfo;
-	var node_createServiceRequestInfoSimple;
+var node_createServiceRequestInfoSimple;
 	
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -19,9 +16,6 @@ var node_getExecuteNoneDataAssociationRequest = function(inputDataSet, associati
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
 
 //Register Node by Name

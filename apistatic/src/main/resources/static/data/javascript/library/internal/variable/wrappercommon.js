@@ -15,14 +15,11 @@ var node_basicUtility;
 var node_dataUtility;
 var node_pathUtility;
 var node_wrapperFactory;
-var node_namingConvensionUtility;
 var node_createServiceRequestInfoSequence;
 var node_valueInVarOperationServiceUtility;
 var node_createServiceRequestInfoSimple;
 var node_ServiceInfo;
-var node_createServiceRequestInfoSet;
 var node_requestServiceProcessor;
-var node_createWrapperOrderedContainer;
 var node_RelativeEntityInfo;
 	
 //*******************************************   Start Node Definition  ************************************** 	
@@ -639,14 +636,11 @@ nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_b
 nosliw.registerSetNodeDataEvent("variable.valueinvar.utility", function(){node_dataUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.path.pathUtility", function(){node_pathUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("variable.wrapper.wrapperFactory", function(){node_wrapperFactory = this.getData();});
-nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.valueInVarOperationServiceUtility", function(){node_valueInVarOperationServiceUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSet", function(){node_createServiceRequestInfoSet = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.wrapper.createWrapperOrderedContainer", function(){node_createWrapperOrderedContainer = this.getData();});
 nosliw.registerSetNodeDataEvent("common.reference.RelativeEntityInfo", function(){node_RelativeEntityInfo = this.getData();});
 
 

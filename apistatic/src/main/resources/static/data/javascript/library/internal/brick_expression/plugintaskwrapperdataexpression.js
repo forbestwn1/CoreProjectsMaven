@@ -5,19 +5,11 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_buildComponentInterface;
-	var node_createServiceRequestInfoSequence;
-	var node_ServiceInfo;
-	var node_ResourceId;
-	var node_resourceUtility;
-	var node_componentUtility;
-	var node_createServiceRequestInfoSimple;
+var node_createServiceRequestInfoSequence;
+var node_createServiceRequestInfoSimple;
 	var node_expressionUtility;
 	var node_makeObjectWithApplicationInterface;
-    var node_createTaskContainerInterface;
-	var node_createTaskInterface;
-	var node_createTaskCore;
+var node_createTaskCore;
 	var node_interactiveUtility;
 	var node_ruleUtility;
 	
@@ -105,19 +97,11 @@ var loc_createTaskWrapperDataExpressionCore = function(complexEntityDef, valueCo
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("component.buildComponentCore", function(){node_buildComponentInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
-nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_ResourceId = this.getData();	});
-nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtility = this.getData();	});
-nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("task.createTaskContainerInterface", function(){	node_createTaskContainerInterface = this.getData();	});
-nosliw.registerSetNodeDataEvent("task.createTaskInterface", function(){	node_createTaskInterface = this.getData();	});
 nosliw.registerSetNodeDataEvent("task.createTaskCore", function(){node_createTaskCore = this.getData();});
 nosliw.registerSetNodeDataEvent("task.interactiveUtility", function(){	node_interactiveUtility = this.getData();	});
 nosliw.registerSetNodeDataEvent("rule.ruleUtility", function(){	node_ruleUtility = this.getData();	});

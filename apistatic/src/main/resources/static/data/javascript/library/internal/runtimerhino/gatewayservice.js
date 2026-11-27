@@ -4,12 +4,10 @@ var packageObj = library;
 (function(packageObj){
 	//get used node
 	var node_buildServiceProvider;
-	var node_requestUtility;
-	var node_createServiceRequestInfoExecutor;
+var node_createServiceRequestInfoExecutor;
 	var node_requestServiceProcessor;
 	var node_ServiceInfo;
-	var node_ServiceRequestExecuteInfo;
-	var node_COMMONATRIBUTECONSTANT;
+var node_COMMONATRIBUTECONSTANT;
 	var node_errorUtility;
 	var node_CONSTANT;
 //*******************************************   Start Node Definition  ************************************** 	
@@ -77,12 +75,10 @@ var node_createGatewayService = function(){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("request.utility", function(){node_requestUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.buildServiceProvider", function(){node_buildServiceProvider = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoExecutor", function(){node_createServiceRequestInfoExecutor = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();});
-nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){node_ServiceRequestExecuteInfo = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("error.errorUtility", function(){node_errorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});

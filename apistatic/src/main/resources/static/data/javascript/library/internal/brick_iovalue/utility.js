@@ -11,10 +11,6 @@ var packageObj = library;
 	var node_ServiceInfo;
 	var node_getObjectType;
 	var node_createIODataSet;
-	var node_createDynamicIOData;
-	var node_getEntityObjectInterface;
-	var node_createValueInVarOperationRequest;
-	var node_ValueInVarOperation;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_utility = function(){
@@ -147,10 +143,6 @@ nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple"
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("iovalue.entity.createIODataSet", function(){node_createIODataSet = this.getData();});
-nosliw.registerSetNodeDataEvent("iovalue.entity.createDynamicData", function(){node_createDynamicIOData = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.createValueInVarOperationRequest", function(){node_createValueInVarOperationRequest = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.ValueInVarOperation", function(){node_ValueInVarOperation = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("dataIOUtility", node_utility); 

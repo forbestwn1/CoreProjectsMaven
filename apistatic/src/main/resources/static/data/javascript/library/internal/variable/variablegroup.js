@@ -4,15 +4,10 @@ var packageObj = library.getChildPackage();
 (function(packageObj){
 //get used node
 	var node_CONSTANT;
-	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_makeObjectWithType;
-	var node_getObjectType;
-	var node_makeObjectWithLifecycle;
+var node_makeObjectWithLifecycle;
 	var node_getLifecycleInterface;
 	var node_createRequestEventGroupHandler;
-	var node_createValuePortElementInfo;
-	var node_valuePortUtilityResolvedVariable;
+var node_valuePortUtilityResolvedVariable;
 //*******************************************   Start Node Definition  ************************************** 	
 /**
  * this is a factory to create variables group
@@ -86,14 +81,9 @@ var node_createVariablesGroup = function(valuePortEnv, variableIdsArray, handler
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("request.event.createRequestEventGroupHandler", function(){node_createRequestEventGroupHandler = this.getData();});
-nosliw.registerSetNodeDataEvent("valueport.createValuePortElementInfo", function(){node_createValuePortElementInfo = this.getData();});
 nosliw.registerSetNodeDataEvent("valueport.valuePortUtilityResolvedVariable", function(){node_valuePortUtilityResolvedVariable = this.getData();});
 
 //Register Node by Name

@@ -12,8 +12,7 @@ var packageObj = library;
 	var node_createServiceRequestInfoCommon;
 	var node_ServiceRequestExecuteInfo;
 	var node_buildServiceProvider;
-	var node_RequestResult;
-	var node_requestServiceProcessor;
+var node_requestServiceProcessor;
 	var node_SMTransitInfo;
 	
 //*******************************************   Start Node Definition  ************************************** 	
@@ -433,7 +432,6 @@ nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple"
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoCommon", function(){	node_createServiceRequestInfoCommon = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){	node_ServiceRequestExecuteInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.buildServiceProvider", function(){node_buildServiceProvider = this.getData();});
-nosliw.registerSetNodeDataEvent("request.entity.RequestResult", function(){node_RequestResult = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("statemachine.SMTransitInfo", function(){node_SMTransitInfo = this.getData();});
 

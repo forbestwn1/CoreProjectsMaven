@@ -4,20 +4,11 @@ var packageObj = library.getChildPackage();
 (function(packageObj){
 	//get used node
 	var node_CONSTANT;
-	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_getComponentLifecycleInterface;
-	var node_createIODataSet;
-	var node_requestServiceProcessor;
-	var node_createAppConfigure;
-	var node_createModuleConfigure;
-	var node_createServiceRequestInfoSimple;
-	var node_createServiceRequestInfoSequence;
+var node_getComponentLifecycleInterface;
+var node_requestServiceProcessor;
+var node_createServiceRequestInfoSequence;
 	var node_ResourceId;
-	var node_createConfigure;
-	var node_resourceUtility;
-
-	var node_createComponentLifeCycleDebugView;
+var node_createComponentLifeCycleDebugView;
 	var node_createComponentDataView;
 	var node_createComponentEventView;
 	var node_createComponentResetView;
@@ -125,20 +116,11 @@ var node_createComponentDebugTool = function(views, resourceType, resourceId, in
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("component.getComponentLifecycleInterface", function(){node_getComponentLifecycleInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("component.createStateBackupService", function(){node_createStateBackupService = this.getData();});
-nosliw.registerSetNodeDataEvent("uimodule.createModuleConfigure", function(){node_createModuleConfigure = this.getData();});
-nosliw.registerSetNodeDataEvent("iovalue.entity.createIODataSet", function(){node_createIODataSet = this.getData();});
-nosliw.registerSetNodeDataEvent("uiapp.createAppConfigure", function(){node_createAppConfigure = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){	node_ResourceId = this.getData();	});
-nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
-nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtility = this.getData();});
 
 
 nosliw.registerSetNodeDataEvent("debug.createComponentLifeCycleDebugView", function(){node_createComponentLifeCycleDebugView = this.getData();});

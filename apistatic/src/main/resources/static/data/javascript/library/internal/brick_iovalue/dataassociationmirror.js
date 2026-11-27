@@ -4,8 +4,7 @@ var packageObj = library;
 (function(packageObj){
 	//get used node
 	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_createServiceRequestInfoSet;
+var node_createServiceRequestInfoSet;
 	var node_dataIOUtility;
 	var node_ServiceInfo;
 	var node_createServiceRequestInfoSequence;
@@ -61,7 +60,6 @@ var node_getExecuteMirrorDataAssociationRequest = function(inputDataSet, associa
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSet", function(){node_createServiceRequestInfoSet = this.getData();});
 nosliw.registerSetNodeDataEvent("iovalue.dataIOUtility", function(){node_dataIOUtility = this.getData();	});

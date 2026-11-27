@@ -3,10 +3,8 @@ var packageObj = library.getChildPackage("empty");
 
 (function(packageObj){
 	//get used node
-	var node_basicUtility;
-	var node_makeObjectWithType;
-	var node_getObjectType;
-	var node_CONSTANT;
+var node_makeObjectWithType;
+var node_CONSTANT;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_createEmptyValue = function(){
@@ -21,8 +19,6 @@ var node_createEmptyValue = function(){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 

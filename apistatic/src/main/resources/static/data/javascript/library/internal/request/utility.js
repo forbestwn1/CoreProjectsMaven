@@ -5,8 +5,7 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_eventUtility;
-	var node_getObjectType;
-	var node_createServiceRequestInfoSimple;
+var node_createServiceRequestInfoSimple;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_utility = function(){
@@ -176,7 +175,6 @@ var node_utility = function(){
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 
 //Register Node by Name

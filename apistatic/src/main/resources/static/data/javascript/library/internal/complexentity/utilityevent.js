@@ -3,13 +3,9 @@ var packageObj = library;
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONATRIBUTECONSTANT;
+var node_COMMONATRIBUTECONSTANT;
 	var node_COMMONCONSTANT;
-	var node_createServiceRequestInfoSequence;
-	var node_createServiceRequestInfoSimple;
-	var node_createServiceRequestInfoService;
-	var node_complexEntityUtility;
+var node_complexEntityUtility;
 	var node_createTaskSetup;
 	var node_taskUtility;
 	var node_taskExecuteUtility;
@@ -63,12 +59,8 @@ var node_uiEventUtility = function(){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoService", function(){node_createServiceRequestInfoService = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("task.createTaskSetup", function(){node_createTaskSetup = this.getData();});
 nosliw.registerSetNodeDataEvent("task.taskUtility", function(){node_taskUtility = this.getData();});

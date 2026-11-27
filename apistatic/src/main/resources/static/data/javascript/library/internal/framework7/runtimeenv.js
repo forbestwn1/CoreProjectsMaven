@@ -3,8 +3,6 @@ var packageObj = library;
 
 (function(packageObj){
 //get used node
-var node_CONSTANT;
-var node_COMMONCONSTANT;
 var node_framework7Utility;
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -103,8 +101,6 @@ var node_createRuntimeEnv = function(parentView){
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("framework7.utility", function(){node_framework7Utility = this.getData();});
 
 //Register Node by Name

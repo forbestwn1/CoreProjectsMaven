@@ -3,9 +3,9 @@ var packageObj = library.getChildPackage("utility");
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_namingConvensionUtility;
+var node_namingConvensionUtility;
+var node_COMMONCONSTANT;
+
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_basicUtility = 
@@ -175,9 +175,8 @@ var node_basicUtility =
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
+nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 
 
 //Register Node by Name

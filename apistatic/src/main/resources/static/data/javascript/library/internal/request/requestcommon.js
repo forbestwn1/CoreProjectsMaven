@@ -7,12 +7,10 @@ var packageObj = library.getChildPackage("request");
 	var node_getObjectType;
 	var node_CONSTANT;
 	var node_requestUtility;
-	var node_eventUtility;
-	var node_basicUtility;
+var node_basicUtility;
 	var node_errorUtility;
 	var node_createEventObject;
-	var node_ServiceData;
-	var node_requestProcessErrorUtility;
+var node_requestProcessErrorUtility;
 	var node_RequestResult;
 	var node_ServiceRequestExecuteInfo;
 //*******************************************   Start Node Definition  ************************************** 	
@@ -428,11 +426,9 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", functi
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.utility", function(){node_requestUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("error.errorUtility", function(){node_errorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
-nosliw.registerSetNodeDataEvent("error.entity.ServiceData", function(){node_ServiceData = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestProcessErrorUtility", function(){node_requestProcessErrorUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.entity.RequestResult", function(){node_RequestResult = this.getData();});
 nosliw.registerSetNodeDataEvent("request.entity.ServiceRequestExecuteInfo", function(){node_ServiceRequestExecuteInfo = this.getData();});

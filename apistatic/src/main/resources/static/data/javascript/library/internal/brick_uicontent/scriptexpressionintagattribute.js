@@ -5,12 +5,10 @@ var packageObj = library;
 	//get used node
 	var node_CONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
-	var node_makeObjectWithLifecycle;
+var node_makeObjectWithLifecycle;
 	var node_createEventObject;
 	var node_getLifecycleInterface;
-	var node_createTaskGroupItemWatch;
-    var node_createExpressionTaskWatch;
+var node_createExpressionTaskWatch;
     var node_getItemValueInContainer;
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -84,12 +82,10 @@ var packageObj = library;
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("task.createTaskGroupItemWatch", function(){node_createTaskGroupItemWatch = this.getData();});
 nosliw.registerSetNodeDataEvent("expression.createExpressionTaskWatch", function(){node_createExpressionTaskWatch = this.getData();});
 nosliw.registerSetNodeDataEvent("common.valuecontainer.getItemValueInContainer", function(){node_getItemValueInContainer = this.getData();});
 

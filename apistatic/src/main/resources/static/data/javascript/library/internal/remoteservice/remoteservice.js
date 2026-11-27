@@ -4,8 +4,6 @@ var packageObj = library;
 (function(packageObj){
 //get used node
 var node_createConfiguresBase;
-var node_remoteServiceUtility;
-var node_RemoteServiceTask;
 var node_createRemoteSyncTask;
 var node_COMMONCONSTANT;
 var node_CONSTANT;
@@ -204,8 +202,6 @@ var node_createRemoteService = function(){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("common.setting.createConfiguresBase", function(){node_createConfiguresBase = this.getData();});
-nosliw.registerSetNodeDataEvent("remote.utility", function(){node_remoteServiceUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("remote.entity.RemoteServiceTask", function(){node_RemoteServiceTask = this.getData();});
 nosliw.registerSetNodeDataEvent("remote.entity.createRemoteSyncTask", function(){node_createRemoteSyncTask = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});

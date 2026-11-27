@@ -4,9 +4,6 @@ var packageObj = library;
 (function(packageObj){
 //get used node
 var node_CONSTANT;
-var node_COMMONCONSTANT;
-var node_COMMONATRIBUTECONSTANT;
-var node_createConfigures;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_utility = function(){
@@ -76,9 +73,6 @@ var node_utility = function(){
 //*******************************************   End Node Definition  ************************************** 	
 
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.setting.createConfigures", function(){node_createConfigures = this.getData();});
 
 
 //Register Node by Name

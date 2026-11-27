@@ -3,9 +3,7 @@ var packageObj = library.getChildPackage("utility");
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_COMMONATRIBUTECONSTANT;
+var node_COMMONATRIBUTECONSTANT;
 	var node_basicUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -28,8 +26,6 @@ var node_dataUtility =
 //*******************************************   End Node Definition  ************************************** 	
 
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 

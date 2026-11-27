@@ -7,8 +7,7 @@ var packageObj = library;
 	var node_getComponentLifecycleInterface;
 	var node_createConfigure;
 	var node_basicUtility;
-	var node_buildComponentInterface;
-	var node_createServiceRequestInfoSequence;
+var node_createServiceRequestInfoSequence;
 	var node_ServiceInfo;
 	var node_getBasicEntityObjectInterface;
 	var node_createServiceRequestInfoSimple;
@@ -154,7 +153,6 @@ nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = 
 nosliw.registerSetNodeDataEvent("component.getComponentLifecycleInterface", function(){node_getComponentLifecycleInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("configure.createConfigure", function(){node_createConfigure = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.buildComponentCore", function(){node_buildComponentInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getBasicEntityObjectInterface", function(){node_getBasicEntityObjectInterface = this.getData();});

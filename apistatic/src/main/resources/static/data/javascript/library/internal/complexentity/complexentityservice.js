@@ -3,30 +3,24 @@ var packageObj = library;
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
+var node_COMMONCONSTANT;
 	var node_COMMONATRIBUTECONSTANT;
-	var node_basicUtility;
-	var node_createServiceRequestInfoSimple;
+var node_createServiceRequestInfoSimple;
 	var node_createServiceRequestInfoSet;
 	var node_createServiceRequestInfoSequence;
 	var node_ServiceInfo;
 	var node_requestServiceProcessor;
 	var node_createBundleCore;
-	var node_EntityIdInDomain;
-	var node_buildEntityPlugInObject;
+var node_buildEntityPlugInObject;
 	var node_buildAdapterPlugInObject;
 	var node_createComponentRuntime;
 	var node_componentUtility;
 	var node_createApplication;
 	var node_createLifeCycleRuntimeContext;
-	var node_buildComponentInterface;
-	var node_makeObjectWithComponentManagementInterface;
+var node_makeObjectWithComponentManagementInterface;
 	var node_createBrickDefinition;
 	var node_getObjectType;
-	var node_createStateBackupService;
-	
-    var node_makeObjectWithEmbededEntityInterface;
+var node_makeObjectWithEmbededEntityInterface;
     var node_getEmbededEntityInterface;
 
     var node_makeObjectWithComponentInterface;
@@ -35,10 +29,8 @@ var packageObj = library;
     var node_makeObjectEntityObjectInterface; 
     var node_getEntityObjectInterface;
     var node_makeObjectEntityTreeNodeInterface;
-    var node_getEntityTreeNodeInterface;
-	var node_makeObjectWithId;
-	var node_complexEntityUtility;
-	var node_makeObjectWithType;
+var node_makeObjectWithId;
+var node_makeObjectWithType;
 	var node_buildComplexEntityCreationVariationPointObject;
     var node_createDynamicCore;
     
@@ -62,8 +54,7 @@ var packageObj = library;
 	var node_createExpressionSinglePlugin;
 	var node_createTaskPlugin;
 	var node_createScriptTaskTaskPlugin;
-	var node_createDecorationScriptPlugin;
-	var node_createScriptTaskGroupEntityPlugin;
+var node_createScriptTaskGroupEntityPlugin;
 	var node_createFlowTaskPlugin;
 	var node_createTaskActivityPlugin;
 	var node_createDynamicActivityPlugin;
@@ -75,8 +66,7 @@ var packageObj = library;
 	var node_makeObjectWithValuePortInterface;
 	var node_createWrapperBrickPlugin;
 	var node_createModulePlugin;
-	var node_getObjectId;
-	var node_configureUtility;
+var node_configureUtility;
 
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -445,28 +435,23 @@ var node_createComplexEntityRuntimeService = function() {
 
 //*******************************************   End Node Definition  ************************************** 	
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSet", function(){	node_createServiceRequestInfoSet = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.createBundleCore", function(){node_createBundleCore = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.entity.EntityIdInDomain", function(){node_EntityIdInDomain = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.buildEntityPlugInObject", function(){node_buildEntityPlugInObject = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.buildAdapterPlugInObject", function(){node_buildAdapterPlugInObject = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createComponentRuntime", function(){node_createComponentRuntime = this.getData();});
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.createApplication", function(){node_createApplication = this.getData();});
-nosliw.registerSetNodeDataEvent("component.buildComponentCore", function(){node_buildComponentInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createLifeCycleRuntimeContext", function(){node_createLifeCycleRuntimeContext = this.getData();});
 nosliw.registerSetNodeDataEvent("component.makeObjectWithComponentManagementInterface", function(){node_makeObjectWithComponentManagementInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.entity.createBrickDefinition", function(){node_createBrickDefinition = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
-nosliw.registerSetNodeDataEvent("component.createStateBackupService", function(){node_createStateBackupService = this.getData();});
 
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithEmbededEntityInterface", function(){node_makeObjectWithEmbededEntityInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getEmbededEntityInterface", function(){node_getEmbededEntityInterface = this.getData();});
@@ -478,9 +463,7 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectBasicEntityObject
 nosliw.registerSetNodeDataEvent("complexentity.makeObjectEntityObjectInterface", function(){node_makeObjectEntityObjectInterface = this.getData();}); 
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.makeObjectEntityTreeNodeInterface", function(){node_makeObjectEntityTreeNodeInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.getEntityTreeNodeInterface", function(){node_getEntityTreeNodeInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithId", function(){node_makeObjectWithId = this.getData();});
-nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("scriptbased.createScriptBasedPlugin", function(){node_createScriptBasedPlugin = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.buildComplexEntityCreationVariationPointObject", function(){node_buildComplexEntityCreationVariationPointObject = this.getData();});
@@ -524,7 +507,6 @@ nosliw.registerSetNodeDataEvent("entitycontainer.createContainerListPlugin", fun
 nosliw.registerSetNodeDataEvent("valueport.makeObjectWithValuePortInterface", function(){node_makeObjectWithValuePortInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.createContainerPlugin", function(){node_createWrapperBrickPlugin = this.getData();});
 nosliw.registerSetNodeDataEvent("module.createModulePlugin", function(){node_createModulePlugin = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectId", function(){node_getObjectId = this.getData();});
 
 nosliw.registerSetNodeDataEvent("configure.configureUtility", function(){node_configureUtility = this.getData();});
 

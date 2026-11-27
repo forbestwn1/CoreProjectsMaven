@@ -6,20 +6,14 @@ var packageObj = library;
 	var node_makeObjectWithName;
 	var node_makeObjectWithLifecycle;
 	var node_createIdService;
-	var node_createLoggingService;
-	var node_createResourceManager;
+var node_createResourceManager;
 	var node_createResourceService;
 	var node_createExpressionService;
 	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_createRemoteService;
+var node_createRemoteService;
 	var node_createGatewayService;
-	var node_createMiniAppService;
-	var node_createTaskRuntimeFactory;
-	var node_createDataService;
+var node_createDataService;
 	var node_createUIPageService;
-	var node_createUIModuleService;
-	var node_createUIAppService;
 	var node_createRequestServiceProcessor;
 	var node_createErrorManager;
 	var node_createStoreService;
@@ -58,10 +52,6 @@ var node_createRuntime = function(name){
 	
 	var loc_uiPageService;
 	
-	var loc_uiModuleService;
-
-	var loc_uiAppService;
-
 	var loc_requestProcessor;
 	
 	var loc_securityService;
@@ -98,10 +88,6 @@ var node_createRuntime = function(name){
 		
 		getUIPageService(){		return loc_uiPageService;		},
 		
-		getUIModuleService(){   return loc_uiModuleService; },
-
-		getUIAppService(){   return loc_uiAppService; },
-
 		getRequestProcessor(){   return  loc_requestProcessor;  },
 
 		getSecurityService(){  return  loc_securityService;  },
@@ -136,8 +122,6 @@ var node_createRuntime = function(name){
 		loc_variableManager = node_createVariableManager();
 
 		loc_uiService = node_createUIService(loc_complexEntityService);
-		loc_uiModuleService = node_createUIModuleService();
-		loc_uiAppService = node_createUIAppService();
 		
 		loc_requestProcessor = node_createRequestServiceProcessor();
 		nosliw.createNode("request.requestServiceProcessor", loc_requestProcessor); 
@@ -165,7 +149,6 @@ var node_createRuntime = function(name){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithName", function(){node_makeObjectWithName = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("service.idservice.createIdService", function(){node_createIdService = this.getData();});
@@ -174,12 +157,8 @@ nosliw.registerSetNodeDataEvent("expression.service.createExpressionService", fu
 nosliw.registerSetNodeDataEvent("resource.createResourceService", function(){node_createResourceService = this.getData();});
 nosliw.registerSetNodeDataEvent("remote.createRemoteService", function(){node_createRemoteService = this.getData();});
 nosliw.registerSetNodeDataEvent("runtime.createGatewayService", function(){node_createGatewayService = this.getData();});
-nosliw.registerSetNodeDataEvent("miniapp.service.createMiniAppService", function(){node_createMiniAppService = this.getData();});
-nosliw.registerSetNodeDataEvent("task.createTaskRuntimeFactory", function(){node_createTaskRuntimeFactory = this.getData();});
 nosliw.registerSetNodeDataEvent("dataservice.createDataService", function(){node_createDataService = this.getData();});
 nosliw.registerSetNodeDataEvent("uipage.createUIPageService", function(){node_createUIPageService = this.getData();});
-nosliw.registerSetNodeDataEvent("uimodule.service.createUIModuleService", function(){node_createUIModuleService = this.getData();});
-nosliw.registerSetNodeDataEvent("uiapp.service.createUIAppService", function(){node_createUIAppService = this.getData();});
 nosliw.registerSetNodeDataEvent("request.createRequestServiceProcessor", function(){ node_createRequestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("security.createSecurityService", function(){ node_createSecurityService = this.getData();});
 nosliw.registerSetNodeDataEvent("error.createErrorManager", function(){ node_createErrorManager = this.getData();});

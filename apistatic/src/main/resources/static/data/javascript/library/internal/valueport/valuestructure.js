@@ -7,22 +7,14 @@ var node_CONSTANT;
 var node_COMMONCONSTANT;
 var node_COMMONATRIBUTECONSTANT;
 var node_makeObjectWithType;
-var node_getObjectType;
 var node_createEventObject;
-var node_eventUtility;
-var node_createContextElement;
 var node_createValueStructureVariableRef;
-var node_createVariable;
-var node_DataOperationService;
 var node_makeObjectWithLifecycle;
 var node_getLifecycleInterface;
-var node_namingConvensionUtility;
-var node_ServiceInfo;
 var node_dataUtility;
 var node_pathUtility;
 var node_createServiceRequestInfoSimple;
 var node_createVariableWrapper;
-var node_getHandleEachElementRequest;
 var node_createServiceRequestInfoSequence;
 var node_createServiceRequestInfoSet;
 var node_createValueInVarOperationRequest;
@@ -30,7 +22,6 @@ var node_valueInVarOperationServiceUtility;
 var node_ValueInVarOperation;
 var node_createRequestEventGroupHandler;
 var node_createEmptyValue;
-var node_createValueStructureElementCreateInfo;
 var node_createVariableCreateInfo;
 
 //*******************************************   Start Node Definition  ************************************** 	
@@ -484,17 +475,10 @@ nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = 
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.event.createEventObject", function(){node_createEventObject = this.getData();});
-nosliw.registerSetNodeDataEvent("common.event.utility", function(){node_eventUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.context.createContextElement", function(){node_createContextElement = this.getData();});
 nosliw.registerSetNodeDataEvent("valueport.valuestructure.createValueStructureVariableRef", function(){node_createValueStructureVariableRef = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.variable.createVariable", function(){node_createVariable = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.dataoperation.DataOperationService", function(){node_DataOperationService = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.makeObjectWithLifecycle", function(){node_makeObjectWithLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("common.lifecycle.getLifecycleInterface", function(){node_getLifecycleInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("variable.valueinvar.utility", function(){node_dataUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.path.pathUtility", function(){node_pathUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){node_createServiceRequestInfoSimple = this.getData();});
@@ -507,7 +491,6 @@ nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.valueInVarOperati
 nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.ValueInVarOperation", function(){node_ValueInVarOperation = this.getData();});
 nosliw.registerSetNodeDataEvent("request.event.createRequestEventGroupHandler", function(){node_createRequestEventGroupHandler = this.getData();});
 nosliw.registerSetNodeDataEvent("common.empty.createEmptyValue", function(){node_createEmptyValue = this.getData();});
-nosliw.registerSetNodeDataEvent("valueport.valuestructure.createValueStructureElementCreateInfo", function(){node_createValueStructureElementCreateInfo = this.getData();});
 nosliw.registerSetNodeDataEvent("valueport.valuestructure.createVariableCreateInfo", function(){node_createVariableCreateInfo = this.getData();});
 
 //Register Node by Name

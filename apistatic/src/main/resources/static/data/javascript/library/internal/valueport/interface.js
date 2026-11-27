@@ -3,19 +3,13 @@ var packageObj = library.getChildPackage();
 
 (function(packageObj){
 	//get used node
-	var node_COMMONATRIBUTECONSTANT;
-	var node_COMMONCONSTANT;
+var node_COMMONCONSTANT;
 	var node_CONSTANT;
-	var node_ServiceInfo;
-	var node_createServiceRequestInfoSequence;
-	var node_getEmbededEntityInterface;
+var node_getEmbededEntityInterface;
 	var node_buildInterface;
 	var node_getEntityObjectInterface;
 	var node_getInterface;
-	var node_valueInVarOperationServiceUtility;
-	var node_createValuePortValueContext;
-	var node_createValuePort;
-	var node_makeObjectWithType;
+var node_makeObjectWithType;
 //*******************************************   Start Node Definition  ************************************** 	
 
 var node_makeObjectWithValuePortInterface = function(rawEntity){
@@ -144,17 +138,11 @@ var node_buildValuePort = function(rawValuePort){
 
 //populate dependency node data
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
-nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getEmbededEntityInterface", function(){node_getEmbededEntityInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interface.buildInterface", function(){node_buildInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interface.getInterface", function(){node_getInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("variable.valueinvar.operation.valueInVarOperationServiceUtility", function(){node_valueInVarOperationServiceUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("valueport.createValuePortValueContext", function(){node_createValuePortValueContext = this.getData();});
-nosliw.registerSetNodeDataEvent("valueport.createValuePort", function(){node_createValuePort = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
 
 //Register Node by Name

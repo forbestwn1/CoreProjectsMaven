@@ -6,7 +6,6 @@ var packageObj = library.getChildPackage("wrapper");
 var node_CONSTANT;
 var node_getObjectType;
 var node_createWraperCommon;
-var node_getObjectId;
 var node_basicUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -80,7 +79,6 @@ var node_wrapperFactory = function(){
 nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("variable.wrapper.createWraperCommon", function(){node_createWraperCommon = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectId", function(){node_getObjectId = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 
 //Register Node by Name

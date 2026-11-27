@@ -3,13 +3,8 @@ var packageObj = library.getChildPackage("path");
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	var node_COMMONCONSTANT;
-	var node_buildInterface;
-	var node_getInterface;
-	var node_makeObjectWithType;
-	var node_getObjectType;
-	var node_basicUtility;
+var node_COMMONCONSTANT;
+var node_basicUtility;
 	var node_namingConvensionUtility;
 //*******************************************   Start Node Definition  ************************************** 	
 
@@ -142,12 +137,7 @@ var node_pathUtility = function(){
 
 //*******************************************   End Node Definition  ************************************** 	
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMONCONSTANT = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interface.buildInterface", function(){node_buildInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interface.getInterface", function(){node_getInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithType", function(){node_makeObjectWithType = this.getData();});
-nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){node_getObjectType = this.getData();});
 nosliw.registerSetNodeDataEvent("common.utility.basicUtility", function(){node_basicUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
 

@@ -3,8 +3,6 @@ var packageObj = library;
 
 (function(packageObj){
 	//get used node
-	var node_CONSTANT;
-	
 //*******************************************   Start Node Definition  **************************************
 var node_StateMachineTaskInfo = function(task, handlers, request){
 	this.task = task;
@@ -187,7 +185,6 @@ var node_createStateMachineDef = function(transitInfos, commandInfos){
 
 //*******************************************   End Node Definition  ************************************** 	
 //populate dependency node data
-nosliw.registerSetNodeDataEvent("constant.CONSTANT", function(){node_CONSTANT = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("SMTransitInfo", node_SMTransitInfo); 
