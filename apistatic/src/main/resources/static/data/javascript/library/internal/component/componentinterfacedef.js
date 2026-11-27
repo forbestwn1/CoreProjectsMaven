@@ -21,60 +21,9 @@ var packageObj = library;
 	var node_componentUtility;
 	var node_getBasicEntityObjectInterface;
 	var node_getEntityTreeNodeInterface;
+	var node_createComponentLifecycleEntity;
 
 //*******************************************   Start Node Definition  ************************************** 	
-
-var node_makeObjectWithApplicationInterface = function(baseObject, facadeName, interface){
-	var interfaces = node_getInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY);
-	if(interfaces==undefined){
-		interfaces = {};
-	}
-	interfaces[facadeName] = interface;
-	return node_buildInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY, interfaces);
-};
-
-var node_getApplicationInterface = function(baseObject, facadeName){
-	var interfaces = node_getInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY);
-	if(interfaces==undefined)   return interfaces;
-	else return interfaces[facadeName];
-};
-	
-//interface for decoration plug in
-var node_buildDecorationPlugInObject = function(rawPluginObj){
-	var loc_rawPluginObj = rawPluginObj;
-	
-	var loc_out = {
-
-		getInterface : function(){   return loc_rawPluginObj.getInterface==undefined?undefined:loc_rawPluginObj.getInterface();  },
-		
-		processComponentCoreEvent : function(eventName, eventData, request){	return loc_rawPluginObj.processComponentCoreEvent==undefined? undefined:loc_rawPluginObj.processComponentCoreEvent(eventName, eventData, request);	},
-		
-		processComponentCoreValueChangeEvent : function(eventName, eventData, request){	return loc_rawPluginObj.processComponentCoreValueChangeEvent==undefined? undefined:loc_rawPluginObj.processComponentCoreValueChangeEvent(eventName, eventData, request);},
-			
-		getProcessCommandRequest : function(command, parms, handlers, request){	return loc_rawPluginObj.getProcessCommandRequest==undefined? undefined:loc_rawPluginObj.getProcessCommandRequest(command, parms, handlers, request);},
-		getProcessNosliwCommandRequest : function(command, parms, handlers, request){	return this.getProcessCommandRequest(node_basicUtility.buildNosliwFullName(command), parms, handlers, request);},
-		
-		getUpdateViewRequest : function(view, handlers, request){
-			if(loc_rawPluginObj.getUpdateViewRequest!=undefined){
-				return loc_rawPluginObj.getUpdateViewRequest(view, handlers, request);
-			}
-			else{
-				//callback not defined, then return view 
-				return node_createServiceRequestInfoSimple(undefined, function(request){
-					return view;
-				}, handlers, request);
-			}
-		},
-		
-		getLifeCycleRequest : function(transitName, handlers, request){	return loc_rawPluginObj.getLifeCycleRequest==undefined?undefined:loc_rawPluginObj.getLifeCycleRequest(transitName, handlers, request);},
-		setLifeCycleStatus : function(status){},
-		
-		//restore data in state to decoration 
-		getRestoreStateDataRequest : function(handlers, request){return loc_rawPluginObj.getRestoreStateDataRequest==undefined? undefined:loc_rawPluginObj.getRestoreStateDataRequest(handlers, request);},
-	};
-	
-	return loc_out;
-};
 
 //interface for component core 
 var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debugMode){
@@ -113,31 +62,7 @@ var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debu
 		return loc_debugView;
 	};
 	
-	var loc_interfaceEntity = {
-
-		//execute command
-		getExecuteCommandRequest : function(commandName, parm, handlers, requestInfo){
-			return loc_rawComponentCore.getExecuteCommandRequest==undefined?null:loc_rawComponentCore.getExecuteCommandRequest(commandName, parm, handlers, requestInfo);
-		},
-		getExecuteNosliwCommandRequest : function(commandName, parm, handlers, requestInfo){   this.getExecuteCommandRequest(node_basicUtility.buildNosliwFullName(commandName), parm, handlers, requestInfo);    },
-
-		//get part by id
-		getPart : function(partId){ },
-		
-		//value by name
-		getValue : function(name){},
-		setValue : function(name, value){},
-		
-		getRawEntity : function(){   return loc_rawComponentCore.getRawEntity==undefined?loc_rawComponentCore:loc_rawComponentCore.getRawEntity();    },
-		
-		//************************* for debugging
-		getDataType: function(){  return loc_entityType;    },
-		
-		//************************* interface exposed by the core external
-		getAllInterfaceInfo : function(){  return loc_rawComponentCore.getAllInterfaceInfo!=undefined?loc_rawComponentCore.getAllInterfaceInfo():[];	},
-		getInterfaceExecutable : function(interfaceName){   return loc_rawComponentCore.getInterfaceExecutable!=undefined?loc_rawComponentCore.getInterfaceExecutable(interfaceName):undefined;    },
-		
-		//*************************state
+	var loc_withState = {
 		getBackupState : function(){   return loc_backupState;    },
 
 		getGetStateDataRequest : function(handlers, request){ 
@@ -180,6 +105,48 @@ var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debu
 			
 			return out;
 		},
+	};
+	
+	var loc_withLifecycle = {
+		getLifeCycleRequest : function(transitName, handlers, request){
+			if(loc_isDebugMode()){
+				loc_getDebugView().logMethodCalled(node_CONSTANT.COMPONENT_INTERFACE_LIFECYCLE, {
+					"transitName" : transitName
+				});
+			}
+			
+			if(loc_rawComponentCore.getLifeCycleRequest!=undefined)		return loc_rawComponentCore.getLifeCycleRequest(transitName, handlers, request);
+			else return node_createServiceRequestInfoSequence(undefined, handlers, request);
+		},
+
+	};
+	
+	
+	var loc_interfaceEntity = {
+
+		//execute command
+		getExecuteCommandRequest : function(commandName, parm, handlers, requestInfo){
+			return loc_rawComponentCore.getExecuteCommandRequest==undefined?null:loc_rawComponentCore.getExecuteCommandRequest(commandName, parm, handlers, requestInfo);
+		},
+		getExecuteNosliwCommandRequest : function(commandName, parm, handlers, requestInfo){   this.getExecuteCommandRequest(node_basicUtility.buildNosliwFullName(commandName), parm, handlers, requestInfo);    },
+
+		//get part by id
+		getPart : function(partId){ },
+		
+		//value by name
+		getValue : function(name){},
+		setValue : function(name, value){},
+		
+		getRawEntity : function(){   return loc_rawComponentCore.getRawEntity==undefined?loc_rawComponentCore:loc_rawComponentCore.getRawEntity();    },
+		
+		//************************* for debugging
+		getDataType: function(){  return loc_entityType;    },
+		
+		//************************* interface exposed by the core external
+		getAllInterfaceInfo : function(){  return loc_rawComponentCore.getAllInterfaceInfo!=undefined?loc_rawComponentCore.getAllInterfaceInfo():[];	},
+		getInterfaceExecutable : function(interfaceName){   return loc_rawComponentCore.getInterfaceExecutable!=undefined?loc_rawComponentCore.getInterfaceExecutable(interfaceName):undefined;    },
+		
+		//*************************state
 
 		//*************************event
 		registerEventListener : function(listener, handler, thisContext){  },
@@ -198,20 +165,9 @@ var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debu
 			return node_componentUtility.getInterfaceCallRequest(loc_rawComponentCore, node_getComponentInterface, "getPostInitRequest", [], handlers, request);
 		},
 		
-		getLifeCycleRequest : function(transitName, handlers, request){
-			if(loc_isDebugMode()){
-				loc_getDebugView().logMethodCalled(node_CONSTANT.COMPONENT_INTERFACE_LIFECYCLE, {
-					"transitName" : transitName
-				});
-			}
-			
-			if(loc_rawComponentCore.getLifeCycleRequest!=undefined)		return loc_rawComponentCore.getLifeCycleRequest(transitName, handlers, request);
-			else return node_createServiceRequestInfoSequence(undefined, handlers, request);
-		},
-
 		getLifecycleEntity : function(){   return loc_lifecycleEntity;    },
 		
-		updateBackupStateObject : function(backupStateObj){
+		updateBackupStateObject111111 : function(backupStateObj){
 			loc_backupState = backupStateObj;
 			
 			var treeNodeInterface = node_getEntityTreeNodeInterface(loc_rawComponentCore);
@@ -233,7 +189,7 @@ var node_makeObjectWithComponentInterface = function(entityType, rawEntity, debu
 		
 		updateLifecycleEntityObject : function(lifecycleEntityObj){
 			loc_lifecycleEntity = lifecycleEntityObj;
-			loc_lifecycleEntity.setComponentCore(this);
+			loc_lifecycleEntity.setLifecycleEntity(node_createComponentLifecycleEntity(loc_withState, loc_withLifecycle, this, loc_lifecycleEntity.getId()));
 			
 			var treeNodeInterface = node_getEntityTreeNodeInterface(loc_rawComponentCore);
 			if(treeNodeInterface!=undefined){
@@ -316,15 +272,14 @@ nosliw.registerSetNodeDataEvent("common.interface.getInterface", function(){node
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getBasicEntityObjectInterface", function(){node_getBasicEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityTreeNodeInterface", function(){node_getEntityTreeNodeInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("component.createComponentLifecycleEntity", function(){node_createComponentLifecycleEntity = this.getData();});
+
 
 
 //Register Node by Name
-packageObj.createChildNode("buildDecorationPlugInObject", node_buildDecorationPlugInObject); 
 packageObj.createChildNode("buildComponentEnv", node_buildComponentEnv); 
 packageObj.createChildNode("makeObjectWithComponentInterface", node_makeObjectWithComponentInterface); 
 packageObj.createChildNode("getComponentInterface", node_getComponentInterface); 
 
-packageObj.createChildNode("makeObjectWithApplicationInterface", node_makeObjectWithApplicationInterface); 
-packageObj.createChildNode("getApplicationInterface", node_getApplicationInterface); 
 
 })(packageObj);

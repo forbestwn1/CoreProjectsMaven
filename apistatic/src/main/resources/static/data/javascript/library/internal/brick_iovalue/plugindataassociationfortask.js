@@ -95,8 +95,8 @@ nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequenc
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
 nosliw.registerSetNodeDataEvent("iovalue.createDataAssociation", function(){node_createDataAssociation = this.getData();});
 nosliw.registerSetNodeDataEvent("task.taskExecuteUtility", function(){node_taskExecuteUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("component.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
 
 
 //Register Node by Name

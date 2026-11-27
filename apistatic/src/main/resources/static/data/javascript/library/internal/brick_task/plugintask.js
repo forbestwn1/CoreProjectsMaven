@@ -165,9 +165,9 @@ nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtil
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.getEntityTreeNodeInterface", function(){node_getEntityTreeNodeInterface = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("task.taskExecuteUtility", function(){node_taskExecuteUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.requestServiceProcessor", function(){node_requestServiceProcessor = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});

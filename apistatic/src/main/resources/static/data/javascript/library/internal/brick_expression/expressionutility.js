@@ -562,7 +562,7 @@ nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expression
 nosliw.registerSetNodeDataEvent("expression.dataUtility", function(){node_dataUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.namingconvension.namingConvensionUtility", function(){node_namingConvensionUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("complexentity.complexEntityUtility", function(){node_complexEntityUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("valueport.createValuePortElementInfo", function(){node_createValuePortElementInfo = this.getData();});
 nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){	node_ResourceId = this.getData();	});
 nosliw.registerSetNodeDataEvent("valueport.getWithValuePortInterface", function(){node_getWithValuePortInterface = this.getData();});

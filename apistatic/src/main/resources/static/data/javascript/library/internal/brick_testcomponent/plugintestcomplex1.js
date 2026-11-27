@@ -246,7 +246,7 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.getBasicEntityObjectInterfa
 nosliw.registerSetNodeDataEvent("complexentity.getEntityObjectInterface", function(){node_getEntityObjectInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("task.taskExecuteUtility", function(){node_taskExecuteUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectId", function(){node_getObjectId = this.getData();});
-nosliw.registerSetNodeDataEvent("component.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.getApplicationInterface", function(){node_getApplicationInterface = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createTestComplex1Plugin", node_createTestComplex1Plugin); 

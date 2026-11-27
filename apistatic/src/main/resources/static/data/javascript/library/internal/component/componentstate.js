@@ -15,7 +15,8 @@ var packageObj = library;
 
 //*******************************************   Start Node Definition  ************************************** 	
 
-//object to manage component state
+//bridge between state and component
+//
 var node_createComponentState = function(state, getGetStateDataRequest, getRestoreStateDataRequest){
 	//callback request for collecting component state data
 	var loc_getGetStateDataRequest = getGetStateDataRequest;

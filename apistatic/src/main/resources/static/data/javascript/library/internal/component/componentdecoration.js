@@ -21,6 +21,14 @@ var packageObj = library;
 
 var loc_BUNDLE_NAME = "bundle";	
 
+var node_DecorationInfo = function(name, type, version, id, configure){
+	this.name = name;
+	this.type = type;
+	this.version = version;
+	this.id = id;
+	this.configure = configure;
+};
+
 var node_createDecoration = function(decorationInfo){
 	
 	var loc_decorationInfo = decorationInfo;
@@ -193,6 +201,44 @@ var node_createComponentCoreDecoration = function(id, componentCore, decorationR
 	loc_out = node_makeObjectWithType(loc_out, node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTDECORATION);
 	return loc_out;
 };	
+
+//interface for decoration plug in
+var node_buildDecorationPlugInObject = function(rawPluginObj){
+	var loc_rawPluginObj = rawPluginObj;
+	
+	var loc_out = {
+
+		getInterface : function(){   return loc_rawPluginObj.getInterface==undefined?undefined:loc_rawPluginObj.getInterface();  },
+		
+		processComponentCoreEvent : function(eventName, eventData, request){	return loc_rawPluginObj.processComponentCoreEvent==undefined? undefined:loc_rawPluginObj.processComponentCoreEvent(eventName, eventData, request);	},
+		
+		processComponentCoreValueChangeEvent : function(eventName, eventData, request){	return loc_rawPluginObj.processComponentCoreValueChangeEvent==undefined? undefined:loc_rawPluginObj.processComponentCoreValueChangeEvent(eventName, eventData, request);},
+			
+		getProcessCommandRequest : function(command, parms, handlers, request){	return loc_rawPluginObj.getProcessCommandRequest==undefined? undefined:loc_rawPluginObj.getProcessCommandRequest(command, parms, handlers, request);},
+		getProcessNosliwCommandRequest : function(command, parms, handlers, request){	return this.getProcessCommandRequest(node_basicUtility.buildNosliwFullName(command), parms, handlers, request);},
+		
+		getUpdateViewRequest : function(view, handlers, request){
+			if(loc_rawPluginObj.getUpdateViewRequest!=undefined){
+				return loc_rawPluginObj.getUpdateViewRequest(view, handlers, request);
+			}
+			else{
+				//callback not defined, then return view 
+				return node_createServiceRequestInfoSimple(undefined, function(request){
+					return view;
+				}, handlers, request);
+			}
+		},
+		
+		getLifeCycleRequest : function(transitName, handlers, request){	return loc_rawPluginObj.getLifeCycleRequest==undefined?undefined:loc_rawPluginObj.getLifeCycleRequest(transitName, handlers, request);},
+		setLifeCycleStatus : function(status){},
+		
+		//restore data in state to decoration 
+		getRestoreStateDataRequest : function(handlers, request){return loc_rawPluginObj.getRestoreStateDataRequest==undefined? undefined:loc_rawPluginObj.getRestoreStateDataRequest(handlers, request);},
+	};
+	
+	return loc_out;
+};
+
 	
 
 //*******************************************   End Node Definition  ************************************** 	
@@ -215,5 +261,7 @@ nosliw.registerSetNodeDataEvent("resource.entity.ResourceId", function(){node_Re
 //Register Node by Name
 //packageObj.createChildNode("createComponentCoreDecoration", node_createComponentCoreDecoration); 
 packageObj.createChildNode("createDecoration", node_createDecoration); 
+packageObj.createChildNode("DecorationInfo", node_DecorationInfo); 
+packageObj.createChildNode("buildDecorationPlugInObject", node_buildDecorationPlugInObject); 
 
 })(packageObj);

@@ -15,6 +15,21 @@ var packageObj = library.getChildPackage("interfacedef");
 	var node_getObjectType;
 
 //*******************************************   Start Node Definition  **************************************
+var node_makeObjectWithApplicationInterface = function(baseObject, facadeName, interface){
+	var interfaces = node_getInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY);
+	if(interfaces==undefined){
+		interfaces = {};
+	}
+	interfaces[facadeName] = interface;
+	return node_buildInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY, interfaces);
+};
+
+var node_getApplicationInterface = function(baseObject, facadeName){
+	var interfaces = node_getInterface(baseObject, node_CONSTANT.INTERFACE_APPLICATIONENTITY);
+	if(interfaces==undefined)   return interfaces;
+	else return interfaces[facadeName];
+};
+	
 
 var node_makeObjectWithEmbededEntityInterface = function(rawEntity){
 	
@@ -153,6 +168,9 @@ nosliw.registerSetNodeDataEvent("common.interfacedef.getObjectType", function(){
 
 
 //Register Node by Name
+packageObj.createChildNode("makeObjectWithApplicationInterface", node_makeObjectWithApplicationInterface); 
+packageObj.createChildNode("getApplicationInterface", node_getApplicationInterface); 
+
 packageObj.createChildNode("makeObjectWithEmbededEntityInterface", node_makeObjectWithEmbededEntityInterface); 
 packageObj.createChildNode("getEmbededEntityInterface", node_getEmbededEntityInterface); 
 

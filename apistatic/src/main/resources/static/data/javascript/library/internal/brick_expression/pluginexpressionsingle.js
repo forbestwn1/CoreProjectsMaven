@@ -84,7 +84,7 @@ nosliw.registerSetNodeDataEvent("resource.utility", function(){node_resourceUtil
 nosliw.registerSetNodeDataEvent("component.componentUtility", function(){node_componentUtility = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSimple", function(){	node_createServiceRequestInfoSimple = this.getData();	});
 nosliw.registerSetNodeDataEvent("expression.utility", function(){node_expressionUtility = this.getData();});
-nosliw.registerSetNodeDataEvent("component.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
+nosliw.registerSetNodeDataEvent("common.interfacedef.makeObjectWithApplicationInterface", function(){node_makeObjectWithApplicationInterface = this.getData();});
 
 //Register Node by Name
 packageObj.createChildNode("createExpressionSinglePlugin", node_createExpressionSinglePlugin); 

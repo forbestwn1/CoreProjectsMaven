@@ -8,7 +8,6 @@ var packageObj = library;
 	var node_COMMONCONSTANT;
 	var node_createServiceRequestInfoSequence;
 	var node_ServiceInfo;
-	var node_makeObjectWithComponentLifecycle;
 	var node_getComponentInterface;
 	var node_createComponentCoreComplex;
 	var node_componentUtility;
@@ -35,43 +34,12 @@ var node_createComponentRuntime = function(componentCore, decorationInfos, reque
 	
 	var loc_componentCoreComplex;
 
-	var loc_lifeCycleStatus;
-	
-	var loc_eventListener = node_createEventObject();
-
 	var loc_init = function(componentCore, decorationInfos, request){
 		//build core complex using core and decoration
 		loc_componentCoreComplex = node_createComponentCoreComplex(componentCore, decorationInfos);
 	};
 
 	var loc_getComponentCore = function(){   return loc_componentCoreComplex.getCore();   };
-	var loc_getTaskEnv = function(){   return loc_componentCoreComplex.getInterface();    };
-
-	
-	
-	
-	
-	var loc_getContextIODataSet = function(){  return loc_getComponentCore().getContextIODataSet();   };
-
-
-	//runtime environment provided for component complex
-	var loc_runtimeEnv = {
-		//process request
-		processRequest : function(request){  node_requestServiceProcessor.processRequest(request); },
-
-		getLifecycleStatus : function(){   return loc_lifeCycleStatus;     },
-		
-		//env interfact to access external env
-		getEnvInterface : function(){     },
-		
-		
-		
-		getTaskEnv : function(){    return loc_getTaskEnv();    },
-		
-		getContextIODataSet : function(){   return loc_getContextIODataSet();   }, 
-		
-		getVariableGroup : function(){}
-	};
 
 	var loc_out = {
 
@@ -85,23 +53,6 @@ var node_createComponentRuntime = function(componentCore, decorationInfos, reque
 		
 		getDecorations : function(){   return loc_componentCoreComplex.getDecorations();   },
 		
-		//combo request(preinit, runtimeContext, postInit)
-		getInitRequest1 : function(runtimeContext, handlers, request){
-			var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("getInitRequestRuntime", {}), handlers, request);
-
-			out.addRequest(loc_componentCoreComplex.getPreInitRequest({
-				success : function(request){
-					return loc_componentCoreComplex.getUpdateRuntimeContextRequest(runtimeContext, {
-						success : function(request){
-							return loc_componentCoreComplex.getPostInitRequest();
-						}
-					});
-				}
-			}));
-
-			return out;
-		},
-
 		getPreInitRequest : function(handlers, request){	
 			var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("PreInit", {}), handlers, request);
 			out.addRequest(loc_componentCoreComplex.getPreInitRequest());
@@ -127,44 +78,54 @@ var node_createComponentRuntime = function(componentCore, decorationInfos, reque
 			
 		updateView : function(view){		return loc_componentCoreComplex.updateView(view);		},
 		
+		registerEventListener : function(listener, handler, thisContext){  return loc_componentCoreComplex.registerEventListener(listener, handler, thisContext);   },
+		unregisterEventListener : function(listener){   return loc_componentCoreComplex.unregisterEventListener(listener);  },
+		registerValueChangeEventListener : function(listener, handler, thisContext){   return loc_componentCoreComplex.registerValueChangeEventListener(listener, handler, thisContext);   },
+		unregisterValueChangeEventListener : function(listener){   return loc_componentCoreComplex.unregisterValueChangeEventListener(listener);    },
 		
 		
 		
 		
+
 		
+		
+		
+				
+		//combo request(preinit, runtimeContext, postInit)
+		getInitRequest111111 : function(runtimeContext, handlers, request){
+			var out = node_createServiceRequestInfoSequence(new node_ServiceInfo("getInitRequestRuntime", {}), handlers, request);
+
+			out.addRequest(loc_componentCoreComplex.getPreInitRequest({
+				success : function(request){
+					return loc_componentCoreComplex.getUpdateRuntimeContextRequest(runtimeContext, {
+						success : function(request){
+							return loc_componentCoreComplex.getPostInitRequest();
+						}
+					});
+				}
+			}));
+
+			return out;
+		},
+
+		setInterfaceEnv1111 : function(interfaceEnv){		loc_interfaceEnv = interfaceEnv;	},
 			
-		setInterfaceEnv : function(interfaceEnv){		loc_interfaceEnv = interfaceEnv;	},
-			
-		
-		
-		getUpdateSystemDataRequest : function(domain, systemData, handlers, request){
+		getUpdateSystemDataRequest1111 : function(domain, systemData, handlers, request){
 			return loc_getComponentCore().getUpdateSystemDataRequest(domain, systemData, handlers, request);
 		},
 		
 		//component management interface 
-		getContextIODataSet :  function(){  return loc_getContextIODataSet();  },
-		getExecuteCommandRequest : function(command, parms, handlers, request){
+		getContextIODataSet1111 :  function(){  return loc_getContextIODataSet();  },
+		getExecuteCommandRequest1111 : function(command, parms, handlers, request){
 			var out = node_componentUtility.getProcessNosliwCommand(loc_out, command, parms, handlers, request);
 			if(out==undefined){
 				out = loc_componentCoreComplex.getExecuteCommandRequest(command, parms, handlers, request);    
 			}
 			return out;
 		},
-		registerEventListener : function(listener, handler, thisContext){  return loc_componentCoreComplex.registerEventListener(listener, handler, thisContext);   },
-		unregisterEventListener : function(listener){   return loc_componentCoreComplex.unregisterEventListener(listener);  },
-		registerValueChangeEventListener : function(listener, handler, thisContext){   return loc_componentCoreComplex.registerValueChangeEventListener(listener, handler, thisContext);   },
-		unregisterValueChangeEventListener : function(listener){   return loc_componentCoreComplex.unregisterValueChangeEventListener(listener);    }
 	};
 	
 	loc_init(componentCore, decorationInfos, request);
-	
-//	loc_out = node_makeObjectWithComponentLifecycle(loc_out, loc_lifecycleCallback, loc_lifecycleTaskCallback, loc_out);
-//	//listen to lifecycle event and update lifecycle status
-//	node_getComponentLifecycleInterface(loc_out).registerEventListener(loc_eventListener, function(eventName, eventData, request){
-//		if(eventName==node_CONSTANT.LIFECYCLE_RESOURCE_EVENT_FINISHTRANSITION){
-//			loc_lifeCycleStatus = eventData.to;
-//		}
-//	});
 	
 	loc_out = node_makeObjectWithType(loc_out, node_CONSTANT.TYPEDOBJECT_TYPE_COMPONENTRUNTIME);
 	
@@ -182,7 +143,6 @@ nosliw.registerSetNodeDataEvent("constant.COMMONCONSTANT", function(){node_COMMO
 nosliw.registerSetNodeDataEvent("constant.COMMONATRIBUTECONSTANT", function(){node_COMMONATRIBUTECONSTANT = this.getData();});
 nosliw.registerSetNodeDataEvent("request.request.createServiceRequestInfoSequence", function(){	node_createServiceRequestInfoSequence = this.getData();	});
 nosliw.registerSetNodeDataEvent("common.service.ServiceInfo", function(){node_ServiceInfo = this.getData();	});
-nosliw.registerSetNodeDataEvent("component.makeObjectWithComponentLifecycle", function(){node_makeObjectWithComponentLifecycle = this.getData();});
 nosliw.registerSetNodeDataEvent("component.getComponentLifecycleInterface", function(){node_getComponentLifecycleInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("component.getComponentInterface", function(){node_getComponentInterface = this.getData();});
 nosliw.registerSetNodeDataEvent("component.createComponentCoreComplex", function(){node_createComponentCoreComplex = this.getData();});
